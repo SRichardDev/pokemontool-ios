@@ -1,7 +1,6 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, LocationManagerDelegate {
 
@@ -20,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationManagerDel
     }
     
     func zoomToUserLocation() {
-        if let userLocation = locationManager.currentLocation {
+        if let userLocation = locationManager.currentUserLocation {
             let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
                                                 latitudinalMeters: 1500,
                                                 longitudinalMeters: 1500)

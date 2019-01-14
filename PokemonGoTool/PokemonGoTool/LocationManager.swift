@@ -10,11 +10,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     public weak var delegate: LocationManagerDelegate?
     private var locationManager: CLLocationManager!
-    private var userLocationWasSet = false
-    private(set) var currentLocation: CLLocation? {
+    private var initialUserLocationWasSet = false
+    private(set) var currentUserLocation: CLLocation? {
         didSet {
-            if !userLocationWasSet {
-                userLocationWasSet = true
+            if !initialUserLocationWasSet {
+                initialUserLocationWasSet = true
                 delegate?.didFindInitialUserLocation()
             }
         }
@@ -33,7 +33,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = locations.sorted { $0.horizontalAccuracy < $1.horizontalAccuracy }.first
+        currentUserLocation = locations.sorted { $0.horizontalAccuracy < $1.horizontalAccuracy }.first
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
