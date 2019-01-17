@@ -7,14 +7,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet private var mapView: MKMapView!
     private var locationManager = LocationManager()
     private var firebaseConnector: FirebaseConnector!
-    private var currentGeohash = ""
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
-    private var neighborGeohashes: [String]? {
-        get {
-            return Geohash.neighbors(currentGeohash)
-        }
-    }
+    let geohashWindow = GeohashWindow()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -41,22 +37,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let center = mapView.centerCoordinate
         let centerGeohash = Geohash.encode(latitude: center.latitude, longitude: center.longitude)
         
-        guard centerGeohash != currentGeohash else { return }
+        guard centerGeohash != geohashWindow.currentGeohash else { return }
         print("Geohash changed to: \(centerGeohash)")
-        currentGeohash = centerGeohash
+        geohashWindow.currentGeohash = centerGeohash
         
         removeAnnotationIfNeeded()
         mapView.removeOverlays(mapView.overlays)
-        neighborGeohashes?.forEach { firebaseConnector.loadQuests(for: $0) }
-        firebaseConnector.loadQuests(for: currentGeohash)
-        addPolyLine(for: Geohash.geohashbox(currentGeohash))
+        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadQuests(for: $0) }
+        firebaseConnector.loadQuests(for: geohashWindow.currentGeohash)
+        
+        let hashes = geohashWindow.neighborGeohashes
+        hashes?.forEach { addPolyLine(for: Geohash.geohashbox($0)) }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = .red
-            polylineRenderer.lineWidth = 2
+            polylineRenderer.strokeColor = UIColor.orange.withAlphaComponent(0.5)
+            polylineRenderer.lineWidth = 1
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
@@ -144,13 +142,12 @@ extension MapViewController {
     func removeAnnotationIfNeeded() {
         mapView.annotations.forEach {
             guard let annotation = $0 as? PokestopPointAnnotation else { return }
-            if annotation.geohash != currentGeohash {
+            if annotation.geohash != geohashWindow.currentGeohash {
                 let annotationGeohash = annotation.geohash
-                let neighborsGeohashes = Geohash.neighbors(annotationGeohash)
                 var foundAnnotationGeohashInNeighbor = false
                 
-                neighborsGeohashes?.forEach { neighborGeohash in
-                    if neighborGeohash == currentGeohash {
+                geohashWindow.neighborGeohashes(for: annotationGeohash).forEach { neighborGeohash in
+                    if neighborGeohash == geohashWindow.currentGeohash {
                         foundAnnotationGeohashInNeighbor = true
                     }
                 }

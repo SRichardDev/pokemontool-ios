@@ -26,7 +26,7 @@ prefix func !(a: Parity) -> Parity {
 }
 
 public struct Geohash {
-    public static let defaultPrecision = 5
+    public static let defaultPrecision = 6
     
     private static let DecimalToBase32Map = Array("0123456789bcdefghjkmnpqrstuvwxyz") // decimal to 32base mapping (0 => "0", 31 => "z")
     private static let Base32BitflowInit: UInt8 = 0b10000
