@@ -4,13 +4,17 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-
     @IBOutlet private var mapView: MKMapView!
     private var locationManager = LocationManager()
     private var firebaseConnector: FirebaseConnector!
-    private var currentGeoHash = ""
+    private var currentGeohash = ""
     private var polygon: MKPolygon?
-
+    private var allAnnotations = [PokestopPointAnnotation]()
+    private var neighborGeohashes: [String]? {
+        get {
+            return Geohash.neighbors(currentGeohash)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -37,19 +41,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let center = mapView.centerCoordinate
         let centerGeohash = Geohash.encode(latitude: center.latitude, longitude: center.longitude)
         
-        guard centerGeohash != currentGeoHash else { return }
+        guard centerGeohash != currentGeohash else { return }
         print("Geohash changed to: \(centerGeohash)")
-        currentGeoHash = centerGeohash
-        mapView.removeAnnotations(mapView.annotations)
-        firebaseConnector.loadQuests(for: centerGeohash)
-        addPolyLine()
+        currentGeohash = centerGeohash
+        
+        removeAnnotationIfNeeded()
+        mapView.removeOverlays(mapView.overlays)
+        neighborGeohashes?.forEach { firebaseConnector.loadQuests(for: $0) }
+        firebaseConnector.loadQuests(for: currentGeohash)
+        addPolyLine(for: Geohash.geohashbox(currentGeohash))
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = .blue
-            polylineRenderer.lineWidth = 5
+            polylineRenderer.strokeColor = .red
+            polylineRenderer.lineWidth = 2
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
@@ -58,9 +65,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func addPolyLine() {
-        guard let geohashBox = Geohash.geohashbox(currentGeoHash) else { return }
-        mapView.removeOverlays(mapView.overlays)
+    func addPolyLine(for geohashBox: GeohashBox?) {
+        guard let geohashBox = geohashBox else { return }
         let polyLine = MKPolyline.polyline(for: geohashBox)
         let polygon = MKPolygon.polygon(for: geohashBox)
         self.polygon = polygon
@@ -68,36 +74,41 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addOverlay(polygon)
     }
     
-    @IBAction func tappedOnMap(sender: UILongPressGestureRecognizer) {
-        
+    @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             let locationInView = sender.location(in: mapView)
-            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let annotation = PokestopPointAnnotation(coordinate: locationOnMap)
-            let quest = Quest(name: "Foo",
-                              reward: "bar",
-                              latitude: locationOnMap.latitude,
-                              longitude: locationOnMap.longitude,
-                              submitter: "Developer")
-            firebaseConnector.saveQuest(quest)
-//            addAnnotation(annotation)
-            let feedback = UIImpactFeedbackGenerator()
-            feedback.impactOccurred()
+            addAnnotation(for: locationInView)
         }
     }
+    
+    @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
+        let locationInView = sender.location(in: mapView)
+        let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        let geoHash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+        addPolyLine(for: Geohash.geohashbox(geoHash))
+    }
+    
+    func addAnnotation(for locationInView: CGPoint) {
+        let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+        let quest = Quest(pokestop: "Pokestop",
+                          name: "Name",
+                          reward: "Reward",
+                          latitude: locationOnMap.latitude,
+                          longitude: locationOnMap.longitude,
+                          submitter: "Developer",
+                          id: nil)
+        firebaseConnector.saveQuest(quest)
+        let feedback = UIImpactFeedbackGenerator()
+        feedback.impactOccurred()
+    }
+
 }
 
 extension MapViewController: FirebaseDelegate {
     func didUpdateQuests() {
-        for quest in firebaseConnector.quests {
-            let annotation = PokestopPointAnnotation(quest: quest)
-            addAnnotation(annotation)
-        }
-    }
-    
-    func addAnnotation(_ annotation: MKAnnotation) {
-        DispatchQueue.main.async {
-            self.mapView.addAnnotation(annotation)
+        firebaseConnector.quests.forEach {
+            let annotation = PokestopPointAnnotation(quest: $0)
+            addAnnotationIfNeeded(annotation)
         }
     }
 }
@@ -106,5 +117,48 @@ extension MapViewController: LocationManagerDelegate {
     
     func didFindInitialUserLocation() {
         zoomToUserLocation()
+    }
+}
+
+extension MapViewController {
+    
+    func addAnnotationIfNeeded(_ annotation: PokestopPointAnnotation) {
+        DispatchQueue.main.async {
+            
+            var questFound = false
+            
+            self.mapView.annotations.forEach { annotationOnMap in
+                guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
+                if annotationOnMap.quest.id == annotation.quest.id {
+                    questFound = true
+                }
+            }
+            
+            if !questFound {
+                self.mapView.addAnnotation(annotation)
+                print("Annotation added")
+            }
+        }
+    }
+    
+    func removeAnnotationIfNeeded() {
+        mapView.annotations.forEach {
+            guard let annotation = $0 as? PokestopPointAnnotation else { return }
+            if annotation.geohash != currentGeohash {
+                let annotationGeohash = annotation.geohash
+                let neighborsGeohashes = Geohash.neighbors(annotationGeohash)
+                var foundAnnotationGeohashInNeighbor = false
+                
+                neighborsGeohashes?.forEach { neighborGeohash in
+                    if neighborGeohash == currentGeohash {
+                        foundAnnotationGeohashInNeighbor = true
+                    }
+                }
+                if !foundAnnotationGeohashInNeighbor {
+                    print("Removed annotation")
+                    mapView.removeAnnotation(annotation)
+                }
+            }
+        }
     }
 }
