@@ -9,6 +9,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     private var locationManager = LocationManager()
     private var firebaseConnector: FirebaseConnector!
     private var currentGeoHash = ""
+    private var polygon: MKPolygon?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -44,27 +46,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = .blue
-        polylineRenderer.lineWidth = 5
-        return polylineRenderer
-        
-        //        if overlay is MKPolyline {
-//
-//        }
+        if let polyline = overlay as? MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay: polyline)
+            polylineRenderer.strokeColor = .blue
+            polylineRenderer.lineWidth = 5
+            return polylineRenderer
+        } else {
+            let renderer = MKPolygonRenderer(polygon: polygon!)
+            renderer.fillColor = UIColor.green.withAlphaComponent(0.2)
+            return renderer
+        }
     }
     
     func addPolyLine() {
         guard let geohashBox = Geohash.geohashbox(currentGeoHash) else { return }
-        let nw = CLLocation(latitude: geohashBox.north, longitude: geohashBox.west)
-        let ne = CLLocation(latitude: geohashBox.north, longitude: geohashBox.east)
-        let se = CLLocation(latitude: geohashBox.south, longitude: geohashBox.east)
-        let sw = CLLocation(latitude: geohashBox.south, longitude: geohashBox.west)
-        
-        let locationCoordinates = [nw,ne,se,sw,nw]
-        let coordinates = locationCoordinates.map { $0.coordinate }
-        let polyLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.removeOverlays(mapView.overlays)
+        let polyLine = MKPolyline.polyline(for: geohashBox)
+        let polygon = MKPolygon.polygon(for: geohashBox)
+        self.polygon = polygon
         mapView.addOverlay(polyLine)
+        mapView.addOverlay(polygon)
     }
     
     @IBAction func tappedOnMap(sender: UILongPressGestureRecognizer) {

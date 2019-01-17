@@ -18,6 +18,7 @@
 		2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDE621ED4FFB00170A46 /* Geohash.swift */; };
 		2CDFDDE921ED4FFB00170A46 /* GeohashBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDE721ED4FFB00170A46 /* GeohashBox.swift */; };
 		2CF6F99F21EFF71600610BC9 /* PokestopAnnotationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6F99E21EFF71600610BC9 /* PokestopAnnotationPoint.swift */; };
+		2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */; };
 		49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		2CDFDDE621ED4FFB00170A46 /* Geohash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geohash.swift; sourceTree = "<group>"; };
 		2CDFDDE721ED4FFB00170A46 /* GeohashBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeohashBox.swift; sourceTree = "<group>"; };
 		2CF6F99E21EFF71600610BC9 /* PokestopAnnotationPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopAnnotationPoint.swift; sourceTree = "<group>"; };
+		2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPolyline+Extension.swift"; sourceTree = "<group>"; };
 		85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonGoTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8D17068DFD218CB12B0034 /* Pods-PokemonGoTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.release.xcconfig"; sourceTree = "<group>"; };
 		FFADD158951324AC77E484BA /* Pods-PokemonGoTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
 				2CF6F99E21EFF71600610BC9 /* PokestopAnnotationPoint.swift */,
+				2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */,
 				2CDFDDEA21ED501A00170A46 /* GeoHash */,
 				2C1976A221ED266A00091F8C /* Main.storyboard */,
 				2C1976A521ED266B00091F8C /* Assets.xcassets */,
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
+				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopAnnotationPoint.swift in Sources */,
 				2CDFDDE921ED4FFB00170A46 /* GeohashBox.swift in Sources */,
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
