@@ -8,6 +8,7 @@ protocol LocationManagerDelegate: class {
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
+    public var currentGeohash = ""
     public weak var delegate: LocationManagerDelegate?
     private var locationManager: CLLocationManager!
     private var initialUserLocationWasSet = false

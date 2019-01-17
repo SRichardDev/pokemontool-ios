@@ -12,16 +12,18 @@ struct Quest {
     //downvotes
 }
 
+protocol FirebaseDelegate {
+    func didUpdateQuests()
+}
+
 class FirebaseConnector {
     
     private var database: DatabaseReference!
+    var quests = [Quest]()
+    var delegate: FirebaseDelegate?
     
     init() {
-        database = Database.database().reference()
-        
-//        let quest = Quest(name: "Foo", reward: "bar", latitude: 48.41235, longitude: 11.23564, submitter: "Developer")
-//        saveQuest(quest)
-        let _ = loadQuests()
+        database = Database.database().reference(withPath: "quests")
     }
     
     func saveQuest(_ quest: Quest) {
@@ -33,23 +35,27 @@ class FirebaseConnector {
                     "longitude" : "\(quest.longitude)",
                     "submitter" : "\(quest.submitter)"]
         
-        database.child("quests").child(geohash).childByAutoId().setValue(data)
+        database.child(geohash).childByAutoId().setValue(data)
     }
     
-    func loadQuests() -> [Quest] {
-        database.observe(.childAdded, with: { snapshot in
-            
-//            snapshot.children.forEach { print($0) }
-            
-            
-//            print(snapshot.key)
-//            guard let dict = snapshot.value as? [String : Any] else { return }
-            print(snapshot.value(forKey: "quests") ?? "")
-            
-            
-//            print(dict)
-//            print(snapshot.childSnapshot(forPath: "quests"))
+    func loadQuests(for geoHash: String) {
+        quests.removeAll()
+        database.child(geoHash).observe(.value, with: { snapshot in
+            if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                for child in result {
+                    print(child.key)
+                    let values = child.value as! [String: Any]
+                    let name = values["name"] as! String
+                    let reward = values["reward"] as! String
+                    let latitude = Double(values["latitude"] as! String)!
+                    let longitude = Double(values["longitude"] as! String)!
+                    let submitter = values["submitter"] as! String
+                    let quest = Quest(name: name, reward: reward, latitude: latitude, longitude: longitude, submitter: submitter)
+                    self.quests.append(quest)
+                }
+                self.delegate?.didUpdateQuests()
+            }
+            print("Loaded data for: \(geoHash)")
         })
-        return [Quest(name: "Foo", reward: "bar", latitude: 48.41235, longitude: 11.23564, submitter: "Developer")]
     }
 }
