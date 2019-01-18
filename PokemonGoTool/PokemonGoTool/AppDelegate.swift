@@ -4,12 +4,19 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    lazy var appModule: AppModule = {
+        return AppModule()
+    }()
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         FirebaseApp.configure()
-        return true
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = appModule.tabBarController
+        window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {}

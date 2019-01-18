@@ -2,25 +2,24 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessible {
     
     @IBOutlet private var mapView: MKMapView!
-    private var locationManager = LocationManager()
-    private var firebaseConnector: FirebaseConnector!
+    var locationManager: LocationManager!
+    var firebaseConnector: FirebaseConnector!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
     let geohashWindow = GeohashWindow()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
         mapView.delegate = self
-        firebaseConnector = FirebaseConnector()
-        firebaseConnector.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        locationManager.delegate = self
+        firebaseConnector.delegate = self
         zoomToUserLocation()
     }
     

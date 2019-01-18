@@ -16,11 +16,29 @@ protocol FirebaseDelegate {
     func didUpdateQuests()
 }
 
+protocol FirebaseErrorPresentable {
+    var firebaseConnector: FirebaseConnector! { get set }
+}
+
+extension FirebaseErrorPresentable where Self: UIViewController & AppModuleAccessible {
+    func showAlert(with title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+}
+
+
 class FirebaseConnector {
     
     private var database: DatabaseReference!
     var quests = [Quest]()
     var delegate: FirebaseDelegate?
+    
+    var isSignedIn: Bool {
+        return Auth.auth().currentUser?.uid != nil ? true : false
+    }
     
     init() {
         database = Database.database().reference(withPath: "quests")
@@ -83,7 +101,68 @@ class FirebaseConnector {
         })
     }
     
-    func signUpUser() {
-        
+    func signUpUser(with email: String, password: String, completion: @escaping (AuthError?) -> ()) {
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                if let errorCode = AuthErrorCode(rawValue: error._code) {
+                    switch errorCode {
+                    case .weakPassword:
+                        completion(.weakPassword)
+                    case .invalidCredential:
+                        completion(.invalidCredential)
+                    case .emailAlreadyInUse:
+                        completion(.emailAlreadyInUse)
+                    case .invalidEmail:
+                        completion(.invalidEmail)
+                    case .networkError:
+                        completion(.networkError)
+                    case .missingEmail:
+                        completion(.missingEmail)
+                    default:
+                        completion(.unknown(error: error.localizedDescription))
+                    }
+                }
+                print(error.localizedDescription)
+            }
+            
+            if result != nil {
+                result?.user.sendEmailVerification() { error in
+                    completion(nil)
+                }
+            }
+        }
     }
+    
+    func signInUser(with email: String, password: String, completion: @escaping (AuthError?) -> ()) {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                if let errorCode = AuthErrorCode(rawValue: error._code) {
+                    switch errorCode {
+                    case .invalidCredential:
+                        completion(.invalidCredential)
+                    case .invalidEmail:
+                        completion(.invalidEmail)
+                    case .networkError:
+                        completion(.networkError)
+                    case .missingEmail:
+                        completion(.missingEmail)
+                    default:
+                        completion(.unknown(error: error.localizedDescription))
+                    }
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+}
+
+enum AuthError {
+    case weakPassword
+    case invalidCredential
+    case emailAlreadyInUse
+    case invalidEmail
+    case networkError
+    case missingEmail
+    case unknown(error: String)
 }

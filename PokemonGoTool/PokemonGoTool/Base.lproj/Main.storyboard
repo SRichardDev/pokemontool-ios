@@ -93,7 +93,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="iphone5001@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
                                 <rect key="frame" x="111" y="70" width="248" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="u4z-Np-tnN"/>
@@ -102,7 +102,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
                                 <rect key="frame" x="111" y="108" width="248" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -156,7 +156,10 @@
                     <tabBarItem key="tabBarItem" title="Item" id="xSH-rb-Ras"/>
                     <connections>
                         <outlet property="emailTextField" destination="xFC-XE-29T" id="KMp-ie-nvn"/>
+                        <outlet property="loginButton" destination="tUA-kc-gbG" id="QlF-j4-7CL"/>
                         <outlet property="passwordTextField" destination="hJy-vz-fqT" id="0xy-7P-LxB"/>
+                        <outlet property="signOutButton" destination="hm7-lO-kHL" id="OzE-a4-gYp"/>
+                        <outlet property="signUpButton" destination="W80-yE-u3c" id="BCg-oE-SQ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfj-lB-PLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
