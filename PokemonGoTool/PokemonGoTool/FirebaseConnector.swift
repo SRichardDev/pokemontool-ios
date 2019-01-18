@@ -16,19 +16,9 @@ protocol FirebaseDelegate {
     func didUpdateQuests()
 }
 
-protocol FirebaseErrorPresentable {
+protocol FirebaseStatusPresentable {
     var firebaseConnector: FirebaseConnector! { get set }
 }
-
-extension FirebaseErrorPresentable where Self: UIViewController & AppModuleAccessible {
-    func showAlert(with title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
-}
-
 
 class FirebaseConnector {
     
@@ -101,7 +91,7 @@ class FirebaseConnector {
         })
     }
     
-    func signUpUser(with email: String, password: String, completion: @escaping (AuthError?) -> ()) {
+    func signUpUser(with email: String, password: String, completion: @escaping (AuthStatus) -> ()) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code) {
@@ -127,13 +117,13 @@ class FirebaseConnector {
             
             if result != nil {
                 result?.user.sendEmailVerification() { error in
-                    completion(nil)
+                    completion(.signedUp)
                 }
             }
         }
     }
     
-    func signInUser(with email: String, password: String, completion: @escaping (AuthError?) -> ()) {
+    func signInUser(with email: String, password: String, completion: @escaping (AuthStatus) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code) {
@@ -151,13 +141,16 @@ class FirebaseConnector {
                     }
                 }
             } else {
-                completion(nil)
+                completion(.signedIn)
             }
         }
     }
 }
 
-enum AuthError {
+enum AuthStatus {
+    case signedUp
+    case signedIn
+    case signedOut
     case weakPassword
     case invalidCredential
     case emailAlreadyInUse
