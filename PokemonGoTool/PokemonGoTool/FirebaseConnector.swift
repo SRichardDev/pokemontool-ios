@@ -36,7 +36,13 @@ class FirebaseConnector {
                     "longitude" : "\(quest.longitude)",
                     "submitter" : quest.submitter]
         
-        database.child(geohash).childByAutoId().setValue(data)
+        
+        if Auth.auth().currentUser != nil {
+            database.child(geohash).childByAutoId().setValue(data)
+            print("✅ Did write quest to database")
+        } else {
+            print("❌ Not authenticated, can not write to database")
+        }
     }
     
     func loadQuests(for geoHash: String) {
@@ -75,5 +81,9 @@ class FirebaseConnector {
                 self.delegate?.didUpdateQuests()
             }
         })
+    }
+    
+    func signUpUser() {
+        
     }
 }
