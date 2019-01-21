@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = appModule.tabBarController
         window?.makeKeyAndVisible()
-
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -54,6 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 print("Remote instance ID token: \(result.token)")
+                
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+                let database = Database.database().reference(withPath: "users/\(userID)")
+                let data = ["notificationToken" : fcmToken]
+                database.setValue(data)
+
 //                self.instanceIDTokenMessage.text  = "Remote InstanceID token: \(result.token)"
             }
         }
@@ -62,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        
+        Messaging.messaging().subscribe(toTopic: "quests") { error in
+            print("Subscribed to quests topic")
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {}
