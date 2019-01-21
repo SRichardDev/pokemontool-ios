@@ -34,9 +34,9 @@ class FirebaseConnector {
     
     func saveQuest(quest: Quest, for pokestop: Pokestop) {
         guard let pokestopID = pokestop.id else {return}
-        let data = ["quest" : ["name" : quest.name,
-                               "reward" : quest.reward,
-                               "submitter" : quest.submitter]]
+        let data = ["name" : quest.name,
+                    "reward" : quest.reward,
+                    "submitter" : quest.submitter]
         saveToDatabase(data: data, geohash: pokestop.geohash, id: pokestopID)
     }
     
@@ -51,7 +51,7 @@ class FirebaseConnector {
     
     private func saveToDatabase(data: [String: Any], geohash: String, id: String) {
         if isSignedIn {
-            database.child(geohash).child(id).setValue(data)
+            database.child(geohash).child(id).child("quest").setValue(data)
             print("✅ Did write to database")
         } else {
             print("❌ Not authenticated, can not write to database")
@@ -75,22 +75,20 @@ class FirebaseConnector {
                     var reward = ""
                     var submitter = ""
                     
-                    for questChild in questChildren.children {
-                        let questSnapshot = questChild as! DataSnapshot
-                        let quest = questSnapshot.value as! [String: Any]
+                    if let quest = questChildren.value as? [String: Any] {
                         questName = quest["name"] as! String
                         reward = quest["reward"] as! String
                         submitter = quest["submitter"] as! String
                     }
                     
-                    let quest = Quest(name: questName, reward: reward, submitter: submitter)
+                    let quest1 = Quest(name: questName, reward: reward, submitter: submitter)
                     
                     
                     let pokestop = Pokestop(name: name,
                                             latitude: latitude,
                                             longitude: longitude,
                                             id: child.key,
-                                            quest: quest)
+                                            quest: quest1)
                     
                     var pokestopAlreadySaved = false
 

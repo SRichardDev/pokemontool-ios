@@ -4,6 +4,7 @@ import MapKit
 
 class PokestopPointAnnotation: MKPointAnnotation {
     var pokestop: Pokestop!
+    var imageName = "Pokestop"
     var geohash: String {
         get {
             return Geohash.encode(latitude: coordinate.latitude, longitude: coordinate.longitude)

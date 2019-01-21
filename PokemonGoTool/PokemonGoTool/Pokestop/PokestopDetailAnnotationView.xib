@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PokestopDetailAnnotationView" customModule="PokemonGoTool" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="253"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XXr-mF-scy">
+                    <rect key="frame" x="95" y="20" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="6MM-8R-ZYI"/>
+                        <constraint firstAttribute="width" secondItem="XXr-mF-scy" secondAttribute="height" multiplier="1:1" id="Ck4-Hh-jom"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PokestopName" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cS-cu-EPc">
+                    <rect key="frame" x="16" y="85" width="208" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SQ-9p-kS3">
+                    <rect key="frame" x="16" y="113.5" width="208" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Nr-reQ">
+                    <rect key="frame" x="109" y="211" width="22" height="22"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="showPokestopInfoTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="QXa-vg-ReE"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GEV-Nr-reQ" secondAttribute="bottom" constant="20" id="I4u-oP-B3L"/>
+                <constraint firstItem="7SQ-9p-kS3" firstAttribute="top" secondItem="6cS-cu-EPc" secondAttribute="bottom" constant="8" id="Mne-lY-JRB"/>
+                <constraint firstItem="GEV-Nr-reQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7SQ-9p-kS3" secondAttribute="bottom" constant="8" id="WBm-f5-uj2"/>
+                <constraint firstItem="6cS-cu-EPc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="XeR-Il-OFR"/>
+                <constraint firstItem="6cS-cu-EPc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="bM8-IO-0Bn"/>
+                <constraint firstItem="7SQ-9p-kS3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="egU-y8-a5r"/>
+                <constraint firstItem="XXr-mF-scy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="hOK-0x-jMk"/>
+                <constraint firstItem="GEV-Nr-reQ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="rkI-8u-sOY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7SQ-9p-kS3" secondAttribute="trailing" constant="16" id="s0f-P7-hSo"/>
+                <constraint firstItem="XXr-mF-scy" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="s5s-jF-mRp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6cS-cu-EPc" secondAttribute="trailing" constant="16" id="tat-Lr-qMi"/>
+                <constraint firstItem="6cS-cu-EPc" firstAttribute="top" secondItem="XXr-mF-scy" secondAttribute="bottom" constant="15" id="uH3-12-rPK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="pokestopImageView" destination="XXr-mF-scy" id="ISK-YD-qUl"/>
+                <outlet property="pokestopInfoLabel" destination="7SQ-9p-kS3" id="Mpm-jn-5Bn"/>
+                <outlet property="pokestopNameLabel" destination="6cS-cu-EPc" id="idN-dA-vPR"/>
+            </connections>
+            <point key="canvasLocation" x="32" y="-153.37331334332833"/>
+        </view>
+    </objects>
+</document>

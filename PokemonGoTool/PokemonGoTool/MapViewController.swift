@@ -82,7 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         let locationInView = sender.location(in: mapView)
         let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
         let geoHash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-        addPolyLine(for: Geohash.geohashbox(geoHash))
+//        addPolyLine(for: Geohash.geohashbox(geoHash))
     }
     
     func addAnnotation(for locationInView: CGPoint) {
@@ -96,14 +96,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         let feedback = UIImpactFeedbackGenerator()
         feedback.impactOccurred()
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? PokestopPointAnnotation  else { return nil }
+        let annotationView = PokestopAnnotationView.prepareFor(mapView: mapView, annotation: annotation)
+        annotationView?.delegate = self
+        return annotationView
+    }
+    
+    func addPokestopAnnotations(for pokestops: Array<Pokestop>) {
+        for pokestop in pokestops {
+            let annotation = PokestopPointAnnotation(pokestop: pokestop)
+            addAnnotationIfNeeded(annotation)
+        }
+    }
 }
 
 extension MapViewController: FirebaseDelegate {
     func didUpdatePokestops() {
-        firebaseConnector.pokestops.forEach {
-            let annotation = PokestopPointAnnotation(pokestop: $0)
-            addAnnotationIfNeeded(annotation)
-        }
+        addPokestopAnnotations(for: firebaseConnector.pokestops)
     }
 }
 
@@ -153,5 +164,15 @@ extension MapViewController {
                 }
             }
         }
+    }
+}
+
+extension MapViewController: PokestopDetailDelegate {
+    func showDetail(for pokestop: Pokestop) {
+        let navigationController = SubmitQuestViewController.instantiateFromStoryboardInNavigationController()
+        let submitQuestViewController = navigationController.topViewController as! SubmitQuestViewController
+        submitQuestViewController.pokestop = pokestop
+        submitQuestViewController.firebaseConnector = firebaseConnector
+        present(navigationController, animated: true)
     }
 }
