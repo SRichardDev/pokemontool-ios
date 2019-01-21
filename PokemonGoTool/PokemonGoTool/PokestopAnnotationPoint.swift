@@ -3,7 +3,7 @@ import UIKit
 import MapKit
 
 class PokestopPointAnnotation: MKPointAnnotation {
-    var quest: Quest!
+    var pokestop: Pokestop!
     var geohash: String {
         get {
             return Geohash.encode(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -15,9 +15,9 @@ class PokestopPointAnnotation: MKPointAnnotation {
         self.coordinate = coordinate
     }
     
-    convenience init(quest: Quest) {
+    convenience init(pokestop: Pokestop) {
         self.init()
-        self.quest = quest
-        coordinate = CLLocationCoordinate2D(latitude: quest.latitude, longitude: quest.longitude)
+        self.pokestop = pokestop
+        coordinate = CLLocationCoordinate2D(latitude: pokestop.latitude, longitude: pokestop.longitude)
     }
 }

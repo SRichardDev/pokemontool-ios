@@ -2,16 +2,6 @@
 import Foundation
 import Firebase
 
-struct Quest {
-    let pokestop: String
-    let name: String
-    let reward: String
-    let latitude: Double
-    let longitude: Double
-    let submitter: String
-    let id: String?
-}
-
 protocol FirebaseDelegate {
     func didUpdateQuests()
 }
@@ -23,7 +13,7 @@ protocol FirebaseStatusPresentable {
 class FirebaseConnector {
     
     private var database: DatabaseReference!
-    var quests = [Quest]()
+    var pokestops = [Pokestop]()
     var delegate: FirebaseDelegate?
     
     var isSignedIn: Bool {
@@ -31,59 +21,74 @@ class FirebaseConnector {
     }
     
     init() {
-        database = Database.database().reference(withPath: "quests")
+        database = Database.database().reference(withPath: "pokestops")
     }
     
-    func saveQuest(_ quest: Quest) {
-        let geohash = "\(Geohash.encode(latitude: quest.latitude, longitude: quest.longitude))"
+    func savePokestop(_ pokestop: Pokestop) {
+        let data = ["name"      : pokestop.name,
+                    "latitude"  : pokestop.latitude.string,
+                    "longitude" : pokestop.longitude.string]
         
-        let data = ["pokestop"  : quest.pokestop,
-                    "name"      : quest.name,
-                    "reward"    : quest.reward,
-                    "latitude"  : "\(quest.latitude)",
-                    "longitude" : "\(quest.longitude)",
-                    "submitter" : quest.submitter]
-        
-        
-        if Auth.auth().currentUser != nil {
+        saveToDatabase(data: data, geohash: pokestop.geohash)
+    }
+    
+    func saveQuest(quest: Quest, for pokestop: Pokestop) {
+        guard let pokestopID = pokestop.id else {return}
+        let data = ["quest" : ["name" : quest.name,
+                               "reward" : quest.reward,
+                               "submitter" : quest.submitter]]
+        saveToDatabase(data: data, geohash: pokestop.geohash, id: pokestopID)
+    }
+    
+    private func saveToDatabase(data: [String: Any], geohash: String) {
+        if isSignedIn {
             database.child(geohash).childByAutoId().setValue(data)
-            print("✅ Did write quest to database")
+            print("✅ Did write to database")
         } else {
             print("❌ Not authenticated, can not write to database")
         }
     }
     
-    func loadQuests(for geoHash: String) {
+    private func saveToDatabase(data: [String: Any], geohash: String, id: String) {
+        if isSignedIn {
+            database.child(geohash).child(id).setValue(data)
+            print("✅ Did write to database")
+        } else {
+            print("❌ Not authenticated, can not write to database")
+        }
+    }
+    
+    func loadPokestops(for geoHash: String) {
         guard geoHash != "" else { return }
-        quests.removeAll()
+        pokestops.removeAll()
         database.child(geoHash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     let values = child.value as! [String: Any]
-                    let pokestop = values["pokestop"] as! String
                     let name = values["name"] as! String
-                    let reward = values["reward"] as! String
                     let latitude = Double(values["latitude"] as! String)!
                     let longitude = Double(values["longitude"] as! String)!
-                    let submitter = values["submitter"] as! String
-                    let quest = Quest(pokestop: pokestop,
-                                      name: name,
-                                      reward: reward,
-                                      latitude: latitude,
-                                      longitude: longitude,
-                                      submitter: submitter,
-                                      id: child.key)
                     
-                    var questAlreadySaved = false
+//                    let quest = values["quest"] as! String
+//                    let reward = values["reward"] as! String
+//                    let submitter = values["submitter"] as! String
                     
-                    self.quests.forEach { savedQuest in
-                        if quest.id == savedQuest.id {
-                            questAlreadySaved = true
+                    let pokestop = Pokestop(name: name,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                            id: child.key,
+                                            quest: nil)
+                    
+                    var pokestopAlreadySaved = false
+
+                    self.pokestops.forEach { savedPokestop in
+                        if pokestop.id == savedPokestop.id {
+                            pokestopAlreadySaved = true
                         }
                     }
                     
-                    if !questAlreadySaved {
-                        self.quests.append(quest)
+                    if !pokestopAlreadySaved {
+                        self.pokestops.append(pokestop)
                     }
                 }
                 self.delegate?.didUpdateQuests()

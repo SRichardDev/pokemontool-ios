@@ -42,8 +42,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         
         removeAnnotationIfNeeded()
         mapView.removeOverlays(mapView.overlays)
-        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadQuests(for: $0) }
-        firebaseConnector.loadQuests(for: geohashWindow.currentGeohash)
+        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadPokestops(for: $0) }
+        firebaseConnector.loadPokestops(for: geohashWindow.currentGeohash)
         
         let hashes = geohashWindow.neighborGeohashes
         hashes?.forEach { addPolyLine(for: Geohash.geohashbox($0)) }
@@ -87,24 +87,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     
     func addAnnotation(for locationInView: CGPoint) {
         let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-        let quest = Quest(pokestop: "Pokestop",
-                          name: "Name",
-                          reward: "Reward",
-                          latitude: locationOnMap.latitude,
-                          longitude: locationOnMap.longitude,
-                          submitter: "Developer",
-                          id: nil)
-        firebaseConnector.saveQuest(quest)
+        let pokestop = Pokestop(name: "Test",
+                                latitude: locationOnMap.latitude,
+                                longitude: locationOnMap.longitude,
+                                id: nil,
+                                quest: nil)
+        firebaseConnector.savePokestop(pokestop)
         let feedback = UIImpactFeedbackGenerator()
         feedback.impactOccurred()
     }
-
 }
 
 extension MapViewController: FirebaseDelegate {
     func didUpdateQuests() {
-        firebaseConnector.quests.forEach {
-            let annotation = PokestopPointAnnotation(quest: $0)
+        firebaseConnector.pokestops.forEach {
+            let annotation = PokestopPointAnnotation(pokestop: $0)
             addAnnotationIfNeeded(annotation)
         }
     }
@@ -122,16 +119,16 @@ extension MapViewController {
     func addAnnotationIfNeeded(_ annotation: PokestopPointAnnotation) {
         DispatchQueue.main.async {
             
-            var questFound = false
+            var pokestopFound = false
             
             self.mapView.annotations.forEach { annotationOnMap in
                 guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
-                if annotationOnMap.quest.id == annotation.quest.id {
-                    questFound = true
+                if annotationOnMap.pokestop.id == annotation.pokestop.id {
+                    pokestopFound = true
                 }
             }
             
-            if !questFound {
+            if !pokestopFound {
                 self.mapView.addAnnotation(annotation)
                 print("Annotation added")
             }
