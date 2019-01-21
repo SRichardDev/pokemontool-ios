@@ -8,6 +8,12 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
     @IBOutlet var questNameTextField: UITextField!
     @IBOutlet var rewardTextField: UITextField!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        questNameTextField.text = pokestop.quest?.name
+        rewardTextField.text = pokestop.quest?.reward
+    }
+    
     @IBAction func doneTapped(_ sender: Any) {
         dismiss(animated: true)
     }
