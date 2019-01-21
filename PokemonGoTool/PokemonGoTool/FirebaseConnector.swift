@@ -3,7 +3,7 @@ import Foundation
 import Firebase
 
 protocol FirebaseDelegate {
-    func didUpdateQuests()
+    func didUpdatePokestops()
 }
 
 protocol FirebaseStatusPresentable {
@@ -91,7 +91,7 @@ class FirebaseConnector {
                         self.pokestops.append(pokestop)
                     }
                 }
-                self.delegate?.didUpdateQuests()
+                self.delegate?.didUpdatePokestops()
             }
         })
     }

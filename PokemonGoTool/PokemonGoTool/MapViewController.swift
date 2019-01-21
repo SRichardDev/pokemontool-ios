@@ -99,7 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
 }
 
 extension MapViewController: FirebaseDelegate {
-    func didUpdateQuests() {
+    func didUpdatePokestops() {
         firebaseConnector.pokestops.forEach {
             let annotation = PokestopPointAnnotation(pokestop: $0)
             addAnnotationIfNeeded(annotation)

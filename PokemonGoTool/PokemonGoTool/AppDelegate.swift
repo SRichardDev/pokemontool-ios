@@ -68,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         
-        Messaging.messaging().subscribe(toTopic: "quests") { error in
-            print("Subscribed to quests topic")
+        Messaging.messaging().subscribe(toTopic: "pokestops") { error in
+            print("Subscribed to pokestops topic")
         }
     }
     

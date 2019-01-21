@@ -21,7 +21,7 @@ admin.initializeApp(functions.config().firebase);
 //     });
 // })
 
-exports.sendAdminNotification = functions.database.ref('/quests/{pushId}').onWrite(event => {
+exports.sendAdminNotification = functions.database.ref('/pokestops/{pushId}').onWrite(event => {
          const payload = {
              notification: {
                 title: `New Quest`,
@@ -29,5 +29,5 @@ exports.sendAdminNotification = functions.database.ref('/quests/{pushId}').onWri
                 sound: `default`
              }
          };
-    admin.messaging().sendToTopic("quests", payload)
+    admin.messaging().sendToTopic("pokestops", payload)
 });
