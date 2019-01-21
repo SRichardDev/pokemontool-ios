@@ -73,8 +73,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     
     @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
+            let navigationController = SubmitPokestopViewController.instantiateFromStoryboardInNavigationController()
+            let submitPokestopViewController = navigationController.topViewController as! SubmitPokestopViewController
+            submitPokestopViewController.firebaseConnector = firebaseConnector
             let locationInView = sender.location(in: mapView)
-            addAnnotation(for: locationInView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            submitPokestopViewController.locationOnMap = locationOnMap
+            let feedback = UIImpactFeedbackGenerator(style: .heavy)
+            feedback.impactOccurred()
+            present(navigationController, animated: true)
         }
     }
     
@@ -83,18 +90,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
         let geoHash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
 //        addPolyLine(for: Geohash.geohashbox(geoHash))
-    }
-    
-    func addAnnotation(for locationInView: CGPoint) {
-        let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-        let pokestop = Pokestop(name: "Test",
-                                latitude: locationOnMap.latitude,
-                                longitude: locationOnMap.longitude,
-                                id: nil,
-                                quest: nil)
-        firebaseConnector.savePokestop(pokestop)
-        let feedback = UIImpactFeedbackGenerator()
-        feedback.impactOccurred()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
