@@ -69,15 +69,28 @@ class FirebaseConnector {
                     let latitude = Double(values["latitude"] as! String)!
                     let longitude = Double(values["longitude"] as! String)!
                     
-//                    let quest = values["quest"] as! String
-//                    let reward = values["reward"] as! String
-//                    let submitter = values["submitter"] as! String
+                    let questChildren = child.childSnapshot(forPath: "quest")
+            
+                    var questName = ""
+                    var reward = ""
+                    var submitter = ""
+                    
+                    for questChild in questChildren.children {
+                        let questSnapshot = questChild as! DataSnapshot
+                        let quest = questSnapshot.value as! [String: Any]
+                        questName = quest["name"] as! String
+                        reward = quest["reward"] as! String
+                        submitter = quest["submitter"] as! String
+                    }
+                    
+                    let quest = Quest(name: questName, reward: reward, submitter: submitter)
+                    
                     
                     let pokestop = Pokestop(name: name,
                                             latitude: latitude,
                                             longitude: longitude,
                                             id: child.key,
-                                            quest: nil)
+                                            quest: quest)
                     
                     var pokestopAlreadySaved = false
 

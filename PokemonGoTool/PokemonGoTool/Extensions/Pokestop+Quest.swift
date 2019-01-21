@@ -19,4 +19,3 @@ struct Quest {
     let reward: String
     let submitter: String
 }
-
