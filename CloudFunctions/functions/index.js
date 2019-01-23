@@ -57,22 +57,30 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
     // console.log("userId: " + userId);
 
     admin.database().ref('/pokestops/' + geohash + '/registred_user').once('value', (snapshot, context) => { 
-        var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
-        console.log("notificationToken: " + notificationToken);
-        console.log("new snapshot");
-        console.log(snapshot.val());
-        console.log("new context");
-        console.log(context);
+        // var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
+        // console.log("notificationToken: " + notificationToken);
+        // console.log("new snapshot");
+        // console.log(snapshot.val());
+        // console.log("new context");
+        // console.log(context);
 
-        const payload = {
-            notification: {
-               title: 'New Quest',
-               body: name,
-               sound: 'default'
-            }
-        };
-    
-        admin.messaging().sendToDevice(notificationToken, payload)
+        snapshot.forEach(function(child){
+            const userId = child.val();
+            console.log("userId: " + userId);
+            admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+
+                const payload = {
+                    notification: {
+                       title: 'New Quest',
+                       body: name,
+                       sound: 'default'
+                    }
+                };
+            
+                admin.messaging().sendToDevice(notificationToken, payload)
+            });
+        });
     });
 
     
