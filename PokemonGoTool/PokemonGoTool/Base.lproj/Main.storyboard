@@ -27,13 +27,23 @@
                                     <outletCollection property="gestureRecognizers" destination="6wD-2r-vhW" appends="YES" id="mP2-3b-0Bu"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7d-2h-foG">
+                                <rect key="frame" x="299" y="544" width="40" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="📡"/>
+                                <connections>
+                                    <action selector="toggleGeohashSelectionMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibA-qI-g8u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cxu-QH-e1m"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GnQ-xh-ZWm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o4G-kI-jT1" secondAttribute="trailing" id="O0t-9I-WxO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="m7d-2h-foG" secondAttribute="trailing" constant="20" id="Vul-Qb-6ry"/>
                             <constraint firstAttribute="bottom" secondItem="o4G-kI-jT1" secondAttribute="bottom" id="ckU-mf-Wyc"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="m7d-2h-foG" secondAttribute="bottom" constant="20" id="ndV-Uh-aud"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

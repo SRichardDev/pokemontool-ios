@@ -1,6 +1,7 @@
 
 import Foundation
 import Firebase
+import FirebaseMessaging
 
 protocol FirebaseDelegate {
     func didUpdatePokestops()
@@ -65,7 +66,7 @@ class FirebaseConnector {
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     let values = child.value as! [String: Any]
-                    let name = values["name"] as! String
+                    guard let name = values["name"] as? String else { return }
                     let latitude = Double(values["latitude"] as! String)!
                     let longitude = Double(values["longitude"] as! String)!
                     
@@ -160,6 +161,13 @@ class FirebaseConnector {
                 completion(.signedIn)
             }
         }
+    }
+    
+    func subscribeForPush(for geohash: String) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let user = Database.database().reference(withPath: "pokestops/\(geohash)")
+        let data = [userID : userID]
+        user.child("registered_user").setValue(data)
     }
 }
 

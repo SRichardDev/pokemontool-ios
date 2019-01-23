@@ -9,8 +9,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     var firebaseConnector: FirebaseConnector!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
-    let geohashWindow = GeohashWindow()
-
+    private let geohashWindow = GeohashWindow()
+    private var selectedGeohashes = [String]()
+    private var isGeoashSelectionMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -52,12 +54,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = UIColor.orange.withAlphaComponent(0.5)
+            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.5)
             polylineRenderer.lineWidth = 1
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
-            renderer.fillColor = UIColor.green.withAlphaComponent(0.2)
+            renderer.fillColor = isGeoashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
             return renderer
         }
     }
@@ -88,8 +90,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
         let locationInView = sender.location(in: mapView)
         let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-        let geoHash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-//        addPolyLine(for: Geohash.geohashbox(geoHash))
+        let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+        if isGeoashSelectionMode {
+            firebaseConnector.subscribeForPush(for: geohash)
+            addPolyLine(for: Geohash.geohashbox(geohash))
+        }
+    }
+    
+    @IBAction func toggleGeohashSelectionMode(_ sender: UIButton) {
+        isGeoashSelectionMode = !isGeoashSelectionMode
+        isGeoashSelectionMode ? sender.setTitle("✅", for: .normal) : sender.setTitle("📡", for: .normal)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
