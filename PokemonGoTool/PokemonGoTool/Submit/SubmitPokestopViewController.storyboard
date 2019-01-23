@@ -36,20 +36,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ttO-Za-528">
+                                <rect key="frame" x="0.0" y="64" width="375" height="222.5"/>
+                            </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scl-Rn-Dvp">
-                                <rect key="frame" x="161" y="84.5" width="189" height="30"/>
+                                <rect key="frame" x="161" y="307" width="189" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokestop Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMa-Ia-g8g">
-                                <rect key="frame" x="25" y="89" width="126" height="21"/>
+                                <rect key="frame" x="25" y="311.5" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQq-FT-b3b">
-                                <rect key="frame" x="163" y="224" width="49" height="30"/>
+                                <rect key="frame" x="163" y="357" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitTapped:" destination="46f-wM-hAp" eventType="touchUpInside" id="3MH-e1-1v6"/>
@@ -59,11 +62,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="centerY" secondItem="vMa-Ia-g8g" secondAttribute="centerY" id="07W-3N-vSI"/>
+                            <constraint firstItem="ttO-Za-528" firstAttribute="trailing" secondItem="QeK-9e-Tcu" secondAttribute="trailing" id="1oq-VA-IkQ"/>
                             <constraint firstItem="QeK-9e-Tcu" firstAttribute="trailing" secondItem="scl-Rn-Dvp" secondAttribute="trailing" constant="25" id="2Jo-KY-Hfw"/>
+                            <constraint firstItem="ttO-Za-528" firstAttribute="leading" secondItem="QeK-9e-Tcu" secondAttribute="leading" id="DqW-s4-w6f"/>
+                            <constraint firstItem="ttO-Za-528" firstAttribute="top" secondItem="QeK-9e-Tcu" secondAttribute="top" id="EnO-jp-AXj"/>
                             <constraint firstItem="kQq-FT-b3b" firstAttribute="centerX" secondItem="QeK-9e-Tcu" secondAttribute="centerX" id="Nli-9N-fVv"/>
-                            <constraint firstItem="kQq-FT-b3b" firstAttribute="top" secondItem="scl-Rn-Dvp" secondAttribute="bottom" constant="109.5" id="fYZ-uo-iXB"/>
-                            <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="QeK-9e-Tcu" secondAttribute="top" constant="25" id="fvW-qI-ai7"/>
+                            <constraint firstItem="kQq-FT-b3b" firstAttribute="top" secondItem="scl-Rn-Dvp" secondAttribute="bottom" constant="20" id="fYZ-uo-iXB"/>
+                            <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="ttO-Za-528" secondAttribute="bottom" constant="25" id="iwO-lm-4Yy"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="trailing" constant="10" id="p1p-Wd-RC5"/>
+                            <constraint firstItem="ttO-Za-528" firstAttribute="height" secondItem="8V2-Sf-TwM" secondAttribute="height" multiplier="1:3" id="qCQ-hQ-G8Q"/>
                             <constraint firstItem="vMa-Ia-g8g" firstAttribute="leading" secondItem="QeK-9e-Tcu" secondAttribute="leading" constant="25" id="rBc-ap-hOS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QeK-9e-Tcu"/>
@@ -76,12 +83,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="ttO-Za-528" id="h7O-gk-wCz"/>
                         <outlet property="pokestopNameTextField" destination="scl-Rn-Dvp" id="epb-Z8-ziX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5x-vL-Db2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="894" y="81"/>
+            <point key="canvasLocation" x="893.60000000000002" y="80.50974512743629"/>
         </scene>
     </scenes>
 </document>

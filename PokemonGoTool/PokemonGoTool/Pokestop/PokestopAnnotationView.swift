@@ -9,16 +9,18 @@ protocol PokestopDetailDelegate: class {
 }
 
 class PokestopAnnotationView: CustomAnnotationView {
-    var pokestop: Pokestop!
+    var pokestop: Pokestop?
     weak var delegate: PokestopDetailDelegate?
     
     override func didMoveToSuperview() {
+        guard let pokestop = pokestop else { return }
         label.text = pokestop.name
         addSubview(label)
         super.didMoveToSuperview()
     }
     
     func loadPokestopDetailAnnotationView() -> PokestopDetailAnnotationView? {
+        guard let pokestop = pokestop else { return nil }
         if let views = Bundle.main.loadNibNamed("PokestopDetailAnnotationView",
                                                 owner: self,
                                                 options: nil) as? [PokestopDetailAnnotationView], views.count > 0 {

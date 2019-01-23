@@ -26,7 +26,7 @@ class CustomAnnotationView: MKAnnotationView {
         label.clipsToBounds = true
         let padding: CGFloat = 5
         label.frame = CGRect(x: -label.intrinsicContentSize.width/2 + frame.width/2 - padding/2,
-                             y: frame.height + 2,
+                             y: frame.height - 28,
                              width: label.intrinsicContentSize.width + padding,
                              height: label.intrinsicContentSize.height)
     }

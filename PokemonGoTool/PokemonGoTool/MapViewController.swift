@@ -16,21 +16,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        zoomToUserLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         locationManager.delegate = self
         firebaseConnector.delegate = self
-        zoomToUserLocation()
     }
     
-    func zoomToUserLocation() {
+    func zoomToUserLocation(animated: Bool = false) {
         if let userLocation = locationManager.currentUserLocation {
             let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
                                                 latitudinalMeters: 1500,
                                                 longitudinalMeters: 1500)
-            mapView.setRegion(viewRegion, animated: true)
+            mapView.setRegion(viewRegion, animated: animated)
         }
     }
     
