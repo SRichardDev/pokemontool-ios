@@ -49,7 +49,8 @@ class FirebaseConnector {
     }
     
     func saveArena(_ arena: Arena) {
-
+        let data = try! FirebaseEncoder().encode(arena)
+        arenasRef.child(arena.geohash).childByAutoId().setValue(data)
     }
     
     func saveQuest(quest: Quest, for pokestop: Pokestop) {
