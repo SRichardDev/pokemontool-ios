@@ -30,7 +30,7 @@ class SubmitPokestopViewController: UIViewController, MKMapViewDelegate, Storybo
                                 latitude: locationOnMap.latitude,
                                 longitude: locationOnMap.longitude,
                                 submitter: firebaseConnector.user?.trainerName ?? "",
-                                id: nil, quest: nil, upVotes: nil, downVotes: nil)
+                                id: "", quest: nil, upVotes: nil, downVotes: nil)
         
         firebaseConnector.savePokestop(pokestop)
         dismiss(animated: true)

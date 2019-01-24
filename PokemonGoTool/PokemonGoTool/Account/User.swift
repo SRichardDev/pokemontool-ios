@@ -2,7 +2,7 @@
 import Foundation
 import Firebase
 
-class User {
+class User: Codable {
     private(set) var id: String
     private(set) var email: String
     private(set) var trainerName: String?
