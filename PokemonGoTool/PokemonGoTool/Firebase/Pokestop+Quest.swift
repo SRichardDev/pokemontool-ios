@@ -39,7 +39,7 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             object.setId(snapshot.key)
             return object
         } catch let error {
-            print(error.localizedDescription)
+//            print(error.localizedDescription)
         }
     }
     return nil
