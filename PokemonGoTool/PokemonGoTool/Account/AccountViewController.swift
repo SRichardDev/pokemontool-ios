@@ -2,15 +2,11 @@
 import UIKit
 import Firebase
 
-class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable, UITextFieldDelegate {
+class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable, UITextFieldDelegate, FirebaseUserDelegate {
     
     var firebaseConnector: FirebaseConnector!
     var locationManager: LocationManager!
-    private var user: User? {
-        didSet {
-            updateUI()
-        }
-    }
+
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordLabel: UILabel!
@@ -19,10 +15,14 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
     @IBOutlet var signUpButton: UIButton!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        firebaseConnector.userDelegate = self
         passwordTextField.delegate = self
-        User.loadUser { user in
-            self.user = user
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
     }
     
     @IBAction func loginTapped(_ sender: Any) {
@@ -66,9 +66,9 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
         signUpButton.isHidden = isSignedIn
         isSignedIn ? loginButton.setTitle("Sign out", for: .normal) : loginButton.setTitle("Sign in", for: .normal)
         emailTextField.isEnabled = !isSignedIn
-        emailTextField.text = user?.email
+        emailTextField.text = firebaseConnector.user?.email
         passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
-        passwordTextField.text = isSignedIn ? user?.trainerName : ""
+        passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
         passwordTextField.isSecureTextEntry = !isSignedIn
     }
     
@@ -80,8 +80,12 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
     func textFieldDidEndEditing(_ textField: UITextField) {
         if firebaseConnector.isSignedIn {
             guard let trainerName = textField.text else { return }
-            user?.updateTrainerName(trainerName)
+            firebaseConnector.user?.updateTrainerName(trainerName)
         }
+    }
+    
+    func didUpdateUser() {
+        updateUI()
     }
 }
 

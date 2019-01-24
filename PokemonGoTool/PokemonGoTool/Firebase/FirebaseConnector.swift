@@ -7,6 +7,10 @@ protocol FirebaseDelegate {
     func didUpdatePokestops()
 }
 
+protocol FirebaseUserDelegate {
+    func didUpdateUser()
+}
+
 protocol FirebaseStatusPresentable {
     var firebaseConnector: FirebaseConnector! { get set }
 }
@@ -14,14 +18,24 @@ protocol FirebaseStatusPresentable {
 class FirebaseConnector {
     
     private var database: DatabaseReference!
+    private(set) var user: User? {
+        didSet {
+            userDelegate?.didUpdateUser()
+        }
+    }
+    
     var pokestops = [Pokestop]()
     var delegate: FirebaseDelegate?
-    
+    var userDelegate: FirebaseUserDelegate?
     var isSignedIn: Bool {
         return Auth.auth().currentUser?.uid != nil ? true : false
     }
     
     init() {
+        User.loadUser { user in
+            self.user = user
+        }
+        
         database = Database.database().reference(withPath: "pokestops")
     }
     
