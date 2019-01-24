@@ -94,24 +94,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-u7-gLK">
-                                <rect key="frame" x="16" y="141" width="56" height="21"/>
+                                <rect key="frame" x="16" y="141" width="339" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qk-Ka-CIe">
-                                <rect key="frame" x="16" y="215" width="83" height="21"/>
+                                <rect key="frame" x="16" y="215" width="339" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="iphone5001@gmail.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
                                 <rect key="frame" x="16" y="170" width="339" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc123" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
                                 <rect key="frame" x="16" y="244" width="339" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -146,6 +146,8 @@
                         <constraints>
                             <constraint firstItem="hJy-vz-fqT" firstAttribute="top" secondItem="7qk-Ka-CIe" secondAttribute="bottom" constant="8" symbolic="YES" id="1ch-Up-MWT"/>
                             <constraint firstItem="wAl-OH-Hjd" firstAttribute="bottom" secondItem="tUA-kc-gbG" secondAttribute="bottom" constant="26" id="3zN-3L-xtW"/>
+                            <constraint firstItem="xFC-XE-29T" firstAttribute="trailing" secondItem="Rfa-u7-gLK" secondAttribute="trailing" id="60L-YL-k81"/>
+                            <constraint firstItem="hJy-vz-fqT" firstAttribute="trailing" secondItem="7qk-Ka-CIe" secondAttribute="trailing" id="7au-HZ-cII"/>
                             <constraint firstItem="xFC-XE-29T" firstAttribute="leading" secondItem="7qk-Ka-CIe" secondAttribute="leading" id="HXK-P5-b7d"/>
                             <constraint firstItem="tUA-kc-gbG" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="20" id="JcK-Oy-HhS"/>
                             <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="xFC-XE-29T" secondAttribute="trailing" constant="20" id="LOF-ra-CZu"/>
@@ -209,8 +211,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Account" width="75" height="75"/>
-        <image name="Map" width="75" height="75"/>
+        <image name="Account" width="30" height="30"/>
+        <image name="Map" width="30" height="30"/>
         <namedColor name="Orange">
             <color red="0.94599997997283936" green="0.43000000715255737" blue="0.22200000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

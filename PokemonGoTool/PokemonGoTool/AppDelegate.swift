@@ -17,16 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
         if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-            
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+                                                                    completionHandler: {_, _ in })
         } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
+                                                                                  categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
@@ -50,25 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
-                print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-                
+                print("🔥❌ Error fetching remote instance ID: \(error)")
+            } else {
+                print("🔥✅ Firebase registration token: \(fcmToken)")
                 guard let userID = Auth.auth().currentUser?.uid else {return}
                 let database = Database.database().reference(withPath: "users/\(userID)")
                 let data = ["notificationToken" : fcmToken]
                 database.updateChildValues(data)
             }
         }
-        
-        print("Firebase registration token: \(fcmToken)")
-        
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        
-        Messaging.messaging().subscribe(toTopic: "pokestops") { error in
-            print("Subscribed to pokestops topic")
-        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {}

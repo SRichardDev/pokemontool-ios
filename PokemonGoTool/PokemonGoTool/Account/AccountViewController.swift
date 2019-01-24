@@ -2,11 +2,15 @@
 import UIKit
 import Firebase
 
-class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable {    
+class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable, UITextFieldDelegate {
     
     var firebaseConnector: FirebaseConnector!
     var locationManager: LocationManager!
-    
+    private var user: User? {
+        didSet {
+            updateUI()
+        }
+    }
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordLabel: UILabel!
@@ -14,17 +18,10 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        signUpButton.setTitleColor(.lightGray, for: .disabled)
-        updateButtons()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if firebaseConnector.isSignedIn {
-            firebaseConnector.user?.updateTrainerName(passwordTextField.text ?? "")
+    override func viewDidLoad() {
+        passwordTextField.delegate = self
+        User.loadUser { user in
+            self.user = user
         }
     }
     
@@ -33,7 +30,7 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
             do {
                 try Auth.auth().signOut()
                 showAlert(for: .signedOut)
-                self.updateButtons()
+                self.updateUI()
             } catch let error {
                 showAlert(for: .unknown(error: error.localizedDescription))
             }
@@ -41,9 +38,9 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
             guard let email = emailTextField.text else {return}
             guard let password = passwordTextField.text else {return}
             
-            firebaseConnector.signInUser(with: email, password: password) { status in
+            User.signIn(with: email, password: password) { status in
                 self.showAlert(for: status)
-                self.updateButtons()
+                self.updateUI()
             }
         }
 
@@ -55,28 +52,36 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         
-        firebaseConnector.signUpUser(with: email, password: password) { status in
+        User.signUp(with: email, password: password) { status in
             self.showAlert(for: status)
-            self.updateButtons()
+            self.updateUI()
         }
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
-        updateButtons()
+        updateUI()
     }
     
-    func updateButtons() {
+    func updateUI() {
         let isSignedIn = firebaseConnector.isSignedIn
         signUpButton.isHidden = isSignedIn
         isSignedIn ? loginButton.setTitle("Sign out", for: .normal) : loginButton.setTitle("Sign in", for: .normal)
         emailTextField.isEnabled = !isSignedIn
+        emailTextField.text = user?.email
         passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
-        passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
+        passwordTextField.text = isSignedIn ? user?.trainerName : ""
         passwordTextField.isSecureTextEntry = !isSignedIn
     }
     
     @IBAction func viewTapped(_ sender: Any) {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if firebaseConnector.isSignedIn {
+            guard let trainerName = textField.text else { return }
+            user?.updateTrainerName(trainerName)
+        }
     }
 }
 

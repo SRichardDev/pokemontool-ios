@@ -15,7 +15,6 @@ class FirebaseConnector {
     
     private var database: DatabaseReference!
     var pokestops = [Pokestop]()
-    private(set) var user: User?
     var delegate: FirebaseDelegate?
     
     var isSignedIn: Bool {
@@ -24,9 +23,6 @@ class FirebaseConnector {
     
     init() {
         database = Database.database().reference(withPath: "pokestops")
-        User.loadUser(completion: { user in
-            self.user = user
-        })
     }
     
     func savePokestop(_ pokestop: Pokestop) {
@@ -110,64 +106,6 @@ class FirebaseConnector {
                 self.delegate?.didUpdatePokestops()
             }
         })
-    }
-    
-    func signUpUser(with email: String, password: String, completion: @escaping (AuthStatus) -> ()) {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                if let errorCode = AuthErrorCode(rawValue: error._code) {
-                    switch errorCode {
-                    case .weakPassword:
-                        completion(.weakPassword)
-                    case .invalidCredential:
-                        completion(.invalidCredential)
-                    case .emailAlreadyInUse:
-                        completion(.emailAlreadyInUse)
-                    case .invalidEmail:
-                        completion(.invalidEmail)
-                    case .networkError:
-                        completion(.networkError)
-                    case .missingEmail:
-                        completion(.missingEmail)
-                    default:
-                        completion(.unknown(error: error.localizedDescription))
-                    }
-                }
-                print(error.localizedDescription)
-            }
-            
-            guard let result = result else { completion(.unknown(error: "No Result")); return }
-            let user = result.user
-            self.user = User(id: user.uid, email: user.email ?? "")
-            
-            user.sendEmailVerification() { error in
-                print(error?.localizedDescription ?? "")
-                completion(.signedUp)
-            }
-        }
-    }
-    
-    func signInUser(with email: String, password: String, completion: @escaping (AuthStatus) -> ()) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                if let errorCode = AuthErrorCode(rawValue: error._code) {
-                    switch errorCode {
-                    case .invalidCredential:
-                        completion(.invalidCredential)
-                    case .invalidEmail:
-                        completion(.invalidEmail)
-                    case .networkError:
-                        completion(.networkError)
-                    case .missingEmail:
-                        completion(.missingEmail)
-                    default:
-                        completion(.unknown(error: error.localizedDescription))
-                    }
-                }
-            } else {
-                completion(.signedIn)
-            }
-        }
     }
     
     func subscribeForPush(for geohash: String) {
