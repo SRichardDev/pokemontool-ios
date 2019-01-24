@@ -69,10 +69,11 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
             console.log("userId: " + userId);
             admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
                 const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+                const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
 
                 const payload = {
                     notification: {
-                       title: 'New Quest',
+                       title: 'New Quest from: ' + trainer,
                        body: name,
                        sound: 'default'
                     }

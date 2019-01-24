@@ -174,7 +174,7 @@ class FirebaseConnector {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let user = Database.database().reference(withPath: "pokestops/\(geohash)")
         let data = [userID : userID]
-        user.child("registered_user").setValue(data)
+        user.child("registered_user").updateChildValues(data)
     }
 }
 
