@@ -21,7 +21,7 @@ class SubmitPokestopViewController: UIViewController, MKMapViewDelegate, Storybo
         mapView.addAnnotation(annotation)
     }
 
-    @IBAction func doneTapped(_ sender: Any) {
+    @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true)
     }
     

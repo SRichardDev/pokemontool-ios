@@ -42,7 +42,9 @@ class FirebaseConnector {
     func savePokestop(_ pokestop: Pokestop) {
         let data = ["name"      : pokestop.name,
                     "latitude"  : pokestop.latitude.string,
-                    "longitude" : pokestop.longitude.string]
+                    "longitude" : pokestop.longitude.string,
+                    "submitter" : user?.trainerName ?? "Unknown",
+                    "submitterId" : user?.id ?? "Unknown"]
         
         saveToDatabase(data: data, geohash: pokestop.geohash)
     }
