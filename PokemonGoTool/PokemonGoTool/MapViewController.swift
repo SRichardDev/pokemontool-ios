@@ -46,7 +46,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         mapView.removeOverlays(mapView.overlays)
         geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadPokestops(for: $0) }
         firebaseConnector.loadPokestops(for: geohashWindow.currentGeohash)
-        
+//        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadArenas(for: $0) }
+//        firebaseConnector.loadArenas(for: geohashWindow.currentGeohash)
         let hashes = geohashWindow.neighborGeohashes
         hashes?.forEach { addPolyLine(for: Geohash.geohashbox($0)) }
     }
@@ -75,8 +76,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     
     @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            let navigationController = SubmitPokestopViewController.instantiateFromStoryboardInNavigationController()
-            let submitPokestopViewController = navigationController.topViewController as! SubmitPokestopViewController
+            let navigationController = SubmitViewController.instantiateFromStoryboardInNavigationController()
+            let submitPokestopViewController = navigationController.topViewController as! SubmitViewController
             submitPokestopViewController.firebaseConnector = firebaseConnector
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
@@ -109,15 +110,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         return annotationView
     }
     
-    func addPokestopAnnotations(for pokestops: Array<Pokestop>) {
+    func addPokestopAnnotations(for pokestops: [Pokestop]) {
         for pokestop in pokestops {
             let annotation = PokestopPointAnnotation(pokestop: pokestop)
+            addAnnotationIfNeeded(annotation)
+        }
+    }
+    
+    func addArenaAnnotations(for arenas: [Arena]) {
+        for arena in arenas {
+            let annotation = ArenaPointAnnotation(arena: arena)
             addAnnotationIfNeeded(annotation)
         }
     }
 }
 
 extension MapViewController: FirebaseDelegate {
+    func didUpdateArenas() {
+        addArenaAnnotations(for: firebaseConnector.arenas)
+    }
+    
     func didUpdatePokestops() {
         addPokestopAnnotations(for: firebaseConnector.pokestops)
     }
@@ -143,6 +155,21 @@ extension MapViewController {
         }
         
         if !pokestopFound {
+            self.mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func addAnnotationIfNeeded(_ annotation: ArenaPointAnnotation) {
+        var arenaFound = false
+        
+        self.mapView.annotations.forEach { annotationOnMap in
+            guard let annotationOnMap = annotationOnMap as? ArenaPointAnnotation else { return }
+            if annotationOnMap.arena.id == annotation.arena.id {
+                arenaFound = true
+            }
+        }
+        
+        if !arenaFound {
             self.mapView.addAnnotation(annotation)
         }
     }

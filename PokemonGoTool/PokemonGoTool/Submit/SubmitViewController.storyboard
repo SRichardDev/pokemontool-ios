@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="85.599999999999994" y="80.50974512743629"/>
         </scene>
-        <!--Neuer Pokéstop-->
+        <!--Neu-->
         <scene sceneID="Sod-h9-BdA">
             <objects>
-                <viewController id="46f-wM-hAp" customClass="SubmitPokestopViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="46f-wM-hAp" customClass="SubmitViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8V2-Sf-TwM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,34 +40,44 @@
                                 <rect key="frame" x="16" y="131" width="343" height="167"/>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scl-Rn-Dvp">
-                                <rect key="frame" x="16" y="352" width="343" height="30"/>
+                                <rect key="frame" x="16" y="385" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokestop Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMa-Ia-g8g">
-                                <rect key="frame" x="16" y="323" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMa-Ia-g8g">
+                                <rect key="frame" x="16" y="356" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hUe-ek-XGY">
+                                <rect key="frame" x="16" y="313" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Pokéstop"/>
+                                    <segment title="Arena"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="leading" id="1NR-Ys-aRD"/>
+                            <constraint firstItem="hUe-ek-XGY" firstAttribute="top" secondItem="ttO-Za-528" secondAttribute="bottom" constant="15" id="5YS-Rg-sOL"/>
                             <constraint firstItem="vMa-Ia-g8g" firstAttribute="leading" secondItem="QeK-9e-Tcu" secondAttribute="leading" constant="16" id="C8Q-Zk-3Ha"/>
                             <constraint firstItem="QeK-9e-Tcu" firstAttribute="trailing" secondItem="vMa-Ia-g8g" secondAttribute="trailing" constant="16" id="DOZ-Ir-e1h"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="top" secondItem="vMa-Ia-g8g" secondAttribute="bottom" constant="8" id="HS3-Sk-1ED"/>
                             <constraint firstItem="ttO-Za-528" firstAttribute="leading" secondItem="QeK-9e-Tcu" secondAttribute="leading" constant="16" id="Ht8-Wo-qnx"/>
                             <constraint firstItem="ttO-Za-528" firstAttribute="top" secondItem="QeK-9e-Tcu" secondAttribute="top" constant="15" id="ItW-aC-S0y"/>
+                            <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="hUe-ek-XGY" secondAttribute="bottom" constant="15" id="QsH-Wd-fA0"/>
                             <constraint firstItem="ttO-Za-528" firstAttribute="height" secondItem="8V2-Sf-TwM" secondAttribute="height" multiplier="1:4" id="T4W-M1-UM4"/>
                             <constraint firstItem="QeK-9e-Tcu" firstAttribute="trailing" secondItem="ttO-Za-528" secondAttribute="trailing" constant="16" id="Y36-K4-4Ss"/>
+                            <constraint firstItem="hUe-ek-XGY" firstAttribute="trailing" secondItem="ttO-Za-528" secondAttribute="trailing" id="beF-6X-he5"/>
+                            <constraint firstItem="hUe-ek-XGY" firstAttribute="leading" secondItem="ttO-Za-528" secondAttribute="leading" id="beS-4q-Zfi"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="trailing" secondItem="vMa-Ia-g8g" secondAttribute="trailing" id="f10-Lt-TiS"/>
-                            <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="ttO-Za-528" secondAttribute="bottom" constant="25" id="np6-0c-LCZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QeK-9e-Tcu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Neuer Pokéstop" id="DV3-fu-zAK">
+                    <navigationItem key="navigationItem" title="Neu" id="DV3-fu-zAK">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="lWX-Qk-Rcy">
                             <connections>
                                 <action selector="cancelTapped:" destination="46f-wM-hAp" id="zLu-Nh-hyw"/>
@@ -81,7 +91,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="ttO-Za-528" id="h7O-gk-wCz"/>
-                        <outlet property="pokestopNameTextField" destination="scl-Rn-Dvp" id="epb-Z8-ziX"/>
+                        <outlet property="nameTextField" destination="scl-Rn-Dvp" id="epb-Z8-ziX"/>
+                        <outlet property="segmentedControl" destination="hUe-ek-XGY" id="gOG-7X-RLp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5x-vL-Db2" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -6,6 +6,7 @@ import CodableFirebase
 
 protocol FirebaseDelegate {
     func didUpdatePokestops()
+    func didUpdateArenas()
 }
 
 protocol FirebaseUserDelegate {
@@ -29,6 +30,7 @@ class FirebaseConnector {
     }
     
     var pokestops = [Pokestop]()
+    var arenas = [Arena]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
     var isSignedIn: Bool {
@@ -72,10 +74,10 @@ class FirebaseConnector {
         }
     }
     
-    func loadPokestops(for geoHash: String) {
-        guard geoHash != "" else { return }
+    func loadPokestops(for geohash: String) {
+        guard geohash != "" else { return }
         pokestops.removeAll()
-        pokestopsRef.child(geoHash).observe(.value, with: { snapshot in
+        pokestopsRef.child(geohash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     guard let pokestop: Pokestop = decode(from: child) else { continue }
@@ -90,6 +92,28 @@ class FirebaseConnector {
                     }
                 }
                 self.delegate?.didUpdatePokestops()
+            }
+        })
+    }
+    
+    func loadArenas(for geohash: String) {
+        guard geohash != "" else { return }
+        arenas.removeAll()
+        arenasRef.child(geohash).observe(.value, with: { snapshot in
+            if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                for child in result {
+                    guard let arena: Arena = decode(from: child) else { continue }
+                    var arenaAlreadySaved = false
+                    self.arenas.forEach { savedArena in
+                        if arena.id == savedArena.id {
+                            arenaAlreadySaved = true
+                        }
+                    }
+                    if !arenaAlreadySaved {
+                        self.arenas.append(arena)
+                    }
+                }
+                self.delegate?.didUpdateArenas()
             }
         })
     }

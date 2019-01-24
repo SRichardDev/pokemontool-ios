@@ -42,7 +42,6 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             print(error.localizedDescription)
         }
     }
-    
     return nil
 }
 
@@ -52,13 +51,13 @@ struct Quest: Codable {
     let submitter: String
 }
 
-struct Arena: Codable {
+struct Arena: FirebaseCodable {    
     let name: String
     let latitude: Double
     let longitude: Double
     let submitter: String
-    let id: String?
-    let raid: Raid?
+    var id: String!
+//    let raid: Raid?
     let upVotes: Int?
     let downVotes: Int?
     var geohash: String {
