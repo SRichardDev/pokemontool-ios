@@ -23,6 +23,11 @@ class AppModule {
             if var appModuleAccessibleViewController = viewController as? AppModuleAccessible {
                 appModuleAccessibleViewController.firebaseConnector = firebaseConnector
                 appModuleAccessibleViewController.locationManager = locationManager
+            } else if let navigationController = viewController as? UINavigationController {
+                if var appModuleAccessibleViewController = navigationController.topViewController as? AppModuleAccessible {
+                    appModuleAccessibleViewController.firebaseConnector = firebaseConnector
+                    appModuleAccessibleViewController.locationManager = locationManager
+                }
             }
         }
     }

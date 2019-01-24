@@ -66,9 +66,8 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
     
     func updateButtons() {
         let isSignedIn = firebaseConnector.isSignedIn
-        signUpButton.isEnabled = !isSignedIn
+        signUpButton.isHidden = isSignedIn
         isSignedIn ? loginButton.setTitle("Sign out", for: .normal) : loginButton.setTitle("Sign in", for: .normal)
-        isSignedIn ? (signUpButton.backgroundColor = #colorLiteral(red: 0.94599998, green: 0.4300000072, blue: 0.2220000029, alpha: 1).withAlphaComponent(0.5)) : (signUpButton.backgroundColor = #colorLiteral(red: 0.94599998, green: 0.4300000072, blue: 0.2220000029, alpha: 1))
         emailTextField.isEnabled = !isSignedIn
         passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
         passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
