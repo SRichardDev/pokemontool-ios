@@ -135,7 +135,6 @@
 			children = (
 				2C97F78021F67AC700630BA2 /* NibView.swift */,
 				2C97F77F21F67AC600630BA2 /* StoryboardViewController.swift */,
-				2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */,
 				2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */,
 				2C97F77221F6585900630BA2 /* Double+Extension.swift */,
 			);
@@ -177,6 +176,7 @@
 		2C97F78A21F67D6D00630BA2 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
 				2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */,
 			);

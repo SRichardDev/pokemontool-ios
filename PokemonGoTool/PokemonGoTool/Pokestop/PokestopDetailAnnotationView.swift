@@ -1,10 +1,3 @@
-//
-//  GymDetailAnnotationView.swift
-//  PokemapTool
-//
-//  Created by Nico on 27.02.18.
-//  Copyright © 2018 NST. All rights reserved.
-//
 
 import UIKit
 
