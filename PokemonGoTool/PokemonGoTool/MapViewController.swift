@@ -133,21 +133,17 @@ extension MapViewController: LocationManagerDelegate {
 extension MapViewController {
     
     func addAnnotationIfNeeded(_ annotation: PokestopPointAnnotation) {
-        DispatchQueue.main.async {
-            
-            var pokestopFound = false
-            
-            self.mapView.annotations.forEach { annotationOnMap in
-                guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
-                if annotationOnMap.pokestop.id == annotation.pokestop.id {
-                    pokestopFound = true
-                }
+        var pokestopFound = false
+        
+        self.mapView.annotations.forEach { annotationOnMap in
+            guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
+            if annotationOnMap.pokestop.id == annotation.pokestop.id {
+                pokestopFound = true
             }
-            
-            if !pokestopFound {
-                self.mapView.addAnnotation(annotation)
-                print("Annotation added")
-            }
+        }
+        
+        if !pokestopFound {
+            self.mapView.addAnnotation(annotation)
         }
     }
     
@@ -164,7 +160,6 @@ extension MapViewController {
                     }
                 }
                 if !foundAnnotationGeohashInNeighbor {
-                    print("Removed annotation")
                     mapView.removeAnnotation(annotation)
                 }
             }

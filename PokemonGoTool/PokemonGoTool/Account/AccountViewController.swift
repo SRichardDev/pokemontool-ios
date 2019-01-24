@@ -1,6 +1,7 @@
 
 import UIKit
 import Firebase
+
 class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable {    
     
     var firebaseConnector: FirebaseConnector!
@@ -17,6 +18,14 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
         super.viewWillAppear(animated)
         signUpButton.setTitleColor(.lightGray, for: .disabled)
         updateButtons()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if firebaseConnector.isSignedIn {
+            firebaseConnector.user?.updateTrainerName(passwordTextField.text ?? "")
+        }
     }
     
     @IBAction func loginTapped(_ sender: Any) {
@@ -61,10 +70,9 @@ class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStat
         isSignedIn ? loginButton.setTitle("Sign out", for: .normal) : loginButton.setTitle("Sign in", for: .normal)
         isSignedIn ? (signUpButton.backgroundColor = #colorLiteral(red: 0.94599998, green: 0.4300000072, blue: 0.2220000029, alpha: 1).withAlphaComponent(0.5)) : (signUpButton.backgroundColor = #colorLiteral(red: 0.94599998, green: 0.4300000072, blue: 0.2220000029, alpha: 1))
         emailTextField.isEnabled = !isSignedIn
-        passwordLabel.isHidden = isSignedIn
-        passwordTextField.isHidden = isSignedIn
-        
-        
+        passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
+        passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
+        passwordTextField.isSecureTextEntry = !isSignedIn
     }
     
     @IBAction func viewTapped(_ sender: Any) {

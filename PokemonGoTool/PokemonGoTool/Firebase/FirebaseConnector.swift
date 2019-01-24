@@ -15,6 +15,7 @@ class FirebaseConnector {
     
     private var database: DatabaseReference!
     var pokestops = [Pokestop]()
+    private(set) var user: User?
     var delegate: FirebaseDelegate?
     
     var isSignedIn: Bool {
@@ -23,6 +24,9 @@ class FirebaseConnector {
     
     init() {
         database = Database.database().reference(withPath: "pokestops")
+        User.loadUser(completion: { user in
+            self.user = user
+        })
     }
     
     func savePokestop(_ pokestop: Pokestop) {
@@ -132,10 +136,13 @@ class FirebaseConnector {
                 print(error.localizedDescription)
             }
             
-            if result != nil {
-                result?.user.sendEmailVerification() { error in
-                    completion(.signedUp)
-                }
+            guard let result = result else { completion(.unknown(error: "No Result")); return }
+            let user = result.user
+            self.user = User(id: user.uid, email: user.email ?? "")
+            
+            user.sendEmailVerification() { error in
+                print(error?.localizedDescription ?? "")
+                completion(.signedUp)
             }
         }
     }
