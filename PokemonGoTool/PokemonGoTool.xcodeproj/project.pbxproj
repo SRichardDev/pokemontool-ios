@@ -13,6 +13,7 @@
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
 		2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */; };
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
+		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */; };
 		2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */; };
@@ -50,6 +51,7 @@
 		2C1976AA21ED266B00091F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
+		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStatusPresentable.swift; sourceTree = "<group>"; };
 		2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pokestop+Quest.swift"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */,
 				2C97F77221F6585900630BA2 /* Double+Extension.swift */,
 				2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */,
+				2C44EAB021FCA0B10029527C /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				2C97F77821F672F400630BA2 /* PokestopAnnotationView.swift in Sources */,
 				2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
+				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,

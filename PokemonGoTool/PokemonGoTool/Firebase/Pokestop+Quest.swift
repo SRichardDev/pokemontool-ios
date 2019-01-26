@@ -4,7 +4,7 @@ import Firebase
 import CodableFirebase
 
 protocol FirebaseCodable: Codable {
-    var id: String! {get set}
+    var id: String? {get set}
     mutating func setId(_ documentId: String)
 }
 
@@ -12,15 +12,15 @@ extension FirebaseCodable {
     mutating func setId(_ id: String) {}
 }
 
-struct Pokestop: FirebaseCodable {
-    let name: String
-    let latitude: Double
-    let longitude: Double
-    let submitter: String
-    var id: String!
-    let quest: Quest?
-    let upVotes: Int?
-    let downVotes: Int?
+struct Pokestop: FirebaseCodable, Equatable {
+    var name: String
+    var latitude: Double
+    var longitude: Double
+    var submitter: String
+    var id: String?
+    var quest: Quest?
+    var upVotes: Int?
+    var downVotes: Int?
     var geohash: String {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)
@@ -30,6 +30,25 @@ struct Pokestop: FirebaseCodable {
     mutating func setId(_ id: String) {
         self.id = id
     }
+    
+    static func == (lhs: Pokestop, rhs: Pokestop) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.latitude == rhs.latitude &&
+            lhs.longitude == rhs.longitude &&
+            lhs.submitter == rhs.submitter &&
+            lhs.id == rhs.id
+    }
+    
+    mutating func updateData(with pokestop: Pokestop) {
+        name = pokestop.name
+        latitude = pokestop.latitude
+        longitude = pokestop.longitude
+        submitter = pokestop.submitter
+        id = pokestop.id
+        quest = pokestop.quest
+        upVotes = pokestop.upVotes
+        downVotes = pokestop.downVotes
+    }
 }
 
 func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
@@ -38,8 +57,9 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             var object = try FirebaseDecoder().decode(T.self, from: data)
             object.setId(snapshot.key)
             return object
-        } catch let error {
-//            print(error.localizedDescription)
+        } catch _ {
+            //Error for registred push users
+//            print("Error decoding: \(error.localizedDescription) : \(T.self)")
         }
     }
     return nil
@@ -56,7 +76,7 @@ struct Arena: FirebaseCodable {
     let latitude: Double
     let longitude: Double
     let submitter: String
-    var id: String!
+    var id: String?
 //    let raid: Raid?
     let upVotes: Int?
     let downVotes: Int?
