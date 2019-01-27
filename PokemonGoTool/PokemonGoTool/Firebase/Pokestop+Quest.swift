@@ -9,11 +9,17 @@ protocol FirebaseCodable: Codable {
 }
 
 extension FirebaseCodable {
-    mutating func setId(_ id: String) {}
+    mutating func setId(_ id: String) {
+        self.id = id
+    }
 }
 
 protocol Annotation  {
-    
+    var name: String { get set }
+    var latitude: Double { get set }
+    var longitude: Double { get set }
+    var upVotes: Int? { get set }
+    var downVotes: Int? { get set }
 }
 
 struct Pokestop: FirebaseCodable, Equatable, Annotation {
@@ -29,10 +35,6 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)
         }
-    }
-    
-    mutating func setId(_ id: String) {
-        self.id = id
     }
     
     static func == (lhs: Pokestop, rhs: Pokestop) -> Bool {
@@ -76,14 +78,14 @@ struct Quest: Codable {
 }
 
 struct Arena: FirebaseCodable, Annotation {    
-    let name: String
-    let latitude: Double
-    let longitude: Double
+    var name: String
+    var latitude: Double
+    var longitude: Double
     let submitter: String
     var id: String?
 //    let raid: Raid?
-    let upVotes: Int?
-    let downVotes: Int?
+    var upVotes: Int?
+    var downVotes: Int?
     var geohash: String {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)

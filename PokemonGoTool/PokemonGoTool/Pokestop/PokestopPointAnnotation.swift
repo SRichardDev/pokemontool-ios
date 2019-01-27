@@ -2,7 +2,11 @@
 import UIKit
 import MapKit
 
-class PokestopPointAnnotation: MKPointAnnotation {
+protocol GeohashStringRepresentable {
+    var geohash: String { get }
+}
+
+class PokestopPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     var pokestop: Pokestop!
     var imageName = "Pokestop"
     var geohash: String {

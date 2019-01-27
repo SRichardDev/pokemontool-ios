@@ -6,7 +6,8 @@ class CustomAnnotationView: MKAnnotationView {
 
     weak var customCalloutView: UIView?
     var label = UILabel()
-
+    var labelOffsetY: CGFloat = 28
+    
     override func didMoveToSuperview() {
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 10)
@@ -19,7 +20,7 @@ class CustomAnnotationView: MKAnnotationView {
         label.clipsToBounds = true
         let padding: CGFloat = 5
         label.frame = CGRect(x: -label.intrinsicContentSize.width/2 + frame.width/2 - padding/2,
-                             y: frame.height - 28,
+                             y: frame.height - labelOffsetY,
                              width: label.intrinsicContentSize.width + padding,
                              height: label.intrinsicContentSize.height)
     }

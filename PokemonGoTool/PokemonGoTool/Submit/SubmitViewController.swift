@@ -56,7 +56,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, StoryboardIniti
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? PokestopPointAnnotation  else { return nil }
-        let annotationView = PokestopAnnotationView.prepareFor(mapView: mapView, annotation: annotation)
+        let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
         return annotationView
     }
 }

@@ -2,32 +2,37 @@
 import UIKit
 import MapKit
 
-private let animationTime = 0.25
+private let animationTime = 0.2
 
-protocol PokestopDetailDelegate: class {
-    func showDetail(for pokestop: Pokestop)
+protocol DetailAnnotationViewDelegate: class {
+    func showDetail(for pokestop: Annotation)
 }
 
-class PokestopAnnotationView: CustomAnnotationView {
-    var pokestop: Pokestop?
-    weak var delegate: PokestopDetailDelegate?
+class AnnotationView: CustomAnnotationView {
+    var customAnnotation: Annotation?
+    weak var delegate: DetailAnnotationViewDelegate?
     
     override func didMoveToSuperview() {
-        guard let pokestop = pokestop else { return }
-        label.text = pokestop.name
+        guard let annotation = customAnnotation else { return }
+        
+        if let _ = customAnnotation as? Arena {
+            labelOffsetY = 0
+        }
+        
+        label.text = annotation.name
         addSubview(label)
         super.didMoveToSuperview()
     }
     
-    func loadPokestopDetailAnnotationView() -> PokestopDetailAnnotationView? {
-        guard let pokestop = pokestop else { return nil }
-        if let views = Bundle.main.loadNibNamed("PokestopDetailAnnotationView",
+    private func loadDetailAnnotationView() -> DetailAnnotationView? {
+        guard let annotation = customAnnotation else { return nil }
+        if let views = Bundle.main.loadNibNamed("DetailAnnotationView",
                                                 owner: self,
-                                                options: nil) as? [PokestopDetailAnnotationView], views.count > 0 {
-            let pokestopDetailAnnotationView = views.first!
-            pokestopDetailAnnotationView.configure(with: pokestop)
-            pokestopDetailAnnotationView.delegate = delegate
-            return pokestopDetailAnnotationView
+                                                options: nil) as? [DetailAnnotationView], views.count > 0 {
+            let detailAnnotationView = views.first!
+            detailAnnotationView.configure(with: annotation)
+            detailAnnotationView.delegate = delegate
+            return detailAnnotationView
         }
         return nil
     }
@@ -38,7 +43,7 @@ class PokestopAnnotationView: CustomAnnotationView {
         if selected {
             self.customCalloutView?.removeFromSuperview() // remove old custom callout (if any)
             
-            if let newCustomCalloutView = loadPokestopDetailAnnotationView() {
+            if let newCustomCalloutView = loadDetailAnnotationView() {
                 // fix location from top-left to its right place.
                 newCustomCalloutView.frame.origin.x -= newCustomCalloutView.frame.width / 2.0 - (self.frame.width / 2.0)
                 newCustomCalloutView.frame.origin.y -= newCustomCalloutView.frame.height
@@ -68,20 +73,24 @@ class PokestopAnnotationView: CustomAnnotationView {
         }
     }
     
-    class func prepareFor(mapView: MKMapView, annotation: PokestopPointAnnotation) -> PokestopAnnotationView? {
-        let reuseId = "pokestopAnnotationReuseIdentifier"
+    class func prepareFor(mapView: MKMapView, annotation: MKPointAnnotation) -> AnnotationView? {
+        let reuseId = "annotationReuseIdentifier"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+
+        let pokestopAnnoation = annotation as? PokestopPointAnnotation
+        let arenaAnnotation = annotation as? ArenaPointAnnotation
+
         if annotationView == nil {
-            let pokestopAnnotationView = PokestopAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pokestopAnnotationView.pokestop = annotation.pokestop
+            let pokestopAnnotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
             annotationView = pokestopAnnotationView
         } else {
-            if let pokestopAnnotationView = annotationView as? PokestopAnnotationView {
+            if let pokestopAnnotationView = annotationView as? AnnotationView {
                 pokestopAnnotationView.annotation = annotation
-                pokestopAnnotationView.pokestop = annotation.pokestop
+                pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
             }
         }
-        annotationView?.image = UIImage(named: annotation.imageName)
-        return annotationView as? PokestopAnnotationView
+        annotationView?.image = UIImage(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "")
+        return annotationView as? AnnotationView
     }
 }

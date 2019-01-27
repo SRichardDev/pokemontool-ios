@@ -35,13 +35,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        removeAnnotationIfNeeded()
         mapView.removeOverlays(mapView.overlays)
         let mapRect = mapView.visibleMapRect
         let topLeft = MapRectUtility.getNorthWestCoordinate(in: mapRect)
         let topRight = MapRectUtility.getNorthEastCoordinate(in: mapRect)
         let bottomLeft = MapRectUtility.getSouthWestCoordinate(in: mapRect)
         let bottomRight = MapRectUtility.getSouthEastCoordinate(in: mapRect)
-
         geohashWindow = GeohashWindow(topLeftCoordinate: topLeft,
                                    topRightCoordiante: topRight,
                                    bottomLeftCoordinated: bottomLeft,
@@ -108,10 +108,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? PokestopPointAnnotation  else { return nil }
-        let annotationView = PokestopAnnotationView.prepareFor(mapView: mapView, annotation: annotation)
-        annotationView?.delegate = self
-        return annotationView
+        if let annotation = annotation as? PokestopPointAnnotation  {
+            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
+            annotationView?.delegate = self
+            return annotationView
+        } else if let annotation = annotation as? ArenaPointAnnotation  {
+            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
+            annotationView?.delegate = self
+            return annotationView
+        }
+        return nil
     }
     
     func addAnnotations(for annotations: [Annotation]) {
@@ -146,57 +152,63 @@ extension MapViewController: LocationManagerDelegate {
 
 extension MapViewController {
     
-    func addAnnotationIfNeeded(_ annotation: PokestopPointAnnotation) {
-        var pokestopFound = false
+    func addAnnotationIfNeeded(_ annotation: MKAnnotation) {
         
-        self.mapView.annotations.forEach { annotationOnMap in
-            guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
-            if annotationOnMap.pokestop.id == annotation.pokestop.id {
-                pokestopFound = true
+        if let pokestopAnnotation = annotation as? PokestopPointAnnotation {
+            var pokestopFound = false
+            self.mapView.annotations.forEach { annotationOnMap in
+                guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
+                if annotationOnMap.pokestop.id == pokestopAnnotation.pokestop.id {
+                    pokestopFound = true
+                }
             }
-        }
-        
-        if !pokestopFound {
-            self.mapView.addAnnotation(annotation)
-        }
-    }
-    
-    func addAnnotationIfNeeded(_ annotation: ArenaPointAnnotation) {
-        var arenaFound = false
-        
-        self.mapView.annotations.forEach { annotationOnMap in
-            guard let annotationOnMap = annotationOnMap as? ArenaPointAnnotation else { return }
-            if annotationOnMap.arena.id == annotation.arena.id {
-                arenaFound = true
+            if !pokestopFound {
+                self.mapView.addAnnotation(annotation)
             }
-        }
-        
-        if !arenaFound {
-            self.mapView.addAnnotation(annotation)
+        } else if let arenaAnnotation = annotation as? ArenaPointAnnotation {
+            var arenaFound = false
+            self.mapView.annotations.forEach { annotationOnMap in
+                guard let annotationOnMap = annotationOnMap as? ArenaPointAnnotation else { return }
+                if annotationOnMap.arena.id == arenaAnnotation.arena.id {
+                    arenaFound = true
+                }
+            }
+            if !arenaFound {
+                self.mapView.addAnnotation(annotation)
+            }
         }
     }
     
     func removeAnnotationIfNeeded() {
         mapView.annotations.forEach {
-            guard let annotation = $0 as? PokestopPointAnnotation else { return }
+            guard let annotation = $0 as? GeohashStringRepresentable else { return }
+            var foundAnnotationGeohash = false
+            
             geohashWindow?.geohashMatrix.forEach { lineArray in
                 for geohashBox in lineArray {
                     if annotation.geohash == geohashBox.hash {
-                        continue
+                        foundAnnotationGeohash = true
+                        break
                     }
-                    mapView.removeAnnotation(annotation)
                 }
+            }
+            
+            if !foundAnnotationGeohash {
+                mapView.removeAnnotation(annotation as! MKAnnotation)
             }
         }
     }
 }
 
-extension MapViewController: PokestopDetailDelegate {
-    func showDetail(for pokestop: Pokestop) {
+extension MapViewController: DetailAnnotationViewDelegate {
+    func showDetail(for annotation: Annotation) {
         let navigationController = SubmitQuestViewController.instantiateFromStoryboardInNavigationController()
         let submitQuestViewController = navigationController.topViewController as! SubmitQuestViewController
-        submitQuestViewController.pokestop = pokestop
-        submitQuestViewController.firebaseConnector = firebaseConnector
-        present(navigationController, animated: true)
+        
+        if let pokestopAnnotation = annotation as? Pokestop {
+            submitQuestViewController.pokestop = pokestopAnnotation
+            submitQuestViewController.firebaseConnector = firebaseConnector
+            present(navigationController, animated: true)
+        }
     }
 }

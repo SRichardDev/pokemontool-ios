@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class ArenaPointAnnotation: MKPointAnnotation {
+class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     var arena: Arena!
     var imageName = "arena"
     var geohash: String {
