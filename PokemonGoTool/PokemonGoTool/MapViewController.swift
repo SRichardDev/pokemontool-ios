@@ -50,7 +50,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
                 addPolyLine(for: geohashBox)
-                self.firebaseConnector.loadPokestops(for: geohashBox.hash)
+                firebaseConnector.loadPokestops(for: geohashBox.hash)
+                firebaseConnector.loadArenas(for: geohashBox.hash)
             }
         }
     }
@@ -113,28 +114,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         return annotationView
     }
     
-    func addPokestopAnnotations(for pokestops: [Pokestop]) {
-        for pokestop in pokestops {
-            let annotation = PokestopPointAnnotation(pokestop: pokestop)
-            addAnnotationIfNeeded(annotation)
-        }
-    }
-    
-    func addArenaAnnotations(for arenas: [Arena]) {
-        for arena in arenas {
-            let annotation = ArenaPointAnnotation(arena: arena)
-            addAnnotationIfNeeded(annotation)
+    func addAnnotations(for annotations: [Annotation]) {
+        for annotation in annotations {
+            if let pokestopAnnotation = annotation as? Pokestop {
+                let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation)
+                addAnnotationIfNeeded(annotation)
+            } else if let arenaAnnotation = annotation as? Arena {
+                let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
+                addAnnotationIfNeeded(annotation)
+            }
         }
     }
 }
 
 extension MapViewController: FirebaseDelegate {
     func didUpdateArenas() {
-        addArenaAnnotations(for: firebaseConnector.arenas)
+        addAnnotations(for: firebaseConnector.arenas)
     }
     
     func didUpdatePokestops() {
-        addPokestopAnnotations(for: firebaseConnector.pokestops)
+        addAnnotations(for: firebaseConnector.pokestops)
     }
 }
 

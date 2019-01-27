@@ -12,7 +12,11 @@ extension FirebaseCodable {
     mutating func setId(_ id: String) {}
 }
 
-struct Pokestop: FirebaseCodable, Equatable {
+protocol Annotation  {
+    
+}
+
+struct Pokestop: FirebaseCodable, Equatable, Annotation {
     var name: String
     var latitude: Double
     var longitude: Double
@@ -71,7 +75,7 @@ struct Quest: Codable {
     let submitter: String
 }
 
-struct Arena: FirebaseCodable {    
+struct Arena: FirebaseCodable, Annotation {    
     let name: String
     let latitude: Double
     let longitude: Double
