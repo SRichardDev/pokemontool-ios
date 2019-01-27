@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Maxim Veksler. All rights reserved.
 //
 
-struct GeohashBox {
+struct GeohashBox: Equatable {
     let hash: String
     
     let north: Double // top latitude

@@ -9,7 +9,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     var firebaseConnector: FirebaseConnector!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
-    private let geohashWindow = GeohashWindow()
+    private var geohashWindow: GeohashWindow?
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
     
@@ -35,27 +35,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let center = mapView.centerCoordinate
-        let centerGeohash = Geohash.encode(latitude: center.latitude, longitude: center.longitude)
-        
-        guard centerGeohash != geohashWindow.currentGeohash else { return }
-        print("Geohash changed to: \(centerGeohash)")
-        geohashWindow.currentGeohash = centerGeohash
-        
-        removeAnnotationIfNeeded()
         mapView.removeOverlays(mapView.overlays)
-        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadPokestops(for: $0) }
-        firebaseConnector.loadPokestops(for: geohashWindow.currentGeohash)
-//        geohashWindow.neighborGeohashes?.forEach { firebaseConnector.loadArenas(for: $0) }
-//        firebaseConnector.loadArenas(for: geohashWindow.currentGeohash)
-        let hashes = geohashWindow.neighborGeohashes
-        hashes?.forEach { addPolyLine(for: Geohash.geohashbox($0)) }
+        let mapRect = mapView.visibleMapRect
+        let topLeft = MapRectUtility.getNorthWestCoordinate(in: mapRect)
+        let topRight = MapRectUtility.getNorthEastCoordinate(in: mapRect)
+        let bottomLeft = MapRectUtility.getSouthWestCoordinate(in: mapRect)
+        let bottomRight = MapRectUtility.getSouthEastCoordinate(in: mapRect)
+
+        geohashWindow = GeohashWindow(topLeftCoordinate: topLeft,
+                                   topRightCoordiante: topRight,
+                                   bottomLeftCoordinated: bottomLeft,
+                                   bottomRightCoordiante: bottomRight)
+        
+        geohashWindow?.geohashMatrix.forEach { lineArray in
+            lineArray.forEach { geohashBox in
+                addPolyLine(for: geohashBox)
+                self.firebaseConnector.loadPokestops(for: geohashBox.hash)
+            }
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.5)
+            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
             polylineRenderer.lineWidth = 1
             return polylineRenderer
         } else {
@@ -68,10 +71,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     func addPolyLine(for geohashBox: GeohashBox?) {
         guard let geohashBox = geohashBox else { return }
         let polyLine = MKPolyline.polyline(for: geohashBox)
-        let polygon = MKPolygon.polygon(for: geohashBox)
-        self.polygon = polygon
+//        let polygon = MKPolygon.polygon(for: geohashBox)
+//        self.polygon = polygon
         mapView.addOverlay(polyLine)
-        mapView.addOverlay(polygon)
+//        mapView.addOverlay(polygon)
     }
     
     @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
@@ -177,16 +180,11 @@ extension MapViewController {
     func removeAnnotationIfNeeded() {
         mapView.annotations.forEach {
             guard let annotation = $0 as? PokestopPointAnnotation else { return }
-            if annotation.geohash != geohashWindow.currentGeohash {
-                let annotationGeohash = annotation.geohash
-                var foundAnnotationGeohashInNeighbor = false
-                
-                geohashWindow.neighborGeohashes(for: annotationGeohash).forEach { neighborGeohash in
-                    if neighborGeohash == geohashWindow.currentGeohash {
-                        foundAnnotationGeohashInNeighbor = true
+            geohashWindow?.geohashMatrix.forEach { lineArray in
+                for geohashBox in lineArray {
+                    if annotation.geohash == geohashBox.hash {
+                        continue
                     }
-                }
-                if !foundAnnotationGeohashInNeighbor {
                     mapView.removeAnnotation(annotation)
                 }
             }
