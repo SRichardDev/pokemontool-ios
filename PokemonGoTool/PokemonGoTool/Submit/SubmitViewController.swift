@@ -34,7 +34,7 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
             mapViewController.addPokestopAnnotation()
             title = "Neuer Pokéstop"
         } else if sender.selectedSegmentIndex == 1 {
-            submitType = .arena(isEX: nil)
+            submitType = .arena(isEX: false)
             mapViewController.addArenaAnnotation()
             title = "Neue Arena"
         }

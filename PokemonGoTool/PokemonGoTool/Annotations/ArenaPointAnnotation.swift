@@ -3,7 +3,14 @@ import MapKit
 
 class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     var arena: Arena!
-    var imageName = "arena"
+    var imageName: String {
+        get {
+            guard let arena = arena else { return "arena"}
+            let name = arena.isEX ? "arenaEX" : "arena"
+            return name
+        }
+    }
+    
     var geohash: String {
         get {
             return Geohash.encode(latitude: coordinate.latitude, longitude: coordinate.longitude)

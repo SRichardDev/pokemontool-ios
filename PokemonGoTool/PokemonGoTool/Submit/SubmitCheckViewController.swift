@@ -37,7 +37,6 @@ class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable {
                                     latitude: coordinate.latitude,
                                     longitude: coordinate.longitude,
                                     submitter: user)
-            
             firebaseConnector.savePokestop(pokestop)
         case .arena(let isEX):
             let arena = Arena(name: name,

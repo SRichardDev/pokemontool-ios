@@ -43,7 +43,7 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
         case .pokestop:
             break
         case .arena:
-            submitContent?.submitType = .arena(isEX: isExSwitch?.isEnabled)
+            submitContent?.submitType = .arena(isEX: isExSwitch?.isOn)
             break
         }
         

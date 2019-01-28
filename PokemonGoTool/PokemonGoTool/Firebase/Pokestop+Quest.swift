@@ -89,7 +89,7 @@ struct Arena: FirebaseCodable, Annotation {
     var latitude: Double
     var longitude: Double
     let submitter: String
-    var isEX: Bool
+    var isEX: Bool = false
     var id: String?
 //    let raid: Raid?
     var upVotes: Int?
