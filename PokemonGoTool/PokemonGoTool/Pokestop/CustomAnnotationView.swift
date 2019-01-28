@@ -42,6 +42,18 @@ class CustomAnnotationView: MKAnnotationView {
         customCalloutView?.removeFromSuperview()
     }
     
+    func showLabelAnimated() {
+        UIView.animate(withDuration: 0.25) {
+            self.label.alpha = 1
+        }
+    }
+    
+    func hideLabelAnimated() {
+        UIView.animate(withDuration: 0.25) {
+            self.label.alpha = 0
+        }
+    }
+    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         // if super passed hit test, return the result
         if let parentHitView = super.hitTest(point, with: event) { return parentHitView }

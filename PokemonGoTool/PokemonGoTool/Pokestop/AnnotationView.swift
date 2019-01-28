@@ -15,8 +15,10 @@ class AnnotationView: CustomAnnotationView {
     override func didMoveToSuperview() {
         guard let annotation = customAnnotation else { return }
         
-        if let _ = customAnnotation as? Arena {
+        if (customAnnotation as? Arena) != nil {
             labelOffsetY = 0
+        } else {
+            labelOffsetY = 28
         }
         
         label.text = annotation.name

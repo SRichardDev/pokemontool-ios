@@ -43,9 +43,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         let bottomLeft = MapRectUtility.getSouthWestCoordinate(in: mapRect)
         let bottomRight = MapRectUtility.getSouthEastCoordinate(in: mapRect)
         geohashWindow = GeohashWindow(topLeftCoordinate: topLeft,
-                                   topRightCoordiante: topRight,
-                                   bottomLeftCoordinated: bottomLeft,
-                                   bottomRightCoordiante: bottomRight)
+                                      topRightCoordiante: topRight,
+                                      bottomLeftCoordinated: bottomLeft,
+                                      bottomRightCoordiante: bottomRight)
         
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
