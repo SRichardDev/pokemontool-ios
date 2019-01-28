@@ -2,61 +2,50 @@
 import UIKit
 import MapKit
 
-class SubmitViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController {
+enum SubmitType {
+    case pokestop
+    case arena
+}
+
+struct SubmitContent {
+    var location: CLLocationCoordinate2D?
+    var name: String?
+    var submitType: SubmitType!
+}
+
+class SubmitViewController: UIViewController, StoryboardInitialViewController, SubmitMapEmbeddable {
 
     var firebaseConnector: FirebaseConnector!
     var locationOnMap: CLLocationCoordinate2D!
-    @IBOutlet var mapView: MKMapView!
-    @IBOutlet var nameTextField: UITextField!
     @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var containerView: UIView!
+    var mapViewController: SubmitMapViewController!
+    var submitType: SubmitType = .pokestop
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
-        let viewRegion = MKCoordinateRegion(center: locationOnMap,
-                                            latitudinalMeters: 120,
-                                            longitudinalMeters: 120)
-        mapView.setRegion(viewRegion, animated: false)
-        
-        let annotation = PokestopPointAnnotation(coordinate: locationOnMap)
-        mapView.addAnnotation(annotation)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        nameTextField.resignFirstResponder()
+        mapViewController = embedMap(coordinate: locationOnMap)
     }
 
+    @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            submitType = .pokestop
+            mapViewController.addPokestopAnnotation()
+        } else if sender.selectedSegmentIndex == 1 {
+            submitType = .arena
+            mapViewController.addArenaAnnotation()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SubmitNameViewController {
+            let submitContent = SubmitContent(location: mapViewController.locationOnMap, name: nil, submitType: submitType)
+            destination.submitContent = submitContent
+            destination.firebaseConnector = firebaseConnector
+        }
+    }
+    
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true)
-    }
-    
-    @IBAction func submitTapped(_ sender: Any) {
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            let pokestop = Pokestop(name: nameTextField.text!,
-                                    latitude: locationOnMap.latitude,
-                                    longitude: locationOnMap.longitude,
-                                    submitter: firebaseConnector.user?.trainerName ?? "",
-                                    id: "", quest: nil, upVotes: nil, downVotes: nil)
-            
-            firebaseConnector.savePokestop(pokestop)
-        } else if segmentedControl.selectedSegmentIndex == 1 {
-            let arena = Arena(name: nameTextField.text!,
-                              latitude: locationOnMap.latitude,
-                              longitude: locationOnMap.longitude,
-                              submitter: firebaseConnector.user?.trainerName ?? "",
-                              id: nil, upVotes: nil, downVotes: nil)
-            firebaseConnector.saveArena(arena)
-        }
-        
-
-        dismiss(animated: true)
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? PokestopPointAnnotation  else { return nil }
-        let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
-        return annotationView
     }
 }

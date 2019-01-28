@@ -15,6 +15,9 @@
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
+		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
+		2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */; };
+		2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */; };
 		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
@@ -56,6 +59,9 @@
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
+		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
+		2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMapViewController.swift; sourceTree = "<group>"; };
+		2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCheckViewController.swift; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -162,6 +168,9 @@
 				2C97F78321F67B3700630BA2 /* SubmitQuestViewController.swift */,
 				2C97F78521F67B5C00630BA2 /* SubmitQuestViewController.storyboard */,
 				2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */,
+				2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */,
+				2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */,
+				2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */,
 				2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */,
 			);
 			path = Submit;
@@ -373,8 +382,10 @@
 				2CF6F9A821F2846D00610BC9 /* AppModule.swift in Sources */,
 				2C97F78C21F6881A00630BA2 /* SubmitViewController.swift in Sources */,
 				2C97F77621F6729700630BA2 /* CustomAnnotationView.swift in Sources */,
+				2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */,
 				2C97F77821F672F400630BA2 /* AnnotationView.swift in Sources */,
 				2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */,
+				2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
@@ -389,6 +400,7 @@
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
 				2CDFDDE921ED4FFB00170A46 /* GeohashBox.swift in Sources */,
+				2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */,
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
