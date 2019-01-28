@@ -4,7 +4,7 @@ import MapKit
 
 enum SubmitType {
     case pokestop
-    case arena
+    case arena(isEX: Bool?)
 }
 
 struct SubmitContent {
@@ -24,6 +24,7 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Neuer Pokéstop"
         mapViewController = embedMap(coordinate: locationOnMap)
     }
 
@@ -31,9 +32,11 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
         if sender.selectedSegmentIndex == 0 {
             submitType = .pokestop
             mapViewController.addPokestopAnnotation()
+            title = "Neuer Pokéstop"
         } else if sender.selectedSegmentIndex == 1 {
-            submitType = .arena
+            submitType = .arena(isEX: nil)
             mapViewController.addArenaAnnotation()
+            title = "Neue Arena"
         }
     }
     

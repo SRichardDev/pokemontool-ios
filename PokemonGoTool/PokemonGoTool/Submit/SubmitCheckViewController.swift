@@ -27,27 +27,25 @@ class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable {
     }
     
     @IBAction func submitTapped(_ sender: Any) {
-        guard let name = submitContent?.name else {return}
-        guard let coordinate = submitContent?.location else {return}
+        guard let name = submitContent?.name else { return }
+        guard let coordinate = submitContent?.location else { return }
         guard let submitType = submitContent?.submitType else { return }
+        guard let user = firebaseConnector.user?.trainerName else { return }
         switch submitType {
         case .pokestop:
             let pokestop = Pokestop(name: name,
                                     latitude: coordinate.latitude,
                                     longitude: coordinate.longitude,
-                                    submitter: firebaseConnector.user?.trainerName ?? "",
-                                    id: "", quest: nil, upVotes: nil, downVotes: nil)
+                                    submitter: user)
             
             firebaseConnector.savePokestop(pokestop)
-
-        case .arena:
+        case .arena(let isEX):
             let arena = Arena(name: name,
                               latitude: coordinate.latitude,
                               longitude: coordinate.longitude,
-                              submitter: firebaseConnector.user?.trainerName ?? "",
-                              id: nil, upVotes: nil, downVotes: nil)
+                              submitter: user,
+                              isExArena: isEX ?? false)
             firebaseConnector.saveArena(arena)
-
         }
         dismiss(animated: true)
     }

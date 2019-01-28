@@ -37,6 +37,13 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation {
         }
     }
     
+    init(name: String, latitude: Double, longitude: Double, submitter: String) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.submitter = submitter
+    }
+    
     static func == (lhs: Pokestop, rhs: Pokestop) -> Bool {
         return lhs.name == rhs.name &&
             lhs.latitude == rhs.latitude &&
@@ -82,6 +89,7 @@ struct Arena: FirebaseCodable, Annotation {
     var latitude: Double
     var longitude: Double
     let submitter: String
+    var isEX: Bool
     var id: String?
 //    let raid: Raid?
     var upVotes: Int?
@@ -90,6 +98,14 @@ struct Arena: FirebaseCodable, Annotation {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)
         }
+    }
+    
+    init(name: String, latitude: Double, longitude: Double, submitter: String, isExArena: Bool) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.submitter = submitter
+        self.isEX = isExArena
     }
 }
 
