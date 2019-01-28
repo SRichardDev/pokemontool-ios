@@ -17,6 +17,7 @@
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */; };
+		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
 		2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */; };
 		2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */; };
 		2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77221F6585900630BA2 /* Double+Extension.swift */; };
@@ -57,6 +58,7 @@
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
+		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStatusPresentable.swift; sourceTree = "<group>"; };
 		2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pokestop+Quest.swift"; sourceTree = "<group>"; };
 		2C97F77221F6585900630BA2 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				2C97F77521F6729700630BA2 /* CustomAnnotationView.swift */,
 				2C97F77721F672F400630BA2 /* AnnotationView.swift */,
 				2C97F77B21F6742D00630BA2 /* DetailAnnotationView.swift */,
+				2C7DC24C21FE8D2800BC3F24 /* Button.swift */,
 				2C97F77A21F6742D00630BA2 /* DetailAnnotationView.xib */,
 			);
 			path = Annotations;
@@ -374,6 +377,7 @@
 				2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
+				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
