@@ -28,7 +28,7 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SubmitNameViewController {
-            viewModel.submitContent(coordinate: mapViewController.locationOnMap)
+            viewModel.coordinate = mapViewController.locationOnMap
             destination.viewModel = viewModel
         }
     }

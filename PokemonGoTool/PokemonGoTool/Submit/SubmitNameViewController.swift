@@ -17,6 +17,7 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         nameTextField.becomeFirstResponder()
         nameTextField.delegate = self
+        nameTextField.text = viewModel.name
         exArenaTitleLabel.isHidden = viewModel.isPokestop
         exArenaSubtitleLabel.isHidden = viewModel.isPokestop
         isExSwitch.isHidden = viewModel.isPokestop
@@ -28,9 +29,9 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        viewModel.name = nameTextField.text
         if !viewModel.isPokestop {
             viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
-            viewModel.submitContent?.name = nameTextField.text
         }
         if let destination = segue.destination as? SubmitCheckViewController {
             destination.viewModel = viewModel

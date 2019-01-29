@@ -46,8 +46,15 @@ class SubmitViewModel {
         }
     }
     
+    var name: String! = ""
+    
     var coordinate: CLLocationCoordinate2D
-    var submitContent: SubmitContent!
+    
+    var submitContent: SubmitContent {
+        get {
+            return SubmitContent(location: coordinate, name: name, submitType: submitType)
+        }
+    }
     var submitType: SubmitType = .pokestop
     var firebaseConnector: FirebaseConnector
     
@@ -56,14 +63,10 @@ class SubmitViewModel {
         self.coordinate = coordinate
     }
     
-    func submitContent(coordinate: CLLocationCoordinate2D, name: String? = nil) {
-        submitContent = SubmitContent(location: coordinate, name: name, submitType: submitType)
-    }
-    
     func submit() {
-        guard let name = submitContent?.name else { return }
-        guard let coordinate = submitContent?.location else { return }
-        guard let submitType = submitContent?.submitType else { return }
+        guard let name = submitContent.name else { return }
+        guard let coordinate = submitContent.location else { return }
+        guard let submitType = submitContent.submitType else { return }
         guard let user = firebaseConnector.user?.trainerName else { return }
         switch submitType {
         case .pokestop:

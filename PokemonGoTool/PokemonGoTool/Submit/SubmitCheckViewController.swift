@@ -12,6 +12,7 @@ class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable {
         super.viewDidLoad()
         nameLabel.text = viewModel.submitName
         mapViewController = embedMap(coordinate: viewModel.coordinate)
+        mapViewController.view.isUserInteractionEnabled = false
         
         if viewModel.isPokestop {
             mapViewController.addPokestopAnnotation()
