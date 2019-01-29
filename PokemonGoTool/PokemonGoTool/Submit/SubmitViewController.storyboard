@@ -75,7 +75,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VN3-5d-WLF">
-                                <rect key="frame" x="16" y="322" width="343" height="241"/>
+                                <rect key="frame" x="16" y="321.5" width="343" height="241.5"/>
                                 <connections>
                                     <segue destination="WCd-3Y-aWd" kind="embed" id="uOq-Lp-omC"/>
                                 </connections>
@@ -317,7 +317,7 @@
             <objects>
                 <viewController id="WCd-3Y-aWd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dr6-VT-RSI">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="241"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="241.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>

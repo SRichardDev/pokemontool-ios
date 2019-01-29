@@ -17,12 +17,13 @@ class Button: UIButton {
     }
     
     private func setup() {
+        let systemBlue = UIButton(type: .system).tintColor!
         layer.cornerRadius = 10
-        layer.borderColor = UIButton(type: .system).tintColor.cgColor
+        layer.borderColor = systemBlue.cgColor
         layer.borderWidth = 1
-        backgroundColor = .clear
-        setBackgroundColor(color: UIColor.blue.withAlphaComponent(0.3), forState: .highlighted)
-
+        setTitleColor(.white, for: .normal)
+        setTitleColor(.lightGray, for: .highlighted)
+        setBackgroundColor(color: systemBlue, forState: .normal)
     }
 
     override var intrinsicContentSize: CGSize {
@@ -34,14 +35,14 @@ class Button: UIButton {
 
 extension UIButton {
     func setBackgroundColor(color: UIColor, forState: UIControl.State) {
-        self.clipsToBounds = true  // add this to maintain corner radius
+        clipsToBounds = true
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         if let context = UIGraphicsGetCurrentContext() {
             context.setFillColor(color.cgColor)
             context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
             let colorImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            self.setBackgroundImage(colorImage, for: forState)
+            setBackgroundImage(colorImage, for: forState)
         }
     }
 }

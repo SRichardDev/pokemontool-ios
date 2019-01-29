@@ -15,7 +15,6 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.becomeFirstResponder()
         nameTextField.delegate = self
         nameTextField.text = viewModel.name
         exArenaTitleLabel.isHidden = viewModel.isPokestop
@@ -25,6 +24,10 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
     
@@ -40,11 +43,24 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     
     @objc
     func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {            
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             if viewModel.isPokestop {
-                buttonBottomToSuperViewConstraint.constant = keyboardFrame.cgRectValue.height
+                animateBottomButtonConstraint(to: keyboardFrame.cgRectValue.height)
             }
         }
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        animateBottomButtonConstraint(to: 30)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nextButton.isEnabled = textField.text != ""
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        nextButton.isEnabled = textField.text != ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -54,5 +70,12 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func tappedView(_ sender: Any) {
         nameTextField.resignFirstResponder()
+    }
+    
+    private func animateBottomButtonConstraint(to constant: CGFloat) {
+        buttonBottomToSuperViewConstraint.constant = constant
+        UIView.animate(withDuration: 0.4) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
