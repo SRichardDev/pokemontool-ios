@@ -82,10 +82,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
         if sender.state == .began {
             let navigationController = SubmitViewController.instantiateFromStoryboardInNavigationController()
             let submitPokestopViewController = navigationController.topViewController as! SubmitViewController
-            submitPokestopViewController.firebaseConnector = firebaseConnector
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            submitPokestopViewController.locationOnMap = locationOnMap
+            let viewModel = SubmitViewModel(firebaseConnector: firebaseConnector, coordinate: locationOnMap)
+            submitPokestopViewController.viewModel = viewModel
+
             let feedback = UIImpactFeedbackGenerator(style: .heavy)
             feedback.impactOccurred()
             present(navigationController, animated: true)

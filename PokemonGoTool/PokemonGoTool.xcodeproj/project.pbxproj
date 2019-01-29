@@ -18,6 +18,7 @@
 		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
 		2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */; };
 		2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */; };
+		2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7721FFD41900427FBE /* SubmitViewModel.swift */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */; };
 		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
@@ -62,6 +63,7 @@
 		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMapViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCheckViewController.swift; sourceTree = "<group>"; };
+		2C6E7F7721FFD41900427FBE /* SubmitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewModel.swift; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				2C97F78321F67B3700630BA2 /* SubmitQuestViewController.swift */,
 				2C97F78521F67B5C00630BA2 /* SubmitQuestViewController.storyboard */,
+				2C6E7F7721FFD41900427FBE /* SubmitViewModel.swift */,
 				2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */,
 				2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */,
 				2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */,
@@ -395,6 +398,7 @@
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
+				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,

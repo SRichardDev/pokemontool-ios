@@ -2,49 +2,34 @@
 import UIKit
 import MapKit
 
-enum SubmitType {
-    case pokestop
-    case arena(isEX: Bool?)
-}
-
-struct SubmitContent {
-    var location: CLLocationCoordinate2D?
-    var name: String?
-    var submitType: SubmitType!
-}
-
 class SubmitViewController: UIViewController, StoryboardInitialViewController, SubmitMapEmbeddable {
 
-    var firebaseConnector: FirebaseConnector!
-    var locationOnMap: CLLocationCoordinate2D!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var containerView: UIView!
     var mapViewController: SubmitMapViewController!
-    var submitType: SubmitType = .pokestop
+    var viewModel: SubmitViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Neuer Pokéstop"
-        mapViewController = embedMap(coordinate: locationOnMap)
+        title = viewModel.title
+        mapViewController = embedMap(coordinate: viewModel.coordinate)
     }
 
     @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            submitType = .pokestop
+            viewModel.submitType = .pokestop
             mapViewController.addPokestopAnnotation()
-            title = "Neuer Pokéstop"
         } else if sender.selectedSegmentIndex == 1 {
-            submitType = .arena(isEX: false)
+            viewModel.submitType = .arena(isEX: false)
             mapViewController.addArenaAnnotation()
-            title = "Neue Arena"
         }
+        title = viewModel.title
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SubmitNameViewController {
-            let submitContent = SubmitContent(location: mapViewController.locationOnMap, name: nil, submitType: submitType)
-            destination.submitContent = submitContent
-            destination.firebaseConnector = firebaseConnector
+            viewModel.submitContent(coordinate: mapViewController.locationOnMap)
+            destination.viewModel = viewModel
         }
     }
     

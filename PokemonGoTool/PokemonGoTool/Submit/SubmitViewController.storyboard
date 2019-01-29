@@ -177,6 +177,7 @@
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eEQ-ZF-mzh" firstAttribute="top" secondItem="vMa-Ia-g8g" secondAttribute="bottom" constant="15" id="2IU-Jx-v0J"/>
                             <constraint firstItem="Rm9-BE-Tl9" firstAttribute="bottom" secondItem="8JP-0N-bYf" secondAttribute="bottom" constant="30" id="8SO-2W-6qb"/>
@@ -199,6 +200,9 @@
                             <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="Rm9-BE-Tl9" secondAttribute="top" constant="20" id="y6x-T0-g45"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rm9-BE-Tl9"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="sal-Oi-EFv" appends="YES" id="mlf-80-Keh"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="buttonBottomToSuperViewConstraint" destination="8SO-2W-6qb" id="hxN-km-pTT"/>
@@ -212,6 +216,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A60-Wi-mGV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="sal-Oi-EFv">
+                    <connections>
+                        <action selector="tappedView:" destination="eNo-D4-xUM" id="n7S-bm-GxI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1588" y="82.3088455772114"/>
         </scene>

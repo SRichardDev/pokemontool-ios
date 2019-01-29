@@ -3,8 +3,7 @@ import UIKit
 
 class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     
-    var submitContent: SubmitContent?
-    var firebaseConnector: FirebaseConnector!
+    var viewModel: SubmitViewModel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subTitleLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
@@ -18,53 +17,31 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         nameTextField.becomeFirstResponder()
         nameTextField.delegate = self
+        exArenaTitleLabel.isHidden = viewModel.isPokestop
+        exArenaSubtitleLabel.isHidden = viewModel.isPokestop
+        isExSwitch.isHidden = viewModel.isPokestop
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
-        
-        guard let submitType = submitContent?.submitType else { return }
-        switch submitType {
-        case .pokestop:
-            exArenaTitleLabel.isHidden = true
-            exArenaSubtitleLabel.isHidden = true
-            isExSwitch.isHidden = true
-        case .arena:
-            break
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        submitContent?.name = nameTextField.text
-        
-        guard let submitType = submitContent?.submitType else { return }
-        switch submitType {
-        case .pokestop:
-            break
-        case .arena:
-            submitContent?.submitType = .arena(isEX: isExSwitch?.isOn)
-            break
+        if !viewModel.isPokestop {
+            viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
+            viewModel.submitContent?.name = nameTextField.text
         }
-        
         if let destination = segue.destination as? SubmitCheckViewController {
-            destination.submitContent = submitContent
-            destination.firebaseConnector = firebaseConnector
+            destination.viewModel = viewModel
         }
     }
     
     @objc
     func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            
-            guard let submitType = submitContent?.submitType else { return }
-            switch submitType {
-            case .pokestop:
-                buttonBottomToSuperViewConstraint.constant = keyboardHeight
-            case .arena:
-                break
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {            
+            if viewModel.isPokestop {
+                buttonBottomToSuperViewConstraint.constant = keyboardFrame.cgRectValue.height
             }
         }
     }
@@ -72,5 +49,9 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func tappedView(_ sender: Any) {
+        nameTextField.resignFirstResponder()
     }
 }
