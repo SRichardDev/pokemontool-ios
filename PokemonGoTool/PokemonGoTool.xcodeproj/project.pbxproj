@@ -19,6 +19,7 @@
 		2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A2222025329005330B8 /* SubmitCheckViewController.storyboard */; };
 		2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A24220253DD005330B8 /* SubmitNameViewController.storyboard */; };
 		2C395A2C22025708005330B8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A2B22025708005330B8 /* ViewModel.swift */; };
+		2C395A3022026598005330B8 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A2F22026598005330B8 /* NavigationController.swift */; };
 		2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */; };
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
@@ -76,6 +77,7 @@
 		2C395A2222025329005330B8 /* SubmitCheckViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubmitCheckViewController.storyboard; sourceTree = "<group>"; };
 		2C395A24220253DD005330B8 /* SubmitNameViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubmitNameViewController.storyboard; sourceTree = "<group>"; };
 		2C395A2B22025708005330B8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		2C395A2F22026598005330B8 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -171,8 +173,6 @@
 				2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */,
 				2C1976AA21ED266B00091F8C /* Info.plist */,
 				2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */,
-				2C6E7F792201103500427FBE /* ScrollableViewController.swift */,
-				2C6E7F7B220110C200427FBE /* UIView+Extension.swift */,
 			);
 			path = PokemonGoTool;
 			sourceTree = "<group>";
@@ -191,6 +191,7 @@
 			children = (
 				2C395A17220248A1005330B8 /* Coordinator.swift */,
 				2C395A1922024A7F005330B8 /* MainCoordinator.swift */,
+				2C395A2F22026598005330B8 /* NavigationController.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -265,6 +266,8 @@
 		2C97F77421F66CD900630BA2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C6E7F792201103500427FBE /* ScrollableViewController.swift */,
+				2C6E7F7B220110C200427FBE /* UIView+Extension.swift */,
 				2C395A2B22025708005330B8 /* ViewModel.swift */,
 				2C97F78021F67AC700630BA2 /* NibView.swift */,
 				2C97F77F21F67AC600630BA2 /* StoryboardViewController.swift */,
@@ -512,6 +515,7 @@
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
+				2C395A3022026598005330B8 /* NavigationController.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
 				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,

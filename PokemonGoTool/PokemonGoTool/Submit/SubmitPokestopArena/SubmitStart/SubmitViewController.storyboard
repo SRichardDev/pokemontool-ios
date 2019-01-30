@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Neu-->
+        <!--Submit View Controller-->
         <scene sceneID="Sod-h9-BdA">
             <objects>
                 <viewController id="46f-wM-hAp" customClass="SubmitViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,13 +86,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QeK-9e-Tcu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Neu" id="DV3-fu-zAK">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lWX-Qk-Rcy">
-                            <connections>
-                                <action selector="cancelTapped:" destination="46f-wM-hAp" id="zLu-Nh-hyw"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="VN3-5d-WLF" id="SNe-4D-bLR"/>
                         <outlet property="segmentedControl" destination="hUe-ek-XGY" id="gOG-7X-RLp"/>

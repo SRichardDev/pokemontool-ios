@@ -5,13 +5,12 @@ class MainCoordinator: Coordinator {
     
     var children = [Coordinator]()
     var tabBarController: UITabBarController
-    var navigationController = UINavigationController()
+    var navigationController = NavigationController()
     var appModule: AppModule
     
     init(appModule: AppModule, tabBarController: UITabBarController) {
         self.appModule = appModule
         self.tabBarController = tabBarController
-        navigationController.navigationBar.prefersLargeTitles = true
     }
     
     func start() {
@@ -32,9 +31,7 @@ class MainCoordinator: Coordinator {
         submitViewController.viewModel = viewModel
         navigationController.viewControllers = [submitViewController]
         tabBarController.present(navigationController, animated: true)
-        
-//        let feedback = UIImpactFeedbackGenerator(style: .heavy)
-//        feedback.impactOccurred()
+        impact()
     }
     
     func showSubmitName(for viewModel: SubmitViewModel) {
@@ -42,6 +39,7 @@ class MainCoordinator: Coordinator {
         submitNameViewController.coordinator = self
         submitNameViewController.viewModel = viewModel
         navigationController.pushViewController(submitNameViewController, animated: true)
+        impact()
     }
     
     func showSubmitCheck(for viewModel: SubmitViewModel) {
@@ -49,6 +47,7 @@ class MainCoordinator: Coordinator {
         submitCheckViewController.coordinator = self
         submitCheckViewController.viewModel = viewModel
         navigationController.pushViewController(submitCheckViewController, animated: true)
+        impact()
     }
     
     func showSubmitQuest(for pokestop: Pokestop) {
@@ -58,6 +57,7 @@ class MainCoordinator: Coordinator {
         submitQuestViewController.firebaseConnector = appModule.firebaseConnector
         navigationController.viewControllers = [submitQuestViewController]
         tabBarController.present(navigationController, animated: true)
+        impact()
     }
     
     func showSubmitRaid(for arena: Arena) {
@@ -66,5 +66,12 @@ class MainCoordinator: Coordinator {
         let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
+        impact()
+    }
+    
+    func impact() {
+        let feedback = UIImpactFeedbackGenerator(style: .heavy)
+        feedback.prepare()
+        feedback.impactOccurred()
     }
 }
