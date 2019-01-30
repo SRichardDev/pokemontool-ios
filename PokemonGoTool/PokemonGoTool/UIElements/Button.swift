@@ -1,6 +1,6 @@
 import UIKit
 
-class Button: UIButton {
+@IBDesignable class Button: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -16,6 +16,10 @@ class Button: UIButton {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForInterfaceBuilder() {
+        setup()
+    }
+    
     private func setup() {
         let systemBlue = UIButton(type: .system).tintColor!
         layer.cornerRadius = 10
@@ -24,11 +28,12 @@ class Button: UIButton {
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
         setBackgroundColor(color: systemBlue, forState: .normal)
+        setBackgroundColor(color: .orange, forState: .highlighted)
     }
 
     override var intrinsicContentSize: CGSize {
         get {
-            return CGSize(width: bounds.width, height: 30)
+            return CGSize(width: bounds.width, height: 44)
         }
     }
 }

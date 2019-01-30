@@ -23,7 +23,7 @@ class DetailAnnotationView: UIView {
         self.annotation = annotation
         annotationNameLabel.text = annotation.name
         
-        if let _ = annotation as? Pokestop {
+        if annotation is Pokestop {
             annotationImageView.image = UIImage(named: "Pokestop")
             let questButton = Button()
             let detailsButton = Button()
@@ -32,11 +32,12 @@ class DetailAnnotationView: UIView {
             detailsButton.setTitle("Details", for: .normal)
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
-        } else if let _ = annotation as? Arena {
+        } else if annotation is Arena {
             annotationImageView.image = UIImage(named: "arena")
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)
+            raidButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoTapped(_:)), for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
             buttonsStackView.addArrangedSubview(raidButton)
             buttonsStackView.addArrangedSubview(detailsButton)

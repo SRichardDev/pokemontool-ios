@@ -10,11 +10,7 @@ class ScrollableViewController: UIViewController {
             childViewController?.view.removeFromSuperview()
         }
         didSet {
-            childViewController.view.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.addSubviewAndEdgeConstraints(childViewController.view)
-            childViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            addChild(childViewController)
-            childViewController.didMove(toParent: self)
+            embedChildViewController()
         }
     }
     
@@ -30,5 +26,14 @@ class ScrollableViewController: UIViewController {
     override public func loadView() {
         self.view = scrollView
         scrollView.backgroundColor = .white
+        embedChildViewController()
+    }
+    
+    private func embedChildViewController() {
+        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubviewAndEdgeConstraints(childViewController.view)
+        childViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        addChild(childViewController)
+        childViewController.didMove(toParent: self)
     }
 }

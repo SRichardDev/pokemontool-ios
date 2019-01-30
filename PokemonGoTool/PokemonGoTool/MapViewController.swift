@@ -203,12 +203,20 @@ extension MapViewController {
 
 extension MapViewController: DetailAnnotationViewDelegate {
     func showDetail(for annotation: Annotation) {
-        let navigationController = SubmitQuestViewController.instantiateFromStoryboardInNavigationController()
-        let submitQuestViewController = navigationController.topViewController as! SubmitQuestViewController
         
         if let pokestopAnnotation = annotation as? Pokestop {
+            let navigationController = SubmitQuestViewController.instantiateFromStoryboardInNavigationController()
+            let submitQuestViewController = navigationController.topViewController as! SubmitQuestViewController
             submitQuestViewController.pokestop = pokestopAnnotation
             submitQuestViewController.firebaseConnector = firebaseConnector
+            present(navigationController, animated: true)
+        }
+        
+        if let arenaAnnotation = annotation as? Arena {
+            let submitRaidDetailsViewController = SubmitRaidDetailsViewController.instantiateFromStoryboard()
+            let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
+            let navigationController = UINavigationController(rootViewController: scrollableViewController)
+            navigationController.navigationBar.prefersLargeTitles = true
             present(navigationController, animated: true)
         }
     }

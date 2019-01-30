@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aup-Af-NvV">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,7 +16,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Aup-Af-NvV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="e7d-CR-1ya">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -33,27 +33,24 @@
             <objects>
                 <viewController id="46f-wM-hAp" customClass="SubmitViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8V2-Sf-TwM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ix-SS-QRz" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="593" width="343" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="uqM-12-9G5"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="504" width="288" height="44"/>
                                 <state key="normal" title="Weiter"/>
                                 <connections>
                                     <segue destination="eNo-D4-xUM" kind="show" id="oG6-5F-uFo"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Was möchtest du einreichen?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nne-5t-DVu">
-                                <rect key="frame" x="16" y="136" width="343" height="21"/>
+                                <rect key="frame" x="16" y="131" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hUe-ek-XGY">
-                                <rect key="frame" x="16" y="172" width="343" height="29"/>
+                                <rect key="frame" x="16" y="167" width="288" height="29"/>
                                 <segments>
                                     <segment title="Pokéstop"/>
                                     <segment title="Arena"/>
@@ -63,19 +60,19 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stimmt die Position?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-xQ-ykP">
-                                <rect key="frame" x="16" y="240" width="343" height="21"/>
+                                <rect key="frame" x="16" y="235" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du kannst die Position hier verschieben. Halte das Symbol fest und schiebe es bis die Position passt." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ez-dG-hrA">
-                                <rect key="frame" x="16" y="276" width="343" height="30.5"/>
+                                <rect key="frame" x="16" y="271" width="288" height="30.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VN3-5d-WLF">
-                                <rect key="frame" x="16" y="321.5" width="343" height="241.5"/>
+                                <rect key="frame" x="16" y="316.5" width="288" height="157.5"/>
                                 <connections>
                                     <segue destination="WCd-3Y-aWd" kind="embed" id="uOq-Lp-omC"/>
                                 </connections>
@@ -96,7 +93,7 @@
                             <constraint firstItem="QeK-9e-Tcu" firstAttribute="trailing" secondItem="Nne-5t-DVu" secondAttribute="trailing" constant="16" id="cgP-9Z-tQk"/>
                             <constraint firstItem="hUe-ek-XGY" firstAttribute="top" secondItem="Nne-5t-DVu" secondAttribute="bottom" constant="15" id="fcA-vx-MNd"/>
                             <constraint firstItem="8Ez-dG-hrA" firstAttribute="trailing" secondItem="Nne-5t-DVu" secondAttribute="trailing" id="g2A-0w-4vX"/>
-                            <constraint firstItem="QeK-9e-Tcu" firstAttribute="bottom" secondItem="3ix-SS-QRz" secondAttribute="bottom" constant="30" id="grr-NX-gcI"/>
+                            <constraint firstItem="QeK-9e-Tcu" firstAttribute="bottom" secondItem="3ix-SS-QRz" secondAttribute="bottom" constant="20" id="grr-NX-gcI"/>
                             <constraint firstItem="3ix-SS-QRz" firstAttribute="leading" secondItem="Nne-5t-DVu" secondAttribute="leading" id="jGZ-Uh-de1"/>
                             <constraint firstItem="8Ez-dG-hrA" firstAttribute="top" secondItem="wDo-xQ-ykP" secondAttribute="bottom" constant="15" id="jeY-fU-FS2"/>
                             <constraint firstItem="wDo-xQ-ykP" firstAttribute="leading" secondItem="Nne-5t-DVu" secondAttribute="leading" id="qk6-TU-D0D"/>
@@ -128,59 +125,56 @@
             <objects>
                 <viewController title="Name" id="eNo-D4-xUM" customClass="SubmitNameViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pwd-If-TPo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scl-Rn-Dvp">
-                                <rect key="frame" x="16" y="217.5" width="343" height="30"/>
+                                <rect key="frame" x="16" y="212.5" width="288" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wie heißt der Pokestop/Arena?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMa-Ia-g8g">
-                                <rect key="frame" x="16" y="136" width="343" height="21"/>
+                                <rect key="frame" x="16" y="131" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitte gebe genau den Namen ein, den du auch im Spiel findest." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEQ-ZF-mzh">
-                                <rect key="frame" x="16" y="172" width="343" height="30.5"/>
+                                <rect key="frame" x="16" y="167" width="288" height="30.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JP-0N-bYf" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="593" width="343" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Z1j-iT-quf"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="504" width="288" height="44"/>
                                 <state key="normal" title="Weiter"/>
                                 <connections>
                                     <segue destination="WQC-4h-Rds" kind="show" id="8UP-Ri-pUn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ist die Arena eine EX-Raid Arena?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oK-Kb-0pe">
-                                <rect key="frame" x="16" y="287.5" width="265.5" height="21"/>
+                                <rect key="frame" x="16" y="282.5" width="265.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-Il-mP3">
-                                <rect key="frame" x="16" y="323.5" width="238" height="62.5"/>
+                                <rect key="frame" x="16" y="318.5" width="183" height="78.5"/>
                                 <string key="text">Du findest heraus ob es sich um eine EX-Raid Arena handlt, wenn du im Arena Bildschirm oben rechts einen Schriftzug dafür findest.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qOS-RH-VXh">
-                                <rect key="frame" x="310" y="323.5" width="51" height="31"/>
+                                <rect key="frame" x="255" y="318.5" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eEQ-ZF-mzh" firstAttribute="top" secondItem="vMa-Ia-g8g" secondAttribute="bottom" constant="15" id="2IU-Jx-v0J"/>
-                            <constraint firstItem="Rm9-BE-Tl9" firstAttribute="bottom" secondItem="8JP-0N-bYf" secondAttribute="bottom" constant="30" id="8SO-2W-6qb"/>
+                            <constraint firstItem="Rm9-BE-Tl9" firstAttribute="bottom" secondItem="8JP-0N-bYf" secondAttribute="bottom" constant="20" id="8SO-2W-6qb"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="leading" id="BJu-3z-kwg"/>
                             <constraint firstItem="qOS-RH-VXh" firstAttribute="top" secondItem="EwZ-Il-mP3" secondAttribute="top" id="Grt-Lr-imA"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="top" secondItem="eEQ-ZF-mzh" secondAttribute="bottom" constant="15" id="HGd-Sl-ZyP"/>
@@ -229,39 +223,36 @@
             <objects>
                 <viewController title="Prüfen" id="WQC-4h-Rds" customClass="SubmitCheckViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aNm-ch-r75">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfU-e6-TEI" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="603" width="343" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="oit-2s-vr6"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="504" width="288" height="44"/>
                                 <state key="normal" title="Absenden"/>
                                 <connections>
                                     <action selector="submitTapped:" destination="WQC-4h-Rds" eventType="touchUpInside" id="AHx-sE-LdX"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sind deine Eingaben korrekt?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95Q-hj-o0K">
-                                <rect key="frame" x="16" y="136" width="343" height="21"/>
+                                <rect key="frame" x="16" y="131" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4C-Cy-40p">
-                                <rect key="frame" x="16" y="172" width="343" height="244.5"/>
+                                <rect key="frame" x="16" y="167" width="288" height="134.5"/>
                                 <connections>
                                     <segue destination="OGL-jL-BEO" kind="embed" id="NdV-H1-6Qm"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokestop/Arena: $name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ld-7c-n6Q">
-                                <rect key="frame" x="16" y="456.5" width="343" height="30"/>
+                                <rect key="frame" x="16" y="341.5" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHR-dm-gft">
-                                <rect key="frame" x="16" y="526.5" width="343" height="46.5"/>
+                                <rect key="frame" x="16" y="411.5" width="288" height="62.5"/>
                                 <string key="text">Bitte beachte, dass es sich hier um Nutzergenerierte Daten handelt. Stelle sicher, dass alles korrekt ist, damit andere Spieler den Pokéstop/Arena auch finden können</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -303,28 +294,30 @@
             <objects>
                 <viewController id="OGL-jL-BEO" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0V9-PW-B9D">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="244.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="134.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Krc-O0-gq6"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWr-fU-9Ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2289" y="589"/>
+            <point key="canvasLocation" x="2289" y="686"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="e0r-Ei-XIF">
             <objects>
                 <viewController id="WCd-3Y-aWd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dr6-VT-RSI">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="241.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="157.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GAA-ng-lRg"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VGq-IJ-oM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="894" y="590"/>
+            <point key="canvasLocation" x="893" y="736"/>
         </scene>
     </scenes>
 </document>
