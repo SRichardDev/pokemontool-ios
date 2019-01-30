@@ -97,6 +97,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             addPolyLine(for: Geohash.geohashbox(geohash))
         }
     }
+    @IBAction func zoomToUserTapped(_ sender: Any) {
+        zoomToUserLocation(animated: true)
+    }
     
     @IBAction func toggleGeohashSelectionMode(_ sender: UIButton) {
         isGeoashSelectionMode = !isGeoashSelectionMode
