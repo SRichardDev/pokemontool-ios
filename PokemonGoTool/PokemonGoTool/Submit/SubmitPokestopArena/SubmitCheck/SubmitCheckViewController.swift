@@ -1,8 +1,9 @@
 
 import UIKit
 
-class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable {
+class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable, StoryboardInitialViewController {
     
+    weak var coordinator: MainCoordinator?
     var viewModel: SubmitViewModel!
     var mapViewController: SubmitMapViewController!
     @IBOutlet var containerView: UIView!

@@ -9,7 +9,8 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
-
+    var coordinator: MainCoordinator?
+    
     lazy var appModule: AppModule = {
         return AppModule()
     }()
@@ -31,8 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         
+        let tabBarController = UITabBarController()
+        coordinator = MainCoordinator(appModule: appModule, tabBarController: tabBarController)
+        coordinator?.start()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = appModule.tabBarController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
     

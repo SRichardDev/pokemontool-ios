@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WQC-4h-Rds">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="4HP-Gm-IwY">
+            <objects>
+                <viewController id="qIv-hQ-9u0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="B0d-e1-xSU">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="341"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="tjM-p5-2Mh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="imD-M9-hqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3142" y="280"/>
+        </scene>
+        <!--Prüfen-->
+        <scene sceneID="Zst-SK-tiG">
+            <objects>
+                <viewController title="Prüfen" id="WQC-4h-Rds" customClass="SubmitCheckViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aNm-ch-r75">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfU-e6-TEI" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="603" width="343" height="44"/>
+                                <state key="normal" title="Absenden"/>
+                                <connections>
+                                    <action selector="submitTapped:" destination="WQC-4h-Rds" eventType="touchUpInside" id="AHx-sE-LdX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sind deine Eingaben korrekt?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95Q-hj-o0K">
+                                <rect key="frame" x="16" y="40" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokestop/Arena: $name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ld-7c-n6Q">
+                                <rect key="frame" x="16" y="456.5" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHR-dm-gft">
+                                <rect key="frame" x="16" y="526.5" width="343" height="46.5"/>
+                                <string key="text">Bitte beachte, dass es sich hier um Nutzergenerierte Daten handelt. Stelle sicher, dass alles korrekt ist, damit andere Spieler den Pokéstop/Arena auch finden können</string>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRU-ew-WCk">
+                                <rect key="frame" x="16" y="76" width="343" height="341"/>
+                                <connections>
+                                    <segue destination="qIv-hQ-9u0" kind="embed" id="ggK-0d-7Wt"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="95Q-hj-o0K" firstAttribute="top" secondItem="Cqe-nr-2ox" secondAttribute="top" constant="20" id="AMu-RL-NYW"/>
+                            <constraint firstItem="MHR-dm-gft" firstAttribute="trailing" secondItem="95Q-hj-o0K" secondAttribute="trailing" id="Du9-Xr-wPU"/>
+                            <constraint firstItem="0Ld-7c-n6Q" firstAttribute="top" secondItem="gRU-ew-WCk" secondAttribute="bottom" constant="39.5" id="FA5-fE-1pD"/>
+                            <constraint firstItem="0Ld-7c-n6Q" firstAttribute="leading" secondItem="95Q-hj-o0K" secondAttribute="leading" id="GMD-kK-iKr"/>
+                            <constraint firstItem="gRU-ew-WCk" firstAttribute="leading" secondItem="95Q-hj-o0K" secondAttribute="leading" id="GeT-oD-D4c"/>
+                            <constraint firstItem="ZfU-e6-TEI" firstAttribute="top" secondItem="MHR-dm-gft" secondAttribute="bottom" constant="30" id="J38-WL-nsJ"/>
+                            <constraint firstItem="0Ld-7c-n6Q" firstAttribute="trailing" secondItem="95Q-hj-o0K" secondAttribute="trailing" id="WhB-IC-52M"/>
+                            <constraint firstItem="Cqe-nr-2ox" firstAttribute="trailing" secondItem="95Q-hj-o0K" secondAttribute="trailing" constant="16" id="bVX-qj-Yrg"/>
+                            <constraint firstItem="gRU-ew-WCk" firstAttribute="top" secondItem="95Q-hj-o0K" secondAttribute="bottom" constant="15" id="hPG-mN-LY8"/>
+                            <constraint firstItem="gRU-ew-WCk" firstAttribute="trailing" secondItem="95Q-hj-o0K" secondAttribute="trailing" id="hY5-dx-8Dq"/>
+                            <constraint firstItem="ZfU-e6-TEI" firstAttribute="leading" secondItem="Cqe-nr-2ox" secondAttribute="leading" constant="16" id="htU-GT-nc2"/>
+                            <constraint firstItem="MHR-dm-gft" firstAttribute="leading" secondItem="95Q-hj-o0K" secondAttribute="leading" id="jLM-fH-ROY"/>
+                            <constraint firstItem="MHR-dm-gft" firstAttribute="top" secondItem="0Ld-7c-n6Q" secondAttribute="bottom" constant="40" id="m7P-Lj-qui"/>
+                            <constraint firstItem="Cqe-nr-2ox" firstAttribute="bottom" secondItem="ZfU-e6-TEI" secondAttribute="bottom" constant="20" id="p5Q-4h-FjE"/>
+                            <constraint firstItem="95Q-hj-o0K" firstAttribute="leading" secondItem="Cqe-nr-2ox" secondAttribute="leading" constant="16" id="tjI-G3-JpL"/>
+                            <constraint firstItem="Cqe-nr-2ox" firstAttribute="trailing" secondItem="ZfU-e6-TEI" secondAttribute="trailing" constant="16" id="wLO-gu-tah"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Cqe-nr-2ox"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="gRU-ew-WCk" id="x4x-Hk-W4k"/>
+                        <outlet property="nameLabel" destination="0Ld-7c-n6Q" id="AOT-1f-YZO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lN9-Fh-cf6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3143" y="-432"/>
+        </scene>
+    </scenes>
+</document>

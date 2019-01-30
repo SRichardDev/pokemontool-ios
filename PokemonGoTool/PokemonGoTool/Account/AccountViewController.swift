@@ -2,10 +2,10 @@
 import UIKit
 import Firebase
 
-class AccountViewController: UIViewController, AppModuleAccessible, FirebaseStatusPresentable, UITextFieldDelegate, FirebaseUserDelegate {
+class AccountViewController: UIViewController, FirebaseStatusPresentable, UITextFieldDelegate, FirebaseUserDelegate, StoryboardInitialViewController {
     
+    weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
-    var locationManager: LocationManager!
 
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var emailTextField: UITextField!

@@ -3,6 +3,7 @@ import UIKit
 
 class SubmitQuestViewController: UIViewController, StoryboardInitialViewController {
     
+    weak var coordinator: MainCoordinator?
     var pokestop: Pokestop!
     var firebaseConnector: FirebaseConnector!
     @IBOutlet var questNameTextField: UITextField!

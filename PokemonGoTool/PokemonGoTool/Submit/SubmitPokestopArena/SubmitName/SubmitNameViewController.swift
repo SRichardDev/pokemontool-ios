@@ -1,8 +1,9 @@
 
 import UIKit
 
-class SubmitNameViewController: UIViewController, UITextFieldDelegate {
+class SubmitNameViewController: UIViewController, UITextFieldDelegate, StoryboardInitialViewController {
     
+    weak var coordinator: MainCoordinator?
     var viewModel: SubmitViewModel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subTitleLabel: UILabel!
@@ -32,10 +33,7 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        viewModel.name = nameTextField.text
-        if !viewModel.isPokestop {
-            viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
-        }
+
         if let destination = segue.destination as? SubmitCheckViewController {
             destination.viewModel = viewModel
         }
@@ -70,6 +68,14 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func tappedView(_ sender: Any) {
         nameTextField.resignFirstResponder()
+    }
+    
+    @IBAction func bottomButtonTapped(_ sender: Any) {
+        viewModel.name = nameTextField.text
+        if !viewModel.isPokestop {
+            viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
+        }
+        coordinator?.showSubmitCheck(for: viewModel)
     }
     
     private func animateBottomButtonConstraint(to constant: CGFloat) {

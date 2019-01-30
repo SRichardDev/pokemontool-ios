@@ -4,6 +4,7 @@ import MapKit
 
 class SubmitViewController: UIViewController, StoryboardInitialViewController, SubmitMapEmbeddable {
 
+    weak var coordinator: MainCoordinator?
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var containerView: UIView!
     var mapViewController: SubmitMapViewController!
@@ -26,14 +27,11 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
         title = viewModel.title
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? SubmitNameViewController {
-            viewModel.coordinate = mapViewController.locationOnMap
-            destination.viewModel = viewModel
-        }
-    }
-    
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    @IBAction func bottomButtonTapped(_ sender: Any) {
+        coordinator?.showSubmitName(for: viewModel)
     }
 }

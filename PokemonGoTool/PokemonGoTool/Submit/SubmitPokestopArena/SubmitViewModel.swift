@@ -13,7 +13,7 @@ struct SubmitContent {
     var submitType: SubmitType!
 }
 
-class SubmitViewModel {
+class SubmitViewModel: ViewModel {
     var title: String {
         get {
             switch submitType {
@@ -48,7 +48,7 @@ class SubmitViewModel {
     
     var name: String! = ""
     
-    var coordinate: CLLocationCoordinate2D
+    var coordinate = CLLocationCoordinate2D(latitude: 50, longitude: 30)
     
     var submitContent: SubmitContent {
         get {

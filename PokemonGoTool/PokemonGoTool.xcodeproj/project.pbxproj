@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
-		2C1976A421ED266A00091F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A221ED266A00091F8C /* Main.storyboard */; };
 		2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A521ED266B00091F8C /* Assets.xcassets */; };
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
+		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
+		2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1922024A7F005330B8 /* MainCoordinator.swift */; };
+		2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1C22024F40005330B8 /* MapViewController.storyboard */; };
+		2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1E22025100005330B8 /* AccountViewController.storyboard */; };
+		2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A2222025329005330B8 /* SubmitCheckViewController.storyboard */; };
+		2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A24220253DD005330B8 /* SubmitNameViewController.storyboard */; };
+		2C395A2C22025708005330B8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A2B22025708005330B8 /* ViewModel.swift */; };
 		2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */; };
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
@@ -58,12 +64,18 @@
 /* Begin PBXFileReference section */
 		2C19769B21ED266900091F8C /* PokemonGoTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGoTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C19769E21ED266900091F8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C1976A321ED266A00091F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C1976A521ED266B00091F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C1976A821ED266B00091F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1976AA21ED266B00091F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
+		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		2C395A1922024A7F005330B8 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		2C395A1C22024F40005330B8 /* MapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapViewController.storyboard; sourceTree = "<group>"; };
+		2C395A1E22025100005330B8 /* AccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AccountViewController.storyboard; sourceTree = "<group>"; };
+		2C395A2222025329005330B8 /* SubmitCheckViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubmitCheckViewController.storyboard; sourceTree = "<group>"; };
+		2C395A24220253DD005330B8 /* SubmitNameViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubmitNameViewController.storyboard; sourceTree = "<group>"; };
+		2C395A2B22025708005330B8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -145,16 +157,16 @@
 				2CF6F9A621F25C9800610BC9 /* PokemonGoTool.entitlements */,
 				2C19769E21ED266900091F8C /* AppDelegate.swift */,
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
-				2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */,
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
-				2C6E7F8222011F8200427FBE /* UIElements */,
+				2C395A2022025122005330B8 /* Map */,
+				2C395A212202512E005330B8 /* Coordinator */,
 				2C97F78721F67D2F00630BA2 /* Submit */,
 				2C97F78821F67D3E00630BA2 /* Account */,
 				2C97F78A21F67D6D00630BA2 /* Firebase */,
 				2C97F78921F67D4F00630BA2 /* Annotations */,
 				2C97F77421F66CD900630BA2 /* Extensions */,
+				2C6E7F8222011F8200427FBE /* UIElements */,
 				2CDFDDEA21ED501A00170A46 /* GeoHash */,
-				2C1976A221ED266A00091F8C /* Main.storyboard */,
 				2C1976A521ED266B00091F8C /* Assets.xcassets */,
 				2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */,
 				2C1976AA21ED266B00091F8C /* Info.plist */,
@@ -165,15 +177,78 @@
 			path = PokemonGoTool;
 			sourceTree = "<group>";
 		};
+		2C395A2022025122005330B8 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */,
+				2C395A1C22024F40005330B8 /* MapViewController.storyboard */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		2C395A212202512E005330B8 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2C395A17220248A1005330B8 /* Coordinator.swift */,
+				2C395A1922024A7F005330B8 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		2C395A262202559A005330B8 /* SubmitName */ = {
+			isa = PBXGroup;
+			children = (
+				2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */,
+				2C395A24220253DD005330B8 /* SubmitNameViewController.storyboard */,
+			);
+			path = SubmitName;
+			sourceTree = "<group>";
+		};
+		2C395A27220255AE005330B8 /* SubmitStart */ = {
+			isa = PBXGroup;
+			children = (
+				2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */,
+				2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */,
+			);
+			path = SubmitStart;
+			sourceTree = "<group>";
+		};
+		2C395A28220255C2005330B8 /* SubmitCheck */ = {
+			isa = PBXGroup;
+			children = (
+				2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */,
+				2C395A2222025329005330B8 /* SubmitCheckViewController.storyboard */,
+			);
+			path = SubmitCheck;
+			sourceTree = "<group>";
+		};
+		2C395A29220255FD005330B8 /* SubmitQuest */ = {
+			isa = PBXGroup;
+			children = (
+				2C97F78321F67B3700630BA2 /* SubmitQuestViewController.swift */,
+				2C97F78521F67B5C00630BA2 /* SubmitQuestViewController.storyboard */,
+			);
+			path = SubmitQuest;
+			sourceTree = "<group>";
+		};
+		2C395A2A22025610005330B8 /* SubmitRaid */ = {
+			isa = PBXGroup;
+			children = (
+				2C6E7F7E22011C6600427FBE /* SubmitRaid.storyboard */,
+				2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */,
+				2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */,
+			);
+			path = SubmitRaid;
+			sourceTree = "<group>";
+		};
 		2C6E7F7D22011C4000427FBE /* SubmitPokestopArena */ = {
 			isa = PBXGroup;
 			children = (
 				2C6E7F7721FFD41900427FBE /* SubmitViewModel.swift */,
-				2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */,
-				2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */,
-				2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */,
 				2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */,
-				2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */,
+				2C395A27220255AE005330B8 /* SubmitStart */,
+				2C395A262202559A005330B8 /* SubmitName */,
+				2C395A28220255C2005330B8 /* SubmitCheck */,
 			);
 			path = SubmitPokestopArena;
 			sourceTree = "<group>";
@@ -190,6 +265,7 @@
 		2C97F77421F66CD900630BA2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C395A2B22025708005330B8 /* ViewModel.swift */,
 				2C97F78021F67AC700630BA2 /* NibView.swift */,
 				2C97F77F21F67AC600630BA2 /* StoryboardViewController.swift */,
 				2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */,
@@ -204,12 +280,9 @@
 		2C97F78721F67D2F00630BA2 /* Submit */ = {
 			isa = PBXGroup;
 			children = (
-				2C97F78321F67B3700630BA2 /* SubmitQuestViewController.swift */,
-				2C97F78521F67B5C00630BA2 /* SubmitQuestViewController.storyboard */,
+				2C395A29220255FD005330B8 /* SubmitQuest */,
 				2C6E7F7D22011C4000427FBE /* SubmitPokestopArena */,
-				2C6E7F7E22011C6600427FBE /* SubmitRaid.storyboard */,
-				2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */,
-				2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */,
+				2C395A2A22025610005330B8 /* SubmitRaid */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -217,6 +290,7 @@
 		2C97F78821F67D3E00630BA2 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				2C395A1E22025100005330B8 /* AccountViewController.storyboard */,
 				2CF6F9A421F259E700610BC9 /* AccountViewController.swift */,
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 			);
@@ -342,14 +416,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
+				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C6E7F7F22011C6600427FBE /* SubmitRaid.storyboard in Resources */,
 				2C97F78621F67B5C00630BA2 /* SubmitQuestViewController.storyboard in Resources */,
+				2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */,
 				2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */,
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
-				2C1976A421ED266A00091F8C /* Main.storyboard in Resources */,
+				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
 				2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +506,7 @@
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */,
+				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
@@ -436,6 +514,7 @@
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
+				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
@@ -450,6 +529,7 @@
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
 				2C97F77E21F6742D00630BA2 /* DetailAnnotationView.swift in Sources */,
 				2CDFDDE321ED4A3D00170A46 /* FirebaseConnector.swift in Sources */,
+				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
 				2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */,
 				2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */,
 				2C6E7F8122011ED900427FBE /* Label.swift in Sources */,
@@ -460,14 +540,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2C1976A221ED266A00091F8C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C1976A321ED266A00091F8C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

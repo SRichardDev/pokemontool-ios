@@ -2,8 +2,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessible {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController {
     
+    weak var coordinator: MainCoordinator?
     @IBOutlet private var mapView: MKMapView!
     var locationManager: LocationManager!
     var firebaseConnector: FirebaseConnector!
@@ -80,24 +81,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, AppModuleAccessibl
     
     @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            let navigationController = SubmitViewController.instantiateFromStoryboardInNavigationController()
-            let submitPokestopViewController = navigationController.topViewController as! SubmitViewController
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
             let viewModel = SubmitViewModel(firebaseConnector: firebaseConnector, coordinate: locationOnMap)
-            submitPokestopViewController.viewModel = viewModel
-
-            let feedback = UIImpactFeedbackGenerator(style: .heavy)
-            feedback.impactOccurred()
-            present(navigationController, animated: true)
+            coordinator?.showSubmitPokestopAndArena(for: viewModel)
         }
     }
     
     @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
-        let locationInView = sender.location(in: mapView)
-        let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-        let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
         if isGeoashSelectionMode {
+            let locationInView = sender.location(in: mapView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
             firebaseConnector.subscribeForPush(for: geohash)
             addPolyLine(for: Geohash.geohashbox(geohash))
         }
@@ -203,21 +198,10 @@ extension MapViewController {
 
 extension MapViewController: DetailAnnotationViewDelegate {
     func showDetail(for annotation: Annotation) {
-        
         if let pokestopAnnotation = annotation as? Pokestop {
-            let navigationController = SubmitQuestViewController.instantiateFromStoryboardInNavigationController()
-            let submitQuestViewController = navigationController.topViewController as! SubmitQuestViewController
-            submitQuestViewController.pokestop = pokestopAnnotation
-            submitQuestViewController.firebaseConnector = firebaseConnector
-            present(navigationController, animated: true)
-        }
-        
-        if let arenaAnnotation = annotation as? Arena {
-            let submitRaidDetailsViewController = SubmitRaidDetailsViewController.instantiateFromStoryboard()
-            let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
-            let navigationController = UINavigationController(rootViewController: scrollableViewController)
-            navigationController.navigationBar.prefersLargeTitles = true
-            present(navigationController, animated: true)
+            coordinator?.showSubmitQuest(for: pokestopAnnotation)
+        } else if let arenaAnnotation = annotation as? Arena {
+            coordinator?.showSubmitRaid(for: arenaAnnotation)
         }
     }
 }

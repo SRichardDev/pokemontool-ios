@@ -1,7 +1,7 @@
 
 import UIKit
 
-extension FirebaseStatusPresentable where Self: UIViewController & AppModuleAccessible {
+extension FirebaseStatusPresentable where Self: UIViewController {
     
     func showAlert(for status: AuthStatus) {
         

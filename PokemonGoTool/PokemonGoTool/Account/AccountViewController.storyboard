@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gnt-ur-o23">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Account-->
+        <scene sceneID="PlF-7w-edP">
+            <objects>
+                <viewController id="gnt-ur-o23" customClass="AccountViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aBd-Fo-028">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-u7-gLK">
+                                <rect key="frame" x="16" y="141" width="339" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qk-Ka-CIe">
+                                <rect key="frame" x="16" y="215" width="339" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
+                                <rect key="frame" x="16" y="170" width="339" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
+                                <rect key="frame" x="16" y="244" width="339" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-kc-gbG" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="20" y="548" width="335" height="44"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="awo-K5-HXg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W80-yE-u3c" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="20" y="496" width="335" height="44"/>
+                                <state key="normal" title="Sign up"/>
+                                <connections>
+                                    <action selector="signupTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="wPO-YL-lCH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="hJy-vz-fqT" firstAttribute="top" secondItem="7qk-Ka-CIe" secondAttribute="bottom" constant="8" symbolic="YES" id="1ch-Up-MWT"/>
+                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="bottom" secondItem="tUA-kc-gbG" secondAttribute="bottom" constant="26" id="3zN-3L-xtW"/>
+                            <constraint firstItem="xFC-XE-29T" firstAttribute="trailing" secondItem="Rfa-u7-gLK" secondAttribute="trailing" id="60L-YL-k81"/>
+                            <constraint firstItem="hJy-vz-fqT" firstAttribute="trailing" secondItem="7qk-Ka-CIe" secondAttribute="trailing" id="7au-HZ-cII"/>
+                            <constraint firstItem="xFC-XE-29T" firstAttribute="leading" secondItem="7qk-Ka-CIe" secondAttribute="leading" id="HXK-P5-b7d"/>
+                            <constraint firstItem="tUA-kc-gbG" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="20" id="JcK-Oy-HhS"/>
+                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="xFC-XE-29T" secondAttribute="trailing" constant="20" id="LOF-ra-CZu"/>
+                            <constraint firstItem="7qk-Ka-CIe" firstAttribute="top" secondItem="xFC-XE-29T" secondAttribute="bottom" constant="15" id="MFo-5e-orE"/>
+                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="tUA-kc-gbG" secondAttribute="trailing" constant="20" id="PxB-q2-DA1"/>
+                            <constraint firstItem="xFC-XE-29T" firstAttribute="top" secondItem="Rfa-u7-gLK" secondAttribute="bottom" constant="8" symbolic="YES" id="U7V-rS-g9C"/>
+                            <constraint firstItem="7qk-Ka-CIe" firstAttribute="leading" secondItem="hJy-vz-fqT" secondAttribute="leading" id="cn3-5r-bh4"/>
+                            <constraint firstItem="Rfa-u7-gLK" firstAttribute="leading" secondItem="aBd-Fo-028" secondAttribute="leadingMargin" id="dPV-9y-x8r"/>
+                            <constraint firstItem="W80-yE-u3c" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="20" id="gQ6-e5-Gav"/>
+                            <constraint firstItem="tUA-kc-gbG" firstAttribute="top" secondItem="W80-yE-u3c" secondAttribute="bottom" constant="8" id="j6K-qz-hbn"/>
+                            <constraint firstItem="Rfa-u7-gLK" firstAttribute="top" secondItem="wAl-OH-Hjd" secondAttribute="top" constant="25" id="kol-wE-FK9"/>
+                            <constraint firstItem="Rfa-u7-gLK" firstAttribute="leading" secondItem="xFC-XE-29T" secondAttribute="leading" id="lE9-Hz-Biu"/>
+                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="W80-yE-u3c" secondAttribute="trailing" constant="20" id="lUq-2W-SBR"/>
+                            <constraint firstItem="xFC-XE-29T" firstAttribute="trailing" secondItem="hJy-vz-fqT" secondAttribute="trailing" id="t9y-KX-sZw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wAl-OH-Hjd"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1Nb-hT-CGq" appends="YES" id="sti-cA-Qrt"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="9Nm-Se-dcI"/>
+                    <connections>
+                        <outlet property="emailLabel" destination="Rfa-u7-gLK" id="Mgr-Y1-s5z"/>
+                        <outlet property="emailTextField" destination="xFC-XE-29T" id="KMp-ie-nvn"/>
+                        <outlet property="loginButton" destination="tUA-kc-gbG" id="QlF-j4-7CL"/>
+                        <outlet property="passwordLabel" destination="7qk-Ka-CIe" id="FbR-NO-cf4"/>
+                        <outlet property="passwordTextField" destination="hJy-vz-fqT" id="0xy-7P-LxB"/>
+                        <outlet property="signUpButton" destination="W80-yE-u3c" id="BCg-oE-SQ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfj-lB-PLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Nb-hT-CGq">
+                    <connections>
+                        <action selector="viewTapped:" destination="gnt-ur-o23" id="9H9-y8-TJs"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1932" y="788.45577211394311"/>
+        </scene>
+    </scenes>
+</document>
