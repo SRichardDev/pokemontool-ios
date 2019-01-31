@@ -38,10 +38,6 @@ public extension StoryboardInitialViewController {
     static func instantiateFromStoryboard() -> Self {
         return UIStoryboard(name: self.storyboardName, bundle: bundle).instantiateInitialViewController() as! Self
     }
-    
-    static func instantiateFromStoryboardInNavigationController() -> UINavigationController {
-        return UIStoryboard(name: self.storyboardName, bundle: bundle).instantiateInitialViewController() as! UINavigationController
-    }
 }
 
 /**
