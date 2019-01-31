@@ -32,6 +32,32 @@ admin.initializeApp(functions.config().firebase);
 //     admin.messaging().sendToTopic("pokestops", payload)
 // });
 
+exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
+
+    const arena = snapshot.after.val();
+    const name = arena.name;
+
+    admin.database().ref('/arenas/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
+        snapshot.forEach(function(child) {
+            const userId = child.val();
+            console.log("userId: " + userId);
+            admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+                const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
+
+                const payload = {
+                    notification: {
+                       title: 'Neuer Raid',
+                       body: name,
+                       sound: 'default'
+                    }
+                };
+            
+                admin.messaging().sendToDevice(notificationToken, payload)
+            });
+        });
+    });
+});
 
 
 exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
