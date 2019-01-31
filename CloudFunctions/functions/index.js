@@ -32,6 +32,32 @@ admin.initializeApp(functions.config().firebase);
 //     admin.messaging().sendToTopic("pokestops", payload)
 // });
 
+exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
+
+    const arena = snapshot.after.val();
+    const name = arena.name;
+
+    admin.database().ref('/arenas/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
+        snapshot.forEach(function(child) {
+            const userId = child.val();
+            console.log("userId: " + userId);
+            admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+                const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
+
+                const payload = {
+                    notification: {
+                       title: 'Neuer Raid',
+                       body: name,
+                       sound: 'default'
+                    }
+                };
+            
+                admin.messaging().sendToDevice(notificationToken, payload)
+            });
+        });
+    });
+});
 
 
 exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
@@ -47,9 +73,11 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
     console.log("currentKey: " + currentKey);
 
     const pokestop = snapshot.after.val(); //Message Data
-    console.log("pokestop name: " + pokestop.name);
+    console.log("Pokestop name: " + pokestop.name);
 
     const name = pokestop.name;
+    const questName = pokestop.quest.name;
+    const questReward = pokestop.quest.reward;
     // const users = currentValue.registred_user;
     // const token = users.pushToken;
     // console.log(token);
@@ -64,7 +92,7 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
         // console.log("new context");
         // console.log(context);
 
-        snapshot.forEach(function(child){
+        snapshot.forEach(function(child) {
             const userId = child.val();
             console.log("userId: " + userId);
             admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
@@ -73,8 +101,8 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
 
                 const payload = {
                     notification: {
-                       title: 'New Quest from: ' + trainer,
-                       body: name,
+                       title: 'Neue Feldforschung',
+                       body: questName + ": "+ questReward,
                        sound: 'default'
                     }
                 };
