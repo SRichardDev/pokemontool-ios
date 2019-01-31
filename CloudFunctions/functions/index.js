@@ -47,9 +47,11 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
     console.log("currentKey: " + currentKey);
 
     const pokestop = snapshot.after.val(); //Message Data
-    console.log("pokestop name: " + pokestop.name);
+    console.log("Pokestop name: " + pokestop.name);
 
     const name = pokestop.name;
+    const questName = pokestop.quest.name;
+    const questReward = pokestop.quest.reward;
     // const users = currentValue.registred_user;
     // const token = users.pushToken;
     // console.log(token);
@@ -64,7 +66,7 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
         // console.log("new context");
         // console.log(context);
 
-        snapshot.forEach(function(child){
+        snapshot.forEach(function(child) {
             const userId = child.val();
             console.log("userId: " + userId);
             admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
@@ -73,8 +75,8 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
 
                 const payload = {
                     notification: {
-                       title: 'New Quest from: ' + trainer,
-                       body: name,
+                       title: 'Neue Feldforschung',
+                       body: questName + ": "+ questReward,
                        sound: 'default'
                     }
                 };
