@@ -129,9 +129,11 @@ class FirebaseConnector {
     
     func subscribeForPush(for geohash: String) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let user = Database.database().reference(withPath: "pokestops/\(geohash)")
         let data = [userID : userID]
-        user.child("registered_user").updateChildValues(data)
+        let geohashRegionPokestop = Database.database().reference(withPath: "pokestops/\(geohash)")
+        geohashRegionPokestop.child("registered_user").updateChildValues(data)
+        let geohashRegionArena = Database.database().reference(withPath: "arenas/\(geohash)")
+        geohashRegionArena.child("registered_user").updateChildValues(data)
     }
 }
 

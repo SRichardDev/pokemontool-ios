@@ -34,13 +34,20 @@ admin.initializeApp(functions.config().firebase);
 
 exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
 
+    const uid = context.params.uid;
+    const geohash = context.params.geohash;
+    
     const arena = snapshot.after.val();
     const name = arena.name;
+    const raid = arena.raid;
+    const level = raid.level;
+    const raidBoss = raid.raidBoss;
+    const hatchTime = raid.hatchTime;
+    const startTime = raid.startTime;
 
     admin.database().ref('/arenas/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
         snapshot.forEach(function(child) {
             const userId = child.val();
-            console.log("userId: " + userId);
             admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
                 const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
                 const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
