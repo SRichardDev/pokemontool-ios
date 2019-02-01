@@ -15,15 +15,24 @@
             <objects>
                 <viewController id="ERV-en-bJu" customClass="RaidPickerViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nr2-2K-3la">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhH-ka-Ee5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nhH-ka-Ee5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBY-Bh-dij">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raid Zeit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zq7-to-c1o">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-0J-wmE">
+                                        <rect key="frame" x="0.0" y="20.5" width="375" height="169.5"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="570669448.518489">
+                                            <!--2019-01-31 23:17:28 +0000-->
+                                        </date>
+                                    </datePicker>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -36,9 +45,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gy1-ow-giz"/>
                     </view>
-                    <size key="freeformSize" width="375" height="100"/>
+                    <size key="freeformSize" width="375" height="190"/>
                     <connections>
-                        <outlet property="pickerView" destination="PBY-Bh-dij" id="H17-xS-YAy"/>
+                        <outlet property="pickerView" destination="dgm-0J-wmE" id="ZXP-UD-ff3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqo-xo-WF1" userLabel="First Responder" sceneMemberID="firstResponder"/>

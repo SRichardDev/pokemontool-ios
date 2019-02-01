@@ -63,6 +63,8 @@ class MainCoordinator: Coordinator {
     func showSubmitRaid(for arena: Arena) {
         let submitRaidDetailsViewController = SubmitRaidDetailsViewController.instantiateFromStoryboard()
         submitRaidDetailsViewController.coordinator = self
+        submitRaidDetailsViewController.firebaseConnector = appModule.firebaseConnector
+
         let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)

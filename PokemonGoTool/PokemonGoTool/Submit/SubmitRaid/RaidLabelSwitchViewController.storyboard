@@ -34,6 +34,9 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0OW-fQ-dDH">
                                         <rect key="frame" x="326" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchToggled:" destination="dee-tD-OcB" eventType="valueChanged" id="s2e-pW-c7x"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                             </stackView>
