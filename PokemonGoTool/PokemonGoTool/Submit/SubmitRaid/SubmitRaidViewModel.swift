@@ -5,6 +5,7 @@ enum UpdateType {
     case raidLevelChanged
     case raidAlreadyRunning
     case userParticipates
+    case currentRaidbossesChanged
 }
 
 protocol SubmitRaidDelegate: class {
@@ -15,12 +16,13 @@ class SubmitRaidViewModel {
     
     weak var delegate: SubmitRaidDelegate?
     var firebaseConnector: FirebaseConnector
-    var showHatchTimePicker = true
+    var raidAlreadyRunning = false
     var showMeetupTimePicker = true
     var currentRaidLevel = 3
     var selectedHatchTime = "00:00"
     var selectedMeetupTime = "00:00"
     var selectedTimeLeft = "45 min"
+    var currentRaidBosses = [String]()
     var imageName: String {
         get {
             return "level_\(currentRaidLevel)"
@@ -29,10 +31,11 @@ class SubmitRaidViewModel {
     
     init(firebaseConnector: FirebaseConnector) {
         self.firebaseConnector = firebaseConnector
+        updateRaidCurrentBosses()
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
-        showHatchTimePicker = !isRunning
+        raidAlreadyRunning = !isRunning
         delegate?.update(of: .raidAlreadyRunning)
     }
     
@@ -43,7 +46,19 @@ class SubmitRaidViewModel {
     
     func sliderChanged(to value: Int) {
         currentRaidLevel = value
+        updateRaidCurrentBosses()
         delegate?.update(of: .raidLevelChanged)
+    }
+    
+    func raidBosses() -> [String]  {
+        return currentRaidBosses
+    }
+    
+    func updateRaidCurrentBosses() {
+        firebaseConnector.loadRaidBosses(for: currentRaidLevel, completion: { raidBosses in
+            self.currentRaidBosses = raidBosses ?? [String]()
+            self.delegate?.update(of: .currentRaidbossesChanged)
+        })
     }
     
     func submitRaid() {

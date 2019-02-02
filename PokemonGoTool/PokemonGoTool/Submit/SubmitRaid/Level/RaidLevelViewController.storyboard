@@ -27,12 +27,31 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="1qD-GT-2lF" customClass="SnappableSlider" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="-2" y="34.5" width="404" height="86.5"/>
-                                        <connections>
-                                            <action selector="sliderDidChange:" destination="GFO-f1-pFw" eventType="valueChanged" id="GkD-Hq-IwD"/>
-                                        </connections>
-                                    </slider>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XW-Jd-2A2">
+                                        <rect key="frame" x="0.0" y="34.5" width="400" height="85.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-7G-Rm8">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="85.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="3VG-cB-w97"/>
+                                                </constraints>
+                                            </view>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="1qD-GT-2lF" customClass="SnappableSlider" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="48" y="0.0" width="304" height="86.5"/>
+                                                <connections>
+                                                    <action selector="sliderDidChange:" destination="GFO-f1-pFw" eventType="valueChanged" id="GkD-Hq-IwD"/>
+                                                </connections>
+                                            </slider>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxC-hw-SEo">
+                                                <rect key="frame" x="350" y="0.0" width="50" height="85.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="zxC-hw-SEo" firstAttribute="width" secondItem="ZP2-7G-Rm8" secondAttribute="width" id="dyx-hV-NE7"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>

@@ -9,11 +9,12 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
     private let raidBossPickerViewController = RaidBossPickerViewController.instantiateFromStoryboard()
+    private let raidBossTableViewController = RaidBossTableViewController.instantiateFromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
     private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
     private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.instantiateFromStoryboard()
-    private let switchViewController = RaidAlreadyRunningSwitchViewController.instantiateFromStoryboard()
+    private let raidAlreadyRunningSwitchViewController = RaidAlreadyRunningSwitchViewController.instantiateFromStoryboard()
     private let doneButton = Button()
     var viewModel: SubmitRaidViewModel!
 
@@ -24,7 +25,10 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.distribution = .equalSpacing
-        view.addSubviewAndEdgeConstraints(stackView, edges: .all, margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16), constrainToSafeAreaGuide: false)
+        view.addSubviewAndEdgeConstraints(stackView,
+                                          edges: .all,
+                                          margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
+                                          constrainToSafeAreaGuide: false)
         
         doneButton.setTitle("Raid melden", for: .normal)
         doneButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
@@ -33,29 +37,32 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        let separatorView = SeparatorView.instantiateFromNib()
-        let separatorView1 = SeparatorView.instantiateFromNib()
 
         raidLevelViewController.viewModel = viewModel
         raidBossPickerViewController.viewModel = viewModel
-        switchViewController.viewModel = viewModel
+        raidBossTableViewController.viewModel = viewModel
+        raidAlreadyRunningSwitchViewController.viewModel = viewModel
         hatchTimePickerViewController.viewModel = viewModel
         timeLeftPickerViewController.viewModel = viewModel
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
 
-        timeLeftPickerViewController.view.isHidden = true
+        timeLeftPickerViewController.view.isHidden = !viewModel.raidAlreadyRunning
+        raidBossPickerViewController.view.isHidden = !viewModel.raidAlreadyRunning
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
+        stackView.addSepartor()
+        stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidBossPickerViewController, to: self)
-        stackView.addArrangedSubview(separatorView)
-        stackView.addArrangedViewController(viewController: switchViewController, to: self)
+        stackView.addArrangedViewController(viewController: raidBossTableViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)
         stackView.addArrangedViewController(viewController: timeLeftPickerViewController, to: self)
-        stackView.addArrangedSubview(separatorView1)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: userParticipatesViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: meetupTimePickerViewController, to: self)
         stackView.addArrangedSubview(doneButton)
     }
@@ -75,14 +82,19 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         case .raidLevelChanged:
             UIView.transition(with: imageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                 self.imageView.image = UIImage(named: self.viewModel.imageName)!
+                self.setTitle()
             })
-            setTitle()
 
         case .raidAlreadyRunning:
-            hatchTimePickerViewController.view.isHidden = !viewModel.showHatchTimePicker
-            timeLeftPickerViewController.view.isHidden = viewModel.showHatchTimePicker
+            changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
+                                                raidBossTableViewController,
+                                                timeLeftPickerViewController,
+                                                raidBossPickerViewController])
         case .userParticipates:
-            changeVisibility(of: meetupTimePickerViewController, visible: viewModel.showMeetupTimePicker)
+            changeVisibility(of: meetupTimePickerViewController, visible: viewModel.showMeetupTimePicker, hideAnimated: true)
+        case .currentRaidbossesChanged:
+            raidBossPickerViewController.pickerView.reloadAllComponents()
+            raidBossTableViewController.update()
         }
     }
     
@@ -90,11 +102,45 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         navigationController?.navigationBar.topItem?.title = "Neuer Level \(viewModel.currentRaidLevel) Raid"
     }
     
-    private func changeVisibility(of viewController: UIViewController, visible: Bool) {
-        UIView.animate(withDuration: 0.125, animations: {
+    private func changeVisibiltyOf(viewControllers: [UIViewController]) {
+        
+        var viewControllersToShow = [UIViewController]()
+        var viewControllersToHide = [UIViewController]()
+
+        for viewController in viewControllers {
+            viewController.view.isHidden ? viewControllersToShow.append(viewController) : viewControllersToHide.append(viewController)
+        }
+        
+        viewControllersToHide.forEach { vcToHide in
+            UIView.animate(withDuration: 0.25, animations: {
+                vcToHide.view.alpha = 0
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.25, animations: {
+                    vcToHide.view.isHidden = true
+                }, completion: { _ in
+                    viewControllersToShow.forEach { vcToShow in
+                        UIView.animate(withDuration: 0.25, animations: {
+                            vcToShow.view.alpha = 1
+                        }, completion: { _ in
+                            UIView.animate(withDuration: 0.25, animations: {
+                                vcToShow.view.isHidden = false
+                            })
+                        })
+                    }
+                })
+            })
+        }
+    }
+    
+    private func changeVisibility(of viewController: UIViewController, visible: Bool, hideAnimated: Bool = true) {
+        UIView.animate(withDuration: 0.25, animations: {
             viewController.view.alpha = visible ? 1 : 0
         }) { done in
-            UIView.animate(withDuration: 0.25) {
+            if hideAnimated {
+                UIView.animate(withDuration: 0.25) {
+                    viewController.view.isHidden = !visible
+                }
+            } else {
                 viewController.view.isHidden = !visible
             }
         }

@@ -8,8 +8,7 @@ class RaidBossPickerViewController: UIViewController, StoryboardInitialViewContr
     @IBOutlet var pickerView: UIPickerView!
     var pickerViewRows: [String] {
         get {
-            //FirebaseConnector get raid bosses for level
-            return ["Groudon", "Lugia", "Mewtu", "Zapdos", "Arktos", "Lavados"]
+            return viewModel.currentRaidBosses
         }
     }
 

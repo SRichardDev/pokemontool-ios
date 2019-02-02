@@ -52,6 +52,8 @@ class FirebaseConnector {
                 print("Not connected")
             }
         })
+        
+        addRaidBosses()
     }
     
     func savePokestop(_ pokestop: Pokestop) {
@@ -134,6 +136,49 @@ class FirebaseConnector {
         geohashRegionPokestop.child("registered_user").updateChildValues(data)
         let geohashRegionArena = Database.database().reference(withPath: "arenas/\(geohash)")
         geohashRegionArena.child("registered_user").updateChildValues(data)
+    }
+    
+    func loadRaidBosses(for level: Int, completion: @escaping ([String]?) -> ()) {
+        var raidBossesArray = [String]()
+        let raidbosses = Database.database().reference(withPath: "raidBosses")
+        raidbosses.child("level\(level)").observeSingleEvent(of: .value) { snapshot in
+            if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                for child in result {
+                    raidBossesArray.append(child.value as! String)
+                }
+                completion(raidBossesArray)
+            }
+        }
+    }
+    
+    func addRaidBosses() {
+        let level5Data = ["484" : "Palkia"]
+        let level4Data = ["105" : "Alola Knogga",
+                          "176" : "Togetic",
+                          "217" : "Ursaring",
+                          "248" : "Despotar",
+                          "359" : "Absol"]
+        let level3Data = ["1" : "Simsala",
+                          "2" : "Machomei",
+                          "3" : "Azumarill",
+                          "4" : "Granbull"]
+        let level2Data = ["1" : "Alola Kokowei",
+                          "2" : "Kirilia",
+                          "3" : "Zobiris",
+                          "4" : "Flunkifer"]
+        let level1Data = ["1" : "Karpador",
+                          "2" : "Dratini",
+                          "3" : "Wablu",
+                          "4" : "Barschwa",
+                          "5" : "Shinux",
+                          "6" : "Bamelin"]
+        let raidbosses = Database.database().reference(withPath: "raidBosses")
+        raidbosses.child("level5").updateChildValues(level5Data)
+        raidbosses.child("level4").updateChildValues(level4Data)
+        raidbosses.child("level3").updateChildValues(level3Data)
+        raidbosses.child("level2").updateChildValues(level2Data)
+        raidbosses.child("level1").updateChildValues(level1Data)
+
     }
 }
 
