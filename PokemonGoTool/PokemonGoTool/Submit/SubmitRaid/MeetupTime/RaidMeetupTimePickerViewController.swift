@@ -22,8 +22,8 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
     }
     
     @IBAction func timePickerDidChange(_ sender: UIDatePicker) {
-        viewModel.selectedTime = selectedTime(date: sender.date)
-        selectedTimeLabel.text = viewModel.selectedTime
+        viewModel.selectedMeetupTime = selectedTime(date: sender.date)
+        selectedTimeLabel.text = viewModel.selectedMeetupTime
     }
     
     private func selectedTime(date: Date) -> String {

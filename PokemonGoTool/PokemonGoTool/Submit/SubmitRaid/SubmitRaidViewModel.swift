@@ -14,19 +14,21 @@ protocol SubmitRaidDelegate: class {
 class SubmitRaidViewModel {
     
     weak var delegate: SubmitRaidDelegate?
-    
+    var firebaseConnector: FirebaseConnector
     var showHatchTimePicker = true
     var showMeetupTimePicker = true
     var currentRaidLevel = 3
-    var selectedTime = "00:00"
+    var selectedHatchTime = "00:00"
+    var selectedMeetupTime = "00:00"
+    var selectedTimeLeft = "45 min"
     var imageName: String {
         get {
             return "level_\(currentRaidLevel)"
         }
     }
     
-    init() {
-        
+    init(firebaseConnector: FirebaseConnector) {
+        self.firebaseConnector = firebaseConnector
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
@@ -42,5 +44,9 @@ class SubmitRaidViewModel {
     func sliderChanged(to value: Int) {
         currentRaidLevel = value
         delegate?.update(of: .raidLevelChanged)
+    }
+    
+    func submitRaid() {
+//        let raid = Raid(level: currentRaidLevel, hatchTime: selectedHatchTime)
     }
 }

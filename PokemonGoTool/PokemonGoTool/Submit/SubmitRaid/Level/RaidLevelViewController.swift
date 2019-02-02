@@ -6,11 +6,6 @@ class RaidLevelViewController: UIViewController, StoryboardInitialViewController
     var viewModel: SubmitRaidViewModel!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var slider: SnappableSlider!
-    @IBOutlet var level1Label: Label!
-    @IBOutlet var level2Label: Label!
-    @IBOutlet var level3Label: Label!
-    @IBOutlet var level4Label: Label!
-    @IBOutlet var level5Label: Label!
     var currentValue = 0
 
     override func viewDidLoad() {

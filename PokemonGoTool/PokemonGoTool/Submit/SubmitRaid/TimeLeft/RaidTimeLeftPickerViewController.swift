@@ -12,7 +12,7 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
         get {
             var array = [String]()
             array.reserveCapacity(45)
-            for index in 0...45 {
+            for index in 1...45 {
                 array.append("\(index) min")
             }
             return array
@@ -26,13 +26,13 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
         pickerView.dataSource = self
     }
     
-    //MARK: UIPickerViewDelegate
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return self.pickerViewRows[row]
     }
     
-    //MARK: UIPickerViewDataSource
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.selectedTimeLeft = pickerViewRows[row]
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -40,18 +40,5 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.pickerViewRows.count
-    }
-    
-    @IBAction func timePickerDidChange(_ sender: UIDatePicker) {
-//        viewModel.selectedTime = selectedTime(date: sender.date)
-//        selectedTimeLabel.text = viewModel.selectedTime
-    }
-    
-    private func selectedTime(date: Date) -> String {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = Locale.current
-        let selectedTime: String = dateFormatter.string(from: date)
-        return selectedTime
     }
 }

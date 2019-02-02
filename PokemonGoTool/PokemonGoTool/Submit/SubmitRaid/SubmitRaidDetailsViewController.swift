@@ -6,21 +6,23 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
     private let stackView = UIStackView()
+    private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
+    private let raidBossPickerViewController = RaidBossPickerViewController.instantiateFromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
     private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
     private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.instantiateFromStoryboard()
     private let switchViewController = RaidAlreadyRunningSwitchViewController.instantiateFromStoryboard()
     private let doneButton = Button()
-    let viewModel = SubmitRaidViewModel()
-    let imageView = UIImageView()
+    var viewModel: SubmitRaidViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = SubmitRaidViewModel(firebaseConnector: firebaseConnector)
         viewModel.delegate = self
         stackView.axis = .vertical
-        stackView.spacing = 50
+        stackView.spacing = 15
         stackView.distribution = .equalSpacing
         view.addSubviewAndEdgeConstraints(stackView, edges: .all, margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16), constrainToSafeAreaGuide: false)
         
@@ -36,6 +38,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         let separatorView1 = SeparatorView.instantiateFromNib()
 
         raidLevelViewController.viewModel = viewModel
+        raidBossPickerViewController.viewModel = viewModel
         switchViewController.viewModel = viewModel
         hatchTimePickerViewController.viewModel = viewModel
         timeLeftPickerViewController.viewModel = viewModel
@@ -46,6 +49,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
+        stackView.addArrangedViewController(viewController: raidBossPickerViewController, to: self)
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedViewController(viewController: switchViewController, to: self)
         stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)

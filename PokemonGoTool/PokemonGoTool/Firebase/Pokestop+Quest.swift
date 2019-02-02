@@ -111,7 +111,13 @@ struct Arena: FirebaseCodable, Annotation {
 
 struct Raid: Codable {
     let level: Int
-    let hatchTime: String
-    let participants: [User]
+    var hatchTime: String?
+    var timeLeft: String?
+    var raidMeetup: RaidMeetup?
+}
+
+struct RaidMeetup: Codable {
+    let meetupTime: String
+    var participants: [User]?
 }
 
