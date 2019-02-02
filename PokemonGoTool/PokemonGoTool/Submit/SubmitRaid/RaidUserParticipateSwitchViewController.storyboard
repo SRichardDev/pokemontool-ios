@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Raid Label Switch View Controller-->
+        <!--Raid User Participate Switch View Controller-->
         <scene sceneID="rcY-C5-Q6c">
             <objects>
-                <viewController id="dee-tD-OcB" customClass="RaidLabelSwitchViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dee-tD-OcB" customClass="RaidUserParticipateSwitchViewController" customModule="PokemonGoTool" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aax-Gn-Ee0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,9 +21,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-pE-5MF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raid läuft bereits?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-4R-adI" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nimmst du teil am Raid?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-4R-adI" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="326" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>

@@ -22,12 +22,20 @@
 		2C395A3022026598005330B8 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A2F22026598005330B8 /* NavigationController.swift */; };
 		2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A332203934C005330B8 /* RaidLevelViewController.swift */; };
 		2C395A3622039358005330B8 /* RaidLevelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A3522039358005330B8 /* RaidLevelViewController.storyboard */; };
-		2C395A3A22039A34005330B8 /* RaidPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A3922039A34005330B8 /* RaidPickerViewController.swift */; };
-		2C395A3C2203A296005330B8 /* RaidLabelSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A3B2203A296005330B8 /* RaidLabelSwitchViewController.swift */; };
-		2C395A3E2203A2A2005330B8 /* RaidLabelSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A3D2203A2A2005330B8 /* RaidLabelSwitchViewController.storyboard */; };
-		2C395A402203B210005330B8 /* RaidPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A3F2203B210005330B8 /* RaidPickerViewController.storyboard */; };
+		2C395A3E2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A3D2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard */; };
+		2C395A402203B210005330B8 /* RaidHatchTimePickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A3F2203B210005330B8 /* RaidHatchTimePickerViewController.storyboard */; };
 		2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A412203D393005330B8 /* SubmitRaidViewModel.swift */; };
 		2C395A492204C110005330B8 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A482204C110005330B8 /* UIStackView+Extension.swift */; };
+		2C395A4B2205FA38005330B8 /* RaidHatchTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A4A2205FA37005330B8 /* RaidHatchTimePickerViewController.swift */; };
+		2C395A4E2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A4D2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift */; };
+		2C395A4F2205FB0F005330B8 /* RaidMeetupTimePickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A4C2205FA4B005330B8 /* RaidMeetupTimePickerViewController.storyboard */; };
+		2C395A512205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A502205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift */; };
+		2C395A542205FCCB005330B8 /* RaidUserParticipateSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A522205FCCA005330B8 /* RaidUserParticipateSwitchViewController.swift */; };
+		2C395A552205FF79005330B8 /* RaidUserParticipateSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A532205FCCB005330B8 /* RaidUserParticipateSwitchViewController.storyboard */; };
+		2C395A58220603E4005330B8 /* RaidTimeLeftPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A57220603E4005330B8 /* RaidTimeLeftPickerViewController.swift */; };
+		2C395A592206041B005330B8 /* RaidTimeLeftPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A56220603E4005330B8 /* RaidTimeLeftPickerViewController.storyboard */; };
+		2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A5A22060E9D005330B8 /* SeparatorView.xib */; };
+		2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A5C22060EF7005330B8 /* SeparatorView.swift */; };
 		2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */; };
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
@@ -87,12 +95,20 @@
 		2C395A2F22026598005330B8 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2C395A332203934C005330B8 /* RaidLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidLevelViewController.swift; sourceTree = "<group>"; };
 		2C395A3522039358005330B8 /* RaidLevelViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidLevelViewController.storyboard; sourceTree = "<group>"; };
-		2C395A3922039A34005330B8 /* RaidPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidPickerViewController.swift; sourceTree = "<group>"; };
-		2C395A3B2203A296005330B8 /* RaidLabelSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidLabelSwitchViewController.swift; sourceTree = "<group>"; };
-		2C395A3D2203A2A2005330B8 /* RaidLabelSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidLabelSwitchViewController.storyboard; sourceTree = "<group>"; };
-		2C395A3F2203B210005330B8 /* RaidPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidPickerViewController.storyboard; sourceTree = "<group>"; };
+		2C395A3D2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidAlreadyRunningSwitchViewController.storyboard; sourceTree = "<group>"; };
+		2C395A3F2203B210005330B8 /* RaidHatchTimePickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidHatchTimePickerViewController.storyboard; sourceTree = "<group>"; };
 		2C395A412203D393005330B8 /* SubmitRaidViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidViewModel.swift; sourceTree = "<group>"; };
 		2C395A482204C110005330B8 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		2C395A4A2205FA37005330B8 /* RaidHatchTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaidHatchTimePickerViewController.swift; sourceTree = "<group>"; };
+		2C395A4C2205FA4B005330B8 /* RaidMeetupTimePickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidMeetupTimePickerViewController.storyboard; sourceTree = "<group>"; };
+		2C395A4D2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidMeetupTimePickerViewController.swift; sourceTree = "<group>"; };
+		2C395A502205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaidAlreadyRunningSwitchViewController.swift; sourceTree = "<group>"; };
+		2C395A522205FCCA005330B8 /* RaidUserParticipateSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidUserParticipateSwitchViewController.swift; sourceTree = "<group>"; };
+		2C395A532205FCCB005330B8 /* RaidUserParticipateSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidUserParticipateSwitchViewController.storyboard; sourceTree = "<group>"; };
+		2C395A56220603E4005330B8 /* RaidTimeLeftPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidTimeLeftPickerViewController.storyboard; sourceTree = "<group>"; };
+		2C395A57220603E4005330B8 /* RaidTimeLeftPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidTimeLeftPickerViewController.swift; sourceTree = "<group>"; };
+		2C395A5A22060E9D005330B8 /* SeparatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeparatorView.xib; sourceTree = "<group>"; };
+		2C395A5C22060EF7005330B8 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -254,10 +270,18 @@
 				2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */,
 				2C395A332203934C005330B8 /* RaidLevelViewController.swift */,
 				2C395A3522039358005330B8 /* RaidLevelViewController.storyboard */,
-				2C395A3922039A34005330B8 /* RaidPickerViewController.swift */,
-				2C395A3F2203B210005330B8 /* RaidPickerViewController.storyboard */,
-				2C395A3B2203A296005330B8 /* RaidLabelSwitchViewController.swift */,
-				2C395A3D2203A2A2005330B8 /* RaidLabelSwitchViewController.storyboard */,
+				2C395A4A2205FA37005330B8 /* RaidHatchTimePickerViewController.swift */,
+				2C395A3F2203B210005330B8 /* RaidHatchTimePickerViewController.storyboard */,
+				2C395A57220603E4005330B8 /* RaidTimeLeftPickerViewController.swift */,
+				2C395A56220603E4005330B8 /* RaidTimeLeftPickerViewController.storyboard */,
+				2C395A4D2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift */,
+				2C395A4C2205FA4B005330B8 /* RaidMeetupTimePickerViewController.storyboard */,
+				2C395A502205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift */,
+				2C395A3D2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard */,
+				2C395A522205FCCA005330B8 /* RaidUserParticipateSwitchViewController.swift */,
+				2C395A532205FCCB005330B8 /* RaidUserParticipateSwitchViewController.storyboard */,
+				2C395A5C22060EF7005330B8 /* SeparatorView.swift */,
+				2C395A5A22060E9D005330B8 /* SeparatorView.xib */,
 			);
 			path = SubmitRaid;
 			sourceTree = "<group>";
@@ -442,18 +466,22 @@
 			files = (
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
+				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97F78621F67B5C00630BA2 /* SubmitQuestViewController.storyboard in Resources */,
-				2C395A3E2203A2A2005330B8 /* RaidLabelSwitchViewController.storyboard in Resources */,
-				2C395A402203B210005330B8 /* RaidPickerViewController.storyboard in Resources */,
+				2C395A3E2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard in Resources */,
+				2C395A402203B210005330B8 /* RaidHatchTimePickerViewController.storyboard in Resources */,
 				2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */,
 				2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */,
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
+				2C395A4F2205FB0F005330B8 /* RaidMeetupTimePickerViewController.storyboard in Resources */,
+				2C395A592206041B005330B8 /* RaidTimeLeftPickerViewController.storyboard in Resources */,
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
 				2C395A3622039358005330B8 /* RaidLevelViewController.storyboard in Resources */,
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
 				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
 				2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */,
+				2C395A552205FF79005330B8 /* RaidUserParticipateSwitchViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF6F9A821F2846D00610BC9 /* AppModule.swift in Sources */,
+				2C395A512205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift in Sources */,
 				2C97F78C21F6881A00630BA2 /* SubmitViewController.swift in Sources */,
 				2C97F77621F6729700630BA2 /* CustomAnnotationView.swift in Sources */,
 				2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */,
@@ -531,20 +560,22 @@
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
-				2C395A3A22039A34005330B8 /* RaidPickerViewController.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
+				2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C395A3022026598005330B8 /* NavigationController.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
 				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
+				2C395A4E2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift in Sources */,
 				2C395A492204C110005330B8 /* UIStackView+Extension.swift in Sources */,
+				2C395A4B2205FA38005330B8 /* RaidHatchTimePickerViewController.swift in Sources */,
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
@@ -557,10 +588,11 @@
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
+				2C395A58220603E4005330B8 /* RaidTimeLeftPickerViewController.swift in Sources */,
 				2C97F77E21F6742D00630BA2 /* DetailAnnotationView.swift in Sources */,
 				2CDFDDE321ED4A3D00170A46 /* FirebaseConnector.swift in Sources */,
-				2C395A3C2203A296005330B8 /* RaidLabelSwitchViewController.swift in Sources */,
 				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
+				2C395A542205FCCB005330B8 /* RaidUserParticipateSwitchViewController.swift in Sources */,
 				2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */,
 				2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */,
 				2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */,

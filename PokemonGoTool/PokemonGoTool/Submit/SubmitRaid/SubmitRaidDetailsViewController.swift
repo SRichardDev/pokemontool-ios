@@ -7,15 +7,17 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     var firebaseConnector: FirebaseConnector!
     private let stackView = UIStackView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
-    private let pickerViewController = RaidPickerViewController.instantiateFromStoryboard()
-    private let switchViewController = RaidLabelSwitchViewController.instantiateFromStoryboard()
+    private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
+    private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
+    private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
+    private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.instantiateFromStoryboard()
+    private let switchViewController = RaidAlreadyRunningSwitchViewController.instantiateFromStoryboard()
     private let doneButton = Button()
     let viewModel = SubmitRaidViewModel()
     let imageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Neuer Raid"
         viewModel.delegate = self
         stackView.axis = .vertical
         stackView.spacing = 50
@@ -28,17 +30,35 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         let image = UIImage(named: viewModel.imageName)!
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
+        let separatorView = SeparatorView.instantiateFromNib()
+        let separatorView1 = SeparatorView.instantiateFromNib()
+
         raidLevelViewController.viewModel = viewModel
         switchViewController.viewModel = viewModel
-        pickerViewController.viewModel = viewModel
+        hatchTimePickerViewController.viewModel = viewModel
+        timeLeftPickerViewController.viewModel = viewModel
+        userParticipatesViewController.viewModel = viewModel
+        meetupTimePickerViewController.viewModel = viewModel
 
+        timeLeftPickerViewController.view.isHidden = true
+        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
+        stackView.addArrangedSubview(separatorView)
         stackView.addArrangedViewController(viewController: switchViewController, to: self)
-        stackView.addArrangedViewController(viewController: pickerViewController, to: self)
+        stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)
+        stackView.addArrangedViewController(viewController: timeLeftPickerViewController, to: self)
+        stackView.addArrangedSubview(separatorView1)
+        stackView.addArrangedViewController(viewController: userParticipatesViewController, to: self)
+        stackView.addArrangedViewController(viewController: meetupTimePickerViewController, to: self)
         stackView.addArrangedSubview(doneButton)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setTitle()
     }
     
     @objc
@@ -52,14 +72,26 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
             UIView.transition(with: imageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                 self.imageView.image = UIImage(named: self.viewModel.imageName)!
             })
+            setTitle()
 
-        case .switchChanged:
-            UIView.animate(withDuration: 0.125, animations: {
-                self.pickerViewController.view.alpha = self.viewModel.showTimePicker ? 1 : 0
-            }) { done in
-                UIView.animate(withDuration: 0.25) {
-                    self.pickerViewController.view.isHidden = !self.viewModel.showTimePicker
-                }
+        case .raidAlreadyRunning:
+            hatchTimePickerViewController.view.isHidden = !viewModel.showHatchTimePicker
+            timeLeftPickerViewController.view.isHidden = viewModel.showHatchTimePicker
+        case .userParticipates:
+            changeVisibility(of: meetupTimePickerViewController, visible: viewModel.showMeetupTimePicker)
+        }
+    }
+    
+    private func setTitle() {
+        navigationController?.navigationBar.topItem?.title = "Neuer Level \(viewModel.currentRaidLevel) Raid"
+    }
+    
+    private func changeVisibility(of viewController: UIViewController, visible: Bool) {
+        UIView.animate(withDuration: 0.125, animations: {
+            viewController.view.alpha = visible ? 1 : 0
+        }) { done in
+            UIView.animate(withDuration: 0.25) {
+                viewController.view.isHidden = !visible
             }
         }
     }

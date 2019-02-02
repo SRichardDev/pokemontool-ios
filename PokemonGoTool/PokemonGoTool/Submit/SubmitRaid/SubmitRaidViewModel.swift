@@ -3,7 +3,8 @@ import Foundation
 
 enum UpdateType {
     case raidLevelChanged
-    case switchChanged
+    case raidAlreadyRunning
+    case userParticipates
 }
 
 protocol SubmitRaidDelegate: class {
@@ -14,8 +15,10 @@ class SubmitRaidViewModel {
     
     weak var delegate: SubmitRaidDelegate?
     
-    var showTimePicker = false
+    var showHatchTimePicker = true
+    var showMeetupTimePicker = true
     var currentRaidLevel = 3
+    var selectedTime = "00:00"
     var imageName: String {
         get {
             return "level_\(currentRaidLevel)"
@@ -26,9 +29,14 @@ class SubmitRaidViewModel {
         
     }
     
-    func switchToggled(enabled: Bool) {
-        showTimePicker = enabled
-        delegate?.update(of: .switchChanged)
+    func raidAlreadyRunning(_ isRunning: Bool) {
+        showHatchTimePicker = !isRunning
+        delegate?.update(of: .raidAlreadyRunning)
+    }
+    
+    func userParticipates(_ userParticipates: Bool) {
+        showMeetupTimePicker = userParticipates
+        delegate?.update(of: .userParticipates)
     }
     
     func sliderChanged(to value: Int) {

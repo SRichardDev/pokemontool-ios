@@ -17,8 +17,8 @@ class RaidLevelViewController: UIViewController, StoryboardInitialViewController
         super.viewDidLoad()
         
     }
+    
     @IBAction func sliderDidChange(_ sender: UISlider) {
-        
         if currentValue != Int(sender.value) {
             currentValue = Int(sender.value)
             viewModel.sliderChanged(to: Int(sender.value))

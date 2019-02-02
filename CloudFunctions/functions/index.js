@@ -36,14 +36,14 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
 
     const uid = context.params.uid;
     const geohash = context.params.geohash;
-    
+
     const arena = snapshot.after.val();
     const name = arena.name;
-    const raid = arena.raid;
-    const level = raid.level;
-    const raidBoss = raid.raidBoss;
-    const hatchTime = raid.hatchTime;
-    const startTime = raid.startTime;
+    // const raid = arena.raid;
+    // const level = raid.level;
+    // const raidBoss = raid.raidBoss;
+    // const hatchTime = raid.hatchTime;
+    // const startTime = raid.startTime;
 
     admin.database().ref('/arenas/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
         snapshot.forEach(function(child) {
@@ -83,41 +83,48 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
     console.log("Pokestop name: " + pokestop.name);
 
     const name = pokestop.name;
-    const questName = pokestop.quest.name;
-    const questReward = pokestop.quest.reward;
+    // const hasQuest = (snapshot.val() && snapshot.val().quest);
+    
+    // if (hasQuest) {
+        const quest = pokestop.quest
+        const questName = quest.name;
+        const questReward = quest.reward;
+        
+        admin.database().ref('/pokestops/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
+            // var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
+            // console.log("notificationToken: " + notificationToken);
+            // console.log("new snapshot");
+            // console.log(snapshot.val());
+            // console.log("new context");
+            // console.log(context);
+    
+            snapshot.forEach(function(child) {
+                const userId = child.val();
+                console.log("userId: " + userId);
+                admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                    const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+                    const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
+    
+                    const payload = {
+                        notification: {
+                           title: 'Neue Feldforschung',
+                           body: 'Pokestop: ' + name + '\n\nQuest: ' + questName + "\n\nBelohnung: "+ questReward,
+                           sound: 'default'
+                        }
+                    };
+                
+                    admin.messaging().sendToDevice(notificationToken, payload)
+                });
+            });
+        });
+    // }
     // const users = currentValue.registred_user;
     // const token = users.pushToken;
     // console.log(token);
     // var userId = admin.auth().currentUser.uid;
     // console.log("userId: " + userId);
 
-    admin.database().ref('/pokestops/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
-        // var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
-        // console.log("notificationToken: " + notificationToken);
-        // console.log("new snapshot");
-        // console.log(snapshot.val());
-        // console.log("new context");
-        // console.log(context);
-
-        snapshot.forEach(function(child) {
-            const userId = child.val();
-            console.log("userId: " + userId);
-            admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
-                const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
-                const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
-
-                const payload = {
-                    notification: {
-                       title: 'Neue Feldforschung',
-                       body: questName + ": "+ questReward,
-                       sound: 'default'
-                    }
-                };
-            
-                admin.messaging().sendToDevice(notificationToken, payload)
-            });
-        });
-    });
+    
 
     
 
