@@ -47,7 +47,7 @@ class SubmitRaidViewModel {
         delegate?.update(of: .userParticipates)
     }
     
-    func sliderChanged(to value: Int) {
+    func raidLevelChanged(to value: Int) {
         currentRaidLevel = value
         updateCurrentRaidBosses()
         delegate?.update(of: .raidLevelChanged)

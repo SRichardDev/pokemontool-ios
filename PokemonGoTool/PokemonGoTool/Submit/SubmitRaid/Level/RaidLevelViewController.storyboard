@@ -22,34 +22,67 @@
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feW-iw-iwb" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="26"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XW-Jd-2A2">
-                                        <rect key="frame" x="0.0" y="34.5" width="400" height="85.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9XW-Jd-2A2">
+                                        <rect key="frame" x="0.0" y="40" width="400" height="80"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZP2-7G-Rm8">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="85.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqt-kf-XTW">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="3VG-cB-w97"/>
+                                                    <constraint firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="height" multiplier="1:1" id="GIj-Jc-ihA"/>
                                                 </constraints>
-                                            </view>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="1qD-GT-2lF" customClass="SnappableSlider" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="48" y="0.0" width="304" height="86.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="1"/>
                                                 <connections>
-                                                    <action selector="sliderDidChange:" destination="GFO-f1-pFw" eventType="valueChanged" id="GkD-Hq-IwD"/>
+                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="tv1-gy-GW0"/>
                                                 </connections>
-                                            </slider>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxC-hw-SEo">
-                                                <rect key="frame" x="350" y="0.0" width="50" height="85.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czd-aN-QIR">
+                                                <rect key="frame" x="80" y="0.0" width="80" height="80"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="16r-kQ-dvf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcI-tj-ve3">
+                                                <rect key="frame" x="160" y="0.0" width="80" height="80"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="3"/>
+                                                <connections>
+                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="3cf-Pz-Ydb"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AD2-fU-yyd">
+                                                <rect key="frame" x="240" y="0.0" width="80" height="80"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="4"/>
+                                                <connections>
+                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="jAy-4T-qr3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f43-QB-F3X">
+                                                <rect key="frame" x="320" y="0.0" width="80" height="80"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="5"/>
+                                                <connections>
+                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="etI-UM-BSg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="zxC-hw-SEo" firstAttribute="width" secondItem="ZP2-7G-Rm8" secondAttribute="width" id="dyx-hV-NE7"/>
+                                            <constraint firstItem="Czd-aN-QIR" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="9pe-YQ-b0A"/>
+                                            <constraint firstItem="VcI-tj-ve3" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="G06-XH-cTi"/>
+                                            <constraint firstItem="f43-QB-F3X" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="Hvg-Xo-Shl"/>
+                                            <constraint firstItem="VcI-tj-ve3" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="YEM-5J-EI5"/>
+                                            <constraint firstItem="AD2-fU-yyd" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="b0d-PU-wPt"/>
+                                            <constraint firstItem="Czd-aN-QIR" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="jjQ-BQ-kEm"/>
+                                            <constraint firstItem="AD2-fU-yyd" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="pRA-mF-cSD"/>
+                                            <constraint firstItem="f43-QB-F3X" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="sqT-YT-6YO"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -69,8 +102,12 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="120"/>
                     <connections>
-                        <outlet property="slider" destination="1qD-GT-2lF" id="tSn-Ki-Qif"/>
                         <outlet property="titleLabel" destination="feW-iw-iwb" id="p9Z-mL-vJp"/>
+                        <outletCollection property="buttons" destination="Zqt-kf-XTW" collectionClass="NSMutableArray" id="bdB-3a-ky9"/>
+                        <outletCollection property="buttons" destination="Czd-aN-QIR" collectionClass="NSMutableArray" id="WyE-Lv-RpJ"/>
+                        <outletCollection property="buttons" destination="VcI-tj-ve3" collectionClass="NSMutableArray" id="v4g-IG-kWe"/>
+                        <outletCollection property="buttons" destination="AD2-fU-yyd" collectionClass="NSMutableArray" id="Bqj-fA-OXa"/>
+                        <outletCollection property="buttons" destination="f43-QB-F3X" collectionClass="NSMutableArray" id="lRw-2m-bRb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jci-cv-flJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

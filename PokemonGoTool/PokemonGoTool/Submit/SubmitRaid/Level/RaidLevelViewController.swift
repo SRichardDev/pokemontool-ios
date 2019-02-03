@@ -5,47 +5,16 @@ class RaidLevelViewController: UIViewController, StoryboardInitialViewController
 
     var viewModel: SubmitRaidViewModel!
     @IBOutlet var titleLabel: Label!
-    @IBOutlet var slider: SnappableSlider!
-    var currentValue = 0
+    @IBOutlet var buttons: [UIButton]!
     
-    @IBAction func sliderDidChange(_ sender: UISlider) {
-        if currentValue != Int(sender.value) {
-            currentValue = Int(sender.value)
-            viewModel.sliderChanged(to: Int(sender.value))
+    @IBAction func levelButtonsTapped(_ sender: UIButton) {
+        buttons.forEach {
+            $0.layer.borderColor = UIColor.clear.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 5
         }
-    }
-}
-
-@IBDesignable
-class SnappableSlider: UISlider {
-    
-    @IBInspectable
-    var interval: Int = 1
-    var currentValue = 0
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUpSlider()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setUpSlider()
-    }
-    
-    private func setUpSlider() {
-        addTarget(self, action: #selector(handleValueChange(sender:)), for: .valueChanged)
-    }
-    
-    @objc func handleValueChange(sender: UISlider) {
-        let newValue =  (sender.value / Float(interval)).rounded() * Float(interval)
-        setValue(newValue, animated: true)
-        
-        if currentValue != Int(newValue) {
-            currentValue = Int(newValue)
-            let feedback = UIImpactFeedbackGenerator(style: .light)
-            feedback.prepare()
-            feedback.impactOccurred()
-        }
+        sender.layer.borderColor = UIColor.lightGray.cgColor
+       
+        viewModel.raidLevelChanged(to: sender.tag)
     }
 }
