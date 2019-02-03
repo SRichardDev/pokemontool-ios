@@ -15,11 +15,13 @@ protocol SubmitRaidDelegate: class {
 class SubmitRaidViewModel {
     
     weak var delegate: SubmitRaidDelegate?
+    var arena: Arena
     var firebaseConnector: FirebaseConnector
     var raidAlreadyRunning = false
     var showMeetupTimePicker = true
     var currentRaidLevel = 3
-    var selectedHatchTime = "00:00"
+    var selectedRaidBoss = ""
+    var selectedHatchTime: String?
     var selectedMeetupTime = "00:00"
     var selectedTimeLeft = "45 min"
     var currentRaidBosses = [String]()
@@ -29,9 +31,10 @@ class SubmitRaidViewModel {
         }
     }
     
-    init(firebaseConnector: FirebaseConnector) {
+    init(arena: Arena, firebaseConnector: FirebaseConnector) {
+        self.arena = arena
         self.firebaseConnector = firebaseConnector
-        updateRaidCurrentBosses()
+        updateCurrentRaidBosses()
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
@@ -46,7 +49,7 @@ class SubmitRaidViewModel {
     
     func sliderChanged(to value: Int) {
         currentRaidLevel = value
-        updateRaidCurrentBosses()
+        updateCurrentRaidBosses()
         delegate?.update(of: .raidLevelChanged)
     }
     
@@ -54,7 +57,7 @@ class SubmitRaidViewModel {
         return currentRaidBosses
     }
     
-    func updateRaidCurrentBosses() {
+    func updateCurrentRaidBosses() {
         firebaseConnector.loadRaidBosses(for: currentRaidLevel, completion: { raidBosses in
             self.currentRaidBosses = raidBosses ?? [String]()
             self.delegate?.update(of: .currentRaidbossesChanged)
@@ -62,6 +65,14 @@ class SubmitRaidViewModel {
     }
     
     func submitRaid() {
-//        let raid = Raid(level: currentRaidLevel, hatchTime: selectedHatchTime)
+        let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
+                                    participants: [firebaseConnector.user])
+        let raid = Raid(level: currentRaidLevel,
+                        hatchTime: selectedHatchTime,
+                        raidBoss: selectedRaidBoss,
+                        timeLeft: selectedTimeLeft,
+                        raidMeetup: raidMeetup)
+        arena.raid = raid
+        firebaseConnector.saveRaid(arena: arena)
     }
 }

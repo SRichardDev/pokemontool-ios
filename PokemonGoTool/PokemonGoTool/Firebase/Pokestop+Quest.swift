@@ -91,7 +91,7 @@ struct Arena: FirebaseCodable, Annotation {
     let submitter: String
     var isEX: Bool = false
     var id: String?
-//    let raid: Raid?
+    var raid: Raid?
     var upVotes: Int?
     var downVotes: Int?
     var geohash: String {
@@ -112,12 +112,13 @@ struct Arena: FirebaseCodable, Annotation {
 struct Raid: Codable {
     let level: Int
     var hatchTime: String?
+    var raidBoss: String?
     var timeLeft: String?
     var raidMeetup: RaidMeetup?
 }
 
 struct RaidMeetup: Codable {
     let meetupTime: String
-    var participants: [User]?
+    var participants: [User?]
 }
 

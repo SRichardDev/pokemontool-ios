@@ -8,10 +8,11 @@ class User: Codable {
     private(set) var trainerName: String?
     private(set) var notificationToken: String?
     
-    init(id: String, email: String, trainerName: String? = nil) {
+    init(id: String, email: String, trainerName: String? = nil, notificationToken: String? = nil) {
         self.id = id
         self.email = email
         self.trainerName = trainerName
+        self.notificationToken = notificationToken
     }
     
     func updateTrainerName(_ name: String) {
@@ -35,7 +36,8 @@ class User: Codable {
         users.child(userId).observeSingleEvent(of: .value) { snapshot in
             if let value = snapshot.value as? [String : String] {
                 let name = value["trainerName"]
-                let user = User(id: userId, email: email, trainerName: name)
+                let notificationToken = value["notificationToken"]
+                let user = User(id: userId, email: email, trainerName: name, notificationToken: notificationToken)
                 print("✅👨🏻 Did load user")
                 completion(user)
             }

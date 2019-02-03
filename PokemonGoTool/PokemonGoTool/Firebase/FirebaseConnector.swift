@@ -53,7 +53,7 @@ class FirebaseConnector {
             }
         })
         
-        addRaidBosses()
+//        addRaidBosses()
     }
     
     func savePokestop(_ pokestop: Pokestop) {
@@ -70,6 +70,12 @@ class FirebaseConnector {
         guard let pokestopID = pokestop.id else { return }
         let data = try! FirebaseEncoder().encode(quest)
         pokestopsRef.child(pokestop.geohash).child(pokestopID).child("quest").setValue(data)
+    }
+    
+    func saveRaid(arena: Arena) {
+        guard let arenaID = arena.id else { return }
+        let data = try! FirebaseEncoder().encode(arena.raid)
+        arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(data)
     }
     
     private func saveToDatabase(data: [String: Any], geohash: String, id: String? = nil) {
@@ -131,7 +137,8 @@ class FirebaseConnector {
     
     func subscribeForPush(for geohash: String) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let data = [userID : userID]
+        guard let notificationToken = user?.notificationToken else { return }
+        let data = [notificationToken : userID]
         let geohashRegionPokestop = Database.database().reference(withPath: "pokestops/\(geohash)")
         geohashRegionPokestop.child("registered_user").updateChildValues(data)
         let geohashRegionArena = Database.database().reference(withPath: "arenas/\(geohash)")

@@ -8,7 +8,8 @@ class RaidBossPickerViewController: UIViewController, StoryboardInitialViewContr
     @IBOutlet var pickerView: UIPickerView!
     var pickerViewRows: [String] {
         get {
-            return viewModel.currentRaidBosses
+            let currentRaidBosses = viewModel.currentRaidBosses
+            return currentRaidBosses
         }
     }
 
@@ -18,12 +19,16 @@ class RaidBossPickerViewController: UIViewController, StoryboardInitialViewContr
         pickerView.dataSource = self
     }
     
+    func commitData() {
+        viewModel.selectedRaidBoss = pickerViewRows[pickerView.selectedRow(inComponent: 0)]
+    }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return self.pickerViewRows[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        viewModel.selectedTimeLeft = pickerViewRows[row]
+        viewModel.selectedRaidBoss = pickerViewRows[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

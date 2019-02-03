@@ -4,7 +4,6 @@ import UIKit
 class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewController, SubmitRaidDelegate {
     
     weak var coordinator: MainCoordinator?
-    var firebaseConnector: FirebaseConnector!
     private let stackView = UIStackView()
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
@@ -20,7 +19,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SubmitRaidViewModel(firebaseConnector: firebaseConnector)
         viewModel.delegate = self
         stackView.axis = .vertical
         stackView.spacing = 15
@@ -74,6 +72,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     @objc
     func submitTapped() {
+        raidBossPickerViewController.commitData()
+        viewModel.submitRaid()
         dismiss(animated: true)
     }
     

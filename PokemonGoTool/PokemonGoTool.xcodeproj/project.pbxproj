@@ -278,6 +278,15 @@
 			path = RaidBossPicker;
 			sourceTree = "<group>";
 		};
+		2C348BB1220657A400F6A1F7 /* RaidBossTableView */ = {
+			isa = PBXGroup;
+			children = (
+				2C348BAD220639C400F6A1F7 /* RaidBossTableViewController.swift */,
+				2C348BAF220639D100F6A1F7 /* RaidBossTableViewController.storyboard */,
+			);
+			path = RaidBossTableView;
+			sourceTree = "<group>";
+		};
 		2C395A2022025122005330B8 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,8 +349,7 @@
 				2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */,
 				2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */,
 				2C348BA222061A4000F6A1F7 /* Level */,
-				2C348BAD220639C400F6A1F7 /* RaidBossTableViewController.swift */,
-				2C348BAF220639D100F6A1F7 /* RaidBossTableViewController.storyboard */,
+				2C348BB1220657A400F6A1F7 /* RaidBossTableView */,
 				2C348BAC22061DD300F6A1F7 /* RaidBossPicker */,
 				2C348BA322061A4B00F6A1F7 /* HatchTime */,
 				2C348BA422061A5B00F6A1F7 /* TimeLeft */,

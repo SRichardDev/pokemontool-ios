@@ -13,6 +13,7 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
         pickerView.datePickerMode = .time
         pickerView.timeZone = TimeZone.current
         let originalDate = Date()
+        viewModel.selectedHatchTime = selectedTime(date: originalDate)
         let calendar = Calendar.current
         let minDate = calendar.date(byAdding: .minute, value: -90, to: originalDate, wrappingComponents: false)
         let maxDate = calendar.date(byAdding: .minute, value: 90, to: originalDate, wrappingComponents: false)
@@ -22,7 +23,7 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
     }
     
     @IBAction func timePickerDidChange(_ sender: UIDatePicker) {
-        viewModel.selectedMeetupTime = selectedTime(date: sender.date)
+        viewModel.selectedHatchTime = selectedTime(date: sender.date)
         selectedTimeLabel.text = viewModel.selectedMeetupTime
     }
     

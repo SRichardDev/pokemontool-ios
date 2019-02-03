@@ -7,11 +7,6 @@ class RaidLevelViewController: UIViewController, StoryboardInitialViewController
     @IBOutlet var titleLabel: Label!
     @IBOutlet var slider: SnappableSlider!
     var currentValue = 0
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     @IBAction func sliderDidChange(_ sender: UISlider) {
         if currentValue != Int(sender.value) {

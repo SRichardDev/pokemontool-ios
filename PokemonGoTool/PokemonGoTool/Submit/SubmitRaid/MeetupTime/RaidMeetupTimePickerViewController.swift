@@ -13,6 +13,7 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
         pickerView.datePickerMode = .time
         pickerView.timeZone = TimeZone.current
         let originalDate = Date()
+        viewModel.selectedMeetupTime = selectedTime(date: originalDate)
         let calendar = Calendar.current
         let minDate = calendar.date(byAdding: .minute, value: -90, to: originalDate, wrappingComponents: false)
         let maxDate = calendar.date(byAdding: .minute, value: 90, to: originalDate, wrappingComponents: false)
