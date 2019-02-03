@@ -56,6 +56,17 @@
                                     <action selector="signupTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="wPO-YL-lCH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Et7-yC-8CA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="193" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -68,10 +79,12 @@
                             <constraint firstItem="tUA-kc-gbG" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="20" id="JcK-Oy-HhS"/>
                             <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="xFC-XE-29T" secondAttribute="trailing" constant="20" id="LOF-ra-CZu"/>
                             <constraint firstItem="7qk-Ka-CIe" firstAttribute="top" secondItem="xFC-XE-29T" secondAttribute="bottom" constant="15" id="MFo-5e-orE"/>
+                            <constraint firstItem="Et7-yC-8CA" firstAttribute="top" secondItem="hJy-vz-fqT" secondAttribute="bottom" constant="15" id="Pws-9f-tLT"/>
                             <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="tUA-kc-gbG" secondAttribute="trailing" constant="20" id="PxB-q2-DA1"/>
                             <constraint firstItem="xFC-XE-29T" firstAttribute="top" secondItem="Rfa-u7-gLK" secondAttribute="bottom" constant="8" symbolic="YES" id="U7V-rS-g9C"/>
                             <constraint firstItem="7qk-Ka-CIe" firstAttribute="leading" secondItem="hJy-vz-fqT" secondAttribute="leading" id="cn3-5r-bh4"/>
                             <constraint firstItem="Rfa-u7-gLK" firstAttribute="leading" secondItem="aBd-Fo-028" secondAttribute="leadingMargin" id="dPV-9y-x8r"/>
+                            <constraint firstItem="Et7-yC-8CA" firstAttribute="leading" secondItem="xFC-XE-29T" secondAttribute="leading" id="dp1-rl-30e"/>
                             <constraint firstItem="W80-yE-u3c" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="20" id="gQ6-e5-Gav"/>
                             <constraint firstItem="tUA-kc-gbG" firstAttribute="top" secondItem="W80-yE-u3c" secondAttribute="bottom" constant="8" id="j6K-qz-hbn"/>
                             <constraint firstItem="Rfa-u7-gLK" firstAttribute="top" secondItem="wAl-OH-Hjd" secondAttribute="top" constant="25" id="kol-wE-FK9"/>
@@ -90,6 +103,7 @@
                     <connections>
                         <outlet property="emailLabel" destination="Rfa-u7-gLK" id="Mgr-Y1-s5z"/>
                         <outlet property="emailTextField" destination="xFC-XE-29T" id="KMp-ie-nvn"/>
+                        <outlet property="emailVerifiedLabel" destination="Et7-yC-8CA" id="bO5-Xx-I6F"/>
                         <outlet property="loginButton" destination="tUA-kc-gbG" id="QlF-j4-7CL"/>
                         <outlet property="passwordLabel" destination="7qk-Ka-CIe" id="FbR-NO-cf4"/>
                         <outlet property="passwordTextField" destination="hJy-vz-fqT" id="0xy-7P-LxB"/>

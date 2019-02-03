@@ -11,6 +11,7 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordLabel: UILabel!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var emailVerifiedLabel: Label!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
     
@@ -18,11 +19,24 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
         super.viewDidLoad()
         firebaseConnector.userDelegate = self
         passwordTextField.delegate = self
+        emailVerifiedLabel.text = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
+        
+        Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { _, _ in
+            Auth.auth().currentUser?.reload(completion: { error in
+                DispatchQueue.main.async {
+                    if Auth.auth().currentUser?.isEmailVerified ?? false {
+                        self.emailVerifiedLabel.text = "E-Mail ist verifiziert."
+                    } else {
+                        self.emailVerifiedLabel.text = "Bitte verifiziere deine E-Mail Adresse. Bitte sehe in deinem Posteingang nach."
+                    }
+                }
+            })
+        })
     }
     
     @IBAction func loginTapped(_ sender: Any) {
