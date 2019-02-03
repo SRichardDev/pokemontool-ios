@@ -15,8 +15,8 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
         let originalDate = Date()
         viewModel.selectedMeetupTime = selectedTime(date: originalDate)
         let calendar = Calendar.current
-        let minDate = calendar.date(byAdding: .minute, value: -90, to: originalDate, wrappingComponents: false)
-        let maxDate = calendar.date(byAdding: .minute, value: 90, to: originalDate, wrappingComponents: false)
+        let minDate = calendar.date(byAdding: .minute, value: 0, to: originalDate, wrappingComponents: false)
+        let maxDate = calendar.date(byAdding: .minute, value: 105, to: originalDate, wrappingComponents: false)
         pickerView.minimumDate = minDate
         pickerView.maximumDate = maxDate
         selectedTimeLabel.text = selectedTime(date: pickerView.date)

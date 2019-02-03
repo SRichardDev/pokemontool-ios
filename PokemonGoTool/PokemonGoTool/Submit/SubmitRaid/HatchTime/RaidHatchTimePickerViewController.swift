@@ -15,8 +15,8 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
         let originalDate = Date()
         viewModel.selectedHatchTime = selectedTime(date: originalDate)
         let calendar = Calendar.current
-        let minDate = calendar.date(byAdding: .minute, value: -90, to: originalDate, wrappingComponents: false)
-        let maxDate = calendar.date(byAdding: .minute, value: 90, to: originalDate, wrappingComponents: false)
+        let minDate = calendar.date(byAdding: .minute, value: -60, to: originalDate, wrappingComponents: false)
+        let maxDate = calendar.date(byAdding: .minute, value: 60, to: originalDate, wrappingComponents: false)
         pickerView.minimumDate = minDate
         pickerView.maximumDate = maxDate
         selectedTimeLabel.text = selectedTime(date: pickerView.date)
