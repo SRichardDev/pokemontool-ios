@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         removeAnnotationIfNeeded()
-        mapView.removeOverlays(mapView.overlays)
+//        mapView.removeOverlays(mapView.overlays)
         let mapRect = mapView.visibleMapRect
         let topLeft = MapRectUtility.getNorthWestCoordinate(in: mapRect)
         let topRight = MapRectUtility.getNorthEastCoordinate(in: mapRect)
@@ -60,8 +60,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
-            polylineRenderer.lineWidth = 1
+            polylineRenderer.strokeColor = .red // isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
+            polylineRenderer.lineWidth = 3
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
@@ -75,7 +75,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         let polyLine = MKPolyline.polyline(for: geohashBox)
 //        let polygon = MKPolygon.polygon(for: geohashBox)
 //        self.polygon = polygon
-        mapView.addOverlay(polyLine)
+//        mapView.addOverlay(polyLine)
 //        mapView.addOverlay(polygon)
     }
     
@@ -117,6 +117,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             return annotationView
         }
         return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let currentUserLocation = locationManager.currentUserLocation else { return }
+        showRouteOnMap(pickupCoordinate: currentUserLocation.coordinate, destinationCoordinate: view.annotation!.coordinate)
     }
     
     func addAnnotations(for annotations: [Annotation]) {
@@ -205,6 +210,58 @@ extension MapViewController: DetailAnnotationViewDelegate {
             coordinator?.showSubmitQuest(for: pokestopAnnotation)
         } else if let arenaAnnotation = annotation as? Arena {
             coordinator?.showSubmitRaid(for: arenaAnnotation)
+        }
+    }
+}
+
+extension MapViewController {
+    func showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        
+        let sourcePlacemark = MKPlacemark(coordinate: pickupCoordinate, addressDictionary: nil)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate, addressDictionary: nil)
+        
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let sourceAnnotation = MKPointAnnotation()
+        
+        if let location = sourcePlacemark.location {
+            sourceAnnotation.coordinate = location.coordinate
+        }
+        
+        let destinationAnnotation = MKPointAnnotation()
+        
+        if let location = destinationPlacemark.location {
+            destinationAnnotation.coordinate = location.coordinate
+        }
+        
+//        self.mapView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
+        
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .walking
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate {
+            (response, error) -> Void in
+            
+            guard let response = response else {
+                if let error = error {
+                    print("Error: \(error)")
+                }
+                
+                return
+            }
+            
+            let route = response.routes[0]
+            
+            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+            
+//            let rect = route.polyline.boundingMapRect
+//            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
 }

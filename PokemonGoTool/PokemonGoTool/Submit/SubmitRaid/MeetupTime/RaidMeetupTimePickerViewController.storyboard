@@ -25,14 +25,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Treffpunkt:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zq7-to-c1o" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlT-xt-BxJ" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -81,7 +75,6 @@
                     <size key="freeformSize" width="375" height="190"/>
                     <connections>
                         <outlet property="pickerView" destination="dgm-0J-wmE" id="ZXP-UD-ff3"/>
-                        <outlet property="selectedTimeLabel" destination="LlT-xt-BxJ" id="XUi-6M-cQo"/>
                         <outlet property="titleLabel" destination="zq7-to-c1o" id="Cg4-OY-EMK"/>
                     </connections>
                 </viewController>

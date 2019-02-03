@@ -8,7 +8,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
     private let raidBossPickerViewController = RaidBossPickerViewController.instantiateFromStoryboard()
-    private let raidBossTableViewController = RaidBossTableViewController.instantiateFromStoryboard()
+    private let raidBossTableViewController = RaidBossCollectionViewController.instantiateFromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
     private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
@@ -21,8 +21,9 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         super.viewDidLoad()
         viewModel.delegate = self
         stackView.axis = .vertical
-        stackView.spacing = 15
+        stackView.spacing = 20
         stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubviewAndEdgeConstraints(stackView,
                                           edges: .all,
                                           margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),

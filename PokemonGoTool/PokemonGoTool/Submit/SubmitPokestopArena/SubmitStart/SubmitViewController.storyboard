@@ -25,14 +25,19 @@
                                     <action selector="bottomButtonTapped:" destination="46f-wM-hAp" eventType="touchUpInside" id="E2p-Ru-IVA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Was möchtest du einreichen?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nne-5t-DVu">
-                                <rect key="frame" x="16" y="40" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Was möchtest du einreichen?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nne-5t-DVu" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="40" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hUe-ek-XGY">
-                                <rect key="frame" x="16" y="76" width="288" height="29"/>
+                                <rect key="frame" x="16" y="75.5" width="288" height="29"/>
                                 <segments>
                                     <segment title="Pokéstop"/>
                                     <segment title="Arena"/>
@@ -41,20 +46,30 @@
                                     <action selector="segmentedControlDidChange:" destination="46f-wM-hAp" eventType="valueChanged" id="hSo-rZ-aXg"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stimmt die Position?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-xQ-ykP">
-                                <rect key="frame" x="16" y="144" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stimmt die Position?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-xQ-ykP" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="143.5" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du kannst die Position hier verschieben. Halte das Symbol fest und schiebe es bis die Position passt." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ez-dG-hrA">
-                                <rect key="frame" x="16" y="180" width="288" height="30.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du kannst die Position hier verschieben. Halte das Symbol fest und schiebe es bis die Position passt." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ez-dG-hrA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="179" width="288" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VN3-5d-WLF">
-                                <rect key="frame" x="16" y="225.5" width="288" height="248.5"/>
+                                <rect key="frame" x="16" y="237" width="288" height="237"/>
                                 <connections>
                                     <segue destination="WCd-3Y-aWd" kind="embed" id="uOq-Lp-omC"/>
                                 </connections>
@@ -100,7 +115,7 @@
             <objects>
                 <viewController id="WCd-3Y-aWd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dr6-VT-RSI">
-                        <rect key="frame" x="0.0" y="0.0" width="288" height="248.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="237"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="GAA-ng-lRg"/>

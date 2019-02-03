@@ -6,7 +6,7 @@ class RaidBossPickerViewController: UIViewController, StoryboardInitialViewContr
     var viewModel: SubmitRaidViewModel!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var pickerView: UIPickerView!
-    var pickerViewRows: [String] {
+    var pickerViewRows: [[String]] {
         get {
             let currentRaidBosses = viewModel.currentRaidBosses
             return currentRaidBosses
@@ -20,15 +20,15 @@ class RaidBossPickerViewController: UIViewController, StoryboardInitialViewContr
     }
     
     func commitData() {
-        viewModel.selectedRaidBoss = pickerViewRows[pickerView.selectedRow(inComponent: 0)]
+        viewModel.selectedRaidBoss = pickerViewRows[pickerView.selectedRow(inComponent: 0)][1]
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.pickerViewRows[row]
+        return self.pickerViewRows[row][1]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        viewModel.selectedRaidBoss = pickerViewRows[row]
+        viewModel.selectedRaidBoss = pickerViewRows[row][1]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
