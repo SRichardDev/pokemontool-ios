@@ -11,6 +11,10 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         startTimer()
     }
 

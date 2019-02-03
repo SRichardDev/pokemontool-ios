@@ -38,19 +38,14 @@ class CustomAnnotationView: MKAnnotationView {
     override func prepareForReuse() {
         super.prepareForReuse()
         image = nil
+        label.alpha = 0
         label.removeFromSuperview()
         customCalloutView?.removeFromSuperview()
     }
     
-    func showLabelAnimated() {
+    func changeLabelVisibilityAnimated(_ visible: Bool) {
         UIView.animate(withDuration: 0.25) {
-            self.label.alpha = 1
-        }
-    }
-    
-    func hideLabelAnimated() {
-        UIView.animate(withDuration: 0.25) {
-            self.label.alpha = 0
+            self.label.alpha = visible ? 1 : 0
         }
     }
     

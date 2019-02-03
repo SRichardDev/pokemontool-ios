@@ -75,7 +75,7 @@ class AnnotationView: CustomAnnotationView {
         }
     }
     
-    class func prepareFor(mapView: MKMapView, annotation: MKPointAnnotation) -> AnnotationView? {
+    class func prepareFor(mapView: MKMapView, annotation: MKAnnotation, showLabel: Bool = false) -> AnnotationView? {
         let reuseId = "annotationReuseIdentifier"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
 
@@ -85,10 +85,13 @@ class AnnotationView: CustomAnnotationView {
         if annotationView == nil {
             let pokestopAnnotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
+            pokestopAnnotationView.label.alpha = showLabel ? 1 : 0
             annotationView = pokestopAnnotationView
+
         } else {
             if let pokestopAnnotationView = annotationView as? AnnotationView {
                 pokestopAnnotationView.annotation = annotation
+                pokestopAnnotationView.label.alpha = showLabel ? 1 : 0
                 pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
             }
         }

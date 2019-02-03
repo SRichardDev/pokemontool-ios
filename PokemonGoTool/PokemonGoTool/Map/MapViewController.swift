@@ -5,14 +5,15 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController {
     
     weak var coordinator: MainCoordinator?
-    @IBOutlet private var mapView: MKMapView!
     var locationManager: LocationManager!
     var firebaseConnector: FirebaseConnector!
+    @IBOutlet private var mapView: MKMapView!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
     private var geohashWindow: GeohashWindow?
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
+    private var currentlyShowingLabels = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,45 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         firebaseConnector.delegate = self
     }
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        removeAnnotationIfNeeded()
+        mapView.removeOverlays(mapView.overlays)
+        let mapRect = mapView.visibleMapRect
+        geohashWindow = GeohashWindow(topLeftCoordinate: MapRectUtility.getNorthWestCoordinate(in: mapRect),
+                                      topRightCoordiante: MapRectUtility.getNorthEastCoordinate(in: mapRect),
+                                      bottomLeftCoordinated: MapRectUtility.getSouthWestCoordinate(in: mapRect),
+                                      bottomRightCoordiante: MapRectUtility.getSouthEastCoordinate(in: mapRect))
+        
+        geohashWindow?.geohashMatrix.forEach { lineArray in
+            lineArray.forEach { geohashBox in
+                addPolyLine(for: geohashBox)
+                firebaseConnector.loadPokestops(for: geohashBox.hash)
+                firebaseConnector.loadArenas(for: geohashBox.hash)
+            }
+        }
+        changeAnnotationLabelVisibility()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation, showLabel: currentlyShowingLabels)
+        annotationView?.delegate = self
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay: polyline)
+            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
+            polylineRenderer.lineWidth = 1
+            return polylineRenderer
+        } else {
+            let renderer = MKPolygonRenderer(polygon: polygon!)
+            renderer.fillColor = isGeoashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
+            return renderer
+        }
+    }
+
+    
     func zoomToUserLocation(animated: Bool = false) {
         if let userLocation = locationManager.currentUserLocation {
             let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
@@ -35,47 +75,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        removeAnnotationIfNeeded()
-//        mapView.removeOverlays(mapView.overlays)
-        let mapRect = mapView.visibleMapRect
-        let topLeft = MapRectUtility.getNorthWestCoordinate(in: mapRect)
-        let topRight = MapRectUtility.getNorthEastCoordinate(in: mapRect)
-        let bottomLeft = MapRectUtility.getSouthWestCoordinate(in: mapRect)
-        let bottomRight = MapRectUtility.getSouthEastCoordinate(in: mapRect)
-        geohashWindow = GeohashWindow(topLeftCoordinate: topLeft,
-                                      topRightCoordiante: topRight,
-                                      bottomLeftCoordinated: bottomLeft,
-                                      bottomRightCoordiante: bottomRight)
+    func changeAnnotationLabelVisibility() {
+        let showLabels = mapView.camera.altitude < 2000.0
         
-        geohashWindow?.geohashMatrix.forEach { lineArray in
-            lineArray.forEach { geohashBox in
-                addPolyLine(for: geohashBox)
-                firebaseConnector.loadPokestops(for: geohashBox.hash)
-                firebaseConnector.loadArenas(for: geohashBox.hash)
+        if showLabels != currentlyShowingLabels {
+            currentlyShowingLabels = showLabels
+            mapView.annotations.forEach { annotation in
+                if let annotationView = self.mapView.view(for: annotation) as? AnnotationView {
+                    annotationView.changeLabelVisibilityAnimated(showLabels)
+                }
             }
-        }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let polyline = overlay as? MKPolyline {
-            let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = .red // isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
-            polylineRenderer.lineWidth = 3
-            return polylineRenderer
-        } else {
-            let renderer = MKPolygonRenderer(polygon: polygon!)
-            renderer.fillColor = isGeoashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
-            return renderer
         }
     }
     
     func addPolyLine(for geohashBox: GeohashBox?) {
         guard let geohashBox = geohashBox else { return }
         let polyLine = MKPolyline.polyline(for: geohashBox)
-//        let polygon = MKPolygon.polygon(for: geohashBox)
-//        self.polygon = polygon
-//        mapView.addOverlay(polyLine)
+        let polygon = MKPolygon.polygon(for: geohashBox)
+        self.polygon = polygon
+        mapView.addOverlay(polyLine)
 //        mapView.addOverlay(polygon)
     }
     
@@ -97,6 +115,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             addPolyLine(for: Geohash.geohashbox(geohash))
         }
     }
+    
     @IBAction func zoomToUserTapped(_ sender: Any) {
         zoomToUserLocation(animated: true)
     }
@@ -104,24 +123,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     @IBAction func toggleGeohashSelectionMode(_ sender: UIButton) {
         isGeoashSelectionMode = !isGeoashSelectionMode
         isGeoashSelectionMode ? sender.setTitle("✅", for: .normal) : sender.setTitle("📡", for: .normal)
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? PokestopPointAnnotation  {
-            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
-            annotationView?.delegate = self
-            return annotationView
-        } else if let annotation = annotation as? ArenaPointAnnotation  {
-            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
-            annotationView?.delegate = self
-            return annotationView
-        }
-        return nil
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let currentUserLocation = locationManager.currentUserLocation else { return }
-        showRouteOnMap(pickupCoordinate: currentUserLocation.coordinate, destinationCoordinate: view.annotation!.coordinate)
     }
     
     func addAnnotations(for annotations: [Annotation]) {
@@ -148,7 +149,6 @@ extension MapViewController: FirebaseDelegate {
 }
 
 extension MapViewController: LocationManagerDelegate {
-    
     func didFindInitialUserLocation() {
         zoomToUserLocation()
     }
@@ -157,7 +157,6 @@ extension MapViewController: LocationManagerDelegate {
 extension MapViewController {
     
     func addAnnotationIfNeeded(_ annotation: MKAnnotation) {
-        
         if let pokestopAnnotation = annotation as? PokestopPointAnnotation {
             var pokestopFound = false
             self.mapView.annotations.forEach { annotationOnMap in
@@ -210,58 +209,6 @@ extension MapViewController: DetailAnnotationViewDelegate {
             coordinator?.showSubmitQuest(for: pokestopAnnotation)
         } else if let arenaAnnotation = annotation as? Arena {
             coordinator?.showSubmitRaid(for: arenaAnnotation)
-        }
-    }
-}
-
-extension MapViewController {
-    func showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-        
-        let sourcePlacemark = MKPlacemark(coordinate: pickupCoordinate, addressDictionary: nil)
-        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate, addressDictionary: nil)
-        
-        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-        
-        let sourceAnnotation = MKPointAnnotation()
-        
-        if let location = sourcePlacemark.location {
-            sourceAnnotation.coordinate = location.coordinate
-        }
-        
-        let destinationAnnotation = MKPointAnnotation()
-        
-        if let location = destinationPlacemark.location {
-            destinationAnnotation.coordinate = location.coordinate
-        }
-        
-//        self.mapView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
-        
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = sourceMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .walking
-        
-        // Calculate the direction
-        let directions = MKDirections(request: directionRequest)
-        
-        directions.calculate {
-            (response, error) -> Void in
-            
-            guard let response = response else {
-                if let error = error {
-                    print("Error: \(error)")
-                }
-                
-                return
-            }
-            
-            let route = response.routes[0]
-            
-            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
-            
-//            let rect = route.polyline.boundingMapRect
-//            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
 }

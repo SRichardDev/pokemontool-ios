@@ -40,13 +40,7 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(mapView)
-        mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
+        view.addSubviewAndEdgeConstraints(mapView)
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
         let viewRegion = MKCoordinateRegion(center: locationOnMap,
@@ -57,16 +51,9 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is PokestopPointAnnotation {
-            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation as! MKPointAnnotation)
-            annotationView?.isDraggable = true
-            return annotationView
-        } else if annotation is ArenaPointAnnotation {
-            let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation as! MKPointAnnotation)
-            annotationView?.isDraggable = true
-            return annotationView
-        }
-        return nil
+        let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation)
+        annotationView?.isDraggable = true
+        return annotationView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
