@@ -13,11 +13,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     private var geohashWindow: GeohashWindow?
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
-    private var currentlyShowingLabels = false
+    private var currentlyShowingLabels = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.showsUserLocation = true
         zoomToUserLocation()
     }
     
@@ -29,7 +30,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         removeAnnotationIfNeeded()
+        
+        //TODO: Fix crash when tilting map. Do adding/removing annotations on main thread
         mapView.removeOverlays(mapView.overlays)
+        
         let mapRect = mapView.visibleMapRect
         geohashWindow = GeohashWindow(topLeftCoordinate: MapRectUtility.getNorthWestCoordinate(in: mapRect),
                                       topRightCoordiante: MapRectUtility.getNorthEastCoordinate(in: mapRect),
@@ -47,7 +51,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = AnnotationView.prepareFor(mapView: mapView, annotation: annotation, showLabel: currentlyShowingLabels)
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        let annotationView = AnnotationView.prepareFor(mapView: mapView,
+                                                       annotation: annotation,
+                                                       showLabel: currentlyShowingLabels)
         annotationView?.delegate = self
         return annotationView
     }

@@ -1,6 +1,7 @@
 import UIKit
 
-@IBDesignable class Button: UIButton {
+@IBDesignable
+class Button: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,10 +26,11 @@ import UIKit
         layer.cornerRadius = 10
         layer.borderColor = systemBlue.cgColor
         layer.borderWidth = 1
+        titleLabel?.font = UIFont.systemFont(ofSize: 12)
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
         setBackgroundColor(color: systemBlue, forState: .normal)
-        setBackgroundColor(color: .orange, forState: .highlighted)
+//        setBackgroundColor(color: .orange, forState: .highlighted)
     }
 
     override var intrinsicContentSize: CGSize {

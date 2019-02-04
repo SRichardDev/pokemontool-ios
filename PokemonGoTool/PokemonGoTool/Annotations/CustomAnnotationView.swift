@@ -4,7 +4,7 @@ import MapKit
 
 class CustomAnnotationView: MKAnnotationView {
 
-    weak var customCalloutView: UIView?
+    var customCalloutView: UIView?
     var label = UILabel()
     var labelOffsetY: CGFloat = 28
     
@@ -50,12 +50,25 @@ class CustomAnnotationView: MKAnnotationView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        // if super passed hit test, return the result
-        if let parentHitView = super.hitTest(point, with: event) { return parentHitView }
-        else { // test in our custom callout.
-            if customCalloutView != nil {
-                return customCalloutView!.hitTest(convert(point, to: customCalloutView!), with: event)
-            } else { return nil }
+        let hitView = super.hitTest(point, with: event)
+        if (hitView != nil) {
+            self.superview?.bringSubviewToFront(self)
         }
+        return hitView
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let rect = self.bounds
+        var isInside: Bool = rect.contains(point)
+        if(!isInside) {
+            for view in self.subviews {
+                isInside = view.frame.contains(point)
+                if isInside {
+                    break
+                }
+            }
+        }
+        return isInside
     }
 }
+

@@ -5,18 +5,15 @@ class DetailAnnotationView: UIView {
     
     @IBOutlet private var annotationImageView: UIImageView!
     @IBOutlet private var annotationNameLabel: UILabel!
-    @IBOutlet private var annotationInfoLabel: UILabel!
-    @IBOutlet private var buttonsStackView: UIStackView!
+    @IBOutlet private var stackView: UIStackView!
+    @IBOutlet var buttonsStackView: UIStackView!
     
     var annotation: Annotation!
     var raidDetails: [String] = []
     weak var delegate: DetailAnnotationViewDelegate?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.cornerRadius = 10
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1
     }
     
     func configure(with annotation: Annotation) {
@@ -24,7 +21,7 @@ class DetailAnnotationView: UIView {
         annotationNameLabel.text = annotation.name
         
         if annotation is Pokestop {
-            annotationImageView.image = UIImage(named: "Pokestop")
+            annotationImageView.image = UIImage(named: "PokestopLarge")
             let questButton = Button()
             let detailsButton = Button()
             questButton.setTitle("Neue Quest", for: .normal)

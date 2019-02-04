@@ -70,7 +70,10 @@ class AnnotationView: CustomAnnotationView {
                     }, completion: { (success) in
                         self.customCalloutView!.removeFromSuperview()
                     })
-                } else { self.customCalloutView!.removeFromSuperview() } // just remove it.
+                } else {
+                    self.customCalloutView!.removeFromSuperview()
+                    
+                }
             }
         }
     }
