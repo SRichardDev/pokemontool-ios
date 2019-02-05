@@ -9,6 +9,7 @@ class RaidUserParticipateSwitchViewController: UIViewController, StoryboardIniti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switchControl.isOn = viewModel.isUserParticipating
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {

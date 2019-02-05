@@ -7,8 +7,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     private let stackView = UIStackView()
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
-    private let raidBossPickerViewController = RaidBossPickerViewController.instantiateFromStoryboard()
-    private let raidBossTableViewController = RaidBossCollectionViewController.instantiateFromStoryboard()
+    private let raidBossCollectionViewController = RaidBossCollectionViewController.instantiateFromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
     private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
@@ -38,24 +37,22 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
 
         raidLevelViewController.viewModel = viewModel
-        raidBossPickerViewController.viewModel = viewModel
-        raidBossTableViewController.viewModel = viewModel
+        raidBossCollectionViewController.viewModel = viewModel
         raidAlreadyRunningSwitchViewController.viewModel = viewModel
         hatchTimePickerViewController.viewModel = viewModel
         timeLeftPickerViewController.viewModel = viewModel
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
 
-        timeLeftPickerViewController.view.isHidden = !viewModel.raidAlreadyRunning
-        raidBossPickerViewController.view.isHidden = !viewModel.raidAlreadyRunning
+        timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
+        meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
         stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
         stackView.addSepartor()
-        stackView.addArrangedViewController(viewController: raidBossPickerViewController, to: self)
-        stackView.addArrangedViewController(viewController: raidBossTableViewController, to: self)
+        stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
         stackView.addSepartor()
         stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)
         stackView.addArrangedViewController(viewController: timeLeftPickerViewController, to: self)
@@ -73,7 +70,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     @objc
     func submitTapped() {
-        raidBossPickerViewController.commitData()
         viewModel.submitRaid()
         dismiss(animated: true)
     }
@@ -88,19 +84,17 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
 
         case .raidAlreadyRunning:
             changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
-                                                raidBossTableViewController,
-                                                timeLeftPickerViewController,
-                                                raidBossPickerViewController])
+                                                timeLeftPickerViewController])
+            raidBossCollectionViewController.toggleScrolling()
         case .userParticipates:
-            changeVisibility(of: meetupTimePickerViewController, visible: viewModel.showMeetupTimePicker, hideAnimated: true)
+            changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:
-            raidBossPickerViewController.pickerView.reloadAllComponents()
-            raidBossTableViewController.update()
+            raidBossCollectionViewController.updateRaidBosses()
         }
     }
     
     private func setTitle() {
-        navigationController?.navigationBar.topItem?.title = "Neuer Level \(viewModel.currentRaidLevel) Raid"
+        navigationController?.navigationBar.topItem?.title = "Neuer Level \(viewModel.selectedRaidLevel) Raid"
     }
     
     private func changeVisibiltyOf(viewControllers: [UIViewController]) {

@@ -3,6 +3,15 @@ import UIKit
 
 extension UIView {
     
+    var isVisible: Bool {
+        get {
+            return !isHidden
+        }
+        set {
+            isHidden = !newValue
+        }
+    }
+    
     public func addSubviewAndEdgeConstraints(_ subview: UIView, edges: UIRectEdge = .all, margins: UIEdgeInsets = .zero, constrainToSafeAreaGuide: Bool = false) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         addSubview(subview)

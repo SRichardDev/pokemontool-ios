@@ -17,17 +17,17 @@ class SubmitRaidViewModel {
     weak var delegate: SubmitRaidDelegate?
     var arena: Arena
     var firebaseConnector: FirebaseConnector
-    var raidAlreadyRunning = false
-    var showMeetupTimePicker = true
-    var currentRaidLevel = 3
+    var isRaidAlreadyRunning = false
+    var isUserParticipating = false
+    var selectedRaidLevel = 3
     var selectedRaidBoss = ""
     var selectedHatchTime: String?
-    var selectedMeetupTime = "00:00"
+    var selectedMeetupTime = "--:--"
     var selectedTimeLeft = "45 min"
     var currentRaidBosses = [[String]]()
     var imageName: String {
         get {
-            return "level_\(currentRaidLevel)"
+            return "level_\(selectedRaidLevel)"
         }
     }
     
@@ -38,17 +38,17 @@ class SubmitRaidViewModel {
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
-        raidAlreadyRunning = !isRunning
+        isRaidAlreadyRunning = !isRunning
         delegate?.update(of: .raidAlreadyRunning)
     }
     
     func userParticipates(_ userParticipates: Bool) {
-        showMeetupTimePicker = userParticipates
+        isUserParticipating = userParticipates
         delegate?.update(of: .userParticipates)
     }
     
     func raidLevelChanged(to value: Int) {
-        currentRaidLevel = value
+        selectedRaidLevel = value
         updateCurrentRaidBosses()
         delegate?.update(of: .raidLevelChanged)
     }
@@ -58,7 +58,7 @@ class SubmitRaidViewModel {
     }
     
     func updateCurrentRaidBosses() {
-        firebaseConnector.loadRaidBosses(for: currentRaidLevel, completion: { raidBosses in
+        firebaseConnector.loadRaidBosses(for: selectedRaidLevel, completion: { raidBosses in
             self.currentRaidBosses = raidBosses ?? [[String]()]
             self.delegate?.update(of: .currentRaidbossesChanged)
         })
@@ -67,7 +67,7 @@ class SubmitRaidViewModel {
     func submitRaid() {
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
                                     participants: [firebaseConnector.user])
-        let raid = Raid(level: currentRaidLevel,
+        let raid = Raid(level: selectedRaidLevel,
                         hatchTime: selectedHatchTime,
                         raidBoss: selectedRaidBoss,
                         timeLeft: selectedTimeLeft,

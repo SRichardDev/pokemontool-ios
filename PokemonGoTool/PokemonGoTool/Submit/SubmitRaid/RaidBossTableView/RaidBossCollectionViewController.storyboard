@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="D5i-j5-L5r" customClass="RaidBossCollectionViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PRG-mT-0wb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EOO-DT-4fD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EOO-DT-4fD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="eqO-Kg-yC5">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -33,7 +33,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30h-fT-d34">
-                                        <rect key="frame" x="0.0" y="20.5" width="375" height="169.5"/>
+                                        <rect key="frame" x="0.0" y="35.5" width="375" height="169.5"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="60j-fR-Jbz">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
@@ -96,10 +96,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="i2U-ev-EYW"/>
                     </view>
-                    <size key="freeformSize" width="375" height="190"/>
+                    <size key="freeformSize" width="375" height="205"/>
                     <connections>
                         <outlet property="collectionView" destination="60j-fR-Jbz" id="agm-hj-0z5"/>
                         <outlet property="stackView" destination="EOO-DT-4fD" id="heA-xF-Gek"/>
+                        <outlet property="titleLabel" destination="ieJ-Jh-lA6" id="6Vp-6g-pFG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnP-Gu-TYM" userLabel="First Responder" sceneMemberID="firstResponder"/>
