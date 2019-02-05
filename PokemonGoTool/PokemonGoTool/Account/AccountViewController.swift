@@ -1,6 +1,7 @@
 
 import UIKit
 import Firebase
+import NotificationBannerSwift
 
 class AccountViewController: UIViewController, FirebaseStatusPresentable, UITextFieldDelegate, FirebaseUserDelegate, StoryboardInitialViewController {
     
@@ -54,7 +55,7 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
             
             User.signIn(with: email, password: password) { status in
                 self.showAlert(for: status)
-                self.updateUI()
+                self.firebaseConnector.loadUser()
             }
         }
 
@@ -68,11 +69,10 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
         
         User.signUp(with: email, password: password) { status in
             self.showAlert(for: status)
-            self.updateUI()
+            self.firebaseConnector.loadUser()
         }
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
-        updateUI()
     }
     
     func updateUI() {

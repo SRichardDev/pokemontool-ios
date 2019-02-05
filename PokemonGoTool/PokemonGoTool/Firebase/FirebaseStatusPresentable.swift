@@ -1,5 +1,6 @@
 
 import UIKit
+import NotificationBannerSwift
 
 extension FirebaseStatusPresentable where Self: UIViewController {
     
@@ -7,36 +8,52 @@ extension FirebaseStatusPresentable where Self: UIViewController {
         
         var title = "Error"
         var message = ""
-        
+        var bannerStyle: BannerStyle = .none
         switch status {
         case .weakPassword:
-            message = "Weak password"
+            title = "Fehler"
+            message = "Schwaches Passwort! Bitte verwende ein sicheres Passwort!"
+            bannerStyle = .danger
         case .invalidCredential:
-            message = "Invalid Credential"
+            title = "Fehler"
+            message = "Ungültige Eingabe"
+            bannerStyle = .danger
         case .emailAlreadyInUse:
-            message = "Email already in use"
+            title = "Fehler"
+            message = "Diese E-Mail Adresse ist schon registriert. Falls du dein Passwort vergessen hast, musst du dein Passwort zurücksetzen"
+            bannerStyle = .danger
         case .invalidEmail:
-            message = "Invalid E-Mail"
+            title = "Fehler"
+            message = "Ungültige E-Mail Adresse"
+            bannerStyle = .danger
         case .networkError:
-            message = "Network error"
+            title = "Fehler"
+            message = "Es besteht keine Verbindung zum Internet"
+            bannerStyle = .danger
         case .missingEmail:
-            message = "Missing E-Mail"
+            title = "Fehler"
+            message = "Fehlende E-Mail Adresse"
+            bannerStyle = .danger
         case .unknown(let error):
+            title = "Fehler"
             message = error
+            bannerStyle = .danger
         case .signedUp:
-            title = "Success"
-            message = "Please check your E-Mail inbox and verify your account"
+            title = "Erfolgreich"
+            message = "Bitte bestätige die Verifizierungs E-Mail die dir zugesendet wurde"
+            bannerStyle = .success
         case .signedIn:
-            title = "Success"
-            message = "Welcome back"
+            title = "Erfolgreich eingeloggt"
+            message = "Willkommen zurück Trainer!"
+            bannerStyle = .success
         case .signedOut:
-            title = "Success"
-            message = "Signed out"
+            title = "Erfolgreich ausgeloggt"
+            message = "Bis bald Trainer!"
+            bannerStyle = .success
         }
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
+        let banner = NotificationBanner(title: title, subtitle: message, style: bannerStyle)
+        banner.show()
+
     }
 }

@@ -26,46 +26,75 @@
                                     <outletCollection property="gestureRecognizers" destination="6wD-2r-vhW" appends="YES" id="mP2-3b-0Bu"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7d-2h-foG">
-                                <rect key="frame" x="311" y="603" width="44" height="44"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a9V-Kz-BDu">
+                                <rect key="frame" x="310" y="397" width="50" height="245"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7d-2h-foG">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <state key="normal" title="📡"/>
+                                        <connections>
+                                            <action selector="toggleGeohashSelectionMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibA-qI-g8u"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1SD-08-kLi">
+                                        <rect key="frame" x="0.0" y="65" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="E0T-9Y-XwM"/>
+                                            <constraint firstAttribute="height" constant="50" id="Gyo-uU-wJd"/>
+                                        </constraints>
+                                        <state key="normal" image="locate"/>
+                                        <connections>
+                                            <action selector="zoomToUserTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jvC-GS-T3e"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THC-p9-fpI">
+                                        <rect key="frame" x="0.0" y="130" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="Map"/>
+                                        <connections>
+                                            <action selector="changeMapTypeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yf9-F2-2i9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7L1-rp-9Ra">
+                                        <rect key="frame" x="0.0" y="195" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                        <state key="normal" title="⚙️"/>
+                                        <connections>
+                                            <action selector="settingsButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZ3-1K-9tI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="fZ7-yO-KOH"/>
-                                    <constraint firstAttribute="height" constant="44" id="faM-JX-36r"/>
+                                    <constraint firstItem="1SD-08-kLi" firstAttribute="height" secondItem="THC-p9-fpI" secondAttribute="height" id="3cP-Pd-6Mp"/>
+                                    <constraint firstItem="1SD-08-kLi" firstAttribute="width" secondItem="THC-p9-fpI" secondAttribute="width" id="CAI-tn-PiI"/>
+                                    <constraint firstItem="7L1-rp-9Ra" firstAttribute="width" secondItem="1SD-08-kLi" secondAttribute="width" id="ZvJ-S9-apx"/>
+                                    <constraint firstItem="1SD-08-kLi" firstAttribute="height" secondItem="m7d-2h-foG" secondAttribute="height" id="cUj-xq-q9s"/>
+                                    <constraint firstItem="1SD-08-kLi" firstAttribute="width" secondItem="m7d-2h-foG" secondAttribute="width" id="oyY-TY-iw0"/>
+                                    <constraint firstItem="7L1-rp-9Ra" firstAttribute="height" secondItem="1SD-08-kLi" secondAttribute="height" id="uwh-oE-iWa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <state key="normal" title="📡"/>
-                                <connections>
-                                    <action selector="toggleGeohashSelectionMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibA-qI-g8u"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THC-p9-fpI">
-                                <rect key="frame" x="20" y="603" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Mni-IY-idh"/>
-                                    <constraint firstAttribute="width" constant="44" id="Xym-l4-QS8"/>
-                                </constraints>
-                                <state key="normal" image="locate"/>
-                                <connections>
-                                    <action selector="zoomToUserTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EZR-mm-4Z7"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="THC-p9-fpI" secondAttribute="bottom" constant="20" id="7fw-kA-CA6"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cxu-QH-e1m"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GnQ-xh-ZWm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o4G-kI-jT1" secondAttribute="trailing" id="O0t-9I-WxO"/>
-                            <constraint firstItem="THC-p9-fpI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Upc-91-uyC"/>
-                            <constraint firstAttribute="trailing" secondItem="m7d-2h-foG" secondAttribute="trailing" constant="20" id="Vul-Qb-6ry"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="a9V-Kz-BDu" secondAttribute="bottom" constant="25" id="VTF-Sy-fXz"/>
                             <constraint firstAttribute="bottom" secondItem="o4G-kI-jT1" secondAttribute="bottom" id="ckU-mf-Wyc"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="m7d-2h-foG" secondAttribute="bottom" constant="20" id="ndV-Uh-aud"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a9V-Kz-BDu" secondAttribute="trailing" constant="15" id="v6c-R8-DYY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="Xsb-mU-ruf"/>
                     <connections>
                         <outlet property="mapView" destination="o4G-kI-jT1" id="XeR-Hb-GGm"/>
+                        <outletCollection property="menuButtons" destination="THC-p9-fpI" collectionClass="NSMutableArray" id="4MI-K9-YM0"/>
+                        <outletCollection property="menuButtons" destination="1SD-08-kLi" collectionClass="NSMutableArray" id="UYU-7u-wXF"/>
+                        <outletCollection property="menuButtons" destination="m7d-2h-foG" collectionClass="NSMutableArray" id="TkP-YQ-qMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -1,6 +1,7 @@
 
 import UIKit
 import MapKit
+import NotificationBannerSwift
 
 class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController {
     
@@ -14,6 +15,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
     private var currentlyShowingLabels = true
+    @IBOutlet var menuButtons: [UIButton]! {
+        didSet {
+            menuButtons.forEach {
+                $0.isHidden = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +141,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         isGeoashSelectionMode ? sender.setTitle("✅", for: .normal) : sender.setTitle("📡", for: .normal)
     }
     
+    @IBAction func settingsButtonTap(_ sender: AnyObject) {
+       
+        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 3) {
+            self.menuButtons.forEach {
+                $0.isHidden = !$0.isHidden
+            }
+        }
+        animator.startAnimation()
+    }
+    
+    @IBAction func changeMapTypeTapped(_ sender: AnyObject) {
+        let mapType = mapView.mapType
+        if mapType == .standard {
+            mapView.mapType = .hybrid
+        } else if mapType == .hybrid {
+            mapView.mapType = .satellite
+        } else if mapType == .satellite {
+            mapView.mapType = .standard
+        }
+    }
+    
     func addAnnotations(for annotations: [Annotation]) {
         for annotation in annotations {
             if let pokestopAnnotation = annotation as? Pokestop {
@@ -222,10 +251,14 @@ extension MapViewController: DetailAnnotationViewDelegate {
 }
 
 extension MapViewController: PushManagerDelegate {
-    func didReceivePushNotification(for coordincate: CLLocationCoordinate2D) {
+    func didReceivePushNotification(with title: String, message: String, coordincate: CLLocationCoordinate2D) {
+        let banner = NotificationBanner(title: title, subtitle: message.replacingOccurrences(of: "\n", with: ", "), style: .info)
+        banner.show()
+        
         let viewRegion = MKCoordinateRegion(center: coordincate,
                                             latitudinalMeters: 200,
                                             longitudinalMeters: 200)
         mapView.setRegion(viewRegion, animated: true)
+
     }
 }

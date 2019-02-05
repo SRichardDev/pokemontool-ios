@@ -22,7 +22,10 @@ class MainCoordinator: Coordinator {
         let accountViewController = AccountViewController.instantiateFromStoryboard()
         accountViewController.coordinator = self
         accountViewController.firebaseConnector = appModule.firebaseConnector
-        tabBarController.viewControllers = [mapViewController, accountViewController]
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.viewControllers = [accountViewController]
+        tabBarController.viewControllers = [mapViewController, navigationController]
     }
     
     func showSubmitPokestopAndArena(for viewModel: SubmitViewModel) {

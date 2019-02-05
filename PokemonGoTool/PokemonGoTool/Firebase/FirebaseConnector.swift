@@ -38,9 +38,7 @@ class FirebaseConnector {
     }
     
     init() {
-        User.loadUser { user in
-            self.user = user
-        }
+        loadUser()
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
         
@@ -54,6 +52,12 @@ class FirebaseConnector {
         })
         
         addRaidBosses()
+    }
+    
+    func loadUser() {
+        User.loadUser { user in
+            self.user = user
+        }
     }
     
     func savePokestop(_ pokestop: Pokestop) {
