@@ -144,6 +144,10 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
                 title: 'Neuer Raid bei: ' + arena.name,
                 body: 'Level: ' + raid.level + '\nRaidboss: ' + raid.raidBoss + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raid.raidMeetup.meetupTime,
                 sound: 'default'
+            },
+            data: {
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude)
             }
         };
 
