@@ -17,6 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        coordinator?.appModule.pushManager.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
         zoomToUserLocation()
@@ -217,5 +218,14 @@ extension MapViewController: DetailAnnotationViewDelegate {
         } else if let arenaAnnotation = annotation as? Arena {
             coordinator?.showSubmitRaid(for: arenaAnnotation)
         }
+    }
+}
+
+extension MapViewController: PushManagerDelegate {
+    func didReceivePushNotification(for coordincate: CLLocationCoordinate2D) {
+        let viewRegion = MKCoordinateRegion(center: coordincate,
+                                            latitudinalMeters: 200,
+                                            longitudinalMeters: 200)
+        mapView.setRegion(viewRegion, animated: true)
     }
 }

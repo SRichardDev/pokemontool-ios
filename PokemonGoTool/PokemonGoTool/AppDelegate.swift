@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if application.applicationState == .inactive {
             print("user tapped the notification bar when the app is in background")
         }
-        print(response.notification.request.content)
+        appModule.pushManager.parsePushNotification(response: response)
         completionHandler()
     }
 

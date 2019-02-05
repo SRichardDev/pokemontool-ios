@@ -15,6 +15,7 @@
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
 		2C348BB52207424D00F6A1F7 /* RaidBossCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB42207424D00F6A1F7 /* RaidBossCollectionViewController.swift */; };
+		2C34F19E220A173300B3B99C /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F19D220A173300B3B99C /* PushManager.swift */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
 		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
@@ -57,7 +58,7 @@
 		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
 		2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */; };
 		2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */; };
-		2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77221F6585900630BA2 /* Double+Extension.swift */; };
+		2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77221F6585900630BA2 /* Double+String+Extension.swift */; };
 		2C97F77621F6729700630BA2 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77521F6729700630BA2 /* CustomAnnotationView.swift */; };
 		2C97F77821F672F400630BA2 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77721F672F400630BA2 /* AnnotationView.swift */; };
 		2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C97F77A21F6742D00630BA2 /* DetailAnnotationView.xib */; };
@@ -93,6 +94,7 @@
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
 		2C348BB42207424D00F6A1F7 /* RaidBossCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaidBossCollectionViewController.swift; sourceTree = "<group>"; };
+		2C34F19D220A173300B3B99C /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
 		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStatusPresentable.swift; sourceTree = "<group>"; };
 		2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pokestop+Quest.swift"; sourceTree = "<group>"; };
-		2C97F77221F6585900630BA2 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		2C97F77221F6585900630BA2 /* Double+String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String+Extension.swift"; sourceTree = "<group>"; };
 		2C97F77521F6729700630BA2 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		2C97F77721F672F400630BA2 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		2C97F77A21F6742D00630BA2 /* DetailAnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAnnotationView.xib; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				2CF6F9A621F25C9800610BC9 /* PokemonGoTool.entitlements */,
 				2C19769E21ED266900091F8C /* AppDelegate.swift */,
+				2C34F19D220A173300B3B99C /* PushManager.swift */,
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */,
@@ -395,7 +398,7 @@
 				2C97F78021F67AC700630BA2 /* NibView.swift */,
 				2C97F77F21F67AC600630BA2 /* StoryboardViewController.swift */,
 				2CF6F9A021F012EB00610BC9 /* MKPolyline+Extension.swift */,
-				2C97F77221F6585900630BA2 /* Double+Extension.swift */,
+				2C97F77221F6585900630BA2 /* Double+String+Extension.swift */,
 				2C44EAAC21FA73E40029527C /* UIViewController+Extensions.swift */,
 				2C44EAB021FCA0B10029527C /* Array+Extension.swift */,
 				2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */,
@@ -641,7 +644,7 @@
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
-				2C97F77321F6585900630BA2 /* Double+Extension.swift in Sources */,
+				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
@@ -661,6 +664,7 @@
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
+				2C34F19E220A173300B3B99C /* PushManager.swift in Sources */,
 				2CDFDDE921ED4FFB00170A46 /* GeohashBox.swift in Sources */,
 				2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */,
 				2C6E7F7C220110C200427FBE /* UIView+Extension.swift in Sources */,
