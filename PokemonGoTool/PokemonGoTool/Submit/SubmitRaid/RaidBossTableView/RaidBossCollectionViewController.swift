@@ -39,6 +39,10 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? RaidBossCell else { return }
         viewModel.selectedRaidBoss = cell.titleLabel.text ?? "?"
@@ -51,7 +55,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RaidBossCell
         cell.titleLabel.text = viewModel.currentRaidBosses[indexPath.row][1]
-        cell.imageView.image = ImageManager.image(named: viewModel.currentRaidBosses[indexPath.row][0])
+        cell.imageView.image = ImageManager.image(named: viewModel.currentRaidBosses[indexPath.row][0])?.colorized(with: .black)
         return cell
     }
     

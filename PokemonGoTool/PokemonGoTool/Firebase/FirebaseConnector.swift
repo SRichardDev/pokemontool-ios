@@ -3,6 +3,7 @@ import Foundation
 import Firebase
 import FirebaseMessaging
 import CodableFirebase
+import NotificationBannerSwift
 
 protocol FirebaseDelegate {
     func didUpdatePokestops()
@@ -42,11 +43,17 @@ class FirebaseConnector {
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
         
+        
+        
         let connectedRef = Database.database().reference(withPath: ".info/connected")
         connectedRef.observe(.value, with: { snapshot in
             if snapshot.value as? Bool ?? false {
                 print("Connected")
+                let banner = NotificationBanner(title: "Vebunden zum Server", subtitle: "Viel Spaß Trainer!", style: .success)
+                banner.show()
             } else {
+                let banner = NotificationBanner(title: "Keine Verbindung zum Server", subtitle: "Prüfe bitte deine Internetverbingdung", style: .danger)
+                banner.show()
                 print("Not connected")
             }
         })

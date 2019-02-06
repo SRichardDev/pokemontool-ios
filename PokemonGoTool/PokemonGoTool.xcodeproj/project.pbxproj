@@ -16,6 +16,7 @@
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
 		2C348BB52207424D00F6A1F7 /* RaidBossCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB42207424D00F6A1F7 /* RaidBossCollectionViewController.swift */; };
 		2C34F19E220A173300B3B99C /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F19D220A173300B3B99C /* PushManager.swift */; };
+		2C34F1A4220A4C7C00B3B99C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1A3220A4C7C00B3B99C /* UIImage+Extension.swift */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
 		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
@@ -95,6 +96,7 @@
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
 		2C348BB42207424D00F6A1F7 /* RaidBossCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaidBossCollectionViewController.swift; sourceTree = "<group>"; };
 		2C34F19D220A173300B3B99C /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		2C34F1A3220A4C7C00B3B99C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
 		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				2C44EAB021FCA0B10029527C /* Array+Extension.swift */,
 				2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */,
 				2C395A482204C110005330B8 /* UIStackView+Extension.swift */,
+				2C34F1A3220A4C7C00B3B99C /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C395A3022026598005330B8 /* NavigationController.swift in Sources */,
+				2C34F1A4220A4C7C00B3B99C /* UIImage+Extension.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
 				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,
