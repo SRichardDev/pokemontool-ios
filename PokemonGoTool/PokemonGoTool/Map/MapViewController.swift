@@ -15,13 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
     private var currentlyShowingLabels = true
-    @IBOutlet var menuButtons: [UIButton]! {
-        didSet {
-            menuButtons.forEach {
-                $0.isHidden = true
-            }
-        }
-    }
+    @IBOutlet var settingsButtonsView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         mapView.delegate = self
         mapView.showsUserLocation = true
         zoomToUserLocation()
+        ButtonsStackViewController.embed(in: settingsButtonsView, in: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,7 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         locationManager.delegate = self
         firebaseConnector.delegate = self
     }
-    
+        
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         removeAnnotationIfNeeded()
         
@@ -85,8 +80,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     func zoomToUserLocation(animated: Bool = false) {
         if let userLocation = locationManager.currentUserLocation {
             let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
-                                                latitudinalMeters: 1500,
-                                                longitudinalMeters: 1500)
+                                                latitudinalMeters: 1000,
+                                                longitudinalMeters: 1000)
             mapView.setRegion(viewRegion, animated: animated)
         }
     }
@@ -139,16 +134,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     @IBAction func toggleGeohashSelectionMode(_ sender: UIButton) {
         isGeoashSelectionMode = !isGeoashSelectionMode
         isGeoashSelectionMode ? sender.setTitle("✅", for: .normal) : sender.setTitle("📡", for: .normal)
-    }
-    
-    @IBAction func settingsButtonTap(_ sender: AnyObject) {
-       
-        let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 3) {
-            self.menuButtons.forEach {
-                $0.isHidden = !$0.isHidden
-            }
-        }
-        animator.startAnimation()
     }
     
     @IBAction func changeMapTypeTapped(_ sender: AnyObject) {

@@ -29,7 +29,7 @@ class User: Codable {
         notificationToken = token
     }
     
-    class func loadUser(completion: @escaping (User?) -> ()) {
+    class func load(completion: @escaping (User?) -> ()) {
         let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         guard let email = Auth.auth().currentUser?.email else { return }

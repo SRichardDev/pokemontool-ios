@@ -73,9 +73,9 @@ class MainCoordinator: Coordinator {
         impact()
     }
     
-    func impact() {
-        let feedback = UIImpactFeedbackGenerator(style: .heavy)
+    func impact() {        
+        let feedback = UISelectionFeedbackGenerator()
         feedback.prepare()
-        feedback.impactOccurred()
+        feedback.selectionChanged()
     }
 }

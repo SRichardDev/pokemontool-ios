@@ -7,6 +7,13 @@ extension UIViewController {
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
+    
+    func add(_ child: UIViewController, toView: UIView) {
+        addChild(child)
+        toView.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+        
     func remove() {
         guard parent != nil else {
             return

@@ -30,6 +30,7 @@ class FirebaseConnector {
         }
     }
     
+    private var connectivityTimer: Timer?
     var pokestops = [Pokestop]()
     var arenas = [Arena]()
     var delegate: FirebaseDelegate?
@@ -42,27 +43,12 @@ class FirebaseConnector {
         loadUser()
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
-        
-        
-        
-        let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-            if snapshot.value as? Bool ?? false {
-                print("Connected")
-                let banner = NotificationBanner(title: "Vebunden zum Server", subtitle: "Viel Spaß Trainer!", style: .success)
-                banner.show()
-            } else {
-                let banner = NotificationBanner(title: "Keine Verbindung zum Server", subtitle: "Prüfe bitte deine Internetverbingdung", style: .danger)
-                banner.show()
-                print("Not connected")
-            }
-        })
-        
-        addRaidBosses()
+//        addRaidBosses()
+        checkConnectivity()
     }
     
     func loadUser() {
-        User.loadUser { user in
+        User.load { user in
             self.user = user
         }
     }
@@ -198,7 +184,22 @@ class FirebaseConnector {
         raidbosses.child("level3").updateChildValues(level3Data)
         raidbosses.child("level2").updateChildValues(level2Data)
         raidbosses.child("level1").updateChildValues(level1Data)
-
+    }
+    
+    private func checkConnectivity() {
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if snapshot.value as? Bool ?? false {
+                self.connectivityTimer?.invalidate()
+                let banner = NotificationBanner(title: "Vebunden zum Server", subtitle: "Viel Spaß Trainer!", style: .success)
+                banner.show()
+            } else {
+                self.connectivityTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { timer in
+                    let banner = NotificationBanner(title: "Keine Verbindung zum Server", subtitle: "Prüfe bitte deine Internetverbindung", style: .danger)
+                    banner.show()
+                })
+            }
+        })
     }
 }
 
