@@ -63,6 +63,16 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         cell.subtitleLabel.text = quest?.reward
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! SubmitQuestCell
+        guard let questName = cell.titleLabel.text else { fatalError() }
+        guard let reward = cell.subtitleLabel.text else { fatalError() }
+        guard let trainerName = firebaseConnector.user?.trainerName else { fatalError() }
+        let quest = Quest(name: questName, reward: reward, submitter: trainerName)
+        firebaseConnector.saveQuest(quest: quest, for: pokestop)
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 class SubmitQuestCell: UITableViewCell {
@@ -114,6 +124,4 @@ extension SubmitQuestViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
-    
-    
 }
