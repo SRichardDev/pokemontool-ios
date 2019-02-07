@@ -44,6 +44,7 @@ class FirebaseConnector {
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
 //        addRaidBosses()
+//        addQuests()
         checkConnectivity()
     }
     
@@ -157,7 +158,21 @@ class FirebaseConnector {
         }
     }
     
-    func addRaidBosses() {
+    func loadQuests(completion: @escaping ([QuestDefinition]?) -> ()) {
+        let quests = Database.database().reference(withPath: "quests")
+        quests.observeSingleEvent(of:.value) { snapshot in
+            if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                var quests = [QuestDefinition]()
+                for child in result {
+                    guard let quest: QuestDefinition = decode(from: child) else { continue }
+                    quests.append(quest)
+                }
+                completion(quests)
+            }
+        }
+    }
+    
+    private func addRaidBosses() {
         let level5Data = ["484" : "Palkia"]
         let level4Data = ["105" : "Alola Knogga",
                           "176" : "Togetic",
@@ -185,6 +200,22 @@ class FirebaseConnector {
         raidbosses.child("level2").updateChildValues(level2Data)
         raidbosses.child("level1").updateChildValues(level1Data)
     }
+    
+    private func addQuests() {
+        
+        let quest1 = ["quest" : "Tausche 10 Pokémon",
+                      "reward" : "Panflam"]
+        let quest2 = ["quest" : "Fange 10 Pokémon von Typ Boden",
+                      "reward" : "Sandan ✨"]
+        let quest3 = ["quest" : "Lande 5 großartige Curveball-Würfe hintereinander",
+                      "reward" : "Pandir (Form 5)"]
+
+        let quests = Database.database().reference(withPath: "quests")
+        quests.childByAutoId().setValue(quest1)
+        quests.childByAutoId().setValue(quest2)
+        quests.childByAutoId().setValue(quest3)
+    }
+    
     
     private func checkConnectivity() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")

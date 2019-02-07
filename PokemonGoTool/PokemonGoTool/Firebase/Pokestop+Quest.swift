@@ -84,6 +84,12 @@ struct Quest: Codable {
     let submitter: String
 }
 
+struct QuestDefinition: FirebaseCodable {
+    var id: String?
+    let quest: String
+    let reward: String
+}
+
 struct Arena: FirebaseCodable, Annotation {    
     var name: String
     var latitude: Double
@@ -121,4 +127,3 @@ struct RaidMeetup: Codable {
     let meetupTime: String
     var participants: [User?]
 }
-
