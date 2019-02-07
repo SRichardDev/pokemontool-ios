@@ -4,23 +4,28 @@ import UIKit
 class ButtonsStackViewController: UIViewController, StoryboardInitialViewController {
     
     @IBOutlet var stackView: UIStackView!
-    @IBOutlet var buttons: [UIButton]!
+    var buttons: [UIButton]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.layer.cornerRadius = stackView.frame.size.width / 2
         view.layer.borderWidth = 1
         view.clipsToBounds = true
-        
-        buttons.forEach {
-            $0.isHidden = true
-        }
     }
     
-    @IBAction func toggleVisibilty() {
+    func toggleVisibilty() {
         let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 5) {
             self.buttons.forEach {
+                let pulse = CASpringAnimation(keyPath: "transform.scale")
+                pulse.duration = 0.25
+                pulse.fromValue = $0.isHidden ? 0 : 1
+                pulse.toValue = $0.isHidden ? 1 : 0
+                $0.layer.add(pulse, forKey: "pulse")
                 $0.isHidden = !$0.isHidden
                 $0.alpha = $0.isHidden ? 0 : 1
             }
@@ -32,13 +37,41 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
         feedback.selectionChanged()
     }
     
-    @IBAction func buttonTapped(sender: UIButton) {
-    
-    }
-    
     @discardableResult
-    class func embed(in containerView: UIView, in viewController: UIViewController) -> ButtonsStackViewController {
+    class func embed(in containerView: UIView,
+                     in viewController: UIViewController,
+                     with buttons: [UIButton]) -> ButtonsStackViewController {
+        
         let buttonsStackViewController = ButtonsStackViewController.instantiateFromStoryboard()
+        buttonsStackViewController.loadView()
+        
+        buttonsStackViewController.buttons = buttons
+        
+        buttons.forEach {
+            buttonsStackViewController.stackView.addArrangedSubview($0)
+            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.showsTouchWhenHighlighted = true
+            $0.isHidden = true
+        }
+        
+        let settingsButton = UIButton()
+        settingsButton.setImage(UIImage(named: "mapMenuGear"), for: .normal)
+        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.addAction {
+            buttonsStackViewController.toggleVisibilty()
+            let spring = CASpringAnimation(keyPath: "transform.scale")
+            spring.damping = 30.0
+            spring.fromValue = 1
+            spring.toValue = 1.2
+            spring.duration = 0.125
+            spring.autoreverses = true
+            settingsButton.layer.add(spring, forKey: "scale")
+        }
+        buttonsStackViewController.stackView.addArrangedSubview(settingsButton)
+
+        
         viewController.add(buttonsStackViewController, toView: containerView)
         containerView.addSubviewAndEdgeConstraints(buttonsStackViewController.view)
         return buttonsStackViewController

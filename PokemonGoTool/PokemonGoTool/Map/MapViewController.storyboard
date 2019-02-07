@@ -18,6 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ENM-7P-zbS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Y-yD-ywP">
+                                <rect key="frame" x="0.0" y="315.5" width="375" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4G-kI-jT1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
@@ -35,19 +45,30 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerY" secondItem="ENM-7P-zbS" secondAttribute="centerY" id="3ur-No-BQa"/>
+                            <constraint firstItem="ENM-7P-zbS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7Zq-Yg-GQQ"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cxu-QH-e1m"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k5Y-yD-ywP" secondAttribute="trailing" id="F2u-S7-Nv6"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GnQ-xh-ZWm"/>
+                            <constraint firstItem="ENM-7P-zbS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H4L-Sp-B5Z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o4G-kI-jT1" secondAttribute="trailing" id="O0t-9I-WxO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ENM-7P-zbS" secondAttribute="bottom" id="SSe-HU-tJJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ENM-7P-zbS" secondAttribute="trailing" id="Xwy-Pl-7Np"/>
                             <constraint firstAttribute="bottom" secondItem="o4G-kI-jT1" secondAttribute="bottom" id="ckU-mf-Wyc"/>
+                            <constraint firstItem="o4G-kI-jT1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eEW-ic-y2t"/>
+                            <constraint firstItem="k5Y-yD-ywP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gM4-XA-82I"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yJj-r2-iqh" secondAttribute="trailing" constant="15" id="gOP-Ok-Lgx"/>
+                            <constraint firstItem="o4G-kI-jT1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3j-rr-V4N"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yJj-r2-iqh" secondAttribute="bottom" constant="25" id="rmR-zn-Xyo"/>
+                            <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerX" secondItem="ENM-7P-zbS" secondAttribute="centerX" id="tP2-rg-WEW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="Xsb-mU-ruf"/>
                     <connections>
+                        <outlet property="backgroundLabel" destination="k5Y-yD-ywP" id="zOZ-HM-PKD"/>
                         <outlet property="mapView" destination="o4G-kI-jT1" id="XeR-Hb-GGm"/>
                         <outlet property="settingsButtonsView" destination="yJj-r2-iqh" id="PNH-YY-eVN"/>
                     </connections>

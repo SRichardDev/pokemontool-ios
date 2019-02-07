@@ -9,21 +9,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var locationManager: LocationManager!
     var firebaseConnector: FirebaseConnector!
     @IBOutlet private var mapView: MKMapView!
+    @IBOutlet var settingsButtonsView: UIView!
+    @IBOutlet var backgroundLabel: UILabel!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
     private var geohashWindow: GeohashWindow?
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
     private var currentlyShowingLabels = true
-    @IBOutlet var settingsButtonsView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         coordinator?.appModule.pushManager.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
         zoomToUserLocation()
-        ButtonsStackViewController.embed(in: settingsButtonsView, in: self)
+        setupMapButtonsMenu()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,7 +32,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         locationManager.delegate = self
         firebaseConnector.delegate = self
     }
-        
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         removeAnnotationIfNeeded()
         
@@ -127,26 +128,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
     }
     
-    @IBAction func zoomToUserTapped(_ sender: Any) {
-        zoomToUserLocation(animated: true)
-    }
-    
-    @IBAction func toggleGeohashSelectionMode(_ sender: UIButton) {
-        isGeoashSelectionMode = !isGeoashSelectionMode
-        isGeoashSelectionMode ? sender.setTitle("✅", for: .normal) : sender.setTitle("📡", for: .normal)
-    }
-    
-    @IBAction func changeMapTypeTapped(_ sender: AnyObject) {
-        let mapType = mapView.mapType
-        if mapType == .standard {
-            mapView.mapType = .hybrid
-        } else if mapType == .hybrid {
-            mapView.mapType = .satellite
-        } else if mapType == .satellite {
-            mapView.mapType = .standard
-        }
-    }
-    
     func addAnnotations(for annotations: [Annotation]) {
         for annotation in annotations {
             if let pokestopAnnotation = annotation as? Pokestop {
@@ -157,6 +138,73 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 addAnnotationIfNeeded(annotation)
             }
         }
+    }
+    
+    private func togglePushRegistrationMode() {
+        self.isGeoashSelectionMode = !self.isGeoashSelectionMode
+        if self.isGeoashSelectionMode {
+            let banner = NotificationBanner(title: "Push Registrierung",
+                                            subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest.",
+                                            style: .info)
+            banner.show()
+        }
+    }
+    
+    private func changeMapType() {
+        let mapType = mapView.mapType
+        if mapType == .standard {
+            backgroundLabel.text = "Hybrid Karte"
+        } else if mapType == .hybrid {
+            backgroundLabel.text = "Satelliten Karte"
+        } else if mapType == .satellite {
+            backgroundLabel.text = "Standard Karte"
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.mapView.alpha = 0
+        }, completion: { _ in
+            let mapType = self.mapView.mapType
+            if mapType == .standard {
+                self.mapView.mapType = .hybrid
+            } else if mapType == .hybrid {
+                self.mapView.mapType = .satellite
+            } else if mapType == .satellite {
+                self.mapView.mapType = .standard
+            }
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.mapView.alpha = 1
+            })
+        })
+    }
+    
+    private func setupMapButtonsMenu() {
+        let locateButton = UIButton()
+        locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
+        locateButton.addAction { [weak self] in
+            self?.zoomToUserLocation(animated: true)
+            locateButton.scaleIn()
+        }
+        
+        let changeMapTypeButton = UIButton()
+        changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
+        changeMapTypeButton.addAction { [weak self] in
+            self?.changeMapType()
+            changeMapTypeButton.scaleIn()
+        }
+        
+        let registerPushGeohashButton = UIButton()
+        registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
+        registerPushGeohashButton.addAction { [weak self] in
+            self?.togglePushRegistrationMode()
+            registerPushGeohashButton.scaleIn()
+        }
+        
+        ButtonsStackViewController.embed(in: settingsButtonsView,
+                                         in: self,
+                                         with: [registerPushGeohashButton,
+                                                changeMapTypeButton,
+                                                locateButton])
     }
 }
 
