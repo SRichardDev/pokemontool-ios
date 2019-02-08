@@ -208,86 +208,94 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
 });
 
 
-// exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
-//     // const path = context.params;
-//     // console.log(path);
-//     const geohash = context.params.geohash;
-//     const uid = context.params.uid;
-//     console.log("geohash: " + geohash);
-//     console.log("uid: " + uid);
-//     console.log("snapshot: " + snapshot);
+exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
+    // const path = context.params;
+    // console.log(path);
+    const geohash = context.params.geohash;
+    const uid = context.params.uid;
+    console.log("geohash: " + geohash);
+    console.log("uid: " + uid);
+    console.log("snapshot: " + snapshot);
 
-//     const currentKey = snapshot.after.key;
-//     console.log("currentKey: " + currentKey);
+    const currentKey = snapshot.after.key;
+    console.log("currentKey: " + currentKey);
 
-//     const pokestop = snapshot.after.val(); //Message Data
-//     console.log("Pokestop name: " + pokestop.name);
+    const pokestop = snapshot.after.val(); //Message Data
+    console.log("Pokestop name: " + pokestop.name);
 
-//     const name = pokestop.name;
-//     // const hasQuest = (snapshot.val() && snapshot.val().quest);
+    const name = pokestop.name;
+    // const hasQuest = (snapshot.val() && snapshot.val().quest);
     
-//     // if (hasQuest) {
-//         const quest = pokestop.quest
-//         const questName = quest.name;
-//         const questReward = quest.reward;
+    // if (hasQuest) {
+        const quest = pokestop.quest
+        const questName = quest.name;
+        const questReward = quest.reward;
         
-//         admin.database().ref('/pokestops/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
-//             // var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
-//             // console.log("notificationToken: " + notificationToken);
-//             // console.log("new snapshot");
-//             // console.log(snapshot.val());
-//             // console.log("new context");
-//             // console.log(context);
+        admin.database().ref('/pokestops/' + geohash + '/registered_user').once('value', (snapshot, context) => { 
+            // var notificationToken = (snapshot.val() && snapshot.val().pushToken) || 'No token';
+            // console.log("notificationToken: " + notificationToken);
+            // console.log("new snapshot");
+            // console.log(snapshot.val());
+            // console.log("new context");
+            // console.log(context);
     
-//             snapshot.forEach(function(child) {
-//                 const userId = child.val();
-//                 console.log("userId: " + userId);
-//                 admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
-//                     const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
-//                     const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
+            snapshot.forEach(function(child) {
+                const userId = child.val();
+                console.log("userId: " + userId);
+                admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                    const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token';
+                    const trainer = (snapshot.val() && snapshot.val().trainerName) || 'Unknown';
     
-//                     const payload = {
-//                         notification: {
-//                            title: 'Neue Feldforschung',
-//                            body: 'Pokestop: ' + name + '\n\nQuest: ' + questName + "\n\nBelohnung: "+ questReward,
-//                            sound: 'default'
-//                         }
-//                     };
+                    const payload = {
+                        notification: {
+                           title: 'Neue Feldforschung',
+                           body: 'Pokestop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
+                           sound: 'default',
+                           mutable_content: 'true',
+                           category : 'MEETING_INVITATION'
+
+                        },
+                        data: {
+                            latitude: String(pokestop.latitude),
+                            longitude: String(pokestop.longitude),
+                            imageUrl: 'foo.jpg'
+                        }
+                    };
                 
-//                     admin.messaging().sendToDevice(notificationToken, payload)
-//                 });
-//             });
-//         });
-//     // }
-//     // const users = currentValue.registred_user;
-//     // const token = users.pushToken;
-//     // console.log(token);
-//     // var userId = admin.auth().currentUser.uid;
-//     // console.log("userId: " + userId);
+                    admin.messaging().sendToDevice(notificationToken, payload)
+                });
+            });
+        });
+    // }
+    // const users = currentValue.registred_user;
+    // const token = users.pushToken;
+    // console.log(token);
+    // var userId = admin.auth().currentUser.uid;
+    // console.log("userId: " + userId);
 
     
 
     
 
-//     // currentValue.name
-//     // currentValue.type
-//     // currentValue.color
+    // currentValue.name
+    // currentValue.type
+    // currentValue.color
 
-// //   admin.database.ref('/pokestops/${path}/registred_users').once('value', (snapshot) => { 
-// //         const user = snapshot.val();
-// //         console.log(user);
-// //   });
-// //     var subscriber = snapshot.val();
+//   admin.database.ref('/pokestops/${path}/registred_users').once('value', (snapshot) => { 
+//         const user = snapshot.val();
+//         console.log(user);
+//   });
+//     var subscriber = snapshot.val();
 
-// //     subscriber.pushToken
-// //     subscriber.filters
+//     subscriber.pushToken
+//     subscriber.filters
 
-// //     if (filters.contains(currentValue.type)) {
-// //       tokens.push(subscriber.token);
+//     if (filters.contains(currentValue.type)) {
+//       tokens.push(subscriber.token);
 
-// //       // send push
-// //       admin.messaging().sendToDevice(tokens, payload).then(response => {
-// //         // For each message check if there was an error.
-// //       });
-// //     }
-// });
+//       // send push
+//       admin.messaging().sendToDevice(tokens, payload).then(response => {
+//         // For each message check if there was an error.
+//       });
+//     }
+});

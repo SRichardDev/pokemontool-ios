@@ -160,7 +160,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             backgroundLabel.text = "Standard Karte"
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
+        view.backgroundColor = UIColor.random()
+        UIView.animate(withDuration: 0.6, animations: {
             self.mapView.alpha = 0
         }, completion: { _ in
             let mapType = self.mapView.mapType
@@ -172,7 +173,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 self.mapView.mapType = .standard
             }
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.6, animations: {
                 self.mapView.alpha = 1
             })
         })
