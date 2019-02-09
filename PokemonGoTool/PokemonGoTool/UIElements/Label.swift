@@ -24,6 +24,9 @@ class Label: UILabel {
                 textColor = .black
                 font = UIFont.systemFont(ofSize: 25, weight: .semibold)
                 textAlignment = .center
+            } else if style == 4 {
+                textColor = .black
+                font = UIFont.systemFont(ofSize: 15, weight: .regular)
             }
         }
     }

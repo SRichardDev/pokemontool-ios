@@ -52,15 +52,17 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questCell") as! SubmitQuestCell
         
-        var quest: QuestDefinition?
+        var questDefinition: QuestDefinition?
         if isFiltering() {
-            quest = filteredQuests[indexPath.row]
+            questDefinition = filteredQuests[indexPath.row]
         } else {
-            quest = quests?[indexPath.row]
+            questDefinition = quests?[indexPath.row]
         }
         
-        cell.titleLabel.text = quest?.quest
-        cell.subtitleLabel.text = quest?.reward
+        guard let quest = questDefinition else { return cell }
+        cell.titleLabel.text = quest.quest
+        cell.subtitleLabel.text = quest.reward
+        cell.rewardImageView.image = ImageManager.image(named: quest.imageName)
         return cell
     }
     

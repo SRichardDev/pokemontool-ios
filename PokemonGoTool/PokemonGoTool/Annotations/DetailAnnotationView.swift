@@ -10,12 +10,7 @@ class DetailAnnotationView: UIView {
     @IBOutlet private var buttonsStackView: UIStackView!
     
     var annotation: Annotation!
-    var raidDetails: [String] = []
     weak var delegate: DetailAnnotationViewDelegate?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     func configure(with annotation: Annotation) {
         self.annotation = annotation
@@ -44,7 +39,8 @@ class DetailAnnotationView: UIView {
         }
     }
     
-    @objc func showAnnotationInfoTapped(_ sender: Any) {
+    @objc
+    func showAnnotationInfoTapped(_ sender: Any) {
         delegate?.showDetail(for: annotation)
     }
 }

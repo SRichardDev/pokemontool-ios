@@ -88,6 +88,7 @@ struct QuestDefinition: FirebaseCodable {
     var id: String?
     let quest: String
     let reward: String
+    let imageName: String
 }
 
 struct Arena: FirebaseCodable, Annotation {    

@@ -44,7 +44,7 @@ class FirebaseConnector {
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
 //        addRaidBosses()
-//        addQuests()
+        addQuests()
         checkConnectivity()
     }
     
@@ -204,16 +204,23 @@ class FirebaseConnector {
     private func addQuests() {
         
         let quest1 = ["quest" : "Tausche 10 Pokémon",
-                      "reward" : "Panflam"]
+                      "reward" : "Panflam",
+                      "imageName" : "390"]
         let quest2 = ["quest" : "Fange 10 Pokémon von Typ Boden",
-                      "reward" : "Sandan ✨"]
+                      "reward" : "Sandan ✨",
+                      "imageName" : "27"]
         let quest3 = ["quest" : "Lande 5 großartige Curveball-Würfe hintereinander",
-                      "reward" : "Pandir (Form 5)"]
+                      "reward" : "Pandir (Form 5)",
+                      "imageName" : "327"]
+        let quest4 = ["quest" : "Brüte 5 Eier aus",
+                      "reward" : "3 x Sonderbonbon",
+                      "imageName" : "candy"]
 
         let quests = Database.database().reference(withPath: "quests")
         quests.childByAutoId().setValue(quest1)
         quests.childByAutoId().setValue(quest2)
         quests.childByAutoId().setValue(quest3)
+        quests.childByAutoId().setValue(quest4)
     }
     
     
