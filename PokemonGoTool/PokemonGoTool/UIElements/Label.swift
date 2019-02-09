@@ -20,6 +20,10 @@ class Label: UILabel {
             } else if style == 2 {
                 textColor = .black
                 font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+            } else if style == 3 {
+                textColor = .black
+                font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+                textAlignment = .center
             }
         }
     }

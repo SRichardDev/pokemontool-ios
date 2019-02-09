@@ -4,9 +4,10 @@ import UIKit
 class DetailAnnotationView: UIView {
     
     @IBOutlet private var annotationImageView: UIImageView!
-    @IBOutlet private var annotationNameLabel: UILabel!
+    @IBOutlet private var annotationNameLabel: Label!
+    @IBOutlet private var annotationTypeLabel: Label!
     @IBOutlet private var stackView: UIStackView!
-    @IBOutlet var buttonsStackView: UIStackView!
+    @IBOutlet private var buttonsStackView: UIStackView!
     
     var annotation: Annotation!
     var raidDetails: [String] = []
@@ -21,6 +22,7 @@ class DetailAnnotationView: UIView {
         annotationNameLabel.text = annotation.name
         
         if annotation is Pokestop {
+            annotationTypeLabel.text = "Pokéstop"
             annotationImageView.image = UIImage(named: "PokestopLarge")
             let questButton = Button()
             let detailsButton = Button()
@@ -29,8 +31,9 @@ class DetailAnnotationView: UIView {
             detailsButton.setTitle("Details", for: .normal)
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
-        } else if annotation is Arena {
-            annotationImageView.image = UIImage(named: "arena")
+        } else if let annotation = annotation as? Arena {
+            annotationTypeLabel.text = annotation.isEX ? "EX Arena" : "Arena"
+            annotationImageView.image = annotation.isEX ? UIImage(named: "arenaEX") : UIImage(named: "arena")
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)

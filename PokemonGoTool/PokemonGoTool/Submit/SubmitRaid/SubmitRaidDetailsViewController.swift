@@ -47,7 +47,12 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
         
+        let arenaNameLabel = Label()
+        arenaNameLabel.style = 3
+        arenaNameLabel.text = viewModel.arena.name
+        
         stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(arenaNameLabel)
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
         stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
