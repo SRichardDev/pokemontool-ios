@@ -55,7 +55,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RaidBossCell
         cell.titleLabel.text = viewModel.currentRaidBosses[indexPath.row][1]
-        cell.imageView.image = ImageManager.image(named: viewModel.currentRaidBosses[indexPath.row][0])?.colorized(with: .black)
+        cell.imageView.image = ImageManager.image(named: viewModel.currentRaidBosses[indexPath.row][0])
         return cell
     }
     

@@ -20,6 +20,7 @@
 		2C34F1A8220B720C00B3B99C /* ButtonsStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1A7220B720C00B3B99C /* ButtonsStackViewController.swift */; };
 		2C34F1AA220B737E00B3B99C /* ButtonsStackViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */; };
 		2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */; };
+		2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
 		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
@@ -103,6 +104,7 @@
 		2C34F1A7220B720C00B3B99C /* ButtonsStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsStackViewController.swift; sourceTree = "<group>"; };
 		2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ButtonsStackViewController.storyboard; sourceTree = "<group>"; };
 		2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
 		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 		2C97F77421F66CD900630BA2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */,
 				2C6E7F792201103500427FBE /* ScrollableViewController.swift */,
 				2C6E7F7B220110C200427FBE /* UIView+Extension.swift */,
 				2C395A2B22025708005330B8 /* ViewModel.swift */,
@@ -691,6 +694,7 @@
 				2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */,
 				2C6E7F7C220110C200427FBE /* UIView+Extension.swift in Sources */,
 				2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */,
+				2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */,
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,

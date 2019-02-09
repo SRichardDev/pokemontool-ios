@@ -250,10 +250,10 @@ exports.sendPush = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite(
                         notification: {
                            title: 'Neue Feldforschung',
                            body: 'Pokestop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
+                           badge: '1',
                            sound: 'default',
-                           mutable_content: 'true',
-                           category : 'MEETING_INVITATION'
-
+                           mutable_content: '1',
+                           category : 'Push'
                         },
                         data: {
                             latitude: String(pokestop.latitude),
