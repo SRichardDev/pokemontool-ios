@@ -17,7 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     private var selectedGeohashes = [String]()
     private var isGeoashSelectionMode = false
     private var currentlyShowingLabels = true
-
+    private var mapRegionFromPush: MKCoordinateRegion?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         coordinator?.appModule.pushManager.delegate = self
@@ -31,6 +32,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         super.viewDidAppear(animated)
         locationManager.delegate = self
         firebaseConnector.delegate = self
+        zoomToLocationFromPushIfNeeded()
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -137,6 +139,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
                 addAnnotationIfNeeded(annotation)
             }
+        }
+    }
+    
+    private func zoomToLocationFromPushIfNeeded() {
+        guard let mapRegionFromPush = mapRegionFromPush else {return}
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.mapView.setRegion(mapRegionFromPush, animated: true)
+            self.mapRegionFromPush = nil
         }
     }
     
@@ -285,14 +295,13 @@ extension MapViewController: DetailAnnotationViewDelegate {
 }
 
 extension MapViewController: PushManagerDelegate {
-    func didReceivePushNotification(with title: String, message: String, coordincate: CLLocationCoordinate2D) {
+    func didReceivePushNotification(with title: String, message: String, coordinate: CLLocationCoordinate2D) {
         let banner = NotificationBanner(title: title, subtitle: message.replacingOccurrences(of: "\n", with: ", "), style: .info)
         banner.show()
         
-        let viewRegion = MKCoordinateRegion(center: coordincate,
-                                            latitudinalMeters: 200,
-                                            longitudinalMeters: 200)
-        mapView.setRegion(viewRegion, animated: true)
-
+        mapRegionFromPush = MKCoordinateRegion(center: coordinate,
+                                               latitudinalMeters: 200,
+                                               longitudinalMeters: 200)
+        mapView.setRegion(mapRegionFromPush!, animated: true)
     }
 }

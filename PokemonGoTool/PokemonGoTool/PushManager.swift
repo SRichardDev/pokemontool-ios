@@ -4,7 +4,7 @@ import UserNotifications
 import MapKit
 
 protocol PushManagerDelegate: class {
-    func didReceivePushNotification(with title: String, message: String, coordincate: CLLocationCoordinate2D)
+    func didReceivePushNotification(with title: String, message: String, coordinate: CLLocationCoordinate2D)
 }
 
 class PushManager {
@@ -21,6 +21,6 @@ class PushManager {
         let coordiante = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
                                                 longitude:CLLocationDegrees(longitude.double))
 
-        delegate?.didReceivePushNotification(with: title, message: message, coordincate: coordiante)
+        delegate?.didReceivePushNotification(with: title, message: message, coordinate: coordiante)
     }
 }
