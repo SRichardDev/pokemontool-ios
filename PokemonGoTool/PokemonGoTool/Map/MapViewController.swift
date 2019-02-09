@@ -3,12 +3,12 @@ import UIKit
 import MapKit
 import NotificationBannerSwift
 
-class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable {
     
     weak var coordinator: MainCoordinator?
     var locationManager: LocationManager!
     var firebaseConnector: FirebaseConnector!
-    @IBOutlet private var mapView: MKMapView!
+    @IBOutlet var mapView: MKMapView!
     @IBOutlet var settingsButtonsView: UIView!
     @IBOutlet var backgroundLabel: UILabel!
     private var polygon: MKPolygon?
@@ -160,35 +160,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
     }
     
-    private func changeMapType() {
-        let mapType = mapView.mapType
-        if mapType == .standard {
-            backgroundLabel.text = "Hybrid Karte"
-        } else if mapType == .hybrid {
-            backgroundLabel.text = "Satelliten Karte"
-        } else if mapType == .satellite {
-            backgroundLabel.text = "Standard Karte"
-        }
-        
-        view.backgroundColor = UIColor.random()
-        UIView.animate(withDuration: 0.6, animations: {
-            self.mapView.alpha = 0
-        }, completion: { _ in
-            let mapType = self.mapView.mapType
-            if mapType == .standard {
-                self.mapView.mapType = .hybrid
-            } else if mapType == .hybrid {
-                self.mapView.mapType = .satellite
-            } else if mapType == .satellite {
-                self.mapView.mapType = .standard
-            }
-            
-            UIView.animate(withDuration: 0.6, animations: {
-                self.mapView.alpha = 1
-            })
-        })
-    }
-    
     private func setupMapButtonsMenu() {
         let locateButton = UIButton()
         locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
@@ -200,7 +171,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         let changeMapTypeButton = UIButton()
         changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
         changeMapTypeButton.addAction { [weak self] in
-            self?.changeMapType()
+            self?.changeMapTypeAnimated()
             changeMapTypeButton.scaleIn()
         }
         
@@ -251,14 +222,14 @@ extension MapViewController {
             }
         } else if let arenaAnnotation = annotation as? ArenaPointAnnotation {
             var arenaFound = false
-            self.mapView.annotations.forEach { annotationOnMap in
+            mapView.annotations.forEach { annotationOnMap in
                 guard let annotationOnMap = annotationOnMap as? ArenaPointAnnotation else { return }
                 if annotationOnMap.arena.id == arenaAnnotation.arena.id {
                     arenaFound = true
                 }
             }
             if !arenaFound {
-                self.mapView.addAnnotation(annotation)
+                mapView.addAnnotation(annotation)
             }
         }
     }

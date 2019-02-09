@@ -21,6 +21,7 @@
 		2C34F1AA220B737E00B3B99C /* ButtonsStackViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */; };
 		2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */; };
 		2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */; };
+		2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
 		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
@@ -105,6 +106,7 @@
 		2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ButtonsStackViewController.storyboard; sourceTree = "<group>"; };
 		2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTypeSwitchable.swift; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
 		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				2C395A482204C110005330B8 /* UIStackView+Extension.swift */,
 				2C34F1A3220A4C7C00B3B99C /* UIImage+Extension.swift */,
 				2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */,
+				2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
 				2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */,
+				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
