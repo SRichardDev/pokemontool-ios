@@ -44,16 +44,25 @@
                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="uXg-59-JlM"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBR-5L-eGW" customClass="MapCrosshair" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="7WN-oH-XWk"/>
+                                    <constraint firstAttribute="height" constant="150" id="T3z-48-S2h"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerY" secondItem="ENM-7P-zbS" secondAttribute="centerY" id="3ur-No-BQa"/>
                             <constraint firstItem="ENM-7P-zbS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7Zq-Yg-GQQ"/>
+                            <constraint firstItem="NBR-5L-eGW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="AIn-0o-zRe"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cxu-QH-e1m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k5Y-yD-ywP" secondAttribute="trailing" id="F2u-S7-Nv6"/>
-                            <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GnQ-xh-ZWm"/>
+                            <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GnQ-xh-ZWm"/>
                             <constraint firstItem="ENM-7P-zbS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H4L-Sp-B5Z"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o4G-kI-jT1" secondAttribute="trailing" id="O0t-9I-WxO"/>
+                            <constraint firstAttribute="trailing" secondItem="o4G-kI-jT1" secondAttribute="trailing" id="O0t-9I-WxO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ENM-7P-zbS" secondAttribute="bottom" id="SSe-HU-tJJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ENM-7P-zbS" secondAttribute="trailing" id="Xwy-Pl-7Np"/>
                             <constraint firstAttribute="bottom" secondItem="o4G-kI-jT1" secondAttribute="bottom" id="ckU-mf-Wyc"/>
@@ -63,12 +72,14 @@
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3j-rr-V4N"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yJj-r2-iqh" secondAttribute="bottom" constant="25" id="rmR-zn-Xyo"/>
                             <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerX" secondItem="ENM-7P-zbS" secondAttribute="centerX" id="tP2-rg-WEW"/>
+                            <constraint firstItem="NBR-5L-eGW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vb4-6e-fOX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="Xsb-mU-ruf"/>
                     <connections>
                         <outlet property="backgroundLabel" destination="k5Y-yD-ywP" id="zOZ-HM-PKD"/>
+                        <outlet property="mapCrosshairView" destination="NBR-5L-eGW" id="Q07-ak-hUf"/>
                         <outlet property="mapView" destination="o4G-kI-jT1" id="XeR-Hb-GGm"/>
                         <outlet property="settingsButtonsView" destination="yJj-r2-iqh" id="PNH-YY-eVN"/>
                     </connections>

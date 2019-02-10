@@ -22,6 +22,8 @@
 		2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */; };
 		2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */; };
 		2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */; };
+		2C34F1E1220F139400B3B99C /* RaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E0220F139400B3B99C /* RaidDetailsViewController.swift */; };
+		2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */; };
 		2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */; };
 		2C395A1622012CC4005330B8 /* SubmitRaidDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */; };
 		2C395A18220248A1005330B8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C395A17220248A1005330B8 /* Coordinator.swift */; };
@@ -107,6 +109,8 @@
 		2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTypeSwitchable.swift; sourceTree = "<group>"; };
+		2C34F1E0220F139400B3B99C /* RaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RaidDetailsViewController.swift; path = PokemonGoTool/Details/RaidDetailsViewController.swift; sourceTree = SOURCE_ROOT; };
+		2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCrosshair.swift; sourceTree = "<group>"; };
 		2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidDetailsViewController.swift; sourceTree = "<group>"; };
 		2C395A17220248A1005330B8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -216,9 +220,11 @@
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */,
+				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
 				2C395A2022025122005330B8 /* Map */,
 				2C395A212202512E005330B8 /* Coordinator */,
 				2C97F78721F67D2F00630BA2 /* Submit */,
+				2C34F1DD220F133100B3B99C /* Details */,
 				2C97F78821F67D3E00630BA2 /* Account */,
 				2C97F78A21F67D6D00630BA2 /* Firebase */,
 				2C97F78921F67D4F00630BA2 /* Annotations */,
@@ -303,6 +309,30 @@
 				2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */,
 			);
 			path = RaidBossTableView;
+			sourceTree = "<group>";
+		};
+		2C34F1DD220F133100B3B99C /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				2C34F1DF220F135700B3B99C /* PokestopDetails */,
+				2C34F1DE220F134200B3B99C /* ArenaDetails */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		2C34F1DE220F134200B3B99C /* ArenaDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2C34F1E0220F139400B3B99C /* RaidDetailsViewController.swift */,
+			);
+			path = ArenaDetails;
+			sourceTree = "<group>";
+		};
+		2C34F1DF220F135700B3B99C /* PokestopDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PokestopDetails;
 			sourceTree = "<group>";
 		};
 		2C395A2022025122005330B8 /* Map */ = {
@@ -675,6 +705,7 @@
 				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
+				2C34F1E1220F139400B3B99C /* RaidDetailsViewController.swift in Sources */,
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
@@ -710,6 +741,7 @@
 				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
 				2C395A542205FCCB005330B8 /* RaidUserParticipateSwitchViewController.swift in Sources */,
 				2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */,
+				2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */,
 				2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */,
 				2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */,
 				2C348BA922061C7200F6A1F7 /* RaidBossPickerViewController.swift in Sources */,

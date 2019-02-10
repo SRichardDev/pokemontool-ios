@@ -11,6 +11,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var settingsButtonsView: UIView!
     @IBOutlet var backgroundLabel: UILabel!
+    @IBOutlet var mapCrosshairView: MapCrosshair!
     private var polygon: MKPolygon?
     private var allAnnotations = [PokestopPointAnnotation]()
     private var geohashWindow: GeohashWindow?
@@ -83,8 +84,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     func zoomToUserLocation(animated: Bool = false) {
         if let userLocation = locationManager.currentUserLocation {
             let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
-                                                latitudinalMeters: 1000,
-                                                longitudinalMeters: 1000)
+                                                latitudinalMeters: 500,
+                                                longitudinalMeters: 500)
             mapView.setRegion(viewRegion, animated: animated)
         }
     }
@@ -154,18 +155,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         self.isGeoashSelectionMode = !self.isGeoashSelectionMode
         if self.isGeoashSelectionMode {
             let banner = NotificationBanner(title: "Push Registrierung",
-                                            subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest.",
+                                            subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
                                             style: .info)
             banner.show()
         }
     }
     
+    private func toggleAnnotationSubmitMode() {
+        let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
+                                        subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
+                                        style: .warning)
+        banner.show()
+        
+        
+    }
+    
     private func setupMapButtonsMenu() {
-        let locateButton = UIButton()
-        locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
-        locateButton.addAction { [weak self] in
-            self?.zoomToUserLocation(animated: true)
-            locateButton.scaleIn()
+       
+        let registerPushGeohashButton = UIButton()
+        registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
+        registerPushGeohashButton.addAction { [weak self] in
+            self?.togglePushRegistrationMode()
+            registerPushGeohashButton.scaleIn()
+        }
+        
+        let newAnnotationButton = UIButton()
+        newAnnotationButton.setImage(UIImage(named: "Crosshair"), for: .normal)
+        newAnnotationButton.addAction { [weak self] in
+            self?.mapCrosshairView.startAnimating()
+            newAnnotationButton.scaleIn()
+            self?.toggleAnnotationSubmitMode()
         }
         
         let changeMapTypeButton = UIButton()
@@ -174,17 +193,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             self?.changeMapTypeAnimated()
             changeMapTypeButton.scaleIn()
         }
-        
-        let registerPushGeohashButton = UIButton()
-        registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
-        registerPushGeohashButton.addAction { [weak self] in
-            self?.togglePushRegistrationMode()
-            registerPushGeohashButton.scaleIn()
+
+        let locateButton = UIButton()
+        locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
+        locateButton.addAction { [weak self] in
+            self?.zoomToUserLocation(animated: true)
+            locateButton.scaleIn()
         }
-        
+    
         ButtonsStackViewController.embed(in: settingsButtonsView,
                                          in: self,
                                          with: [registerPushGeohashButton,
+                                                newAnnotationButton,
                                                 changeMapTypeButton,
                                                 locateButton])
     }

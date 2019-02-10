@@ -60,3 +60,21 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    enum AnimationKeyPath: String {
+        case opacity = "opacity"
+    }
+    
+    func flash(animation: AnimationKeyPath ,withDuration duration: TimeInterval = 1){
+        let flash = CABasicAnimation(keyPath:AnimationKeyPath.opacity.rawValue)
+        flash.duration = duration
+        flash.fromValue = 1
+        flash.toValue = 0.3
+        flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        flash.autoreverses = true
+        flash.repeatCount = Float.greatestFiniteMagnitude
+        
+        layer.add(flash, forKey: nil)
+    }
+}
