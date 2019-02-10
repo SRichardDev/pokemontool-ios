@@ -4,14 +4,19 @@ import MapKit
 
 protocol SubmitMapEmbeddable {
     var containerView: UIView! { get set }
-    func embedMap(coordinate: CLLocationCoordinate2D) -> SubmitMapViewController
+    func embedMap(coordinate: CLLocationCoordinate2D,mapType: MKMapType, isFlyover: Bool) -> SubmitMapViewController
 }
 
 extension SubmitMapEmbeddable where Self: UIViewController {
     @discardableResult
-    func embedMap(coordinate: CLLocationCoordinate2D) -> SubmitMapViewController {
+    func embedMap(coordinate: CLLocationCoordinate2D,
+                  mapType: MKMapType = .standard,
+                  isFlyover: Bool = false) -> SubmitMapViewController {
+        
         let mapViewController = SubmitMapViewController()
         mapViewController.locationOnMap = coordinate
+        mapViewController.mapView.mapType = mapType
+        mapViewController.isFlyover = isFlyover
         addChild(mapViewController)
         mapViewController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         mapViewController.view.frame = containerView.bounds
@@ -24,8 +29,10 @@ extension SubmitMapEmbeddable where Self: UIViewController {
 class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     
     var locationOnMap: CLLocationCoordinate2D!
-    
-    private let mapView = MKMapView()
+    var camera: MKMapCamera?
+    var isFlyover = false
+
+    let mapView = MKMapView()
     private var pokestopAnnotation: PokestopPointAnnotation {
         get {
             return PokestopPointAnnotation(coordinate: locationOnMap)
@@ -43,11 +50,33 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         view.addSubviewAndEdgeConstraints(mapView)
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
-        let viewRegion = MKCoordinateRegion(center: locationOnMap,
-                                            latitudinalMeters: 120,
-                                            longitudinalMeters: 120)
-        mapView.setRegion(viewRegion, animated: false)
         mapView.addAnnotation(pokestopAnnotation)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let distance: CLLocationDistance = 200
+        let pitch: CGFloat = 65
+        let heading = 180.0
+        
+        camera = MKMapCamera(lookingAtCenter: locationOnMap,
+                             fromDistance: distance,
+                             pitch: pitch,
+                             heading: heading)
+        mapView.camera = camera!
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startFlyover()
+    }
+    
+    func startFlyover() {
+        UIView.animate(withDuration: 5.0, animations: {
+            self.camera!.heading += 180
+            self.camera!.pitch = 45
+            self.mapView.camera = self.camera!
+        })
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -57,12 +86,18 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
-        locationOnMap = view.annotation?.coordinate
         switch newState {
         case .starting:
             view.dragState = .dragging
+            UIView.animate(withDuration: 0.25) {
+                view.transform = CGAffineTransform(translationX: 0, y: -50)
+            }
         case .ending, .canceling:
+            locationOnMap = view.annotation?.coordinate
             view.dragState = .none
+            UIView.animate(withDuration: 0.25) {
+                view.transform = .identity
+            }
         default: break
         }
     }

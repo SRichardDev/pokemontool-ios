@@ -64,11 +64,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-Il-mP3" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="225" width="250" height="57.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="8Al-ql-aD7"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-Il-mP3" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="225" width="286" height="43"/>
                                 <string key="text">Du findest heraus ob es sich um eine EX-Raid Arena handlt, wenn du im Arena Bildschirm oben rechts einen Schriftzug dafür findest.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,23 +84,24 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eEQ-ZF-mzh" firstAttribute="top" secondItem="vMa-Ia-g8g" secondAttribute="bottom" constant="15" id="2IU-Jx-v0J"/>
+                            <constraint firstItem="qOS-RH-VXh" firstAttribute="leading" secondItem="EwZ-Il-mP3" secondAttribute="trailing" constant="8" id="7b0-Zc-3iZ"/>
                             <constraint firstItem="Rm9-BE-Tl9" firstAttribute="bottom" secondItem="8JP-0N-bYf" secondAttribute="bottom" constant="20" id="8SO-2W-6qb"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="leading" id="BJu-3z-kwg"/>
-                            <constraint firstItem="qOS-RH-VXh" firstAttribute="leading" secondItem="EwZ-Il-mP3" secondAttribute="trailing" constant="44" id="Bgt-6W-yxH"/>
                             <constraint firstItem="EwZ-Il-mP3" firstAttribute="top" secondItem="3oK-Kb-0pe" secondAttribute="bottom" constant="15" id="DSm-o1-2tq"/>
                             <constraint firstItem="EwZ-Il-mP3" firstAttribute="leading" secondItem="3oK-Kb-0pe" secondAttribute="leading" id="H8b-NE-iGP"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="top" secondItem="eEQ-ZF-mzh" secondAttribute="bottom" constant="15" id="HGd-Sl-ZyP"/>
                             <constraint firstItem="3oK-Kb-0pe" firstAttribute="top" secondItem="scl-Rn-Dvp" secondAttribute="bottom" constant="40" id="IJy-yg-KKU"/>
                             <constraint firstItem="Rm9-BE-Tl9" firstAttribute="trailing" secondItem="vMa-Ia-g8g" secondAttribute="trailing" constant="16" id="NoD-os-m9m"/>
+                            <constraint firstItem="qOS-RH-VXh" firstAttribute="trailing" secondItem="scl-Rn-Dvp" secondAttribute="trailing" id="PdK-TC-WnB"/>
                             <constraint firstItem="qOS-RH-VXh" firstAttribute="top" secondItem="EwZ-Il-mP3" secondAttribute="top" id="Q8c-Ba-R8e"/>
                             <constraint firstItem="eEQ-ZF-mzh" firstAttribute="trailing" secondItem="vMa-Ia-g8g" secondAttribute="trailing" id="V2i-o0-Fj6"/>
                             <constraint firstItem="scl-Rn-Dvp" firstAttribute="trailing" secondItem="vMa-Ia-g8g" secondAttribute="trailing" id="Vfs-qG-9sP"/>
+                            <constraint firstItem="EwZ-Il-mP3" firstAttribute="leading" secondItem="Rm9-BE-Tl9" secondAttribute="leading" constant="16" id="ihc-hw-VB5"/>
                             <constraint firstItem="Rm9-BE-Tl9" firstAttribute="trailing" secondItem="8JP-0N-bYf" secondAttribute="trailing" constant="16" id="kJe-RI-ge0"/>
                             <constraint firstItem="3oK-Kb-0pe" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="leading" id="kkl-R6-kIR"/>
                             <constraint firstItem="vMa-Ia-g8g" firstAttribute="leading" secondItem="Rm9-BE-Tl9" secondAttribute="leading" constant="16" id="qHM-ha-r47"/>
                             <constraint firstItem="8JP-0N-bYf" firstAttribute="leading" secondItem="Rm9-BE-Tl9" secondAttribute="leading" constant="16" id="t6z-Uw-QLe"/>
                             <constraint firstItem="eEQ-ZF-mzh" firstAttribute="leading" secondItem="vMa-Ia-g8g" secondAttribute="leading" id="thE-eg-k8j"/>
-                            <constraint firstItem="Rm9-BE-Tl9" firstAttribute="trailing" secondItem="qOS-RH-VXh" secondAttribute="trailing" constant="16" id="wOq-Pa-VEs"/>
                             <constraint firstItem="vMa-Ia-g8g" firstAttribute="top" secondItem="Rm9-BE-Tl9" secondAttribute="top" constant="20" id="y6x-T0-g45"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rm9-BE-Tl9"/>

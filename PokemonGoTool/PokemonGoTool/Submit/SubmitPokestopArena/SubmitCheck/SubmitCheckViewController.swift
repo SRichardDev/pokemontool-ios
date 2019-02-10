@@ -12,7 +12,9 @@ class SubmitCheckViewController: UIViewController, SubmitMapEmbeddable, Storyboa
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = viewModel.submitName
-        mapViewController = embedMap(coordinate: viewModel.coordinate)
+        mapViewController = embedMap(coordinate: viewModel.coordinate,
+                                     mapType: .satelliteFlyover,
+                                     isFlyover: true)
         mapViewController.view.isUserInteractionEnabled = false
         
         if viewModel.isPokestop {

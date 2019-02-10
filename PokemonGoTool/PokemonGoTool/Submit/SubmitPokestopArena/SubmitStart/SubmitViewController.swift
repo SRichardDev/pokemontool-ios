@@ -15,6 +15,16 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, S
         title = viewModel.title
         mapViewController = embedMap(coordinate: viewModel.coordinate)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mapViewController.locationOnMap = viewModel.coordinate
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.coordinate = mapViewController.locationOnMap
+    }
 
     @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
