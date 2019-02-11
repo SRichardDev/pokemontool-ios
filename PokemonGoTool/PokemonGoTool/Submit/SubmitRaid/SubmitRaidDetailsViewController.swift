@@ -70,7 +70,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setTitle()
+        setTitle("Neuer Level \(viewModel.selectedRaidLevel) Raid")
     }
     
     @objc
@@ -84,7 +84,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         case .raidLevelChanged:
             UIView.transition(with: imageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                 self.imageView.image = UIImage(named: self.viewModel.imageName)!
-                self.setTitle()
+                self.setTitle("Neuer Level \(self.viewModel.selectedRaidLevel) Raid")
             })
 
         case .raidAlreadyRunning:
@@ -96,10 +96,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         case .currentRaidbossesChanged:
             raidBossCollectionViewController.updateRaidBosses()
         }
-    }
-    
-    private func setTitle() {
-        navigationController?.navigationBar.topItem?.title = "Neuer Level \(viewModel.selectedRaidLevel) Raid"
     }
     
     private func changeVisibiltyOf(viewControllers: [UIViewController]) {
@@ -146,3 +142,5 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         }
     }
 }
+
+

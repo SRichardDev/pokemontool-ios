@@ -7,22 +7,22 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissSelf))
         navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        topViewController?.navigationItem.rightBarButtonItem = cancelBarButtonItem
+        let button = UIButton(type: .custom)
+        button.addAction {
+            self.dismiss(animated: true)
+        }
+        button.setImage(UIImage(named: "dismiss"), for: .normal)
+        let item = UIBarButtonItem(customView: button)
+        topViewController?.navigationItem.leftBarButtonItem = item
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
         viewController.navigationItem.rightBarButtonItem = cancelBarButtonItem
-    }
-    
-    @objc
-    func dismissSelf() {
-        dismiss(animated: true)
     }
 }

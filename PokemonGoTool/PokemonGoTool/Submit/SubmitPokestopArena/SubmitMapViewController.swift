@@ -2,12 +2,12 @@
 import UIKit
 import MapKit
 
-protocol SubmitMapEmbeddable {
+protocol MapEmbeddable {
     var containerView: UIView! { get set }
     func embedMap(coordinate: CLLocationCoordinate2D,mapType: MKMapType, isFlyover: Bool) -> SubmitMapViewController
 }
 
-extension SubmitMapEmbeddable where Self: UIViewController {
+extension MapEmbeddable where Self: UIViewController {
     @discardableResult
     func embedMap(coordinate: CLLocationCoordinate2D,
                   mapType: MKMapType = .standard,

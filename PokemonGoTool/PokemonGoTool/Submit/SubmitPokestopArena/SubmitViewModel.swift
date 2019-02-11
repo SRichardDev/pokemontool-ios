@@ -46,9 +46,8 @@ class SubmitViewModel: ViewModel {
         }
     }
     
-    var name: String! = ""
-    
-    var coordinate = CLLocationCoordinate2D(latitude: 50, longitude: 30)
+    var name: String = ""
+    var coordinate: CLLocationCoordinate2D!
     
     var submitContent: SubmitContent {
         get {

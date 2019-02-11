@@ -2,7 +2,7 @@
 import UIKit
 import MapKit
 
-class SubmitViewController: UIViewController, StoryboardInitialViewController, SubmitMapEmbeddable {
+class SubmitViewController: UIViewController, StoryboardInitialViewController, MapEmbeddable {
 
     weak var coordinator: MainCoordinator?
     @IBOutlet var segmentedControl: UISegmentedControl!

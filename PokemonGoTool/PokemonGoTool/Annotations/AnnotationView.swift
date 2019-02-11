@@ -5,7 +5,8 @@ import MapKit
 private let animationTime = 0.2
 
 protocol DetailAnnotationViewDelegate: class {
-    func showDetail(for pokestop: Annotation)
+    func showSubmitDetail(for annotation: Annotation)
+    func showInfoDetail(for annotation: Annotation)
 }
 
 class AnnotationView: CustomAnnotationView {

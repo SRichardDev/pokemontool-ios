@@ -71,7 +71,7 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate, Storyboar
     }
     
     @IBAction func bottomButtonTapped(_ sender: Any) {
-        viewModel.name = nameTextField.text
+        viewModel.name = nameTextField.text ?? "??"
         if !viewModel.isPokestop {
             viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
         }

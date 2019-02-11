@@ -65,9 +65,21 @@ class MainCoordinator: Coordinator {
     
     func showSubmitRaid(for arena: Arena) {
         let submitRaidDetailsViewController = SubmitRaidDetailsViewController.instantiateFromStoryboard()
-        submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena, firebaseConnector: appModule.firebaseConnector)
+        submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena,
+                                                                        firebaseConnector: appModule.firebaseConnector)
         submitRaidDetailsViewController.coordinator = self
         let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
+        navigationController.viewControllers = [scrollableViewController]
+        tabBarController.present(navigationController, animated: true)
+        impact()
+    }
+    
+    func showPokestopDetails(for pokestop: Pokestop) {
+        let pokestopDetailsViewController = PokestopDetailsViewController.instantiateFromStoryboard()
+        pokestopDetailsViewController.coordinator = self
+        pokestopDetailsViewController.viewModel = PokestopDetailsViewModel(pokestop: pokestop,
+                                                                           firebaseConnector: appModule.firebaseConnector)
+        let scrollableViewController = ScrollableViewController(childViewController: pokestopDetailsViewController)
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
         impact()

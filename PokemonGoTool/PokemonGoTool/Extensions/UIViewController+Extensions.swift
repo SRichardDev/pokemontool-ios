@@ -22,4 +22,8 @@ extension UIViewController {
         removeFromParent()
         view.removeFromSuperview()
     }
+    
+    func setTitle(_ title: String) {
+        navigationController?.navigationBar.topItem?.title = title
+    }
 }

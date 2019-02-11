@@ -180,7 +180,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
         
         let newAnnotationButton = UIButton()
-        newAnnotationButton.setImage(UIImage(named: "Crosshair"), for: .normal)
+        newAnnotationButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
         newAnnotationButton.addAction { [weak self] in
             self?.mapCrosshairView.startAnimating()
             newAnnotationButton.scaleIn()
@@ -276,7 +276,16 @@ extension MapViewController {
 }
 
 extension MapViewController: DetailAnnotationViewDelegate {
-    func showDetail(for annotation: Annotation) {
+    
+    func showInfoDetail(for annotation: Annotation) {
+        if let pokestopAnnotation = annotation as? Pokestop {
+            coordinator?.showPokestopDetails(for: pokestopAnnotation)
+        } else if let arenaAnnotation = annotation as? Arena {
+
+        }
+    }
+    
+    func showSubmitDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
             coordinator?.showSubmitQuest(for: pokestopAnnotation)
         } else if let arenaAnnotation = annotation as? Arena {

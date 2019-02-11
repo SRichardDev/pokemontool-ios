@@ -22,8 +22,9 @@ class DetailAnnotationView: UIView {
             let questButton = Button()
             let detailsButton = Button()
             questButton.setTitle("Neue Quest", for: .normal)
-            questButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoTapped(_:)), for: .touchUpInside)
+            questButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)), for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
+            detailsButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)), for: .touchUpInside)
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
         } else if let annotation = annotation as? Arena {
@@ -32,7 +33,7 @@ class DetailAnnotationView: UIView {
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)
-            raidButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoTapped(_:)), for: .touchUpInside)
+            raidButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)), for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
             buttonsStackView.addArrangedSubview(raidButton)
             buttonsStackView.addArrangedSubview(detailsButton)
@@ -40,7 +41,12 @@ class DetailAnnotationView: UIView {
     }
     
     @objc
-    func showAnnotationInfoTapped(_ sender: Any) {
-        delegate?.showDetail(for: annotation)
+    func showAnnotationSubmitDetailTapped(_ sender: Any) {
+        delegate?.showSubmitDetail(for: annotation)
+    }
+    
+    @objc
+    func showAnnotationInfoDetailTapped(_ sender: Any) {
+        delegate?.showInfoDetail(for: annotation)
     }
 }
