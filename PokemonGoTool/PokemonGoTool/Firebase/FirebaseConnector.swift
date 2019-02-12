@@ -8,6 +8,7 @@ import NotificationBannerSwift
 protocol FirebaseDelegate {
     func didUpdatePokestops()
     func didUpdateArenas()
+    func didUpdateAnnotation(newAnnotation: Annotation)
 }
 
 protocol FirebaseUserDelegate {
@@ -107,6 +108,7 @@ class FirebaseConnector {
                         if pokestop.id == savedPokestop.id {
                             pokestopAlreadySaved = true
                             self.pokestops.replace(object: pokestop)
+                            self.delegate?.didUpdateAnnotation(newAnnotation: pokestop)
                         }
                     }
                     if !pokestopAlreadySaved {
@@ -129,6 +131,8 @@ class FirebaseConnector {
                     self.arenas.forEach { savedArena in
                         if arena.id == savedArena.id {
                             arenaAlreadySaved = true
+                            self.arenas.replace(object: arena)
+                            self.delegate?.didUpdateAnnotation(newAnnotation: arena)
                         }
                     }
                     if !arenaAlreadySaved {

@@ -24,9 +24,10 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
         
         tableView.delegate = self
         tableView.dataSource = self
-        firebaseConnector.loadQuests { quests in
-            self.quests = quests
-        }
+        quests = firebaseConnector.quests
+//        firebaseConnector.loadQuests { quests in
+//            self.quests = quests
+//        }
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

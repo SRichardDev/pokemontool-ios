@@ -23,7 +23,7 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapViewController = embedMap(coordinate: viewModel.coordinate)
+        mapViewController = embedMap(coordinate: viewModel.coordinate, mapType: .satelliteFlyover)
         titleLabel.text = viewModel.pokestop.name
         activeQuestLabel.text = viewModel.pokestop.quest?.name
         rewardLabel.text = viewModel.pokestop.quest?.reward

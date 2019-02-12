@@ -20,6 +20,7 @@ protocol Annotation  {
     var longitude: Double { get set }
     var upVotes: Int? { get set }
     var downVotes: Int? { get set }
+    var id: String? { get set }
 }
 
 struct Pokestop: FirebaseCodable, Equatable, Annotation {
@@ -34,6 +35,12 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation {
     var geohash: String {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)
+        }
+    }
+    
+    var hasActiveQuest: Bool {
+        get {
+            return quest != nil
         }
     }
     
@@ -90,6 +97,12 @@ struct QuestDefinition: FirebaseCodable {
     let quest: String
     let reward: String
     let imageName: String
+    
+    var image: UIImage? {
+        get {
+            return ImageManager.image(named: imageName)
+        }
+    }
 }
 
 struct Arena: FirebaseCodable, Annotation {    

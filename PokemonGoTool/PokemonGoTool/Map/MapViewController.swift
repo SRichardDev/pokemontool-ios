@@ -12,13 +12,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     @IBOutlet var settingsButtonsView: UIView!
     @IBOutlet var backgroundLabel: UILabel!
     @IBOutlet var mapCrosshairView: MapCrosshair!
-    private var polygon: MKPolygon?
-    private var allAnnotations = [PokestopPointAnnotation]()
-    private var geohashWindow: GeohashWindow?
-    private var selectedGeohashes = [String]()
-    private var isGeoashSelectionMode = false
-    private var currentlyShowingLabels = true
-    private var mapRegionFromPush: MKCoordinateRegion?
+    var polygon: MKPolygon?
+    var allAnnotations = [PokestopPointAnnotation]()
+    var geohashWindow: GeohashWindow?
+    var selectedGeohashes = [String]()
+    var isGeoashSelectionMode = false
+    var currentlyShowingLabels = true
+    var mapRegionFromPush: MKCoordinateRegion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,16 +80,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
     }
 
-    
-    func zoomToUserLocation(animated: Bool = false) {
-        if let userLocation = locationManager.currentUserLocation {
-            let viewRegion = MKCoordinateRegion(center: userLocation.coordinate,
-                                                latitudinalMeters: 500,
-                                                longitudinalMeters: 500)
-            mapView.setRegion(viewRegion, animated: animated)
-        }
-    }
-    
     func changeAnnotationLabelVisibility() {
         let showLabels = mapView.camera.altitude < 2000.0
         
@@ -112,29 +102,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
 //        mapView.addOverlay(polygon)
     }
     
-    @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            let locationInView = sender.location(in: mapView)
-            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let viewModel = SubmitViewModel(firebaseConnector: firebaseConnector, coordinate: locationOnMap)
-            coordinator?.showSubmitPokestopAndArena(for: viewModel)
-        }
-    }
-    
-    @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
-        if isGeoashSelectionMode {
-            let locationInView = sender.location(in: mapView)
-            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-            firebaseConnector.subscribeForPush(for: geohash)
-            addPolyLine(for: Geohash.geohashbox(geohash))
-        }
-    }
-    
     func addAnnotations(for annotations: [Annotation]) {
         for annotation in annotations {
             if let pokestopAnnotation = annotation as? Pokestop {
-                let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation)
+                let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation, quests: firebaseConnector?.quests)
                 addAnnotationIfNeeded(annotation)
             } else if let arenaAnnotation = annotation as? Arena {
                 let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
@@ -143,70 +114,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
     }
     
-    private func zoomToLocationFromPushIfNeeded() {
-        guard let mapRegionFromPush = mapRegionFromPush else {return}
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.mapView.setRegion(mapRegionFromPush, animated: true)
-            self.mapRegionFromPush = nil
-        }
-    }
-    
-    private func togglePushRegistrationMode() {
-        self.isGeoashSelectionMode = !self.isGeoashSelectionMode
-        if self.isGeoashSelectionMode {
-            let banner = NotificationBanner(title: "Push Registrierung",
-                                            subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
-                                            style: .info)
-            banner.show()
-        }
-    }
-    
-    private func toggleAnnotationSubmitMode() {
-        let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
-                                        subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
-                                        style: .warning)
-        banner.show()
-        
-        
-    }
-    
-    private func setupMapButtonsMenu() {
-       
-        let registerPushGeohashButton = UIButton()
-        registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
-        registerPushGeohashButton.addAction { [weak self] in
-            self?.togglePushRegistrationMode()
-            registerPushGeohashButton.scaleIn()
+    func didUpdateAnnotation(newAnnotation: Annotation) {
+        let annotation = mapView.annotations.first { annotatinon -> Bool in
+            if let pokestopAnnotatinon = annotatinon as? PokestopPointAnnotation {
+                if pokestopAnnotatinon.pokestop.id == newAnnotation.id {
+                    return true
+                }
+            } else if let arenaAnnotation = annotatinon as? ArenaPointAnnotation {
+                if arenaAnnotation.arena.id == newAnnotation.id {
+                    return true
+                }
+            }
+            return false
         }
         
-        let newAnnotationButton = UIButton()
-        newAnnotationButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
-        newAnnotationButton.addAction { [weak self] in
-            self?.mapCrosshairView.startAnimating()
-            newAnnotationButton.scaleIn()
-            self?.toggleAnnotationSubmitMode()
-        }
+        guard let presentAnnotation = annotation else { return }
+        mapView.removeAnnotation(presentAnnotation)
         
-        let changeMapTypeButton = UIButton()
-        changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
-        changeMapTypeButton.addAction { [weak self] in
-            self?.changeMapTypeAnimated()
-            changeMapTypeButton.scaleIn()
+        if let pokestopAnnotation = newAnnotation as? Pokestop {
+            let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation, quests: firebaseConnector?.quests)
+            mapView.addAnnotation(annotation)
+        } else if let arenaAnnotation = newAnnotation as? Arena {
+            let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
+            mapView.addAnnotation(annotation)
         }
-
-        let locateButton = UIButton()
-        locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
-        locateButton.addAction { [weak self] in
-            self?.zoomToUserLocation(animated: true)
-            locateButton.scaleIn()
-        }
-    
-        ButtonsStackViewController.embed(in: settingsButtonsView,
-                                         in: self,
-                                         with: [registerPushGeohashButton,
-                                                newAnnotationButton,
-                                                changeMapTypeButton,
-                                                locateButton])
     }
 }
 
@@ -279,8 +210,8 @@ extension MapViewController: DetailAnnotationViewDelegate {
     
     func showInfoDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
-            guard let pokestop = firebaseConnector.pokestops.first(where: { $0.id == pokestopAnnotation.id }) else { return }
-            coordinator?.showPokestopDetails(for: pokestop)
+//            guard let pokestop = firebaseConnector.pokestops.first(where: { $0.id == pokestopAnnotation.id }) else { return }
+            coordinator?.showPokestopDetails(for: pokestopAnnotation)
         } else if let arenaAnnotation = annotation as? Arena {
 
         }

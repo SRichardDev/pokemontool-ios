@@ -99,7 +99,17 @@ class AnnotationView: CustomAnnotationView {
                 pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
             }
         }
-        annotationView?.image = UIImage(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "")
+        
+        if let image = ImageManager.image(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "") {
+            
+            let baseImage = UIImage(named: "Pokestop")!
+            let topImage = image.scaled(with: 0.5)!
+            
+            annotationView?.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: topImage)
+        } else {
+            annotationView?.image = UIImage(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "")
+        }
+        
         return annotationView as? AnnotationView
     }
 }

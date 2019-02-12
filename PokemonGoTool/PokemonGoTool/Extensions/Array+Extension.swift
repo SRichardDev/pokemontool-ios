@@ -19,3 +19,11 @@ extension Array where Element == Pokestop {
         }
     }
 }
+
+extension Array where Element == Arena {
+    mutating func replace(object: Element) {
+        if let index = index(where: {$0.id == object.id}) {
+            self[index] = object
+        }
+    }
+}

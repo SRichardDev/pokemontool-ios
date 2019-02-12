@@ -119,3 +119,46 @@ extension CGPoint {
         return CGPoint(x: x, y: y)
     }
 }
+
+extension UIImage {
+    
+    func scaled(with scale: CGFloat) -> UIImage? {
+        // size has to be integer, otherwise it could get white lines
+        let size = CGSize(width: floor(self.size.width * scale), height: floor(self.size.height * scale))
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
+extension UIImage {
+    
+    class func imageByCombiningImage(firstImage: UIImage, withImage secondImage: UIImage) -> UIImage {
+        
+        let newImageWidth  = max(firstImage.size.width,  secondImage.size.width )
+        let newImageHeight = max(firstImage.size.height, secondImage.size.height)
+        let newImageSize = CGSize(width : newImageWidth, height: newImageHeight)
+        
+        
+        UIGraphicsBeginImageContextWithOptions(newImageSize, false, UIScreen.main.scale)
+        
+        let firstImageDrawX  = round((newImageSize.width  - firstImage.size.width  ) / 2)
+        let firstImageDrawY  = round((newImageSize.height - firstImage.size.height ) / 2)
+        
+        let secondImageDrawX = round((newImageSize.width  - secondImage.size.width ) / 2)
+        let secondImageDrawY = round((newImageSize.height - secondImage.size.height) / 2)
+        
+        firstImage .draw(at: CGPoint(x: firstImageDrawX,  y: firstImageDrawY))
+        secondImage.draw(at: CGPoint(x: secondImageDrawX, y: secondImageDrawY))
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        
+        return image!
+    }
+    
+}
