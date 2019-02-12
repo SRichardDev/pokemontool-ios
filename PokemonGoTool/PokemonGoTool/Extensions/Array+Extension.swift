@@ -11,3 +11,11 @@ extension RangeReplaceableCollection where Element: Equatable {
         return (false, element)
     }
 }
+
+extension Array where Element == Pokestop {
+    mutating func replace(object: Element) {
+        if let index = index(where: {$0.id == object.id}) {
+            self[index] = object
+        }
+    }
+}

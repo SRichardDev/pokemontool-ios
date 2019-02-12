@@ -33,6 +33,7 @@ class FirebaseConnector {
     private var connectivityTimer: Timer?
     var pokestops = [Pokestop]()
     var arenas = [Arena]()
+    var quests = [QuestDefinition]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
     var isSignedIn: Bool {
@@ -43,9 +44,14 @@ class FirebaseConnector {
         loadUser()
         pokestopsRef = Database.database().reference(withPath: "pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
-//        addRaidBosses()
-        addQuests()
         checkConnectivity()
+//        addRaidBosses()
+//        addQuests()
+        
+        loadQuests { quests in
+            guard let quests = quests else { return }
+            self.quests = quests
+        }
     }
     
     func loadUser() {
@@ -100,6 +106,7 @@ class FirebaseConnector {
                     self.pokestops.forEach { savedPokestop in
                         if pokestop.id == savedPokestop.id {
                             pokestopAlreadySaved = true
+                            self.pokestops.replace(object: pokestop)
                         }
                     }
                     if !pokestopAlreadySaved {
@@ -215,12 +222,16 @@ class FirebaseConnector {
         let quest4 = ["quest" : "Brüte 5 Eier aus",
                       "reward" : "3 x Sonderbonbon",
                       "imageName" : "candy"]
-
+        let quest5 = ["quest" : "Lande 3 fabelhafte Würfe hintereinander",
+                      "reward" : "Larvitar",
+                      "imageName" : "246"]
+        
         let quests = Database.database().reference(withPath: "quests")
         quests.childByAutoId().setValue(quest1)
         quests.childByAutoId().setValue(quest2)
         quests.childByAutoId().setValue(quest3)
         quests.childByAutoId().setValue(quest4)
+        quests.childByAutoId().setValue(quest5)
     }
     
     

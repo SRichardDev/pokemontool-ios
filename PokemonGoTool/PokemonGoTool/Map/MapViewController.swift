@@ -279,7 +279,8 @@ extension MapViewController: DetailAnnotationViewDelegate {
     
     func showInfoDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
-            coordinator?.showPokestopDetails(for: pokestopAnnotation)
+            guard let pokestop = firebaseConnector.pokestops.first(where: { $0.id == pokestopAnnotation.id }) else { return }
+            coordinator?.showPokestopDetails(for: pokestop)
         } else if let arenaAnnotation = annotation as? Arena {
 
         }

@@ -79,6 +79,7 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
 }
 
 struct Quest: Codable {
+    let definitionId: String
     let name: String
     let reward: String
     let submitter: String

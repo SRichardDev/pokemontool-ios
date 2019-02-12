@@ -63,6 +63,7 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         cell.titleLabel.text = quest.quest
         cell.subtitleLabel.text = quest.reward
         cell.rewardImageView.image = ImageManager.image(named: quest.imageName)
+        cell.quest = quest
         return cell
     }
     
@@ -71,8 +72,15 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         guard let questName = cell.titleLabel.text else { fatalError() }
         guard let reward = cell.subtitleLabel.text else { fatalError() }
         guard let trainerName = firebaseConnector.user?.trainerName else { fatalError() }
-        let quest = Quest(name: questName, reward: reward, submitter: trainerName)
-        firebaseConnector.saveQuest(quest: quest, for: pokestop)
+        guard let questDefinition = cell.quest else { fatalError() }
+        
+        let quest = Quest(definitionId: questDefinition.id ?? "??",
+                          name: questName,
+                          reward: reward,
+                          submitter: trainerName)
+        
+        firebaseConnector.saveQuest(quest: quest,
+                                    for: pokestop)
         dismiss(animated: true, completion: nil)
     }
 }
@@ -82,6 +90,8 @@ class SubmitQuestCell: UITableViewCell {
     @IBOutlet var rewardImageView: UIImageView!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var subtitleLabel: Label!
+    
+    var quest: QuestDefinition!
     
     override func awakeFromNib() {
         super.awakeFromNib()
