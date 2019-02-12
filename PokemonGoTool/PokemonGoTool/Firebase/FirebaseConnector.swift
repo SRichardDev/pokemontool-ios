@@ -223,15 +223,23 @@ class FirebaseConnector {
                       "reward" : "3 x Sonderbonbon",
                       "imageName" : "candy"]
         let quest5 = ["quest" : "Lande 3 fabelhafte Würfe hintereinander",
-                      "reward" : "Larvitar",
+                      "reward" : "Larvitar ✨",
                       "imageName" : "246"]
-        
+        let quest6 = ["quest" : "Fange ein Pokémon vom Typ Drache",
+                      "reward" : "Dratini ✨",
+                      "imageName" : "147"]
+        let quest7 = ["quest" : "Lande 3 großartige Curveball-Würfe hintereinander",
+                      "reward" : "Onix",
+                      "imageName" : "95"]
+
         let quests = Database.database().reference(withPath: "quests")
         quests.childByAutoId().setValue(quest1)
         quests.childByAutoId().setValue(quest2)
         quests.childByAutoId().setValue(quest3)
         quests.childByAutoId().setValue(quest4)
         quests.childByAutoId().setValue(quest5)
+        quests.childByAutoId().setValue(quest6)
+        quests.childByAutoId().setValue(quest7)
     }
     
     
