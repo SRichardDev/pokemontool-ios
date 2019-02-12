@@ -36,10 +36,8 @@ class ImageManager {
             let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("pokemon/\(imageName).png")
             if let image = UIImage(contentsOfFile: imageURL.path) {
                 return image
-            } else {
-                return UIImage(named: "0")
             }
         }
-        return UIImage(named: imageName)
+        return nil
     }
 }

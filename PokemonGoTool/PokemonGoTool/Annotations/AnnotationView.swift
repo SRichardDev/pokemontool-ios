@@ -19,7 +19,7 @@ class AnnotationView: CustomAnnotationView {
         if (customAnnotation as? Arena) != nil {
             labelOffsetY = 0
         } else {
-            labelOffsetY = 28
+            labelOffsetY = 20
         }
         
         label.text = annotation.name
@@ -103,7 +103,8 @@ class AnnotationView: CustomAnnotationView {
         if let image = ImageManager.image(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "") {
             
             let baseImage = UIImage(named: "Pokestop")!
-            let topImage = image.scaled(with: 0.5)!
+            let size = CGSize(width: image.size.width/2, height: image.size.height/2)
+            let topImage = image.resize(targetSize: size)
             
             annotationView?.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: topImage)
         } else {

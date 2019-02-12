@@ -59,7 +59,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        guard !annotation.isKind(of: MKUserLocation.self) else {
+            let pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            pin.image = ImageManager.image(named: "25-original-cap")?.resize(scaleFactor: 0.5)
+            return pin
+        }
         let annotationView = AnnotationView.prepareFor(mapView: mapView,
                                                        annotation: annotation,
                                                        showLabel: currentlyShowingLabels)
