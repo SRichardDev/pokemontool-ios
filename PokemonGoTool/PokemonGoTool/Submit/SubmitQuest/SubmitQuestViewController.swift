@@ -38,6 +38,39 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
         searchController.searchBar.scopeButtonTitles = ["Alle", "Fange", "Lande", "Gewinne"]
         searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuest))
+        navigationItem.rightBarButtonItem = addItem
+    }
+    
+    @objc
+    func addQuest() {
+        let alert = UIAlertController(title: "Neue Quest", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Senden", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            let textField1 = alert.textFields![1] as UITextField
+            let textField2 = alert.textFields![2] as UITextField
+            
+            let quest = ["quest" : textField.text!,
+                         "reward" : textField1.text!,
+                         "imageName" : textField2.text!]
+            self.firebaseConnector.addQuest(quest)
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Quest"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Reward"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Image Name"
+        }
+        
+        let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated:true)
     }
 }
 
@@ -72,7 +105,14 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.cellForRow(at: indexPath) as! SubmitQuestCell
         guard let questName = cell.titleLabel.text else { fatalError() }
         guard let reward = cell.subtitleLabel.text else { fatalError() }
-        guard let trainerName = firebaseConnector.user?.trainerName else { fatalError() }
+        guard let trainerName = firebaseConnector.user?.trainerName else {
+            let alert = UIAlertController(title: "Fehler",
+                                          message: "Bitte registriere dich um Feldforschungen einzureichen",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            present(alert, animated: true)
+            return
+        }
         guard let questDefinition = cell.quest else { fatalError() }
         
         let quest = Quest(definitionId: questDefinition.id ?? "??",

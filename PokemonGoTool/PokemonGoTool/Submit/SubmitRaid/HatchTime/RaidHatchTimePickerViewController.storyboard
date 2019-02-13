@@ -36,14 +36,14 @@
                                         <rect key="frame" x="0.0" y="20.5" width="375" height="169.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZK-F5-JNz">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="169.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="169.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="ZF2-82-DjV"/>
+                                                    <constraint firstAttribute="width" constant="75" id="ZF2-82-DjV"/>
                                                 </constraints>
                                             </view>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-0J-wmE">
-                                                <rect key="frame" x="100" y="0.0" width="175" height="169.5"/>
+                                                <rect key="frame" x="75" y="0.0" width="225" height="169.5"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="570669448.518489">
                                                     <!--2019-01-31 23:17:28 +0000-->
                                                 </date>
@@ -52,7 +52,7 @@
                                                 </connections>
                                             </datePicker>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APm-fc-krj">
-                                                <rect key="frame" x="275" y="0.0" width="100" height="169.5"/>
+                                                <rect key="frame" x="300" y="0.0" width="75" height="169.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>

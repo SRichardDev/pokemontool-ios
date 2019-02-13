@@ -246,6 +246,11 @@ class FirebaseConnector {
         quests.childByAutoId().setValue(quest7)
     }
     
+    func addQuest(_ data: [String : String]) {
+        let quests = Database.database().reference(withPath: "quests")
+        quests.childByAutoId().setValue(data)
+    }
+    
     
     private func checkConnectivity() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")
