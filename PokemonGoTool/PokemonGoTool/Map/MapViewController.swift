@@ -50,7 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
-                addPolyLine(for: geohashBox)
+//                addPolyLine(for: geohashBox)
                 firebaseConnector.loadPokestops(for: geohashBox.hash)
                 firebaseConnector.loadArenas(for: geohashBox.hash)
             }
@@ -239,5 +239,9 @@ extension MapViewController: PushManagerDelegate {
                                                latitudinalMeters: 200,
                                                longitudinalMeters: 200)
         mapView.setRegion(mapRegionFromPush!, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.mapRegionFromPush = nil
+        }
     }
 }

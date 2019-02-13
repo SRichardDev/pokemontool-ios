@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {}
     func applicationWillEnterForeground(_ application: UIApplication) {}
     func applicationDidBecomeActive(_ application: UIApplication) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
+//        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     func applicationWillTerminate(_ application: UIApplication) {}
 }
