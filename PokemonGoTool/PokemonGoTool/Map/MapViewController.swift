@@ -86,6 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                                                        annotation: annotation,
                                                        showLabel: currentlyShowingLabels)
         annotationView?.delegate = self
+        
         return annotationView
     }
     
@@ -103,12 +104,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        views.forEach { $0.alpha = 0 }
-        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
-            views.forEach { $0.alpha = 1 }
-        }, completion: nil)
+        views.forEach { $0.transform = CGAffineTransform(scaleX: 0, y: 0) }
+        UIView.animate(withDuration: 0.5) {
+            views.forEach { $0.transform = .identity }
+        }
     }
-
+    
     func changeAnnotationLabelVisibility() {
         let showLabels = mapView.camera.altitude < 2000.0
         
