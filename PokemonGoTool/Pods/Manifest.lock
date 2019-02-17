@@ -1,4 +1,5 @@
 PODS:
+  - Cluster (2.4.3)
   - CodableFirebase (0.2.1)
   - Firebase/Auth (5.16.0):
     - Firebase/CoreOnly
@@ -86,6 +87,7 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
+  - Cluster
   - CodableFirebase
   - Firebase/Auth
   - Firebase/Core
@@ -95,6 +97,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Cluster
     - CodableFirebase
     - Firebase
     - FirebaseAnalytics
@@ -116,6 +119,7 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
+  Cluster: 7cf5838d8e991945da12a82cab51c5b8ce290de2
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
   Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   FirebaseAnalytics: d35d47c03c50c73c14a7fd31463c5775843e78a9
@@ -136,6 +140,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 77d2a8df4b1d97cb39c896c55f367cff3ead11bd
+PODFILE CHECKSUM: b3c84dadcb27a8aaa0e6da6ac8fbd117158bad09
 
 COCOAPODS: 1.5.3

@@ -2,6 +2,7 @@
 import UIKit
 import MapKit
 import NotificationBannerSwift
+import Cluster
 
 class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable {
     
@@ -16,9 +17,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var allAnnotations = [PokestopPointAnnotation]()
     var geohashWindow: GeohashWindow?
     var selectedGeohashes = [String]()
-    var isGeoashSelectionMode = false
+    var isGeohashSelectionMode = false
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
+    
+    lazy var manager: ClusterManager = {
+        let manager = ClusterManager()
+        manager.delegate = self
+        manager.maxZoomLevel = 17
+        manager.minCountForClustering = 3
+        manager.clusterPosition = .average
+        return manager
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +47,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        removeAnnotationIfNeeded()
+//        removeAnnotationIfNeeded()
         
         //TODO: Fix crash when tilting map. Do adding/removing annotations on main thread
-        mapView.removeOverlays(mapView.overlays)
+//        mapView.removeOverlays(mapView.overlays)
         
         let mapRect = mapView.visibleMapRect
         geohashWindow = GeohashWindow(topLeftCoordinate: MapRectUtility.getNorthWestCoordinate(in: mapRect),
                                       topRightCoordiante: MapRectUtility.getNorthEastCoordinate(in: mapRect),
-                                      bottomLeftCoordinated: MapRectUtility.getSouthWestCoordinate(in: mapRect),
+                                      bottomLeftCoordinate: MapRectUtility.getSouthWestCoordinate(in: mapRect),
                                       bottomRightCoordiante: MapRectUtility.getSouthEastCoordinate(in: mapRect))
         
         geohashWindow?.geohashMatrix.forEach { lineArray in
@@ -55,7 +65,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 firebaseConnector.loadArenas(for: geohashBox.hash)
             }
         }
+
         changeAnnotationLabelVisibility()
+        manager.reload(mapView: mapView)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -65,6 +77,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             pin.addPulsator()
             return pin
         }
+        
+        if let annotation = annotation as? ClusterAnnotation {
+            return mapView.annotationView(annotation: annotation, reuseIdentifier: "identifier")
+        }
+        
         let annotationView = AnnotationView.prepareFor(mapView: mapView,
                                                        annotation: annotation,
                                                        showLabel: currentlyShowingLabels)
@@ -75,14 +92,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = isGeoashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
+            polylineRenderer.strokeColor = isGeohashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
             polylineRenderer.lineWidth = 1
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
-            renderer.fillColor = isGeoashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
+            renderer.fillColor = isGeohashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
             return renderer
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        views.forEach { $0.alpha = 0 }
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            views.forEach { $0.alpha = 1 }
+        }, completion: nil)
     }
 
     func changeAnnotationLabelVisibility() {
@@ -108,15 +132,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func addAnnotations(for annotations: [Annotation]) {
+        
+        manager.removeAll()
+        manager.reload(mapView: mapView)
+        var mapAnnotations = [MKAnnotation]()
+
         for annotation in annotations {
             if let pokestopAnnotation = annotation as? Pokestop {
                 let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation, quests: firebaseConnector?.quests)
-                addAnnotationIfNeeded(annotation)
+                mapAnnotations.append(annotation)
+                
             } else if let arenaAnnotation = annotation as? Arena {
                 let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
-                addAnnotationIfNeeded(annotation)
+                mapAnnotations.append(annotation)
             }
         }
+        manager.add(mapAnnotations)
+        manager.reload(mapView: mapView)
     }
     
     func didUpdateAnnotation(newAnnotation: Annotation) {
@@ -147,12 +179,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
 }
 
 extension MapViewController: FirebaseDelegate {
-    func didUpdateArenas() {
-        addAnnotations(for: firebaseConnector.arenas)
+    func didUpdateArenas(arena: Arena) {
+        let annotation = ArenaPointAnnotation(arena: arena)
+        manager.add(annotation)
+        manager.reload(mapView: mapView)
     }
     
-    func didUpdatePokestops() {
-        addAnnotations(for: firebaseConnector.pokestops)
+    func didUpdatePokestops(pokestop: Pokestop) {
+        let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: firebaseConnector?.quests)
+        manager.add(annotation)
+        manager.reload(mapView: mapView)
     }
 }
 
@@ -162,62 +198,13 @@ extension MapViewController: LocationManagerDelegate {
     }
 }
 
-extension MapViewController {
-    
-    func addAnnotationIfNeeded(_ annotation: MKAnnotation) {
-        if let pokestopAnnotation = annotation as? PokestopPointAnnotation {
-            var pokestopFound = false
-            self.mapView.annotations.forEach { annotationOnMap in
-                guard let annotationOnMap = annotationOnMap as? PokestopPointAnnotation else { return }
-                if annotationOnMap.pokestop.id == pokestopAnnotation.pokestop.id {
-                    pokestopFound = true
-                }
-            }
-            if !pokestopFound {
-                self.mapView.addAnnotation(annotation)
-            }
-        } else if let arenaAnnotation = annotation as? ArenaPointAnnotation {
-            var arenaFound = false
-            mapView.annotations.forEach { annotationOnMap in
-                guard let annotationOnMap = annotationOnMap as? ArenaPointAnnotation else { return }
-                if annotationOnMap.arena.id == arenaAnnotation.arena.id {
-                    arenaFound = true
-                }
-            }
-            if !arenaFound {
-                mapView.addAnnotation(annotation)
-            }
-        }
-    }
-    
-    func removeAnnotationIfNeeded() {
-        mapView.annotations.forEach {
-            guard let annotation = $0 as? GeohashStringRepresentable else { return }
-            var foundAnnotationGeohash = false
-            
-            geohashWindow?.geohashMatrix.forEach { lineArray in
-                for geohashBox in lineArray {
-                    if annotation.geohash == geohashBox.hash {
-                        foundAnnotationGeohash = true
-                        break
-                    }
-                }
-            }
-            
-            if !foundAnnotationGeohash {
-                mapView.removeAnnotation(annotation as! MKAnnotation)
-            }
-        }
-    }
-}
-
 extension MapViewController: DetailAnnotationViewDelegate {
     
     func showInfoDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
 //            guard let pokestop = firebaseConnector.pokestops.first(where: { $0.id == pokestopAnnotation.id }) else { return }
             coordinator?.showPokestopDetails(for: pokestopAnnotation)
-        } else if let arenaAnnotation = annotation as? Arena {
+        } else if let _ = annotation as? Arena {
 
         }
     }
@@ -244,5 +231,34 @@ extension MapViewController: PushManagerDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.mapRegionFromPush = nil
         }
+    }
+}
+
+extension MapViewController: ClusterManagerDelegate {
+    
+    func cellSize(for zoomLevel: Double) -> Double {
+        return 0 // default
+    }
+    
+    func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
+        return true
+    }
+}
+
+extension MKMapView {
+    func annotationView(annotation: MKAnnotation?, reuseIdentifier: String) -> MKAnnotationView {
+        let annotationView = self.annotationView(of: CountClusterAnnotationView.self, annotation: annotation, reuseIdentifier: reuseIdentifier)
+        annotationView.countLabel.backgroundColor = .orange
+        return annotationView
+    }
+}
+
+extension MKMapView {
+    func annotationView<T: MKAnnotationView>(of type: T.Type, annotation: MKAnnotation?, reuseIdentifier: String) -> T {
+        guard let annotationView = dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? T else {
+            return type.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        }
+        annotationView.annotation = annotation
+        return annotationView
     }
 }

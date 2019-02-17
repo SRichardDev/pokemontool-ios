@@ -5,16 +5,16 @@ class GeohashWindow {
     
     var currentGeohash = ""
     var geohashMatrix = [[GeohashBox]]()
-    let defaultLengthTopToBottom = 40
+    let defaultLengthTopToBottom = 50
     
     init(topLeftCoordinate: CLLocationCoordinate2D,
          topRightCoordiante: CLLocationCoordinate2D,
-         bottomLeftCoordinated: CLLocationCoordinate2D,
+         bottomLeftCoordinate: CLLocationCoordinate2D,
          bottomRightCoordiante: CLLocationCoordinate2D) {
         
         let topLeftGeohash = Geohash.encode(latitude: topLeftCoordinate.latitude, longitude: topLeftCoordinate.longitude)
         let topRightGeohash = Geohash.encode(latitude: topRightCoordiante.latitude, longitude: topRightCoordiante.longitude)
-        let bottomLeftGeohash = Geohash.encode(latitude: bottomLeftCoordinated.latitude, longitude: bottomLeftCoordinated.longitude)
+        let bottomLeftGeohash = Geohash.encode(latitude: bottomLeftCoordinate.latitude, longitude: bottomLeftCoordinate.longitude)
         
         let lengthLeftToRight = length(for: topLeftGeohash, to: topRightGeohash, direction: .east)
         let lengthTopToBottom = length(for: topLeftGeohash, to: bottomLeftGeohash, direction: .south)
@@ -74,16 +74,3 @@ class GeohashWindow {
     }
 }
 
-
-
-extension Array where Element: Equatable {
-    mutating func removeDuplicates() {
-        var result = [Element]()
-        for value in self {
-            if !result.contains(value) {
-                result.append(value)
-            }
-        }
-        self = result
-    }
-}

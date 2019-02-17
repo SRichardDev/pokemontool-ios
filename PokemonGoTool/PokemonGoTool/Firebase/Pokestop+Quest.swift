@@ -23,7 +23,7 @@ protocol Annotation  {
     var id: String? { get set }
 }
 
-struct Pokestop: FirebaseCodable, Equatable, Annotation {
+struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
     var name: String
     var latitude: Double
     var longitude: Double
@@ -42,6 +42,10 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation {
         get {
             return quest != nil
         }
+    }
+    
+    var hashValue: Int {
+        return name.hashValue ^ id.hashValue
     }
     
     init(name: String, latitude: Double, longitude: Double, submitter: String) {
@@ -105,7 +109,16 @@ struct QuestDefinition: FirebaseCodable {
     }
 }
 
-struct Arena: FirebaseCodable, Annotation {    
+struct Arena: FirebaseCodable, Annotation, Hashable {
+    
+    var hashValue: Int {
+        return name.hashValue ^ id.hashValue
+    }
+    
+    static func == (lhs: Arena, rhs: Arena) -> Bool {
+        return (lhs.id == rhs.id)
+    }
+    
     var name: String
     var latitude: Double
     var longitude: Double

@@ -13,8 +13,8 @@ extension MapViewController {
     }
     
     private func togglePushRegistrationMode() {
-        self.isGeoashSelectionMode = !self.isGeoashSelectionMode
-        if self.isGeoashSelectionMode {
+        self.isGeohashSelectionMode = !self.isGeohashSelectionMode
+        if self.isGeohashSelectionMode {
             let banner = NotificationBanner(title: "Push Registrierung",
                                             subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
                                             style: .info)
@@ -79,7 +79,7 @@ extension MapViewController {
     }
     
     @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
-        if isGeoashSelectionMode {
+        if isGeohashSelectionMode {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
             let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)

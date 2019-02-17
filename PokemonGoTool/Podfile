@@ -12,5 +12,6 @@ target 'PokemonGoTool' do
   pod 'Firebase/Messaging'
   pod 'CodableFirebase'
   pod 'NotificationBannerSwift'
+  pod 'Cluster'
 
 end

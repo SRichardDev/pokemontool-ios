@@ -6,8 +6,8 @@ import CodableFirebase
 import NotificationBannerSwift
 
 protocol FirebaseDelegate {
-    func didUpdatePokestops()
-    func didUpdateArenas()
+    func didUpdatePokestops(pokestop: Pokestop)
+    func didUpdateArenas(arena: Arena)
     func didUpdateAnnotation(newAnnotation: Annotation)
 }
 
@@ -32,8 +32,8 @@ class FirebaseConnector {
     }
     
     private var connectivityTimer: Timer?
-    var pokestops = [Pokestop]()
-    var arenas = [Arena]()
+    var pokestops: Set<Pokestop> = []
+    var arenas: Set<Arena> = []
     var quests = [QuestDefinition]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
@@ -98,48 +98,28 @@ class FirebaseConnector {
     
     func loadPokestops(for geohash: String) {
         guard geohash != "" else { return }
-        pokestops.removeAll()
         pokestopsRef.child(geohash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     guard let pokestop: Pokestop = decode(from: child) else { continue }
-                    var pokestopAlreadySaved = false
-                    self.pokestops.forEach { savedPokestop in
-                        if pokestop.id == savedPokestop.id {
-                            pokestopAlreadySaved = true
-                            self.pokestops.replace(object: pokestop)
-                            self.delegate?.didUpdateAnnotation(newAnnotation: pokestop)
-                        }
-                    }
-                    if !pokestopAlreadySaved {
-                        self.pokestops.append(pokestop)
+                    if self.pokestops.insert(pokestop).inserted {
+                        self.delegate?.didUpdatePokestops(pokestop: pokestop)
                     }
                 }
-                self.delegate?.didUpdatePokestops()
             }
         })
     }
     
     func loadArenas(for geohash: String) {
         guard geohash != "" else { return }
-        arenas.removeAll()
         arenasRef.child(geohash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     guard let arena: Arena = decode(from: child) else { continue }
-                    var arenaAlreadySaved = false
-                    self.arenas.forEach { savedArena in
-                        if arena.id == savedArena.id {
-                            arenaAlreadySaved = true
-                            self.arenas.replace(object: arena)
-                            self.delegate?.didUpdateAnnotation(newAnnotation: arena)
-                        }
-                    }
-                    if !arenaAlreadySaved {
-                        self.arenas.append(arena)
+                    if self.arenas.insert(arena).inserted {
+                        self.delegate?.didUpdateArenas(arena: arena)
                     }
                 }
-                self.delegate?.didUpdateArenas()
             }
         })
     }

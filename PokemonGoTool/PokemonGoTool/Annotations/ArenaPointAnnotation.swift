@@ -17,6 +17,10 @@ class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
         }
     }
     
+    static func == (lhs: ArenaPointAnnotation, rhs: ArenaPointAnnotation) -> Bool {
+        return (lhs.arena == rhs.arena)
+    }
+    
     convenience init(coordinate: CLLocationCoordinate2D) {
         self.init()
         self.coordinate = coordinate

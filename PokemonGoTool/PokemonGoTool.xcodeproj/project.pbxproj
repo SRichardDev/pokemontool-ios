@@ -10,6 +10,7 @@
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
 		2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A521ED266B00091F8C /* Assets.xcassets */; };
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
+		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BA922061C7200F6A1F7 /* RaidBossPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BA822061C7200F6A1F7 /* RaidBossPickerViewController.swift */; };
 		2C348BAB22061C9D00F6A1F7 /* RaidBossPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAA22061C9D00F6A1F7 /* RaidBossPickerViewController.storyboard */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
@@ -103,6 +104,7 @@
 		2C1976A521ED266B00091F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C1976A821ED266B00091F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1976AA21ED266B00091F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BA822061C7200F6A1F7 /* RaidBossPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidBossPickerViewController.swift; sourceTree = "<group>"; };
 		2C348BAA22061C9D00F6A1F7 /* RaidBossPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossPickerViewController.storyboard; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */,
 				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
+				2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */,
 				2C395A2022025122005330B8 /* Map */,
 				2C395A212202512E005330B8 /* Coordinator */,
 				2C97F78721F67D2F00630BA2 /* Submit */,
@@ -649,6 +652,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Cluster/Cluster.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableFirebase/CodableFirebase.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -663,6 +667,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cluster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableFirebase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -756,6 +761,7 @@
 				2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */,
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
+				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
