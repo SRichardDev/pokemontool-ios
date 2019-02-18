@@ -35,6 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         coordinator?.appModule.pushManager.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.mapType = .mutedStandard
         zoomToUserLocation()
         setupMapButtonsMenu()
     }
@@ -180,13 +181,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
 }
 
 extension MapViewController: FirebaseDelegate {
-    func didUpdateArenas(arena: Arena) {
+    
+    func didUpdateArena(arena: Arena) {
+        for annotationOnMap in mapView.annotations {
+            if let arenaAnnotationOnMap = annotationOnMap as? ArenaPointAnnotation {
+                if arenaAnnotationOnMap.arena.id == arena.id {
+                    manager.remove(annotationOnMap)
+                    didAddArena(arena: arena)
+                }
+            }
+        }
+    }
+
+    func didUpdatePokestop(pokestop: Pokestop) {
+        for annotationOnMap in mapView.annotations {
+            if let pokestopAnnotationOnMap = annotationOnMap as? PokestopPointAnnotation {
+                if pokestopAnnotationOnMap.pokestop.id == pokestop.id {
+                    manager.remove(annotationOnMap)
+                    didAddPokestop(pokestop: pokestop)
+                }
+            }
+        }
+    }
+    
+    func didAddArena(arena: Arena) {
         let annotation = ArenaPointAnnotation(arena: arena)
         manager.add(annotation)
         manager.reload(mapView: mapView)
     }
     
-    func didUpdatePokestops(pokestop: Pokestop) {
+    func didAddPokestop(pokestop: Pokestop) {
         let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: firebaseConnector?.quests)
         manager.add(annotation)
         manager.reload(mapView: mapView)
@@ -203,7 +227,6 @@ extension MapViewController: DetailAnnotationViewDelegate {
     
     func showInfoDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
-//            guard let pokestop = firebaseConnector.pokestops.first(where: { $0.id == pokestopAnnotation.id }) else { return }
             coordinator?.showPokestopDetails(for: pokestopAnnotation)
         } else if let _ = annotation as? Arena {
 
@@ -248,7 +271,9 @@ extension MapViewController: ClusterManagerDelegate {
 
 extension MKMapView {
     func annotationView(annotation: MKAnnotation?, reuseIdentifier: String) -> MKAnnotationView {
-        let annotationView = self.annotationView(of: CountClusterAnnotationView.self, annotation: annotation, reuseIdentifier: reuseIdentifier)
+        let annotationView = self.annotationView(of: CountClusterAnnotationView.self,
+                                                 annotation: annotation,
+                                                 reuseIdentifier: reuseIdentifier)
         annotationView.countLabel.backgroundColor = .orange
         return annotationView
     }

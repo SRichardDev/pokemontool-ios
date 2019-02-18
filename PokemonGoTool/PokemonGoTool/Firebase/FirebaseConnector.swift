@@ -6,8 +6,10 @@ import CodableFirebase
 import NotificationBannerSwift
 
 protocol FirebaseDelegate {
-    func didUpdatePokestops(pokestop: Pokestop)
-    func didUpdateArenas(arena: Arena)
+    func didAddPokestop(pokestop: Pokestop)
+    func didUpdatePokestop(pokestop: Pokestop)
+    func didAddArena(arena: Arena)
+    func didUpdateArena(arena: Arena)
     func didUpdateAnnotation(newAnnotation: Annotation)
 }
 
@@ -32,8 +34,8 @@ class FirebaseConnector {
     }
     
     private var connectivityTimer: Timer?
-    var pokestops: Set<Pokestop> = []
-    var arenas: Set<Arena> = []
+    var pokestops: [String: Pokestop] = [:]
+    var arenas: [String: Arena] = [:]
     var quests = [QuestDefinition]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
@@ -102,8 +104,16 @@ class FirebaseConnector {
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     guard let pokestop: Pokestop = decode(from: child) else { continue }
-                    if self.pokestops.insert(pokestop).inserted {
-                        self.delegate?.didUpdatePokestops(pokestop: pokestop)
+                    
+                    if let localPokestop = self.pokestops[pokestop.id] {
+                        if localPokestop == pokestop { continue }
+                        print("Updated Pokestop")
+                        self.pokestops[pokestop.id] = pokestop
+                        self.delegate?.didUpdatePokestop(pokestop: pokestop)
+                    } else {
+                        print("Added Pokestop")
+                        self.pokestops[pokestop.id] = pokestop
+                        self.delegate?.didAddPokestop(pokestop: pokestop)
                     }
                 }
             }
@@ -116,8 +126,16 @@ class FirebaseConnector {
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
                     guard let arena: Arena = decode(from: child) else { continue }
-                    if self.arenas.insert(arena).inserted {
-                        self.delegate?.didUpdateArenas(arena: arena)
+                    
+                    if let localArena = self.arenas[arena.id] {
+                        if localArena == arena { continue }
+                        print("Updated Arena")
+                        self.arenas[arena.id] = arena
+                        self.delegate?.didUpdateArena(arena: arena)
+                    } else {
+                        print("Added Arena")
+                        self.arenas[arena.id] = arena
+                        self.delegate?.didAddArena(arena: arena)
                     }
                 }
             }

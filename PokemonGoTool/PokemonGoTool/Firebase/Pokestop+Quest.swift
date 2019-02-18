@@ -4,7 +4,7 @@ import Firebase
 import CodableFirebase
 
 protocol FirebaseCodable: Codable {
-    var id: String? {get set}
+    var id: String! {get set}
     mutating func setId(_ documentId: String)
 }
 
@@ -20,7 +20,7 @@ protocol Annotation  {
     var longitude: Double { get set }
     var upVotes: Int? { get set }
     var downVotes: Int? { get set }
-    var id: String? { get set }
+    var id: String! { get set }
 }
 
 struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
@@ -28,7 +28,7 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
     var latitude: Double
     var longitude: Double
     var submitter: String
-    var id: String?
+    var id: String!
     var quest: Quest?
     var upVotes: Int?
     var downVotes: Int?
@@ -53,14 +53,6 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
         self.latitude = latitude
         self.longitude = longitude
         self.submitter = submitter
-    }
-    
-    static func == (lhs: Pokestop, rhs: Pokestop) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.latitude == rhs.latitude &&
-            lhs.longitude == rhs.longitude &&
-            lhs.submitter == rhs.submitter &&
-            lhs.id == rhs.id
     }
     
     mutating func updateData(with pokestop: Pokestop) {
@@ -89,7 +81,7 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
     return nil
 }
 
-struct Quest: Codable {
+struct Quest: Codable, Equatable {
     let definitionId: String
     let name: String
     let reward: String
@@ -97,7 +89,7 @@ struct Quest: Codable {
 }
 
 struct QuestDefinition: FirebaseCodable {
-    var id: String?
+    var id: String!
     let quest: String
     let reward: String
     let imageName: String
@@ -115,16 +107,12 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
         return name.hashValue ^ id.hashValue
     }
     
-    static func == (lhs: Arena, rhs: Arena) -> Bool {
-        return (lhs.id == rhs.id)
-    }
-    
     var name: String
     var latitude: Double
     var longitude: Double
     let submitter: String
     var isEX: Bool = false
-    var id: String?
+    var id: String!
     var raid: Raid?
     var upVotes: Int?
     var downVotes: Int?
@@ -143,7 +131,7 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
     }
 }
 
-struct Raid: Codable {
+struct Raid: Codable, Equatable {
     let level: Int
     var hatchTime: String?
     var raidBoss: String?
@@ -151,7 +139,7 @@ struct Raid: Codable {
     var raidMeetup: RaidMeetup?
 }
 
-struct RaidMeetup: Codable {
+struct RaidMeetup: Codable, Equatable {
     let meetupTime: String
     var participants: [User?]
 }

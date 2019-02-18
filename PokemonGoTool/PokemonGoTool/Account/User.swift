@@ -2,7 +2,11 @@
 import Foundation
 import Firebase
 
-class User: Codable {
+class User: Codable, Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     private(set) var id: String
     private(set) var email: String
     private(set) var trainerName: String?
