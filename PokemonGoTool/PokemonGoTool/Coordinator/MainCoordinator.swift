@@ -1,6 +1,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import UIWindowTransitions
 
 class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     
@@ -14,14 +15,11 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         self.window = window
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
-        window.rootViewController = LoadingViewController.instantiateFromStoryboard()
+        let loadingViewController = LoadingViewController.instantiateFromStoryboard()
+        window.rootViewController = loadingViewController
         appModule.firebaseConnector.startUpDelegate = self
     }
     
-    func start() {
-        //make loading screen
-        
-    }
     func didLoadInitialData() {
         showMainMap()
     }
@@ -40,6 +38,12 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         navigationController.viewControllers = [accountViewController]
         tabBarController.viewControllers = [mapViewController, navigationController]
         window.rootViewController = tabBarController
+        
+        var options = UIWindow.TransitionOptions()
+        options.direction = .fade
+        options.duration = 0.75
+        options.style = .easeOut
+        window.setRootViewController(tabBarController, options: options)
     }
     
     func showSubmitPokestopAndArena(for viewModel: SubmitViewModel) {

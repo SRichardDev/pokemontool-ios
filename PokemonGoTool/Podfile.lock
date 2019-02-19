@@ -88,6 +88,7 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.6.1)
   - Protobuf (3.6.1)
   - SnapKit (4.2.0)
+  - UIWindowTransitions (0.2.0)
 
 DEPENDENCIES:
   - Cluster
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - NotificationBannerSwift
   - NVActivityIndicatorView
+  - UIWindowTransitions
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -122,6 +124,7 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - Protobuf
     - SnapKit
+    - UIWindowTransitions
 
 SPEC CHECKSUMS:
   Cluster: 7cf5838d8e991945da12a82cab51c5b8ce290de2
@@ -145,7 +148,8 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  UIWindowTransitions: cb662e2ae9e2d1060fcdbe3eb3de9232bedb7612
 
-PODFILE CHECKSUM: b2595346a5a4437b415c6fb297340363fd193ab1
+PODFILE CHECKSUM: 973f0609fc862089e45290abf659ec745b259cf6
 
 COCOAPODS: 1.5.3
