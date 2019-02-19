@@ -13,5 +13,5 @@ target 'PokemonGoTool' do
   pod 'CodableFirebase'
   pod 'NotificationBannerSwift'
   pod 'Cluster'
-
+  pod 'NVActivityIndicatorView'
 end

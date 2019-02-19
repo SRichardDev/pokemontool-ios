@@ -83,6 +83,9 @@ PODS:
   - NotificationBannerSwift (2.0.1):
     - MarqueeLabel/Swift (~> 3.2.0)
     - SnapKit (~> 4.2.0)
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
   - Protobuf (3.6.1)
   - SnapKit (4.2.0)
 
@@ -94,6 +97,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - NotificationBannerSwift
+  - NVActivityIndicatorView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -115,6 +119,7 @@ SPEC REPOS:
     - MarqueeLabel
     - nanopb
     - NotificationBannerSwift
+    - NVActivityIndicatorView
     - Protobuf
     - SnapKit
 
@@ -137,9 +142,10 @@ SPEC CHECKSUMS:
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NotificationBannerSwift: 007774aa590cc9680647b92b2f217bef5c00c32c
+  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: b3c84dadcb27a8aaa0e6da6ac8fbd117158bad09
+PODFILE CHECKSUM: b2595346a5a4437b415c6fb297340363fd193ab1
 
 COCOAPODS: 1.5.3

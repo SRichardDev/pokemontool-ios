@@ -31,14 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
-        
-        let tabBarController = UITabBarController()
-        coordinator = MainCoordinator(appModule: appModule, tabBarController: tabBarController)
-        coordinator?.start()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
+        coordinator = MainCoordinator(appModule: appModule, window: window!)
         
         return true
     }

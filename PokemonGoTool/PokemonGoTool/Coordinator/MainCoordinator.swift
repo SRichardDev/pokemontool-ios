@@ -1,21 +1,26 @@
 
 import UIKit
+import NVActivityIndicatorView
 
 class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     
     var children = [Coordinator]()
-    var tabBarController: UITabBarController
+    var tabBarController = UITabBarController()
     var navigationController = NavigationController()
     var appModule: AppModule
-    
-    init(appModule: AppModule, tabBarController: UITabBarController) {
+    var window: UIWindow!
+    init(appModule: AppModule, window: UIWindow) {
         self.appModule = appModule
-        self.tabBarController = tabBarController
+        self.window = window
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+        window.rootViewController = LoadingViewController.instantiateFromStoryboard()
         appModule.firebaseConnector.startUpDelegate = self
     }
     
     func start() {
         //make loading screen
+        
     }
     func didLoadInitialData() {
         showMainMap()
@@ -34,6 +39,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.viewControllers = [accountViewController]
         tabBarController.viewControllers = [mapViewController, navigationController]
+        window.rootViewController = tabBarController
     }
     
     func showSubmitPokestopAndArena(for viewModel: SubmitViewModel) {
