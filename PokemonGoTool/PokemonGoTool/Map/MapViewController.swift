@@ -132,52 +132,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         mapView.addOverlay(polyLine)
 //        mapView.addOverlay(polygon)
     }
-    
-    func addAnnotations(for annotations: [Annotation]) {
-        
-        manager.removeAll()
-        manager.reload(mapView: mapView)
-        var mapAnnotations = [MKAnnotation]()
-
-        for annotation in annotations {
-            if let pokestopAnnotation = annotation as? Pokestop {
-                let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation, quests: firebaseConnector?.quests)
-                mapAnnotations.append(annotation)
-                
-            } else if let arenaAnnotation = annotation as? Arena {
-                let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
-                mapAnnotations.append(annotation)
-            }
-        }
-        manager.add(mapAnnotations)
-        manager.reload(mapView: mapView)
-    }
-    
-    func didUpdateAnnotation(newAnnotation: Annotation) {
-        let annotation = mapView.annotations.first { annotatinon -> Bool in
-            if let pokestopAnnotatinon = annotatinon as? PokestopPointAnnotation {
-                if pokestopAnnotatinon.pokestop.id == newAnnotation.id {
-                    return true
-                }
-            } else if let arenaAnnotation = annotatinon as? ArenaPointAnnotation {
-                if arenaAnnotation.arena.id == newAnnotation.id {
-                    return true
-                }
-            }
-            return false
-        }
-        
-        guard let presentAnnotation = annotation else { return }
-        mapView.removeAnnotation(presentAnnotation)
-        
-        if let pokestopAnnotation = newAnnotation as? Pokestop {
-            let annotation = PokestopPointAnnotation(pokestop: pokestopAnnotation, quests: firebaseConnector?.quests)
-            mapView.addAnnotation(annotation)
-        } else if let arenaAnnotation = newAnnotation as? Arena {
-            let annotation = ArenaPointAnnotation(arena: arenaAnnotation)
-            mapView.addAnnotation(annotation)
-        }
-    }
 }
 
 extension MapViewController: FirebaseDelegate {

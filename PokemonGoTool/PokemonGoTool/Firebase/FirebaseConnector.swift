@@ -10,7 +10,6 @@ protocol FirebaseDelegate {
     func didUpdatePokestop(pokestop: Pokestop)
     func didAddArena(arena: Arena)
     func didUpdateArena(arena: Arena)
-    func didUpdateAnnotation(newAnnotation: Annotation)
 }
 
 protocol FirebaseUserDelegate {
@@ -37,6 +36,7 @@ class FirebaseConnector {
     var pokestops: [String: Pokestop] = [:]
     var arenas: [String: Arena] = [:]
     var quests = [QuestDefinition]()
+    var raidbosses = [RaidbossDefinition]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
     var isSignedIn: Bool {
@@ -44,17 +44,15 @@ class FirebaseConnector {
     }
     
     init() {
-        loadUser()
-        pokestopsRef = Database.database().reference(withPath: "pokestops")
-        arenasRef = Database.database().reference(withPath: "arenas")
         checkConnectivity()
+        loadQuests { self.quests = $0 }
+        loadRaidBosses { self.raidbosses = $0 }
+        loadUser()
+        pokestopsRef = Database.database().reference(withPath: "test_pokestops")
+        arenasRef = Database.database().reference(withPath: "arenas")
+
 //        addRaidBosses()
 //        addQuests()
-        
-        loadQuests { quests in
-            guard let quests = quests else { return }
-            self.quests = quests
-        }
     }
     
     func loadUser() {
@@ -152,22 +150,22 @@ class FirebaseConnector {
         geohashRegionArena.child("registered_user").updateChildValues(data)
     }
     
-    func loadRaidBosses(for level: Int, completion: @escaping ([[String]]?) -> ()) {
-        var raidBossesArray = [[String]]()
+    func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {
         let raidbosses = Database.database().reference(withPath: "raidBosses")
-        raidbosses.child("level\(level)").observeSingleEvent(of: .value) { snapshot in
+        raidbosses.observeSingleEvent(of: .value) { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                var raidbosses = [RaidbossDefinition]()
+                
                 for child in result {
-                    let number = child.key
-                    let pokemonName = child.value as! String
-                    raidBossesArray.append([number,pokemonName])
+                    guard let raidboss: RaidbossDefinition = decode(from: child) else { continue }
+                    raidbosses.append(raidboss)
                 }
-                completion(raidBossesArray)
+                completion(raidbosses)
             }
         }
     }
     
-    func loadQuests(completion: @escaping ([QuestDefinition]?) -> ()) {
+    func loadQuests(completion: @escaping ([QuestDefinition]) -> ()) {
         let quests = Database.database().reference(withPath: "quests")
         quests.observeSingleEvent(of:.value) { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
@@ -182,32 +180,99 @@ class FirebaseConnector {
     }
     
     private func addRaidBosses() {
-        let level5Data = ["484" : "Palkia"]
-        let level4Data = ["105" : "Alola Knogga",
-                          "176" : "Togetic",
-                          "217" : "Ursaring",
-                          "248" : "Despotar",
-                          "359" : "Absol"]
-        let level3Data = ["65" : "Simsala",
-                          "68" : "Machomei",
-                          "184" : "Azumarill",
-                          "210" : "Granbull"]
-        let level2Data = ["103" : "Alola Kokowei",
-                          "281" : "Kirilia",
-                          "302" : "Zobiris",
-                          "303" : "Flunkifer"]
-        let level1Data = ["129" : "Karpador",
-                          "147" : "Dratini",
-                          "333" : "Wablu",
-                          "349" : "Barschwa",
-                          "403" : "Shinux",
-                          "418" : "Bamelin"]
+        let palkia = ["name": "Palkia",
+                      "level": "5",
+                      "imageName" : "484"]
+        
+        
+        
+        let knogga = ["name": "Alola Knogga",
+                      "level": "4",
+                      "imageName" : "105"]
+        let togetic = ["name": "Togetic",
+                       "level": "4",
+                       "imageName" : "176"]
+        let ursaring = ["name": "Ursaring",
+                        "level": "4",
+                        "imageName" : "217"]
+        let despotar = ["name": "Despotar",
+                        "level": "4",
+                        "imageName" : "248"]
+        let absol = ["name": "Absol",
+                     "level": "4",
+                     "imageName" : "359"]
+        let simsala = ["name": "Simsala",
+                       "level": "4",
+                       "imageName" : "65"]
+        
+        
+        
+        
+        let machomei = ["name": "Machomei",
+                        "level": "3",
+                        "imageName" : "68"]
+        let azumarill = ["name": "Azumarill",
+                         "level": "3",
+                         "imageName" : "184"]
+        let granbull = ["name": "Granbull",
+                        "level": "3",
+                        "imageName" : "210"]
+        
+        
+        
+        let kokowei = ["name": "Alola Kokowei",
+                        "level": "2",
+                        "imageName" : "103"]
+        let kirilia = ["name": "Kirilia",
+                        "level": "2",
+                        "imageName" : "281"]
+        let zobiris = ["name": "Zobiris",
+                        "level": "2",
+                        "imageName" : "302"]
+        let flunkifer = ["name": "Flunkifer",
+                        "level": "2",
+                        "imageName" : "303"]
+        
+        let karpador = ["name": "Karpador",
+                        "level": "1",
+                        "imageName" : "129"]
+        let dratini = ["name": "Dratini",
+                       "level": "1",
+                       "imageName" : "147"]
+        let wablu = ["name": "Wablu",
+                     "level": "1",
+                     "imageName" : "333"]
+        let barschwa = ["name": "Barschwa",
+                        "level": "1",
+                        "imageName" : "349"]
+        let shinux = ["name": "Shinux",
+                      "level": "1",
+                      "imageName" : "403"]
+        let bamelin = ["name": "Bamelin",
+                       "level": "1",
+                       "imageName" : "418"]
+        
         let raidbosses = Database.database().reference(withPath: "raidBosses")
-        raidbosses.child("level5").updateChildValues(level5Data)
-        raidbosses.child("level4").updateChildValues(level4Data)
-        raidbosses.child("level3").updateChildValues(level3Data)
-        raidbosses.child("level2").updateChildValues(level2Data)
-        raidbosses.child("level1").updateChildValues(level1Data)
+        raidbosses.childByAutoId().updateChildValues(palkia)
+        raidbosses.childByAutoId().updateChildValues(absol)
+        raidbosses.childByAutoId().updateChildValues(azumarill)
+        raidbosses.childByAutoId().updateChildValues(bamelin)
+        raidbosses.childByAutoId().updateChildValues(barschwa)
+        raidbosses.childByAutoId().updateChildValues(despotar)
+        raidbosses.childByAutoId().updateChildValues(dratini)
+        raidbosses.childByAutoId().updateChildValues(flunkifer)
+        raidbosses.childByAutoId().updateChildValues(granbull)
+        raidbosses.childByAutoId().updateChildValues(karpador)
+        raidbosses.childByAutoId().updateChildValues(kirilia)
+        raidbosses.childByAutoId().updateChildValues(knogga)
+        raidbosses.childByAutoId().updateChildValues(kokowei)
+        raidbosses.childByAutoId().updateChildValues(machomei)
+        raidbosses.childByAutoId().updateChildValues(shinux)
+        raidbosses.childByAutoId().updateChildValues(simsala)
+        raidbosses.childByAutoId().updateChildValues(togetic)
+        raidbosses.childByAutoId().updateChildValues(ursaring)
+        raidbosses.childByAutoId().updateChildValues(wablu)
+        raidbosses.childByAutoId().updateChildValues(zobiris)
     }
     
     private func addQuests() {

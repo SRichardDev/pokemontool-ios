@@ -101,6 +101,19 @@ struct QuestDefinition: FirebaseCodable {
     }
 }
 
+struct RaidbossDefinition: FirebaseCodable {
+    var id: String!
+    let name: String
+    let level: String
+    let imageName: String
+    
+    var image: UIImage? {
+        get {
+            return ImageManager.image(named: imageName)
+        }
+    }
+}
+
 struct Arena: FirebaseCodable, Annotation, Hashable {
     
     var hashValue: Int {

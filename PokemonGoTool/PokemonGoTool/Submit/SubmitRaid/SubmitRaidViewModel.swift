@@ -24,7 +24,11 @@ class SubmitRaidViewModel {
     var selectedHatchTime: String?
     var selectedMeetupTime = "--:--"
     var selectedTimeLeft = "45 min"
-    var currentRaidBosses = [[String]]()
+    var currentRaidBosses: [RaidbossDefinition] {
+        get {
+            return firebaseConnector.raidbosses.filter { Int($0.level) == selectedRaidLevel }
+        }
+    }
     var imageName: String {
         get {
             return "level_\(selectedRaidLevel)"
@@ -53,15 +57,12 @@ class SubmitRaidViewModel {
         delegate?.update(of: .raidLevelChanged)
     }
     
-    func raidBosses() -> [[String]]  {
+    func raidBosses() -> [RaidbossDefinition]  {
         return currentRaidBosses
     }
     
     func updateCurrentRaidBosses() {
-        firebaseConnector.loadRaidBosses(for: selectedRaidLevel, completion: { raidBosses in
-            self.currentRaidBosses = raidBosses ?? [[String]()]
-            self.delegate?.update(of: .currentRaidbossesChanged)
-        })
+        self.delegate?.update(of: .currentRaidbossesChanged)
     }
     
     func submitRaid() {
