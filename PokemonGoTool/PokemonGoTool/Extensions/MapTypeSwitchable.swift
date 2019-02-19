@@ -12,7 +12,7 @@ extension MapTypeSwitchable where Self: UIViewController {
     
     func changeMapTypeAnimated() {
         let mapType = mapView.mapType
-        if mapType == .standard {
+        if mapType == .mutedStandard {
             backgroundLabel.text = "Hybrid Karte"
         } else if mapType == .hybrid {
             backgroundLabel.text = "Satelliten Karte"
@@ -26,7 +26,7 @@ extension MapTypeSwitchable where Self: UIViewController {
             self.mapView.alpha = 0
         }, completion: { _ in
             let mapType = self.mapView.mapType
-            if mapType == .standard {
+            if mapType == .mutedStandard {
                 self.mapView.mapType = .hybrid
             } else if mapType == .hybrid {
                 self.mapView.mapType = .satellite
