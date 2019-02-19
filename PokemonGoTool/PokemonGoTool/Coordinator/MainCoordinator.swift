@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MainCoordinator: Coordinator {
+class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     
     var children = [Coordinator]()
     var tabBarController: UITabBarController
@@ -11,9 +11,17 @@ class MainCoordinator: Coordinator {
     init(appModule: AppModule, tabBarController: UITabBarController) {
         self.appModule = appModule
         self.tabBarController = tabBarController
+        appModule.firebaseConnector.startUpDelegate = self
     }
     
     func start() {
+        //make loading screen
+    }
+    func didLoadInitialData() {
+        showMainMap()
+    }
+
+    func showMainMap() {
         let mapViewController = MapViewController.instantiateFromStoryboard()
         mapViewController.coordinator = self
         mapViewController.firebaseConnector = appModule.firebaseConnector

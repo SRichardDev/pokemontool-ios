@@ -16,6 +16,10 @@ protocol FirebaseUserDelegate {
     func didUpdateUser()
 }
 
+protocol FirebaseStartupDelegate {
+    func didLoadInitialData()
+}
+
 protocol FirebaseStatusPresentable {
     var firebaseConnector: FirebaseConnector! { get set }
 }
@@ -39,20 +43,41 @@ class FirebaseConnector {
     var raidbosses = [RaidbossDefinition]()
     var delegate: FirebaseDelegate?
     var userDelegate: FirebaseUserDelegate?
+    var startUpDelegate: FirebaseStartupDelegate?
     var isSignedIn: Bool {
         return Auth.auth().currentUser?.uid != nil ? true : false
     }
     
     init() {
         checkConnectivity()
-        loadQuests { self.quests = $0 }
-        loadRaidBosses { self.raidbosses = $0 }
-        loadUser()
+        loadInitialData()
         pokestopsRef = Database.database().reference(withPath: "test_pokestops")
         arenasRef = Database.database().reference(withPath: "arenas")
-
 //        addRaidBosses()
 //        addQuests()
+//        addDummyPokestops()
+    }
+    
+    private func loadInitialData() {
+        let group = DispatchGroup()
+        group.enter()
+        loadQuests {
+            self.quests = $0
+            group.leave()
+        }
+        group.enter()
+        loadRaidBosses {
+            self.raidbosses = $0
+            group.leave()
+        }
+        group.enter()
+        User.load { user in
+            self.user = user
+            group.leave()
+        }
+        group.notify(queue: .main) {
+            self.startUpDelegate?.didLoadInitialData()
+        }
     }
     
     func loadUser() {
@@ -314,6 +339,14 @@ class FirebaseConnector {
         quests.childByAutoId().setValue(data)
     }
     
+    func addDummyPokestops() {
+        for _ in 0...1000 {
+            let latitude = Double.random(in: 48.0...48.3)
+            let longitude = Double.random(in: 11.4...11.7)
+            let pokestop = Pokestop(name: "foobar", latitude: latitude, longitude: longitude, submitter: "Test")
+            savePokestop(pokestop)
+        }
+    }
     
     private func checkConnectivity() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")
