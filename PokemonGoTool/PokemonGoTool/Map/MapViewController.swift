@@ -75,7 +75,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         guard !annotation.isKind(of: MKUserLocation.self) else {
             let pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
             pin.image = ImageManager.image(named: "25-original-cap")?.resize(scaleFactor: 0.5)
-            pin.addPulsator()
+            pin.addPulsator(numPulses: 1)
             return pin
         }
         
@@ -182,8 +182,8 @@ extension MapViewController: DetailAnnotationViewDelegate {
     func showInfoDetail(for annotation: Annotation) {
         if let pokestopAnnotation = annotation as? Pokestop {
             coordinator?.showPokestopDetails(for: pokestopAnnotation)
-        } else if let _ = annotation as? Arena {
-
+        } else if let arena = annotation as? Arena {
+            coordinator?.showArenaDetails(for: arena)
         }
     }
     

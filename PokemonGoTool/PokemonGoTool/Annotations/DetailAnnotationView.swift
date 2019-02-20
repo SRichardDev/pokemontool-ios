@@ -35,6 +35,7 @@ class DetailAnnotationView: UIView {
             raidButton.setTitle("Neuer Raid", for: .normal)
             raidButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)), for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
+            detailsButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)), for: .touchUpInside)
             buttonsStackView.addArrangedSubview(raidButton)
             buttonsStackView.addArrangedSubview(detailsButton)
         }

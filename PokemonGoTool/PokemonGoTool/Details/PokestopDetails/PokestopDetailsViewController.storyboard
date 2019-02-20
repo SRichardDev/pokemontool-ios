@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokéstop Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5l-5u-wZD" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="45" width="368" height="20.5"/>
+                                <rect key="frame" x="16" y="45" width="368" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GZ-dH-DvG">
-                                <rect key="frame" x="16" y="90.5" width="368" height="260"/>
+                                <rect key="frame" x="16" y="100" width="368" height="260"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="Boe-wr-TM2"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QIJ-dD-lyh">
-                                <rect key="frame" x="16" y="375.5" width="368" height="406"/>
+                                <rect key="frame" x="16" y="385" width="368" height="388"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fj-co-OCV">
                                         <rect key="frame" x="0.0" y="0.0" width="368" height="177"/>
@@ -124,7 +124,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48.324378, 11.095473" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-b3-YQj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="243.5" width="368" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="243.5" width="368" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submitter:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyw-ES-JUd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="279" width="368" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="273" width="368" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -146,7 +146,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NicoVR42" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FW-UA-lcL" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="314.5" width="368" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="308.5" width="368" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -157,7 +157,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Added:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rN-YF-yfa" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="350" width="368" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="338" width="368" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -168,7 +168,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeStamp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ds1-Zm-Zfy" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="385.5" width="368" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="373.5" width="368" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

@@ -86,10 +86,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena,
                                                                         firebaseConnector: appModule.firebaseConnector)
         submitRaidDetailsViewController.coordinator = self
-        let scrollableViewController = ScrollableViewController(childViewController: submitRaidDetailsViewController)
-        navigationController.viewControllers = [scrollableViewController]
-        tabBarController.present(navigationController, animated: true)
-        impact()
+        embedInScrollViewControllerAndPresent(viewController: submitRaidDetailsViewController)
     }
     
     func showPokestopDetails(for pokestop: Pokestop) {
@@ -97,13 +94,25 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         pokestopDetailsViewController.coordinator = self
         pokestopDetailsViewController.viewModel = PokestopDetailsViewModel(pokestop: pokestop,
                                                                            firebaseConnector: appModule.firebaseConnector)
-        let scrollableViewController = ScrollableViewController(childViewController: pokestopDetailsViewController)
+        embedInScrollViewControllerAndPresent(viewController: pokestopDetailsViewController)
+    }
+    
+    func showArenaDetails(for arena: Arena) {
+        let arenaDetailsViewController = ArenaDetailsViewController.instantiateFromStoryboard()
+        arenaDetailsViewController.coordinator = self
+        arenaDetailsViewController.viewModel = ArenaDetailsViewModel(arena: arena,
+                                                                     firebaseConnector: appModule.firebaseConnector)
+        embedInScrollViewControllerAndPresent(viewController: arenaDetailsViewController)
+    }
+    
+    private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
+        let scrollableViewController = ScrollableViewController(childViewController: viewController)
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
         impact()
     }
     
-    func impact() {        
+    private func impact() {
         let feedback = UISelectionFeedbackGenerator()
         feedback.prepare()
         feedback.selectionChanged()

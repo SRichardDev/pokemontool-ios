@@ -66,8 +66,9 @@ class SubmitRaidViewModel {
     }
     
     func submitRaid() {
+        guard let user = firebaseConnector.user else { fatalError("Handle error")}
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
-                                    participants: [firebaseConnector.user])
+                                    participants: [user])
         let raid = Raid(level: selectedRaidLevel,
                         hatchTime: selectedHatchTime,
                         raidBoss: selectedRaidBoss,

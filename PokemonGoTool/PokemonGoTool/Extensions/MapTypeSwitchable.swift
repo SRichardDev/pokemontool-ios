@@ -17,6 +17,8 @@ extension MapTypeSwitchable where Self: UIViewController {
         } else if mapType == .hybrid {
             backgroundLabel.text = "Satelliten Karte"
         } else if mapType == .satellite {
+            backgroundLabel.text = "Satelliten 3D Karte"
+        } else if mapType == .satelliteFlyover {
             backgroundLabel.text = "Standard Karte"
         }
         
@@ -31,7 +33,9 @@ extension MapTypeSwitchable where Self: UIViewController {
             } else if mapType == .hybrid {
                 self.mapView.mapType = .satellite
             } else if mapType == .satellite {
-                self.mapView.mapType = .standard
+                self.mapView.mapType = .satelliteFlyover
+            } else if mapType == .satelliteFlyover {
+                self.mapView.mapType = .mutedStandard
             }
             
             UIView.animate(withDuration: 0.6, animations: {

@@ -152,7 +152,9 @@ struct Raid: Codable, Equatable {
     var raidMeetup: RaidMeetup?
 }
 
+import Firebase
+
 struct RaidMeetup: Codable, Equatable {
     let meetupTime: String
-    var participants: [User?]
+    var participants: [User]
 }
