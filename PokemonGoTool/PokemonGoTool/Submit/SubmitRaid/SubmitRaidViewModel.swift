@@ -21,7 +21,7 @@ class SubmitRaidViewModel {
     var isUserParticipating = false
     var selectedRaidLevel = 3
     var selectedRaidBoss = ""
-    var selectedHatchTime: String?
+    var selectedHatchTime = ""
     var selectedMeetupTime = "--:--"
     var selectedTimeLeft = "45 min"
     var currentRaidBosses: [RaidbossDefinition] {

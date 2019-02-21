@@ -105,6 +105,8 @@ class FirebaseConnector {
     func saveRaid(arena: Arena) {
         guard let arenaID = arena.id else { return }
         let data = try! FirebaseEncoder().encode(arena.raid)
+//        var data1 = data as! [String: Any]
+//        data1["timestamp"] = ServerValue.timestamp()
         arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(data)
     }
     
