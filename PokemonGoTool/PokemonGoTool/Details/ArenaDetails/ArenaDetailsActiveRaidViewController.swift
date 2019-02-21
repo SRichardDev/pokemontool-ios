@@ -16,7 +16,7 @@ class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        restTimeLabel.text = viewModel.submitDate
         
     }
     

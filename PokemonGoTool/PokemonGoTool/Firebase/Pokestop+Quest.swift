@@ -54,17 +54,6 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
         self.longitude = longitude
         self.submitter = submitter
     }
-    
-    mutating func updateData(with pokestop: Pokestop) {
-        name = pokestop.name
-        latitude = pokestop.latitude
-        longitude = pokestop.longitude
-        submitter = pokestop.submitter
-        id = pokestop.id
-        quest = pokestop.quest
-        upVotes = pokestop.upVotes
-        downVotes = pokestop.downVotes
-    }
 }
 
 func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
@@ -145,14 +134,20 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
 }
 
 struct Raid: Codable, Equatable {
+    var timestamp: Double?
     let level: Int
     var hatchTime: String?
     var raidBoss: String?
     var timeLeft: String?
     var raidMeetup: RaidMeetup?
+    
+    init(level: Int, hatchTime: String, raidBoss: String, timeLeft: String, raidMeetup: RaidMeetup) {
+        self.level = level
+        self.raidBoss = raidBoss
+        self.timeLeft = timeLeft
+        self.raidMeetup = raidMeetup
+    }
 }
-
-import Firebase
 
 struct RaidMeetup: Codable, Equatable {
     let meetupTime: String
