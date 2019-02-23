@@ -23,7 +23,7 @@ class SubmitRaidViewModel {
     var selectedRaidBoss = ""
     var selectedHatchTime = ""
     var selectedMeetupTime = "--:--"
-    var selectedTimeLeft = "45 min"
+    var selectedTimeLeft = "45"
     var currentRaidBosses: [RaidbossDefinition] {
         get {
             return firebaseConnector.raidbosses.filter { Int($0.level) == selectedRaidLevel }

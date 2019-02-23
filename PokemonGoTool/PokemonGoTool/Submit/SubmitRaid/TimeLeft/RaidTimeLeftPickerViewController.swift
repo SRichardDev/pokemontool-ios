@@ -13,7 +13,7 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
             var array = [String]()
             array.reserveCapacity(45)
             for index in 1...45 {
-                array.append("\(index) min")
+                array.append("\(index)")
             }
             return array
         }

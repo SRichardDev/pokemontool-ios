@@ -1,8 +1,7 @@
 
 import UIKit
 
-class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialViewController {
-    
+class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialViewController, RaidTimeLeftDelegate {
     var viewModel: ArenaDetailsViewModel!
 
     @IBOutlet var bossEggImageView: UIImageView!
@@ -15,11 +14,12 @@ class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        restTimeLabel.text = viewModel.submitDate
-        
+        viewModel.delegate = self
     }
     
+    func didUpdateTimeLeft(_ string: String) {
+        restTimeLabel.text = string
+    }
     
     @IBAction func participateTapped(_ sender: Any) {
         
