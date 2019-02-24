@@ -5,15 +5,16 @@ class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialV
     var viewModel: ArenaDetailsViewModel!
 
     @IBOutlet var bossEggImageView: UIImageView!
-    @IBOutlet var bossEggNameLabel: UILabel!
-    @IBOutlet var restTimeLabel: UILabel!
-    @IBOutlet var participantsTitleLabel: UILabel!
-    @IBOutlet var participantsLabel: UILabel!
+    @IBOutlet var bossEggNameLabel: Label!
+    @IBOutlet var restTimeLabel: Label!
+    @IBOutlet var participantsTitleLabel: Label!
+    @IBOutlet var participantsLabel: Label!
     @IBOutlet var participateButton: Button!
-    @IBOutlet var chatTitleLabel: UILabel!
+    @IBOutlet var chatTitleLabel: Label!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restTimeLabel.text = "-- : -- : --"
         viewModel.delegate = self
     }
     

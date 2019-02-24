@@ -134,18 +134,56 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
 }
 
 struct Raid: Codable, Equatable {
+    var isActiveAndRunning: Bool {
+        get {
+            if let date = date {
+                let timestampPlusTimeLeft = date.addingTimeInterval((timeLeft?.double ?? 0) * 60.0)
+                return timestampPlusTimeLeft > Date()
+            }
+            return false
+        }
+    }
+    
+    var hasHatched: Bool {
+        return timeLeft != nil
+    }
+    
     var timestamp: Double?
     let level: Int
     var hatchTime: String?
-    var raidBoss: String?
+    var raidBoss: String
     var timeLeft: String?
     var raidMeetup: RaidMeetup?
+    var date: Date? {
+        get {
+            return timestamp?.dateFromUnixTime()
+        }
+    }
     
-    init(level: Int, hatchTime: String, raidBoss: String, timeLeft: String, raidMeetup: RaidMeetup) {
+    init(level: Int, hatchTime: String, raidBoss: String, raidMeetup: RaidMeetup) {
+        self.level = level
+        self.hatchTime = hatchTime
+        self.raidBoss = raidBoss
+        self.raidMeetup = raidMeetup
+    }
+    
+    init(level: Int, hatchTime: String, raidBoss: String) {
+        self.level = level
+        self.hatchTime = hatchTime
+        self.raidBoss = raidBoss
+    }
+    
+    init(level: Int, raidBoss: String, timeLeft: String, raidMeetup: RaidMeetup) {
         self.level = level
         self.raidBoss = raidBoss
         self.timeLeft = timeLeft
         self.raidMeetup = raidMeetup
+    }
+    
+    init(level: Int, raidBoss: String, timeLeft: String) {
+        self.level = level
+        self.raidBoss = raidBoss
+        self.timeLeft = timeLeft
     }
 }
 

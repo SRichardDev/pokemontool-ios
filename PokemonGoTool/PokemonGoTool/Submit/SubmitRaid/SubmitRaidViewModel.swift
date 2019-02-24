@@ -21,9 +21,9 @@ class SubmitRaidViewModel {
     var isUserParticipating = false
     var selectedRaidLevel = 3
     var selectedRaidBoss = ""
-    var selectedHatchTime = ""
-    var selectedMeetupTime = "--:--"
-    var selectedTimeLeft = "45"
+    var selectedHatchTime: String?
+    var selectedMeetupTime = "00:00"
+    var selectedTimeLeft: String?
     var currentRaidBosses: [RaidbossDefinition] {
         get {
             return firebaseConnector.raidbosses.filter { Int($0.level) == selectedRaidLevel }
@@ -42,7 +42,7 @@ class SubmitRaidViewModel {
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
-        isRaidAlreadyRunning = !isRunning
+        isRaidAlreadyRunning = isRunning
         delegate?.update(of: .raidAlreadyRunning)
     }
     
@@ -69,11 +69,36 @@ class SubmitRaidViewModel {
         guard let user = firebaseConnector.user else { fatalError("Handle error")}
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
                                     participants: [user])
-        let raid = Raid(level: selectedRaidLevel,
-                        hatchTime: selectedHatchTime,
-                        raidBoss: selectedRaidBoss,
-                        timeLeft: selectedTimeLeft,
-                        raidMeetup: raidMeetup)
+        
+        var raid: Raid?
+        if isRaidAlreadyRunning {
+            guard let selectedTimeLeft = selectedTimeLeft else { return }
+
+            if isUserParticipating {
+                raid = Raid(level: selectedRaidLevel,
+                            raidBoss: selectedRaidBoss,
+                            timeLeft: selectedTimeLeft,
+                            raidMeetup: raidMeetup)
+            } else {
+                raid = Raid(level: selectedRaidLevel,
+                            raidBoss: selectedRaidBoss,
+                            timeLeft: selectedTimeLeft)
+            }
+        } else {
+            guard let selectedHatchTime = selectedHatchTime else { return }
+
+            if isUserParticipating {
+                raid = Raid(level: selectedRaidLevel,
+                            hatchTime: selectedHatchTime,
+                            raidBoss: selectedRaidBoss,
+                            raidMeetup: raidMeetup)
+
+            } else {
+                raid = Raid(level: selectedRaidLevel,
+                            hatchTime: selectedHatchTime,
+                            raidBoss: selectedRaidBoss)
+            }
+        }
         arena.raid = raid
         firebaseConnector.saveRaid(arena: arena)
     }

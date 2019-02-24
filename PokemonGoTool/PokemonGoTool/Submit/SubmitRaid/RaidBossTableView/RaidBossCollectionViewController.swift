@@ -29,13 +29,13 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     
     func toggleScrolling() {
         if viewModel.isRaidAlreadyRunning {
-            startTimer()
-            titleLabel.text = "Mögliche Raidbosse:"
-            collectionView.isUserInteractionEnabled = false
-        } else {
             scrollTimer?.invalidate()
             titleLabel.text = "Wähle den Raidboss aus:"
             collectionView.isUserInteractionEnabled = true
+        } else {
+            startTimer()
+            titleLabel.text = "Mögliche Raidbosse:"
+            collectionView.isUserInteractionEnabled = false
         }
     }
     

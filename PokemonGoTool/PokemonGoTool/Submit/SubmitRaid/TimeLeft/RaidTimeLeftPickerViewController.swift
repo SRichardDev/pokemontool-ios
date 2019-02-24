@@ -5,7 +5,6 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
     
     var viewModel: SubmitRaidViewModel!
     @IBOutlet var titleLabel: Label!
-    @IBOutlet var selectedTimeLabel: Label!
     @IBOutlet var pickerView: UIPickerView!
     
     var pickerViewRows: [String] {
@@ -15,7 +14,7 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
             for index in 1...45 {
                 array.append("\(index)")
             }
-            return array
+            return array.reversed()
         }
     }
 
