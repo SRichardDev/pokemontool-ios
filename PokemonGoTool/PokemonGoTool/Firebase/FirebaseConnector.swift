@@ -99,15 +99,17 @@ class FirebaseConnector {
     func saveQuest(quest: Quest, for pokestop: Pokestop) {
         guard let pokestopID = pokestop.id else { return }
         let data = try! FirebaseEncoder().encode(quest)
-        pokestopsRef.child(pokestop.geohash).child(pokestopID).child("quest").setValue(data)
+        var dataWithTimestamp = data as! [String: Any]
+        dataWithTimestamp["timestamp"] = ServerValue.timestamp()
+        pokestopsRef.child(pokestop.geohash).child(pokestopID).child("quest").setValue(dataWithTimestamp)
     }
     
     func saveRaid(arena: Arena) {
         guard let arenaID = arena.id else { return }
         let data = try! FirebaseEncoder().encode(arena.raid)
-        var data1 = data as! [String: Any]
-        data1["timestamp"] = ServerValue.timestamp()
-        arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(data1)
+        var dataWithTimestamp = data as! [String: Any]
+        dataWithTimestamp["timestamp"] = ServerValue.timestamp()
+        arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(dataWithTimestamp)
     }
     
     private func saveToDatabase(data: [String: Any], geohash: String, id: String? = nil) {
