@@ -178,7 +178,11 @@ struct Raid: Codable, Equatable {
     var endDate: Date? {
         get {
             guard let timeLeft = timeLeft?.double else { return nil }
-            return hatchDate?.addingTimeInterval(timeLeft * 60)
+            if let hatchDate = hatchDate {
+                return hatchDate.addingTimeInterval(timeLeft * 60)
+            } else {
+                return submitDate?.addingTimeInterval(timeLeft * 60)
+            }
         }
     }
     
