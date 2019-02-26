@@ -79,44 +79,83 @@ class AnnotationView: CustomAnnotationView {
         }
     }
     
-    class func prepareFor(mapView: MKMapView, annotation: MKAnnotation, showLabel: Bool = false) -> AnnotationView? {
-        let pokestopAnnoation = annotation as? PokestopPointAnnotation
-        let arenaAnnotation = annotation as? ArenaPointAnnotation
-
-        var reuseId = ""
-        
-        if pokestopAnnoation != nil {
-            reuseId = "pokestopReuseIdentifier"
+    private class func prepareArenaAnnotation(in mapView: MKMapView,
+                                        for annotation: ArenaPointAnnotation,
+                                        showLabel: Bool = false) -> MKAnnotationView? {
+        let reuseId = "arenaReuseIdentifier"
+        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? AnnotationView {
+            annotationView.annotation = annotation
+            annotationView.label.alpha = showLabel ? 1 : 0
+            annotationView.customAnnotation = annotation.arena
+            
+            let baseImage = UIImage(named: annotation.imageName)!
+            let topImage = UIImage(named: annotation.raidEggImageName)!
+            let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
+            let resizedTopImage = topImage.resize(targetSize: size)
+            annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+            return annotationView
         } else {
-            reuseId = "arenaReuseIdentifier"
+            let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView.customAnnotation = annotation.arena
+            annotationView.label.alpha = showLabel ? 1 : 0
+            
+            let baseImage = UIImage(named: annotation.imageName)!
+            let topImage = UIImage(named: annotation.raidEggImageName)!
+            let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
+            let resizedTopImage = topImage.resize(targetSize: size)
+            annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+            return annotationView
         }
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+    }
+    
+    private class func preparePokestopAnnotation(in mapView: MKMapView,
+                                           for annotation: PokestopPointAnnotation,
+                                           showLabel: Bool = false) -> MKAnnotationView? {
+        let reuseId = "pokestopReuseIdentifier"
         
-        if annotationView == nil {
-            let pokestopAnnotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
-            pokestopAnnotationView.label.alpha = showLabel ? 1 : 0
-            annotationView = pokestopAnnotationView
-
-        } else {
-            if let pokestopAnnotationView = annotationView as? AnnotationView {
-                pokestopAnnotationView.annotation = annotation
-                pokestopAnnotationView.label.alpha = showLabel ? 1 : 0
-                pokestopAnnotationView.customAnnotation = pokestopAnnoation?.pokestop ?? arenaAnnotation?.arena
+        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? AnnotationView {
+            annotationView.annotation = annotation
+            annotationView.label.alpha = showLabel ? 1 : 0
+            annotationView.customAnnotation = annotation.pokestop
+            
+            if let image = ImageManager.image(named: annotation.imageName) {
+                let baseImage = UIImage(named: "Pokestop")!
+                let size = CGSize(width: image.size.width/2, height: image.size.height/2)
+                let topImage = image.resize(targetSize: size)
+                annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: topImage)
+            } else {
+                annotationView.image = UIImage(named: "Pokestop")!
             }
-        }
-        
-        if let image = ImageManager.image(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "") {
             
-            let baseImage = UIImage(named: "Pokestop")!
-            let size = CGSize(width: image.size.width/2, height: image.size.height/2)
-            let topImage = image.resize(targetSize: size)
-            
-            annotationView?.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: topImage)
+            return annotationView
         } else {
-            annotationView?.image = UIImage(named: pokestopAnnoation?.imageName ?? arenaAnnotation?.imageName ?? "")
+            let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView.customAnnotation = annotation.pokestop
+            annotationView.label.alpha = showLabel ? 1 : 0
+            
+            if let image = ImageManager.image(named: annotation.imageName) {
+                let baseImage = UIImage(named: "Pokestop")!
+                let size = CGSize(width: image.size.width/2, height: image.size.height/2)
+                let topImage = image.resize(targetSize: size)
+                annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: topImage)
+            } else {
+                annotationView.image = UIImage(named: "Pokestop")!
+            }
+            
+            return annotationView
         }
-        
+    }
+
+    
+    
+    class func prepareFor(mapView: MKMapView, annotation: MKAnnotation, showLabel: Bool = false) -> AnnotationView? {
+        var annotationView: MKAnnotationView?
+        if let pokestopAnnoation = annotation as? PokestopPointAnnotation {
+            annotationView = AnnotationView.preparePokestopAnnotation(in: mapView, for: pokestopAnnoation, showLabel: showLabel)
+        }
+        if let arenaAnnotation = annotation as? ArenaPointAnnotation {
+            annotationView = AnnotationView.prepareArenaAnnotation(in: mapView, for: arenaAnnotation, showLabel: showLabel)
+        }
         return annotationView as? AnnotationView
     }
 }

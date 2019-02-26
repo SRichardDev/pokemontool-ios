@@ -11,6 +11,8 @@ class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
         }
     }
     
+    var raidEggImageName = "level_5"
+    
     var geohash: String {
         get {
             return Geohash.encode(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -30,5 +32,10 @@ class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
         self.init()
         self.arena = arena
         coordinate = CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
+        
+        guard let raid = arena.raid else { return }
+        if !raid.isExpired {
+            raidEggImageName = "level_\(raid.level)"
+        }
     }
 }
