@@ -170,7 +170,7 @@ struct Raid: Codable, Equatable {
             let hatchDate = Calendar.current.date(bySettingHour: hours,
                                                   minute: minutes,
                                                   second: 0,
-                                                  of: Date())!
+                                                  of: Date())
             return hatchDate
         }
     }
