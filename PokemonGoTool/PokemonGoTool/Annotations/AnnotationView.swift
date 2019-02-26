@@ -111,27 +111,29 @@ class AnnotationView: CustomAnnotationView {
         
         let baseImage = UIImage(named: annotation.imageName)!
 
-        if let raid = annotation.arena.raid, !raid.isExpired {
-            let topImage = UIImage(named: annotation.raidEggImageName)!
-            let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
-            let resizedTopImage = topImage.resize(targetSize: size)
-            annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
-
-            if raid.level == 5 {
-                annotationView.addPulsator(numPulses: 1, color: .purple)
-            } else if raid.level == 4 {
-                annotationView.addPulsator(numPulses: 1, color: .yellow)
-            } else if raid.level == 3 {
-                annotationView.addPulsator(numPulses: 1, color: .orange)
-            } else if raid.level == 2 {
-                annotationView.addPulsator(numPulses: 1, color: .red)
-            } else if raid.level == 1 {
-                annotationView.addPulsator(numPulses: 1, color: .magenta)
+        
+        if let raid = annotation.arena?.raid {
+            if !raid.isExpired {
+                let topImage = UIImage(named: annotation.raidEggImageName)!
+                let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
+                let resizedTopImage = topImage.resize(targetSize: size)
+                annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+                
+                if raid.level == 5 {
+                    annotationView.addPulsator(numPulses: 1, color: .purple)
+                } else if raid.level == 4 {
+                    annotationView.addPulsator(numPulses: 1, color: .yellow)
+                } else if raid.level == 3 {
+                    annotationView.addPulsator(numPulses: 1, color: .orange)
+                } else if raid.level == 2 {
+                    annotationView.addPulsator(numPulses: 1, color: .red)
+                } else if raid.level == 1 {
+                    annotationView.addPulsator(numPulses: 1, color: .magenta)
+                }
             }
         } else {
             annotationView.image = baseImage
         }
-        
         return annotationView
     }
     
