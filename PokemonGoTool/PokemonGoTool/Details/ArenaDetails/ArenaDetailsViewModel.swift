@@ -71,7 +71,7 @@ class ArenaDetailsViewModel {
     
     func startTimeLeftTimer() {
         guard let raid = arena.raid else { return }
-        guard let date = raid.raidEndDate else { fatalError() }
+        guard let date = raid.endDate else { fatalError() }
         timeLeftTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             if self.isTimeUp(for: date) {
                 self.showTimeUp()

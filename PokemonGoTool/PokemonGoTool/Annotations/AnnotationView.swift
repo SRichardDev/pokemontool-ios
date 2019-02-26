@@ -110,12 +110,13 @@ class AnnotationView: CustomAnnotationView {
         annotationView.customAnnotation = annotation.arena
         
         let baseImage = UIImage(named: annotation.imageName)!
-        let topImage = UIImage(named: annotation.raidEggImageName)!
-        let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
-        let resizedTopImage = topImage.resize(targetSize: size)
-        annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
 
         if let raid = annotation.arena.raid, !raid.isExpired {
+            let topImage = UIImage(named: annotation.raidEggImageName)!
+            let size = CGSize(width: topImage.size.width/2, height: topImage.size.height/2)
+            let resizedTopImage = topImage.resize(targetSize: size)
+            annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+
             if raid.level == 5 {
                 annotationView.addPulsator(numPulses: 1, color: .purple)
             } else if raid.level == 4 {
