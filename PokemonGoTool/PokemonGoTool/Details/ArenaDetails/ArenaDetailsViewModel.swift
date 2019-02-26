@@ -12,7 +12,8 @@ class ArenaDetailsViewModel {
     var arena: Arena
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
-    var timer: Timer?
+    var hatchTimer: Timer?
+    var timeLeftTimer: Timer?
     var timerIsOn = false
     var hasActiveRaid: Bool {
         get {
@@ -30,64 +31,83 @@ class ArenaDetailsViewModel {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
         self.coordinate = CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
-    
-        guard let raid = arena.raid else { return }
-        guard let timestampDate = arena.raid?.date else { return }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale.current
-        
-        
-        var refDate = Date()
-        
-        if raid.hasHatched {
-            guard let timeLeft = raid.timeLeft else { return }
-            let activeRaidTimeLeftDate = timestampDate.addingTimeInterval(timeLeft.double * 60.0)
-            refDate = activeRaidTimeLeftDate
-            let newDateString = dateFormatter.string(from: activeRaidTimeLeftDate)
-            print(newDateString)
+
+        guard let raid = arena.raid else { return }
+
+        if raid.isSubmittedBeforeHatchTime {
+            startHatchTimer()
         } else {
-            guard let hatchTime = raid.hatchTime else { return }
-            let hoursAndMinutesUntilHatch = hatchTime.components(separatedBy: ":")
-            let hatchDate = Calendar.current.date(bySettingHour: Int(hoursAndMinutesUntilHatch[0]) ?? 0,
-                                                  minute: Int(hoursAndMinutesUntilHatch[1]) ?? 0,
-                                                  second: 0,
-                                                  of: Date())!
-            refDate = hatchDate
-            let hatchTimeDateString = dateFormatter.string(from: hatchDate)
-            print(hatchTimeDateString)
+            startTimeLeftTimer()
         }
-        
-        
-
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-
-            let timerInterval = refDate.timeIntervalSince(Date())
-            let time = NSInteger(timerInterval)
-            let seconds = time % 60
-            let minutes = (time / 60) % 60
-            let hours = (time / 3600)
-            
-            if raid.hasHatched {
-                self.timeLeft = String(format: "Läuft noch:\n%0.2d : %0.2d : %0.2d",hours ,minutes ,seconds)
-            } else {
-                self.timeLeft = String(format: "Schlüpft in:\n%0.2d : %0.2d : %0.2d",hours ,minutes ,seconds)
+    }
+    
+    func startHatchTimer() {
+        guard let raid = arena.raid else { return }
+        guard let date = raid.hatchDate else { fatalError() }
+        hatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            if self.isTimeUp(for: date) {
+                self.startTimeLeftTimer()
+                self.hatchTimer?.invalidate()
+                return
             }
             
-//            if !raid.isActiveAndRunning {
-//                self.timeLeft = "Raid bereits abgelaufen"
-//                self.timer?.invalidate()
-//            } else {
-//
-//            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .short
+            dateFormatter.locale = Locale.current
+            let dateString = dateFormatter.string(from: raid.hatchDate ?? Date())
+            self.timeLeft = "Schlüpft in:\n\(self.formattedCountDown(for: date))\n\(dateString)"
             
             DispatchQueue.main.async {
-                self.delegate?.didUpdateTimeLeft(self.timeLeft ?? "")
+                self.delegate?.didUpdateTimeLeft(self.timeLeft!)
             }
         })
-        
+    }
+    
+    func startTimeLeftTimer() {
+        guard let raid = arena.raid else { return }
+        guard let date = raid.raidEndDate else { fatalError() }
+        timeLeftTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            if self.isTimeUp(for: date) {
+                self.showTimeUp()
+                self.timeLeftTimer?.invalidate()
+                return
+            }
+            self.timeLeft = "Läuft noch:\n\(self.formattedCountDown(for: date))"
+            
+            DispatchQueue.main.async {
+                self.delegate?.didUpdateTimeLeft(self.timeLeft!)
+            }
+        })
+    }
+    
+    func showTimeUp() {
+        self.timeLeft = "Raid bereits abgelaufen"
+        DispatchQueue.main.async {
+            self.delegate?.didUpdateTimeLeft(self.timeLeft!)
+        }
+    }
+    
+    private func isTimeUp(for date: Date) -> Bool {
+        let timerInterval = date.timeIntervalSince(Date())
+        let time = NSInteger(timerInterval)
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        return seconds <= 0 && minutes <= 0 && hours <= 0
+    }
+    
+    private func formattedCountDown(for date: Date) -> String {
+        let timerInterval = date.timeIntervalSince(Date())
+        let time = NSInteger(timerInterval)
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        return String(format: "%0.2d : %0.2d : %0.2d", hours, minutes, seconds)
     }
 }

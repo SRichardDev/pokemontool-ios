@@ -134,18 +134,56 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
 }
 
 struct Raid: Codable, Equatable {
-    var isActiveAndRunning: Bool {
+    
+    var isSubmittedBeforeHatchTime: Bool {
         get {
-            if let date = date {
-                let timestampPlusTimeLeft = date.addingTimeInterval((timeLeft?.double ?? 0) * 60.0)
-                return timestampPlusTimeLeft > Date()
+            return hatchTime != nil && timeLeft != nil
+        }
+    }
+    
+    var isExpired: Bool {
+        get {
+            if let raidEndDate = raidEndDate {
+                return raidEndDate < Date()
+            }
+
+            if let hatchDate = hatchDate {
+                return hatchDate < Date()
             }
             return false
         }
     }
     
     var hasHatched: Bool {
-        return timeLeft != nil
+        if let hatchDate = hatchDate {
+            return hatchDate < Date()
+        }
+        return false
+    }
+    
+    var hatchDate: Date? {
+        get {
+            guard let hatchTime = hatchTime else { return nil }
+            let hoursAndMinutesUntilHatch = hatchTime.components(separatedBy: ":")
+            guard let hours = Int(hoursAndMinutesUntilHatch[0]) else { fatalError() }
+            guard let minutes = Int(hoursAndMinutesUntilHatch[1]) else { fatalError() }
+            let hatchDate = Calendar.current.date(bySettingHour: hours,
+                                                  minute: minutes,
+                                                  second: 0,
+                                                  of: Date())!
+            return hatchDate
+        }
+    }
+    
+    var raidEndDate: Date? {
+        get {
+            guard let timeLeft = timeLeft?.double else { return nil }
+            if isSubmittedBeforeHatchTime {
+                return Date().addingTimeInterval(timeLeft * 60.0)
+            } else {
+                return date?.addingTimeInterval(timeLeft * 60.0)
+            }
+        }
     }
     
     var timestamp: Double?
@@ -165,12 +203,14 @@ struct Raid: Codable, Equatable {
         self.hatchTime = hatchTime
         self.raidBoss = raidBoss
         self.raidMeetup = raidMeetup
+        self.timeLeft = "45"
     }
     
     init(level: Int, hatchTime: String, raidBoss: String) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBoss = raidBoss
+        self.timeLeft = "45"
     }
     
     init(level: Int, raidBoss: String, timeLeft: String, raidMeetup: RaidMeetup) {
