@@ -150,7 +150,7 @@ struct Raid: Codable, Equatable {
             if let hatchDate = hatchDate {
                 return hatchDate < Date()
             }
-            return false
+            return true
         }
     }
     
@@ -163,7 +163,7 @@ struct Raid: Codable, Equatable {
     
     var hatchDate: Date? {
         get {
-            guard let hatchTime = hatchTime else { return nil }
+            guard let hatchTime = hatchTime, let _ = date else { return nil }
             let hoursAndMinutesUntilHatch = hatchTime.components(separatedBy: ":")
             guard let hours = Int(hoursAndMinutesUntilHatch[0]) else { fatalError() }
             guard let minutes = Int(hoursAndMinutesUntilHatch[1]) else { fatalError() }
@@ -177,11 +177,11 @@ struct Raid: Codable, Equatable {
     
     var raidEndDate: Date? {
         get {
-            guard let timeLeft = timeLeft?.double else { return nil }
-            if isSubmittedBeforeHatchTime {
+            guard let timeLeft = timeLeft?.double, let date = date else { return nil }
+            if isSubmittedBeforeHatchTime && date > Date() {
                 return Date().addingTimeInterval(timeLeft * 60.0)
             } else {
-                return date?.addingTimeInterval(timeLeft * 60.0)
+                return date.addingTimeInterval(timeLeft * 60.0)
             }
         }
     }
