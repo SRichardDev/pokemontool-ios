@@ -163,7 +163,9 @@ struct Raid: Codable, Equatable {
     
     var hatchDate: Date? {
         get {
-            guard let hatchTime = hatchTime, let _ = submitDate else { return nil }
+            guard let hatchTime = hatchTime, let submitDate = submitDate else { return nil }
+            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return nil }
+            
             let hoursAndMinutesUntilHatch = hatchTime.components(separatedBy: ":")
             guard let hours = Int(hoursAndMinutesUntilHatch[0]) else { fatalError() }
             guard let minutes = Int(hoursAndMinutesUntilHatch[1]) else { fatalError() }
@@ -178,6 +180,7 @@ struct Raid: Codable, Equatable {
     var endDate: Date? {
         get {
             guard let timeLeft = timeLeft?.double else { return nil }
+            
             if let hatchDate = hatchDate {
                 return hatchDate.addingTimeInterval(timeLeft * 60)
             } else {

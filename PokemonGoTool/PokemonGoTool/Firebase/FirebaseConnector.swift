@@ -212,8 +212,9 @@ class FirebaseConnector {
         let palkia = ["name": "Palkia",
                       "level": "5",
                       "imageName" : "484"]
-        
-        
+        let latias = ["name": "Latias",
+                      "level": "5",
+                      "imageName" : "380"]
         
         let knogga = ["name": "Alola Knogga",
                       "level": "4",
@@ -283,6 +284,7 @@ class FirebaseConnector {
         
         let raidbosses = Database.database().reference(withPath: "raidBosses")
         raidbosses.childByAutoId().updateChildValues(palkia)
+        raidbosses.childByAutoId().updateChildValues(latias)
         raidbosses.childByAutoId().updateChildValues(absol)
         raidbosses.childByAutoId().updateChildValues(azumarill)
         raidbosses.childByAutoId().updateChildValues(bamelin)

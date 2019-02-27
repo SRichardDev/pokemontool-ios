@@ -46,9 +46,9 @@ class ArenaDetailsViewModel {
         }
     }
     
-    func startHatchTimer() {
+    func startHatchTimer() { 
         guard let raid = arena.raid else { return }
-        guard let date = raid.hatchDate else { fatalError() }
+        guard let date = raid.hatchDate else { return }
         hatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             if self.isTimeUp(for: date) {
                 self.startTimeLeftTimer()
