@@ -7,7 +7,7 @@ protocol GeohashStringRepresentable {
 }
 
 class PokestopPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
-    var pokestop: Pokestop!
+    var pokestop: Pokestop?
     var imageName = "Pokestop"
     var geohash: String {
         get {

@@ -75,6 +75,28 @@ struct Quest: Codable, Equatable {
     let name: String
     let reward: String
     let submitter: String
+    var timestamp: Double?
+    
+    var submitDate: Date? {
+        get {
+            return timestamp?.dateFromUnixTime()
+        }
+    }
+    
+    var isActive: Bool {
+        get {
+            guard let submitDate = submitDate else { return false }
+            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return false }
+            return true
+        }
+    }
+    
+    init(definitionId: String, name: String, reward: String, submitter: String) {
+        self.definitionId = definitionId
+        self.name = name
+        self.reward = reward
+        self.submitter = submitter
+    }
 }
 
 struct QuestDefinition: FirebaseCodable {

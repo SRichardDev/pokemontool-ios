@@ -157,8 +157,8 @@ class AnnotationView: CustomAnnotationView {
                                            showLabel: Bool) -> AnnotationView {
         annotationView.customAnnotation = annotation.pokestop
         annotationView.label.alpha = showLabel ? 1 : 0
-        
-        if let image = ImageManager.image(named: annotation.imageName) {
+    
+        if let quest = annotation.pokestop?.quest, quest.isActive, let image = ImageManager.image(named: annotation.imageName) {
             let baseImage = UIImage(named: "Pokestop")!
             let size = CGSize(width: image.size.width/2, height: image.size.height/2)
             let topImage = image.resize(targetSize: size)
@@ -166,6 +166,7 @@ class AnnotationView: CustomAnnotationView {
         } else {
             annotationView.image = UIImage(named: "Pokestop")!
         }
+        
         return annotationView
     }
 }

@@ -150,7 +150,7 @@ extension MapViewController: FirebaseDelegate {
     func didUpdatePokestop(pokestop: Pokestop) {
         for annotationOnMap in mapView.annotations {
             if let pokestopAnnotationOnMap = annotationOnMap as? PokestopPointAnnotation {
-                if pokestopAnnotationOnMap.pokestop.id == pokestop.id {
+                if pokestopAnnotationOnMap.pokestop?.id == pokestop.id {
                     manager.remove(annotationOnMap)
                     didAddPokestop(pokestop: pokestop)
                 }
