@@ -112,7 +112,7 @@ struct QuestDefinition: FirebaseCodable {
     }
 }
 
-struct RaidbossDefinition: FirebaseCodable {
+struct RaidbossDefinition: FirebaseCodable, Equatable {
     var id: String!
     let name: String
     let level: String
@@ -185,6 +185,14 @@ struct Raid: Codable, Equatable {
     
     var hatchDate: Date? {
         get {
+            
+            if hatchTime == nil {
+                let minutes = 45 - Int(timeLeft?.double ?? 0)
+                let calendar = Calendar.current
+                let date = calendar.date(byAdding: .minute, value: -minutes, to: submitDate!)
+                return date
+            }
+            
             guard let hatchTime = hatchTime, let submitDate = submitDate else { return nil }
             guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return nil }
             
@@ -211,10 +219,16 @@ struct Raid: Codable, Equatable {
         }
     }
     
+    var image: UIImage? {
+        get {
+            return ImageManager.image(named: "\(raidBoss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(level)")
+        }
+    }
+    
     var timestamp: Double?
     let level: Int
     var hatchTime: String?
-    var raidBoss: String
+    var raidBoss: RaidbossDefinition?
     var timeLeft: String?
     var raidMeetup: RaidMeetup?
     var submitDate: Date? {
@@ -223,7 +237,7 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    init(level: Int, hatchTime: String, raidBoss: String, raidMeetup: RaidMeetup) {
+    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil, raidMeetup: RaidMeetup) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBoss = raidBoss
@@ -231,21 +245,21 @@ struct Raid: Codable, Equatable {
         self.timeLeft = "45"
     }
     
-    init(level: Int, hatchTime: String, raidBoss: String) {
+    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBoss = raidBoss
         self.timeLeft = "45"
     }
     
-    init(level: Int, raidBoss: String, timeLeft: String, raidMeetup: RaidMeetup) {
+    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String, raidMeetup: RaidMeetup) {
         self.level = level
         self.raidBoss = raidBoss
         self.timeLeft = timeLeft
         self.raidMeetup = raidMeetup
     }
     
-    init(level: Int, raidBoss: String, timeLeft: String) {
+    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String) {
         self.level = level
         self.raidBoss = raidBoss
         self.timeLeft = timeLeft

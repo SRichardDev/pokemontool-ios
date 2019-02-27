@@ -16,6 +16,8 @@ class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialV
         super.viewDidLoad()
         restTimeLabel.text = "-- : -- : --"
         viewModel.delegate = self
+        bossEggImageView.image = viewModel.image
+        bossEggNameLabel.text = viewModel.arena.raid?.raidBoss?.name
     }
     
     func didUpdateTimeLeft(_ string: String) {

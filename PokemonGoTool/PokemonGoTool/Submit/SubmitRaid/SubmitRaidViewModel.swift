@@ -20,7 +20,7 @@ class SubmitRaidViewModel {
     var isRaidAlreadyRunning = false
     var isUserParticipating = false
     var selectedRaidLevel = 3
-    var selectedRaidBoss = ""
+    var selectedRaidBoss: RaidbossDefinition?
     var selectedHatchTime: String?
     var selectedMeetupTime = "00:00"
     var selectedTimeLeft: String?
@@ -69,7 +69,7 @@ class SubmitRaidViewModel {
         guard let user = firebaseConnector.user else { fatalError("Handle error")}
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
                                     participants: [user])
-        
+    
         var raid: Raid?
         if isRaidAlreadyRunning {
             guard let selectedTimeLeft = selectedTimeLeft else { return }

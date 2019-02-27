@@ -39,13 +39,8 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? RaidBossCell else { return }
-        viewModel.selectedRaidBoss = cell.titleLabel.text ?? "?"
+        viewModel.selectedRaidBoss = viewModel.currentRaidBosses[indexPath.row]
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

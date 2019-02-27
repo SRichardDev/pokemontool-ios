@@ -9,6 +9,7 @@ extension MKAnnotationView {
         pulsator.numPulse = numPulses
         pulsator.zPosition = -1
         pulsator.backgroundColor = color.cgColor
+        pulsator.autoRemove = true
         layer.addSublayer(pulsator)
         pulsator.start()
     }

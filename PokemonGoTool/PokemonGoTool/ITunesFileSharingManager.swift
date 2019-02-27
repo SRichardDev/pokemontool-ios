@@ -38,6 +38,6 @@ class ImageManager {
                 return image
             }
         }
-        return nil
+        return UIImage(named: imageName)
     }
 }

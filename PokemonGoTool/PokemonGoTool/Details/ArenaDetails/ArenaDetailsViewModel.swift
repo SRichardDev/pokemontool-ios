@@ -17,13 +17,25 @@ class ArenaDetailsViewModel {
     var timerIsOn = false
     var hasActiveRaid: Bool {
         get {
-            return arena.raid != nil
+            return !(arena.raid?.isExpired ?? true)
+        }
+    }
+    
+    var isRaidbossActive: Bool {
+        get {
+            return arena.raid?.hasHatched ?? false
         }
     }
     
     var participants: [User]? {
         get {
             return arena.raid?.raidMeetup?.participants
+        }
+    }
+    
+    var image: UIImage? {
+        get {
+            return arena.raid?.image
         }
     }
     
