@@ -1,15 +1,22 @@
 
 import MapKit
+import Firebase
 
 protocol RaidTimeLeftDelegate: class {
     func didUpdateTimeLeft(_ string: String)
+}
+
+protocol RaidMeetupDelegate: class {
+    func didUpdateMeetup()
 }
 
 class ArenaDetailsViewModel {
     
     var firebaseConnector: FirebaseConnector
     weak var delegate: RaidTimeLeftDelegate?
+    weak var meetupDelegate: RaidMeetupDelegate?
     var arena: Arena
+    var meetup: RaidMeetup?
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
@@ -29,7 +36,7 @@ class ArenaDetailsViewModel {
     
     var participants: [User]? {
         get {
-            return arena.raid?.raidMeetup?.participants
+            return meetup?.participants
         }
     }
     
@@ -56,6 +63,14 @@ class ArenaDetailsViewModel {
         } else {
             startTimeLeftTimer()
         }
+        
+        guard let meetupId = arena.raid?.raidMeetupId else { return }
+        let ref = Database.database().reference(withPath: "raidMeetups")
+        ref.child(meetupId).observe(.value, with: { snapshot in
+            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
+            self.meetup = meetup
+            self.meetupDelegate?.didUpdateMeetup()
+        })
     }
     
     func startHatchTimer() { 

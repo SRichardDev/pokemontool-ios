@@ -112,6 +112,14 @@ class FirebaseConnector {
         arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(dataWithTimestamp)
     }
     
+    func saveRaidMeetup(raidMeetup: RaidMeetup) -> String? {
+        let data = try! FirebaseEncoder().encode(raidMeetup)
+        let ref = Database.database().reference(withPath: "raidMeetups")
+        let createId = ref.childByAutoId()
+        createId.setValue(data)
+        return createId.key
+    }
+    
     private func saveToDatabase(data: [String: Any], geohash: String, id: String? = nil) {
         if isSignedIn {
             if let id = id {

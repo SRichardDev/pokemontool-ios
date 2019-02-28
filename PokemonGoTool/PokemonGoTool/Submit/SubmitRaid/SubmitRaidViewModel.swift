@@ -75,10 +75,13 @@ class SubmitRaidViewModel {
             guard let selectedTimeLeft = selectedTimeLeft else { return }
 
             if isUserParticipating {
+                
+                let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
+                
                 raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss,
                             timeLeft: selectedTimeLeft,
-                            raidMeetup: raidMeetup)
+                            raidMeetupId: id)
             } else {
                 raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss,
@@ -88,10 +91,12 @@ class SubmitRaidViewModel {
             guard let selectedHatchTime = selectedHatchTime else { return }
 
             if isUserParticipating {
+                let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
+
                 raid = Raid(level: selectedRaidLevel,
                             hatchTime: selectedHatchTime,
                             raidBoss: selectedRaidBoss,
-                            raidMeetup: raidMeetup)
+                            raidMeetupId: id)
 
             } else {
                 raid = Raid(level: selectedRaidLevel,

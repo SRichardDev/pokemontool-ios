@@ -62,9 +62,9 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             var object = try FirebaseDecoder().decode(T.self, from: data)
             object.setId(snapshot.key)
             return object
-        } catch _ {
+        } catch let error {
             //Error for registred push users
-//            print("Error decoding: \(error.localizedDescription) : \(T.self)")
+            print("Error decoding: \(error.localizedDescription) : \(T.self)")
         }
     }
     return nil
@@ -230,18 +230,18 @@ struct Raid: Codable, Equatable {
     var hatchTime: String?
     var raidBoss: RaidbossDefinition?
     var timeLeft: String?
-    var raidMeetup: RaidMeetup?
+    var raidMeetupId: String?
     var submitDate: Date? {
         get {
             return timestamp?.dateFromUnixTime()
         }
     }
     
-    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil, raidMeetup: RaidMeetup) {
+    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil, raidMeetupId: String?) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBoss = raidBoss
-        self.raidMeetup = raidMeetup
+        self.raidMeetupId = raidMeetupId
         self.timeLeft = "45"
     }
     
@@ -252,11 +252,11 @@ struct Raid: Codable, Equatable {
         self.timeLeft = "45"
     }
     
-    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String, raidMeetup: RaidMeetup) {
+    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String, raidMeetupId: String?) {
         self.level = level
         self.raidBoss = raidBoss
         self.timeLeft = timeLeft
-        self.raidMeetup = raidMeetup
+        self.raidMeetupId = raidMeetupId
     }
     
     init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String) {
@@ -266,7 +266,13 @@ struct Raid: Codable, Equatable {
     }
 }
 
-struct RaidMeetup: Codable, Equatable {
+struct RaidMeetup: FirebaseCodable, Equatable {
+    var id: String!
     let meetupTime: String
     var participants: [User]
+    
+    init(meetupTime: String, participants: [User]) {
+        self.meetupTime = meetupTime
+        self.participants = participants
+    }
 }
