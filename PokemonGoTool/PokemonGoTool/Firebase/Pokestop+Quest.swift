@@ -267,12 +267,14 @@ struct Raid: Codable, Equatable {
 }
 
 struct RaidMeetup: FirebaseCodable, Equatable {
+    
+    typealias UserId = String
+    
     var id: String!
     let meetupTime: String
-    var participants: [User]
+    var participants: [String: UserId]?
     
-    init(meetupTime: String, participants: [User]) {
+    init(meetupTime: String) {
         self.meetupTime = meetupTime
-        self.participants = participants
     }
 }

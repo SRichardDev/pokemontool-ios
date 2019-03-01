@@ -26,8 +26,10 @@ protocol FirebaseStatusPresentable {
 
 class FirebaseConnector {
     
-    private var pokestopsRef: DatabaseReference!
-    private var arenasRef: DatabaseReference!
+    private var pokestopsRef = Database.database().reference(withPath: "test_pokestops")
+    private var arenasRef = Database.database().reference(withPath: "arenas")
+    private let raidMeetupsRef = Database.database().reference(withPath: "raidMeetups")
+    private let usersRef = Database.database().reference(withPath: "users")
 
     
     private(set) var user: User? {
@@ -51,8 +53,6 @@ class FirebaseConnector {
     init() {
         checkConnectivity()
         loadInitialData()
-        pokestopsRef = Database.database().reference(withPath: "test_pokestops")
-        arenasRef = Database.database().reference(withPath: "arenas")
 //        addRaidBosses()
 //        addQuests()
 //        addDummyPokestops()
@@ -213,6 +213,22 @@ class FirebaseConnector {
                 }
                 completion(quests)
             }
+        }
+    }
+    
+    func userParticipates(in raid: Raid?) {
+        guard let meetupId = raid?.raidMeetupId,
+              let id = raidMeetupsRef.childByAutoId().key,
+              let userId = user?.id else { fatalError() }
+        
+        let data = [id : userId]
+        raidMeetupsRef.child(meetupId).child("participants").updateChildValues(data)
+    }
+    
+    func user(for id: String, completion: @escaping (User) -> ()) {
+        usersRef.child(id).observeSingleEvent(of: .value) { snapshot in
+            guard let user: User = decode(from: snapshot) else { return }
+            completion(user)
         }
     }
     

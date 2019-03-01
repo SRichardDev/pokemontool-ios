@@ -35,19 +35,26 @@ class ArenaDetailsActiveRaidViewController: UIViewController, StoryboardInitialV
         participantsTableViewHeightConstraint.constant = participantsTableView.contentSize.height
     }
     
+    func didUpdateUsers() {
+        participantsTableView.reloadData()
+        participantsTableViewHeightConstraint.constant = participantsTableView.contentSize.height
+    }
+    
     @IBAction func participateTapped(_ sender: Any) {
-        
+        viewModel.userParticipates()
     }
 }
 
 extension ArenaDetailsActiveRaidViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.participants?.count ?? 0
+        return viewModel.participants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell")!
-        cell.textLabel?.text = viewModel.participants?[indexPath.row].trainerName
+        
+        let name = Array(viewModel.participants.values)[indexPath.row]
+        cell.textLabel?.text = name
         return cell
     }
 }

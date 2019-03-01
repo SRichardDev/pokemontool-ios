@@ -56,8 +56,8 @@
                                     <action selector="signupTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="wPO-YL-lCH"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Et7-yC-8CA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="193" width="339" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Et7-yC-8CA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="193" width="339" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

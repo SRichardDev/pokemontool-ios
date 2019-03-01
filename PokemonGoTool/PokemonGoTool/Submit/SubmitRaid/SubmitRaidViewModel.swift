@@ -66,9 +66,7 @@ class SubmitRaidViewModel {
     }
     
     func submitRaid() {
-        guard let user = firebaseConnector.user else { fatalError("Handle error")}
-        let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime,
-                                    participants: [user])
+        let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime)
     
         var raid: Raid?
         if isRaidAlreadyRunning {
@@ -77,11 +75,12 @@ class SubmitRaidViewModel {
             if isUserParticipating {
                 
                 let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
-                
+
                 raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss,
                             timeLeft: selectedTimeLeft,
                             raidMeetupId: id)
+                firebaseConnector.userParticipates(in: raid)
             } else {
                 raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss,
@@ -92,11 +91,11 @@ class SubmitRaidViewModel {
 
             if isUserParticipating {
                 let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
-
                 raid = Raid(level: selectedRaidLevel,
                             hatchTime: selectedHatchTime,
                             raidBoss: selectedRaidBoss,
                             raidMeetupId: id)
+                firebaseConnector.userParticipates(in: raid)
 
             } else {
                 raid = Raid(level: selectedRaidLevel,

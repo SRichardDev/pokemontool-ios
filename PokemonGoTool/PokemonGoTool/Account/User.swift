@@ -1,18 +1,19 @@
 
 import Foundation
 import Firebase
+import CodableFirebase
 
-class User: Codable, Equatable {
+class User: FirebaseCodable, Equatable {
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id
     }
     
-    private(set) var id: String
-    private(set) var email: String
-    private(set) var trainerName: String?
-    private(set) var notificationToken: String?
+    var id: String!
+    var email: String?
+    var trainerName: String?
+    var notificationToken: String?
     
-    init(id: String, email: String, trainerName: String? = nil, notificationToken: String? = nil) {
+    init(id: String, email: String? = nil, trainerName: String? = nil, notificationToken: String? = nil) {
         self.id = id
         self.email = email
         self.trainerName = trainerName
@@ -34,17 +35,12 @@ class User: Codable, Equatable {
     }
     
     class func load(completion: @escaping (User?) -> ()) {
-        let users = Database.database().reference(withPath: "users")
+        let usersRef = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        guard let email = Auth.auth().currentUser?.email else { return }
-        users.child(userId).observeSingleEvent(of: .value) { snapshot in
-            if let value = snapshot.value as? [String : String] {
-                let name = value["trainerName"]
-                let notificationToken = value["notificationToken"]
-                let user = User(id: userId, email: email, trainerName: name, notificationToken: notificationToken)
-                print("✅👨🏻 Did load user")
-                completion(user)
-            }
+
+        usersRef.child(userId).observeSingleEvent(of: .value) { snapshot in
+            guard let user: User = decode(from: snapshot) else { return }
+            completion(user)
         }
     }
     
@@ -73,12 +69,17 @@ class User: Codable, Equatable {
             }
             
             guard let result = result else { completion(.unknown(error: "No Result")); return }
-            let user = result.user
+            let firebaseUser = result.user
 
-            user.sendEmailVerification() { error in
+            firebaseUser.sendEmailVerification() { error in
                 print(error?.localizedDescription ?? "")
                 completion(.signedUp)
             }
+            
+            let user = User(id: firebaseUser.uid, email: firebaseUser.email)
+            let data = try! FirebaseEncoder().encode(user)
+            let ref = Database.database().reference(withPath: "users").child(firebaseUser.uid)
+            ref.setValue(data)
         }
     }
     

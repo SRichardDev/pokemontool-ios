@@ -1,6 +1,7 @@
 
 import MapKit
 import Firebase
+import CodableFirebase
 
 protocol RaidTimeLeftDelegate: class {
     func didUpdateTimeLeft(_ string: String)
@@ -8,6 +9,7 @@ protocol RaidTimeLeftDelegate: class {
 
 protocol RaidMeetupDelegate: class {
     func didUpdateMeetup()
+    func didUpdateUsers()
 }
 
 class ArenaDetailsViewModel {
@@ -17,11 +19,18 @@ class ArenaDetailsViewModel {
     weak var meetupDelegate: RaidMeetupDelegate?
     var arena: Arena
     var meetup: RaidMeetup?
+    let ref = Database.database().reference(withPath: "raidMeetups")
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
+    var isUserParticipating: Bool {
+        get {
+            guard let userId = firebaseConnector.user?.id else {return false}
+            return self.participants[userId] != nil
+        }
+    }
     var hasActiveRaid: Bool {
         get {
             return !(arena.raid?.isExpired ?? true)
@@ -34,11 +43,7 @@ class ArenaDetailsViewModel {
         }
     }
     
-    var participants: [User]? {
-        get {
-            return meetup?.participants
-        }
-    }
+    var participants = [String: String]()
     
     var image: UIImage? {
         get {
@@ -65,12 +70,32 @@ class ArenaDetailsViewModel {
         }
         
         guard let meetupId = arena.raid?.raidMeetupId else { return }
-        let ref = Database.database().reference(withPath: "raidMeetups")
         ref.child(meetupId).observe(.value, with: { snapshot in
             guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
             self.meetup = meetup
             self.meetupDelegate?.didUpdateMeetup()
+            
+            guard let userIds = meetup.participants?.values.makeIterator() else { return }
+            
+            for userId in userIds {
+                self.loadUser(for: userId)
+            }
         })
+    }
+    
+    func loadUser(for id: String) {
+        firebaseConnector.user(for: id) { user in
+            self.participants[user.id] = user.trainerName
+            self.meetupDelegate?.didUpdateUsers()
+        }
+    }
+    
+    func userParticipates() {
+        if !isUserParticipating {
+            firebaseConnector.userParticipates(in: arena.raid)
+        } else {
+            print("User already participating in raid")
+        }
     }
     
     func startHatchTimer() { 
