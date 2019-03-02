@@ -43,7 +43,7 @@ class ArenaDetailsViewModel {
         }
     }
     
-    var participants = [String: String]()
+    var participants = [String: User]()
     
     var image: UIImage? {
         get {
@@ -85,7 +85,7 @@ class ArenaDetailsViewModel {
     
     func loadUser(for id: String) {
         firebaseConnector.user(for: id) { user in
-            self.participants[user.id] = user.trainerName
+            self.participants[user.id] = user
             self.meetupDelegate?.didUpdateUsers()
         }
     }

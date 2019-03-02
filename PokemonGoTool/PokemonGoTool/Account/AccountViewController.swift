@@ -15,12 +15,28 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     @IBOutlet var emailVerifiedLabel: Label!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var teamSelectionSegmentedControl: UISegmentedControl!
+    @IBOutlet var levelPickerView: UIPickerView!
+    
+    var teamPickerViewRows: [String] {
+        get {
+            var array = [String]()
+            array.reserveCapacity(40)
+            for index in 1...40 {
+                array.append("\(index)")
+            }
+            return array.reversed()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         firebaseConnector.userDelegate = self
         passwordTextField.delegate = self
         emailVerifiedLabel.text = ""
+        levelPickerView.delegate = self
+        levelPickerView.dataSource = self
+        setTitle("Account")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +100,10 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
         passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
         passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
         passwordTextField.isSecureTextEntry = !isSignedIn
+        
+        guard let level = firebaseConnector.user?.level else { return }
+        levelPickerView.selectRow(40 - level, inComponent: 0, animated: false)
+
     }
     
     @IBAction func viewTapped(_ sender: Any) {
@@ -101,5 +121,39 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     func didUpdateUser() {
         updateUI()
     }
+    
+    @IBAction func didSelectTeam(_ sender: UISegmentedControl) {
+        let team = sender.selectedSegmentIndex
+        
+        if team == 0 {
+            sender.tintColor = .blue
+            sender.backgroundColor = .white
+        } else if team == 1 {
+            sender.tintColor = .red
+            sender.backgroundColor = .white
+        } else if team == 2 {
+            sender.tintColor = .yellow
+            sender.backgroundColor = .black
+        }
+        
+        firebaseConnector.user?.updateTeam(team)
+    }
 }
 
+extension AccountViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return teamPickerViewRows[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        firebaseConnector.user?.updateTrainerLevel(Int(teamPickerViewRows[row]) ?? 0)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return teamPickerViewRows.count
+    }
+}

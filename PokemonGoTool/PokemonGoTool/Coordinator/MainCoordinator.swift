@@ -29,13 +29,17 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         mapViewController.coordinator = self
         mapViewController.firebaseConnector = appModule.firebaseConnector
         mapViewController.locationManager = appModule.locationManager
+        mapViewController.tabBarItem = UITabBarItem(title: "Karte", image: UIImage(named: "Map"), selectedImage: nil)
         
         let accountViewController = AccountViewController.instantiateFromStoryboard()
+        let scrollableViewController = ScrollableViewController(childViewController: accountViewController)
+        scrollableViewController.title = "Account"
+        scrollableViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "Account"), selectedImage: nil)
         accountViewController.coordinator = self
         accountViewController.firebaseConnector = appModule.firebaseConnector
         let navigationController = UINavigationController()
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.viewControllers = [accountViewController]
+        navigationController.viewControllers = [scrollableViewController]
         tabBarController.viewControllers = [mapViewController, navigationController]
         window.rootViewController = tabBarController
         

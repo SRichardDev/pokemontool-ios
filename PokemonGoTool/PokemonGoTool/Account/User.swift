@@ -12,6 +12,8 @@ class User: FirebaseCodable, Equatable {
     var email: String?
     var trainerName: String?
     var notificationToken: String?
+    var level: Int?
+    var team: Int?
     
     init(id: String, email: String? = nil, trainerName: String? = nil, notificationToken: String? = nil) {
         self.id = id
@@ -28,6 +30,26 @@ class User: FirebaseCodable, Equatable {
         let data = ["trainerName" : name]
         users.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update trainer name to database")
+    }
+    
+    func updateTeam(_ team: Int) {
+        guard self.team != team else { return }
+        self.team = team
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = ["team" : team]
+        users.child(userId).updateChildValues(data)
+        print("✅👨🏻 Did update team")
+    }
+    
+    func updateTrainerLevel(_ level: Int) {
+        guard self.level != level else { return }
+        self.level = level
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = ["level" : level]
+        users.child(userId).updateChildValues(data)
+        print("✅👨🏻 Did update level")
     }
     
     func updateNotificationToken(_ token: String) {

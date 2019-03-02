@@ -53,8 +53,8 @@ extension ArenaDetailsActiveRaidViewController: UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell")!
         
-        let name = Array(viewModel.participants.values)[indexPath.row]
-        cell.textLabel?.text = name
+        let user = Array(viewModel.participants.values)[indexPath.row]
+        cell.textLabel?.text = user.trainerName
         return cell
     }
 }

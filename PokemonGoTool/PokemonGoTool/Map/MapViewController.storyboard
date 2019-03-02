@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,7 +76,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="Map" id="Xsb-mU-ruf"/>
                     <connections>
                         <outlet property="backgroundLabel" destination="k5Y-yD-ywP" id="zOZ-HM-PKD"/>
                         <outlet property="mapCrosshairView" destination="NBR-5L-eGW" id="Q07-ak-hUf"/>
@@ -99,7 +98,4 @@
             <point key="canvasLocation" x="992.79999999999995" y="27.436281859070466"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Map" width="30" height="30"/>
-    </resources>
 </document>
