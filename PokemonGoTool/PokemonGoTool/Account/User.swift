@@ -14,6 +14,18 @@ class User: FirebaseCodable, Equatable {
     var notificationToken: String?
     var level: Int?
     var team: Int?
+    var teamName: String? {
+        get {
+            if team == 0 {
+                return "Mystic"
+            } else if team == 1 {
+                return "Valor"
+            } else if team == 2 {
+                return "Instinct"
+            }
+            return nil
+        }
+    }
     
     init(id: String, email: String? = nil, trainerName: String? = nil, notificationToken: String? = nil) {
         self.id = id

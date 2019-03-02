@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iwm-uN-HHB">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Arena Details Active Raid Participants Table View Controller-->
+        <scene sceneID="34p-U3-GZc">
+            <objects>
+                <viewController id="Iwm-uN-HHB" customClass="ArenaDetailsActiveRaidParticipantsTableViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d2B-PA-Wxz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="u5S-HI-q6o">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="HnT-lS-4lz"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userCell" rowHeight="59" id="vWU-qF-kvQ" customClass="ParticipantsTableViewCell" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="59"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vWU-qF-kvQ" id="021-rz-fCe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bV-dA-aMc">
+                                                    <rect key="frame" x="15" y="8" width="40" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ4-vr-2w7" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                            <rect key="frame" x="9.5" y="9.5" width="21" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="kJ4-vr-2w7" firstAttribute="centerX" secondItem="3bV-dA-aMc" secondAttribute="centerX" id="1hN-tS-vS7"/>
+                                                        <constraint firstAttribute="width" secondItem="3bV-dA-aMc" secondAttribute="height" multiplier="1:1" id="cun-da-R6Y"/>
+                                                        <constraint firstItem="kJ4-vr-2w7" firstAttribute="centerY" secondItem="3bV-dA-aMc" secondAttribute="centerY" id="d72-Wt-wYB"/>
+                                                        <constraint firstAttribute="width" constant="40" id="gN3-ZL-rIT"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seA-hK-x2W" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                    <rect key="frame" x="63" y="17.5" width="96" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3bV-dA-aMc" firstAttribute="leading" secondItem="021-rz-fCe" secondAttribute="leading" constant="15" id="7Hq-Rd-1Os"/>
+                                                <constraint firstAttribute="bottom" secondItem="3bV-dA-aMc" secondAttribute="bottom" constant="8" id="VXW-gF-W8g"/>
+                                                <constraint firstItem="seA-hK-x2W" firstAttribute="leading" secondItem="3bV-dA-aMc" secondAttribute="trailing" constant="8" id="bIY-Lb-wCr"/>
+                                                <constraint firstItem="seA-hK-x2W" firstAttribute="centerY" secondItem="021-rz-fCe" secondAttribute="centerY" id="qJ6-Um-bt8"/>
+                                                <constraint firstItem="3bV-dA-aMc" firstAttribute="centerY" secondItem="021-rz-fCe" secondAttribute="centerY" id="qv4-nF-pbl"/>
+                                                <constraint firstItem="3bV-dA-aMc" firstAttribute="top" secondItem="021-rz-fCe" secondAttribute="top" constant="8" id="xDh-tM-6YY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="levelLabel" destination="kJ4-vr-2w7" id="MMC-lG-T7v"/>
+                                            <outlet property="teamBackgroundView" destination="3bV-dA-aMc" id="vlf-vM-iEw"/>
+                                            <outlet property="trainerNameLabel" destination="seA-hK-x2W" id="d3q-uw-hDv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u5S-HI-q6o" firstAttribute="top" secondItem="Vp0-L6-AKj" secondAttribute="top" id="LEJ-tn-XZD"/>
+                            <constraint firstItem="Vp0-L6-AKj" firstAttribute="bottom" secondItem="u5S-HI-q6o" secondAttribute="bottom" id="NxA-ch-VR6"/>
+                            <constraint firstItem="Vp0-L6-AKj" firstAttribute="trailing" secondItem="u5S-HI-q6o" secondAttribute="trailing" id="fGP-R8-OZJ"/>
+                            <constraint firstItem="u5S-HI-q6o" firstAttribute="leading" secondItem="Vp0-L6-AKj" secondAttribute="leading" id="xJE-zk-Wce"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Vp0-L6-AKj"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="200"/>
+                    <connections>
+                        <outlet property="heightConstraint" destination="HnT-lS-4lz" id="3Zm-ja-RG4"/>
+                        <outlet property="tableView" destination="u5S-HI-q6o" id="HVl-jn-7An"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfr-E8-myt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-330.39999999999998" y="55.772113943028494"/>
+        </scene>
+    </scenes>
+</document>

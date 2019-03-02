@@ -88,6 +88,8 @@
 		2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */; };
 		2CBCD8E7221C8E910058D782 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCD8E6221C8E910058D782 /* LoadingViewController.swift */; };
 		2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */; };
+		2CC2EDEC222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */; };
+		2CC2EDEE222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */; };
 		2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */; };
 		2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */; };
 		2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDE021ED306F00170A46 /* LocationManager.swift */; };
@@ -187,6 +189,8 @@
 		2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitViewController.storyboard; sourceTree = "<group>"; };
 		2CBCD8E6221C8E910058D782 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingViewController.storyboard; sourceTree = "<group>"; };
+		2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsActiveRaidParticipantsTableViewController.storyboard; sourceTree = "<group>"; };
+		2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsActiveRaidParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2CDFDDE021ED306F00170A46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 				2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */,
 				2C97154D221DF08F00B4E49A /* ArenaDetailsActiveRaidViewController.swift */,
 				2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidViewController.storyboard */,
+				2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */,
+				2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */,
 				2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */,
 			);
 			path = ArenaDetails;
@@ -624,6 +630,7 @@
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
+				2CC2EDEC222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
@@ -748,6 +755,7 @@
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
+				2CC2EDEE222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift in Sources */,
 				2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */,
 				2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,

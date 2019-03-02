@@ -31,7 +31,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         doneButton.setTitle("Raid melden", for: .normal)
         doneButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
 
-        let image = UIImage(named: viewModel.imageName)!
+        let image = UIImage(named: viewModel.imageName)
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
