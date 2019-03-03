@@ -350,6 +350,7 @@
 		2C34F1DE220F134200B3B99C /* ArenaDetails */ = {
 			isa = PBXGroup;
 			children = (
+				2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */,
 				2C34F1E0220F139400B3B99C /* ArenaDetailsViewController.swift */,
 				2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */,
 				2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */,
@@ -358,7 +359,6 @@
 				2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard */,
 				2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */,
 				2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */,
-				2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */,
 			);
 			path = ArenaDetails;
 			sourceTree = "<group>";

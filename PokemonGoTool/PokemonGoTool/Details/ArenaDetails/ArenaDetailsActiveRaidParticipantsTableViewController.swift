@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RaidMeetupDelegate, StoryboardInitialViewController {
+class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
 
     var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!
@@ -11,7 +11,6 @@ class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, U
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.meetupDelegate = self
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,21 +25,9 @@ class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, U
         return cell
     }
     
-    func didUpdateMeetup() {
-        updateUI()
-    }
-    
-    func didUpdateUsers() {
-        updateUI()
-    }
-    
-    private func updateUI() {
-        tableView.reloadData()
-        heightConstraint.constant = tableView.contentSize.height
-
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
-        }
+    func updateUI() {
+        tableView.reloadSections([0], with: .automatic)
+        heightConstraint.constant = 150
     }
 }
 

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ArenaDetailsActiveRaidRestTimeViewController: UIViewController, StoryboardInitialViewController, RaidTimeLeftDelegate {
+class ArenaDetailsActiveRaidRestTimeViewController: UIViewController, StoryboardInitialViewController {
     
     var viewModel: ArenaDetailsViewModel!
 
@@ -9,11 +9,10 @@ class ArenaDetailsActiveRaidRestTimeViewController: UIViewController, Storyboard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restTimeLabel.text = "-- : -- : --"
-        viewModel.delegate = self
+        restTimeLabel.text = "\n-- : -- : --"
     }
 
-    func didUpdateTimeLeft(_ string: String) {
+    func updateTime(_ string: String?) {
         restTimeLabel.text = string
     }
 }

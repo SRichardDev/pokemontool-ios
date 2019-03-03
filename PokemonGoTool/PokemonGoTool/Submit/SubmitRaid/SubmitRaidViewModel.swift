@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum UpdateType {
+enum SubmitRaidUpdateType {
     case raidLevelChanged
     case raidAlreadyRunning
     case userParticipates
@@ -9,7 +9,7 @@ enum UpdateType {
 }
 
 protocol SubmitRaidDelegate: class {
-    func update(of type: UpdateType)
+    func update(of type: SubmitRaidUpdateType)
 }
 
 class SubmitRaidViewModel {
@@ -80,7 +80,7 @@ class SubmitRaidViewModel {
                                 timeLeft: selectedTimeLeft,
                                 raidMeetupId: id)
                 arena.raid = raid
-                firebaseConnector.userParticipates(in: raid, for: arena)
+                firebaseConnector.userParticipates(in: raid, for: &arena)
             } else {
                 let raid = Raid(level: selectedRaidLevel,
                                 raidBoss: selectedRaidBoss,
@@ -97,7 +97,7 @@ class SubmitRaidViewModel {
                                 raidBoss: selectedRaidBoss,
                                 raidMeetupId: id)
                 arena.raid = raid
-                firebaseConnector.userParticipates(in: raid, for: arena)
+                firebaseConnector.userParticipates(in: raid, for: &arena)
 
             } else {
                 let raid = Raid(level: selectedRaidLevel,

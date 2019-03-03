@@ -197,7 +197,8 @@ class FirebaseConnector {
         }
     }
     
-    func userParticipates(in raid: Raid, for arena: Arena) {
+    @discardableResult
+    func userParticipates(in raid: Raid, for arena: inout Arena) -> Arena {
         
         if let meetupId = raid.raidMeetupId {
             guard let id = raidMeetupsRef.childByAutoId().key,
@@ -207,15 +208,30 @@ class FirebaseConnector {
         } else {
             let raidMeetup = RaidMeetup(meetupTime: "12:00")
             guard let id = saveRaidMeetup(raidMeetup: raidMeetup) else {fatalError()}
+            arena.raid?.raidMeetupId = id
             guard let arenaID = arena.id else {fatalError()}
             let data = ["raidMeetupId" : id]
+            
             arenasRef.child(arena.geohash).child(arenaID).child("raid").updateChildValues(data)
             
             guard let id1 = raidMeetupsRef.childByAutoId().key,
                   let userId = user?.id else { fatalError() }
             let data1 = [id1 : userId]
             raidMeetupsRef.child(id).child("participants").updateChildValues(data1)
-
+        }
+        return arena
+    }
+    
+    func userCanceled(in meetup: RaidMeetup) {
+        
+        if let userKeys = meetup.participants?.keys.makeIterator() {
+            if let participants = meetup.participants {
+                for userKey in userKeys {
+                    if participants[userKey] == user?.id {
+                        raidMeetupsRef.child(meetup.id).child("participants").child(userKey).removeValue()
+                    }
+                }
+            }
         }
     }
     

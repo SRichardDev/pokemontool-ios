@@ -1,13 +1,12 @@
 
 import UIKit
 
-class ArenaDetailsViewController: UIViewController, StoryboardInitialViewController {
+class ArenaDetailsViewController: UIViewController, StoryboardInitialViewController, ArenaDetailsDelegate {
     
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
     private let stackView = UIStackView()
     private let imageView = UIImageView()
-    private let titleLabel = Label()
     private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
     private let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
     private let restTimeViewController = ArenaDetailsActiveRaidRestTimeViewController.instantiateFromStoryboard()
@@ -15,6 +14,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .equalSpacing
@@ -27,8 +27,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         imageView.image = viewModel.isRaidExpired ? UIImage(named: "arena") : viewModel.raidBossImage
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        titleLabel.style = 3
         
         participateButton.setTitle("Teilnehmen", for: .normal)
         participateButton.addTarget(self, action: #selector(participateTapped), for: .touchUpInside)
@@ -47,7 +45,24 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsTableViewController.view.isHidden = viewModel.isRaidExpired
         participateButton.isHidden = viewModel.isRaidExpired
-        titleLabel.text = viewModel.isRaidExpired ? viewModel.arena.name : viewModel.arena.raid?.raidBoss?.name
+
+    }
+    
+    func updateUI() {
+        restTimeViewController.view.isHidden = viewModel.isRaidExpired
+        participateButton.isHidden = viewModel.isRaidExpired
+    }
+    
+    var animating = false
+    func update(of type: ArenaDetailsUpdateType) {
+        updateUI()
+        switch type {
+        case .usersChanged:
+            participantsTableViewController.updateUI()
+            
+        case .timeLeftChanged(let timeLeft):
+            restTimeViewController.updateTime(timeLeft)
+        }
     }
     
     @objc

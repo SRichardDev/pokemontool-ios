@@ -3,21 +3,24 @@ import MapKit
 import Firebase
 import CodableFirebase
 
-protocol RaidTimeLeftDelegate: class {
-    func didUpdateTimeLeft(_ string: String)
+enum ArenaDetailsUpdateType {
+    case usersChanged
+    case timeLeftChanged(_ timeLeft: String?)
 }
 
-protocol RaidMeetupDelegate: class {
-    func didUpdateMeetup()
-    func didUpdateUsers()
+protocol ArenaDetailsDelegate: class {
+    func update(of type: ArenaDetailsUpdateType)
 }
 
 class ArenaDetailsViewModel {
     
     var firebaseConnector: FirebaseConnector
-    weak var delegate: RaidTimeLeftDelegate?
-    weak var meetupDelegate: RaidMeetupDelegate?
-    var arena: Arena
+    weak var delegate: ArenaDetailsDelegate?
+    var arena: Arena {
+        didSet {
+            observeRaidMeetup()
+        }
+    }
     var meetup: RaidMeetup?
     let ref = Database.database().reference(withPath: "raidMeetups")
     var coordinate: CLLocationCoordinate2D!
@@ -49,11 +52,23 @@ class ArenaDetailsViewModel {
         }
     }
     
+    var hasActiveMeetup: Bool {
+        get {
+            return arena.raid?.raidMeetupId != nil && participants.count > 0 && !(arena.raid?.isExpired ?? true)
+        }
+    }
+    
     var participants = [String: User]()
     
     var raidBossImage: UIImage? {
         get {
             return arena.raid?.image
+        }
+    }
+    
+    var arenaImage: UIImage {
+        get {
+            return arena.isEX ? UIImage(named: "arenaEX")! : UIImage(named: "arena")!
         }
     }
     
@@ -75,13 +90,26 @@ class ArenaDetailsViewModel {
             startTimeLeftTimer()
         }
         
+        observeRaidMeetup()
+    }
+    
+    private func observeRaidMeetup() {
         guard let meetupId = arena.raid?.raidMeetupId else { return }
+        ref.child(meetupId).removeAllObservers()
         ref.child(meetupId).observe(.value, with: { snapshot in
             guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
+            self.participants.removeAll()
             self.meetup = meetup
-            self.meetupDelegate?.didUpdateMeetup()
+
+            print(meetup)
             
-            guard let userIds = meetup.participants?.values.makeIterator() else { return }
+ 
+            guard let userIds = meetup.participants?.values.makeIterator() else {
+                DispatchQueue.main.async {
+                    self.delegate?.update(of: .usersChanged)
+                }
+                return
+            }
             
             for userId in userIds {
                 self.loadUser(for: userId)
@@ -92,16 +120,19 @@ class ArenaDetailsViewModel {
     func loadUser(for id: String) {
         firebaseConnector.user(for: id) { user in
             self.participants[user.id] = user
-            self.meetupDelegate?.didUpdateUsers()
+            DispatchQueue.main.async {
+                self.delegate?.update(of: .usersChanged)
+            }
         }
     }
     
     func userParticipates() {
         if !isUserParticipating {
             guard let raid = arena.raid else { fatalError() }
-            firebaseConnector.userParticipates(in: raid, for: arena)
+            self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
         } else {
-            print("User already participating in raid")
+            firebaseConnector.userCanceled(in: meetup!)
+            print("User canceled meetup")
         }
     }
     
@@ -123,7 +154,7 @@ class ArenaDetailsViewModel {
             self.timeLeft = "🥚 → 🐉\n\(self.formattedCountDown(for: date))\n\(dateString)"
             
             DispatchQueue.main.async {
-                self.delegate?.didUpdateTimeLeft(self.timeLeft!)
+                self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
             }
         })
     }
@@ -140,7 +171,7 @@ class ArenaDetailsViewModel {
             self.timeLeft = "🐉 → ❌\n\(self.formattedCountDown(for: date))"
             
             DispatchQueue.main.async {
-                self.delegate?.didUpdateTimeLeft(self.timeLeft!)
+                self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
             }
         })
     }
@@ -148,7 +179,7 @@ class ArenaDetailsViewModel {
     func showTimeUp() {
         self.timeLeft = "Raid bereits abgelaufen"
         DispatchQueue.main.async {
-            self.delegate?.didUpdateTimeLeft(self.timeLeft!)
+            self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
         }
     }
     

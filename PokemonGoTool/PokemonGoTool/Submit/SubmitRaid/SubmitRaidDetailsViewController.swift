@@ -83,7 +83,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         dismiss(animated: true)
     }
     
-    func update(of type: UpdateType) {
+    func update(of type: SubmitRaidUpdateType) {
         switch type {
         case .raidLevelChanged:
             UIView.transition(with: imageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
@@ -99,50 +99,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:
             raidBossCollectionViewController.updateRaidBosses()
-        }
-    }
-    
-    private func changeVisibiltyOf(viewControllers: [UIViewController]) {
-        
-        var viewControllersToShow = [UIViewController]()
-        var viewControllersToHide = [UIViewController]()
-
-        for viewController in viewControllers {
-            viewController.view.isHidden ? viewControllersToShow.append(viewController) : viewControllersToHide.append(viewController)
-        }
-        
-        viewControllersToHide.forEach { vcToHide in
-            UIView.animate(withDuration: 0.25, animations: {
-                vcToHide.view.alpha = 0
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.25, animations: {
-                    vcToHide.view.isHidden = true
-                }, completion: { _ in
-                    viewControllersToShow.forEach { vcToShow in
-                        UIView.animate(withDuration: 0.25, animations: {
-                            vcToShow.view.alpha = 1
-                        }, completion: { _ in
-                            UIView.animate(withDuration: 0.25, animations: {
-                                vcToShow.view.isHidden = false
-                            })
-                        })
-                    }
-                })
-            })
-        }
-    }
-    
-    private func changeVisibility(of viewController: UIViewController, visible: Bool, hideAnimated: Bool = true) {
-        UIView.animate(withDuration: 0.25, animations: {
-            viewController.view.alpha = visible ? 1 : 0
-        }) { done in
-            if hideAnimated {
-                UIView.animate(withDuration: 0.25) {
-                    viewController.view.isHidden = !visible
-                }
-            } else {
-                viewController.view.isHidden = !visible
-            }
         }
     }
     
