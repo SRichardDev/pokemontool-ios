@@ -10,6 +10,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
     private let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
     private let restTimeViewController = ArenaDetailsActiveRaidRestTimeViewController.instantiateFromStoryboard()
+    private let infoViewController = ArenaDetailsInfoViewController.instantiateFromStoryboard()
     private let participateButton = Button()
     
     override func viewDidLoad() {
@@ -34,18 +35,29 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         headerViewController.viewModel = viewModel
         restTimeViewController.viewModel = viewModel
         participantsTableViewController.viewModel = viewModel
+        infoViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
-        stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
-        stackView.addSepartor()
-        stackView.addArrangedViewController(viewController: participantsTableViewController, to: self)
-        stackView.addArrangedSubview(participateButton)
+        
+        if !viewModel.isRaidExpired {
+            stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
+            stackView.addSepartor()
+            stackView.addArrangedViewController(viewController: participantsTableViewController, to: self)
+            stackView.addArrangedSubview(participateButton)
+            stackView.addSepartor()
+        }
+        stackView.addArrangedViewController(viewController: infoViewController, to: self)
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsTableViewController.view.isHidden = viewModel.isRaidExpired
         participateButton.isHidden = viewModel.isRaidExpired
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.topViewController?.navigationItem.title = viewModel.title
     }
     
     func updateUI() {

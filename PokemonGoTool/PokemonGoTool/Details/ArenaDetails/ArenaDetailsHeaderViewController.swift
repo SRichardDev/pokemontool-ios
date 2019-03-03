@@ -10,7 +10,7 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = viewModel.isRaidExpired ? viewModel.arena.name : viewModel.arena.raid?.raidBoss?.name
+        titleLabel.text = ""//viewModel.isRaidExpired ? viewModel.arena.name : viewModel.arena.raid?.raidBoss?.name
         imageView.image = viewModel.isRaidExpired ? viewModel.arenaImage : viewModel.raidBossImage
     }
 }

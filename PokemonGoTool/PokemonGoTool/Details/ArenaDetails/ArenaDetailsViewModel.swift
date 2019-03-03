@@ -28,6 +28,13 @@ class ArenaDetailsViewModel {
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
+    
+    var title: String {
+        get {
+            return isRaidExpired ? arena.name : arena.raid?.raidBoss?.name ?? ""
+        }
+    }
+    
     var isUserParticipating: Bool {
         get {
             guard let userId = firebaseConnector.user?.id else {return false}
