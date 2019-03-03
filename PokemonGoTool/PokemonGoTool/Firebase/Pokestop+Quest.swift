@@ -145,7 +145,7 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
             return Geohash.encode(latitude: latitude, longitude: longitude)
         }
     }
-    
+
     init(name: String, latitude: Double, longitude: Double, submitter: String, isExArena: Bool) {
         self.name = name
         self.latitude = latitude

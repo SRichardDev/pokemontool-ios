@@ -7,9 +7,12 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     var viewModel: ArenaDetailsViewModel!
     private let stackView = UIStackView()
     private let imageView = UIImageView()
-    let participantsTableView = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+    private let titleLabel = Label()
+    private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
+    private let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+    private let restTimeViewController = ArenaDetailsActiveRaidRestTimeViewController.instantiateFromStoryboard()
     private let participateButton = Button()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.axis = .vertical
@@ -21,24 +24,28 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
                                           margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
                                           constrainToSafeAreaGuide: false)
         
-        imageView.image = viewModel.image
+        imageView.image = viewModel.isRaidExpired ? UIImage(named: "arena") : viewModel.raidBossImage
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        let bossNameLabel = Label()
-        bossNameLabel.style = 3
-        bossNameLabel.text = viewModel.arena.raid?.raidBoss?.name
-
+        titleLabel.style = 3
         
         participateButton.setTitle("Teilnehmen", for: .normal)
         participateButton.addTarget(self, action: #selector(participateTapped), for: .touchUpInside)
 
-        participantsTableView.viewModel = viewModel
-        
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(bossNameLabel)
-        stackView.addArrangedViewController(viewController: participantsTableView, to: self)
+        headerViewController.viewModel = viewModel
+        restTimeViewController.viewModel = viewModel
+        participantsTableViewController.viewModel = viewModel
+
+        stackView.addArrangedViewController(viewController: headerViewController, to: self)
+        stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
+        stackView.addArrangedViewController(viewController: participantsTableViewController, to: self)
         stackView.addArrangedSubview(participateButton)
+        
+        restTimeViewController.view.isHidden = viewModel.isRaidExpired
+        participantsTableViewController.view.isHidden = viewModel.isRaidExpired
+        participateButton.isHidden = viewModel.isRaidExpired
+        titleLabel.text = viewModel.isRaidExpired ? viewModel.arena.name : viewModel.arena.raid?.raidBoss?.name
     }
     
     @objc

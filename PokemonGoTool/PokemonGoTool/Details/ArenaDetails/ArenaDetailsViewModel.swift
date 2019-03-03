@@ -43,9 +43,15 @@ class ArenaDetailsViewModel {
         }
     }
     
+    var isRaidExpired: Bool {
+        get {
+            return arena.raid?.isExpired ?? true
+        }
+    }
+    
     var participants = [String: User]()
     
-    var image: UIImage? {
+    var raidBossImage: UIImage? {
         get {
             return arena.raid?.image
         }
