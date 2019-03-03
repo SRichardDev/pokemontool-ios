@@ -4,6 +4,7 @@ import UIKit
 class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewController, SubmitRaidDelegate {
     
     weak var coordinator: MainCoordinator?
+    var firebaseConnector: FirebaseConnector!
     private let stackView = UIStackView()
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
@@ -71,6 +72,9 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle("Neuer Level \(viewModel.selectedRaidLevel) Raid")
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = addItem
+
     }
     
     @objc
@@ -140,6 +144,36 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
                 viewController.view.isHidden = !visible
             }
         }
+    }
+    
+    @objc
+    func addRaidboss() {
+        let alert = UIAlertController(title: "Neuer Raidboss", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Senden", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            let textField1 = alert.textFields![1] as UITextField
+            let textField2 = alert.textFields![2] as UITextField
+            
+            let raidboss = ["name" : textField.text!,
+                         "level" : textField1.text!,
+                         "imageName" : textField2.text!]
+            self.firebaseConnector.addRaidBoss(raidboss)
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Name"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Level"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Image Name"
+        }
+        
+        let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        present(alert, animated:true)
     }
 }
 

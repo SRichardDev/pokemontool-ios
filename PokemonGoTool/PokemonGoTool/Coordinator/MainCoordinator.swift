@@ -90,6 +90,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena,
                                                                         firebaseConnector: appModule.firebaseConnector)
         submitRaidDetailsViewController.coordinator = self
+        submitRaidDetailsViewController.firebaseConnector = appModule.firebaseConnector
         embedInScrollViewControllerAndPresent(viewController: submitRaidDetailsViewController)
     }
     
