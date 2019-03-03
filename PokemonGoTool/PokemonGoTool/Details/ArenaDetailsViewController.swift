@@ -38,7 +38,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         participantsTableViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: participantsTableViewController, to: self)
         stackView.addArrangedSubview(participateButton)
         

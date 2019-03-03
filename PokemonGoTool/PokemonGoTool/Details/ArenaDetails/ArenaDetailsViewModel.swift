@@ -98,7 +98,8 @@ class ArenaDetailsViewModel {
     
     func userParticipates() {
         if !isUserParticipating {
-            firebaseConnector.userParticipates(in: arena.raid)
+            guard let raid = arena.raid else { fatalError() }
+            firebaseConnector.userParticipates(in: raid, for: arena)
         } else {
             print("User already participating in raid")
         }
@@ -119,7 +120,7 @@ class ArenaDetailsViewModel {
             dateFormatter.timeStyle = .short
             dateFormatter.locale = Locale.current
             let dateString = dateFormatter.string(from: raid.hatchDate ?? Date())
-            self.timeLeft = "Schlüpft in:\n\(self.formattedCountDown(for: date))\n\(dateString)"
+            self.timeLeft = "🥚 → 🐉\n\(self.formattedCountDown(for: date))\n\(dateString)"
             
             DispatchQueue.main.async {
                 self.delegate?.didUpdateTimeLeft(self.timeLeft!)
@@ -136,7 +137,7 @@ class ArenaDetailsViewModel {
                 self.timeLeftTimer?.invalidate()
                 return
             }
-            self.timeLeft = "Läuft noch:\n\(self.formattedCountDown(for: date))"
+            self.timeLeft = "🐉 → ❌\n\(self.formattedCountDown(for: date))"
             
             DispatchQueue.main.async {
                 self.delegate?.didUpdateTimeLeft(self.timeLeft!)

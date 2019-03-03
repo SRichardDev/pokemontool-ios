@@ -197,13 +197,26 @@ class FirebaseConnector {
         }
     }
     
-    func userParticipates(in raid: Raid?) {
-        guard let meetupId = raid?.raidMeetupId,
-              let id = raidMeetupsRef.childByAutoId().key,
-              let userId = user?.id else { fatalError() }
+    func userParticipates(in raid: Raid, for arena: Arena) {
         
-        let data = [id : userId]
-        raidMeetupsRef.child(meetupId).child("participants").updateChildValues(data)
+        if let meetupId = raid.raidMeetupId {
+            guard let id = raidMeetupsRef.childByAutoId().key,
+                  let userId = user?.id else { fatalError() }
+            let data = [id : userId]
+            raidMeetupsRef.child(meetupId).child("participants").updateChildValues(data)
+        } else {
+            let raidMeetup = RaidMeetup(meetupTime: "12:00")
+            guard let id = saveRaidMeetup(raidMeetup: raidMeetup) else {fatalError()}
+            guard let arenaID = arena.id else {fatalError()}
+            let data = ["raidMeetupId" : id]
+            arenasRef.child(arena.geohash).child(arenaID).child("raid").updateChildValues(data)
+            
+            guard let id1 = raidMeetupsRef.childByAutoId().key,
+                  let userId = user?.id else { fatalError() }
+            let data1 = [id1 : userId]
+            raidMeetupsRef.child(id).child("participants").updateChildValues(data1)
+
+        }
     }
     
     func user(for id: String, completion: @escaping (User) -> ()) {
