@@ -29,8 +29,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        participateButton.setTitle("Teilnehmen", for: .normal)
-        participateButton.addTarget(self, action: #selector(participateTapped), for: .touchUpInside)
+        participateButton.addTarget(self, action: #selector(participateTapped(_:)), for: .touchUpInside)
 
         headerViewController.viewModel = viewModel
         restTimeViewController.viewModel = viewModel
@@ -71,6 +70,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         switch type {
         case .usersChanged:
             participantsTableViewController.updateUI()
+            participateButton.setTitle(viewModel.participateButtonTitle, for: .normal)
+            participateButton.isDestructive = viewModel.isUserParticipating
             
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTime(timeLeft)
@@ -78,7 +79,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     }
     
     @objc
-    func participateTapped() {
-        viewModel.userParticipates()
+    func participateTapped(_ sender: Button) {
+        viewModel.userTappedParticipate()
+        sender.setTitle(viewModel.participateButtonTitle, for: .normal)
+        sender.isDestructive = viewModel.isUserParticipating
     }
 }

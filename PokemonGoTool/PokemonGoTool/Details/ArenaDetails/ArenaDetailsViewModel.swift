@@ -35,6 +35,12 @@ class ArenaDetailsViewModel {
         }
     }
     
+    var participateButtonTitle: String {
+        get {
+            return isUserParticipating ? "Abmelden" : "Teilnehmen"
+        }
+    }
+    
     var isUserParticipating: Bool {
         get {
             guard let userId = firebaseConnector.user?.id else {return false}
@@ -133,7 +139,7 @@ class ArenaDetailsViewModel {
         }
     }
     
-    func userParticipates() {
+    func userTappedParticipate() {
         if !isUserParticipating {
             guard let raid = arena.raid else { fatalError() }
             self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
