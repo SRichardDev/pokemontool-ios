@@ -51,7 +51,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsTableViewController.view.isHidden = viewModel.isRaidExpired
         participateButton.isHidden = viewModel.isRaidExpired
-
+        participateButton.setTitle(viewModel.participateButtonTitle, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -62,9 +62,9 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             var object = try FirebaseDecoder().decode(T.self, from: data)
             object.setId(snapshot.key)
             return object
-        } catch let error {
+        } catch let _ {
             //Error for registred push users
-            print("Error decoding: \(error.localizedDescription) : \(T.self)")
+//            print("Error decoding: \(error.localizedDescription) : \(T.self)")
         }
     }
     return nil

@@ -23,7 +23,7 @@ class SubmitRaidViewModel {
     var selectedRaidBoss: RaidbossDefinition?
     var selectedHatchTime: String?
     var selectedMeetupTime = "00:00"
-    var selectedTimeLeft: String?
+    var selectedTimeLeft = "45"
     var currentRaidBosses: [RaidbossDefinition] {
         get {
             return firebaseConnector.raidbosses.filter { Int($0.level) == selectedRaidLevel }
@@ -69,8 +69,6 @@ class SubmitRaidViewModel {
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime)
     
         if isRaidAlreadyRunning {
-            guard let selectedTimeLeft = selectedTimeLeft else { return }
-
             if isUserParticipating {
                 
                 let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
