@@ -5,12 +5,12 @@ class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, U
 
     var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var heightConstraint: NSLayoutConstraint!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        title = "Teilnehmer"
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,12 +22,12 @@ class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, U
         let user = Array(viewModel.participants.values)[indexPath.row]
         cell.trainerNameLabel.text = user.trainerName
         cell.levelLabel.text = "\(user.level ?? 0)"
+        cell.teamBackgroundView.backgroundColor = user.teamColor
         return cell
     }
     
     func updateUI() {
         tableView.reloadSections([0], with: .automatic)
-        heightConstraint.constant = 150
     }
 }
 

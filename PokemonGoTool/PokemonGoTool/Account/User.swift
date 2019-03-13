@@ -3,6 +3,12 @@ import Foundation
 import Firebase
 import CodableFirebase
 
+enum Team: Int, Codable {
+    case mystic
+    case valor
+    case instinct
+}
+
 class User: FirebaseCodable, Equatable {
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id
@@ -13,15 +19,34 @@ class User: FirebaseCodable, Equatable {
     var trainerName: String?
     var notificationToken: String?
     var level: Int?
-    var team: Int?
+    var team: Team?
     var teamName: String? {
         get {
-            if team == 0 {
-                return "Mystic"
-            } else if team == 1 {
-                return "Valor"
-            } else if team == 2 {
-                return "Instinct"
+            if let team = team {
+                switch team {
+                case .mystic:
+                    return "Mystic"
+                case .valor:
+                    return "Valor"
+                case .instinct:
+                    return "Instinct"
+                }
+            }
+            return nil
+        }
+    }
+
+    var teamColor: UIColor? {
+        get {
+            if let team = team {
+                switch team {
+                case .mystic:
+                    return .blue
+                case .valor:
+                    return .red
+                case .instinct:
+                    return .yellow
+                }
             }
             return nil
         }
@@ -44,12 +69,12 @@ class User: FirebaseCodable, Equatable {
         print("✅👨🏻 Did update trainer name to database")
     }
     
-    func updateTeam(_ team: Int) {
+    func updateTeam(_ team: Team) {
         guard self.team != team else { return }
         self.team = team
         let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["team" : team]
+        let data = ["team" : team.rawValue]
         users.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update team")
     }

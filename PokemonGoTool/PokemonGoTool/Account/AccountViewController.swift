@@ -135,8 +135,12 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
             sender.tintColor = .yellow
             sender.backgroundColor = .black
         }
-        
-        firebaseConnector.user?.updateTeam(team)
+
+        if let team = Team(rawValue: team) {
+            firebaseConnector.user?.updateTeam(team)
+        } else {
+            fatalError()
+        }
     }
 }
 
