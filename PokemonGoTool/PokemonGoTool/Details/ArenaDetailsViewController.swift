@@ -9,10 +9,10 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let imageView = UIImageView()
     private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
     private let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+    private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.instantiateFromStoryboard()
     private let restTimeViewController = ArenaDetailsActiveRaidRestTimeViewController.instantiateFromStoryboard()
     private let infoViewController = ArenaDetailsInfoViewController.instantiateFromStoryboard()
-    private let participateButton = Button()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -29,11 +29,12 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        participateButton.addTarget(self, action: #selector(participateTapped(_:)), for: .touchUpInside)
 
         headerViewController.viewModel = viewModel
         restTimeViewController.viewModel = viewModel
         participantsTableViewController.viewModel = viewModel
+        participantsOverviewViewController.viewModel = viewModel
+        participantsOverviewViewController.coordinator = coordinator
         infoViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
@@ -42,17 +43,14 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         if !viewModel.isRaidExpired {
             stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
             stackView.addSepartor()
-            stackView.addArrangedViewController(viewController: participantsTableViewController, to: self)
-            stackView.addArrangedSubview(participateButton)
+            stackView.addArrangedViewController(viewController: participantsOverviewViewController, to: self)
             stackView.addSepartor()
         }
         stackView.addArrangedViewController(viewController: infoViewController, to: self)
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
-        participantsTableViewController.view.isHidden = viewModel.isRaidExpired
-        participateButton.isHidden = viewModel.isRaidExpired
-        participateButton.setTitle(viewModel.participateButtonTitle, for: .normal)
-    }
+        participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
+   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,7 +59,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     func updateUI() {
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
-        participateButton.isHidden = viewModel.isRaidExpired
     }
     
     var animating = false
@@ -69,19 +66,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         updateUI()
         switch type {
         case .usersChanged:
-            participantsTableViewController.updateUI()
-            participateButton.setTitle(viewModel.participateButtonTitle, for: .normal)
-            participateButton.isDestructive = viewModel.isUserParticipating
-            
+            participantsOverviewViewController.updateUI()            
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTime(timeLeft)
         }
-    }
-    
-    @objc
-    func participateTapped(_ sender: Button) {
-        viewModel.userTappedParticipate()
-        sender.setTitle(viewModel.participateButtonTitle, for: .normal)
-        sender.isDestructive = viewModel.isUserParticipating
     }
 }

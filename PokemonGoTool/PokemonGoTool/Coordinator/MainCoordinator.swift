@@ -109,6 +109,12 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
                                                                      firebaseConnector: appModule.firebaseConnector)
         embedInScrollViewControllerAndPresent(viewController: arenaDetailsViewController)
     }
+
+    func showRaidParticipants(_ viewModel: ArenaDetailsViewModel) {
+        let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+        participantsTableViewController.viewModel = viewModel
+        navigationController.pushViewController(participantsTableViewController, animated: true)
+    }
     
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)

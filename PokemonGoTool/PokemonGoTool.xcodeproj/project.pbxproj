@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */; };
+		035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */; };
 		2C03085B222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */; };
 		2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */; };
 		2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */; };
@@ -110,6 +112,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsOverviewViewController.swift; sourceTree = "<group>"; };
+		035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsOverviewViewController.storyboard; sourceTree = "<group>"; };
 		2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsActiveRaidRestTimeViewController.swift; sourceTree = "<group>"; };
 		2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsHeaderViewController.storyboard; sourceTree = "<group>"; };
 		2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsHeaderViewController.swift; sourceTree = "<group>"; };
@@ -363,6 +367,8 @@
 				2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */,
 				2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */,
 				2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard */,
+				035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */,
+				035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */,
 				2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */,
 				2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */,
 			);
@@ -625,6 +631,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 2C19769221ED266900091F8C;
 			productRefGroup = 2C19769C21ED266900091F8C /* Products */;
@@ -646,6 +653,7 @@
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard in Resources */,
+				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
@@ -682,7 +690,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Cluster/Cluster.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableFirebase/CodableFirebase.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -715,7 +723,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4EC8629B9A97862DF397556E /* [CP] Check Pods Manifest.lock */ = {
@@ -766,6 +774,7 @@
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
 				2C03085B222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
+				035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
 				2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */,
 				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
