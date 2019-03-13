@@ -80,8 +80,8 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     }
     
     @IBAction func signupTapped(_ sender: Any) {
-        guard let email = emailTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         
         User.signUp(with: email, password: password) { status in
             self.showAlert(for: status)
@@ -100,7 +100,9 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
         passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
         passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
         passwordTextField.isSecureTextEntry = !isSignedIn
-        
+        teamSelectionSegmentedControl.selectedSegmentIndex = firebaseConnector.user?.team?.rawValue ?? 0
+        teamSelectionSegmentedControl.tintColor = firebaseConnector.user?.teamColor
+
         guard let level = firebaseConnector.user?.level else { return }
         levelPickerView.selectRow(40 - level, inComponent: 0, animated: false)
 
@@ -125,14 +127,7 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     @IBAction func didSelectTeam(_ sender: UISegmentedControl) {
         guard let team = Team(rawValue: sender.selectedSegmentIndex) else { return }
         firebaseConnector.user?.updateTeam(team)
-        switch team {
-        case .mystic:
-            sender.tintColor = .blue
-        case .valor:
-            sender.tintColor = .red
-        case .instinct:
-            sender.tintColor = .orange
-        }
+        sender.tintColor = firebaseConnector.user?.teamColor
     }
 }
 

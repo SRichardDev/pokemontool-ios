@@ -39,6 +39,7 @@ class ParticipantsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        levelLabel.textColor = .white
         teamBackgroundView.layer.cornerRadius = teamBackgroundView.bounds.width / 2
     }
 }

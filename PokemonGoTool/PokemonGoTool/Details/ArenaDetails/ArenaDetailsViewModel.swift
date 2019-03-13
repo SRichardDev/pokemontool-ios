@@ -113,9 +113,6 @@ class ArenaDetailsViewModel {
             guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
             self.participants.removeAll()
             self.meetup = meetup
-
-            print(meetup)
-            
  
             guard let userIds = meetup.participants?.values.makeIterator() else {
                 DispatchQueue.main.async {

@@ -223,7 +223,6 @@ class FirebaseConnector {
     }
     
     func userCanceled(in meetup: RaidMeetup) {
-        
         if let userKeys = meetup.participants?.keys.makeIterator() {
             if let participants = meetup.participants {
                 for userKey in userKeys {
