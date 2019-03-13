@@ -45,7 +45,7 @@ class User: FirebaseCodable, Equatable {
                 case .valor:
                     return .red
                 case .instinct:
-                    return .yellow
+                    return .orange
                 }
             }
             return nil

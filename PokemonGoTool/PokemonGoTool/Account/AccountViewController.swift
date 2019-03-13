@@ -124,15 +124,15 @@ class AccountViewController: UIViewController, FirebaseStatusPresentable, UIText
     
     @IBAction func didSelectTeam(_ sender: UISegmentedControl) {
         guard let team = Team(rawValue: sender.selectedSegmentIndex) else { return }
+        firebaseConnector.user?.updateTeam(team)
         switch team {
         case .mystic:
             sender.tintColor = .blue
         case .valor:
             sender.tintColor = .red
         case .instinct:
-            sender.tintColor = .yellow
+            sender.tintColor = .orange
         }
-        firebaseConnector.user?.updateTeam(team)
     }
 }
 
