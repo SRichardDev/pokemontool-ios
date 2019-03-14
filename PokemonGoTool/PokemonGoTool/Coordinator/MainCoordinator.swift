@@ -114,6 +114,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
         participantsTableViewController.viewModel = viewModel
         navigationController.pushViewController(participantsTableViewController, animated: true)
+        impact()
     }
     
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
