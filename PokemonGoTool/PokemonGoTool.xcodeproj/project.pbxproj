@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */; };
 		035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */; };
+		0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */; };
+		0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */; };
+		0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */; };
 		2C03085B222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */; };
 		2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */; };
 		2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */; };
@@ -29,7 +32,6 @@
 		2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */; };
 		2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */; };
 		2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */; };
-		2C34F1E1220F139400B3B99C /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E0220F139400B3B99C /* ArenaDetailsViewController.swift */; };
 		2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */; };
 		2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */; };
 		2C34F1E72210933700B3B99C /* PokestopDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */; };
@@ -114,6 +116,9 @@
 /* Begin PBXFileReference section */
 		035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsOverviewViewController.swift; sourceTree = "<group>"; };
 		035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsOverviewViewController.storyboard; sourceTree = "<group>"; };
+		0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewController.swift; sourceTree = "<group>"; };
+		0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
 		2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsActiveRaidRestTimeViewController.swift; sourceTree = "<group>"; };
 		2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsHeaderViewController.storyboard; sourceTree = "<group>"; };
 		2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsHeaderViewController.swift; sourceTree = "<group>"; };
@@ -136,7 +141,6 @@
 		2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTypeSwitchable.swift; sourceTree = "<group>"; };
-		2C34F1E0220F139400B3B99C /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArenaDetailsViewController.swift; path = PokemonGoTool/Details/ArenaDetailsViewController.swift; sourceTree = SOURCE_ROOT; };
 		2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCrosshair.swift; sourceTree = "<group>"; };
 		2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopDetailsViewController.swift; sourceTree = "<group>"; };
 		2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopDetailsViewController.storyboard; sourceTree = "<group>"; };
@@ -351,6 +355,8 @@
 			children = (
 				2C34F1DF220F135700B3B99C /* PokestopDetails */,
 				2C34F1DE220F134200B3B99C /* ArenaDetails */,
+				0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */,
+				0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -359,7 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */,
-				2C34F1E0220F139400B3B99C /* ArenaDetailsViewController.swift */,
+				0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */,
 				2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */,
 				2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */,
 				2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */,
@@ -656,6 +662,7 @@
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
+				0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */,
 				2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */,
@@ -696,6 +703,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -713,6 +722,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -769,6 +780,7 @@
 				2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */,
 				2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
+				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
@@ -780,7 +792,6 @@
 				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
 				2C97F78221F67AC700630BA2 /* NibView.swift in Sources */,
-				2C34F1E1220F139400B3B99C /* ArenaDetailsViewController.swift in Sources */,
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
@@ -825,6 +836,7 @@
 				2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */,
 				2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */,
 				2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */,
+				0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */,
 				2C6E7F8122011ED900427FBE /* Label.swift in Sources */,
 				2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */,
 				2C348BB52207424D00F6A1F7 /* RaidBossCollectionViewController.swift in Sources */,

@@ -30,4 +30,8 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
         viewModel.userTappedParticipate()
         updateUI()
     }
+
+    @IBAction func showChat(_ sender: Any) {
+        coordinator?.showRaidChat(viewModel)
+    }
 }

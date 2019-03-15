@@ -116,6 +116,14 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         navigationController.pushViewController(participantsTableViewController, animated: true)
         impact()
     }
+
+    func showRaidChat(_ viewModel: ArenaDetailsViewModel) {
+        let chatViewController = ChatViewController.instantiateFromStoryboard()
+        chatViewController.viewModel = viewModel
+        chatViewController.firebaseConnector = appModule.firebaseConnector
+        navigationController.pushViewController(chatViewController, animated: true)
+        impact()
+    }
     
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)

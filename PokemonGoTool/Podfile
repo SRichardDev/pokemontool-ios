@@ -15,4 +15,5 @@ target 'PokemonGoTool' do
   pod 'Cluster'
   pod 'NVActivityIndicatorView'
   pod 'UIWindowTransitions'
+  pod 'MessageKit'
 end

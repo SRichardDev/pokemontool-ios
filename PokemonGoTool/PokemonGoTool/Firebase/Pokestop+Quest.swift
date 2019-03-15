@@ -62,7 +62,7 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
             var object = try FirebaseDecoder().decode(T.self, from: data)
             object.setId(snapshot.key)
             return object
-        } catch let _ {
+        } catch _ {
             //Error for registred push users
 //            print("Error decoding: \(error.localizedDescription) : \(T.self)")
         }
@@ -276,5 +276,16 @@ struct RaidMeetup: FirebaseCodable, Equatable {
     
     init(meetupTime: String) {
         self.meetupTime = meetupTime
+    }
+}
+
+struct ChatMessage: FirebaseCodable {
+    var id: String!
+    let message: String
+    let senderId: String
+
+    init(message: String, senderId: String) {
+        self.message = message
+        self.senderId = senderId
     }
 }

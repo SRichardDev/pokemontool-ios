@@ -206,6 +206,7 @@ class FirebaseConnector {
             let data = [id : userId]
             raidMeetupsRef.child(meetupId).child("participants").updateChildValues(data)
         } else {
+            //TODO
             let raidMeetup = RaidMeetup(meetupTime: "12:00")
             guard let id = saveRaidMeetup(raidMeetup: raidMeetup) else {fatalError()}
             arena.raid?.raidMeetupId = id
@@ -232,6 +233,11 @@ class FirebaseConnector {
                 }
             }
         }
+    }
+
+    func sendMessage(_ message: ChatMessage, to meetupForId: String) {
+        let data = try! FirebaseEncoder().encode(message)
+        raidMeetupsRef.child(meetupForId).child("chat").childByAutoId().setValue(data)
     }
     
     func user(for id: String, completion: @escaping (User) -> ()) {
