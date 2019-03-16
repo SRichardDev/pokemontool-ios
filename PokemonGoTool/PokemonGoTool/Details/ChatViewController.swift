@@ -23,22 +23,14 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         title = "Chat"
         sender = Sender(id: firebaseConnector.user?.id ?? "", displayName: firebaseConnector.user?.trainerName ?? "")
 
-        let testMessage0 = Message(sender: sender, messageId: "adfgr4t", sentDate: Date(), kind: .text("Hallo"))
-        let testMessage1 = Message(sender: sender, messageId: "adfgs4t", sentDate: Date(), kind: .text("Lol"))
-        let testMessage2 = Message(sender: sender, messageId: "adfg34t", sentDate: Date(), kind: .text("Penis"))
-        let testMessage3 = Message(sender: sender, messageId: "adfg64t", sentDate: Date(), kind: .text("Kacke"))
-        let testMessage4 = Message(sender: sender, messageId: "adfg24t", sentDate: Date(), kind: .text("Deine Mama ist fett!"))
-
-        insertNewMessage(testMessage0)
-        insertNewMessage(testMessage1)
-        insertNewMessage(testMessage2)
-        insertNewMessage(testMessage3)
-        insertNewMessage(testMessage4)
-
         messageInputBar.delegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+
+        firebaseConnector.raidChatDelegate = self
+        guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
+        firebaseConnector.observeRaidChat(for: raidMeetupId)
     }
 
     private func insertNewMessage(_ message: Message) {
@@ -55,6 +47,17 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
                 self.messagesCollectionView.scrollToBottom(animated: true)
             }
         }
+    }
+}
+
+extension ChatViewController: RaidChatDelegate {
+    func didReceiveNewChatMessage(_ chatMessage: ChatMessage) {
+        let sender = Sender(id: chatMessage.senderId, displayName: "Peter")
+        let message = Message(sender: sender,
+                              messageId: chatMessage.id,
+                              sentDate: chatMessage.timestamp?.dateFromUnixTime() ?? Date(),
+                              kind: .text(chatMessage.message))
+        insertNewMessage(message)
     }
 }
 
@@ -78,29 +81,30 @@ extension ChatViewController: MessagesDisplayDelegate {}
 extension ChatViewController: MessageInputBarDelegate {
 
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
-        let message = Message(sender: sender, messageId: "96syufs\(Int.random(in: 0...100))", sentDate: Date(), kind: .text(text))
-        insertNewMessage(message)
-        inputBar.inputTextView.text = ""
-
-        let chatMessage = ChatMessage(message: "Foo", senderId: "Foo")
+        let chatMessage = ChatMessage(message: text, senderId: sender.id)
         firebaseConnector.sendMessage(chatMessage, to: viewModel.meetup?.id ?? "")
+        inputBar.inputTextView.text = ""
     }
 }
 
 extension ChatViewController: MessagesLayoutDelegate {
 
-    func avatarSize(for message: MessageType, at indexPath: IndexPath,
+    func avatarSize(for message: MessageType,
+                    at indexPath: IndexPath,
                     in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return .zero
     }
 
-    func footerViewSize(for message: MessageType, at indexPath: IndexPath,
+    func footerViewSize(for message: MessageType,
+                        at indexPath: IndexPath,
                         in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return CGSize(width: 0, height: 8)
     }
 
-    func heightForLocation(message: MessageType, at indexPath: IndexPath,
-                           with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+    func heightForLocation(message: MessageType,
+                           at indexPath: IndexPath,
+                           with maxWidth: CGFloat,
+                           in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 0
     }
 }

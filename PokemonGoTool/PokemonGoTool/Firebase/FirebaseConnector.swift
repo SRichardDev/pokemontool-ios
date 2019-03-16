@@ -28,6 +28,7 @@ class FirebaseConnector {
     weak var userDelegate: FirebaseUserDelegate?
     weak var startUpDelegate: FirebaseStartupDelegate?
     weak var raidMeetupDelegate: RaidMeetupDelegate?
+    weak var raidChatDelegate: RaidChatDelegate?
 
     var isSignedIn: Bool {
         return Auth.auth().currentUser?.uid != nil ? true : false
@@ -259,6 +260,18 @@ class FirebaseConnector {
         })
     }
 
+    func observeRaidChat(for meetupId: String) {
+        raidMeetupsRef.child(meetupId).child("chat").removeAllObservers()
+        raidMeetupsRef.child(meetupId).child("chat").observe(.value, with: { snapshot in
+            if let result = snapshot.children.allObjects as? [DataSnapshot] {
+                for child in result {
+                    guard let chatMessage: ChatMessage = decode(from: child) else { continue }
+                    self.raidChatDelegate?.didReceiveNewChatMessage(chatMessage)
+                }
+            }
+        })
+    }
+
     func loadUser(for id: String, completion: @escaping (User) -> Void) {
         user(for: id) { user in
             completion(user)
@@ -315,6 +328,10 @@ protocol FirebaseStatusPresentable: class {
 
 protocol RaidMeetupDelegate: class {
     func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup)
+}
+
+protocol RaidChatDelegate: class {
+    func didReceiveNewChatMessage(_ message: ChatMessage)
 }
 
 enum AuthStatus {
