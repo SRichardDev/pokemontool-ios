@@ -283,6 +283,7 @@ struct ChatMessage: FirebaseCodable {
     var id: String!
     let message: String
     let senderId: String
+    var timestamp: Double?
 
     init(message: String, senderId: String) {
         self.message = message

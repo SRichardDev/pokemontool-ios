@@ -18,11 +18,11 @@ class ArenaDetailsViewModel {
     weak var delegate: ArenaDetailsDelegate?
     var arena: Arena {
         didSet {
-            observeRaidMeetup()
+            guard let meetupId = arena.raid?.raidMeetupId else { return }
+            firebaseConnector.observeRaidMeetup(for: meetupId)
         }
     }
     var meetup: RaidMeetup?
-    let ref = Database.database().reference(withPath: "raidMeetups")
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
@@ -89,7 +89,9 @@ class ArenaDetailsViewModel {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
         self.coordinate = CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
-        
+
+        firebaseConnector.raidMeetupDelegate = self
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
@@ -102,40 +104,11 @@ class ArenaDetailsViewModel {
         } else {
             startTimeLeftTimer()
         }
-        
-        observeRaidMeetup()
-    }
-    
-    private func observeRaidMeetup() {
+
         guard let meetupId = arena.raid?.raidMeetupId else { return }
-        ref.child(meetupId).removeAllObservers()
-        ref.child(meetupId).observe(.value, with: { snapshot in
-            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
-            self.participants.removeAll()
-            self.meetup = meetup
- 
-            guard let userIds = meetup.participants?.values.makeIterator() else {
-                DispatchQueue.main.async {
-                    self.delegate?.update(of: .usersChanged)
-                }
-                return
-            }
-            
-            for userId in userIds {
-                self.loadUser(for: userId)
-            }
-        })
+        firebaseConnector.observeRaidMeetup(for: meetupId)
     }
-    
-    func loadUser(for id: String) {
-        firebaseConnector.user(for: id) { user in
-            self.participants[user.id] = user
-            DispatchQueue.main.async {
-                self.delegate?.update(of: .usersChanged)
-            }
-        }
-    }
-    
+        
     func userTappedParticipate() {
         if !isUserParticipating {
             guard let raid = arena.raid else { fatalError() }
@@ -209,5 +182,28 @@ class ArenaDetailsViewModel {
         let minutes = (time / 60) % 60
         let hours = (time / 3600)
         return String(format: "%0.2d : %0.2d : %0.2d", hours, minutes, seconds)
+    }
+}
+
+extension ArenaDetailsViewModel: RaidMeetupDelegate {
+
+    func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
+        self.participants.removeAll()
+        self.meetup = raidMeetup
+        guard let userIds = raidMeetup.participants?.values.makeIterator() else {
+            DispatchQueue.main.async {
+                self.delegate?.update(of: .usersChanged)
+            }
+            return
+        }
+
+        for userId in userIds {
+            firebaseConnector.loadUser(for: userId) { user in
+                self.participants[user.id] = user
+                DispatchQueue.main.async {
+                    self.delegate?.update(of: .usersChanged)
+                }
+            }
+        }
     }
 }

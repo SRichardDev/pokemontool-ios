@@ -11,7 +11,6 @@ class FirebaseConnector {
     private var arenasRef = Database.database().reference(withPath: "arenas")
     private let raidMeetupsRef = Database.database().reference(withPath: "raidMeetups")
     private let usersRef = Database.database().reference(withPath: "users")
-
     
     private(set) var user: User? {
         didSet {
@@ -24,9 +23,12 @@ class FirebaseConnector {
     var arenas: [String: Arena] = [:]
     var quests = [QuestDefinition]()
     var raidbosses = [RaidbossDefinition]()
-    var delegate: FirebaseDelegate?
-    var userDelegate: FirebaseUserDelegate?
-    var startUpDelegate: FirebaseStartupDelegate?
+
+    weak var delegate: FirebaseDelegate?
+    weak var userDelegate: FirebaseUserDelegate?
+    weak var startUpDelegate: FirebaseStartupDelegate?
+    weak var raidMeetupDelegate: RaidMeetupDelegate?
+
     var isSignedIn: Bool {
         return Auth.auth().currentUser?.uid != nil ? true : false
     }
@@ -237,7 +239,9 @@ class FirebaseConnector {
 
     func sendMessage(_ message: ChatMessage, to meetupForId: String) {
         let data = try! FirebaseEncoder().encode(message)
-        raidMeetupsRef.child(meetupForId).child("chat").childByAutoId().setValue(data)
+        var dataWithTimestamp = data as! [String: Any]
+        dataWithTimestamp["timestamp"] = ServerValue.timestamp()
+        raidMeetupsRef.child(meetupForId).child("chat").childByAutoId().setValue(dataWithTimestamp)
     }
     
     func user(for id: String, completion: @escaping (User) -> ()) {
@@ -246,7 +250,22 @@ class FirebaseConnector {
             completion(user)
         }
     }
-    
+
+    func observeRaidMeetup(for meetupId: String) {
+        raidMeetupsRef.child(meetupId).removeAllObservers()
+        raidMeetupsRef.child(meetupId).observe(.value, with: { snapshot in
+            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
+            self.raidMeetupDelegate?.didUpdateRaidMeetup(meetup)
+        })
+    }
+
+    func loadUser(for id: String, completion: @escaping (User) -> Void) {
+        user(for: id) { user in
+            completion(user)
+        }
+    }
+
+    /// DEBUG
     func addQuest(_ data: [String : String]) {
         let quests = Database.database().reference(withPath: "quests")
         quests.childByAutoId().setValue(data)
@@ -256,7 +275,8 @@ class FirebaseConnector {
         let quests = Database.database().reference(withPath: "raidBosses")
         quests.childByAutoId().setValue(data)
     }
-    
+    /// End DEBUG
+
     private func checkConnectivity() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")
         connectedRef.observe(.value, with: { snapshot in
@@ -274,23 +294,27 @@ class FirebaseConnector {
     }
 }
 
-protocol FirebaseDelegate {
+protocol FirebaseDelegate: class {
     func didAddPokestop(pokestop: Pokestop)
     func didUpdatePokestop(pokestop: Pokestop)
     func didAddArena(arena: Arena)
     func didUpdateArena(arena: Arena)
 }
 
-protocol FirebaseUserDelegate {
+protocol FirebaseUserDelegate: class {
     func didUpdateUser()
 }
 
-protocol FirebaseStartupDelegate {
+protocol FirebaseStartupDelegate: class {
     func didLoadInitialData()
 }
 
-protocol FirebaseStatusPresentable {
+protocol FirebaseStatusPresentable: class {
     var firebaseConnector: FirebaseConnector! { get set }
+}
+
+protocol RaidMeetupDelegate: class {
+    func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup)
 }
 
 enum AuthStatus {
