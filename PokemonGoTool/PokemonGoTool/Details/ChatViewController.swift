@@ -28,6 +28,9 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
 
+        scrollsToBottomOnKeyboardBeginsEditing = true
+        maintainPositionOnKeyboardFrameChanged = true
+
         firebaseConnector.raidChatDelegate = self
         guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
         firebaseConnector.observeRaidChat(for: raidMeetupId)
@@ -52,12 +55,14 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
 
 extension ChatViewController: RaidChatDelegate {
     func didReceiveNewChatMessage(_ chatMessage: ChatMessage) {
-        let sender = Sender(id: chatMessage.senderId, displayName: "Peter")
-        let message = Message(sender: sender,
-                              messageId: chatMessage.id,
-                              sentDate: chatMessage.timestamp?.dateFromUnixTime() ?? Date(),
-                              kind: .text(chatMessage.message))
-        insertNewMessage(message)
+        firebaseConnector.user(for: chatMessage.senderId) { user in
+            let sender = Sender(id: chatMessage.senderId, displayName: user.trainerName ?? "Unknown")
+            let message = Message(sender: sender,
+                                  messageId: chatMessage.id,
+                                  sentDate: chatMessage.timestamp?.dateFromUnixTime() ?? Date(),
+                                  kind: .text(chatMessage.message))
+            self.insertNewMessage(message)
+        }
     }
 }
 
@@ -76,7 +81,27 @@ extension ChatViewController: MessagesDataSource {
     }
 }
 
-extension ChatViewController: MessagesDisplayDelegate {}
+extension ChatViewController: MessagesDisplayDelegate {
+
+    func backgroundColor(for message: MessageType,
+                         at indexPath: IndexPath,
+                         in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return isFromCurrentSender(message: message) ? .blue : .green
+    }
+
+    func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath,
+                             in messagesCollectionView: MessagesCollectionView) -> Bool {
+        return false
+    }
+
+    func messageStyle(for message: MessageType,
+                      at indexPath: IndexPath,
+                      in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+
+        let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        return .bubbleTail(corner, .pointedEdge)
+    }
+}
 
 extension ChatViewController: MessageInputBarDelegate {
 
