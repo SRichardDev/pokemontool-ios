@@ -40,6 +40,7 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         guard !messages.contains( where: { return $0.messageId == message.messageId }) else { return }
 
         messages.append(message)
+        messages = messages.sorted(by: { $0.sentDate < $1.sentDate })
         messagesCollectionView.reloadData()
 
         let isLatestMessage = messages.index{$0.messageId == message.messageId} == (messages.count - 1)
