@@ -21,7 +21,9 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         super.viewDidLoad()
 
         title = "Chat"
-        sender = Sender(id: firebaseConnector.user?.id ?? "", displayName: firebaseConnector.user?.trainerName ?? "")
+        guard let userId = firebaseConnector.user?.id,
+              let trainerName = firebaseConnector.user?.trainerName else { fatalError() }
+        sender = Sender(id: userId, displayName: trainerName)
 
         messageInputBar.delegate = self
         messagesCollectionView.messagesDataSource = self
@@ -41,10 +43,12 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
 
         messages.append(message)
         messages = messages.sorted(by: { $0.sentDate < $1.sentDate })
-        messagesCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.messagesCollectionView.reloadData()
+        }
 
         let isLatestMessage = messages.index{$0.messageId == message.messageId} == (messages.count - 1)
-        let shouldScrollToBottom = isLatestMessage //&& messagesCollectionView.isAtBottom
+        let shouldScrollToBottom = isLatestMessage && messagesCollectionView.isAtBottom
 
         if shouldScrollToBottom {
             DispatchQueue.main.async {
@@ -87,7 +91,7 @@ extension ChatViewController: MessagesDisplayDelegate {
     func backgroundColor(for message: MessageType,
                          at indexPath: IndexPath,
                          in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .blue : .green
+        return isFromCurrentSender(message: message) ? UIColor.blue.withAlphaComponent(0.5) : UIColor.green.withAlphaComponent(0.5)
     }
 
     func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath,
@@ -108,7 +112,7 @@ extension ChatViewController: MessageInputBarDelegate {
 
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         let chatMessage = ChatMessage(message: text, senderId: sender.id)
-        firebaseConnector.sendMessage(chatMessage, to: viewModel.meetup?.id ?? "")
+        firebaseConnector.sendMessage(chatMessage, in: &viewModel.arena)
         inputBar.inputTextView.text = ""
     }
 }
