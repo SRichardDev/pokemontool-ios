@@ -72,7 +72,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             participantsOverviewViewController.updateUI()
             meetupTimeViewController.updateUI()
         case .timeLeftChanged(let timeLeft):
-            restTimeViewController.updateTime(timeLeft)
+            restTimeViewController.updateTimeLeft(timeLeft)
+        case .hatchTimeLeftChanged(let timeLeft):
+            restTimeViewController.updateHatchTimeLeft(timeLeft)
         }
     }
 }

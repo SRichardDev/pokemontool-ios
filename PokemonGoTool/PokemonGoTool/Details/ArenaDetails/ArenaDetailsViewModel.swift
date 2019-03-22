@@ -5,7 +5,8 @@ import CodableFirebase
 
 enum ArenaDetailsUpdateType {
     case meetupChanged
-    case timeLeftChanged(_ timeLeft: String?)
+    case timeLeftChanged(_ timeLeft: String)
+    case hatchTimeLeftChanged(_ timeLeft: String)
 }
 
 protocol ArenaDetailsDelegate: class {
@@ -133,15 +134,14 @@ class ArenaDetailsViewModel {
                 return
             }
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
-            dateFormatter.timeStyle = .short
-            dateFormatter.locale = Locale.current
-            let dateString = dateFormatter.string(from: raid.hatchDate ?? Date())
-            self.timeLeft = "🥚 → 🐉\n\(self.formattedCountDown(for: date))\n\(dateString)"
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateStyle = .none
+//            dateFormatter.timeStyle = .short
+//            dateFormatter.locale = Locale.current
+//            let dateString = dateFormatter.string(from: raid.hatchDate ?? Date())
             
             DispatchQueue.main.async {
-                self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
+                self.delegate?.update(of: .hatchTimeLeftChanged("\(self.formattedCountDown(for: date))"))
             }
         })
         hatchTimer?.fire()
@@ -156,19 +156,17 @@ class ArenaDetailsViewModel {
                 self.timeLeftTimer?.invalidate()
                 return
             }
-            self.timeLeft = "🐉 → ❌\n\(self.formattedCountDown(for: date))"
             
             DispatchQueue.main.async {
-                self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
+                self.delegate?.update(of: .timeLeftChanged("\(self.formattedCountDown(for: date))"))
             }
         })
         timeLeftTimer?.fire()
     }
     
     func showTimeUp() {
-        self.timeLeft = "Raid bereits abgelaufen"
         DispatchQueue.main.async {
-            self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
+            self.delegate?.update(of: .timeLeftChanged("Raid bereits abgelaufen"))
         }
     }
     

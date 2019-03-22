@@ -7,7 +7,7 @@ import NotificationBannerSwift
 
 class FirebaseConnector {
     
-    private var pokestopsRef = Database.database().reference(withPath: "test_pokestops")
+    private var pokestopsRef = Database.database().reference(withPath: "pokestops")
     private var arenasRef = Database.database().reference(withPath: "arenas")
     private let raidMeetupsRef = Database.database().reference(withPath: "raidMeetups")
     private let usersRef = Database.database().reference(withPath: "users")

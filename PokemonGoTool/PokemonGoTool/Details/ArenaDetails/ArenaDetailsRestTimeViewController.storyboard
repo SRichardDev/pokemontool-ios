@@ -15,37 +15,48 @@
             <objects>
                 <viewController id="878-eE-YZL" customClass="ArenaDetailsRestTimeViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uaX-H6-6T8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restzeittimer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ML1-WR-Ce8" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="38Y-yO-84M">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zeit bis zum schlüpfen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qt-u5-tjB" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--:--" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ML1-WR-Ce8" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="57.5" width="375" height="42.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ML1-WR-Ce8" firstAttribute="top" secondItem="qcg-TD-tSN" secondAttribute="top" id="BFP-Gk-0DB"/>
-                            <constraint firstItem="ML1-WR-Ce8" firstAttribute="leading" secondItem="qcg-TD-tSN" secondAttribute="leading" id="CeN-df-Dyh"/>
-                            <constraint firstItem="qcg-TD-tSN" firstAttribute="bottom" secondItem="ML1-WR-Ce8" secondAttribute="bottom" id="aon-U6-GLu"/>
-                            <constraint firstItem="ML1-WR-Ce8" firstAttribute="centerY" secondItem="uaX-H6-6T8" secondAttribute="centerY" id="faM-dM-ibU"/>
-                            <constraint firstItem="qcg-TD-tSN" firstAttribute="trailing" secondItem="ML1-WR-Ce8" secondAttribute="trailing" id="kJm-NV-LfI"/>
+                            <constraint firstItem="38Y-yO-84M" firstAttribute="leading" secondItem="qcg-TD-tSN" secondAttribute="leading" id="8Zw-xm-2lC"/>
+                            <constraint firstItem="qcg-TD-tSN" firstAttribute="bottom" secondItem="38Y-yO-84M" secondAttribute="bottom" id="BpM-Bb-zf7"/>
+                            <constraint firstItem="38Y-yO-84M" firstAttribute="top" secondItem="qcg-TD-tSN" secondAttribute="top" id="c1b-qD-P7Q"/>
+                            <constraint firstItem="qcg-TD-tSN" firstAttribute="trailing" secondItem="38Y-yO-84M" secondAttribute="trailing" id="gIR-v7-oai"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qcg-TD-tSN"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="150"/>
+                    <size key="freeformSize" width="375" height="100"/>
                     <connections>
                         <outlet property="restTimeLabel" destination="ML1-WR-Ce8" id="gGc-HX-fTa"/>
+                        <outlet property="titleLabel" destination="1Qt-u5-tjB" id="FeN-pk-LRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chd-uY-i9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
