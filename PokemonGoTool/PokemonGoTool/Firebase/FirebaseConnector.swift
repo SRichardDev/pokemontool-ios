@@ -119,6 +119,7 @@ class FirebaseConnector {
     
     func loadPokestops(for geohash: String) {
         guard geohash != "" else { return }
+        pokestopsRef.child(geohash).removeAllObservers()
         pokestopsRef.child(geohash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
@@ -141,6 +142,7 @@ class FirebaseConnector {
     
     func loadArenas(for geohash: String) {
         guard geohash != "" else { return }
+        arenasRef.child(geohash).removeAllObservers()
         arenasRef.child(geohash).observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
