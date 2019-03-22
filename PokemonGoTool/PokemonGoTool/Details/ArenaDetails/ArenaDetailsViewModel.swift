@@ -31,7 +31,7 @@ class ArenaDetailsViewModel {
     
     var title: String {
         get {
-            return isRaidExpired ? arena.name : arena.raid?.raidBoss?.name ?? ""
+            return isRaidExpired ? arena.name : arena.raid?.raidBoss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
         }
     }
     
