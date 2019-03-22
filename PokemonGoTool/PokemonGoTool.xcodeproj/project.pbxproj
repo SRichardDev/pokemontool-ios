@@ -12,7 +12,7 @@
 		0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */; };
 		0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */; };
 		0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */; };
-		2C03085B222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */; };
+		2C03085B222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085A222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift */; };
 		2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */; };
 		2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */; };
 		2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */; };
@@ -81,7 +81,7 @@
 		2C870DD922135C60000F2268 /* MapViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C870DD822135C60000F2268 /* MapViewController+Extension.swift */; };
 		2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */; };
 		2C97154C221DE7EB00B4E49A /* ArenaDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */; };
-		2C971550221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard */; };
+		2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */; };
 		2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */; };
 		2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */; };
 		2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F77221F6585900630BA2 /* Double+String+Extension.swift */; };
@@ -97,8 +97,8 @@
 		2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */; };
 		2CBCD8E7221C8E910058D782 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCD8E6221C8E910058D782 /* LoadingViewController.swift */; };
 		2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */; };
-		2CC2EDEC222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */; };
-		2CC2EDEE222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */; };
+		2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC2EDEB222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard */; };
+		2CC2EDEE222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */; };
 		2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */; };
 		2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */; };
 		2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDE021ED306F00170A46 /* LocationManager.swift */; };
@@ -119,7 +119,7 @@
 		0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewController.swift; sourceTree = "<group>"; };
 		0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
-		2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsActiveRaidRestTimeViewController.swift; sourceTree = "<group>"; };
+		2C03085A222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsRestTimeViewController.swift; sourceTree = "<group>"; };
 		2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsHeaderViewController.storyboard; sourceTree = "<group>"; };
 		2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsHeaderViewController.swift; sourceTree = "<group>"; };
 		2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestData.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		2C870DD822135C60000F2268 /* MapViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+Extension.swift"; sourceTree = "<group>"; };
 		2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewModel.swift; sourceTree = "<group>"; };
-		2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsActiveRaidRestTimeViewController.storyboard; sourceTree = "<group>"; };
+		2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsRestTimeViewController.storyboard; sourceTree = "<group>"; };
 		2C971551221F6CB600B4E49A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStatusPresentable.swift; sourceTree = "<group>"; };
 		2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pokestop+Quest.swift"; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitViewController.storyboard; sourceTree = "<group>"; };
 		2CBCD8E6221C8E910058D782 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingViewController.storyboard; sourceTree = "<group>"; };
-		2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsActiveRaidParticipantsTableViewController.storyboard; sourceTree = "<group>"; };
-		2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsActiveRaidParticipantsTableViewController.swift; sourceTree = "<group>"; };
+		2CC2EDEB222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsTableViewController.storyboard; sourceTree = "<group>"; };
+		2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2CDFDDE021ED306F00170A46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -371,12 +371,12 @@
 				2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */,
 				2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */,
 				2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */,
-				2C03085A222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift */,
-				2C97154F221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard */,
+				2C03085A222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift */,
+				2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */,
 				035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */,
 				035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */,
-				2CC2EDED222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift */,
-				2CC2EDEB222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard */,
+				2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */,
+				2CC2EDEB222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard */,
 			);
 			path = ArenaDetails;
 			sourceTree = "<group>";
@@ -658,7 +658,7 @@
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
-				2CC2EDEC222ADD510087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.storyboard in Resources */,
+				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
@@ -673,7 +673,7 @@
 				2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */,
 				2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */,
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
-				2C971550221DF09A00B4E49A /* ArenaDetailsActiveRaidRestTimeViewController.storyboard in Resources */,
+				2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */,
 				2C395A4F2205FB0F005330B8 /* RaidMeetupTimePickerViewController.storyboard in Resources */,
 				2C395A592206041B005330B8 /* RaidTimeLeftPickerViewController.storyboard in Resources */,
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
@@ -784,7 +784,7 @@
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
-				2C03085B222B3DF9007A1EA0 /* ArenaDetailsActiveRaidRestTimeViewController.swift in Sources */,
+				2C03085B222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
 				035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
@@ -795,7 +795,7 @@
 				2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */,
 				2CF6F9A121F012EB00610BC9 /* MKPolyline+Extension.swift in Sources */,
 				2C97F77121F6576500630BA2 /* Pokestop+Quest.swift in Sources */,
-				2CC2EDEE222ADD740087DF6F /* ArenaDetailsActiveRaidParticipantsTableViewController.swift in Sources */,
+				2CC2EDEE222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift in Sources */,
 				2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */,
 				2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,

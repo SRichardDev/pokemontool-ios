@@ -111,7 +111,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
 
     func showRaidParticipants(_ viewModel: ArenaDetailsViewModel) {
-        let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+        let participantsTableViewController = ArenaDetailsParticipantsTableViewController.instantiateFromStoryboard()
         participantsTableViewController.viewModel = viewModel
         navigationController.pushViewController(participantsTableViewController, animated: true)
         impact()

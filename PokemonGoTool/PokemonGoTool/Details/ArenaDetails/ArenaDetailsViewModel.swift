@@ -140,6 +140,7 @@ class ArenaDetailsViewModel {
                 self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
             }
         })
+        hatchTimer?.fire()
     }
     
     func startTimeLeftTimer() {
@@ -157,6 +158,7 @@ class ArenaDetailsViewModel {
                 self.delegate?.update(of: .timeLeftChanged(self.timeLeft))
             }
         })
+        timeLeftTimer?.fire()
     }
     
     func showTimeUp() {

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ArenaDetailsActiveRaidRestTimeViewController: UIViewController, StoryboardInitialViewController {
+class ArenaDetailsRestTimeViewController: UIViewController, StoryboardInitialViewController {
     
     var viewModel: ArenaDetailsViewModel!
 

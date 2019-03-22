@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ArenaDetailsActiveRaidParticipantsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
+class ArenaDetailsParticipantsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
 
     var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!

@@ -8,9 +8,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let stackView = UIStackView()
     private let imageView = UIImageView()
     private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
-    private let participantsTableViewController = ArenaDetailsActiveRaidParticipantsTableViewController.instantiateFromStoryboard()
+    private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.instantiateFromStoryboard()
     private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.instantiateFromStoryboard()
-    private let restTimeViewController = ArenaDetailsActiveRaidRestTimeViewController.instantiateFromStoryboard()
+    private let restTimeViewController = ArenaDetailsRestTimeViewController.instantiateFromStoryboard()
     private let infoViewController = ArenaDetailsInfoViewController.instantiateFromStoryboard()
 
     override func viewDidLoad() {
