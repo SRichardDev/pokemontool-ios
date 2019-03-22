@@ -43,6 +43,8 @@ class FirebaseConnector {
     }
     
     private func loadInitialData() {
+        loadUser()
+    
         let group = DispatchGroup()
         group.enter()
         loadQuests {
@@ -54,11 +56,7 @@ class FirebaseConnector {
             self.raidbosses = $0
             group.leave()
         }
-        group.enter()
-        User.load { user in
-            self.user = user
-            group.leave()
-        }
+
         group.notify(queue: .main) {
             self.startUpDelegate?.didLoadInitialData()
         }
