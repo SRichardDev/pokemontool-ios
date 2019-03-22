@@ -12,7 +12,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.instantiateFromStoryboard()
     private let restTimeViewController = ArenaDetailsRestTimeViewController.instantiateFromStoryboard()
     private let infoViewController = ArenaDetailsInfoViewController.instantiateFromStoryboard()
-
+    private let meetupTimeViewController = ArenaDetailsMeetupTimeViewController.instantiateFromStoryboard()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -29,19 +30,21 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-
         headerViewController.viewModel = viewModel
         restTimeViewController.viewModel = viewModel
         participantsTableViewController.viewModel = viewModel
         participantsOverviewViewController.viewModel = viewModel
         participantsOverviewViewController.coordinator = coordinator
         infoViewController.viewModel = viewModel
+        meetupTimeViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
         
         if !viewModel.isRaidExpired {
             stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
+            stackView.addSepartor()
+            stackView.addArrangedViewController(viewController: meetupTimeViewController, to: self)
             stackView.addSepartor()
             stackView.addArrangedViewController(viewController: participantsOverviewViewController, to: self)
             stackView.addSepartor()
@@ -65,8 +68,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     func update(of type: ArenaDetailsUpdateType) {
         updateUI()
         switch type {
-        case .usersChanged:
-            participantsOverviewViewController.updateUI()            
+        case .meetupChanged:
+            participantsOverviewViewController.updateUI()
+            meetupTimeViewController.updateUI()
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTime(timeLeft)
         }

@@ -4,7 +4,7 @@ import Firebase
 import CodableFirebase
 
 enum ArenaDetailsUpdateType {
-    case usersChanged
+    case meetupChanged
     case timeLeftChanged(_ timeLeft: String?)
 }
 
@@ -22,7 +22,11 @@ class ArenaDetailsViewModel {
             firebaseConnector.observeRaidMeetup(for: meetupId)
         }
     }
-    var meetup: RaidMeetup?
+    var meetup: RaidMeetup? {
+        didSet {
+            
+        }
+    }
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
@@ -194,7 +198,7 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
         self.meetup = raidMeetup
         guard let userIds = raidMeetup.participants?.values.makeIterator() else {
             DispatchQueue.main.async {
-                self.delegate?.update(of: .usersChanged)
+                self.delegate?.update(of: .meetupChanged)
             }
             return
         }
@@ -203,7 +207,7 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
             firebaseConnector.loadUser(for: userId) { user in
                 self.participants[user.id] = user
                 DispatchQueue.main.async {
-                    self.delegate?.update(of: .usersChanged)
+                    self.delegate?.update(of: .meetupChanged)
                 }
             }
         }
