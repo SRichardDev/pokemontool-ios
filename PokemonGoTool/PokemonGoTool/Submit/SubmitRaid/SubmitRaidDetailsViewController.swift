@@ -74,7 +74,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         setTitle("Neuer Level \(viewModel.selectedRaidLevel) Raid")
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = addItem
-
     }
     
     @objc
