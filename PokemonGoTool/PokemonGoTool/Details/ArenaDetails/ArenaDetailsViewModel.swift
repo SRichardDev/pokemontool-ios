@@ -194,14 +194,15 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
     func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
         self.participants.removeAll()
         self.meetup = raidMeetup
-        guard let userIds = raidMeetup.participants?.values.makeIterator() else {
+        
+        guard let userIds = raidMeetup.participants else {
             DispatchQueue.main.async {
                 self.delegate?.update(of: .meetupChanged)
             }
             return
         }
-
-        for userId in userIds {
+        
+        userIds.values.forEach { userId in
             firebaseConnector.loadUser(for: userId) { user in
                 self.participants[user.id] = user
                 DispatchQueue.main.async {
