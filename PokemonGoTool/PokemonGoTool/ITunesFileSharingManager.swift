@@ -34,8 +34,8 @@ class ImageManager {
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
         if let dirPath = paths.first {
             let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("pokemon/\(imageName).png")
-            if let image = UIImage(contentsOfFile: imageURL.path) {
-                return image
+            if let userDefinedImage = UIImage(contentsOfFile: imageURL.path) {
+                return userDefinedImage
             }
         }
         return UIImage(named: imageName)

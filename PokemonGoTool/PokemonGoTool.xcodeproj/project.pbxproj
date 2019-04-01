@@ -269,7 +269,6 @@
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */,
-				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
 				2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */,
 				2CBCD8E6221C8E910058D782 /* LoadingViewController.swift */,
 				2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */,
@@ -405,6 +404,7 @@
 				2C34F1A7220B720C00B3B99C /* ButtonsStackViewController.swift */,
 				2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */,
 				2C870DD822135C60000F2268 /* MapViewController+Extension.swift */,
+				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";

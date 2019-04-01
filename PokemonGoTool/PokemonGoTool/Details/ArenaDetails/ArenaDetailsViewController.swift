@@ -53,6 +53,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
+        meetupTimeViewController.view.isHidden = viewModel.isRaidExpired
    }
     
     override func viewWillAppear(_ animated: Bool) {

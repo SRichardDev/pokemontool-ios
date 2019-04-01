@@ -27,69 +27,117 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9XW-Jd-2A2">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRg-ke-Pjx">
                                         <rect key="frame" x="0.0" y="40" width="400" height="80"/>
                                         <subviews>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqt-kf-XTW" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="height" multiplier="1:1" id="GIj-Jc-ihA"/>
-                                                </constraints>
-                                                <state key="normal" image="level_1">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="tv1-gy-GW0"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czd-aN-QIR" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="80" y="0.0" width="80" height="80"/>
-                                                <state key="normal" image="level_2">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="16r-kQ-dvf"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcI-tj-ve3" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="160" y="0.0" width="80" height="80"/>
-                                                <state key="normal" image="level_3">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="3cf-Pz-Ydb"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AD2-fU-yyd" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="240" y="0.0" width="80" height="80"/>
-                                                <state key="normal" image="level_4">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="jAy-4T-qr3"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f43-QB-F3X" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="320" y="0.0" width="80" height="80"/>
-                                                <state key="normal" image="level_5">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="etI-UM-BSg"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5V4-3W-UIy">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynJ-YL-oED" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="ynJ-YL-oED" secondAttribute="height" multiplier="1:1" id="xcr-bA-tqA"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru5-Dl-oic" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="80" y="0.0" width="80" height="80"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="ru5-Dl-oic" secondAttribute="height" multiplier="1:1" id="pAg-Yg-g0p"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pkt-uv-3pq" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="160" y="0.0" width="80" height="80"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Pkt-uv-3pq" secondAttribute="height" multiplier="1:1" id="i0b-Ve-4k9"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpa-5D-2CE" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="240" y="0.0" width="80" height="80"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="tpa-5D-2CE" secondAttribute="height" multiplier="1:1" id="eZa-JH-inK"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2C-Kd-Ma2" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="320" y="0.0" width="80" height="80"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="I2C-Kd-Ma2" secondAttribute="height" multiplier="1:1" id="hps-Fh-4Cv"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9XW-Jd-2A2">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0r-GH-YgQ" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="q0r-GH-YgQ" secondAttribute="height" multiplier="1:1" id="lhO-JD-nHh"/>
+                                                        </constraints>
+                                                        <state key="normal" image="level_1"/>
+                                                        <connections>
+                                                            <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="QAS-8u-Z2N"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9i7-pX-VcJ" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="80" y="0.0" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="9i7-pX-VcJ" secondAttribute="height" multiplier="1:1" id="OHY-kk-FNt"/>
+                                                        </constraints>
+                                                        <state key="normal" image="level_2"/>
+                                                        <connections>
+                                                            <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="abb-Tc-8GN"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCr-SF-gx4" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="160" y="0.0" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="yCr-SF-gx4" secondAttribute="height" multiplier="1:1" id="ie0-W8-RfD"/>
+                                                        </constraints>
+                                                        <state key="normal" image="level_3"/>
+                                                        <connections>
+                                                            <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="jmb-ca-sIt"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrq-f8-sAT" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="240" y="0.0" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Yrq-f8-sAT" secondAttribute="height" multiplier="1:1" id="S0G-LT-e80"/>
+                                                        </constraints>
+                                                        <state key="normal" image="level_4"/>
+                                                        <connections>
+                                                            <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="Jat-o0-l9R"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndc-eh-Cta" customClass="LevelSelectionButton" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="320" y="0.0" width="80" height="80"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="ndc-eh-Cta" secondAttribute="height" multiplier="1:1" id="ZcB-1i-h4A"/>
+                                                        </constraints>
+                                                        <state key="normal" image="level_5"/>
+                                                        <connections>
+                                                            <action selector="levelButtonsTapped:" destination="GFO-f1-pFw" eventType="touchUpInside" id="801-Te-OES"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Czd-aN-QIR" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="9pe-YQ-b0A"/>
-                                            <constraint firstItem="VcI-tj-ve3" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="G06-XH-cTi"/>
-                                            <constraint firstItem="f43-QB-F3X" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="Hvg-Xo-Shl"/>
-                                            <constraint firstItem="VcI-tj-ve3" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="YEM-5J-EI5"/>
-                                            <constraint firstItem="AD2-fU-yyd" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="b0d-PU-wPt"/>
-                                            <constraint firstItem="Czd-aN-QIR" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="jjQ-BQ-kEm"/>
-                                            <constraint firstItem="AD2-fU-yyd" firstAttribute="height" secondItem="Zqt-kf-XTW" secondAttribute="height" id="pRA-mF-cSD"/>
-                                            <constraint firstItem="f43-QB-F3X" firstAttribute="width" secondItem="Zqt-kf-XTW" secondAttribute="width" id="sqT-YT-6YO"/>
+                                            <constraint firstItem="5V4-3W-UIy" firstAttribute="leading" secondItem="wRg-ke-Pjx" secondAttribute="leading" id="2iV-l8-wnm"/>
+                                            <constraint firstAttribute="trailing" secondItem="9XW-Jd-2A2" secondAttribute="trailing" id="AOl-hz-v2w"/>
+                                            <constraint firstAttribute="bottom" secondItem="9XW-Jd-2A2" secondAttribute="bottom" id="akd-Y9-odf"/>
+                                            <constraint firstItem="9XW-Jd-2A2" firstAttribute="top" secondItem="wRg-ke-Pjx" secondAttribute="top" id="bTp-7s-PSU"/>
+                                            <constraint firstItem="9XW-Jd-2A2" firstAttribute="leading" secondItem="wRg-ke-Pjx" secondAttribute="leading" id="ier-w3-Cq0"/>
+                                            <constraint firstAttribute="trailing" secondItem="5V4-3W-UIy" secondAttribute="trailing" id="kb1-L6-SLe"/>
+                                            <constraint firstItem="5V4-3W-UIy" firstAttribute="top" secondItem="wRg-ke-Pjx" secondAttribute="top" id="pbB-fr-yRp"/>
+                                            <constraint firstAttribute="bottom" secondItem="5V4-3W-UIy" secondAttribute="bottom" id="zMq-xm-jgI"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -108,11 +156,16 @@
                     <size key="freeformSize" width="400" height="120"/>
                     <connections>
                         <outlet property="titleLabel" destination="feW-iw-iwb" id="p9Z-mL-vJp"/>
-                        <outletCollection property="buttons" destination="Zqt-kf-XTW" collectionClass="NSMutableArray" id="bdB-3a-ky9"/>
-                        <outletCollection property="buttons" destination="Czd-aN-QIR" collectionClass="NSMutableArray" id="WyE-Lv-RpJ"/>
-                        <outletCollection property="buttons" destination="VcI-tj-ve3" collectionClass="NSMutableArray" id="v4g-IG-kWe"/>
-                        <outletCollection property="buttons" destination="AD2-fU-yyd" collectionClass="NSMutableArray" id="Bqj-fA-OXa"/>
-                        <outletCollection property="buttons" destination="f43-QB-F3X" collectionClass="NSMutableArray" id="lRw-2m-bRb"/>
+                        <outletCollection property="buttons" destination="q0r-GH-YgQ" collectionClass="NSMutableArray" id="Vlf-1G-BnO"/>
+                        <outletCollection property="buttons" destination="9i7-pX-VcJ" collectionClass="NSMutableArray" id="74h-zx-3ZR"/>
+                        <outletCollection property="buttons" destination="yCr-SF-gx4" collectionClass="NSMutableArray" id="cgR-MX-deX"/>
+                        <outletCollection property="buttons" destination="Yrq-f8-sAT" collectionClass="NSMutableArray" id="OAW-Bi-PC4"/>
+                        <outletCollection property="buttons" destination="ndc-eh-Cta" collectionClass="NSMutableArray" id="LhA-9P-gHv"/>
+                        <outletCollection property="buttonBackgroundViews" destination="ynJ-YL-oED" collectionClass="NSMutableArray" id="i52-tz-ZGy"/>
+                        <outletCollection property="buttonBackgroundViews" destination="ru5-Dl-oic" collectionClass="NSMutableArray" id="p2P-qS-VhK"/>
+                        <outletCollection property="buttonBackgroundViews" destination="Pkt-uv-3pq" collectionClass="NSMutableArray" id="8CA-Nt-bij"/>
+                        <outletCollection property="buttonBackgroundViews" destination="tpa-5D-2CE" collectionClass="NSMutableArray" id="F4s-BJ-S1n"/>
+                        <outletCollection property="buttonBackgroundViews" destination="I2C-Kd-Ma2" collectionClass="NSMutableArray" id="S0U-dP-4qH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jci-cv-flJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
