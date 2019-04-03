@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eaa-fN-iMv">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="HSa-kp-it2">
+            <objects>
+                <viewController id="eaa-fN-iMv" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E0w-lR-Wbi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="V8r-na-zUa">
+                                <rect key="frame" x="16" y="36" width="343" height="158"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zua-Lf-mn2" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVG-SL-hXj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="45.5" width="343" height="57.5"/>
+                                        <string key="text">Um einen Account zu erstellen benötigen wir eine gültige E-Mail Adresse von dir. Bitte achte darauf, dass die E-Mail Adresse korrekt ist, da du von uns eine Bestätigungs-E-Mail bekommst.</string>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Trage hier deine E-Mail Adresse ein" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="drZ-43-96w">
+                                        <rect key="frame" x="0.0" y="128" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrR-Od-wX1" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="607" width="343" height="44"/>
+                                <state key="normal" title="Weiter"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="V8r-na-zUa" firstAttribute="leading" secondItem="9ex-LQ-UyY" secondAttribute="leading" constant="16" id="3kB-NN-ccy"/>
+                            <constraint firstItem="9ex-LQ-UyY" firstAttribute="trailing" secondItem="V8r-na-zUa" secondAttribute="trailing" constant="16" id="56w-G6-Aqx"/>
+                            <constraint firstItem="V8r-na-zUa" firstAttribute="top" secondItem="9ex-LQ-UyY" secondAttribute="top" constant="16" id="MDo-6c-uyq"/>
+                            <constraint firstItem="lrR-Od-wX1" firstAttribute="leading" secondItem="9ex-LQ-UyY" secondAttribute="leading" constant="16" id="bzB-yk-7xk"/>
+                            <constraint firstItem="9ex-LQ-UyY" firstAttribute="trailing" secondItem="lrR-Od-wX1" secondAttribute="trailing" constant="16" id="o0U-9N-jEJ"/>
+                            <constraint firstItem="9ex-LQ-UyY" firstAttribute="bottom" secondItem="lrR-Od-wX1" secondAttribute="bottom" constant="16" id="rUG-72-6k5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9ex-LQ-UyY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RBh-Sl-wWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="62"/>
+        </scene>
+    </scenes>
+</document>
