@@ -5,7 +5,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
-    private let stackView = UIStackView()
+    private let stackView = StackView()
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
     private let raidBossCollectionViewController = RaidBossCollectionViewController.instantiateFromStoryboard()
@@ -20,10 +20,6 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubviewAndEdgeConstraints(stackView,
                                           edges: .all,
                                           margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),

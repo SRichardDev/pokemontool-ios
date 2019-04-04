@@ -5,7 +5,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
-    private let stackView = UIStackView()
+    private let stackView = StackView()
     private let imageView = UIImageView()
     private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
     private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.instantiateFromStoryboard()
@@ -17,10 +17,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubviewAndEdgeConstraints(stackView,
                                           edges: .all,
                                           margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
