@@ -15,7 +15,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         self.window = window
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
-        let loadingViewController = LoadingViewController.instantiateFromStoryboard()
+        let loadingViewController = LoadingViewController.fromStoryboard()
         window.rootViewController = loadingViewController
         appModule.firebaseConnector.startUpDelegate = self
     }
@@ -25,13 +25,13 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
 
     func showMainMap() {
-        let mapViewController = MapViewController.instantiateFromStoryboard()
+        let mapViewController = MapViewController.fromStoryboard()
         mapViewController.coordinator = self
         mapViewController.firebaseConnector = appModule.firebaseConnector
         mapViewController.locationManager = appModule.locationManager
         mapViewController.tabBarItem = UITabBarItem(title: "Karte", image: UIImage(named: "Map"), selectedImage: nil)
         
-        let accountViewController = AccountViewController.instantiateFromStoryboard()
+        let accountViewController = AccountViewController.fromStoryboard()
         let scrollableViewController = ScrollableViewController(childViewController: accountViewController)
         scrollableViewController.title = "Account"
         scrollableViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "Account"), selectedImage: nil)
@@ -51,7 +51,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showSubmitPokestopAndArena(for viewModel: SubmitViewModel) {
-        let submitViewController = SubmitViewController.instantiateFromStoryboard()
+        let submitViewController = SubmitViewController.fromStoryboard()
         submitViewController.coordinator = self
         submitViewController.viewModel = viewModel
         navigationController.viewControllers = [submitViewController]
@@ -60,7 +60,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showSubmitName(for viewModel: SubmitViewModel) {
-        let submitNameViewController = SubmitNameViewController.instantiateFromStoryboard()
+        let submitNameViewController = SubmitNameViewController.fromStoryboard()
         submitNameViewController.coordinator = self
         submitNameViewController.viewModel = viewModel
         navigationController.pushViewController(submitNameViewController, animated: true)
@@ -68,7 +68,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showSubmitCheck(for viewModel: SubmitViewModel) {
-        let submitCheckViewController = SubmitCheckViewController.instantiateFromStoryboard()
+        let submitCheckViewController = SubmitCheckViewController.fromStoryboard()
         submitCheckViewController.coordinator = self
         submitCheckViewController.viewModel = viewModel
         navigationController.pushViewController(submitCheckViewController, animated: true)
@@ -76,7 +76,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showSubmitQuest(for pokestop: Pokestop) {
-        let submitQuestViewController = SubmitQuestViewController.instantiateFromStoryboard()
+        let submitQuestViewController = SubmitQuestViewController.fromStoryboard()
         submitQuestViewController.coordinator = self
         submitQuestViewController.pokestop = pokestop
         submitQuestViewController.firebaseConnector = appModule.firebaseConnector
@@ -86,7 +86,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showSubmitRaid(for arena: Arena) {
-        let submitRaidDetailsViewController = SubmitRaidDetailsViewController.instantiateFromStoryboard()
+        let submitRaidDetailsViewController = SubmitRaidDetailsViewController.fromStoryboard()
         submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena,
                                                                         firebaseConnector: appModule.firebaseConnector)
         submitRaidDetailsViewController.coordinator = self
@@ -95,7 +95,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showPokestopDetails(for pokestop: Pokestop) {
-        let pokestopDetailsViewController = PokestopDetailsViewController.instantiateFromStoryboard()
+        let pokestopDetailsViewController = PokestopDetailsViewController.fromStoryboard()
         pokestopDetailsViewController.coordinator = self
         pokestopDetailsViewController.viewModel = PokestopDetailsViewModel(pokestop: pokestop,
                                                                            firebaseConnector: appModule.firebaseConnector)
@@ -103,7 +103,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
     
     func showArenaDetails(for arena: Arena) {
-        let arenaDetailsViewController = ArenaDetailsViewController.instantiateFromStoryboard()
+        let arenaDetailsViewController = ArenaDetailsViewController.fromStoryboard()
         arenaDetailsViewController.coordinator = self
         arenaDetailsViewController.viewModel = ArenaDetailsViewModel(arena: arena,
                                                                      firebaseConnector: appModule.firebaseConnector)
@@ -111,14 +111,14 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     }
 
     func showRaidParticipants(_ viewModel: ArenaDetailsViewModel) {
-        let participantsTableViewController = ArenaDetailsParticipantsTableViewController.instantiateFromStoryboard()
+        let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
         participantsTableViewController.viewModel = viewModel
         navigationController.pushViewController(participantsTableViewController, animated: true)
         impact()
     }
 
     func showRaidChat(_ viewModel: ArenaDetailsViewModel) {
-        let chatViewController = ChatViewController.instantiateFromStoryboard()
+        let chatViewController = ChatViewController.fromStoryboard()
         chatViewController.viewModel = viewModel
         chatViewController.firebaseConnector = appModule.firebaseConnector
         navigationController.pushViewController(chatViewController, animated: true)

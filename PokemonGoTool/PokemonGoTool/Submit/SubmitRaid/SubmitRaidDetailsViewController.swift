@@ -7,13 +7,13 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     var firebaseConnector: FirebaseConnector!
     private let stackView = StackView()
     private let imageView = UIImageView()
-    private let raidLevelViewController = RaidLevelViewController.instantiateFromStoryboard()
-    private let raidBossCollectionViewController = RaidBossCollectionViewController.instantiateFromStoryboard()
-    private let hatchTimePickerViewController = RaidHatchTimePickerViewController.instantiateFromStoryboard()
-    private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.instantiateFromStoryboard()
-    private let userParticipatesViewController = RaidUserParticipateSwitchViewController.instantiateFromStoryboard()
-    private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.instantiateFromStoryboard()
-    private let raidAlreadyRunningSwitchViewController = RaidAlreadyRunningSwitchViewController.instantiateFromStoryboard()
+    private let raidLevelViewController = RaidLevelViewController.fromStoryboard()
+    private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
+    private let hatchTimePickerViewController = RaidHatchTimePickerViewController.fromStoryboard()
+    private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.fromStoryboard()
+    private let userParticipatesViewController = RaidUserParticipateSwitchViewController.fromStoryboard()
+    private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.fromStoryboard()
+    private let raidAlreadyRunningSwitchViewController = RaidAlreadyRunningSwitchViewController.fromStoryboard()
     private let doneButton = Button()
     var viewModel: SubmitRaidViewModel!
 

@@ -1,17 +1,12 @@
 
 import UIKit
 
-#if os(iOS)
-
-/**
- A view controller that is instaniated from a Storyboard file.
- */
 public protocol StoryboardViewController: class {
     static var storyboardName: String {get}
     static var storyboardIdentifier: String {get}
     static var bundle: Bundle {get}
 
-    static func instantiateFromStoryboard() -> Self
+    static func fromStoryboard() -> Self
 }
 
 public extension StoryboardViewController {
@@ -28,21 +23,14 @@ public extension StoryboardViewController {
     }
 }
 
-/**
- Use this protocol to mark a view controller that is the initial view controller of a storyboard.
- Then use .instantiateFromStoryboard() to conveniently create an instance
- */
 public protocol StoryboardInitialViewController: StoryboardViewController {}
 
 public extension StoryboardInitialViewController {
-    static func instantiateFromStoryboard() -> Self {
+    static func fromStoryboard() -> Self {
         return UIStoryboard(name: self.storyboardName, bundle: bundle).instantiateInitialViewController() as! Self
     }
 }
 
-/**
- Use this protocol to mark a view controller that is embedded in the initial view controller of a storyboard.
- */
 public protocol StoryboardEmbeddedViewController: StoryboardViewController {
     associatedtype StoryboardEmbeddingViewController: UIViewController
     var embeddingViewController: StoryboardEmbeddingViewController {get}
@@ -53,10 +41,8 @@ public extension StoryboardEmbeddedViewController where Self: UIViewController, 
         return self.navigationController as! StoryboardEmbeddingViewController
     }
 
-    static func instantiateFromStoryboard() -> Self {
+    static func fromStoryboard() -> Self {
         let embeddingViewController = UIStoryboard(name: self.storyboardName, bundle: bundle).instantiateInitialViewController() as! UINavigationController
         return embeddingViewController.topViewController as! Self
     }
 }
-
-#endif

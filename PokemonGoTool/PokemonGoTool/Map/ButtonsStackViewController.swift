@@ -42,7 +42,7 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
                      in viewController: UIViewController,
                      with buttons: [UIButton]) -> ButtonsStackViewController {
         
-        let buttonsStackViewController = ButtonsStackViewController.instantiateFromStoryboard()
+        let buttonsStackViewController = ButtonsStackViewController.fromStoryboard()
         buttonsStackViewController.loadView()
         
         buttonsStackViewController.buttons = buttons

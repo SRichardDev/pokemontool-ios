@@ -7,12 +7,12 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     var viewModel: ArenaDetailsViewModel!
     private let stackView = StackView()
     private let imageView = UIImageView()
-    private let headerViewController = ArenaDetailsHeaderViewController.instantiateFromStoryboard()
-    private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.instantiateFromStoryboard()
-    private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.instantiateFromStoryboard()
-    private let restTimeViewController = ArenaDetailsRestTimeViewController.instantiateFromStoryboard()
-    private let infoViewController = ArenaDetailsInfoViewController.instantiateFromStoryboard()
-    private let meetupTimeViewController = ArenaDetailsMeetupTimeViewController.instantiateFromStoryboard()
+    private let headerViewController = ArenaDetailsHeaderViewController.fromStoryboard()
+    private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
+    private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.fromStoryboard()
+    private let restTimeViewController = ArenaDetailsRestTimeViewController.fromStoryboard()
+    private let infoViewController = ArenaDetailsInfoViewController.fromStoryboard()
+    private let meetupTimeViewController = ArenaDetailsMeetupTimeViewController.fromStoryboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
