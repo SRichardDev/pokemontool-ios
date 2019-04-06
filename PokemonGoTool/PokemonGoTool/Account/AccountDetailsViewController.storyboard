@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Team Details View Controller-->
+        <!--Account Details View Controller-->
         <scene sceneID="U2Q-NJ-lxv">
             <objects>
-                <viewController id="X90-2a-4Wj" customClass="TeamDetailsViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="X90-2a-4Wj" customClass="AccountDetailsViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nwg-Vc-Z23">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="265"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

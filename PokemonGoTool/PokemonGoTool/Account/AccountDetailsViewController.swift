@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TeamDetailsViewController: UIViewController, StoryboardInitialViewController {
+class AccountDetailsViewController: UIViewController, StoryboardInitialViewController {
 
     var viewModel: AccountViewModel!
     
@@ -39,7 +39,7 @@ class TeamDetailsViewController: UIViewController, StoryboardInitialViewControll
     }
 }
 
-extension TeamDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AccountDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return teamPickerViewRows[row]
     }

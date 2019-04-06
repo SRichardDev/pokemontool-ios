@@ -5,6 +5,12 @@ class AccountViewModel {
     
     private let firebaseConnector: FirebaseConnector
     
+    var trainerName: String {
+        get {
+            return firebaseConnector.user?.trainerName ?? "Kein Trainer Name gesetzt"
+        }
+    }
+    
     var currentTeam: Int {
         get {
             return firebaseConnector.user?.team?.rawValue ?? 0
@@ -20,6 +26,12 @@ class AccountViewModel {
     var currentLevel: Int {
         get {
             return 40 - (firebaseConnector.user?.level ?? 0)
+        }
+    }
+    
+    var isLoggedIn: Bool {
+        get {
+            return firebaseConnector.isSignedIn
         }
     }
     

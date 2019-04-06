@@ -13,8 +13,8 @@ class NavigationController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let button = UIButton(type: .custom)
-        button.addAction {
-            self.dismiss(animated: true)
+        button.addAction { [weak self] in
+            self?.dismiss(animated: true)
         }
         button.setImage(UIImage(named: "dismiss"), for: .normal)
         let item = UIBarButtonItem(customView: button)

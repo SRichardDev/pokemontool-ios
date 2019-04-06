@@ -20,14 +20,16 @@
 		2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */; };
 		2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */; };
 		2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */; };
-		2C0B5B6F2255387500620F4A /* TeamDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B6E2255387500620F4A /* TeamDetailsViewController.storyboard */; };
-		2C0B5B712255399300620F4A /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B702255399300620F4A /* TeamDetailsViewController.swift */; };
+		2C0B5B6F2255387500620F4A /* AccountDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */; };
+		2C0B5B712255399300620F4A /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */; };
 		2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7222553B2500620F4A /* AccountViewModel.swift */; };
 		2C0B5B752255408800620F4A /* AccountEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B742255408800620F4A /* AccountEmailViewController.swift */; };
 		2C0B5B77225540A100620F4A /* AccountEmailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */; };
 		2C0B5B792255423900620F4A /* AccountPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */; };
 		2C0B5B7B2255426400620F4A /* AccountPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */; };
 		2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7C22568C9000620F4A /* StackView.swift */; };
+		2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */; };
+		2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */; };
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
 		2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A521ED266B00091F8C /* Assets.xcassets */; };
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
@@ -137,14 +139,16 @@
 		2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestData.swift; sourceTree = "<group>"; };
 		2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsInfoViewController.swift; sourceTree = "<group>"; };
 		2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsInfoViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B6E2255387500620F4A /* TeamDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TeamDetailsViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B702255399300620F4A /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
+		2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountDetailsViewController.storyboard; sourceTree = "<group>"; };
+		2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		2C0B5B7222553B2500620F4A /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		2C0B5B742255408800620F4A /* AccountEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEmailViewController.swift; sourceTree = "<group>"; };
 		2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountEmailViewController.storyboard; sourceTree = "<group>"; };
 		2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPasswordViewController.swift; sourceTree = "<group>"; };
 		2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountPasswordViewController.storyboard; sourceTree = "<group>"; };
 		2C0B5B7C22568C9000620F4A /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOverviewViewController.swift; sourceTree = "<group>"; };
+		2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountOverviewViewController.storyboard; sourceTree = "<group>"; };
 		2C19769B21ED266900091F8C /* PokemonGoTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGoTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C19769E21ED266900091F8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C1976A521ED266B00091F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -548,14 +552,16 @@
 		2C97F78821F67D3E00630BA2 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				2C0B5B702255399300620F4A /* TeamDetailsViewController.swift */,
-				2C0B5B6E2255387500620F4A /* TeamDetailsViewController.storyboard */,
+				2CF6F9A421F259E700610BC9 /* AccountViewController.swift */,
+				2C395A1E22025100005330B8 /* AccountViewController.storyboard */,
+				2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */,
+				2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */,
+				2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */,
+				2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */,
 				2C0B5B742255408800620F4A /* AccountEmailViewController.swift */,
 				2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */,
 				2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */,
 				2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */,
-				2CF6F9A421F259E700610BC9 /* AccountViewController.swift */,
-				2C395A1E22025100005330B8 /* AccountViewController.storyboard */,
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
 				2C0B5B7C22568C9000620F4A /* StackView.swift */,
@@ -684,6 +690,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */,
 				2C34F1AA220B737E00B3B99C /* ButtonsStackViewController.storyboard in Resources */,
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
@@ -712,7 +719,7 @@
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
 				2C0B5B7B2255426400620F4A /* AccountPasswordViewController.storyboard in Resources */,
 				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
-				2C0B5B6F2255387500620F4A /* TeamDetailsViewController.storyboard in Resources */,
+				2C0B5B6F2255387500620F4A /* AccountDetailsViewController.storyboard in Resources */,
 				2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */,
 				2C395A552205FF79005330B8 /* RaidUserParticipateSwitchViewController.storyboard in Resources */,
 				2C34F1E72210933700B3B99C /* PokestopDetailsViewController.storyboard in Resources */,
@@ -822,7 +829,7 @@
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
 				035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
-				2C0B5B712255399300620F4A /* TeamDetailsViewController.swift in Sources */,
+				2C0B5B712255399300620F4A /* AccountDetailsViewController.swift in Sources */,
 				2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */,
 				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
@@ -859,6 +866,7 @@
 				2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */,
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
+				2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */,
 				2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */,
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,

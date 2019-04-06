@@ -8,8 +8,10 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     var children = [Coordinator]()
     var tabBarController = UITabBarController()
     var navigationController = NavigationController()
+    let mainNavigationController = UINavigationController()
     var appModule: AppModule
     var window: UIWindow!
+    
     init(appModule: AppModule, window: UIWindow) {
         self.appModule = appModule
         self.window = window
@@ -36,11 +38,11 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         scrollableViewController.title = "Account"
         scrollableViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "Account"), selectedImage: nil)
         accountViewController.coordinator = self
-        accountViewController.firebaseConnector = appModule.firebaseConnector
-        let navigationController = UINavigationController()
-        navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.viewControllers = [scrollableViewController]
-        tabBarController.viewControllers = [mapViewController, navigationController]
+        let viewModel = AccountViewModel(firebaseConnector: appModule.firebaseConnector)
+        accountViewController.viewModel = viewModel
+        mainNavigationController.navigationBar.prefersLargeTitles = true
+        mainNavigationController.viewControllers = [scrollableViewController]
+        tabBarController.viewControllers = [mapViewController, mainNavigationController]
         window.rootViewController = tabBarController
         
         var options = UIWindow.TransitionOptions()
@@ -122,6 +124,30 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         chatViewController.viewModel = viewModel
         chatViewController.firebaseConnector = appModule.firebaseConnector
         navigationController.pushViewController(chatViewController, animated: true)
+        impact()
+    }
+    
+    func showChangeAccountDetails(_ viewModel: AccountViewModel) {
+        let accountDetailsViewController = AccountDetailsViewController.fromStoryboard()
+        accountDetailsViewController.viewModel = viewModel
+        let scrollableViewController = ScrollableViewController(childViewController: accountDetailsViewController)
+        mainNavigationController.pushViewController(scrollableViewController, animated: true)
+        impact()
+    }
+    
+    func showSignupEmail(_ viewModel: AccountViewModel) {
+        let accountEmailViewController = AccountEmailViewController.fromStoryboard()
+        accountEmailViewController.viewModel = viewModel
+        accountEmailViewController.coordinator = self
+        mainNavigationController.pushViewController(accountEmailViewController, animated: true)
+        impact()
+    }
+    
+    func showSignupPassword(_ viewModel: AccountViewModel) {
+        let accountPasswordViewController = AccountPasswordViewController.fromStoryboard()
+        accountPasswordViewController.viewModel = viewModel
+        accountPasswordViewController.coordinator = self
+        mainNavigationController.pushViewController(accountPasswordViewController, animated: true)
         impact()
     }
     

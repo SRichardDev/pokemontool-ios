@@ -15,95 +15,15 @@
             <objects>
                 <viewController id="gnt-ur-o23" customClass="AccountViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aBd-Fo-028">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-p8-EpM">
-                                <rect key="frame" x="16" y="36" width="343" height="331.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-u7-gLK">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xFC-XE-29T">
-                                        <rect key="frame" x="0.0" y="45.5" width="343" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Et7-yC-8CA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100.5" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qk-Ka-CIe">
-                                        <rect key="frame" x="0.0" y="146" width="343" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJy-vz-fqT">
-                                        <rect key="frame" x="0.0" y="191.5" width="343" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W80-yE-u3c" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246.5" width="343" height="30"/>
-                                        <state key="normal" title="Sign up"/>
-                                        <connections>
-                                            <action selector="signupTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="wPO-YL-lCH"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-kc-gbG" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="301.5" width="343" height="30"/>
-                                        <state key="normal" title="Login"/>
-                                        <connections>
-                                            <action selector="loginTapped:" destination="gnt-ur-o23" eventType="touchUpInside" id="awo-K5-HXg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="trailing" secondItem="zMW-p8-EpM" secondAttribute="trailing" constant="16" id="8KO-k2-XzN"/>
-                            <constraint firstItem="zMW-p8-EpM" firstAttribute="top" secondItem="wAl-OH-Hjd" secondAttribute="top" constant="16" id="glK-h4-b7t"/>
-                            <constraint firstItem="wAl-OH-Hjd" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zMW-p8-EpM" secondAttribute="bottom" constant="16" id="uTK-El-oNH"/>
-                            <constraint firstItem="zMW-p8-EpM" firstAttribute="leading" secondItem="wAl-OH-Hjd" secondAttribute="leading" constant="16" id="yB1-hV-368"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wAl-OH-Hjd"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="1Nb-hT-CGq" appends="YES" id="sti-cA-Qrt"/>
-                        </connections>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <size key="freeformSize" width="375" height="750"/>
-                    <connections>
-                        <outlet property="emailLabel" destination="Rfa-u7-gLK" id="Mgr-Y1-s5z"/>
-                        <outlet property="emailTextField" destination="xFC-XE-29T" id="KMp-ie-nvn"/>
-                        <outlet property="emailVerifiedLabel" destination="Et7-yC-8CA" id="bO5-Xx-I6F"/>
-                        <outlet property="loginButton" destination="tUA-kc-gbG" id="QlF-j4-7CL"/>
-                        <outlet property="passwordLabel" destination="7qk-Ka-CIe" id="FbR-NO-cf4"/>
-                        <outlet property="passwordTextField" destination="hJy-vz-fqT" id="0xy-7P-LxB"/>
-                        <outlet property="signUpButton" destination="W80-yE-u3c" id="BCg-oE-SQ7"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfj-lB-PLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="1Nb-hT-CGq">
-                    <connections>
-                        <action selector="viewTapped:" destination="gnt-ur-o23" id="9H9-y8-TJs"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1932" y="788.45577211394311"/>
         </scene>
