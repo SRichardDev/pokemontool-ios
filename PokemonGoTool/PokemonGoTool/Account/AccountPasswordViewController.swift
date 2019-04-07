@@ -6,7 +6,6 @@ class AccountPasswordViewController: UIViewController, StoryboardInitialViewCont
     weak var coordinator: MainCoordinator?
     var viewModel: AccountViewModel!
 
-    @IBOutlet var titleLabel: Label!
     @IBOutlet var subtitleLabel: Label!
     @IBOutlet var passwordTextField: UITextField!
     
@@ -15,7 +14,11 @@ class AccountPasswordViewController: UIViewController, StoryboardInitialViewCont
         title = "Passwort"
     }
     
-    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        
+    @IBAction func doneTapped(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
+    @IBAction func viewTapped(_ sender: Any) {
+        passwordTextField.resignFirstResponder()
     }
 }

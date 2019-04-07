@@ -25,7 +25,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
         
         let createAccountButton = Button()
         createAccountButton.setTitle("Account anlegen", for: .normal)
-        createAccountButton.addAction { [weak self] in
+        createAccountButton.addAction(for: .touchUpInside) { [weak self] in
             guard let self = self else { return }
             self.coordinator?.showSignupEmail(self.viewModel)
         }

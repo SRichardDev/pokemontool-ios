@@ -39,7 +39,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                         <connections>
-                                            <action selector="textFieldEditingChanged:" destination="eaa-fN-iMv" eventType="editingChanged" id="u44-aD-kHY"/>
+                                            <action selector="doneTapped:" destination="eaa-fN-iMv" eventType="primaryActionTriggered" id="ocC-YM-2B8"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -47,9 +47,13 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrR-Od-wX1" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="16" y="607" width="343" height="44"/>
                                 <state key="normal" title="Weiter"/>
+                                <connections>
+                                    <action selector="nextTapped:" destination="eaa-fN-iMv" eventType="touchUpInside" id="eBH-fQ-F3R"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="V8r-na-zUa" firstAttribute="leading" secondItem="9ex-LQ-UyY" secondAttribute="leading" constant="16" id="3kB-NN-ccy"/>
                             <constraint firstItem="9ex-LQ-UyY" firstAttribute="trailing" secondItem="V8r-na-zUa" secondAttribute="trailing" constant="16" id="56w-G6-Aqx"/>
@@ -59,13 +63,22 @@
                             <constraint firstItem="9ex-LQ-UyY" firstAttribute="bottom" secondItem="lrR-Od-wX1" secondAttribute="bottom" constant="16" id="rUG-72-6k5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ex-LQ-UyY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="gb3-Nm-Noh" appends="YES" id="ULa-k9-ZSQ"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="drZ-43-96w" id="08s-kC-dWC"/>
+                        <outlet property="nextButton" destination="lrR-Od-wX1" id="UQG-x9-dfp"/>
                         <outlet property="subtitleLabel" destination="gVG-SL-hXj" id="fh3-3b-thh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBh-Sl-wWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gb3-Nm-Noh">
+                    <connections>
+                        <action selector="viewTapped:" destination="eaa-fN-iMv" id="QPd-p8-BzS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-129" y="62"/>
         </scene>
