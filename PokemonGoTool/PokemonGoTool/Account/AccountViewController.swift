@@ -33,11 +33,12 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
         stackView.addArrangedSubview(changeDetailsButton)
         stackView.addArrangedSubview(createAccountButton)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    
+        tabBarController?.tabBar.isHidden = false
         
         createAccountButton.isHidden = viewModel.isLoggedIn
         changeDetailsButton.isVisible = viewModel.isLoggedIn

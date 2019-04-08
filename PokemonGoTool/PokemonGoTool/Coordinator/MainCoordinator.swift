@@ -144,6 +144,14 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
+    func showSignUp(_ viewModel: AccountViewModel) {
+        let signUpViewController = AccountSignUpViewController.fromStoryboard()
+        signUpViewController.viewModel = viewModel
+        signUpViewController.coordinator = self
+        mainNavigationController.pushViewController(signUpViewController, animated: true)
+        impact()
+    }
+    
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)
         navigationController.viewControllers = [scrollableViewController]

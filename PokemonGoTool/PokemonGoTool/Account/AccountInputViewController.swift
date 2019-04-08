@@ -37,6 +37,11 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     @IBAction func doneTapped(_ sender: UITextField) {
         sender.resignFirstResponder()
         verifyInput(sender.text)
@@ -47,7 +52,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         verifyInput(textField.text)
     }
     
-    @IBAction func nextTapped(_ sender: Button) {
+    @IBAction func nextTapped(_ sender: Any) {
         switch type {
         case .email:
             coordinator?.showAccountInput(viewModel, type: .password)
@@ -62,24 +67,13 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         guard let inputText = inputText else { return }
         switch type {
         case .email:
-            nextButton.isEnabled = isValidEmail(inputText)
+            nextButton.isEnabled = viewModel.isValidEmail(inputText)
             viewModel.email = inputText
         case .password:
-            nextButton.isEnabled = isValidPassword(inputText)
+            nextButton.isEnabled = viewModel.isValidPassword(inputText)
             viewModel.password = inputText
         case .trainerName:
             nextButton.isEnabled = inputText != ""
         }
-    }
-    
-    private func isValidEmail(_ testString: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testString)
-    }
-    
-    private func isValidPassword(_ testString: String) -> Bool {
-        let passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$"
-        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: testString)
     }
 }

@@ -336,7 +336,6 @@ protocol FirebaseStartupDelegate: class {
 }
 
 protocol FirebaseStatusPresentable: class {
-    var firebaseConnector: FirebaseConnector! { get set }
 }
 
 protocol RaidMeetupDelegate: class {

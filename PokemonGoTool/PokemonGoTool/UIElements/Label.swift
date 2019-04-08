@@ -27,6 +27,9 @@ class Label: UILabel {
             } else if style == 4 {
                 textColor = .black
                 font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            } else if style == 5 {
+                textColor = .gray
+                font = UIFont.systemFont(ofSize: 12, weight: .regular)
             }
         }
     }

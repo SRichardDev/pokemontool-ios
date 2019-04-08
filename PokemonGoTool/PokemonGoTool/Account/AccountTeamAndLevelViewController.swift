@@ -25,7 +25,6 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextButton.setTitle("Account erstellen", for: .normal)
         title = "Team & Level"
         levelPickerView.delegate = self
         levelPickerView.dataSource = self
@@ -43,7 +42,7 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     }
     
     @IBAction func nextTapped(_ sender: Any) {
-        viewModel.signUpUser()
+        coordinator?.showSignUp(viewModel)
     }
 }
 

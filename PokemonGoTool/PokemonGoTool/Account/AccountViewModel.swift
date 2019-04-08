@@ -2,7 +2,7 @@
 import UIKit
 
 protocol AccountCreationDelegate: class {
-    func didCreateAccount(success: Bool)
+    func didCreateAccount(_ status: AuthStatus)
 }
 
 class AccountViewModel {
@@ -59,9 +59,25 @@ class AccountViewModel {
     
     func signUpUser() {
         User.signUp(with: email, password: password) { status in
-//            self.showAlert(for: status)
-            self.firebaseConnector.loadUser()
-            self.accountCreationDelegate?.didCreateAccount(success: true)
+            self.accountCreationDelegate?.didCreateAccount(status)
+            
+            switch status {
+            case .signedUp:
+                self.firebaseConnector.loadUser()
+            default:
+                break
+            }
         }
+    }
+    
+    func isValidEmail(_ testString: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testString)
+    }
+    
+    func isValidPassword(_ testString: String) -> Bool {
+        let passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: testString)
     }
 }

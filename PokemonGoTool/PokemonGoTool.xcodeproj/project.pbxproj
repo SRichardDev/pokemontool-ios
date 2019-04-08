@@ -31,6 +31,8 @@
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
 		2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A521ED266B00091F8C /* Assets.xcassets */; };
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
+		2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE56A225BFEE800AE9C4A /* AccountSignUpViewController.swift */; };
+		2C1AE56D225BFF0600AE9C4A /* AccountSignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */; };
 		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
@@ -150,6 +152,8 @@
 		2C1976A521ED266B00091F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C1976A821ED266B00091F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1976AA21ED266B00091F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C1AE56A225BFEE800AE9C4A /* AccountSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSignUpViewController.swift; sourceTree = "<group>"; };
+		2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountSignUpViewController.storyboard; sourceTree = "<group>"; };
 		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
@@ -552,10 +556,12 @@
 				2C395A1E22025100005330B8 /* AccountViewController.storyboard */,
 				2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */,
 				2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */,
-				2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */,
-				2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */,
 				2C0B5B742255408800620F4A /* AccountInputViewController.swift */,
 				2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */,
+				2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */,
+				2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */,
+				2C1AE56A225BFEE800AE9C4A /* AccountSignUpViewController.swift */,
+				2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */,
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
 				2C0B5B7C22568C9000620F4A /* StackView.swift */,
@@ -697,6 +703,7 @@
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */,
 				2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */,
+				2C1AE56D225BFF0600AE9C4A /* AccountSignUpViewController.storyboard in Resources */,
 				2C97F78621F67B5C00630BA2 /* SubmitQuestViewController.storyboard in Resources */,
 				2C395A3E2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard in Resources */,
 				2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */,
@@ -860,6 +867,7 @@
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */,
 				2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */,
+				2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */,
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
