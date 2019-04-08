@@ -39,12 +39,12 @@ class Button: UIButton {
         let systemBlue = UIButton(type: .system).tintColor!
         layer.cornerRadius = 10
         layer.borderColor = systemBlue.cgColor
-        layer.borderWidth = 1
         titleLabel?.font = UIFont.systemFont(ofSize: 12)
         setTitleColor(.white, for: .normal)
         setTitleColor(.gray, for: .highlighted)
         setBackgroundColor(color: systemBlue, forState: .normal)
         setBackgroundColor(color: systemBlue.withAlphaComponent(0.8), forState: .highlighted)
+        setBackgroundColor(color: .lightGray, forState: .disabled)
     }
 
     override var intrinsicContentSize: CGSize {

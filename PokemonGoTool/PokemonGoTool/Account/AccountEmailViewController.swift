@@ -6,7 +6,6 @@ class AccountEmailViewController: UIViewController, StoryboardInitialViewControl
     weak var coordinator: MainCoordinator?
     var viewModel: AccountViewModel!
 
-    @IBOutlet var titleLabel: Label!
     @IBOutlet var subtitleLabel: Label!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var nextButton: Button!
@@ -29,11 +28,13 @@ class AccountEmailViewController: UIViewController, StoryboardInitialViewControl
     
     @IBAction func viewTapped(_ sender: Any) {
         emailTextField.resignFirstResponder()
+        guard let email = emailTextField.text else { return }
+        nextButton.isEnabled = isValidEmail(email)
     }
     
-    private func isValidEmail(_ testStr: String) -> Bool {
+    private func isValidEmail(_ testString: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+        return emailTest.evaluate(with: testString)
     }
 }
