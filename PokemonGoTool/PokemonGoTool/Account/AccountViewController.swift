@@ -10,41 +10,46 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
 
     private let stackView = StackView()
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
-    
+    private let changeDetailsButton = Button()
+    private let createAccountButton = Button()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.addToView(view)
         accountOverviewViewController.viewModel = viewModel
 
-        let changeDetailsButton = Button()
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction { [weak self] in
             guard let self = self else { return }
-            self.coordinator?.showChangeAccountDetails(self.viewModel)
+            self.coordinator?.showTeamAndLevel(self.viewModel)
         }
         
-        let createAccountButton = Button()
         createAccountButton.setTitle("Account anlegen", for: .normal)
         createAccountButton.addAction(for: .touchUpInside) { [weak self] in
             guard let self = self else { return }
-            self.coordinator?.showSignupEmail(self.viewModel)
+            self.coordinator?.showAccountInput(self.viewModel, type: .email)
         }
         
-        if viewModel.isLoggedIn {
-            stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
-            stackView.addArrangedSubview(changeDetailsButton)
-        } else {
-            stackView.addArrangedSubview(createAccountButton)
-        }
+        stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
+        stackView.addArrangedSubview(changeDetailsButton)
+        stackView.addArrangedSubview(createAccountButton)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        createAccountButton.isHidden = viewModel.isLoggedIn
+        changeDetailsButton.isVisible = viewModel.isLoggedIn
+        accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
+        
         if viewModel.isLoggedIn {
             let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))
             navigationController?.topViewController?.navigationItem.rightBarButtonItem = logoutItem
+        } else {
+            navigationController?.topViewController?.navigationItem.rightBarButtonItem = nil
         }
+        
 //        updateUI()
 //
 //        Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { _, _ in

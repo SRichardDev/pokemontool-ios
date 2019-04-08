@@ -20,13 +20,11 @@
 		2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */; };
 		2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */; };
 		2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */; };
-		2C0B5B6F2255387500620F4A /* AccountDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */; };
-		2C0B5B712255399300620F4A /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */; };
+		2C0B5B6F2255387500620F4A /* AccountTeamAndLevelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */; };
+		2C0B5B712255399300620F4A /* AccountTeamAndLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */; };
 		2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7222553B2500620F4A /* AccountViewModel.swift */; };
-		2C0B5B752255408800620F4A /* AccountEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B742255408800620F4A /* AccountEmailViewController.swift */; };
-		2C0B5B77225540A100620F4A /* AccountEmailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */; };
-		2C0B5B792255423900620F4A /* AccountPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */; };
-		2C0B5B7B2255426400620F4A /* AccountPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */; };
+		2C0B5B752255408800620F4A /* AccountInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B742255408800620F4A /* AccountInputViewController.swift */; };
+		2C0B5B77225540A100620F4A /* AccountInputViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */; };
 		2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7C22568C9000620F4A /* StackView.swift */; };
 		2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */; };
 		2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */; };
@@ -139,13 +137,11 @@
 		2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestData.swift; sourceTree = "<group>"; };
 		2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsInfoViewController.swift; sourceTree = "<group>"; };
 		2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsInfoViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountDetailsViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountTeamAndLevelViewController.storyboard; sourceTree = "<group>"; };
+		2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTeamAndLevelViewController.swift; sourceTree = "<group>"; };
 		2C0B5B7222553B2500620F4A /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
-		2C0B5B742255408800620F4A /* AccountEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEmailViewController.swift; sourceTree = "<group>"; };
-		2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountEmailViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPasswordViewController.swift; sourceTree = "<group>"; };
-		2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountPasswordViewController.storyboard; sourceTree = "<group>"; };
+		2C0B5B742255408800620F4A /* AccountInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInputViewController.swift; sourceTree = "<group>"; };
+		2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInputViewController.storyboard; sourceTree = "<group>"; };
 		2C0B5B7C22568C9000620F4A /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOverviewViewController.swift; sourceTree = "<group>"; };
 		2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountOverviewViewController.storyboard; sourceTree = "<group>"; };
@@ -554,14 +550,12 @@
 			children = (
 				2CF6F9A421F259E700610BC9 /* AccountViewController.swift */,
 				2C395A1E22025100005330B8 /* AccountViewController.storyboard */,
-				2C0B5B702255399300620F4A /* AccountDetailsViewController.swift */,
-				2C0B5B6E2255387500620F4A /* AccountDetailsViewController.storyboard */,
 				2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */,
 				2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */,
-				2C0B5B742255408800620F4A /* AccountEmailViewController.swift */,
-				2C0B5B76225540A100620F4A /* AccountEmailViewController.storyboard */,
-				2C0B5B782255423900620F4A /* AccountPasswordViewController.swift */,
-				2C0B5B7A2255426400620F4A /* AccountPasswordViewController.storyboard */,
+				2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */,
+				2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */,
+				2C0B5B742255408800620F4A /* AccountInputViewController.swift */,
+				2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */,
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
 				2C0B5B7C22568C9000620F4A /* StackView.swift */,
@@ -707,7 +701,7 @@
 				2C395A3E2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard in Resources */,
 				2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */,
 				2C395A402203B210005330B8 /* RaidHatchTimePickerViewController.storyboard in Resources */,
-				2C0B5B77225540A100620F4A /* AccountEmailViewController.storyboard in Resources */,
+				2C0B5B77225540A100620F4A /* AccountInputViewController.storyboard in Resources */,
 				2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */,
 				2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */,
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
@@ -717,9 +711,8 @@
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
 				2C395A3622039358005330B8 /* RaidLevelViewController.storyboard in Resources */,
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
-				2C0B5B7B2255426400620F4A /* AccountPasswordViewController.storyboard in Resources */,
 				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
-				2C0B5B6F2255387500620F4A /* AccountDetailsViewController.storyboard in Resources */,
+				2C0B5B6F2255387500620F4A /* AccountTeamAndLevelViewController.storyboard in Resources */,
 				2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */,
 				2C395A552205FF79005330B8 /* RaidUserParticipateSwitchViewController.storyboard in Resources */,
 				2C34F1E72210933700B3B99C /* PokestopDetailsViewController.storyboard in Resources */,
@@ -829,7 +822,7 @@
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,
 				035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */,
 				2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */,
-				2C0B5B712255399300620F4A /* AccountDetailsViewController.swift in Sources */,
+				2C0B5B712255399300620F4A /* AccountTeamAndLevelViewController.swift in Sources */,
 				2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */,
 				2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */,
 				2C395A18220248A1005330B8 /* Coordinator.swift in Sources */,
@@ -848,7 +841,6 @@
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
 				2C97154C221DE7EB00B4E49A /* ArenaDetailsViewModel.swift in Sources */,
 				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,
-				2C0B5B792255423900620F4A /* AccountPasswordViewController.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
 				2C395A4E2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift in Sources */,
 				2C395A492204C110005330B8 /* UIStackView+Extension.swift in Sources */,
@@ -858,7 +850,7 @@
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
 				2CBCD8E7221C8E910058D782 /* LoadingViewController.swift in Sources */,
 				2C34F19E220A173300B3B99C /* PushManager.swift in Sources */,
-				2C0B5B752255408800620F4A /* AccountEmailViewController.swift in Sources */,
+				2C0B5B752255408800620F4A /* AccountInputViewController.swift in Sources */,
 				2CDFDDE921ED4FFB00170A46 /* GeohashBox.swift in Sources */,
 				2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */,
 				2C6E7F7C220110C200427FBE /* UIView+Extension.swift in Sources */,

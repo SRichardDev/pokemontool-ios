@@ -1,14 +1,16 @@
 
 import UIKit
 
-class AccountDetailsViewController: UIViewController, StoryboardInitialViewController {
+class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialViewController {
 
+    weak var coordinator: MainCoordinator?
     var viewModel: AccountViewModel!
     
     @IBOutlet var teamTitleLabel: Label!
     @IBOutlet var teamSelectionSegmentedControl: UISegmentedControl!
     @IBOutlet var levelTitleLabel: Label!
     @IBOutlet var levelPickerView: UIPickerView!
+    @IBOutlet var nextButton: Button!
     
     var teamPickerViewRows: [String] {
         get {
@@ -23,6 +25,8 @@ class AccountDetailsViewController: UIViewController, StoryboardInitialViewContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nextButton.setTitle("Account erstellen", for: .normal)
+        title = "Team & Level"
         levelPickerView.delegate = self
         levelPickerView.dataSource = self
     }
@@ -37,9 +41,13 @@ class AccountDetailsViewController: UIViewController, StoryboardInitialViewContr
         guard let team = Team(rawValue: sender.selectedSegmentIndex) else { return }
         sender.tintColor = viewModel.updateTeam(team)
     }
+    
+    @IBAction func nextTapped(_ sender: Any) {
+        viewModel.signUpUser()
+    }
 }
 
-extension AccountDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AccountTeamAndLevelViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return teamPickerViewRows[row]
     }

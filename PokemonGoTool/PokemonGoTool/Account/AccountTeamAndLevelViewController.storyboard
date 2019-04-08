@@ -10,16 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Account Details View Controller-->
+        <!--Account Team And Level View Controller-->
         <scene sceneID="U2Q-NJ-lxv">
             <objects>
-                <viewController id="X90-2a-4Wj" customClass="AccountDetailsViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="X90-2a-4Wj" customClass="AccountTeamAndLevelViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nwg-Vc-Z23">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="265"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="amP-gc-reY">
-                                <rect key="frame" x="16" y="16" width="343" height="233"/>
+                                <rect key="frame" x="16" y="36" width="343" height="229"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQT-UT-6Qd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jFy-gs-err">
-                                        <rect key="frame" x="0.0" y="40.5" width="343" height="33"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="343" height="29"/>
                                         <segments>
                                             <segment title="Mystic"/>
                                             <segment title="Valor"/>
@@ -39,13 +39,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd0-DE-obE" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92.5" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="88.5" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srp-98-ZMN">
-                                        <rect key="frame" x="0.0" y="133" width="343" height="100"/>
+                                        <rect key="frame" x="0.0" y="129" width="343" height="100"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-Jh-vVE">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="100"/>
@@ -71,20 +71,30 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN3-eF-chq" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="16" y="621" width="343" height="30"/>
+                                <state key="normal" title="Weiter"/>
+                                <connections>
+                                    <action selector="nextTapped:" destination="X90-2a-4Wj" eventType="touchUpInside" id="MfV-4x-ArR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="amP-gc-reY" firstAttribute="top" secondItem="J2T-mp-853" secondAttribute="top" constant="16" id="4Es-P8-LAp"/>
+                            <constraint firstItem="WN3-eF-chq" firstAttribute="leading" secondItem="nwg-Vc-Z23" secondAttribute="leading" constant="16" id="7DG-1O-XNr"/>
+                            <constraint firstItem="WN3-eF-chq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="srp-98-ZMN" secondAttribute="bottom" constant="20" id="HEe-bY-EN2"/>
                             <constraint firstItem="amP-gc-reY" firstAttribute="leading" secondItem="J2T-mp-853" secondAttribute="leading" constant="16" id="O1B-eh-GHk"/>
-                            <constraint firstItem="J2T-mp-853" firstAttribute="bottom" secondItem="amP-gc-reY" secondAttribute="bottom" constant="16" id="UY3-q4-x6b"/>
                             <constraint firstItem="J2T-mp-853" firstAttribute="trailing" secondItem="amP-gc-reY" secondAttribute="trailing" constant="16" id="XjN-dw-dZK"/>
+                            <constraint firstItem="J2T-mp-853" firstAttribute="bottom" secondItem="WN3-eF-chq" secondAttribute="bottom" constant="16" id="g6o-i1-KM4"/>
+                            <constraint firstItem="J2T-mp-853" firstAttribute="trailing" secondItem="WN3-eF-chq" secondAttribute="trailing" constant="16" id="jLx-uP-Ngk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J2T-mp-853"/>
                     </view>
-                    <size key="freeformSize" width="375" height="265"/>
                     <connections>
                         <outlet property="levelPickerView" destination="M7A-cq-ztJ" id="xmt-fu-lQx"/>
                         <outlet property="levelTitleLabel" destination="Dd0-DE-obE" id="4xs-IG-bye"/>
+                        <outlet property="nextButton" destination="WN3-eF-chq" id="JMJ-az-bdn"/>
                         <outlet property="teamSelectionSegmentedControl" destination="jFy-gs-err" id="ZpF-IF-pl9"/>
                         <outlet property="teamTitleLabel" destination="nQT-UT-6Qd" id="OfV-bH-MN7"/>
                     </connections>

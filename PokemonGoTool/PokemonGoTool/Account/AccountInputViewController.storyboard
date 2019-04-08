@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Account Email View Controller-->
+        <!--Account Input View Controller-->
         <scene sceneID="HSa-kp-it2">
             <objects>
-                <viewController id="eaa-fN-iMv" customClass="AccountEmailViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eaa-fN-iMv" customClass="AccountInputViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0w-lR-Wbi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,9 +68,9 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="drZ-43-96w" id="08s-kC-dWC"/>
                         <outlet property="nextButton" destination="lrR-Od-wX1" id="UQG-x9-dfp"/>
                         <outlet property="subtitleLabel" destination="gVG-SL-hXj" id="fh3-3b-thh"/>
+                        <outlet property="textField" destination="drZ-43-96w" id="08s-kC-dWC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBh-Sl-wWf" userLabel="First Responder" sceneMemberID="firstResponder"/>

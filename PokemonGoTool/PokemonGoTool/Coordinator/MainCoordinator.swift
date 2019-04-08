@@ -127,27 +127,20 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showChangeAccountDetails(_ viewModel: AccountViewModel) {
-        let accountDetailsViewController = AccountDetailsViewController.fromStoryboard()
+    func showTeamAndLevel(_ viewModel: AccountViewModel) {
+        let accountDetailsViewController = AccountTeamAndLevelViewController.fromStoryboard()
         accountDetailsViewController.viewModel = viewModel
-        let scrollableViewController = ScrollableViewController(childViewController: accountDetailsViewController)
-        mainNavigationController.pushViewController(scrollableViewController, animated: true)
+        accountDetailsViewController.coordinator = self
+        mainNavigationController.pushViewController(accountDetailsViewController, animated: true)
         impact()
     }
     
-    func showSignupEmail(_ viewModel: AccountViewModel) {
-        let accountEmailViewController = AccountEmailViewController.fromStoryboard()
-        accountEmailViewController.viewModel = viewModel
-        accountEmailViewController.coordinator = self
-        mainNavigationController.pushViewController(accountEmailViewController, animated: true)
-        impact()
-    }
-    
-    func showSignupPassword(_ viewModel: AccountViewModel) {
-        let accountPasswordViewController = AccountPasswordViewController.fromStoryboard()
-        accountPasswordViewController.viewModel = viewModel
-        accountPasswordViewController.coordinator = self
-        mainNavigationController.pushViewController(accountPasswordViewController, animated: true)
+    func showAccountInput(_ viewModel: AccountViewModel, type: AccountCreationInputType) {
+        let inputViewController = AccountInputViewController.fromStoryboard()
+        inputViewController.viewModel = viewModel
+        inputViewController.coordinator = self
+        inputViewController.type = type
+        mainNavigationController.pushViewController(inputViewController, animated: true)
         impact()
     }
     

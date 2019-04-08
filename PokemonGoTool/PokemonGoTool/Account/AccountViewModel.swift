@@ -1,10 +1,19 @@
 
 import UIKit
 
+protocol AccountCreationDelegate: class {
+    func didCreateAccount(success: Bool)
+}
+
 class AccountViewModel {
     
     private let firebaseConnector: FirebaseConnector
     
+    weak var accountCreationDelegate: AccountCreationDelegate?
+    
+    var email = ""
+    var password = ""
+
     var trainerName: String {
         get {
             return firebaseConnector.user?.trainerName ?? "Kein Trainer Name gesetzt"
@@ -46,5 +55,13 @@ class AccountViewModel {
     
     func updateLevel(_ level: Int) {
         firebaseConnector.user?.updateTrainerLevel(level)
+    }
+    
+    func signUpUser() {
+        User.signUp(with: email, password: password) { status in
+//            self.showAlert(for: status)
+            self.firebaseConnector.loadUser()
+            self.accountCreationDelegate?.didCreateAccount(success: true)
+        }
     }
 }
