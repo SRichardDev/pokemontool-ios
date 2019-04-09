@@ -28,6 +28,19 @@ enum Team: Int, Codable {
             }
         }
     }
+    
+    var image: UIImage {
+        get {
+            switch self {
+            case .mystic:
+                return UIImage(named: "mystic")!
+            case .valor:
+                return UIImage(named: "valor")!
+            case .instinct:
+                return UIImage(named: "instinct")!
+            }
+        }
+    }
 }
 
 class User: FirebaseCodable, Equatable {
