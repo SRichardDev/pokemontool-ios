@@ -33,6 +33,7 @@
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
 		2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE56A225BFEE800AE9C4A /* AccountSignUpViewController.swift */; };
 		2C1AE56D225BFF0600AE9C4A /* AccountSignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */; };
+		2C1AE56F225D198800AE9C4A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */; };
 		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
@@ -154,6 +155,7 @@
 		2C1976AA21ED266B00091F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C1AE56A225BFEE800AE9C4A /* AccountSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSignUpViewController.swift; sourceTree = "<group>"; };
 		2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountSignUpViewController.storyboard; sourceTree = "<group>"; };
+		2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				2C1AE56C225BFF0600AE9C4A /* AccountSignUpViewController.storyboard */,
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
+				2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */,
 				2C0B5B7C22568C9000620F4A /* StackView.swift */,
 			);
 			path = Account;
@@ -887,6 +890,7 @@
 				0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */,
 				2C6E7F8122011ED900427FBE /* Label.swift in Sources */,
 				2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */,
+				2C1AE56F225D198800AE9C4A /* SignUpViewModel.swift in Sources */,
 				2C348BB52207424D00F6A1F7 /* RaidBossCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

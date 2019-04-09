@@ -15,6 +15,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     init(appModule: AppModule, window: UIWindow) {
         self.appModule = appModule
         self.window = window
+        tabBarController.hidesBottomBarWhenPushed = true
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         let loadingViewController = LoadingViewController.fromStoryboard()
@@ -127,24 +128,25 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showTeamAndLevel(_ viewModel: AccountViewModel) {
+    func showTeamAndLevel(signUpViewModel: SignUpViewModel? = nil, accountViewModel: AccountViewModel? = nil) {
         let accountDetailsViewController = AccountTeamAndLevelViewController.fromStoryboard()
-        accountDetailsViewController.viewModel = viewModel
+        accountDetailsViewController.signUpViewModel = signUpViewModel
+        accountDetailsViewController.accountViewModel = accountViewModel
         accountDetailsViewController.coordinator = self
         mainNavigationController.pushViewController(accountDetailsViewController, animated: true)
         impact()
     }
     
-    func showAccountInput(_ viewModel: AccountViewModel, type: AccountCreationInputType) {
+    func showAccountInput(_ viewModel: SignUpViewModel? = nil, type: AccountCreationInputType) {
         let inputViewController = AccountInputViewController.fromStoryboard()
-        inputViewController.viewModel = viewModel
+        inputViewController.viewModel = viewModel ?? SignUpViewModel(firebaseConnector: appModule.firebaseConnector)
         inputViewController.coordinator = self
         inputViewController.type = type
         mainNavigationController.pushViewController(inputViewController, animated: true)
         impact()
     }
     
-    func showSignUp(_ viewModel: AccountViewModel) {
+    func showSignUp(_ viewModel: SignUpViewModel) {
         let signUpViewController = AccountSignUpViewController.fromStoryboard()
         signUpViewController.viewModel = viewModel
         signUpViewController.coordinator = self

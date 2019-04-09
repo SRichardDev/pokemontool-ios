@@ -10,7 +10,7 @@ enum AccountCreationInputType {
 class AccountInputViewController: UIViewController, StoryboardInitialViewController {
     
     weak var coordinator: MainCoordinator?
-    var viewModel: AccountViewModel!
+    var viewModel: SignUpViewModel!
     var type: AccountCreationInputType = .email
     
     @IBOutlet var subtitleLabel: Label!
@@ -59,7 +59,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         case .password:
             coordinator?.showAccountInput(viewModel, type: .trainerName)
         case .trainerName:
-            coordinator?.showTeamAndLevel(viewModel)
+            coordinator?.showTeamAndLevel(signUpViewModel: viewModel)
         }
     }
     
@@ -74,6 +74,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             viewModel.password = inputText
         case .trainerName:
             nextButton.isEnabled = inputText != ""
+            viewModel.trainerName = inputText
         }
     }
 }

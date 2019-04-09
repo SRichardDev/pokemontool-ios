@@ -21,13 +21,13 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction { [weak self] in
             guard let self = self else { return }
-            self.coordinator?.showTeamAndLevel(self.viewModel)
+            self.coordinator?.showTeamAndLevel(accountViewModel: self.viewModel)
         }
         
         createAccountButton.setTitle("Account anlegen", for: .normal)
         createAccountButton.addAction(for: .touchUpInside) { [weak self] in
             guard let self = self else { return }
-            self.coordinator?.showAccountInput(self.viewModel, type: .email)
+            self.coordinator?.showAccountInput(type: .email)
         }
         
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)

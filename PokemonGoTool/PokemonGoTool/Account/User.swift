@@ -7,6 +7,27 @@ enum Team: Int, Codable {
     case mystic
     case valor
     case instinct
+    
+    var description: String {
+        switch self {
+            case .mystic: return "Mystic"
+            case .valor: return "Valor"
+            case .instinct: return "Instinct"
+        }
+    }
+    
+    var color: UIColor? {
+        get {
+            switch self {
+            case .mystic:
+                return .blue
+            case .valor:
+                return .red
+            case .instinct:
+                return .orange
+            }
+        }
+    }
 }
 
 class User: FirebaseCodable, Equatable {
@@ -35,27 +56,19 @@ class User: FirebaseCodable, Equatable {
             return nil
         }
     }
-
-    var teamColor: UIColor? {
-        get {
-            if let team = team {
-                switch team {
-                case .mystic:
-                    return .blue
-                case .valor:
-                    return .red
-                case .instinct:
-                    return .orange
-                }
-            }
-            return nil
-        }
-    }
     
-    init(id: String, email: String? = nil, trainerName: String? = nil, notificationToken: String? = nil) {
+    init(id: String,
+         email: String,
+         trainerName: String,
+         team: Team,
+         level: Int,
+         notificationToken: String? = nil) {
+        
         self.id = id
         self.email = email
         self.trainerName = trainerName
+        self.team = team
+        self.level = level
         self.notificationToken = notificationToken
     }
     
@@ -103,7 +116,13 @@ class User: FirebaseCodable, Equatable {
         }
     }
     
-    class func signUp(with email: String, password: String, completion: @escaping (AuthStatus) -> ()) {
+    class func signUp(with email: String,
+                      password: String,
+                      trainerName: String,
+                      team: Team,
+                      level: Int,
+                      completion: @escaping (AuthStatus) -> ()) {
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code) {
@@ -135,7 +154,12 @@ class User: FirebaseCodable, Equatable {
                 completion(.signedUp)
             }
             
-            let user = User(id: firebaseUser.uid, email: firebaseUser.email)
+            let user = User(id: firebaseUser.uid,
+                            email: firebaseUser.email!,
+                            trainerName: trainerName,
+                            team: team,
+                            level: level)
+            
             let data = try! FirebaseEncoder().encode(user)
             let ref = Database.database().reference(withPath: "users").child(firebaseUser.uid)
             ref.setValue(data)

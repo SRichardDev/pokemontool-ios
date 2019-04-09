@@ -4,7 +4,7 @@ import UIKit
 class AccountSignUpViewController: UIViewController, StoryboardInitialViewController, AccountCreationDelegate, FirebaseStatusPresentable {
     
     weak var coordinator: MainCoordinator?
-    var viewModel: AccountViewModel!
+    var viewModel: SignUpViewModel!
     
     @IBOutlet var emailTitleLabel: Label!
     @IBOutlet var emailLabel: Label!
@@ -26,8 +26,8 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
         emailLabel.text = viewModel.email
         passwordLabel.text = viewModel.password
         trainerNameLabel.text = viewModel.trainerName
-        teamLabel.text = "\(viewModel.currentTeam)"
-        levelLabel.text = "\(viewModel.currentLevel)"
+        teamLabel.text = viewModel.team.description
+        levelLabel.text = "\(viewModel.level)"
     }
     
     @IBAction func signUpTapped(_ sender: Any) {

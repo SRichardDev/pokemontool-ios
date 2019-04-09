@@ -22,7 +22,7 @@ class ArenaDetailsParticipantsTableViewController: UIViewController, UITableView
         let user = Array(viewModel.participants.values)[indexPath.row]
         cell.trainerNameLabel.text = user.trainerName
         cell.levelLabel.text = "\(user.level ?? 0)"
-        cell.teamBackgroundView.backgroundColor = user.teamColor
+        cell.teamBackgroundView.backgroundColor = user.team?.color
         return cell
     }
     
