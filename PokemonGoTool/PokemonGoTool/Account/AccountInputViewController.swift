@@ -76,12 +76,14 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             coordinator?.showAccountInput(viewModel, type: .passwordSignIn)
         case .passwordSignIn:
             viewModel.signInUser()
+            showSpinner()
         }
     }
     
     func didSignInUser(_ status: AuthStatus) {
         showAlert(for: status)
-        
+        removeSpinner()
+
         switch status {
         case .signedIn:
             navigationController?.popToRootViewController(animated: true)

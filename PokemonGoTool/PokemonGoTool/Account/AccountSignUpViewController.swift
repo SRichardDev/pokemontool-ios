@@ -32,10 +32,12 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
     
     @IBAction func signUpTapped(_ sender: Any) {
         viewModel.signUpUser()
+        showSpinner()
     }
     
     func didCreateAccount(_ status: AuthStatus) {
         showAlert(for: status)
+        removeSpinner()
         
         switch status {
         case .signedUp:

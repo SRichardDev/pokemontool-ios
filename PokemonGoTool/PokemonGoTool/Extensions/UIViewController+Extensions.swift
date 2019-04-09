@@ -1,5 +1,6 @@
 
 import UIKit
+import NVActivityIndicatorView
 
 extension UIViewController {
     func add(_ child: UIViewController) {
@@ -69,6 +70,39 @@ extension UIViewController {
             } else {
                 viewController.view.isHidden = !visible
             }
+        }
+    }
+}
+
+var vSpinner : UIView?
+
+extension UIViewController {
+    func showSpinner() {
+        
+        guard let window = UIApplication.shared.keyWindow else { return }
+        
+        let foo = NVActivityIndicatorView(frame: window.bounds, type: .ballTrianglePath, color: .black, padding: 20)
+        foo.startAnimating()
+        
+        let spinnerView = UIView(frame: window.bounds)
+        
+        let blurEffect = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(frame: window.bounds)
+        effectView.effect = blurEffect
+        spinnerView.addSubview(effectView)
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(foo)
+            window.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
+    
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            vSpinner?.removeFromSuperview()
+            vSpinner = nil
         }
     }
 }
