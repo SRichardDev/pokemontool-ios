@@ -1,17 +1,19 @@
 
 import UIKit
 
-enum AccountCreationInputType {
+enum AccountInputType {
     case email
     case password
     case trainerName
+    case emailSignIn
+    case passwordSignIn
 }
 
-class AccountInputViewController: UIViewController, StoryboardInitialViewController {
+class AccountInputViewController: UIViewController, StoryboardInitialViewController, AccountSignInDelegate, FirebaseStatusPresentable {
     
     weak var coordinator: MainCoordinator?
     var viewModel: SignUpViewModel!
-    var type: AccountCreationInputType = .email
+    var type: AccountInputType = .email
     
     @IBOutlet var subtitleLabel: Label!
     @IBOutlet var textField: UITextField!
@@ -19,6 +21,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.accountSignInDelegate = self
         nextButton.isEnabled = false
         
         switch type {
@@ -34,6 +37,15 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             title = "Trainer Name"
             subtitleLabel.text = "Bitte gebe deinen Trainer Namen ein, den du auch im Spiel verwendest."
             textField.placeholder = "Trage hier deinen Trainer Namen ein"
+        case .emailSignIn:
+            title = "E-Mail"
+            subtitleLabel.text = "Bitte gebe deine E-Mail Adresse ein, mit der du dich für diese App registriert hast."
+            textField.placeholder = "Trage hier deine E-Mail Adresse ein"
+        case .passwordSignIn:
+            title = "Passwort"
+            subtitleLabel.text = "Jetzt noch dein Passwort und dann kann es los gehen."
+            textField.placeholder = "Trage hier dein Passwort ein"
+            nextButton.setTitle("Anmelden", for: .normal)
         }
     }
     
@@ -60,16 +72,31 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             coordinator?.showAccountInput(viewModel, type: .trainerName)
         case .trainerName:
             coordinator?.showTeamAndLevel(signUpViewModel: viewModel)
+        case .emailSignIn:
+            coordinator?.showAccountInput(viewModel, type: .passwordSignIn)
+        case .passwordSignIn:
+            viewModel.signInUser()
+        }
+    }
+    
+    func didSignInUser(_ status: AuthStatus) {
+        showAlert(for: status)
+        
+        switch status {
+        case .signedIn:
+            navigationController?.popToRootViewController(animated: true)
+        default:
+            break
         }
     }
     
     private func verifyInput(_ inputText: String?) {
         guard let inputText = inputText else { return }
         switch type {
-        case .email:
+        case .email, .emailSignIn:
             nextButton.isEnabled = viewModel.isValidEmail(inputText)
             viewModel.email = inputText
-        case .password:
+        case .password, .passwordSignIn:
             nextButton.isEnabled = viewModel.isValidPassword(inputText)
             viewModel.password = inputText
         case .trainerName:

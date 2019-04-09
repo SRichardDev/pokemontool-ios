@@ -43,7 +43,7 @@ class FirebaseConnector {
     }
     
     private func loadInitialData() {
-        loadUser()
+        loadUser(){}
     
         let group = DispatchGroup()
         group.enter()
@@ -62,9 +62,10 @@ class FirebaseConnector {
         }
     }
     
-    func loadUser() {
+    func loadUser(completion: @escaping () -> Void) {
         User.load { user in
             self.user = user
+            completion()
         }
     }
     

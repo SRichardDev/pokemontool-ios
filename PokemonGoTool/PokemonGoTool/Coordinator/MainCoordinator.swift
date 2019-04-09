@@ -137,7 +137,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showAccountInput(_ viewModel: SignUpViewModel? = nil, type: AccountCreationInputType) {
+    func showAccountInput(_ viewModel: SignUpViewModel? = nil, type: AccountInputType) {
         let inputViewController = AccountInputViewController.fromStoryboard()
         inputViewController.viewModel = viewModel ?? SignUpViewModel(firebaseConnector: appModule.firebaseConnector)
         inputViewController.coordinator = self

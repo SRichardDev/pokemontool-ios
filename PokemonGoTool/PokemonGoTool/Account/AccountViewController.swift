@@ -3,7 +3,7 @@ import UIKit
 import Firebase
 import NotificationBannerSwift
 
-class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUserDelegate, StoryboardInitialViewController {
+class AccountViewController: UIViewController, StoryboardInitialViewController, FirebaseStatusPresentable {
     
     weak var coordinator: MainCoordinator?
     var viewModel: AccountViewModel!
@@ -12,6 +12,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
     private let changeDetailsButton = Button()
     private let createAccountButton = Button()
+    private let signInButton = Button()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
         accountOverviewViewController.viewModel = viewModel
 
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
-        changeDetailsButton.addAction { [weak self] in
+        changeDetailsButton.addAction(for: .touchUpInside) { [weak self] in
             guard let self = self else { return }
             self.coordinator?.showTeamAndLevel(accountViewModel: self.viewModel)
         }
@@ -30,29 +31,22 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
             self.coordinator?.showAccountInput(type: .email)
         }
         
+        signInButton.setTitle("Anmelden", for: .normal)
+        signInButton.addAction(for: .touchUpInside) { [weak self] in
+            guard let self = self else { return }
+            self.coordinator?.showAccountInput(type: .emailSignIn)
+        }
+        
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
         stackView.addArrangedSubview(changeDetailsButton)
+        stackView.addArrangedSubview(signInButton)
         stackView.addArrangedSubview(createAccountButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
-        tabBarController?.tabBar.isHidden = false
-        
-        createAccountButton.isHidden = viewModel.isLoggedIn
-        changeDetailsButton.isVisible = viewModel.isLoggedIn
-        accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
-        
-        if viewModel.isLoggedIn {
-            let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))
-            navigationController?.topViewController?.navigationItem.rightBarButtonItem = logoutItem
-        } else {
-            navigationController?.topViewController?.navigationItem.rightBarButtonItem = nil
-        }
-        
-//        updateUI()
-//
+        updateUI()
+
 //        Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { _, _ in
 //            Auth.auth().currentUser?.reload(completion: { error in
 //                DispatchQueue.main.async {
@@ -70,66 +64,22 @@ class AccountViewController: UIViewController, UITextFieldDelegate, FirebaseUser
     func logout() {
         do {
             try Auth.auth().signOut()
-            print("signed out")
-//            showAlert(for: .signedOut)
-//            self.updateUI()
+            showAlert(for: .signedOut)
+            updateUI()
         } catch let error {
             print(error)
-//            showAlert(for: .unknown(error: error.localizedDescription))
+            showAlert(for: .unknown(error: error.localizedDescription))
         }
     }
     
-    @IBAction func loginTapped(_ sender: Any) {
-//        if firebaseConnector.isSignedIn {
-//        } else {
-//            guard let email = emailTextField.text else {return}
-//            guard let password = passwordTextField.text else {return}
-//
-//            User.signIn(with: email, password: password) { status in
-//                self.showAlert(for: status)
-//                self.firebaseConnector.loadUser()
-//            }
-//        }
-//        emailTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-    }
-    
-    @IBAction func signupTapped(_ sender: Any) {
-//        guard let email = emailTextField.text else { return }
-//        guard let password = passwordTextField.text else { return }
-//
-//        User.signUp(with: email, password: password) { status in
-//            self.showAlert(for: status)
-//            self.firebaseConnector.loadUser()
-//        }
-//        emailTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-    }
-    
     func updateUI() {
-//        let isSignedIn = firebaseConnector.isSignedIn
-//        signUpButton.isHidden = isSignedIn
-//        isSignedIn ? loginButton.setTitle("Sign out", for: .normal) : loginButton.setTitle("Sign in", for: .normal)
-//        emailTextField.isEnabled = !isSignedIn
-//        emailTextField.text = firebaseConnector.user?.email
-//        passwordLabel.text = isSignedIn ? "Trainer Name:" : "Password:"
-//        passwordTextField.text = isSignedIn ? firebaseConnector.user?.trainerName : ""
-//        passwordTextField.isSecureTextEntry = !isSignedIn
-    }
-    
-    @IBAction func viewTapped(_ sender: Any) {
-//        emailTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if firebaseConnector.isSignedIn {
-//            guard let trainerName = textField.text else { return }
-//            firebaseConnector.user?.updateTrainerName(trainerName)
-//        }
-    }
-    
-    func didUpdateUser() {
-        updateUI()
+        tabBarController?.tabBar.isHidden = false
+        createAccountButton.isHidden = viewModel.isLoggedIn
+        signInButton.isHidden = viewModel.isLoggedIn
+        changeDetailsButton.isVisible = viewModel.isLoggedIn
+        accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
+        
+        let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = viewModel.isLoggedIn ? logoutItem : nil
     }
 }

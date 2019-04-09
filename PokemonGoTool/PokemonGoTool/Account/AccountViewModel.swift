@@ -40,6 +40,4 @@ class AccountViewModel {
     func updateLevel(_ level: Int) {
         firebaseConnector.user?.updateTrainerLevel(level)
     }
-    
-    
 }

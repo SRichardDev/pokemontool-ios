@@ -5,12 +5,17 @@ protocol AccountCreationDelegate: class {
     func didCreateAccount(_ status: AuthStatus)
 }
 
+protocol AccountSignInDelegate: class {
+    func didSignInUser(_ status: AuthStatus)
+}
+
 class SignUpViewModel {
     
     private let firebaseConnector: FirebaseConnector
 
     weak var accountCreationDelegate: AccountCreationDelegate?
-
+    weak var accountSignInDelegate: AccountSignInDelegate?
+    
     var email = ""
     var password = ""
     var trainerName = ""
@@ -28,14 +33,29 @@ class SignUpViewModel {
                     team: team,
                     level: level) { status in
                         
-                        self.accountCreationDelegate?.didCreateAccount(status)
-                        
                         switch status {
                         case .signedUp:
-                            self.firebaseConnector.loadUser()
+                            self.firebaseConnector.loadUser {
+                                self.accountCreationDelegate?.didCreateAccount(status)
+                            }
                         default:
                             break
                         }
+        }
+    }
+    
+    func signInUser() {
+        User.signIn(with: email, password: password) { status in
+            
+            
+            switch status {
+            case .signedIn:
+                self.firebaseConnector.loadUser {
+                    self.accountSignInDelegate?.didSignInUser(status)
+                }
+            default:
+                break
+            }
         }
     }
     
