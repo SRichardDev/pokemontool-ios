@@ -24,7 +24,7 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
         viewModel.accountCreationDelegate = self
         signUpButton.setTitle("Account erstellen", for: .normal)
         emailLabel.text = viewModel.email
-        passwordLabel.text = viewModel.password
+        passwordLabel.text = String(viewModel.password.map { _ in return "•" })
         trainerNameLabel.text = viewModel.trainerName
         teamLabel.text = viewModel.team.description
         levelLabel.text = "\(viewModel.level)"

@@ -7,6 +7,7 @@ protocol AccountCreationDelegate: class {
 
 protocol AccountSignInDelegate: class {
     func didSignInUser(_ status: AuthStatus)
+    func failedToSignIn(_ status: AuthStatus)
 }
 
 class SignUpViewModel {
@@ -20,7 +21,7 @@ class SignUpViewModel {
     var password = ""
     var trainerName = ""
     var team = Team(rawValue: 0)!
-    var level = 1
+    var level = 40
     
     init(firebaseConnector: FirebaseConnector) {
         self.firebaseConnector = firebaseConnector
@@ -46,15 +47,13 @@ class SignUpViewModel {
     
     func signInUser() {
         User.signIn(with: email, password: password) { status in
-            
-            
             switch status {
             case .signedIn:
                 self.firebaseConnector.loadUser {
                     self.accountSignInDelegate?.didSignInUser(status)
                 }
             default:
-                break
+                self.accountSignInDelegate?.failedToSignIn(status)
             }
         }
     }

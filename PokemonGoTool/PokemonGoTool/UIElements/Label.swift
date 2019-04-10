@@ -30,6 +30,9 @@ class Label: UILabel {
             } else if style == 5 {
                 textColor = .gray
                 font = UIFont.systemFont(ofSize: 12, weight: .regular)
+            } else if style == 6 {
+                textColor = .black
+                font = UIFont.systemFont(ofSize: 35, weight: .bold)
             }
         }
     }

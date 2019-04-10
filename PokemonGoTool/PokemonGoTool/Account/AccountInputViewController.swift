@@ -29,10 +29,13 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             title = "E-Mail"
             subtitleLabel.text = "Um einen Account zu erstellen benötigen wir eine gültige E-Mail Adresse von dir. Bitte achte darauf, dass die E-Mail Adresse korrekt ist, da du von uns eine Bestätigungs-E-Mail bekommst."
             textField.placeholder = "Trage hier deine E-Mail Adresse ein"
+            textField.textContentType = .emailAddress
         case .password:
             title = "Passwort"
             subtitleLabel.text = "Bitte wähle ein Passwort aus. Dieses muss mindestens 6 Zeichen lang sein und muss aus Buchstaben und Zahlen bestehen."
             textField.placeholder = "Trage hier dein Passwort ein"
+            textField.textContentType = .newPassword
+            textField.isSecureTextEntry = true
         case .trainerName:
             title = "Trainer Name"
             subtitleLabel.text = "Bitte gebe deinen Trainer Namen ein, den du auch im Spiel verwendest."
@@ -46,6 +49,8 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             subtitleLabel.text = "Jetzt noch dein Passwort und dann kann es los gehen."
             textField.placeholder = "Trage hier dein Passwort ein"
             nextButton.setTitle("Anmelden", for: .normal)
+            textField.textContentType = .password
+            textField.isSecureTextEntry = true
         }
     }
     
@@ -90,6 +95,11 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         default:
             break
         }
+    }
+    
+    func failedToSignIn(_ status: AuthStatus) {
+        showAlert(for: status)
+        removeSpinner()
     }
     
     private func verifyInput(_ inputText: String?) {
