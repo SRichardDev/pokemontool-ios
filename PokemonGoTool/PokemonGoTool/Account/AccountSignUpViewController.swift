@@ -46,4 +46,9 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
             break
         }
     }
+    
+    func failedToCreateAccount(_ status: AuthStatus) {
+        showAlert(for: status)
+        removeSpinner()
+    }
 }

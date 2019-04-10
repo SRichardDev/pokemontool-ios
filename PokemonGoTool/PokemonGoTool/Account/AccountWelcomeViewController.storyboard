@@ -21,20 +21,50 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-g3-gvp" customClass="StackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Account" translatesAutoresizingMaskIntoConstraints="NO" id="1Vh-1n-IgH">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8M-O0-7g8">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="valor" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-rH-QLh">
+                                                <rect key="frame" x="0.0" y="25" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="LSv-n4-5sB"/>
+                                                    <constraint firstAttribute="width" constant="100" id="kDk-hQ-ZKA"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mystic" translatesAutoresizingMaskIntoConstraints="NO" id="YdI-Rm-Brz">
+                                                <rect key="frame" x="137.5" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="2kH-5g-9JR"/>
+                                                    <constraint firstAttribute="height" constant="100" id="zZ9-YO-LMa"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instinct" translatesAutoresizingMaskIntoConstraints="NO" id="Dih-Dd-o7g">
+                                                <rect key="frame" x="275" y="25" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="3m6-1Y-1kE"/>
+                                                    <constraint firstAttribute="width" constant="100" id="e6x-tH-GwN"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="0eY-D3-xMK"/>
+                                            <constraint firstItem="Rcq-rH-QLh" firstAttribute="centerY" secondItem="T8M-O0-7g8" secondAttribute="centerY" id="6Gp-zy-Yiq"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dih-Dd-o7g" secondAttribute="trailing" id="Gwh-wm-hlY"/>
+                                            <constraint firstItem="Dih-Dd-o7g" firstAttribute="centerY" secondItem="T8M-O0-7g8" secondAttribute="centerY" id="KVb-Bc-A2S"/>
+                                            <constraint firstItem="Rcq-rH-QLh" firstAttribute="leading" secondItem="T8M-O0-7g8" secondAttribute="leading" id="O98-zC-5J0"/>
+                                            <constraint firstItem="YdI-Rm-Brz" firstAttribute="centerX" secondItem="T8M-O0-7g8" secondAttribute="centerX" id="YtZ-aJ-iDb"/>
+                                            <constraint firstItem="YdI-Rm-Brz" firstAttribute="top" secondItem="T8M-O0-7g8" secondAttribute="top" id="w5h-aC-ebU"/>
+                                            <constraint firstAttribute="height" constant="150" id="x64-BO-Ojb"/>
                                         </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Willkommen!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-i1-5Tu" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Willkommen!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-i1-5Tu" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="150" width="375" height="150"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                <integer key="value" value="2"/>
+                                                <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
@@ -52,8 +82,10 @@
                     </view>
                     <size key="freeformSize" width="375" height="300"/>
                     <connections>
-                        <outlet property="imageView" destination="1Vh-1n-IgH" id="oNo-1x-sKz"/>
+                        <outlet property="leftImageView" destination="Rcq-rH-QLh" id="qvm-wu-Ety"/>
+                        <outlet property="rightImageView" destination="Dih-Dd-o7g" id="DOn-DI-bpN"/>
                         <outlet property="titleLabel" destination="Gkl-i1-5Tu" id="S2z-Ft-bOi"/>
+                        <outlet property="topImageView" destination="YdI-Rm-Brz" id="yKg-CW-4oN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FPC-zV-e3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -62,6 +94,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Account" width="30" height="30"/>
+        <image name="instinct" width="512" height="512"/>
+        <image name="mystic" width="512" height="512"/>
+        <image name="valor" width="512" height="512"/>
     </resources>
 </document>

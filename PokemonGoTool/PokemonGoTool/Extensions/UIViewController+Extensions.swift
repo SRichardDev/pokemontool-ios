@@ -81,19 +81,22 @@ extension UIViewController {
         
         guard let window = UIApplication.shared.keyWindow else { return }
         
-        let foo = NVActivityIndicatorView(frame: window.bounds, type: .ballTrianglePath, color: .black, padding: 20)
-        foo.startAnimating()
-        
+        let activityIndicator = NVActivityIndicatorView(frame: window.bounds, type: .ballTrianglePath, color: .black, padding: 50)
+        activityIndicator.startAnimating()
         let spinnerView = UIView(frame: window.bounds)
-        
         let blurEffect = UIBlurEffect(style: .light)
         let effectView = UIVisualEffectView(frame: window.bounds)
         effectView.effect = blurEffect
         spinnerView.addSubview(effectView)
+        spinnerView.alpha = 0
         
         DispatchQueue.main.async {
-            spinnerView.addSubview(foo)
+            spinnerView.addSubview(activityIndicator)
             window.addSubview(spinnerView)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                spinnerView.alpha = 1
+            })
         }
         
         vSpinner = spinnerView
@@ -101,8 +104,12 @@ extension UIViewController {
     
     func removeSpinner() {
         DispatchQueue.main.async {
-            vSpinner?.removeFromSuperview()
-            vSpinner = nil
+            UIView.animate(withDuration: 0.25, animations: {
+                vSpinner?.alpha = 0
+            }, completion: { _ in
+                vSpinner?.removeFromSuperview()
+                vSpinner = nil
+            })
         }
     }
 }

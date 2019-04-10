@@ -28,14 +28,12 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         
         createAccountButton.setTitle("Account anlegen", for: .normal)
         createAccountButton.addAction(for: .touchUpInside) { [weak self] in
-            guard let self = self else { return }
-            self.coordinator?.showAccountInput(type: .email)
+            self?.coordinator?.showAccountInput(type: .email)
         }
         
         signInButton.setTitle("Anmelden", for: .normal)
         signInButton.addAction(for: .touchUpInside) { [weak self] in
-            guard let self = self else { return }
-            self.coordinator?.showAccountInput(type: .emailSignIn)
+            self?.coordinator?.showAccountInput(type: .emailSignIn)
         }
         
         stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)

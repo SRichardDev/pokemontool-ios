@@ -3,6 +3,7 @@ import UIKit
 
 protocol AccountCreationDelegate: class {
     func didCreateAccount(_ status: AuthStatus)
+    func failedToCreateAccount(_ status: AuthStatus)
 }
 
 protocol AccountSignInDelegate: class {
@@ -40,7 +41,7 @@ class SignUpViewModel {
                                 self.accountCreationDelegate?.didCreateAccount(status)
                             }
                         default:
-                            break
+                            self.accountCreationDelegate?.failedToCreateAccount(status)
                         }
         }
     }

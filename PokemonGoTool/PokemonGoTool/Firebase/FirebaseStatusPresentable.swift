@@ -43,15 +43,16 @@ extension FirebaseStatusPresentable where Self: UIViewController {
             message = "Bitte bestätige die Verifizierungs E-Mail die dir zugesendet wurde"
             bannerStyle = .success
         case .signedIn:
-            title = "Erfolgreich eingeloggt"
+            title = "Erfolgreich angemeldet"
             message = "Willkommen zurück Trainer!"
             bannerStyle = .success
         case .signedOut:
-            title = "Erfolgreich ausgeloggt"
+            title = "Erfolgreich abgemeldet"
             message = "Bis bald Trainer!"
             bannerStyle = .success
         }
         
+        guard message != "No Result" else { return }
         let banner = NotificationBanner(title: title, subtitle: message, style: bannerStyle)
         banner.show()
 
