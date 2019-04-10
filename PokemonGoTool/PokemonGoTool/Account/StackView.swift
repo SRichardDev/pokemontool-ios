@@ -1,6 +1,7 @@
 
 import UIKit
 
+@IBDesignable
 class StackView: UIStackView {
 
     override func awakeFromNib() {

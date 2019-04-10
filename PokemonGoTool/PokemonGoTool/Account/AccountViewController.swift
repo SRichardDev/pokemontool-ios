@@ -9,6 +9,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     var viewModel: AccountViewModel!
 
     private let stackView = StackView()
+    private let accountWelcomeViewController = AccountWelcomeViewController.fromStoryboard()
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
     private let changeDetailsButton = Button()
     private let createAccountButton = Button()
@@ -37,6 +38,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
             self.coordinator?.showAccountInput(type: .emailSignIn)
         }
         
+        stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
         stackView.addArrangedSubview(changeDetailsButton)
         stackView.addArrangedSubview(signInButton)
@@ -74,10 +76,11 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     
     func updateUI() {
         tabBarController?.tabBar.isHidden = false
+        accountWelcomeViewController.view.isHidden = viewModel.isLoggedIn
+        accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
         createAccountButton.isHidden = viewModel.isLoggedIn
         signInButton.isHidden = viewModel.isLoggedIn
         changeDetailsButton.isVisible = viewModel.isLoggedIn
-        accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
         
         let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = viewModel.isLoggedIn ? logoutItem : nil
