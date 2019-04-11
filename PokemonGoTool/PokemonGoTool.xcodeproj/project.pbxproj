@@ -25,7 +25,6 @@
 		2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7222553B2500620F4A /* AccountViewModel.swift */; };
 		2C0B5B752255408800620F4A /* AccountInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B742255408800620F4A /* AccountInputViewController.swift */; };
 		2C0B5B77225540A100620F4A /* AccountInputViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */; };
-		2C0B5B7D22568C9000620F4A /* OuterVerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */; };
 		2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */; };
 		2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */; };
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
@@ -40,6 +39,7 @@
 		2C1AE577225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */; };
 		2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */; };
 		2C1AE57B225FD06100AE9C4A /* PokestopInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */; };
+		2C1AE57D225FF6DF00AE9C4A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE57C225FF6DF00AE9C4A /* StackView.swift */; };
 		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
@@ -151,7 +151,6 @@
 		2C0B5B7222553B2500620F4A /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		2C0B5B742255408800620F4A /* AccountInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInputViewController.swift; sourceTree = "<group>"; };
 		2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInputViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OuterVerticalStackView.swift; sourceTree = "<group>"; };
 		2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOverviewViewController.swift; sourceTree = "<group>"; };
 		2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountOverviewViewController.storyboard; sourceTree = "<group>"; };
 		2C19769B21ED266900091F8C /* PokemonGoTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGoTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +167,7 @@
 		2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopQuestViewController.storyboard; sourceTree = "<group>"; };
 		2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopInfoViewController.swift; sourceTree = "<group>"; };
 		2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopInfoViewController.storyboard; sourceTree = "<group>"; };
+		2C1AE57C225FF6DF00AE9C4A /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
@@ -527,6 +527,7 @@
 		2C6E7F8222011F8200427FBE /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
+				2C1AE57C225FF6DF00AE9C4A /* StackView.swift */,
 				2C6E7F8022011ED900427FBE /* Label.swift */,
 				2C7DC24C21FE8D2800BC3F24 /* Button.swift */,
 			);
@@ -585,7 +586,6 @@
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
 				2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */,
-				2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -891,11 +891,11 @@
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */,
-				2C0B5B7D22568C9000620F4A /* OuterVerticalStackView.swift in Sources */,
 				2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */,
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
+				2C1AE57D225FF6DF00AE9C4A /* StackView.swift in Sources */,
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
 				2C395A58220603E4005330B8 /* RaidTimeLeftPickerViewController.swift in Sources */,
 				2C97F77E21F6742D00630BA2 /* DetailAnnotationView.swift in Sources */,

@@ -22,9 +22,13 @@ class DetailAnnotationView: UIView {
             let questButton = Button()
             let detailsButton = Button()
             questButton.setTitle("Neue Quest", for: .normal)
-            questButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)), for: .touchUpInside)
+            questButton.addTarget(self,
+                                  action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)),
+                                  for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
-            detailsButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)), for: .touchUpInside)
+            detailsButton.addTarget(self,
+                                    action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)),
+                                    for: .touchUpInside)
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
         } else if let annotation = annotation as? Arena {
@@ -33,9 +37,13 @@ class DetailAnnotationView: UIView {
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)
-            raidButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)), for: .touchUpInside)
+            raidButton.addTarget(self,
+                                 action: #selector(DetailAnnotationView.showAnnotationSubmitDetailTapped(_:)),
+                                 for: .touchUpInside)
             detailsButton.setTitle("Details", for: .normal)
-            detailsButton.addTarget(self, action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)), for: .touchUpInside)
+            detailsButton.addTarget(self,
+                                    action: #selector(DetailAnnotationView.showAnnotationInfoDetailTapped(_:)),
+                                    for: .touchUpInside)
             buttonsStackView.addArrangedSubview(raidButton)
             buttonsStackView.addArrangedSubview(detailsButton)
         }
