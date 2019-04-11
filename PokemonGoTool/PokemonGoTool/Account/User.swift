@@ -16,7 +16,7 @@ enum Team: Int, Codable {
         }
     }
     
-    var color: UIColor? {
+    var color: UIColor {
         get {
             switch self {
             case .mystic:
