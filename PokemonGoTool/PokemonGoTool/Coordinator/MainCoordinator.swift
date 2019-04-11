@@ -15,7 +15,6 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     init(appModule: AppModule, window: UIWindow) {
         self.appModule = appModule
         self.window = window
-        tabBarController.hidesBottomBarWhenPushed = true
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         let loadingViewController = LoadingViewController.fromStoryboard()

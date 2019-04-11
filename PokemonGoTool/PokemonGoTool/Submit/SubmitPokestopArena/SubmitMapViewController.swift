@@ -4,7 +4,7 @@ import MapKit
 
 protocol MapEmbeddable {
     var containerView: UIView! { get set }
-    func embedMap(coordinate: CLLocationCoordinate2D,mapType: MKMapType, isFlyover: Bool) -> SubmitMapViewController
+    func embedMap(coordinate: CLLocationCoordinate2D, mapType: MKMapType, isFlyover: Bool) -> SubmitMapViewController
 }
 
 extension MapEmbeddable where Self: UIViewController {
@@ -48,6 +48,7 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubviewAndEdgeConstraints(mapView)
+        mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 1/1).isActive = true
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
         mapView.addAnnotation(pokestopAnnotation)

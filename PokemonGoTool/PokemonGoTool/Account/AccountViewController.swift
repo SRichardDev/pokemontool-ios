@@ -8,7 +8,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     weak var coordinator: MainCoordinator?
     var viewModel: AccountViewModel!
 
-    private let stackView = StackView()
+    private let stackView = OuterVerticalStackView()
     private let accountWelcomeViewController = AccountWelcomeViewController.fromStoryboard()
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
     private let changeDetailsButton = Button()

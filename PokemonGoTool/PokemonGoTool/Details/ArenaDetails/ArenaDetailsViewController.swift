@@ -5,7 +5,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
-    private let stackView = StackView()
+    private let stackView = OuterVerticalStackView()
     private let imageView = UIImageView()
     private let headerViewController = ArenaDetailsHeaderViewController.fromStoryboard()
     private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()

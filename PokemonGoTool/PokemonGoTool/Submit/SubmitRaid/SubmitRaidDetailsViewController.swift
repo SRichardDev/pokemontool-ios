@@ -5,7 +5,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
-    private let stackView = StackView()
+    private let stackView = OuterVerticalStackView()
     private let imageView = UIImageView()
     private let raidLevelViewController = RaidLevelViewController.fromStoryboard()
     private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()

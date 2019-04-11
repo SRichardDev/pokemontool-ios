@@ -25,7 +25,7 @@
 		2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7222553B2500620F4A /* AccountViewModel.swift */; };
 		2C0B5B752255408800620F4A /* AccountInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B742255408800620F4A /* AccountInputViewController.swift */; };
 		2C0B5B77225540A100620F4A /* AccountInputViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */; };
-		2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7C22568C9000620F4A /* StackView.swift */; };
+		2C0B5B7D22568C9000620F4A /* OuterVerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */; };
 		2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */; };
 		2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */; };
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
@@ -36,6 +36,10 @@
 		2C1AE56F225D198800AE9C4A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */; };
 		2C1AE571225E884200AE9C4A /* AccountWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE570225E884200AE9C4A /* AccountWelcomeViewController.swift */; };
 		2C1AE573225E885900AE9C4A /* AccountWelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE572225E885900AE9C4A /* AccountWelcomeViewController.storyboard */; };
+		2C1AE575225FBB0000AE9C4A /* PokestopQuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE574225FBB0000AE9C4A /* PokestopQuestViewController.swift */; };
+		2C1AE577225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */; };
+		2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */; };
+		2C1AE57B225FD06100AE9C4A /* PokestopInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */; };
 		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
@@ -147,7 +151,7 @@
 		2C0B5B7222553B2500620F4A /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		2C0B5B742255408800620F4A /* AccountInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInputViewController.swift; sourceTree = "<group>"; };
 		2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInputViewController.storyboard; sourceTree = "<group>"; };
-		2C0B5B7C22568C9000620F4A /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OuterVerticalStackView.swift; sourceTree = "<group>"; };
 		2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOverviewViewController.swift; sourceTree = "<group>"; };
 		2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountOverviewViewController.storyboard; sourceTree = "<group>"; };
 		2C19769B21ED266900091F8C /* PokemonGoTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGoTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +164,10 @@
 		2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2C1AE570225E884200AE9C4A /* AccountWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWelcomeViewController.swift; sourceTree = "<group>"; };
 		2C1AE572225E885900AE9C4A /* AccountWelcomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountWelcomeViewController.storyboard; sourceTree = "<group>"; };
+		2C1AE574225FBB0000AE9C4A /* PokestopQuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopQuestViewController.swift; sourceTree = "<group>"; };
+		2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopQuestViewController.storyboard; sourceTree = "<group>"; };
+		2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopInfoViewController.swift; sourceTree = "<group>"; };
+		2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopInfoViewController.storyboard; sourceTree = "<group>"; };
 		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
@@ -417,7 +425,11 @@
 			children = (
 				2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */,
 				2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */,
+				2C1AE574225FBB0000AE9C4A /* PokestopQuestViewController.swift */,
+				2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */,
 				2C34F1E8221206A000B3B99C /* PokestopDetailsViewModel.swift */,
+				2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */,
+				2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */,
 			);
 			path = PokestopDetails;
 			sourceTree = "<group>";
@@ -573,7 +585,7 @@
 				2C79CA3F21F92E1600FA82EE /* User.swift */,
 				2C0B5B7222553B2500620F4A /* AccountViewModel.swift */,
 				2C1AE56E225D198800AE9C4A /* SignUpViewModel.swift */,
-				2C0B5B7C22568C9000620F4A /* StackView.swift */,
+				2C0B5B7C22568C9000620F4A /* OuterVerticalStackView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -706,6 +718,7 @@
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
+				2C1AE577225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
 				0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */,
@@ -724,6 +737,7 @@
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
 				2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */,
 				2C395A4F2205FB0F005330B8 /* RaidMeetupTimePickerViewController.storyboard in Resources */,
+				2C1AE57B225FD06100AE9C4A /* PokestopInfoViewController.storyboard in Resources */,
 				2C395A592206041B005330B8 /* RaidTimeLeftPickerViewController.storyboard in Resources */,
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
 				2C395A3622039358005330B8 /* RaidLevelViewController.storyboard in Resources */,
@@ -832,6 +846,7 @@
 				2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
+				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
@@ -876,7 +891,7 @@
 				2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */,
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */,
-				2C0B5B7D22568C9000620F4A /* StackView.swift in Sources */,
+				2C0B5B7D22568C9000620F4A /* OuterVerticalStackView.swift in Sources */,
 				2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */,
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
@@ -899,6 +914,7 @@
 				2C6E7F8122011ED900427FBE /* Label.swift in Sources */,
 				2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */,
 				2C1AE56F225D198800AE9C4A /* SignUpViewModel.swift in Sources */,
+				2C1AE575225FBB0000AE9C4A /* PokestopQuestViewController.swift in Sources */,
 				2C348BB52207424D00F6A1F7 /* RaidBossCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
