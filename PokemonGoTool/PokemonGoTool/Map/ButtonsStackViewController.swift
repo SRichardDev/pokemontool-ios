@@ -5,17 +5,27 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
     
     @IBOutlet var stackView: UIStackView!
     var buttons: [UIButton]!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.cornerRadius = stackView.frame.size.width / 2
+        if UIDevice.current.orientation.isLandscape {
+            view.layer.cornerRadius = stackView.frame.size.height / 2
+        } else {
+            view.layer.cornerRadius = stackView.frame.size.width / 2
+        }
         view.layer.borderWidth = 1
         view.clipsToBounds = true
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            stackView.axis = .horizontal
+        } else {
+            stackView.axis = .vertical
+        }
+        view.layoutSubviews()
     }
     
     func toggleVisibilty() {
@@ -44,7 +54,6 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
         
         let buttonsStackViewController = ButtonsStackViewController.fromStoryboard()
         buttonsStackViewController.loadView()
-        
         buttonsStackViewController.buttons = buttons
         
         buttons.forEach {
@@ -71,7 +80,6 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
         }
         buttonsStackViewController.stackView.addArrangedSubview(settingsButton)
 
-        
         viewController.add(buttonsStackViewController, toView: containerView)
         containerView.addSubviewAndEdgeConstraints(buttonsStackViewController.view)
         return buttonsStackViewController

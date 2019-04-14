@@ -78,6 +78,9 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="E4g-5D-EvE" firstAttribute="height" secondItem="xVG-YK-Z4X" secondAttribute="height" id="pOg-uE-dyL"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
