@@ -40,6 +40,9 @@
 		2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */; };
 		2C1AE57B225FD06100AE9C4A /* PokestopInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */; };
 		2C1AE57D225FF6DF00AE9C4A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE57C225FF6DF00AE9C4A /* StackView.swift */; };
+		2C1AE57F22637B5F00AE9C4A /* MapFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE57E22637B5F00AE9C4A /* MapFilterViewController.swift */; };
+		2C1AE58122637BD100AE9C4A /* MapFilterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1AE58022637BD100AE9C4A /* MapFilterViewController.storyboard */; };
+		2C1AE58322638CD500AE9C4A /* MapFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AE58222638CD500AE9C4A /* MapFilterViewModel.swift */; };
 		2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */; };
 		2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */; };
 		2C348BB32207394100F6A1F7 /* ITunesFileSharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */; };
@@ -168,6 +171,9 @@
 		2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopInfoViewController.swift; sourceTree = "<group>"; };
 		2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopInfoViewController.storyboard; sourceTree = "<group>"; };
 		2C1AE57C225FF6DF00AE9C4A /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		2C1AE57E22637B5F00AE9C4A /* MapFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewController.swift; sourceTree = "<group>"; };
+		2C1AE58022637BD100AE9C4A /* MapFilterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapFilterViewController.storyboard; sourceTree = "<group>"; };
+		2C1AE58222638CD500AE9C4A /* MapFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterViewModel.swift; sourceTree = "<group>"; };
 		2C2FB5742219A4C2009CCEF8 /* CountClusterAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountClusterAnnotationView.swift; sourceTree = "<group>"; };
 		2C348BAF220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2C348BB22207394100F6A1F7 /* ITunesFileSharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesFileSharingManager.swift; sourceTree = "<group>"; };
@@ -324,6 +330,16 @@
 			path = PokemonGoTool;
 			sourceTree = "<group>";
 		};
+		2C1AE58422638CDF00AE9C4A /* MapFilter */ = {
+			isa = PBXGroup;
+			children = (
+				2C1AE58222638CD500AE9C4A /* MapFilterViewModel.swift */,
+				2C1AE57E22637B5F00AE9C4A /* MapFilterViewController.swift */,
+				2C1AE58022637BD100AE9C4A /* MapFilterViewController.storyboard */,
+			);
+			path = MapFilter;
+			sourceTree = "<group>";
+		};
 		2C348BA222061A4000F6A1F7 /* Level */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +459,7 @@
 				2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */,
 				2C870DD822135C60000F2268 /* MapViewController+Extension.swift */,
 				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
+				2C1AE58422638CDF00AE9C4A /* MapFilter */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -717,6 +734,7 @@
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
+				2C1AE58122637BD100AE9C4A /* MapFilterViewController.storyboard in Resources */,
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
 				2C1AE577225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
@@ -868,6 +886,7 @@
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C34F1A8220B720C00B3B99C /* ButtonsStackViewController.swift in Sources */,
 				2C395A3022026598005330B8 /* NavigationController.swift in Sources */,
+				2C1AE57F22637B5F00AE9C4A /* MapFilterViewController.swift in Sources */,
 				2C34F1A4220A4C7C00B3B99C /* UIImage+Extension.swift in Sources */,
 				2C97F78121F67AC700630BA2 /* StoryboardViewController.swift in Sources */,
 				2C6E7F7821FFD41900427FBE /* SubmitViewModel.swift in Sources */,
@@ -895,6 +914,7 @@
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
+				2C1AE58322638CD500AE9C4A /* MapFilterViewModel.swift in Sources */,
 				2C1AE57D225FF6DF00AE9C4A /* StackView.swift in Sources */,
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
 				2C395A58220603E4005330B8 /* RaidTimeLeftPickerViewController.swift in Sources */,

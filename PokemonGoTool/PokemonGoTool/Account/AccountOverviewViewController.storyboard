@@ -69,6 +69,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mystic" width="1000" height="1000"/>
+        <image name="mystic" width="512" height="512"/>
     </resources>
 </document>

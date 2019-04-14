@@ -15,7 +15,7 @@ class ClosureSleeve {
 }
 
 extension UIControl {
-    func addAction(for controlEvents: UIControl.Event = .touchDown, action: @escaping () -> ()) {
+    func addAction(for controlEvents: UIControl.Event = .touchUpInside, action: @escaping () -> ()) {
         let sleeve = ClosureSleeve(attachTo: self, closure: action)
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
     }

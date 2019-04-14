@@ -61,12 +61,20 @@ extension MapViewController {
             locateButton.scaleIn()
         }
         
+        let filterButton = UIButton()
+        filterButton.setImage(UIImage(named: "filter"), for: .normal)
+        filterButton.addAction { [weak self] in
+            self?.coordinator?.showMapFilter()
+            filterButton.scaleIn()
+        }
+        
         ButtonsStackViewController.embed(in: settingsButtonsView,
                                          in: self,
                                          with: [registerPushGeohashButton,
                                                 newAnnotationButton,
                                                 changeMapTypeButton,
-                                                locateButton])
+                                                locateButton,
+                                                filterButton])
     }
     
     @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {

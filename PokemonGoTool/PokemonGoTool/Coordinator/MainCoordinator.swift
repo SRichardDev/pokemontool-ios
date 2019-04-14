@@ -153,6 +153,14 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
+    func showMapFilter() {
+        let mapFilterViewController = MapFilterViewController.fromStoryboard()
+        let scrollableViewController = ScrollableViewController(childViewController: mapFilterViewController)
+        navigationController.viewControllers = [scrollableViewController]
+        tabBarController.present(navigationController, animated: true)
+        impact()
+    }
+    
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)
         navigationController.viewControllers = [scrollableViewController]
