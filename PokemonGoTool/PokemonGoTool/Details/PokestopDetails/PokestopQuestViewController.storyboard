@@ -71,16 +71,14 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="level_4" translatesAutoresizingMaskIntoConstraints="NO" id="E4g-5D-EvE">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E4g-5D-EvE">
                                                         <rect key="frame" x="275" y="0.0" width="100" height="51"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="51" id="3Cv-Z3-DZ2"/>
                                                             <constraint firstAttribute="width" constant="100" id="gjt-oC-lNU"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="E4g-5D-EvE" firstAttribute="height" secondItem="xVG-YK-Z4X" secondAttribute="height" id="pOg-uE-dyL"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -110,7 +108,4 @@
             <point key="canvasLocation" x="-156" y="72"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="level_4" width="30" height="30"/>
-    </resources>
 </document>

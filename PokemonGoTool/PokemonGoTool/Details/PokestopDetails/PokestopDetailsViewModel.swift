@@ -13,6 +13,12 @@ class PokestopDetailsViewModel {
         }
     }
     
+    var submitter: String {
+        get {
+            return pokestop.submitter
+        }
+    }
+    
     var rewardImageName: String {
         let quest = firebaseConnector.quests.first(where: {$0.id == pokestop.quest?.definitionId})
         return quest?.imageName ?? "??"

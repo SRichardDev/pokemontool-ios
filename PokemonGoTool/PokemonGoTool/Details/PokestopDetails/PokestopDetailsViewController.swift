@@ -23,6 +23,7 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
         mapViewController.locationOnMap = viewModel.coordinate
         mapViewController.mapView.mapType = .satelliteFlyover
         mapViewController.isFlyover = true
+        mapViewController.view.isUserInteractionEnabled = false
         
         let infoViewController = PokestopInfoViewController.fromStoryboard()
         infoViewController.viewModel = viewModel

@@ -9,12 +9,10 @@ class PokestopInfoViewController: UIViewController, StoryboardInitialViewControl
     @IBOutlet var coordianteLabel: Label!
     @IBOutlet var submitterTitleLabel: Label!
     @IBOutlet var submitterLabel: Label!
-    @IBOutlet var timeStampTitleLabel: Label!
-    @IBOutlet var timeStampLabel: Label!
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         coordianteLabel.text = "\(viewModel.coordinate.latitude), \(viewModel.coordinate.longitude)"
-        submitterLabel.text = viewModel.pokestop.submitter
+        submitterLabel.text = viewModel.submitter
     }
 }
