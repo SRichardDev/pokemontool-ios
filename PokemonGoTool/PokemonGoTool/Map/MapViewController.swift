@@ -81,8 +81,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !annotation.isKind(of: MKUserLocation.self) else {
+            guard let playerImage = ImageManager.image(named: "player") else { return nil }
             let pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-            pin.image = ImageManager.image(named: "25-original-cap")?.resize(scaleFactor: 0.5)
+            pin.image = playerImage.resize(scaleFactor: 0.5)
             pin.addPulsator(numPulses: 1)
             return pin
         }
@@ -120,7 +121,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func changeAnnotationLabelVisibility() {
-        let showLabels = mapView.camera.altitude < 2000.0
+        let showLabels = mapView.camera.altitude < 1000.0
         
         if showLabels != currentlyShowingLabels {
             currentlyShowingLabels = showLabels

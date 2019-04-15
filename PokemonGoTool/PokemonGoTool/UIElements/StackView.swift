@@ -30,7 +30,7 @@ class OuterVerticalStackView: UIStackView {
         view.addSubviewAndEdgeConstraints(self,
                                           edges: .all,
                                           margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
-                                          constrainToSafeAreaGuide: false)
+                                          constrainToSafeAreaGuide: true)
     }
 }
 
