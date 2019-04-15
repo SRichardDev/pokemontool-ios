@@ -40,6 +40,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         setupMapButtonsMenu()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if AppSettings.filterSettingsChanged {
+            manager.removeAll()
+            manager.reload(mapView: mapView)
+            loadData()
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         locationManager.delegate = self
@@ -48,11 +58,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-//        removeAnnotationIfNeeded()
-        
-        //TODO: Fix crash when tilting map. Do adding/removing annotations on main thread
-//        mapView.removeOverlays(mapView.overlays)
-        
+        loadData()
+    }
+    
+    func loadData() {
         let mapRect = mapView.visibleMapRect
         geohashWindow = GeohashWindow(topLeftCoordinate: MapRectUtility.getNorthWestCoordinate(in: mapRect),
                                       topRightCoordiante: MapRectUtility.getNorthEastCoordinate(in: mapRect),
@@ -61,12 +70,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
-//                addPolyLine(for: geohashBox)
                 firebaseConnector.loadPokestops(for: geohashBox.hash)
                 firebaseConnector.loadArenas(for: geohashBox.hash)
             }
         }
-
+        
         changeAnnotationLabelVisibility()
         manager.reload(mapView: mapView)
     }
@@ -130,7 +138,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         let polygon = MKPolygon.polygon(for: geohashBox)
         self.polygon = polygon
         mapView.addOverlay(polyLine)
-//        mapView.addOverlay(polygon)
     }
 }
 
@@ -160,14 +167,39 @@ extension MapViewController: FirebaseDelegate {
     
     func didAddArena(arena: Arena) {
         let annotation = ArenaPointAnnotation(arena: arena)
-        manager.add(annotation)
-        manager.reload(mapView: mapView)
+        
+        if AppSettings.showArenas {
+            if AppSettings.showOnlyEXArenas {
+                if arena.isEX {
+                    manager.add(annotation)
+                    manager.reload(mapView: mapView)
+                }
+            } else if AppSettings.showOnlyArenasWithRaid {
+                if arena.hasActiveRaid {
+                    manager.add(annotation)
+                    manager.reload(mapView: mapView)
+                }
+            } else {
+                manager.add(annotation)
+                manager.reload(mapView: mapView)
+            }
+        }
     }
     
     func didAddPokestop(pokestop: Pokestop) {
         let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: firebaseConnector?.quests)
-        manager.add(annotation)
-        manager.reload(mapView: mapView)
+        
+        if AppSettings.showPokestops {
+            if AppSettings.showOnlyPokestopsWithQuest {
+                if pokestop.hasActiveQuest {
+                    manager.add(annotation)
+                    manager.reload(mapView: mapView)
+                }
+            } else {
+                manager.add(annotation)
+                manager.reload(mapView: mapView)
+            }
+        }
     }
 }
 

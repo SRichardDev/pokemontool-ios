@@ -117,6 +117,12 @@ class FirebaseConnector {
     }
     
     func loadPokestops(for geohash: String) {
+        if AppSettings.filterSettingsChanged {
+            pokestops.removeAll()
+            arenas.removeAll()
+            AppSettings.filterSettingsChanged = false
+        }
+        
         guard geohash != "" else { return }
         pokestopsRef.child(geohash).removeAllObservers()
         pokestopsRef.child(geohash).observe(.value, with: { snapshot in
@@ -126,11 +132,9 @@ class FirebaseConnector {
                     
                     if let localPokestop = self.pokestops[pokestop.id] {
                         if localPokestop == pokestop { continue }
-                        print("Updated Pokestop")
                         self.pokestops[pokestop.id] = pokestop
                         self.delegate?.didUpdatePokestop(pokestop: pokestop)
                     } else {
-                        print("Added Pokestop")
                         self.pokestops[pokestop.id] = pokestop
                         self.delegate?.didAddPokestop(pokestop: pokestop)
                     }
@@ -149,11 +153,9 @@ class FirebaseConnector {
                     
                     if let localArena = self.arenas[arena.id] {
                         if localArena == arena { continue }
-                        print("Updated Arena")
                         self.arenas[arena.id] = arena
                         self.delegate?.didUpdateArena(arena: arena)
                     } else {
-                        print("Added Arena")
                         self.arenas[arena.id] = arena
                         self.delegate?.didAddArena(arena: arena)
                     }

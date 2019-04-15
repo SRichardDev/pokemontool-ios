@@ -40,7 +40,7 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
     
     var hasActiveQuest: Bool {
         get {
-            return quest != nil
+            return quest?.isActive ?? false
         }
     }
     
@@ -145,6 +145,12 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
             return Geohash.encode(latitude: latitude, longitude: longitude)
         }
     }
+    
+    var hasActiveRaid: Bool {
+        get {
+            return raid?.isActive ?? false
+        }
+    }
 
     init(name: String, latitude: Double, longitude: Double, submitter: String, isExArena: Bool) {
         self.name = name
@@ -173,6 +179,12 @@ struct Raid: Codable, Equatable {
                 return hatchDate < Date()
             }
             return true
+        }
+    }
+    
+    var isActive: Bool {
+        get {
+            return !isExpired
         }
     }
     

@@ -4,69 +4,99 @@ import UIKit
 class MapFilterViewController: UIViewController, StoryboardInitialViewController {
 
     private let stackView = OuterVerticalStackView()
+    private let arenasFilterStackView = FilterStackView()
+    private let pokstopsFilterStackView = FilterStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stackView.addToView(view)
         
-        let arenaOnlyEXFilter = LabelSwitchRow()
-        arenaOnlyEXFilter.setup("Nur EX") { isOn in
-            
-        }
-        
-        let arenaOnlyRaidFilter = LabelSwitchRow()
-        arenaOnlyRaidFilter.setup("Nur mit Raid") { isOn in
-            
-        }
-        
         let arenaFilter = LabelSwitchRow()
-        arenaFilter.setup("Arenas") { isOn in
+        let arenaOnlyEXFilter = LabelSwitchRow()
+        let arenaOnlyRaidFilter = LabelSwitchRow()
+        
+        arenaFilter.setup("Arenas", isOn: AppSettings.showArenas) { isOn in
+            AppSettings.showArenas = isOn
             arenaOnlyRaidFilter.changeVisibility(isOn)
             arenaOnlyEXFilter.changeVisibility(isOn)
         }
         
-        let pokestopOnlyQuestFilterRow = LabelSwitchRow()
-        pokestopOnlyQuestFilterRow.setup("Nur mit Quest") { isOn in
-            
+        arenaOnlyEXFilter.setup("Nur EX", isOn: AppSettings.showOnlyEXArenas, isSubRow: true) { isOn in
+            AppSettings.showOnlyEXArenas = isOn
         }
         
+        arenaOnlyRaidFilter.setup("Nur mit Raid", isOn: AppSettings.showOnlyArenasWithRaid, isSubRow: true) { isOn in
+            AppSettings.showOnlyArenasWithRaid = isOn
+        }
+        
+        arenasFilterStackView.setup(mainRow: arenaFilter, subRows: [arenaOnlyRaidFilter,
+                                                                    arenaOnlyEXFilter])
+        
+        
+
         let pokestopFilter = LabelSwitchRow()
-        pokestopFilter.setup("Pokestops") { isOn in
+        let pokestopOnlyQuestFilterRow = LabelSwitchRow()
+        
+        pokestopFilter.setup("Pokestops", isOn: AppSettings.showPokestops) { isOn in
             pokestopOnlyQuestFilterRow.changeVisibility(isOn)
+            AppSettings.showPokestops = isOn
         }
         
-        stackView.addArrangedSubview(arenaFilter)
-        stackView.addArrangedSubview(arenaOnlyRaidFilter)
-        stackView.addArrangedSubview(arenaOnlyEXFilter)
+        pokestopOnlyQuestFilterRow.setup("Nur mit Quest", isOn: AppSettings.showOnlyPokestopsWithQuest, isSubRow: true) { isOn in
+            AppSettings.showOnlyPokestopsWithQuest = isOn
+        }
+        
+        pokstopsFilterStackView.setup(mainRow: pokestopFilter, subRows: [pokestopOnlyQuestFilterRow])
+
+        
+        stackView.addArrangedSubview(arenasFilterStackView)
         stackView.addSepartor()
-        stackView.addArrangedSubview(pokestopFilter)
-        stackView.addArrangedSubview(pokestopOnlyQuestFilterRow)
+        stackView.addArrangedSubview(pokstopsFilterStackView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle("Filter")
+        AppSettings.filterSettingsChanged = true
+    }
+}
+
+class FilterStackView: InnerVerticalStackView {
+    
+    var mainRow: LabelSwitchRow!
+    var subRows: [LabelSwitchRow]?
+    
+    func setup(mainRow: LabelSwitchRow, subRows: [LabelSwitchRow]) {
+        self.mainRow = mainRow
+        self.subRows = subRows
+        addArrangedSubview(mainRow)
+        subRows.forEach {
+            $0.isVisible = mainRow.isOn
+            addArrangedSubview($0)
+        }
     }
 }
 
 class LabelSwitchRow: UIStackView {
-    let label = Label()
-    let settingsSwitch = UISwitch()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private let label = Label()
+    private let settingsSwitch = UISwitch()
+    private var isSubRow = false
+    var isOn: Bool {
+        get {
+            return settingsSwitch.isOn
+        }
+        set {
+            if isSubRow {
+                isVisible = newValue
+            }
+            settingsSwitch.isOn = newValue
+        }
     }
     
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    func setup(_ title: String, settingsClosure: @escaping (Bool) -> Void) {
+    func setup(_ title: String, isOn: Bool, isSubRow: Bool = false, settingsClosure: @escaping (Bool) -> Void) {
+        self.isSubRow = isSubRow
+        self.isOn = isOn
         axis = .horizontal
         label.translatesAutoresizingMaskIntoConstraints = false
         settingsSwitch.translatesAutoresizingMaskIntoConstraints = false
