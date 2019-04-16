@@ -29,6 +29,18 @@ class AccountViewModel {
         }
     }
     
+    var submittedPokestopsCount: Int {
+        get {
+            return firebaseConnector.user?.submittedPokestops?.count ?? 0
+        }
+    }
+    
+    var submittedAreansCount: Int {
+        get {
+            return firebaseConnector.user?.submittedArenas?.count ?? 0
+        }
+    }
+    
     init(firebaseConnector: FirebaseConnector) {
         self.firebaseConnector = firebaseConnector
     }

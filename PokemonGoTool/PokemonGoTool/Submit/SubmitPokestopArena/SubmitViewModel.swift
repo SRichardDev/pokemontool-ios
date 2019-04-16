@@ -66,19 +66,19 @@ class SubmitViewModel: ViewModel {
         guard let name = submitContent.name else { return }
         guard let coordinate = submitContent.location else { return }
         guard let submitType = submitContent.submitType else { return }
-        guard let user = firebaseConnector.user?.trainerName else { return }
+        guard let userId = firebaseConnector.user?.id else { return }
         switch submitType {
         case .pokestop:
             let pokestop = Pokestop(name: name,
                                     latitude: coordinate.latitude,
                                     longitude: coordinate.longitude,
-                                    submitter: user)
+                                    submitter: userId)
             firebaseConnector.savePokestop(pokestop)
         case .arena(let isEX):
             let arena = Arena(name: name,
                               latitude: coordinate.latitude,
                               longitude: coordinate.longitude,
-                              submitter: user,
+                              submitter: userId,
                               isExArena: isEX ?? false)
             firebaseConnector.saveArena(arena)
         }

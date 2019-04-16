@@ -44,16 +44,19 @@ enum Team: Int, Codable {
 }
 
 class User: FirebaseCodable, Equatable {
-    static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
-    }
     
+    typealias PokestopId = String
+    typealias ArenaId = String
+
     var id: String!
     var email: String?
     var trainerName: String?
     var notificationToken: String?
     var level: Int?
     var team: Team?
+    var submittedPokestops: [PokestopId: String]?
+    var submittedArenas: [ArenaId: String]?
+    
     var teamName: String? {
         get {
             if let team = team {
@@ -75,6 +78,8 @@ class User: FirebaseCodable, Equatable {
          trainerName: String,
          team: Team,
          level: Int,
+         submittedPokestops: [PokestopId: String]? = nil,
+         submittedArenas: [ArenaId: String]? = nil,
          notificationToken: String? = nil) {
         
         self.id = id
@@ -82,6 +87,8 @@ class User: FirebaseCodable, Equatable {
         self.trainerName = trainerName
         self.team = team
         self.level = level
+        self.submittedPokestops = submittedPokestops
+        self.submittedArenas = submittedArenas
         self.notificationToken = notificationToken
     }
     
@@ -119,11 +126,27 @@ class User: FirebaseCodable, Equatable {
         notificationToken = token
     }
     
+    func saveSubmittedPokestopId(_ id: PokestopId, for geohash: String) {
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [id : geohash]
+        users.child(userId).child("submittedPokestops").updateChildValues(data)
+        print("✅👨🏻 Did add PokestopId to user")
+    }
+    
+    func saveSubmittedArena(_ id: ArenaId, for geohash: String) {
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [id : geohash]
+        users.child(userId).child("submittedArenas").updateChildValues(data)
+        print("✅👨🏻 Did add ArenaId to user")
+    }
+    
     class func load(completion: @escaping (User?) -> ()) {
         let usersRef = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
-
-        usersRef.child(userId).observeSingleEvent(of: .value) { snapshot in
+        
+        usersRef.child(userId).observe(.value) { snapshot in
             guard let user: User = decode(from: snapshot) else { return }
             completion(user)
         }
@@ -200,5 +223,9 @@ class User: FirebaseCodable, Equatable {
                 completion(.signedIn)
             }
         }
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
     }
 }

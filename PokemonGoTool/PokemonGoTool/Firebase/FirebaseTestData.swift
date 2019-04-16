@@ -15,6 +15,11 @@ class FirebaseTestData {
         }
     }
     
+    class func deleteDummyPokestops() {
+        let ref = Database.database().reference(withPath: "test_pokestops")
+        ref.removeValue()
+    }
+    
     class func addRaidBosses() {
         let palkia = ["name": "Palkia",
                       "level": "5",

@@ -40,6 +40,7 @@ class FirebaseConnector {
 //        addRaidBosses()
 //        addQuests()
 //        addDummyPokestops()
+//        FirebaseTestData.deleteDummyPokestops()
     }
     
     private func loadInitialData() {
@@ -71,12 +72,18 @@ class FirebaseConnector {
     
     func savePokestop(_ pokestop: Pokestop) {
         let data = try! FirebaseEncoder().encode(pokestop)
-        pokestopsRef.child(pokestop.geohash).childByAutoId().setValue(data)
+        let newRef = pokestopsRef.child(pokestop.geohash).childByAutoId()
+        newRef.setValue(data)
+        guard let key = newRef.key else { fatalError() }
+        user?.saveSubmittedPokestopId(key, for: pokestop.geohash)
     }
     
     func saveArena(_ arena: Arena) {
         let data = try! FirebaseEncoder().encode(arena)
-        arenasRef.child(arena.geohash).childByAutoId().setValue(data)
+        let newRef = arenasRef.child(arena.geohash).childByAutoId()
+        newRef.setValue(data)
+        guard let key = newRef.key else { fatalError() }
+        user?.saveSubmittedArena(key, for: arena.geohash)
     }
     
     func saveQuest(quest: Quest, for pokestop: Pokestop) {
@@ -205,7 +212,6 @@ class FirebaseConnector {
     
     @discardableResult
     func userParticipates(in raid: Raid, for arena: inout Arena) -> Arena {
-        
         if let meetupId = raid.raidMeetupId {
             guard let id = raidMeetupsRef.childByAutoId().key,
                   let userId = user?.id else { fatalError() }
