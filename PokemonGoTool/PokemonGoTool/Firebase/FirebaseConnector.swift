@@ -39,7 +39,7 @@ class FirebaseConnector {
         loadInitialData()
 //        addRaidBosses()
 //        addQuests()
-//        addDummyPokestops()
+//        FirebaseTestData.addDummyPokestops()
 //        FirebaseTestData.deleteDummyPokestops()
     }
     
