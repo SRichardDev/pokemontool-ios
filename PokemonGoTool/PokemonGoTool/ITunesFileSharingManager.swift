@@ -46,7 +46,7 @@ class ImageManager {
         return UIImage(named: imageName)
     }
     
-    class func resizeImageIfNeeded(_ image: UIImage) -> UIImage {
+    private class func resizeImageIfNeeded(_ image: UIImage) -> UIImage {
         if image.size.width > 72 {
             return image.resize(targetSize: CGSize(width: 72, height: 72))
         }
