@@ -35,14 +35,21 @@ class ImageManager {
         if let dirPath = paths.first {
             let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("pokemon/\(imageName).png")
             if let userDefinedImage = UIImage(contentsOfFile: imageURL.path) {
-                
-                if userDefinedImage.size.width > 96 {
-                    return userDefinedImage.resize(targetSize: CGSize(width: 96, height: 96))
-                }
-                
-                return userDefinedImage
+                return resizeImageIfNeeded(userDefinedImage)
             }
         }
+        
+        if let standardImage = UIImage(named: imageName) {
+            return resizeImageIfNeeded(standardImage)
+        }
+        
         return UIImage(named: imageName)
+    }
+    
+    class func resizeImageIfNeeded(_ image: UIImage) -> UIImage {
+        if image.size.width > 72 {
+            return image.resize(targetSize: CGSize(width: 72, height: 72))
+        }
+        return image
     }
 }
