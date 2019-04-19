@@ -47,9 +47,6 @@ class FirebaseTestData {
                        "level": "4",
                        "imageName" : "65"]
         
-        
-        
-        
         let machomei = ["name": "Machomei",
                         "level": "3",
                         "imageName" : "68"]
