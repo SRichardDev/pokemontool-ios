@@ -17,7 +17,7 @@ class AccountOverviewViewController: UIViewController, StoryboardInitialViewCont
         headerImageView.image = viewModel.currentTeam?.image
         levelLabel.text = "\(viewModel.currentLevel)"
         trainerNameLabel.text = viewModel.trainerName
-        submittedPokestopsLabel.text = "Eingereichte Pokéstops: \(viewModel.submittedPokestopsCount)"
-        submittedArenasLabel.text = "Eingereichte Arenen: \(viewModel.submittedAreansCount)"
+        submittedPokestopsLabel.text = "\(viewModel.submittedPokestopsCount)"
+        submittedArenasLabel.text = "\(viewModel.submittedAreansCount)"
     }
 }

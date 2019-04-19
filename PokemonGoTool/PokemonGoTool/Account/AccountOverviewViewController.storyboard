@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="1YH-9U-WEv" customClass="AccountOverviewViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GKo-cJ-7rV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="335"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yO4-uX-IuB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="335"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mystic" translatesAutoresizingMaskIntoConstraints="NO" id="EF1-nd-h2x">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -28,7 +28,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDV-Wu-cEd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="164.5" y="170" width="46.5" height="43.5"/>
+                                        <rect key="frame" x="164.5" y="170" width="46.5" height="94.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -39,23 +39,80 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT3-r4-XCj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="136.5" y="233.5" width="102.5" height="20.5"/>
+                                        <rect key="frame" x="136.5" y="284.5" width="102.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokestops" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXp-X2-9Wq" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="147.5" y="274" width="80" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arenas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kA-Nn-0RM" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="161" y="314.5" width="53.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p2R-nb-Qcn">
+                                        <rect key="frame" x="102.5" y="325" width="170" height="75"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3K-wV-8eE">
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medal-gold" translatesAutoresizingMaskIntoConstraints="NO" id="r0O-as-tDJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="75" id="7hq-ah-ep8"/>
+                                                            <constraint firstAttribute="width" constant="75" id="c7z-XB-9eR"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXp-X2-9Wq" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="33.5" y="27.5" width="8" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                <integer key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="uXp-X2-9Wq" firstAttribute="centerY" secondItem="I3K-wV-8eE" secondAttribute="centerY" id="ANP-Uo-Ah1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="r0O-as-tDJ" secondAttribute="trailing" id="CJY-wY-cmC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="r0O-as-tDJ" secondAttribute="bottom" id="PLF-1j-kY7"/>
+                                                    <constraint firstItem="r0O-as-tDJ" firstAttribute="leading" secondItem="I3K-wV-8eE" secondAttribute="leading" id="UDl-44-79d"/>
+                                                    <constraint firstItem="r0O-as-tDJ" firstAttribute="top" secondItem="I3K-wV-8eE" secondAttribute="top" id="r3g-HJ-KO3"/>
+                                                    <constraint firstItem="uXp-X2-9Wq" firstAttribute="centerX" secondItem="I3K-wV-8eE" secondAttribute="centerX" id="tMD-iG-ik5"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPT-5J-DdR">
+                                                <rect key="frame" x="95" y="0.0" width="75" height="75"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medal-gold" translatesAutoresizingMaskIntoConstraints="NO" id="nKQ-Y8-6Gx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="75" id="Da3-pv-Mim"/>
+                                                            <constraint firstAttribute="height" constant="75" id="oEm-oE-vJh"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kA-Nn-0RM" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                        <rect key="frame" x="32.5" y="27.5" width="10" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                <integer key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="nKQ-Y8-6Gx" secondAttribute="trailing" id="2lq-wC-WJ6"/>
+                                                    <constraint firstItem="4kA-Nn-0RM" firstAttribute="centerY" secondItem="XPT-5J-DdR" secondAttribute="centerY" id="LzK-sQ-OWH"/>
+                                                    <constraint firstItem="nKQ-Y8-6Gx" firstAttribute="leading" secondItem="XPT-5J-DdR" secondAttribute="leading" id="NCr-Su-6tQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nKQ-Y8-6Gx" secondAttribute="bottom" id="Wdd-R2-e5x"/>
+                                                    <constraint firstItem="4kA-Nn-0RM" firstAttribute="centerX" secondItem="XPT-5J-DdR" secondAttribute="centerX" id="YOG-tc-ki5"/>
+                                                    <constraint firstItem="nKQ-Y8-6Gx" firstAttribute="top" secondItem="XPT-5J-DdR" secondAttribute="top" id="oie-jB-ax7"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -68,7 +125,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rOO-hX-YSm"/>
                     </view>
-                    <size key="freeformSize" width="375" height="335"/>
+                    <size key="freeformSize" width="375" height="400"/>
                     <connections>
                         <outlet property="headerImageView" destination="EF1-nd-h2x" id="3NZ-rO-tYP"/>
                         <outlet property="levelLabel" destination="mDV-Wu-cEd" id="eYB-h8-d2f"/>
@@ -83,6 +140,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="medal-gold" width="96" height="96"/>
         <image name="mystic" width="512" height="512"/>
     </resources>
 </document>
