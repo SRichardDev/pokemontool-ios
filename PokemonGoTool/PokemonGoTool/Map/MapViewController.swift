@@ -38,6 +38,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         mapView.mapType = .mutedStandard
         zoomToUserLocation()
         setupMapButtonsMenu()
+        mapView.showsPointsOfInterest = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
