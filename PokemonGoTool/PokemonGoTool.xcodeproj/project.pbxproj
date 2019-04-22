@@ -91,8 +91,7 @@
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
-		2C496D3C226B9A1000E668F1 /* MedalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C496D3B226B9A1000E668F1 /* MedalView.xib */; };
-		2C496D3E226B9A1F00E668F1 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D3D226B9A1F00E668F1 /* MedalView.swift */; };
+		2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */; };
 		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
 		2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */; };
 		2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */; };
@@ -227,8 +226,7 @@
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
-		2C496D3B226B9A1000E668F1 /* MedalView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedalView.xib; sourceTree = "<group>"; };
-		2C496D3D226B9A1F00E668F1 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
+		2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMedalViewModel.swift; sourceTree = "<group>"; };
 		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMapViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCheckViewController.swift; sourceTree = "<group>"; };
@@ -545,8 +543,7 @@
 			children = (
 				2C1AE587226B97CA00AE9C4A /* AccountMedalViewController.swift */,
 				2C1AE58B226B97EC00AE9C4A /* AccountMedalViewController.storyboard */,
-				2C496D3D226B9A1F00E668F1 /* MedalView.swift */,
-				2C496D3B226B9A1000E668F1 /* MedalView.xib */,
+				2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */,
 			);
 			path = Medals;
 			sourceTree = "<group>";
@@ -763,7 +760,6 @@
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
 				2C348BB0220639D100F6A1F7 /* RaidBossCollectionViewController.storyboard in Resources */,
 				0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */,
-				2C496D3C226B9A1000E668F1 /* MedalView.xib in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */,
 				2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */,
@@ -883,6 +879,7 @@
 				2C97F77621F6729700630BA2 /* CustomAnnotationView.swift in Sources */,
 				2C84B9FB2214C83E00BE433B /* MKAnnotationView+Extension.swift in Sources */,
 				2C34F1E9221206A000B3B99C /* PokestopDetailsViewModel.swift in Sources */,
+				2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */,
 				2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */,
 				2C1AE588226B97CA00AE9C4A /* AccountMedalViewController.swift in Sources */,
 				2C97F77821F672F400630BA2 /* AnnotationView.swift in Sources */,
@@ -938,7 +935,6 @@
 				2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */,
 				2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */,
 				2C1AE56B225BFEE800AE9C4A /* AccountSignUpViewController.swift in Sources */,
-				2C496D3E226B9A1F00E668F1 /* MedalView.swift in Sources */,
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,

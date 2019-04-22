@@ -19,7 +19,9 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.addToView(view)
+        
         accountOverviewViewController.viewModel = viewModel
+        accountMedalViewController.viewModel = viewModel.accountMedalViewModel
         
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction(for: .touchUpInside) { [weak self] in

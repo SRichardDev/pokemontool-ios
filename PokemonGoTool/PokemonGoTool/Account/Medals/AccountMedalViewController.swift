@@ -3,6 +3,8 @@ import UIKit
 
 class AccountMedalViewController: UIViewController, StoryboardInitialViewController {
 
+    var viewModel: AccountMedalViewModel!
+    
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     
@@ -28,12 +30,13 @@ class AccountMedalViewController: UIViewController, StoryboardInitialViewControl
 extension AccountMedalViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return viewModel.medals.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "medalCell", for: indexPath) as! MedalCollectionViewCell
-        cell.setup()
+        let medal = viewModel.medals[indexPath.row]
+        cell.setup(with: medal)
         return cell
     }
 }
@@ -48,7 +51,9 @@ class MedalCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setup() {
-
+    func setup(with medal: Medal) {
+        medalImageView.image = medal.image
+        countLabel.text = "\(medal.count)"
+        descriptionLabel.text = medal.description
     }
 }

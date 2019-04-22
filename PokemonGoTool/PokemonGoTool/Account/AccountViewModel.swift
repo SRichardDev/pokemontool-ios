@@ -5,6 +5,12 @@ class AccountViewModel {
     
     private let firebaseConnector: FirebaseConnector
     
+    var accountMedalViewModel: AccountMedalViewModel {
+        get {
+            return AccountMedalViewModel(firebaseConnector: firebaseConnector)
+        }
+    }
+    
     var trainerName: String {
         get {
             return firebaseConnector.user?.trainerName ?? "Kein Trainer Name gesetzt"
@@ -26,18 +32,6 @@ class AccountViewModel {
     var isLoggedIn: Bool {
         get {
             return firebaseConnector.isSignedIn
-        }
-    }
-    
-    var submittedPokestopsCount: Int {
-        get {
-            return firebaseConnector.user?.submittedPokestops?.count ?? 0
-        }
-    }
-    
-    var submittedAreansCount: Int {
-        get {
-            return firebaseConnector.user?.submittedArenas?.count ?? 0
         }
     }
     
