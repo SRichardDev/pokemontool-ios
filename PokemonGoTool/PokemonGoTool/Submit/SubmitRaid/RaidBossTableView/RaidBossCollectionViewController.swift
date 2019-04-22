@@ -20,7 +20,6 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startTimer()
-        collectionView.isUserInteractionEnabled = viewModel.isRaidAlreadyRunning
     }
 
     func updateRaidBosses() {

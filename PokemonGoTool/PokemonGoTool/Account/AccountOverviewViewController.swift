@@ -8,8 +8,6 @@ class AccountOverviewViewController: UIViewController, StoryboardInitialViewCont
     @IBOutlet var headerImageView: UIImageView!
     @IBOutlet var levelLabel: Label!
     @IBOutlet var trainerNameLabel: Label!
-    @IBOutlet var submittedPokestopsLabel: Label!
-    @IBOutlet var submittedArenasLabel: Label!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -17,7 +15,7 @@ class AccountOverviewViewController: UIViewController, StoryboardInitialViewCont
         headerImageView.image = viewModel.currentTeam?.image
         levelLabel.text = "\(viewModel.currentLevel)"
         trainerNameLabel.text = viewModel.trainerName
-        submittedPokestopsLabel.text = "\(viewModel.submittedPokestopsCount)"
-        submittedArenasLabel.text = "\(viewModel.submittedAreansCount)"
+//        submittedPokestopsLabel.text = "\(viewModel.submittedPokestopsCount)"
+//        submittedArenasLabel.text = "\(viewModel.submittedAreansCount)"
     }
 }

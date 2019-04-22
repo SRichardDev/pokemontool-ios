@@ -11,6 +11,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     private let stackView = OuterVerticalStackView()
     private let accountWelcomeViewController = AccountWelcomeViewController.fromStoryboard()
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
+    private let accountMedalViewController = AccountMedalViewController.fromStoryboard()
     private let changeDetailsButton = Button()
     private let createAccountButton = Button()
     private let signInButton = Button()
@@ -19,7 +20,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         super.viewDidLoad()
         stackView.addToView(view)
         accountOverviewViewController.viewModel = viewModel
-
+        
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction(for: .touchUpInside) { [weak self] in
             guard let self = self else { return }
@@ -39,6 +40,8 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
         stackView.addArrangedSubview(changeDetailsButton)
+        stackView.addSepartor()
+        stackView.addArrangedViewController(viewController: accountMedalViewController, to: self)
         stackView.addArrangedSubview(signInButton)
         stackView.addArrangedSubview(createAccountButton)
     }
@@ -76,6 +79,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         tabBarController?.tabBar.isHidden = false
         accountWelcomeViewController.view.isHidden = viewModel.isLoggedIn
         accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
+        accountMedalViewController.view.isVisible = viewModel.isLoggedIn
         createAccountButton.isHidden = viewModel.isLoggedIn
         signInButton.isHidden = viewModel.isLoggedIn
         changeDetailsButton.isVisible = viewModel.isLoggedIn

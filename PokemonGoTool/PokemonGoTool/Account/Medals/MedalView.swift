@@ -8,7 +8,7 @@ enum MedalType {
     case platinum
 }
 
-class MedalView: UIView {
+class MedalView: UIView, NibView {
 
     @IBOutlet var medalImageView: UIImageView!
     @IBOutlet var countLabel: Label!
@@ -16,6 +16,7 @@ class MedalView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        setup(type: .gold, count: 123, description: "Fooobar lol")
     }
 
     override init(frame: CGRect) {
@@ -32,13 +33,13 @@ class MedalView: UIView {
         
         switch type {
         case .bronze:
-            medalImageView.image = UIImage(named: "")
+            medalImageView.image = UIImage(named: "medal-gold")
         case .silver:
-            medalImageView.image = UIImage(named: "")
+            medalImageView.image = UIImage(named: "medal-gold")
         case .gold:
-            medalImageView.image = UIImage(named: "")
+            medalImageView.image = UIImage(named: "medal-gold")
         case .platinum:
-            medalImageView.image = UIImage(named: "")
+            medalImageView.image = UIImage(named: "medal-gold")
         }
     }
 }

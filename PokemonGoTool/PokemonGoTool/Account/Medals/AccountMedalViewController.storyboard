@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Uaz-28-mRq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,62 +15,112 @@
             <objects>
                 <viewController id="Uaz-28-mRq" customClass="AccountMedalViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Zd-o2-XnH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HZ9-dL-nNu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rSA-Eu-g6O">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="medalCell" id="6FR-pD-AWd" customClass="MedalCollectionViewCell" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Qv-JLm" customClass="MedalView" customModule="PokemonGoTool" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                        </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-C3-RIe" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medallien:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-cG-mfZ" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HZ9-dL-nNu">
+                                        <rect key="frame" x="0.0" y="20.5" width="375" height="154.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="TpQ-Qv-JLm" firstAttribute="top" secondItem="6FR-pD-AWd" secondAttribute="top" id="M57-CY-fZZ"/>
-                                            <constraint firstItem="TpQ-Qv-JLm" firstAttribute="leading" secondItem="6FR-pD-AWd" secondAttribute="leading" id="kvH-rw-8aP"/>
-                                            <constraint firstAttribute="bottom" secondItem="TpQ-Qv-JLm" secondAttribute="bottom" id="wh1-PS-rpx"/>
-                                            <constraint firstAttribute="trailing" secondItem="TpQ-Qv-JLm" secondAttribute="trailing" id="zVg-ge-KwN"/>
+                                            <constraint firstAttribute="height" constant="154.5" id="wzn-hn-jDh"/>
                                         </constraints>
-                                        <connections>
-                                            <outlet property="medalView" destination="TpQ-Qv-JLm" id="tNI-6P-ZFU"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rSA-Eu-g6O">
+                                            <size key="itemSize" width="80" height="100"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="medalCell" id="6FR-pD-AWd" customClass="MedalCollectionViewCell" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medal-gold" translatesAutoresizingMaskIntoConstraints="NO" id="aJy-2J-CZo">
+                                                            <rect key="frame" x="10" y="0.0" width="100" height="100"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="aJy-2J-CZo" secondAttribute="height" multiplier="1:1" id="SFf-Xc-Gbn"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZQ-tj-xFj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                            <rect key="frame" x="46" y="40" width="28.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                    <integer key="value" value="0"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eingereichte Pokéstops" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QfM-LK-XNv" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="110" width="120" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="QfM-LK-XNv" secondAttribute="trailing" id="5Aw-V3-wXt"/>
+                                                    <constraint firstItem="aJy-2J-CZo" firstAttribute="leading" secondItem="6FR-pD-AWd" secondAttribute="leading" constant="10" id="5JB-VZ-hGq"/>
+                                                    <constraint firstItem="9ZQ-tj-xFj" firstAttribute="centerY" secondItem="aJy-2J-CZo" secondAttribute="centerY" id="JQl-dO-Gcm"/>
+                                                    <constraint firstItem="9ZQ-tj-xFj" firstAttribute="centerX" secondItem="aJy-2J-CZo" secondAttribute="centerX" id="LXh-OY-pON"/>
+                                                    <constraint firstItem="QfM-LK-XNv" firstAttribute="top" secondItem="aJy-2J-CZo" secondAttribute="bottom" constant="10" id="RJ8-kB-gUG"/>
+                                                    <constraint firstItem="QfM-LK-XNv" firstAttribute="leading" secondItem="6FR-pD-AWd" secondAttribute="leading" id="Z18-lj-zHU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QfM-LK-XNv" secondAttribute="bottom" id="aGy-bP-6An"/>
+                                                    <constraint firstItem="aJy-2J-CZo" firstAttribute="top" secondItem="6FR-pD-AWd" secondAttribute="top" id="inl-pm-XOf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aJy-2J-CZo" secondAttribute="trailing" constant="10" id="xN0-KE-jV8"/>
+                                                </constraints>
+                                                <size key="customSize" width="120" height="150"/>
+                                                <connections>
+                                                    <outlet property="countLabel" destination="9ZQ-tj-xFj" id="Pn4-5O-7Cf"/>
+                                                    <outlet property="descriptionLabel" destination="QfM-LK-XNv" id="6xt-lI-Tcc"/>
+                                                    <outlet property="medalImageView" destination="aJy-2J-CZo" id="aaY-Tf-jFM"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VvQ-EV-mRV" firstAttribute="trailing" secondItem="HZ9-dL-nNu" secondAttribute="trailing" id="3Bs-XL-E9H"/>
-                            <constraint firstAttribute="bottom" secondItem="HZ9-dL-nNu" secondAttribute="bottom" id="F67-fv-roG"/>
-                            <constraint firstItem="HZ9-dL-nNu" firstAttribute="top" secondItem="2Zd-o2-XnH" secondAttribute="top" id="rIP-jL-BSf"/>
-                            <constraint firstItem="HZ9-dL-nNu" firstAttribute="leading" secondItem="VvQ-EV-mRV" secondAttribute="leading" id="szb-b0-u3f"/>
+                            <constraint firstItem="NZf-C3-RIe" firstAttribute="bottom" secondItem="VvQ-EV-mRV" secondAttribute="bottom" id="Qs7-7N-NTI"/>
+                            <constraint firstItem="NZf-C3-RIe" firstAttribute="leading" secondItem="VvQ-EV-mRV" secondAttribute="leading" id="azw-qU-kVi"/>
+                            <constraint firstItem="NZf-C3-RIe" firstAttribute="trailing" secondItem="VvQ-EV-mRV" secondAttribute="trailing" id="gDq-p0-eW2"/>
+                            <constraint firstItem="NZf-C3-RIe" firstAttribute="top" secondItem="VvQ-EV-mRV" secondAttribute="top" id="mLg-ax-pfZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VvQ-EV-mRV"/>
                     </view>
-                    <size key="freeformSize" width="375" height="100"/>
+                    <size key="freeformSize" width="375" height="175"/>
                     <connections>
                         <outlet property="collectionView" destination="HZ9-dL-nNu" id="V7d-Xr-wwc"/>
+                        <outlet property="heightConstraint" destination="wzn-hn-jDh" id="mA5-6G-yhL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiF-zh-tWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111" y="139"/>
+            <point key="canvasLocation" x="109.59999999999999" y="138.53073463268368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="medal-gold" width="96" height="96"/>
+    </resources>
 </document>

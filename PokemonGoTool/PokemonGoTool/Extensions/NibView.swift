@@ -5,7 +5,7 @@ import UIKit
 
 public protocol NibView: AnyObject {
     /// By default loads the nib with the same name as the class name
-    static func instantiateFromNib() -> Self
+    static func fromNib() -> Self
     /// The default value is the same as the class name
     static var nibName: String { get }
     /// By default returns the `UINib` instance with the same name as the class name
@@ -14,7 +14,7 @@ public protocol NibView: AnyObject {
 
 public extension NibView {
 
-    public static func instantiateFromNib() -> Self {
+    public static func fromNib() -> Self {
         let views = Bundle(for: Self.self).loadNibNamed(nibName, owner: nil, options: nil)
         return views![0] as! Self
     }

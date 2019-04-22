@@ -9,7 +9,7 @@ extension UIStackView {
     }
     
     func addSepartor() {
-        let separatorView = SeparatorView.instantiateFromNib()
+        let separatorView = SeparatorView.fromNib()
         addArrangedSubview(separatorView)
     }
 }
