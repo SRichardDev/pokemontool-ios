@@ -56,8 +56,10 @@ class AccountMedalViewModel {
         get {
             return [Medal(count: submittedPokestopsCount, description: "Eingereichte Pokéstops"),
                     Medal(count: submittedAreansCount, description: "Eingereichte Arenen"),
-                    Medal(count: 12, description: "Eingereichte Raids"),
-                    Medal(count: 99999, description: "Eingereichte Feldforschungen")]
+                    Medal(count: 10, description: "Eingereichte Raids"),
+                    Medal(count: 50, description: "Eingereichte Feldforschungen"),
+                    Medal(count: 100, description: "Test"),
+                    Medal(count: 1000, description: "Test")]
         }
     }
     
