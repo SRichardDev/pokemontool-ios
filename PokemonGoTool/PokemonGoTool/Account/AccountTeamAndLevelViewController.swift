@@ -8,6 +8,8 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     var signUpViewModel: SignUpViewModel?
     var accountViewModel: AccountViewModel?
 
+    @IBOutlet var trainerNameTitleLabel: Label!
+    @IBOutlet var trainerNameTextField: UITextField!
     @IBOutlet var teamTitleLabel: Label!
     @IBOutlet var teamSelectionSegmentedControl: UISegmentedControl!
     @IBOutlet var levelTitleLabel: Label!
@@ -30,6 +32,8 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
         title = "Team & Level"
         levelPickerView.delegate = self
         levelPickerView.dataSource = self
+        trainerNameTitleLabel.isVisible = accountViewModel != nil
+        trainerNameTextField.isVisible = accountViewModel != nil
         nextButton.isHidden = accountViewModel != nil
         updateUI()
     }
@@ -39,11 +43,23 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
         tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let trainerName = trainerNameTextField.text else { return }
+        guard trainerName != "" else { return }
+        accountViewModel?.updateTrainerName(trainerName)
+    }
+    
     func updateUI() {
         guard let viewModel = accountViewModel else { return }
+        trainerNameTextField.text = viewModel.trainerName
         teamSelectionSegmentedControl.selectedSegmentIndex = viewModel.currentTeam?.rawValue ?? 0
         teamSelectionSegmentedControl.tintColor = viewModel.currentTeam?.color
         levelPickerView.selectRow(40 - viewModel.currentLevel, inComponent: 0, animated: false)
+    }
+    
+    @IBAction func doneTapped(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
     @IBAction func didSelectTeam(_ sender: UISegmentedControl) {

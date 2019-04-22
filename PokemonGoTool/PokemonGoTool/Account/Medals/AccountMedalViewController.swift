@@ -16,7 +16,7 @@ class AccountMedalViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let width = (collectionView.bounds.size.width - 20) / 3
+        let width = (collectionView.bounds.size.width - 25) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: 150)
         collectionView.reloadData()

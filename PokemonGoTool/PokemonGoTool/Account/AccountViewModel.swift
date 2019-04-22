@@ -39,6 +39,10 @@ class AccountViewModel {
         self.firebaseConnector = firebaseConnector
     }
     
+    func updateTrainerName(_ name: String) {
+        firebaseConnector.user?.updateTrainerName(name)
+    }
+    
     func updateTeam(_ team: Team) {
         firebaseConnector.user?.updateTeam(team)
     }

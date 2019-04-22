@@ -10,12 +10,9 @@ class AccountOverviewViewController: UIViewController, StoryboardInitialViewCont
     @IBOutlet var trainerNameLabel: Label!
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        super.viewWillAppear(animated)        
         headerImageView.image = viewModel.currentTeam?.image
         levelLabel.text = "\(viewModel.currentLevel)"
         trainerNameLabel.text = viewModel.trainerName
-//        submittedPokestopsLabel.text = "\(viewModel.submittedPokestopsCount)"
-//        submittedArenasLabel.text = "\(viewModel.submittedAreansCount)"
     }
 }
