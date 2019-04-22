@@ -14,7 +14,7 @@ public protocol NibView: AnyObject {
 
 public extension NibView {
 
-    public static func fromNib() -> Self {
+    static func fromNib() -> Self {
         let views = Bundle(for: Self.self).loadNibNamed(nibName, owner: nil, options: nil)
         return views![0] as! Self
     }

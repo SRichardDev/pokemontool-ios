@@ -12,18 +12,20 @@ class AccountMedalViewController: UIViewController, StoryboardInitialViewControl
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        let width = (view.frame.size.width - 52) / 3
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: layout.itemSize.height)
-        
-        let size = collectionView.collectionViewLayout.collectionViewContentSize
-        heightConstraint.constant = size.height
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let width = (collectionView.bounds.size.width - 20) / 3
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: 150)
         collectionView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let size = collectionView.collectionViewLayout.collectionViewContentSize
+        heightConstraint.constant = size.height
     }
 }
 

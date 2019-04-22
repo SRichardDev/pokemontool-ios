@@ -56,10 +56,8 @@ class AccountMedalViewModel {
         get {
             return [Medal(count: submittedPokestopsCount, description: "Eingereichte Pokéstops"),
                     Medal(count: submittedAreansCount, description: "Eingereichte Arenen"),
-                    Medal(count: 10, description: "Eingereichte Raids"),
-                    Medal(count: 50, description: "Eingereichte Feldforschungen"),
-                    Medal(count: 100, description: "Test"),
-                    Medal(count: 1000, description: "Test")]
+                    Medal(count: submittedRaids, description: "Eingereichte Raids"),
+                    Medal(count: submittedQuests, description: "Eingereichte Feldforschungen")]
         }
     }
     
@@ -72,6 +70,18 @@ class AccountMedalViewModel {
     private var submittedAreansCount: Int {
         get {
             return firebaseConnector.user?.submittedArenas?.count ?? 0
+        }
+    }
+    
+    private var submittedQuests: Int {
+        get {
+            return firebaseConnector.user?.submittedQuests ?? 0
+        }
+    }
+    
+    private var submittedRaids: Int {
+        get {
+            return firebaseConnector.user?.submittedRaids ?? 0
         }
     }
     

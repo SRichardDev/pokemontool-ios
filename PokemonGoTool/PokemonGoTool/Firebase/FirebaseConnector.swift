@@ -92,6 +92,7 @@ class FirebaseConnector {
         var dataWithTimestamp = data as! [String: Any]
         dataWithTimestamp["timestamp"] = ServerValue.timestamp()
         pokestopsRef.child(pokestop.geohash).child(pokestopID).child("quest").setValue(dataWithTimestamp)
+        user?.updateSubmittedQuestCount()
     }
     
     func saveRaid(arena: Arena) {
@@ -100,6 +101,7 @@ class FirebaseConnector {
         var dataWithTimestamp = data as! [String: Any]
         dataWithTimestamp["timestamp"] = ServerValue.timestamp()
         arenasRef.child(arena.geohash).child(arenaID).child("raid").setValue(dataWithTimestamp)
+        user?.updateSubmittedRaidCount()
     }
     
     func saveRaidMeetup(raidMeetup: RaidMeetup) -> String {

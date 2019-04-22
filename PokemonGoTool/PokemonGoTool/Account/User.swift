@@ -56,6 +56,8 @@ class User: FirebaseCodable, Equatable {
     var team: Team?
     var submittedPokestops: [PokestopId: String]?
     var submittedArenas: [ArenaId: String]?
+    var submittedRaids: Int?
+    var submittedQuests: Int?
     
     var teamName: String? {
         get {
@@ -80,6 +82,8 @@ class User: FirebaseCodable, Equatable {
          level: Int,
          submittedPokestops: [PokestopId: String]? = nil,
          submittedArenas: [ArenaId: String]? = nil,
+         submittedRaids: Int? = nil,
+         submittedQuests: Int? = nil,
          notificationToken: String? = nil) {
         
         self.id = id
@@ -140,6 +144,22 @@ class User: FirebaseCodable, Equatable {
         let data = [id : geohash]
         users.child(userId).child("submittedArenas").updateChildValues(data)
         print("✅👨🏻 Did add ArenaId to user")
+    }
+    
+    func updateSubmittedQuestCount() {
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = ["submittedQuests" : (submittedQuests ?? 0) + 1]
+        users.child(userId).updateChildValues(data)
+        print("✅👨🏻 Did update submitted quest count to user")
+    }
+    
+    func updateSubmittedRaidCount() {
+        let users = Database.database().reference(withPath: "users")
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = ["submittedRaids" : (submittedRaids ?? 0) + 1]
+        users.child(userId).updateChildValues(data)
+        print("✅👨🏻 Did update submitted raid count to user")
     }
     
     class func load(completion: @escaping (User?) -> ()) {
