@@ -16,9 +16,9 @@ public protocol ClusterManagerDelegate: class {
      - Parameters:
         - zoomLevel: The zoom level of the visible map region.
      
-     - Returns: The cell size at the given zoom level.
+     - Returns: The cell size at the given zoom level. If you return nil, the cell size will automatically adjust to the zoom level.
      */
-    func cellSize(for zoomLevel: Double) -> Double
+    func cellSize(for zoomLevel: Double) -> Double?
     
     /**
      Whether to cluster the given annotation.
@@ -32,8 +32,8 @@ public protocol ClusterManagerDelegate: class {
 }
 
 public extension ClusterManagerDelegate {
-    func cellSize(for zoomLevel: Double) -> Double {
-        return 0
+    func cellSize(for zoomLevel: Double) -> Double? {
+        return nil
     }
     
     func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
@@ -44,14 +44,6 @@ public extension ClusterManagerDelegate {
 open class ClusterManager {
     
     var tree = QuadTree(rect: .world)
-    
-    /**
-     The size of each cell on the grid (The larger the size, the better the performance).
-     
-     If nil, automatically adjusts the cell size to zoom level. The default is nil.
-     */
-    @available(*, deprecated: 2.3.0, message: "Use cellSize(forZoomLevel:)")
-    open var cellSize: Double?
     
     /**
      The current zoom level of the visible map region.
@@ -158,8 +150,8 @@ open class ClusterManager {
      */
     open func add(_ annotation: MKAnnotation) {
         operationQueue.cancelAllOperations()
-        dispatchQueue.async(flags: .barrier) {
-            self.tree.add(annotation)
+        dispatchQueue.async(flags: .barrier) { [weak self] in
+            self?.tree.add(annotation)
         }
     }
     
@@ -171,9 +163,9 @@ open class ClusterManager {
      */
     open func add(_ annotations: [MKAnnotation]) {
         operationQueue.cancelAllOperations()
-        dispatchQueue.async(flags: .barrier) {
+        dispatchQueue.async(flags: .barrier) { [weak self] in
             for annotation in annotations {
-                self.tree.add(annotation)
+                self?.tree.add(annotation)
             }
         }
     }
@@ -186,8 +178,8 @@ open class ClusterManager {
      */
     open func remove(_ annotation: MKAnnotation) {
         operationQueue.cancelAllOperations()
-        dispatchQueue.async(flags: .barrier) {
-            self.tree.remove(annotation)
+        dispatchQueue.async(flags: .barrier) { [weak self] in
+            self?.tree.remove(annotation)
         }
     }
     
@@ -199,9 +191,9 @@ open class ClusterManager {
      */
     open func remove(_ annotations: [MKAnnotation]) {
         operationQueue.cancelAllOperations()
-        dispatchQueue.async(flags: .barrier) {
+        dispatchQueue.async(flags: .barrier) { [weak self] in
             for annotation in annotations {
-                self.tree.remove(annotation)
+                self?.tree.remove(annotation)
             }
         }
     }
@@ -211,8 +203,8 @@ open class ClusterManager {
      */
     open func removeAll() {
         operationQueue.cancelAllOperations()
-        dispatchQueue.async(flags: .barrier) {
-            self.tree = QuadTree(rect: .world)
+        dispatchQueue.async(flags: .barrier) { [weak self] in
+            self?.tree = QuadTree(rect: .world)
         }
     }
     
@@ -223,7 +215,7 @@ open class ClusterManager {
         - mapView: The map view object to reload.
         - visibleMapRect: The area currently displayed by the map view.
      */
-    @available(*, deprecated: 2.1.4, message: "Use reload(mapView:)")
+    @available(swift, obsoleted: 5.0, message: "Use reload(mapView:)")
     open func reload(_ mapView: MKMapView, visibleMapRect: MKMapRect) {
         reload(mapView: mapView)
     }
@@ -247,7 +239,6 @@ open class ClusterManager {
                 let (toAdd, toRemove) = self.clusteredAnnotations(zoomScale: zoomScale, visibleMapRect: visibleMapRect, operation: operation)
                 DispatchQueue.main.async { [weak self, weak mapView] in
                     guard let self = self, let mapView = mapView else { return completion(false) }
-                    if toAdd.isEmpty, toRemove.isEmpty { return completion(false) }
                     self.display(mapView: mapView, toAdd: toAdd, toRemove: toRemove)
                     completion(true)
                 }
@@ -264,68 +255,13 @@ open class ClusterManager {
         
         guard !isCancelled else { return (toAdd: [], toRemove: []) }
         
-        var allAnnotations = [MKAnnotation]()
+        // handle annotations on the same coordinate
+        if shouldDistributeAnnotationsOnSameCoordinate {
+            distributeAnnotations(tree: tree, mapRect: visibleMapRect)
+        }
         
-        dispatchQueue.sync {
-            for mapRect in mapRects {
-                var totalLatitude: Double = 0
-                var totalLongitude: Double = 0
-                var annotations = [MKAnnotation]()
-                var hash = [CLLocationCoordinate2D: [MKAnnotation]]()
-                
-                // add annotations
-                for node in tree.annotations(in: mapRect) {
-                    if delegate?.shouldClusterAnnotation(node) ?? true {
-                        totalLatitude += node.coordinate.latitude
-                        totalLongitude += node.coordinate.longitude
-                        annotations.append(node)
-                        hash[node.coordinate, default: [MKAnnotation]()] += [node]
-                    } else {
-                        allAnnotations.append(node)
-                    }
-                }
-                
-                // handle annotations on the same coordinate
-                if shouldDistributeAnnotationsOnSameCoordinate {
-                    for value in hash.values where value.count > 1 {
-                        for (index, node) in value.enumerated() {
-                            let distanceFromContestedLocation = 3 * Double(value.count) / 2
-                            let radiansBetweenAnnotations = (.pi * 2) / Double(value.count)
-                            let bearing = radiansBetweenAnnotations * Double(index)
-                            (node as? Annotation)?.coordinate = node.coordinate.coordinate(onBearingInRadians: bearing, atDistanceInMeters: distanceFromContestedLocation)
-                        }
-                    }
-                }
-                
-                // handle clustering
-                let count = annotations.count
-                if count >= minCountForClustering, zoomLevel <= maxZoomLevel {
-                    let cluster = ClusterAnnotation()
-                    switch clusterPosition {
-                    case .center:
-                        cluster.coordinate = MKMapPoint(x: mapRect.midX, y: mapRect.midY).coordinate
-                    case .nearCenter:
-                        let coordinate = MKMapPoint(x: mapRect.midX, y: mapRect.midY).coordinate
-                        if let annotation = annotations.min(by: { coordinate.distance(from: $0.coordinate) < coordinate.distance(from: $1.coordinate) }) {
-                            cluster.coordinate = annotation.coordinate
-                        }
-                    case .average:
-                        cluster.coordinate = CLLocationCoordinate2D(
-                            latitude: CLLocationDegrees(totalLatitude) / CLLocationDegrees(count),
-                            longitude: CLLocationDegrees(totalLongitude) / CLLocationDegrees(count)
-                        )
-                    case .first:
-                        if let annotation = annotations.first {
-                            cluster.coordinate = annotation.coordinate
-                        }
-                    }
-                    cluster.annotations = annotations
-                    cluster.style = (annotations.first as? Annotation)?.style
-                    allAnnotations += [cluster]
-                } else {
-                    allAnnotations += annotations
-                }
-            }
+        let allAnnotations = dispatchQueue.sync {
+            clusteredAnnotations(tree: tree, mapRects: mapRects, zoomLevel: zoomLevel)
         }
         
         guard !isCancelled else { return (toAdd: [], toRemove: []) }
@@ -337,16 +273,81 @@ open class ClusterManager {
         let toAdd = after.subtracted(before)
         
         if !shouldRemoveInvisibleAnnotations {
-            let nonRemoving = toRemove.filter { !visibleMapRect.contains($0.coordinate) }
-            toRemove.subtract(nonRemoving)
+            let toKeep = toRemove.filter { !visibleMapRect.contains($0.coordinate) }
+            toRemove.subtract(toKeep)
         }
         
-        dispatchQueue.async(flags: .barrier) {
-            self.visibleAnnotations.subtract(toRemove)
-            self.visibleAnnotations.add(toAdd)
+        dispatchQueue.async(flags: .barrier) { [weak self] in
+            self?.visibleAnnotations.subtract(toRemove)
+            self?.visibleAnnotations.add(toAdd)
         }
         
         return (toAdd: toAdd, toRemove: toRemove)
+    }
+    
+    func clusteredAnnotations(tree: QuadTree, mapRects: [MKMapRect], zoomLevel: Double) -> [MKAnnotation] {
+        var allAnnotations = [MKAnnotation]()
+        for mapRect in mapRects {
+            var annotations = [MKAnnotation]()
+            
+            // add annotations
+            for node in tree.annotations(in: mapRect) {
+                if delegate?.shouldClusterAnnotation(node) ?? true {
+                    annotations.append(node)
+                } else {
+                    allAnnotations.append(node)
+                }
+            }
+            
+            // handle clustering
+            let count = annotations.count
+            if count >= minCountForClustering, zoomLevel <= maxZoomLevel {
+                let cluster = ClusterAnnotation()
+                cluster.coordinate = coordinate(annotations: annotations, position: clusterPosition, mapRect: mapRect)
+                cluster.annotations = annotations
+                cluster.style = (annotations.first as? Annotation)?.style
+                allAnnotations += [cluster]
+            } else {
+                allAnnotations += annotations
+            }
+        }
+        return allAnnotations
+    }
+    
+    func distributeAnnotations(tree: QuadTree, mapRect: MKMapRect) {
+        let annotations = dispatchQueue.sync {
+            tree.annotations(in: mapRect)
+        }
+        let hash = Dictionary(grouping: annotations) { $0.coordinate }
+        dispatchQueue.async(flags: .barrier) {
+            for value in hash.values where value.count > 1 {
+                for (index, annotation) in value.enumerated() {
+                    tree.remove(annotation)
+                    let distanceFromContestedLocation = 3 * Double(value.count) / 2
+                    let radiansBetweenAnnotations = (.pi * 2) / Double(value.count)
+                    let bearing = radiansBetweenAnnotations * Double(index)
+                    (annotation as? MKPointAnnotation)?.coordinate = annotation.coordinate.coordinate(onBearingInRadians: bearing, atDistanceInMeters: distanceFromContestedLocation)
+                    tree.add(annotation)
+                }
+            }
+        }
+    }
+    
+    func coordinate(annotations: [MKAnnotation], position: ClusterPosition, mapRect: MKMapRect) -> CLLocationCoordinate2D {
+        switch position {
+        case .center:
+            return MKMapPoint(x: mapRect.midX, y: mapRect.midY).coordinate
+        case .nearCenter:
+            let coordinate = MKMapPoint(x: mapRect.midX, y: mapRect.midY).coordinate
+            let annotation = annotations.min { coordinate.distance(from: $0.coordinate) < coordinate.distance(from: $1.coordinate) }
+            return annotation!.coordinate
+        case .average:
+            let coordinates = annotations.map { $0.coordinate }
+            let totals = coordinates.reduce((latitude: 0.0, longitude: 0.0)) { ($0.latitude + $1.latitude, $0.longitude + $1.longitude) }
+            return CLLocationCoordinate2D(latitude: totals.latitude / Double(coordinates.count), longitude: totals.longitude / Double(coordinates.count))
+        case .first:
+            return annotations.first!.coordinate
+        }
     }
     
     func mapRects(zoomScale: Double, visibleMapRect: MKMapRect) -> [MKMapRect] {
@@ -380,7 +381,7 @@ open class ClusterManager {
     }
     
     func cellSize(for zoomLevel: Double) -> Double {
-        if let cellSize = delegate?.cellSize(for: zoomLevel), cellSize > 0 {
+        if let cellSize = delegate?.cellSize(for: zoomLevel) {
             return cellSize
         }
         switch zoomLevel {

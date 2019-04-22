@@ -9,7 +9,7 @@
 import MapKit
 
 open class Annotation: MKPointAnnotation {
-    // @available(*, deprecated: 2.5.0, message: "See docs/MigratingToTransforms.md")
+    // @available(swift, obsoleted: 6.0, message: "Please migrate to StyledClusterAnnotationView.")
     open var style: ClusterAnnotationStyle?
     
     public convenience init(coordinate: CLLocationCoordinate2D) {
@@ -44,7 +44,6 @@ open class ClusterAnnotation: Annotation {
  The view associated with your cluster annotations.
  */
 open class ClusterAnnotationView: MKAnnotationView {
-    
     open lazy var countLabel: UILabel = {
         let label = UILabel()
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -70,7 +69,6 @@ open class ClusterAnnotationView: MKAnnotationView {
         let count = annotation.annotations.count
         countLabel.text = "\(count)"
     }
-    
 }
 
 /**
@@ -119,12 +117,6 @@ open class StyledClusterAnnotationView: ClusterAnnotationView {
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @available(*, deprecated: 2.2.5, message:"Use configure()")
-    open func configure(with style: ClusterAnnotationStyle) {
-        self.style = style
-        configure()
     }
     
     open override func configure() {

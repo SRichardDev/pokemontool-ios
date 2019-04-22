@@ -14,7 +14,7 @@ extension RangeReplaceableCollection where Element: Equatable {
 
 extension Array where Element == Pokestop {
     mutating func replace(object: Element) {
-        if let index = index(where: {$0.id == object.id}) {
+        if let index = firstIndex(where: {$0.id == object.id}) {
             self[index] = object
         }
     }
@@ -22,7 +22,7 @@ extension Array where Element == Pokestop {
 
 extension Array where Element == Arena {
     mutating func replace(object: Element) {
-        if let index = index(where: {$0.id == object.id}) {
+        if let index = firstIndex(where: {$0.id == object.id}) {
             self[index] = object
         }
     }

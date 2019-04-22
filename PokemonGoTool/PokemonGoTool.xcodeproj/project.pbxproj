@@ -713,6 +713,7 @@
 				TargetAttributes = {
 					2C19769A21ED266900091F8C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1111,7 +1112,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.stanc.PokemonGoTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1131,7 +1132,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.stanc.PokemonGoTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

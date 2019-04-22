@@ -44,8 +44,9 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
         }
     }
     
-    var hashValue: Int {
-        return name.hashValue ^ id.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(id)
     }
     
     init(name: String, latitude: Double, longitude: Double, submitter: String) {
@@ -127,8 +128,9 @@ struct RaidbossDefinition: FirebaseCodable, Equatable {
 
 struct Arena: FirebaseCodable, Annotation, Hashable {
     
-    var hashValue: Int {
-        return name.hashValue ^ id.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(id)
     }
     
     var name: String

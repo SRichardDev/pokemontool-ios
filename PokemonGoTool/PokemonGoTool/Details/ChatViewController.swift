@@ -47,7 +47,7 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
             self.messagesCollectionView.reloadData()
         }
 
-        let isLatestMessage = messages.index{$0.messageId == message.messageId} == (messages.count - 1)
+        let isLatestMessage = messages.firstIndex{$0.messageId == message.messageId} == (messages.count - 1)
         let shouldScrollToBottom = isLatestMessage && messagesCollectionView.isAtBottom
 
         if shouldScrollToBottom {
