@@ -170,6 +170,12 @@ class ArenaDetailsViewModel {
         }
     }
     
+    func submitterName(_ completion: @escaping (String) -> ()) {
+        firebaseConnector.userName(for: arena.submitter) { trainerName in
+            completion(trainerName)
+        }
+    }
+    
     private func isTimeUp(for date: Date) -> Bool {
         let timerInterval = date.timeIntervalSince(Date())
         let time = NSInteger(timerInterval)

@@ -12,6 +12,6 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
     override func viewDidLoad() {
         super.viewDidLoad()
         coordinateLabel.text = "\(viewModel.arena.latitude), \(viewModel.arena.longitude)"
-        submitterLabel.text = viewModel.arena.submitter
+        viewModel.submitterName { self.submitterLabel.text = $0 }
     }
 }

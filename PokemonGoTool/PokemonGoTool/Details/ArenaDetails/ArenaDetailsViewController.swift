@@ -26,6 +26,11 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         imageView.contentMode = .scaleAspectFit
         imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
+        let titleLabel = Label()
+        titleLabel.style = 2
+        titleLabel.numberOfLines = 0
+        titleLabel.text = viewModel.title
+        
         headerViewController.viewModel = viewModel
         restTimeViewController.viewModel = viewModel
         participantsTableViewController.viewModel = viewModel
@@ -34,6 +39,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         infoViewController.viewModel = viewModel
         meetupTimeViewController.viewModel = viewModel
 
+        stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
         
@@ -54,7 +60,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.topViewController?.navigationItem.title = viewModel.title
+        setTitle("Arena")
     }
     
     func updateUI() {
