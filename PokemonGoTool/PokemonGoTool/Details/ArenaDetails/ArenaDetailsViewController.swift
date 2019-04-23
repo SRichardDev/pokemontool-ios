@@ -17,10 +17,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        view.addSubviewAndEdgeConstraints(stackView,
-                                          edges: .all,
-                                          margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
-                                          constrainToSafeAreaGuide: false)
+        stackView.addToView(view)
         
         imageView.image = viewModel.isRaidExpired ? UIImage(named: "arena") : viewModel.raidBossImage
         imageView.contentMode = .scaleAspectFit
