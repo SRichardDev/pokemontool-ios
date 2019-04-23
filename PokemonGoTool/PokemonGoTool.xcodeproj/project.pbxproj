@@ -92,6 +92,7 @@
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
 		2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */; };
+		2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */; };
 		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
 		2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */; };
 		2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */; };
@@ -227,6 +228,7 @@
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
 		2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMedalViewModel.swift; sourceTree = "<group>"; };
+		2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDefines.swift; sourceTree = "<group>"; };
 		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMapViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCheckViewController.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 			children = (
 				2C97F77021F6576500630BA2 /* Pokestop+Quest.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
+				2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */,
 				2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */,
 				2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */,
 			);
@@ -909,6 +912,7 @@
 				2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C34F1A8220B720C00B3B99C /* ButtonsStackViewController.swift in Sources */,
+				2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */,
 				2C395A3022026598005330B8 /* NavigationController.swift in Sources */,
 				2C1AE57F22637B5F00AE9C4A /* MapFilterViewController.swift in Sources */,
 				2C34F1A4220A4C7C00B3B99C /* UIImage+Extension.swift in Sources */,
