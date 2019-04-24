@@ -5,9 +5,16 @@ class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     var arena: Arena!
     var imageName: String {
         get {
-            guard let arena = arena else { return "arena"}
-            let name = arena.isEX ? "arenaEX" : "arena"
-            return name
+            switch (arena.isEX, arena.isGoldArena) {
+            case (true, true):
+                return "goldArenaEX"
+            case (true, false):
+                return "arenaEX"
+            case (false, true):
+                return "goldArena"
+            default:
+                return "arena"
+            }
         }
     }
     

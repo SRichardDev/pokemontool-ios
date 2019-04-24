@@ -182,7 +182,9 @@ class FirebaseConnector {
             .observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
-                    guard let arena: Arena = decode(from: child) else { continue }
+                    guard var arena: Arena = decode(from: child) else { continue }
+                    
+                    arena.isGoldArena = self.user?.goldArenas?.keys.contains(arena.id) ?? false
                     
                     if let localArena = self.arenas[arena.id] {
                         if localArena == arena { continue }

@@ -48,6 +48,12 @@ class User: FirebaseCodable, Equatable {
     typealias PokestopId = String
     typealias ArenaId = String
 
+    var usersRef: DatabaseReference {
+        get {
+            return Database.database().reference(withPath: "users")
+        }
+    }
+    
     var id: String!
     var email: String?
     var trainerName: String?
@@ -56,6 +62,7 @@ class User: FirebaseCodable, Equatable {
     var team: Team?
     var submittedPokestops: [PokestopId: String]?
     var submittedArenas: [ArenaId: String]?
+    var goldArenas: [ArenaId: String]?
     var submittedRaids: Int?
     var submittedQuests: Int?
     
@@ -82,6 +89,7 @@ class User: FirebaseCodable, Equatable {
          level: Int,
          submittedPokestops: [PokestopId: String]? = nil,
          submittedArenas: [ArenaId: String]? = nil,
+         goldArenas: [ArenaId: String]? = nil,
          submittedRaids: Int? = nil,
          submittedQuests: Int? = nil,
          notificationToken: String? = nil) {
@@ -93,36 +101,36 @@ class User: FirebaseCodable, Equatable {
         self.level = level
         self.submittedPokestops = submittedPokestops
         self.submittedArenas = submittedArenas
+        self.goldArenas = goldArenas
+        self.submittedRaids = submittedRaids
+        self.submittedQuests = submittedQuests
         self.notificationToken = notificationToken
     }
     
     func updateTrainerName(_ name: String) {
         guard trainerName != name else { return }
         trainerName = name
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = ["trainerName" : name]
-        users.child(userId).updateChildValues(data)
+        usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update trainer name to database")
     }
     
     func updateTeam(_ team: Team) {
         guard self.team != team else { return }
         self.team = team
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = ["team" : team.rawValue]
-        users.child(userId).updateChildValues(data)
+        usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update team")
     }
     
     func updateTrainerLevel(_ level: Int) {
         guard self.level != level else { return }
         self.level = level
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = ["level" : level]
-        users.child(userId).updateChildValues(data)
+        usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update level")
     }
     
@@ -131,35 +139,42 @@ class User: FirebaseCodable, Equatable {
     }
     
     func saveSubmittedPokestopId(_ id: PokestopId, for geohash: String) {
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [id : geohash]
-        users.child(userId).child("submittedPokestops").updateChildValues(data)
+        usersRef.child(userId).child("submittedPokestops").updateChildValues(data)
         print("✅👨🏻 Did add PokestopId to user")
     }
     
     func saveSubmittedArena(_ id: ArenaId, for geohash: String) {
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [id : geohash]
-        users.child(userId).child("submittedArenas").updateChildValues(data)
+        usersRef.child(userId).child("submittedArenas").updateChildValues(data)
         print("✅👨🏻 Did add ArenaId to user")
     }
     
     func updateSubmittedQuestCount() {
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = ["submittedQuests" : (submittedQuests ?? 0) + 1]
-        users.child(userId).updateChildValues(data)
+        usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update submitted quest count to user")
     }
     
     func updateSubmittedRaidCount() {
-        let users = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = ["submittedRaids" : (submittedRaids ?? 0) + 1]
-        users.child(userId).updateChildValues(data)
+        usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update submitted raid count to user")
+    }
+    
+    func addGoldArena(_ id: ArenaId, for geohash: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [id : geohash]
+        usersRef.child(userId).child("goldArenas").updateChildValues(data)
+    }
+    
+    func removeGoldArena(_ id: ArenaId) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        usersRef.child(userId).child("goldArenas").child(id).removeValue()
     }
     
     class func load(completion: @escaping (User?) -> ()) {

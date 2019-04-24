@@ -114,7 +114,9 @@ class AnnotationView: CustomAnnotationView {
         
         if let raid = annotation.arena?.raid, !raid.isExpired {
             let topImage = raid.image!
-            let size = CGSize(width: topImage.size.width/4, height: topImage.size.height/4)
+            let scaleFactor: CGFloat = raid.hasHatched ? 4 : 2
+            
+            let size = CGSize(width: topImage.size.width/scaleFactor, height: topImage.size.height/scaleFactor)
             let resizedTopImage = topImage.resize(targetSize: size)
             annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
             

@@ -14,4 +14,8 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
         coordinateLabel.text = "\(viewModel.arena.latitude), \(viewModel.arena.longitude)"
         viewModel.submitterName { self.submitterLabel.text = $0 }
     }
+    
+    @IBAction func didTapGoldArena(_ sender: UIButton) {
+        viewModel.toggleGoldArena()
+    }
 }

@@ -124,6 +124,14 @@ class ArenaDetailsViewModel {
         }
     }
     
+    func toggleGoldArena() {
+        if arena.isGoldArena ?? false {
+            firebaseConnector.user?.removeGoldArena(arena.id)
+        } else {
+            firebaseConnector.user?.addGoldArena(arena.id, for: arena.geohash)
+        }
+    }
+    
     func startHatchTimer() { 
         guard let raid = arena.raid else { return }
         guard let date = raid.hatchDate else { return }

@@ -137,11 +137,12 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
     var latitude: Double
     var longitude: Double
     let submitter: String
-    var isEX: Bool = false
+    var isEX: Bool
     var id: String!
     var raid: Raid?
     var upVotes: Int?
     var downVotes: Int?
+    var isGoldArena: Bool?
     var geohash: String {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)

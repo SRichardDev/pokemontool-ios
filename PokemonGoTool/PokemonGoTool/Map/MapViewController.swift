@@ -25,7 +25,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         let manager = ClusterManager()
         manager.delegate = self
         manager.maxZoomLevel = 17
-        manager.minCountForClustering = 3
+        manager.minCountForClustering = 5
         manager.clusterPosition = .average
         return manager
     }()
@@ -247,10 +247,6 @@ extension MapViewController: PushManagerDelegate {
 }
 
 extension MapViewController: ClusterManagerDelegate {
-    
-    func cellSize(for zoomLevel: Double) -> Double {
-        return 0 // default
-    }
     
     func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
         return true
