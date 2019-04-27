@@ -19,7 +19,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startTimer()
+        startScrolling()
     }
 
     func updateRaidBosses() {
@@ -30,11 +30,9 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         if viewModel.isRaidAlreadyRunning {
             scrollTimer?.invalidate()
             titleLabel.text = "Wähle den Raidboss aus:"
-            collectionView.isUserInteractionEnabled = true
         } else {
-            startTimer()
+            startScrolling()
             titleLabel.text = "Mögliche Raidbosse:"
-            collectionView.isUserInteractionEnabled = false
         }
     }
     
@@ -50,10 +48,11 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RaidBossCell
         cell.titleLabel.text = viewModel.currentRaidBosses[indexPath.row].name
         cell.imageView.image = viewModel.currentRaidBosses[indexPath.row].image
+        cell.isUserInteractionEnabled = viewModel.isRaidAlreadyRunning
         return cell
     }
     
-    private func startTimer() {
+    private func startScrolling() {
         scrollTimer = Timer(fire: Date(), interval: 0.015, repeats: true) { (timer) in
             let initailPoint = CGPoint(x: self.newOffsetX,y :0)
             
@@ -72,7 +71,8 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
                 self.newOffsetX = self.collectionView.contentOffset.x
             }
         }
-        RunLoop.current.add(scrollTimer!, forMode: .common)
+        guard let scrollTimer = scrollTimer else { return }
+        RunLoop.current.add(scrollTimer, forMode: .common)
     }
 }
 

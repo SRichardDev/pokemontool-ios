@@ -92,15 +92,13 @@ class SubmitRaidViewModel {
                 let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
                 let raid = Raid(level: selectedRaidLevel,
                                 hatchTime: selectedHatchTime,
-                                raidBoss: selectedRaidBoss,
                                 raidMeetupId: id)
                 arena.raid = raid
                 firebaseConnector.userParticipates(in: raid, for: &arena)
 
             } else {
                 let raid = Raid(level: selectedRaidLevel,
-                                hatchTime: selectedHatchTime,
-                                raidBoss: selectedRaidBoss)
+                                hatchTime: selectedHatchTime)
                 arena.raid = raid
             }
         }
