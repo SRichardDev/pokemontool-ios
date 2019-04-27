@@ -130,6 +130,7 @@ class ArenaDetailsViewModel {
         } else {
             firebaseConnector.user?.addGoldArena(arena.id, for: arena.geohash)
         }
+        firebaseConnector.loadArenas(for: arena.geohash)
     }
     
     func startHatchTimer() { 
