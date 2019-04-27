@@ -86,7 +86,7 @@ class ArenaDetailsViewModel {
     
     var arenaImage: UIImage {
         get {
-            return arena.isEX ? UIImage(named: "arenaEX")! : UIImage(named: "arena")!
+            return arena.image
         }
     }
     
