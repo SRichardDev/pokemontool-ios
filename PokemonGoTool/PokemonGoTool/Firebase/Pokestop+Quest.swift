@@ -154,6 +154,21 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
             return raid?.isActive ?? false
         }
     }
+    
+    var image: UIImage {
+        get {
+            switch (isEX, isGoldArena) {
+            case (true, true):
+                return UIImage(named: "goldArenaEX")!
+            case (true, false):
+                return UIImage(named: "arenaEX")!
+            case (false, true):
+                return UIImage(named: "goldArena")!
+            default:
+                return UIImage(named: "arena")!
+            }
+        }
+    }
 
     init(name: String, latitude: Double, longitude: Double, submitter: String, isExArena: Bool) {
         self.name = name

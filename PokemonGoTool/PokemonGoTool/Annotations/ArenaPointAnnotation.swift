@@ -3,20 +3,6 @@ import MapKit
 
 class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     var arena: Arena!
-    var imageName: String {
-        get {
-            switch (arena.isEX, arena.isGoldArena) {
-            case (true, true):
-                return "goldArenaEX"
-            case (true, false):
-                return "arenaEX"
-            case (false, true):
-                return "goldArena"
-            default:
-                return "arena"
-            }
-        }
-    }
     
     var raidEggImageName = "level_5"
     

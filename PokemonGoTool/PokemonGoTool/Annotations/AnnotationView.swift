@@ -109,8 +109,7 @@ class AnnotationView: CustomAnnotationView {
         annotationView.label.alpha = showLabel ? 1 : 0
         annotationView.customAnnotation = annotation.arena
         
-        let baseImage = UIImage(named: annotation.imageName)!
-
+        let baseImage = annotation.arena.image
         
         if let raid = annotation.arena?.raid, !raid.isExpired {
             let topImage = raid.image!
