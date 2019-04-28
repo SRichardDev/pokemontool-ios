@@ -249,9 +249,9 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    var image: UIImage? {
+    var image: UIImage {
         get {
-            return ImageManager.image(named: "\(raidBoss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(level)")
+            return ImageManager.image(named: "\(raidBoss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(level)")!
         }
     }
     
@@ -308,9 +308,7 @@ struct RaidMeetup: FirebaseCodable, Equatable {
         self.meetupTime = meetupTime
     }
     
-    init() {
-        
-    }
+    init() {}
 }
 
 struct ChatMessage: FirebaseCodable {

@@ -148,7 +148,7 @@ extension MapViewController: FirebaseDelegate {
     func didUpdateArena(arena: Arena) {
         for annotationOnMap in mapView.annotations {
             if let arenaAnnotationOnMap = annotationOnMap as? ArenaPointAnnotation {
-                if arenaAnnotationOnMap.arena.id == arena.id {
+                if arenaAnnotationOnMap.arena?.id == arena.id {
                     manager.remove(annotationOnMap)
                     didAddArena(arena: arena)
                 }

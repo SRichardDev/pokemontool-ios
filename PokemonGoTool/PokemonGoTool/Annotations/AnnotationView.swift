@@ -109,10 +109,10 @@ class AnnotationView: CustomAnnotationView {
         annotationView.label.alpha = showLabel ? 1 : 0
         annotationView.customAnnotation = annotation.arena
         
-        let baseImage = annotation.arena.image
+        let baseImage = annotation.arena?.image ?? UIImage(named: "arena")!
         
         if let raid = annotation.arena?.raid, !raid.isExpired {
-            let topImage = raid.image!
+            let topImage = raid.image
             let scaleFactor: CGFloat = raid.hasHatched ? 4 : 2
             
             let size = CGSize(width: topImage.size.width/scaleFactor, height: topImage.size.height/scaleFactor)
@@ -133,9 +133,10 @@ class AnnotationView: CustomAnnotationView {
         } else {
             let size = CGSize(width: baseImage.size.width/2, height: baseImage.size.height/2)
             let resizedBaseImage = baseImage.resize(targetSize: size)
-
+            
             annotationView.image = resizedBaseImage
         }
+        
         return annotationView
     }
     
