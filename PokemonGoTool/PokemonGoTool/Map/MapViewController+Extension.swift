@@ -22,15 +22,6 @@ extension MapViewController {
         }
     }
     
-    private func toggleAnnotationSubmitMode() {
-        let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
-                                        subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
-                                        style: .warning)
-        banner.show()
-        
-        
-    }
-    
     func setupMapButtonsMenu() {
         let registerPushGeohashButton = UIButton()
         registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
@@ -39,12 +30,32 @@ extension MapViewController {
             registerPushGeohashButton.scaleIn()
         }
         
-        let newAnnotationButton = UIButton()
-        newAnnotationButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
-        newAnnotationButton.addAction { [weak self] in
-            self?.mapCrosshairView.startAnimating()
-            newAnnotationButton.scaleIn()
-            self?.toggleAnnotationSubmitMode()
+        let newPoiButton = UIButton()
+        newPoiButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
+        newPoiButton.addAction { [weak self] in
+            guard let self = self else { return }
+            
+            let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
+                                            subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
+                                            style: .info)
+            banner.autoDismiss = false
+            banner.show()
+            
+            self.poiSubmissionMode = true
+            self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = -75
+            UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
+            self.startPoiSubmission(submitClosure: {
+                let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
+                                                coordinate: self.poiSubmissionAnnotation.coordinate)
+                self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
+                self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = 15
+                banner.dismiss()
+            }, endClosure: {
+                self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = 15
+                UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
+                banner.dismiss()
+            })
+            newPoiButton.scaleIn()
         }
         
         let changeMapTypeButton = UIButton()
@@ -71,19 +82,10 @@ extension MapViewController {
         ButtonsStackViewController.embed(in: settingsButtonsView,
                                          in: self,
                                          with: [registerPushGeohashButton,
-                                                newAnnotationButton,
+                                                newPoiButton,
                                                 changeMapTypeButton,
                                                 locateButton,
                                                 filterButton])
-    }
-    
-    @IBAction func longPressOnMap(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            let locationInView = sender.location(in: mapView)
-            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let viewModel = SubmitViewModel(firebaseConnector: firebaseConnector, coordinate: locationOnMap)
-            coordinator?.showSubmitPokestopAndArena(for: viewModel)
-        }
     }
     
     @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {

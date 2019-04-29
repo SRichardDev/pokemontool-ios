@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="PEi-fT-3Bz" appends="YES" id="EVm-DH-h0n"/>
                                     <outletCollection property="gestureRecognizers" destination="6wD-2r-vhW" appends="YES" id="mP2-3b-0Bu"/>
                                 </connections>
                             </mapView>
@@ -44,20 +43,11 @@
                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="uXg-59-JlM"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBR-5L-eGW" customClass="MapCrosshair" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="7WN-oH-XWk"/>
-                                    <constraint firstAttribute="height" constant="150" id="T3z-48-S2h"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerY" secondItem="ENM-7P-zbS" secondAttribute="centerY" id="3ur-No-BQa"/>
                             <constraint firstItem="ENM-7P-zbS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7Zq-Yg-GQQ"/>
-                            <constraint firstItem="NBR-5L-eGW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="AIn-0o-zRe"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cxu-QH-e1m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k5Y-yD-ywP" secondAttribute="trailing" id="F2u-S7-Nv6"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GnQ-xh-ZWm"/>
@@ -68,17 +58,15 @@
                             <constraint firstAttribute="bottom" secondItem="o4G-kI-jT1" secondAttribute="bottom" id="ckU-mf-Wyc"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eEW-ic-y2t"/>
                             <constraint firstItem="k5Y-yD-ywP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gM4-XA-82I"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yJj-r2-iqh" secondAttribute="trailing" constant="15" id="gOP-Ok-Lgx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yJj-r2-iqh" secondAttribute="trailing" constant="15" identifier="settingsMenu" id="gOP-Ok-Lgx"/>
                             <constraint firstItem="o4G-kI-jT1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i3j-rr-V4N"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yJj-r2-iqh" secondAttribute="bottom" constant="25" id="rmR-zn-Xyo"/>
                             <constraint firstItem="k5Y-yD-ywP" firstAttribute="centerX" secondItem="ENM-7P-zbS" secondAttribute="centerX" id="tP2-rg-WEW"/>
-                            <constraint firstItem="NBR-5L-eGW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vb4-6e-fOX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="backgroundLabel" destination="k5Y-yD-ywP" id="zOZ-HM-PKD"/>
-                        <outlet property="mapCrosshairView" destination="NBR-5L-eGW" id="Q07-ak-hUf"/>
                         <outlet property="mapView" destination="o4G-kI-jT1" id="XeR-Hb-GGm"/>
                         <outlet property="settingsButtonsView" destination="yJj-r2-iqh" id="PNH-YY-eVN"/>
                     </connections>
@@ -89,11 +77,6 @@
                         <action selector="tappedMap:" destination="BYZ-38-t0r" id="Wi3-1Y-Igf"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="PEi-fT-3Bz">
-                    <connections>
-                        <action selector="longPressOnMapWithSender:" destination="BYZ-38-t0r" id="0Hz-H9-sO2"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="992.79999999999995" y="27.436281859070466"/>
         </scene>

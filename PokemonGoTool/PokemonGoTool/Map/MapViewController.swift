@@ -4,7 +4,7 @@ import MapKit
 import NotificationBannerSwift
 import Cluster
 
-class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable {
     
     weak var coordinator: MainCoordinator?
     var locationManager: LocationManager!
@@ -12,7 +12,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var settingsButtonsView: UIView!
     @IBOutlet var backgroundLabel: UILabel!
-    @IBOutlet var mapCrosshairView: MapCrosshair!
     var polygon: MKPolygon?
     var allAnnotations = [PokestopPointAnnotation]()
     var geohashWindow: GeohashWindow?
@@ -21,6 +20,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
     
+    var poiSubmissionMode = false
+    var poiSubmissionAnnotation: MKPointAnnotation! = MKPointAnnotation()
+
     lazy var manager: ClusterManager = {
         let manager = ClusterManager()
         manager.delegate = self
@@ -56,6 +58,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         locationManager.delegate = self
         firebaseConnector.delegate = self
         zoomToLocationFromPushIfNeeded()
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        updatePoiSubmissionCoordinate(mapView.centerCoordinate)
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {

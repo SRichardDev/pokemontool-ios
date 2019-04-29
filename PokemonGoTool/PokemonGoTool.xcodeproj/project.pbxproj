@@ -57,7 +57,6 @@
 		2C34F1AC220B990600B3B99C /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */; };
 		2C34F1DA220E5CD500B3B99C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */; };
 		2C34F1DC220F10C300B3B99C /* MapTypeSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */; };
-		2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */; };
 		2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */; };
 		2C34F1E72210933700B3B99C /* PokestopDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */; };
 		2C34F1E9221206A000B3B99C /* PokestopDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F1E8221206A000B3B99C /* PokestopDetailsViewModel.swift */; };
@@ -93,6 +92,7 @@
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
 		2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */; };
 		2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */; };
+		2C5E5705227778B9002E00B0 /* PoiSubmissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */; };
 		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
 		2C6E7F7421FF8DD500427FBE /* SubmitMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */; };
 		2C6E7F7621FF8EBA00427FBE /* SubmitCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */; };
@@ -193,7 +193,6 @@
 		2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1D9220E5CD400B3B99C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTypeSwitchable.swift; sourceTree = "<group>"; };
-		2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCrosshair.swift; sourceTree = "<group>"; };
 		2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopDetailsViewController.swift; sourceTree = "<group>"; };
 		2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C34F1E8221206A000B3B99C /* PokestopDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
 		2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMedalViewModel.swift; sourceTree = "<group>"; };
 		2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDefines.swift; sourceTree = "<group>"; };
+		2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoiSubmissable.swift; sourceTree = "<group>"; };
 		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7321FF8DD500427FBE /* SubmitMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMapViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7521FF8EBA00427FBE /* SubmitCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCheckViewController.swift; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 				2C34F1A7220B720C00B3B99C /* ButtonsStackViewController.swift */,
 				2C34F1A9220B737E00B3B99C /* ButtonsStackViewController.storyboard */,
 				2C870DD822135C60000F2268 /* MapViewController+Extension.swift */,
-				2C34F1E2220F9ECA00B3B99C /* MapCrosshair.swift */,
+				2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */,
 				2C1AE58422638CDF00AE9C4A /* MapFilter */,
 			);
 			path = Map;
@@ -875,6 +875,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF6F9A821F2846D00610BC9 /* AppModule.swift in Sources */,
+				2C5E5705227778B9002E00B0 /* PoiSubmissable.swift in Sources */,
 				2C395A512205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift in Sources */,
 				2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */,
 				2C870DD922135C60000F2268 /* MapViewController+Extension.swift in Sources */,
@@ -954,7 +955,6 @@
 				2C1AE571225E884200AE9C4A /* AccountWelcomeViewController.swift in Sources */,
 				2C395A542205FCCB005330B8 /* RaidUserParticipateSwitchViewController.swift in Sources */,
 				2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */,
-				2C34F1E3220F9ECA00B3B99C /* MapCrosshair.swift in Sources */,
 				2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */,
 				0364D57F2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift in Sources */,
 				2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */,
