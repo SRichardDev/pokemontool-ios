@@ -19,6 +19,13 @@ struct ConstraintIdentifiers {
 extension PoiSubmissable where Self: UIViewController {
     
     func startPoiSubmission(submitClosure: @escaping () -> Void, endClosure: @escaping () -> Void) {
+        
+        let viewRegion = MKCoordinateRegion(center: mapView.centerCoordinate,
+                                            latitudinalMeters: 100,
+                                            longitudinalMeters: 100)
+        mapView.setRegion(viewRegion, animated: true)
+
+        
         poiSubmissionAnnotation.coordinate = mapView.centerCoordinate
         mapView.addAnnotation(poiSubmissionAnnotation)
         

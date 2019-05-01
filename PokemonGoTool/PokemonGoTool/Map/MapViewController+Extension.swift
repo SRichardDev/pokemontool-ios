@@ -38,7 +38,7 @@ extension MapViewController {
             self.poiSubmissionMode = true
             
             let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
-                                            subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
+                                            subtitle: "Schiebe die Karte um die Position anzupassen",
                                             style: .info)
             banner.autoDismiss = false
             banner.show()
