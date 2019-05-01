@@ -20,6 +20,8 @@ extension PoiSubmissable where Self: UIViewController {
     
     func startPoiSubmission(submitClosure: @escaping () -> Void, endClosure: @escaping () -> Void) {
         
+        tabBarController?.tabBar.isHidden = true
+        
         let viewRegion = MKCoordinateRegion(center: mapView.centerCoordinate,
                                             latitudinalMeters: 100,
                                             longitudinalMeters: 100)
@@ -59,6 +61,7 @@ extension PoiSubmissable where Self: UIViewController {
     }
     
     private func endPoiSubmission() {
+        tabBarController?.tabBar.isHidden = false
         mapView.removeAnnotation(poiSubmissionAnnotation)
         guard let stackView = view.viewWithTag(ViewTags.poiSubmissionStackView) else { return }
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in
