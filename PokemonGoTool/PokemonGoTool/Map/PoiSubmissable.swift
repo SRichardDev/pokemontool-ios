@@ -8,6 +8,14 @@ protocol PoiSubmissable {
     var poiSubmissionAnnotation: MKPointAnnotation! { get set }
 }
 
+struct ViewTags {
+    static let poiSubmissionStackView = 1337
+}
+
+struct ConstraintIdentifiers {
+    static let settingsMenuRightConstraint = "settingsMenu"
+}
+
 extension PoiSubmissable where Self: UIViewController {
     
     func startPoiSubmission(submitClosure: @escaping () -> Void, endClosure: @escaping () -> Void) {
@@ -33,20 +41,20 @@ extension PoiSubmissable where Self: UIViewController {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 15
-        stackView.tag = 1337
+        stackView.tag = ViewTags.poiSubmissionStackView
         stackView.alpha = 0
         view.addSubview(stackView)
         
-        NSLayoutConstraint.activate([view.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: -16),
-                                     view.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: 16),
-                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 25)])
-        
+        view.addSubviewAndEdgeConstraints(stackView, edges: [.left,.right,.bottom],
+                                          margins: UIEdgeInsets(top: 0, left: 16, bottom: 25, right: 16),
+                                          constrainToSafeAreaGuide: true)
+                
         UIView.animate(withDuration: 0.25, animations: { stackView.alpha = 1 })
     }
     
     private func endPoiSubmission() {
         mapView.removeAnnotation(poiSubmissionAnnotation)
-        guard let stackView = view.viewWithTag(1337) else { return }
+        guard let stackView = view.viewWithTag(ViewTags.poiSubmissionStackView) else { return }
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in
             stackView.removeFromSuperview()
         }

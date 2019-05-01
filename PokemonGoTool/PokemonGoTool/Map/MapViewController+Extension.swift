@@ -33,7 +33,9 @@ extension MapViewController {
         let newPoiButton = UIButton()
         newPoiButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
         newPoiButton.addAction { [weak self] in
+            newPoiButton.scaleIn()
             guard let self = self else { return }
+            self.poiSubmissionMode = true
             
             let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
                                             subtitle: "Benutze das Fadenkreuz um die Position zu markieren",
@@ -41,21 +43,18 @@ extension MapViewController {
             banner.autoDismiss = false
             banner.show()
             
-            self.poiSubmissionMode = true
-            self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = -75
+            self.moveMapMenuOffScreen()
             UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
             self.startPoiSubmission(submitClosure: {
+                banner.dismiss()
+                self.moveMapMenuToOrigin()
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
-                self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = 15
-                banner.dismiss()
             }, endClosure: {
-                self.view.constraints.first { $0.identifier == "settingsMenu"}?.constant = 15
-                UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
                 banner.dismiss()
+                self.moveMapMenuToOrigin()
             })
-            newPoiButton.scaleIn()
         }
         
         let changeMapTypeButton = UIButton()
@@ -86,6 +85,17 @@ extension MapViewController {
                                                 changeMapTypeButton,
                                                 locateButton,
                                                 filterButton])
+    }
+    
+    
+    private func moveMapMenuToOrigin() {
+        self.view.constraints.first { $0.identifier == ConstraintIdentifiers.settingsMenuRightConstraint}?.constant = 15
+        UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
+    }
+    
+    private func moveMapMenuOffScreen() {
+        self.view.constraints.first { $0.identifier == ConstraintIdentifiers.settingsMenuRightConstraint}?.constant = -500
+        UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
     }
     
     @IBAction func tappedMap(_ sender: UITapGestureRecognizer) {
