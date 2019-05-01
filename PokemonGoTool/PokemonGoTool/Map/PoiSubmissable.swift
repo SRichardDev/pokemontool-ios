@@ -29,15 +29,15 @@ extension PoiSubmissable where Self: UIViewController {
         poiSubmissionAnnotation.coordinate = mapView.centerCoordinate
         mapView.addAnnotation(poiSubmissionAnnotation)
         
-        let submitButton = Button()
-        submitButton.setTitle("Einreichen", for: .normal)
+        let submitButton = CircleButton(type: .custom)
+        submitButton.type = .accept
         submitButton.addAction {
             self.endPoiSubmission()
             submitClosure()
         }
         
-        let cancelButton = Button()
-        cancelButton.setTitle("Abbrechen", for: .normal)
+        let cancelButton = CircleButton(type: .custom)
+        cancelButton.type = .cancel
         cancelButton.addAction {
             self.endPoiSubmission()
             endClosure()
@@ -47,15 +47,14 @@ extension PoiSubmissable where Self: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 15
+        stackView.spacing = 40
         stackView.tag = ViewTags.poiSubmissionStackView
         stackView.alpha = 0
         view.addSubview(stackView)
         
-        view.addSubviewAndEdgeConstraints(stackView, edges: [.left,.right,.bottom],
-                                          margins: UIEdgeInsets(top: 0, left: 16, bottom: 25, right: 16),
-                                          constrainToSafeAreaGuide: true)
-                
+        view.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
+        view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 25).isActive = true
+        
         UIView.animate(withDuration: 0.25, animations: { stackView.alpha = 1 })
     }
     
