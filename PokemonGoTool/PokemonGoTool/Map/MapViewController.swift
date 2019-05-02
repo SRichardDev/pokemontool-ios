@@ -19,7 +19,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var isGeohashSelectionMode = false
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
-    
+   
+    var currentBanner: NotificationBanner? {
+        willSet {
+            currentBanner?.dismiss()
+        }
+    }
     var poiSubmissionMode = false
     var poiSubmissionAnnotation: MKPointAnnotation! = MKPointAnnotation()
 
@@ -238,8 +243,10 @@ extension MapViewController: DetailAnnotationViewDelegate {
 
 extension MapViewController: PushManagerDelegate {
     func didReceivePushNotification(with title: String, message: String, coordinate: CLLocationCoordinate2D) {
-        let banner = NotificationBanner(title: title, subtitle: message.replacingOccurrences(of: "\n", with: ", "), style: .info)
-        banner.show()
+        
+        NotificationBannerManager.shared.show(.pushNotification,
+                                              title: title,
+                                              message: message.replacingOccurrences(of: "\n", with: ", "))
         
         mapRegionFromPush = MKCoordinateRegion(center: coordinate,
                                                latitudinalMeters: 200,

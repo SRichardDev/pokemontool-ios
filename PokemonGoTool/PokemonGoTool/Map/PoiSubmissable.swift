@@ -34,6 +34,7 @@ extension PoiSubmissable where Self: UIViewController {
         let submitButton = CircleButton(type: .custom)
         submitButton.type = .accept
         submitButton.addAction {
+            submitButton.scaleIn()
             self.endPoiSubmission()
             submitClosure()
         }
@@ -41,6 +42,7 @@ extension PoiSubmissable where Self: UIViewController {
         let cancelButton = CircleButton(type: .custom)
         cancelButton.type = .cancel
         cancelButton.addAction {
+            cancelButton.scaleIn()
             self.endPoiSubmission()
             endClosure()
         }
@@ -58,6 +60,7 @@ extension PoiSubmissable where Self: UIViewController {
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 25).isActive = true
         
         UIView.animate(withDuration: 0.25, animations: { stackView.alpha = 1 })
+        
     }
     
     private func endPoiSubmission() {

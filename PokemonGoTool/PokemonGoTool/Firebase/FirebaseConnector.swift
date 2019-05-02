@@ -380,18 +380,10 @@ class FirebaseConnector {
         connectedRef.observe(.value, with: { snapshot in
             if snapshot.value as? Bool ?? false {
                 self.connectivityTimer?.invalidate()
-                let banner = NotificationBanner(title: "Vebunden zum Server",
-                                                subtitle: "Viel Spaß Trainer!",
-                                                leftView: UIImageView(image: UIImage(named: "checkmark")),
-                                                style: .success)
-                banner.show()
+                NotificationBannerManager.shared.show(.connected)
             } else {
                 self.connectivityTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { timer in
-                    let banner = NotificationBanner(title: "Keine Verbindung zum Server",
-                                                    subtitle: "Prüfe bitte deine Internetverbindung",
-                                                    leftView: UIImageView(image: UIImage(named: "cross")),
-                                                    style: .danger)
-                    banner.show()
+                    NotificationBannerManager.shared.show(.disconnected)
                 })
             }
         })

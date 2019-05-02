@@ -1,7 +1,6 @@
 
 import UIKit
 import MapKit
-import NotificationBannerSwift
 
 extension MapViewController {
     func zoomToLocationFromPushIfNeeded() {
@@ -15,10 +14,7 @@ extension MapViewController {
     private func togglePushRegistrationMode() {
         self.isGeohashSelectionMode = !self.isGeohashSelectionMode
         if self.isGeohashSelectionMode {
-            let banner = NotificationBanner(title: "Push Registrierung",
-                                            subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
-                                            style: .info)
-            banner.show()
+            NotificationBannerManager.shared.show(.pushRegistraiton)
         }
     }
     
@@ -37,22 +33,18 @@ extension MapViewController {
             guard let self = self else { return }
             self.poiSubmissionMode = true
             
-            let banner = NotificationBanner(title: "Pokéstop / Arena hinzufügen",
-                                            subtitle: "Schiebe die Karte um die Position anzupassen",
-                                            style: .info)
-            banner.autoDismiss = false
-            banner.show()
+            NotificationBannerManager.shared.show(.addPoi)
             
             self.moveMapMenuOffScreen()
             UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
             self.startPoiSubmission(submitClosure: {
-                banner.dismiss()
+                NotificationBannerManager.shared.dismiss()
                 self.moveMapMenuToOrigin()
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
             }, endClosure: {
-                banner.dismiss()
+                NotificationBannerManager.shared.dismiss()
                 self.moveMapMenuToOrigin()
             })
         }

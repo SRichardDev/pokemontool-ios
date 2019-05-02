@@ -21,6 +21,7 @@
 		2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */; };
 		2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */; };
 		2C0733582279BA6000C45028 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0733572279BA6000C45028 /* CircleButton.swift */; };
+		2C07335A227B670300C45028 /* NotificationBannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C073359227B670300C45028 /* NotificationBannerManager.swift */; };
 		2C0B5B6F2255387500620F4A /* AccountTeamAndLevelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */; };
 		2C0B5B712255399300620F4A /* AccountTeamAndLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */; };
 		2C0B5B7322553B2500620F4A /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7222553B2500620F4A /* AccountViewModel.swift */; };
@@ -156,6 +157,7 @@
 		2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsInfoViewController.swift; sourceTree = "<group>"; };
 		2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsInfoViewController.storyboard; sourceTree = "<group>"; };
 		2C0733572279BA6000C45028 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		2C073359227B670300C45028 /* NotificationBannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerManager.swift; sourceTree = "<group>"; };
 		2C0B5B6E2255387500620F4A /* AccountTeamAndLevelViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountTeamAndLevelViewController.storyboard; sourceTree = "<group>"; };
 		2C0B5B702255399300620F4A /* AccountTeamAndLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTeamAndLevelViewController.swift; sourceTree = "<group>"; };
 		2C0B5B7222553B2500620F4A /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */,
 				2C0733572279BA6000C45028 /* CircleButton.swift */,
 				2C1AE58422638CDF00AE9C4A /* MapFilter */,
+				2C073359227B670300C45028 /* NotificationBannerManager.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 				2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */,
 				0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */,
 				2C6E7F8122011ED900427FBE /* Label.swift in Sources */,
+				2C07335A227B670300C45028 /* NotificationBannerManager.swift in Sources */,
 				2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */,
 				2C1AE56F225D198800AE9C4A /* SignUpViewModel.swift in Sources */,
 				2C1AE575225FBB0000AE9C4A /* PokestopQuestViewController.swift in Sources */,
