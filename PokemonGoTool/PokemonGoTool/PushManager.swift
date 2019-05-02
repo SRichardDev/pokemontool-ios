@@ -3,14 +3,24 @@ import Foundation
 import UserNotifications
 import MapKit
 
+struct PushNotification {
+    let title: String
+    let message: String
+    let coordinate: CLLocationCoordinate2D
+}
+
 protocol PushManagerDelegate: class {
-    func didReceivePushNotification(with title: String, message: String, coordinate: CLLocationCoordinate2D)
+    func didReceivePush()
 }
 
 class PushManager {
     
+    static let shared = PushManager()
     weak var delegate: PushManagerDelegate?
-
+    var latestPushNotification: PushNotification?
+    
+    private init() {}
+    
     func parsePushNotification(response: UNNotificationResponse) {
         let title = response.notification.request.content.title
         let message = response.notification.request.content.body
@@ -21,6 +31,7 @@ class PushManager {
         let coordiante = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
                                                 longitude:CLLocationDegrees(longitude.double))
 
-        delegate?.didReceivePushNotification(with: title, message: message, coordinate: coordiante)
+        latestPushNotification = PushNotification(title: title, message: message, coordinate: coordiante)
+        delegate?.didReceivePush()
     }
 }

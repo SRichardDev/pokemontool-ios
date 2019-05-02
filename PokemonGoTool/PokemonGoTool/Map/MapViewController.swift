@@ -33,13 +33,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coordinator?.appModule.pushManager.delegate = self
+        PushManager.shared.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.mapType = .mutedStandard
         zoomToUserLocation()
         setupMapButtonsMenu()
         mapView.showsPointsOfInterest = false
+        
+        displayLocationFromPush()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,20 +238,22 @@ extension MapViewController: DetailAnnotationViewDelegate {
 }
 
 extension MapViewController: PushManagerDelegate {
-    func didReceivePushNotification(with title: String, message: String, coordinate: CLLocationCoordinate2D) {
+    
+    func didReceivePush() {
+        displayLocationFromPush()
+    }
+    
+    func displayLocationFromPush() {
+        guard let push = PushManager.shared.latestPushNotification else { return }
         
         NotificationBannerManager.shared.show(.pushNotification,
-                                              title: title,
-                                              message: message.replacingOccurrences(of: "\n", with: ", "))
+                                              title: push.title,
+                                              message: push.message.replacingOccurrences(of: "\n", with: ", "))
         
-        mapRegionFromPush = MKCoordinateRegion(center: coordinate,
-                                               latitudinalMeters: 200,
-                                               longitudinalMeters: 200)
-        mapView.setRegion(mapRegionFromPush!, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.mapRegionFromPush = nil
-        }
+        let region = MKCoordinateRegion(center: push.coordinate,
+                                        latitudinalMeters: 200,
+                                        longitudinalMeters: 200)
+        mapView.setRegion(region, animated: true)
     }
 }
 
