@@ -1,7 +1,6 @@
 
 import UIKit
 import MapKit
-import NotificationBannerSwift
 import Cluster
 
 class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable {
@@ -19,12 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var isGeohashSelectionMode = false
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
-   
-    var currentBanner: NotificationBanner? {
-        willSet {
-            currentBanner?.dismiss()
-        }
-    }
+
     var poiSubmissionMode = false
     var poiSubmissionAnnotation: MKPointAnnotation! = MKPointAnnotation()
 

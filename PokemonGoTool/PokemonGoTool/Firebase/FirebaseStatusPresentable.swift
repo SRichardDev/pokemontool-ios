@@ -1,6 +1,5 @@
 
 import UIKit
-import NotificationBannerSwift
 
 extension FirebaseStatusPresentable where Self: UIViewController {
     

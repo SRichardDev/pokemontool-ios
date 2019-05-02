@@ -3,7 +3,6 @@ import Foundation
 import Firebase
 import FirebaseMessaging
 import CodableFirebase
-import NotificationBannerSwift
 
 class FirebaseConnector {
     

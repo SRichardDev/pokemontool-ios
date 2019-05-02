@@ -25,7 +25,7 @@ class NotificationBannerManager {
     func show(_ type: NotificationBannerType, title: String? = nil, message: String? = nil) {
         
         switch type {
-            
+
         case .connected:
             currentBanner = NotificationBanner(title: "Vebunden zum Server",
                                                subtitle: "Viel Spaß Trainer!",

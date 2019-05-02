@@ -1,7 +1,6 @@
 
 import UIKit
 import Firebase
-import NotificationBannerSwift
 
 class AccountViewController: UIViewController, StoryboardInitialViewController, FirebaseStatusPresentable {
     
