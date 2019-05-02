@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ikQ-m9-6Fj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ikQ-m9-6Fj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +19,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb7-Ah-N8A" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="50" y="170" width="275" height="347"/>
+                                <rect key="frame" x="87.5" y="233.5" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="2Wl-uQ-61l"/>
+                                    <constraint firstAttribute="width" constant="200" id="BdP-5G-DDD"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballTrianglePath"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -31,10 +35,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="91T-RN-gJ6" firstAttribute="bottom" secondItem="cb7-Ah-N8A" secondAttribute="bottom" constant="150" id="EpC-nK-JB0"/>
-                            <constraint firstItem="cb7-Ah-N8A" firstAttribute="top" secondItem="91T-RN-gJ6" secondAttribute="top" constant="150" id="IhN-Ll-NcK"/>
-                            <constraint firstItem="91T-RN-gJ6" firstAttribute="trailing" secondItem="cb7-Ah-N8A" secondAttribute="trailing" constant="50" id="gin-EI-9p2"/>
-                            <constraint firstItem="cb7-Ah-N8A" firstAttribute="leading" secondItem="91T-RN-gJ6" secondAttribute="leading" constant="50" id="qL0-4D-99Y"/>
+                            <constraint firstItem="cb7-Ah-N8A" firstAttribute="centerY" secondItem="I0H-bU-aDo" secondAttribute="centerY" id="Z3U-vY-whY"/>
+                            <constraint firstItem="cb7-Ah-N8A" firstAttribute="centerX" secondItem="I0H-bU-aDo" secondAttribute="centerX" id="sRi-10-xAs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="91T-RN-gJ6"/>
                     </view>
