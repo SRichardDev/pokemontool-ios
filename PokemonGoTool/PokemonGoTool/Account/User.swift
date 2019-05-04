@@ -111,7 +111,7 @@ class User: FirebaseCodable, Equatable {
         guard trainerName != name else { return }
         trainerName = name
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["trainerName" : name]
+        let data = [DatabaseKeys.trainerName : name]
         usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update trainer name to database")
     }
@@ -120,7 +120,7 @@ class User: FirebaseCodable, Equatable {
         guard self.team != team else { return }
         self.team = team
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["team" : team.rawValue]
+        let data = [DatabaseKeys.team : team.rawValue]
         usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update team")
     }
@@ -129,7 +129,7 @@ class User: FirebaseCodable, Equatable {
         guard self.level != level else { return }
         self.level = level
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["level" : level]
+        let data = [DatabaseKeys.level : level]
         usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update level")
     }
@@ -141,40 +141,66 @@ class User: FirebaseCodable, Equatable {
     func saveSubmittedPokestopId(_ id: PokestopId, for geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [id : geohash]
-        usersRef.child(userId).child("submittedPokestops").updateChildValues(data)
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.submittedPokestops)
+            .updateChildValues(data)
         print("✅👨🏻 Did add PokestopId to user")
     }
     
     func saveSubmittedArena(_ id: ArenaId, for geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [id : geohash]
-        usersRef.child(userId).child("submittedArenas").updateChildValues(data)
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.submittedArenas)
+            .updateChildValues(data)
         print("✅👨🏻 Did add ArenaId to user")
     }
     
     func updateSubmittedQuestCount() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["submittedQuests" : (submittedQuests ?? 0) + 1]
-        usersRef.child(userId).updateChildValues(data)
+        let data = [DatabaseKeys.submittedQuests : (submittedQuests ?? 0) + 1]
+        usersRef
+            .child(userId)
+            .updateChildValues(data)
         print("✅👨🏻 Did update submitted quest count to user")
     }
     
     func updateSubmittedRaidCount() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = ["submittedRaids" : (submittedRaids ?? 0) + 1]
-        usersRef.child(userId).updateChildValues(data)
+        let data = [DatabaseKeys.submittedRaids : (submittedRaids ?? 0) + 1]
+        usersRef
+            .child(userId)
+            .updateChildValues(data)
         print("✅👨🏻 Did update submitted raid count to user")
     }
     
     func addGoldArena(_ id: ArenaId, for geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [id : geohash]
-        usersRef.child(userId).child("goldArenas").updateChildValues(data)
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.goldArenas)
+            .updateChildValues(data)
     }
     
     func removeGoldArena(_ id: ArenaId) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        usersRef.child(userId).child("goldArenas").child(id).removeValue()
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.goldArenas)
+            .child(id)
+            .removeValue()
+    }
+    
+    func addPokestopGeohashPushSubscription(_ geohash: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [geohash : ""]
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.subscribedGeohashPokestops)
+            .updateChildValues(data)
     }
     
     class func load(completion: @escaping (User?) -> ()) {

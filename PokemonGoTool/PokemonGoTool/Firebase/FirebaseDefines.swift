@@ -16,6 +16,14 @@ struct DatabaseKeys {
     static let participants = "participants"
     static let chat = "chat"
     static let trainerName = "trainerName"
+    static let goldArenas = "goldArenas"
+    static let submittedQuests = "submittedQuests"
+    static let submittedRaids = "submittedRaids"
+    static let submittedArenas = "submittedArenas"
+    static let submittedPokestops = "submittedPokestops"
+    static let team = "team"
+    static let level = "level"
+    static let subscribedGeohashPokestops = "subscribedGeohashPokestops"
 }
 
 protocol FirebaseDelegate: class {

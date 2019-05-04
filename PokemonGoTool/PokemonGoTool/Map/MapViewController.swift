@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         zoomToUserLocation()
         setupMapButtonsMenu()
         mapView.showsPointsOfInterest = false
-        displayLocationFromPush()
+        displayLocationFromPushIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -239,10 +239,10 @@ extension MapViewController: DetailAnnotationViewDelegate {
 extension MapViewController: PushManagerDelegate {
     
     func didReceivePush() {
-        displayLocationFromPush()
+        displayLocationFromPushIfNeeded()
     }
     
-    func displayLocationFromPush() {
+    func displayLocationFromPushIfNeeded() {
         guard let push = PushManager.shared.latestPushNotification else { return }
         
         NotificationBannerManager.shared.show(.pushNotification,
