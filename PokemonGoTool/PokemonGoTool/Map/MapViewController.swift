@@ -33,6 +33,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        firebaseConnector.delegate = self
         PushManager.shared.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
@@ -40,7 +42,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         zoomToUserLocation()
         setupMapButtonsMenu()
         mapView.showsPointsOfInterest = false
-        
         displayLocationFromPush()
     }
     
@@ -56,8 +57,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        locationManager.delegate = self
-        firebaseConnector.delegate = self
         zoomToLocationFromPushIfNeeded()
     }
     

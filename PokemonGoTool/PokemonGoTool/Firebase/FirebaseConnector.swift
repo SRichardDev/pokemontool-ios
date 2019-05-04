@@ -119,26 +119,6 @@ class FirebaseConnector {
         return createId.key!
     }
     
-    private func saveToDatabase(data: [String: Any], geohash: String, id: String? = nil) {
-        if isSignedIn {
-            if let id = id {
-                pokestopsRef
-                    .child(geohash)
-                    .child(id)
-                    .child(DatabaseKeys.quest)
-                    .setValue(data)
-            } else {
-                pokestopsRef
-                    .child(geohash)
-                    .childByAutoId()
-                    .setValue(data)
-            }
-            print("🔥✅ Did write to database")
-        } else {
-            print("🔥❌ Not authenticated, can not write to database")
-        }
-    }
-    
     func loadPokestops(for geohash: String) {
         if AppSettings.filterSettingsChanged {
             pokestops.removeAll()

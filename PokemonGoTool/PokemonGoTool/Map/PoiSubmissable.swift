@@ -60,7 +60,6 @@ extension PoiSubmissable where Self: UIViewController {
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 25).isActive = true
         
         UIView.animate(withDuration: 0.25, animations: { stackView.alpha = 1 })
-        
     }
     
     private func endPoiSubmission() {

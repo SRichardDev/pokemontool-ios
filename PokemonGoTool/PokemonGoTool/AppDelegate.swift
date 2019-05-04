@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         Messaging.messaging().delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
         coordinator = MainCoordinator(appModule: appModule, window: window!)
@@ -88,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {}
     func applicationWillEnterForeground(_ application: UIApplication) {}
     func applicationDidBecomeActive(_ application: UIApplication) {
-//        UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = -1
     }
     func applicationWillTerminate(_ application: UIApplication) {}
 }
