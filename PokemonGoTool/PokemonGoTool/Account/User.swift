@@ -194,12 +194,22 @@ class User: FirebaseCodable, Equatable {
             .removeValue()
     }
     
-    func addPokestopGeohashPushSubscription(_ geohash: String) {
+    func addGeohashForPushSubscription(for poiType: PoiType, geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [geohash : ""]
+        
+        let key: String
+        
+        switch poiType {
+        case .pokestop:
+            key = DatabaseKeys.subscribedGeohashPokestops
+        case .arena:
+            key = DatabaseKeys.subscribedGeohashPokestops
+        }
+        
         usersRef
             .child(userId)
-            .child(DatabaseKeys.subscribedGeohashPokestops)
+            .child(key)
             .updateChildValues(data)
     }
     

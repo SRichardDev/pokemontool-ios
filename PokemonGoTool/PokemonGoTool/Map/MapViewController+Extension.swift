@@ -14,7 +14,9 @@ extension MapViewController {
     private func togglePushRegistrationMode() {
         self.isGeohashSelectionMode = !self.isGeohashSelectionMode
         if self.isGeohashSelectionMode {
-            NotificationBannerManager.shared.show(.pushRegistraiton)
+            NotificationBannerManager.shared.show(.pushRegistration)
+        } else {
+            NotificationBannerManager.shared.dismiss()
         }
     }
     
@@ -35,17 +37,17 @@ extension MapViewController {
             
             NotificationBannerManager.shared.show(.addPoi)
             
-            self.moveMapMenuOffScreen()
+            self.moveMapMenu(-500)
             UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
             self.startPoiSubmission(submitClosure: {
                 NotificationBannerManager.shared.dismiss()
-                self.moveMapMenuToOrigin()
+                self.moveMapMenu(15)
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
             }, endClosure: {
                 NotificationBannerManager.shared.dismiss()
-                self.moveMapMenuToOrigin()
+                self.moveMapMenu(15)
             })
         }
         
@@ -80,13 +82,8 @@ extension MapViewController {
     }
     
     
-    private func moveMapMenuToOrigin() {
-        self.view.constraints.first { $0.identifier == ConstraintIdentifiers.settingsMenuRightConstraint}?.constant = 15
-        UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
-    }
-    
-    private func moveMapMenuOffScreen() {
-        self.view.constraints.first { $0.identifier == ConstraintIdentifiers.settingsMenuRightConstraint}?.constant = -500
+    private func moveMapMenu(_ constant: CGFloat) {
+        self.view.constraints.first { $0.identifier == ConstraintIdentifiers.settingsMenuRightConstraint}?.constant = constant
         UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
     }
     

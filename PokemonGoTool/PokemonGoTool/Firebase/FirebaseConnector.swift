@@ -188,7 +188,7 @@ class FirebaseConnector {
             .child(DatabaseKeys.registeredUser)
             .updateChildValues(data)
         
-        user?.addPokestopGeohashPushSubscription(geohash)
+//        user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
         
         let geohashRegionArena = Database.database().reference(withPath: "arenas/\(geohash)")
         geohashRegionArena

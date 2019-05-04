@@ -24,6 +24,7 @@ struct DatabaseKeys {
     static let team = "team"
     static let level = "level"
     static let subscribedGeohashPokestops = "subscribedGeohashPokestops"
+    static let subscribedGeohashArenas = "subscribedGeohashArenas"
 }
 
 protocol FirebaseDelegate: class {
@@ -63,4 +64,9 @@ enum AuthStatus {
     case networkError
     case missingEmail
     case unknown(error: String)
+}
+
+enum PoiType {
+    case pokestop
+    case arena
 }

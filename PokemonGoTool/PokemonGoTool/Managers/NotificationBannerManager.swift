@@ -7,7 +7,7 @@ enum NotificationBannerType {
     case firebaseAuthSuccess
     case firebaseAuthFailure
     case addPoi
-    case pushRegistraiton
+    case pushRegistration
     case pushNotification
 }
 
@@ -50,10 +50,12 @@ class NotificationBannerManager {
                                                style: .info)
             currentBanner?.autoDismiss = false
             currentBanner?.haptic = .none
-        case .pushRegistraiton:
+        case .pushRegistration:
             currentBanner = NotificationBanner(title: "Push Registrierung",
                                                subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
                                                style: .info)
+            currentBanner?.autoDismiss = false
+            currentBanner?.haptic = .none
         case .pushNotification:
             currentBanner = NotificationBanner(title: title,
                                                subtitle: message,
