@@ -14,7 +14,7 @@ enum NotificationBannerType {
 class NotificationBannerManager {
     
     static let shared = NotificationBannerManager()
-    var currentBanner: NotificationBanner? {
+    private var currentBanner: NotificationBanner? {
         willSet {
             currentBanner?.dismiss()
         }
