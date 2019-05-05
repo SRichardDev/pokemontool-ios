@@ -3,7 +3,7 @@ import UIKit
 import MapKit
 import Cluster
 
-class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable, BottomMenuShowable, GeohashRegisterable {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable, BottomMenuShowable, GeohashRegisterable, MapRegionSetable {
     
     weak var coordinator: MainCoordinator?
     var locationManager: LocationManager!
@@ -19,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
 
-    var poiSubmissionMode = false
+    var isPoiSubmissionMode = false
     var poiSubmissionAnnotation: MKPointAnnotation! = MKPointAnnotation()
 
     lazy var manager: ClusterManager = {
@@ -39,9 +39,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.mapType = .mutedStandard
+        mapView.showsPointsOfInterest = false
         zoomToUserLocation()
         setupMapButtonsMenu()
-        mapView.showsPointsOfInterest = false
         displayLocationFromPushIfNeeded()
     }
     
@@ -65,6 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        guard !isGeohashSelectionMode else { return }
         loadData()
     }
     
@@ -110,12 +111,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: polyline)
-            polylineRenderer.strokeColor = isGeohashSelectionMode ? UIColor.red.withAlphaComponent(0.5) : UIColor.blue.withAlphaComponent(0.1)
+            polylineRenderer.strokeColor = UIColor.red.withAlphaComponent(0.5)
             polylineRenderer.lineWidth = 1
             return polylineRenderer
         } else {
             let renderer = MKPolygonRenderer(polygon: polygon!)
-            renderer.fillColor = isGeohashSelectionMode ? UIColor.orange.withAlphaComponent(0.2) : UIColor.green.withAlphaComponent(0.2)
+            renderer.fillColor = UIColor.green.withAlphaComponent(0.2)
             return renderer
         }
     }
@@ -240,11 +241,7 @@ extension MapViewController: PushManagerDelegate {
         NotificationBannerManager.shared.show(.pushNotification,
                                               title: push.title,
                                               message: push.message.replacingOccurrences(of: "\n", with: ", "))
-        
-        let region = MKCoordinateRegion(center: push.coordinate,
-                                        latitudinalMeters: 200,
-                                        longitudinalMeters: 200)
-        mapView.setRegion(region, animated: true)
+        setMapRegion(distance: 200)
     }
 }
 

@@ -69,4 +69,15 @@ enum AuthStatus {
 enum PoiType {
     case pokestop
     case arena
+    
+    var databaseKey: String {
+        get {
+            switch self {
+            case .pokestop:
+                return DatabaseKeys.subscribedGeohashPokestops
+            case .arena:
+                return DatabaseKeys.subscribedGeohashPokestops
+            }
+        }
+    }
 }

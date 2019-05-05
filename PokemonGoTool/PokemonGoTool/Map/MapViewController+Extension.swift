@@ -10,50 +10,46 @@ extension MapViewController {
             self.mapRegionFromPush = nil
         }
     }
-    
-    private func togglePushRegistrationMode() {
-        self.isGeohashSelectionMode = !self.isGeohashSelectionMode
-        if self.isGeohashSelectionMode {
-            NotificationBannerManager.shared.show(.pushRegistration)
-            
-            moveMapMenu(ConstraintConstants.mapMenuOffScreen)
-
-            guard let user = firebaseConnector.user else { return }
-            guard let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted() else {return}
-            startGeohashRegistration(with: subscribedGeohashPokestops)
-            
-        } else {
-            endGeohashRegistration()
-            moveMapMenu(ConstraintConstants.mapMenuOrigin)
-            NotificationBannerManager.shared.dismiss()
-        }
-    }
-    
+        
     func setupMapButtonsMenu() {
         let registerPushGeohashButton = UIButton()
         registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
         registerPushGeohashButton.addAction { [weak self] in
-            self?.togglePushRegistrationMode()
+            guard let self = self else { fatalError() }
             registerPushGeohashButton.scaleIn()
+            
+            guard let user = self.firebaseConnector.user else { return }
+            self.isGeohashSelectionMode = true
+            let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted()
+            NotificationBannerManager.shared.show(.pushRegistration)
+            self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
+            self.startGeohashRegistration(with: subscribedGeohashPokestops, submitClosure: {
+                
+            }, endClosure: { [weak self] in
+                guard let self = self else { fatalError() }
+                self.isGeohashSelectionMode = false
+                self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
+                NotificationBannerManager.shared.dismiss()
+            })
         }
         
         let newPoiButton = UIButton()
         newPoiButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
         newPoiButton.addAction { [weak self] in
             newPoiButton.scaleIn()
-            guard let self = self else { return }
-            self.poiSubmissionMode = true
-            
+            guard let self = self else { fatalError() }
+            self.isPoiSubmissionMode = true
             NotificationBannerManager.shared.show(.addPoi)
-            
             self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
-            self.startPoiSubmission(submitClosure: {
+            self.startPoiSubmission(submitClosure: { [weak self] in
+                guard let self = self else { fatalError() }
                 NotificationBannerManager.shared.dismiss()
                 self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
-            }, endClosure: {
+            }, endClosure: { [weak self] in
+                guard let self = self else { fatalError() }
                 NotificationBannerManager.shared.dismiss()
                 self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
             })
@@ -100,8 +96,8 @@ extension MapViewController {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
             let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-            firebaseConnector.subscribeForPush(for: geohash)
             addPolyLine(for: Geohash.geohashbox(geohash))
+            firebaseConnector.subscribeForPush(for: geohash)
         }
     }
     

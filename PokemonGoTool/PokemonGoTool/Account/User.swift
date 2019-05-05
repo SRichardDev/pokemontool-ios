@@ -203,20 +203,18 @@ class User: FirebaseCodable, Equatable {
     func addGeohashForPushSubscription(for poiType: PoiType, geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [geohash : ""]
-        
-        let key: String
-        
-        switch poiType {
-        case .pokestop:
-            key = DatabaseKeys.subscribedGeohashPokestops
-        case .arena:
-            key = DatabaseKeys.subscribedGeohashPokestops
-        }
-        
         usersRef
             .child(userId)
-            .child(key)
+            .child(poiType.databaseKey)
             .updateChildValues(data)
+    }
+    
+    func removeGeohashForPushSubsription(for poiType: PoiType, geohash: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        usersRef
+            .child(userId)
+            .child(poiType.databaseKey)
+            .removeValue()
     }
     
     class func load(completion: @escaping (User?) -> ()) {

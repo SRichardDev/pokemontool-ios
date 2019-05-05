@@ -24,7 +24,7 @@ extension UIControl {
         let spring = CASpringAnimation(keyPath: "transform.scale")
         spring.damping = 30.0
         spring.fromValue = 1
-        spring.toValue = 1.2
+        spring.toValue = 0.7
         spring.duration = 0.125
         spring.autoreverses = true
         self.layer.add(spring, forKey: "scale")
