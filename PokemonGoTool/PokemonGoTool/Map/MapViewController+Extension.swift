@@ -15,7 +15,16 @@ extension MapViewController {
         self.isGeohashSelectionMode = !self.isGeohashSelectionMode
         if self.isGeohashSelectionMode {
             NotificationBannerManager.shared.show(.pushRegistration)
+            
+            moveMapMenu(ConstraintConstants.mapMenuOffScreen)
+
+            guard let user = firebaseConnector.user else { return }
+            guard let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted() else {return}
+            startGeohashRegistration(with: subscribedGeohashPokestops)
+            
         } else {
+            endGeohashRegistration()
+            moveMapMenu(ConstraintConstants.mapMenuOrigin)
             NotificationBannerManager.shared.dismiss()
         }
     }
@@ -37,17 +46,16 @@ extension MapViewController {
             
             NotificationBannerManager.shared.show(.addPoi)
             
-            self.moveMapMenu(-500)
-            UIView.animate(withDuration: 0.25, animations: {self.view.layoutIfNeeded()})
+            self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
             self.startPoiSubmission(submitClosure: {
                 NotificationBannerManager.shared.dismiss()
-                self.moveMapMenu(15)
+                self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
             }, endClosure: {
                 NotificationBannerManager.shared.dismiss()
-                self.moveMapMenu(15)
+                self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
             })
         }
         

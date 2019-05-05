@@ -3,7 +3,7 @@ import UIKit
 import MapKit
 import Cluster
 
-class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable, BottomMenuShowable, GeohashRegisterable {
     
     weak var coordinator: MainCoordinator?
     var locationManager: LocationManager!
@@ -138,14 +138,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 }
             }
         }
-    }
-    
-    func addPolyLine(for geohashBox: GeohashBox?) {
-        guard let geohashBox = geohashBox else { return }
-        let polyLine = MKPolyline.polyline(for: geohashBox)
-        let polygon = MKPolygon.polygon(for: geohashBox)
-        self.polygon = polygon
-        mapView.addOverlay(polyLine)
     }
 }
 

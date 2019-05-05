@@ -65,7 +65,9 @@ class User: FirebaseCodable, Equatable {
     var goldArenas: [ArenaId: String]?
     var submittedRaids: Int?
     var submittedQuests: Int?
-    
+    var subscribedGeohashPokestops: [String: String]?
+    var subscribedGeohashArenas: [String: String]?
+
     var teamName: String? {
         get {
             if let team = team {
@@ -92,6 +94,8 @@ class User: FirebaseCodable, Equatable {
          goldArenas: [ArenaId: String]? = nil,
          submittedRaids: Int? = nil,
          submittedQuests: Int? = nil,
+         subscribedGeohashPokestops: [String: String]? = nil,
+         subscribedGeohashArenas: [String: String]? = nil,
          notificationToken: String? = nil) {
         
         self.id = id
@@ -104,6 +108,8 @@ class User: FirebaseCodable, Equatable {
         self.goldArenas = goldArenas
         self.submittedRaids = submittedRaids
         self.submittedQuests = submittedQuests
+        self.subscribedGeohashPokestops = subscribedGeohashPokestops
+        self.subscribedGeohashArenas = subscribedGeohashArenas
         self.notificationToken = notificationToken
     }
     
