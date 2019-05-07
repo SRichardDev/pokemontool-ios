@@ -241,7 +241,7 @@ extension MapViewController: PushManagerDelegate {
         NotificationBannerManager.shared.show(.pushNotification,
                                               title: push.title,
                                               message: push.message.replacingOccurrences(of: "\n", with: ", "))
-        setMapRegion(distance: 200)
+        setMapRegion(distance: 200, coordinate: push.coordinate)
     }
 }
 
