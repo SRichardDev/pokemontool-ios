@@ -18,22 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mab-DR-hKV">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mab-DR-hKV" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gold Arena:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgB-cx-C8J" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AZp-xG-Yty">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gold Arena:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgB-cx-C8J" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="4.5" width="318" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gkt-31-svq">
+                                                <rect key="frame" x="326" y="0.0" width="51" height="29"/>
+                                                <connections>
+                                                    <action selector="goldArenaSwitchChanged:" destination="Hh8-5f-2Is" eventType="valueChanged" id="Sbp-KG-Z6m"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speichere dir hier deine Gold Arena ab" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyp-nM-ppo" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="29.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufL-zd-lZo">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="29.5"/>
-                                        <state key="normal" image="star"/>
-                                        <connections>
-                                            <action selector="didTapGoldArena:" destination="Hh8-5f-2Is" eventType="touchUpInside" id="RYx-Zb-EZR"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koordinaten:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmG-2j-a1g" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88.5" width="375" height="29"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -84,6 +99,7 @@
                     <connections>
                         <outlet property="coordinateLabel" destination="84X-aY-5Iq" id="lQn-bv-vrn"/>
                         <outlet property="coordinateTitleLabel" destination="xmG-2j-a1g" id="ovD-xT-dmi"/>
+                        <outlet property="goldArenaSwitch" destination="Gkt-31-svq" id="DVo-ga-en2"/>
                         <outlet property="submitterLabel" destination="tPK-XS-Kt6" id="IxZ-ks-WWf"/>
                         <outlet property="submitterTitleLabel" destination="0Jn-BI-UKG" id="9YZ-Bh-uH4"/>
                     </connections>
@@ -93,7 +109,4 @@
             <point key="canvasLocation" x="62" y="199"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="star" width="31" height="32"/>
-    </resources>
 </document>

@@ -75,6 +75,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             restTimeViewController.updateTimeLeft(timeLeft)
         case .hatchTimeLeftChanged(let timeLeft):
             restTimeViewController.updateHatchTimeLeft(timeLeft)
+        case .goldArenaChanged(let isGold):
+            headerViewController.updateArenaImage(isGold: isGold)
         }
     }
 }

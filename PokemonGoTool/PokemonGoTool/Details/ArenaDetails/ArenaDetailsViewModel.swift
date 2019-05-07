@@ -7,6 +7,7 @@ enum ArenaDetailsUpdateType {
     case meetupChanged
     case timeLeftChanged(_ timeLeft: String)
     case hatchTimeLeftChanged(_ timeLeft: String)
+    case goldArenaChanged(isGold: Bool)
 }
 
 protocol ArenaDetailsDelegate: class {
@@ -90,6 +91,12 @@ class ArenaDetailsViewModel {
         }
     }
     
+    var isGoldArena: Bool {
+        get {
+            return arena.isGoldArena ?? false
+        }
+    }
+    
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
@@ -124,13 +131,15 @@ class ArenaDetailsViewModel {
         }
     }
     
-    func toggleGoldArena() {
-        if arena.isGoldArena ?? false {
-            firebaseConnector.user?.removeGoldArena(arena.id)
-        } else {
+    func changeGoldArena(isGold: Bool) {
+        if isGold {
             firebaseConnector.user?.addGoldArena(arena.id, for: arena.geohash)
+        } else {
+            firebaseConnector.user?.removeGoldArena(arena.id)
         }
-        firebaseConnector.loadArenas(for: arena.geohash)
+        arena.isGoldArena = isGold
+        firebaseConnector.updateArena(arena)
+        delegate?.update(of: .goldArenaChanged(isGold: isGold))
     }
     
     func startHatchTimer() { 

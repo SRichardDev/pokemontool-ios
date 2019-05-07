@@ -370,6 +370,11 @@ class FirebaseConnector {
         })
     }
     
+    func updateArena(_ arena: Arena) {
+        self.arenas[arena.id] = arena
+        self.delegate?.didUpdateArena(arena: arena)
+    }
+    
     /// DEBUG
     func addQuest(_ data: [String : String]) {
         let quests = Database.database().reference(withPath: DatabaseKeys.quests)
