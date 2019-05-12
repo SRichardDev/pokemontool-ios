@@ -101,7 +101,7 @@ extension MapViewController {
             
             if foundOverlays.count > 0 {
                 mapView.removeOverlays(foundOverlays)
-                firebaseConnector.user?.removeGeohashForPushSubsription(for: .pokestop, geohash: tappedGeohash)
+                firebaseConnector.unsubscribeForPush(for: tappedGeohash)
             } else {
                 addPolyLine(for: Geohash.geohashbox(tappedGeohash))
                 firebaseConnector.subscribeForPush(for: tappedGeohash)

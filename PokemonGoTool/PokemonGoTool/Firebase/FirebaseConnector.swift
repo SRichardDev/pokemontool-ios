@@ -183,17 +183,35 @@ class FirebaseConnector {
         guard let notificationToken = user?.notificationToken else { return }
         let data = [notificationToken : userID]
         
-        let geohashRegionPokestop = Database.database().reference(withPath: "pokestops/\(geohash)")
-        geohashRegionPokestop
+        pokestopsRef
+            .child(geohash)
             .child(DatabaseKeys.registeredUser)
             .updateChildValues(data)
         
-        let geohashRegionArena = Database.database().reference(withPath: "arenas/\(geohash)")
-        geohashRegionArena
+        arenasRef
+            .child(geohash)
             .child(DatabaseKeys.registeredUser)
             .updateChildValues(data)
         
         user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
+    }
+    
+    func unsubscribeForPush(for geohash: String) {
+        guard let notificationToken = user?.notificationToken else { return }
+        
+        pokestopsRef
+            .child(geohash)
+            .child(DatabaseKeys.registeredUser)
+            .child(notificationToken)
+            .removeValue()
+        
+        arenasRef
+            .child(geohash)
+            .child(DatabaseKeys.registeredUser)
+            .child(notificationToken)
+            .removeValue()
+        
+        user?.removeGeohashForPushSubsription(for: .pokestop, geohash: geohash)
     }
     
     func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {
