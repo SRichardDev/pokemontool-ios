@@ -214,6 +214,7 @@ class User: FirebaseCodable, Equatable {
         usersRef
             .child(userId)
             .child(poiType.databaseKey)
+            .child(geohash)
             .removeValue()
     }
     

@@ -95,9 +95,17 @@ extension MapViewController {
         if isGeohashSelectionMode {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let geohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-            addPolyLine(for: Geohash.geohashbox(geohash))
-            firebaseConnector.subscribeForPush(for: geohash)
+            let tappedGeohash = Geohash.encode(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+            
+            let foundOverlays = mapView.overlays.filter({$0.title == tappedGeohash})
+            
+            if foundOverlays.count > 0 {
+                mapView.removeOverlays(foundOverlays)
+                firebaseConnector.user?.removeGeohashForPushSubsription(for: .pokestop, geohash: tappedGeohash)
+            } else {
+                addPolyLine(for: Geohash.geohashbox(tappedGeohash))
+                firebaseConnector.subscribeForPush(for: tappedGeohash)
+            }
         }
     }
     

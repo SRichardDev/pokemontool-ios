@@ -7,10 +7,10 @@ protocol MapRegionSetable {
 
 extension MapRegionSetable {
     
-    func setMapRegion(distance: Int, coordinate: CLLocationCoordinate2D? = nil) {
+    func setMapRegion(distance: Int, coordinate: CLLocationCoordinate2D? = nil, animated: Bool = true) {
         let viewRegion = MKCoordinateRegion(center: coordinate ?? mapView.centerCoordinate,
                                             latitudinalMeters: CLLocationDistance(distance),
                                             longitudinalMeters: CLLocationDistance(distance))
-        mapView.setRegion(viewRegion, animated: true)
+        mapView.setRegion(viewRegion, animated: animated)
     }
 }
