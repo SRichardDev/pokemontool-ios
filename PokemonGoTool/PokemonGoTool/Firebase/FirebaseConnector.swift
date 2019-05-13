@@ -180,8 +180,7 @@ class FirebaseConnector {
     
     func subscribeForPush(for geohash: String) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        guard let notificationToken = user?.notificationToken else { return }
-        let data = [notificationToken : userID]
+        let data = [userID : ""]
         
         pokestopsRef
             .child(geohash)
@@ -197,18 +196,18 @@ class FirebaseConnector {
     }
     
     func unsubscribeForPush(for geohash: String) {
-        guard let notificationToken = user?.notificationToken else { return }
-        
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+
         pokestopsRef
             .child(geohash)
             .child(DatabaseKeys.registeredUser)
-            .child(notificationToken)
+            .child(userID)
             .removeValue()
         
         arenasRef
             .child(geohash)
             .child(DatabaseKeys.registeredUser)
-            .child(notificationToken)
+            .child(userID)
             .removeValue()
         
         user?.removeGeohashForPushSubsription(for: .pokestop, geohash: geohash)

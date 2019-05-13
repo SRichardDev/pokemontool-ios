@@ -12,7 +12,7 @@ struct DatabaseKeys {
     static let quests = "quests"
     static let raidBosses = "raidBosses"
     static let timestamp = "timestamp"
-    static let registeredUser = "registered_user"
+    static let registeredUser = "registeredUsers"
     static let participants = "participants"
     static let chat = "chat"
     static let trainerName = "trainerName"
