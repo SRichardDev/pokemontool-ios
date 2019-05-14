@@ -27,6 +27,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     }
     
     func toggleScrolling() {
+        collectionView.reloadData()
         if viewModel.isRaidAlreadyRunning {
             scrollTimer?.invalidate()
             titleLabel.text = "Wähle den Raidboss aus:"
