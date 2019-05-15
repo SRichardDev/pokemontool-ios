@@ -14,6 +14,8 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     @IBOutlet var teamSelectionSegmentedControl: UISegmentedControl!
     @IBOutlet var levelTitleLabel: Label!
     @IBOutlet var levelPickerView: UIPickerView!
+    @IBOutlet var trainerCodeTitleLabel: Label!
+    @IBOutlet var trainerCodeTextField: UITextField!
     @IBOutlet var nextButton: Button!
     
     var teamPickerViewRows: [String] {
@@ -34,7 +36,13 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
         levelPickerView.dataSource = self
         trainerNameTitleLabel.isVisible = accountViewModel != nil
         trainerNameTextField.isVisible = accountViewModel != nil
+        trainerCodeTitleLabel.isVisible = accountViewModel != nil
+        trainerCodeTextField.isVisible = accountViewModel != nil
         nextButton.isHidden = accountViewModel != nil
+        
+        trainerNameTextField.placeholder = "Trage hier deine Namen ein"
+        trainerCodeTextField.placeholder = "Trage hier deinen Freundescode ein"
+        
         updateUI()
     }
     
@@ -45,9 +53,8 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        guard let trainerName = trainerNameTextField.text else { return }
-        guard trainerName != "" else { return }
-        accountViewModel?.updateTrainerName(trainerName)
+        accountViewModel?.updateTrainerName(trainerNameTextField.text ?? "")
+        accountViewModel?.updateTrainerCode(trainerCodeTextField.text ?? "")
     }
     
     func updateUI() {
@@ -55,6 +62,7 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
         trainerNameTextField.text = viewModel.trainerName
         teamSelectionSegmentedControl.selectedSegmentIndex = viewModel.currentTeam?.rawValue ?? 0
         teamSelectionSegmentedControl.tintColor = viewModel.currentTeam?.color
+        trainerCodeTextField.text = viewModel.trainerCode
         levelPickerView.selectRow(40 - viewModel.currentLevel, inComponent: 0, animated: false)
     }
     

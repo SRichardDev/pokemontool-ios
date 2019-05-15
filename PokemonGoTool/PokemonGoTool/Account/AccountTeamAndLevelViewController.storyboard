@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="amP-gc-reY" customClass="OuterVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="36" width="343" height="319.5"/>
+                                <rect key="frame" x="16" y="36" width="343" height="410"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpS-ze-0LP" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -36,14 +36,29 @@
                                             <action selector="doneTapped:" destination="X90-2a-4Wj" eventType="primaryActionTriggered" id="Wm1-ba-QER"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQT-UT-6Qd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g38-hy-fJi" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90.5" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEL-eR-eZM">
+                                        <rect key="frame" x="0.0" y="131" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="doneTapped:" destination="X90-2a-4Wj" eventType="primaryActionTriggered" id="AXX-yJ-WL2"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQT-UT-6Qd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="181" width="343" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jFy-gs-err">
-                                        <rect key="frame" x="0.0" y="131" width="343" height="29"/>
+                                        <rect key="frame" x="0.0" y="221.5" width="343" height="29"/>
                                         <segments>
                                             <segment title="Mystic"/>
                                             <segment title="Valor"/>
@@ -54,13 +69,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd0-DE-obE" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="179" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="269.5" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srp-98-ZMN">
-                                        <rect key="frame" x="0.0" y="219.5" width="343" height="100"/>
+                                        <rect key="frame" x="0.0" y="310" width="343" height="100"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-Jh-vVE">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="100"/>
@@ -112,6 +127,8 @@
                         <outlet property="nextButton" destination="WN3-eF-chq" id="JMJ-az-bdn"/>
                         <outlet property="teamSelectionSegmentedControl" destination="jFy-gs-err" id="ZpF-IF-pl9"/>
                         <outlet property="teamTitleLabel" destination="nQT-UT-6Qd" id="OfV-bH-MN7"/>
+                        <outlet property="trainerCodeTextField" destination="lEL-eR-eZM" id="h6E-vZ-GmF"/>
+                        <outlet property="trainerCodeTitleLabel" destination="g38-hy-fJi" id="9Dx-sy-6F5"/>
                         <outlet property="trainerNameTextField" destination="Job-aC-C1B" id="jdU-u2-lVY"/>
                         <outlet property="trainerNameTitleLabel" destination="CpS-ze-0LP" id="ge2-Fe-ADP"/>
                     </connections>

@@ -58,8 +58,9 @@ class User: FirebaseCodable, Equatable {
     var email: String?
     var trainerName: String?
     var notificationToken: String?
-    var level: Int?
     var team: Team?
+    var level: Int?
+    var trainerCode: String?
     var submittedPokestops: [PokestopId: String]?
     var submittedArenas: [ArenaId: String]?
     var goldArenas: [ArenaId: String]?
@@ -89,6 +90,7 @@ class User: FirebaseCodable, Equatable {
          trainerName: String,
          team: Team,
          level: Int,
+         trainerCode: String? = nil,
          submittedPokestops: [PokestopId: String]? = nil,
          submittedArenas: [ArenaId: String]? = nil,
          goldArenas: [ArenaId: String]? = nil,
@@ -138,6 +140,15 @@ class User: FirebaseCodable, Equatable {
         let data = [DatabaseKeys.level : level]
         usersRef.child(userId).updateChildValues(data)
         print("✅👨🏻 Did update level")
+    }
+    
+    func updateTrainerCode(_ code: String) {
+        guard self.trainerCode != code else { return }
+        self.trainerCode = code
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [DatabaseKeys.trainerCode : code]
+        usersRef.child(userId).updateChildValues(data)
+        print("✅👨🏻 Did update trainer code")
     }
     
     func updateNotificationToken(_ token: String) {

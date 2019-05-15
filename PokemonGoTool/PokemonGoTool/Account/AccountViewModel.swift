@@ -13,7 +13,7 @@ class AccountViewModel {
     
     var trainerName: String {
         get {
-            return firebaseConnector.user?.trainerName ?? "Kein Trainer Name gesetzt"
+            return firebaseConnector.user?.trainerName ?? ""
         }
     }
     
@@ -29,6 +29,12 @@ class AccountViewModel {
         }
     }
     
+    var trainerCode: String {
+        get {
+            return firebaseConnector.user?.trainerCode ?? ""
+        }
+    }
+    
     var isLoggedIn: Bool {
         get {
             return firebaseConnector.isSignedIn
@@ -40,6 +46,7 @@ class AccountViewModel {
     }
     
     func updateTrainerName(_ name: String) {
+        guard name != "" else { return }
         firebaseConnector.user?.updateTrainerName(name)
     }
     
@@ -49,5 +56,10 @@ class AccountViewModel {
     
     func updateLevel(_ level: Int) {
         firebaseConnector.user?.updateTrainerLevel(level)
+    }
+    
+    func updateTrainerCode(_ code: String) {
+        guard code != "" else { return }
+        firebaseConnector.user?.updateTrainerCode(code)
     }
 }
