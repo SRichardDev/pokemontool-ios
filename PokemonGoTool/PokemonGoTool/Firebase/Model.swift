@@ -302,7 +302,7 @@ struct RaidMeetup: FirebaseCodable, Equatable {
     
     var id: String!
     var meetupTime: String?
-    var participants: [String: UserId]?
+    var participants: [UserId: String]?
     
     init(meetupTime: String) {
         self.meetupTime = meetupTime

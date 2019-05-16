@@ -211,8 +211,8 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
             return
         }
         
-        userIds.values.forEach { userId in
-            firebaseConnector.loadUser(for: userId) { publicUserData in
+        userIds.keys.forEach { userId in
+            firebaseConnector.loadPublicUserData(for: userId) { publicUserData in
                 self.participants[userId] = publicUserData
                 DispatchQueue.main.async {
                     self.delegate?.update(of: .meetupChanged)

@@ -243,9 +243,8 @@ class FirebaseConnector {
     @discardableResult
     func userParticipates(in raid: Raid, for arena: inout Arena) -> Arena {
         if let meetupId = raid.raidMeetupId {
-            guard let id = raidMeetupsRef.childByAutoId().key,
-                  let userId = user?.id else { fatalError() }
-            let data = [id : userId]
+            guard let userId = user?.id else { fatalError() }
+            let data = [userId: ""]
             raidMeetupsRef
                 .child(meetupId)
                 .child(DatabaseKeys.participants)
@@ -268,13 +267,12 @@ class FirebaseConnector {
     }
     
     private func saveUserInRaidMeetup(for id: String) {
-        guard let userKey = raidMeetupsRef.childByAutoId().key,
-              let userId = user?.id else { fatalError() }
-        let data1 = [userKey: userId]
+        guard let userId = user?.id else { fatalError() }
+        let data = [userId: ""]
         raidMeetupsRef
             .child(id)
             .child(DatabaseKeys.participants)
-            .updateChildValues(data1)
+            .updateChildValues(data)
     }
     
     func userCanceled(in meetup: RaidMeetup) {
@@ -368,7 +366,7 @@ class FirebaseConnector {
         })
     }
 
-    func loadUser(for id: String, completion: @escaping (PublicUserData) -> Void) {
+    func loadPublicUserData(for id: String, completion: @escaping (PublicUserData) -> Void) {
         user(for: id) { user in
             completion(user)
         }
