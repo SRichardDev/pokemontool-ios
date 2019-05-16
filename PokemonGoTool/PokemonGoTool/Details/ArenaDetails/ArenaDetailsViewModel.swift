@@ -40,7 +40,7 @@ class ArenaDetailsViewModel {
     var isUserParticipating: Bool {
         get {
             guard let userId = firebaseConnector.user?.id else {return false}
-            return self.participants[userId] != nil
+            return participants[userId] != nil
         }
     }
     var hasActiveRaid: Bool {

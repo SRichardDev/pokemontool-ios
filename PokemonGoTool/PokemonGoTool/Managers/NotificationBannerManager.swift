@@ -9,6 +9,7 @@ enum NotificationBannerType {
     case addPoi
     case pushRegistration
     case pushNotification
+    case addFriend
 }
 
 class NotificationBannerManager {
@@ -59,6 +60,11 @@ class NotificationBannerManager {
         case .pushNotification:
             currentBanner = NotificationBanner(title: title,
                                                subtitle: message,
+                                               style: .info)
+        case .addFriend:
+            currentBanner = NotificationBanner(title: "Freundes Code kopiert",
+                                               subtitle: "Kopiere den Code nun in Pokémon GO",
+                                               leftView: UIImageView(image: UIImage(named: "addFriend")),
                                                style: .info)
         }
         

@@ -20,9 +20,7 @@ class ArenaDetailsParticipantsTableViewController: UIViewController, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! ParticipantsTableViewCell
         let publicUserData = Array(viewModel.participants.values)[indexPath.row]
-        cell.trainerNameLabel.text = publicUserData.trainerName
-        cell.levelLabel.text = "\(publicUserData.level ?? 0)"
-        cell.teamBackgroundView.backgroundColor = publicUserData.team?.color
+        cell.userData = publicUserData
         return cell
     }
     
@@ -37,9 +35,23 @@ class ParticipantsTableViewCell: UITableViewCell {
     @IBOutlet var teamBackgroundView: UIView!
     @IBOutlet var trainerNameLabel: Label!
     
+    var userData: PublicUserData? {
+        didSet {
+            trainerNameLabel.text = userData?.trainerName
+            levelLabel.text = "\(userData?.level ?? 0)"
+            teamBackgroundView.backgroundColor = userData?.team?.color
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         levelLabel.textColor = .white
         teamBackgroundView.layer.cornerRadius = teamBackgroundView.bounds.width / 2
+    }
+    
+    @IBAction func didTapAddFriend(_ sender: Any) {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = userData?.trainerCode
+        NotificationBannerManager.shared.show(.addFriend)
     }
 }

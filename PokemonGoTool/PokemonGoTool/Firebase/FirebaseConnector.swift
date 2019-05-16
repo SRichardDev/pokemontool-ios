@@ -279,7 +279,8 @@ class FirebaseConnector {
         if let userKeys = meetup.participants?.keys {
             if let participants = meetup.participants {
                 userKeys.forEach { userKey in
-                    if participants[userKey] == user?.id {
+                    guard let userId = user?.id else { fatalError() }
+                    if participants[userId] != nil {
                         raidMeetupsRef
                             .child(meetup.id)
                             .child(DatabaseKeys.participants)

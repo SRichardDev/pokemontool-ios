@@ -13,13 +13,13 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
         participateTitleLabel.text = "Teilnehmen:"
-        participateSwitch.isOn = viewModel.isUserParticipating
+        updateUI()
     }
 
     func updateUI() {
         participantsCountLabel.text = "\(viewModel.participants.count)"
+        participateSwitch.isOn = viewModel.isUserParticipating
     }
 
     @IBAction func showParticipantsList(_ sender: Any) {
