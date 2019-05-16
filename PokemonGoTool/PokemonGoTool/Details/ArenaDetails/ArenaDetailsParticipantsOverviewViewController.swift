@@ -8,27 +8,26 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
     @IBOutlet var titleLabel: Label!
     @IBOutlet var participantsCountLabel: Label!
     @IBOutlet var participantsListButton: Button!
-    @IBOutlet var participateButton: Button!
+    @IBOutlet var participateTitleLabel: Label!
+    @IBOutlet var participateSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        participateTitleLabel.text = "Teilnehmen:"
+        participateSwitch.isOn = viewModel.isUserParticipating
     }
 
     func updateUI() {
         participantsCountLabel.text = "\(viewModel.participants.count)"
-        participateButton.isDestructive = viewModel.isUserParticipating
-        participateButton.setTitle(viewModel.participateButtonTitle, for: .normal)
     }
 
     @IBAction func showParticipantsList(_ sender: Any) {
         coordinator?.showRaidParticipants(viewModel)
     }
 
-
-    @IBAction func participateTapped(_ sender: Button) {
-        viewModel.userTappedParticipate()
-        updateUI()
+    @IBAction func participateSwitchChanged(_ sender: UISwitch) {
+        viewModel.userParticipates(sender.isOn)
     }
 
     @IBAction func showChat(_ sender: Any) {

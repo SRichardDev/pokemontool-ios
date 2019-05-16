@@ -52,13 +52,23 @@
                                             <action selector="showChat:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="JLp-xR-ZQK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCF-bb-KkT" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eh6-T1-BBg">
                                         <rect key="frame" x="0.0" y="212" width="375" height="38"/>
-                                        <state key="normal" title="Teilnehmen"/>
-                                        <connections>
-                                            <action selector="participateTapped:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="FWY-V0-LPH"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teilnehmen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9a-3Z-5CZ" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="9" width="326" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4a3-ku-4RZ">
+                                                <rect key="frame" x="326" y="3.5" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="participateSwitchChanged:" destination="JwJ-sF-PSt" eventType="valueChanged" id="AuH-iB-asP"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -75,7 +85,8 @@
                     <connections>
                         <outlet property="participantsCountLabel" destination="uDi-DO-H4o" id="E9q-xL-9s9"/>
                         <outlet property="participantsListButton" destination="tVn-7P-ayR" id="n9c-xW-J7V"/>
-                        <outlet property="participateButton" destination="aCF-bb-KkT" id="ohl-LB-A9S"/>
+                        <outlet property="participateSwitch" destination="4a3-ku-4RZ" id="f9P-Fv-Snh"/>
+                        <outlet property="participateTitleLabel" destination="N9a-3Z-5CZ" id="0Lh-oR-aHr"/>
                         <outlet property="titleLabel" destination="VGE-gg-whM" id="nUg-rZ-yCC"/>
                     </connections>
                 </viewController>

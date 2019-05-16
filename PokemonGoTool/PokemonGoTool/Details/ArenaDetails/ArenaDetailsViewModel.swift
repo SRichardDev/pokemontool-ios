@@ -24,11 +24,7 @@ class ArenaDetailsViewModel {
             firebaseConnector.observeRaidMeetup(for: meetupId)
         }
     }
-    var meetup: RaidMeetup? {
-        didSet {
-            
-        }
-    }
+    var meetup: RaidMeetup?
     var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
@@ -38,12 +34,6 @@ class ArenaDetailsViewModel {
     var title: String {
         get {
             return isRaidExpired ? arena.name : arena.raid?.raidBoss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
-        }
-    }
-    
-    var participateButtonTitle: String {
-        get {
-            return isUserParticipating ? "Abmelden" : "Teilnehmen"
         }
     }
     
@@ -121,13 +111,14 @@ class ArenaDetailsViewModel {
         firebaseConnector.observeRaidMeetup(for: meetupId)
     }
         
-    func userTappedParticipate() {
-        if !isUserParticipating {
+    func userParticipates(_ isParticipating: Bool) {
+        if isParticipating {
             guard let raid = arena.raid else { fatalError() }
             self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
+            print("🏟 User participates in meetup")
         } else {
             firebaseConnector.userCanceled(in: meetup!)
-            print("User canceled meetup")
+            print("🏟 User canceled meetup")
         }
     }
     
@@ -151,12 +142,6 @@ class ArenaDetailsViewModel {
                 self.hatchTimer?.invalidate()
                 return
             }
-            
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateStyle = .none
-//            dateFormatter.timeStyle = .short
-//            dateFormatter.locale = Locale.current
-//            let dateString = dateFormatter.string(from: raid.hatchDate ?? Date())
             
             DispatchQueue.main.async {
                 self.delegate?.update(of: .hatchTimeLeftChanged("\(self.formattedCountDown(for: date))"))
