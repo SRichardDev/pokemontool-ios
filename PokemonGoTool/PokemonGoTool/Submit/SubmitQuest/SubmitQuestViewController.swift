@@ -105,7 +105,7 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.cellForRow(at: indexPath) as! SubmitQuestCell
         guard let questName = cell.titleLabel.text else { fatalError() }
         guard let reward = cell.subtitleLabel.text else { fatalError() }
-        guard let trainerName = firebaseConnector.user?.trainerName else {
+        guard let trainerName = firebaseConnector.user?.publicData?.trainerName else {
             let alert = UIAlertController(title: "Fehler",
                                           message: "Bitte registriere dich um Feldforschungen einzureichen",
                                           preferredStyle: .alert)

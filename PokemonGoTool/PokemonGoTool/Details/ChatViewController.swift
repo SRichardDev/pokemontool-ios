@@ -22,7 +22,7 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
 
         title = "Chat"
         guard let userId = firebaseConnector.user?.id,
-              let trainerName = firebaseConnector.user?.trainerName else { fatalError() }
+              let trainerName = firebaseConnector.user?.publicData?.trainerName else { fatalError() }
         sender = Sender(id: userId, displayName: trainerName)
 
         messageInputBar.delegate = self
@@ -60,8 +60,8 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
 
 extension ChatViewController: RaidChatDelegate {
     func didReceiveNewChatMessage(_ chatMessage: ChatMessage) {
-        firebaseConnector.user(for: chatMessage.senderId) { user in
-            let sender = Sender(id: chatMessage.senderId, displayName: user.trainerName ?? "Unknown")
+        firebaseConnector.user(for: chatMessage.senderId) { publicData in
+            let sender = Sender(id: chatMessage.senderId, displayName: publicData.trainerName ?? "Unknown")
             let message = Message(sender: sender,
                                   messageId: chatMessage.id,
                                   sentDate: chatMessage.timestamp?.dateFromUnixTime() ?? Date(),

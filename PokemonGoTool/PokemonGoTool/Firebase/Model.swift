@@ -322,3 +322,15 @@ struct ChatMessage: FirebaseCodable {
         self.senderId = senderId
     }
 }
+
+struct Participant {
+    let id: String
+    let level: Int
+    var trainerCode: String?
+    
+    init(id: String, level: Int, trainerCode: String? = nil) {
+        self.id = id
+        self.level = level
+        self.trainerCode = trainerCode
+    }
+}

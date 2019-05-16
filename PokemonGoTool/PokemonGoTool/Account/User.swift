@@ -43,6 +43,22 @@ enum Team: Int, Codable {
     }
 }
 
+struct PublicUserData: FirebaseCodable {
+    var id: String!
+    var trainerName: String?
+    var team: Team?
+    var level: Int?
+    var trainerCode: String?
+    
+    init(trainerName: String, team: Team, level: Int, trainerCode: String) {
+        self.id = ""
+        self.trainerName = trainerName
+        self.team = team
+        self.level = level
+        self.trainerCode = trainerCode
+    }
+}
+
 class User: FirebaseCodable, Equatable {
     
     typealias PokestopId = String
@@ -56,11 +72,8 @@ class User: FirebaseCodable, Equatable {
     
     var id: String!
     var email: String?
-    var trainerName: String?
+    var publicData: PublicUserData?
     var notificationToken: String?
-    var team: Team?
-    var level: Int?
-    var trainerCode: String?
     var submittedPokestops: [PokestopId: String]?
     var submittedArenas: [ArenaId: String]?
     var goldArenas: [ArenaId: String]?
@@ -71,7 +84,7 @@ class User: FirebaseCodable, Equatable {
 
     var teamName: String? {
         get {
-            if let team = team {
+            if let team = publicData?.team {
                 switch team {
                 case .mystic:
                     return "Mystic"
@@ -87,10 +100,7 @@ class User: FirebaseCodable, Equatable {
     
     init(id: String,
          email: String,
-         trainerName: String,
-         team: Team,
-         level: Int,
-         trainerCode: String? = nil,
+         publicData: PublicUserData,
          submittedPokestops: [PokestopId: String]? = nil,
          submittedArenas: [ArenaId: String]? = nil,
          goldArenas: [ArenaId: String]? = nil,
@@ -102,9 +112,7 @@ class User: FirebaseCodable, Equatable {
         
         self.id = id
         self.email = email
-        self.trainerName = trainerName
-        self.team = team
-        self.level = level
+        self.publicData = publicData
         self.submittedPokestops = submittedPokestops
         self.submittedArenas = submittedArenas
         self.goldArenas = goldArenas
@@ -116,38 +124,38 @@ class User: FirebaseCodable, Equatable {
     }
     
     func updateTrainerName(_ name: String) {
-        guard trainerName != name else { return }
-        trainerName = name
+        guard publicData?.trainerName != name else { return }
+        publicData?.trainerName = name
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.trainerName : name]
-        usersRef.child(userId).updateChildValues(data)
+        usersRef.child(userId).child(DatabaseKeys.publicUserData).updateChildValues(data)
         print("✅👨🏻 Did update trainer name to database")
     }
     
     func updateTeam(_ team: Team) {
-        guard self.team != team else { return }
-        self.team = team
+        guard publicData?.team != team else { return }
+        publicData?.team = team
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.team : team.rawValue]
-        usersRef.child(userId).updateChildValues(data)
+        usersRef.child(userId).child(DatabaseKeys.publicUserData).updateChildValues(data)
         print("✅👨🏻 Did update team")
     }
     
     func updateTrainerLevel(_ level: Int) {
-        guard self.level != level else { return }
-        self.level = level
+        guard publicData?.level != level else { return }
+        publicData?.level = level
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.level : level]
-        usersRef.child(userId).updateChildValues(data)
+        usersRef.child(userId).child(DatabaseKeys.publicUserData).updateChildValues(data)
         print("✅👨🏻 Did update level")
     }
     
     func updateTrainerCode(_ code: String) {
-        guard self.trainerCode != code else { return }
-        self.trainerCode = code
+        guard publicData?.trainerCode != code else { return }
+        publicData?.trainerCode = code
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.trainerCode : code]
-        usersRef.child(userId).updateChildValues(data)
+        usersRef.child(userId).child(DatabaseKeys.publicUserData).updateChildValues(data)
         print("✅👨🏻 Did update trainer code")
     }
     
@@ -277,11 +285,11 @@ class User: FirebaseCodable, Equatable {
                 completion(.signedUp)
             }
             
+            let publicUserData = PublicUserData(trainerName: trainerName, team: team, level: level, trainerCode: "")
+            
             let user = User(id: firebaseUser.uid,
                             email: firebaseUser.email!,
-                            trainerName: trainerName,
-                            team: team,
-                            level: level)
+                            publicData: publicUserData)
             
             let data = try! FirebaseEncoder().encode(user)
             let ref = Database.database().reference(withPath: "users").child(firebaseUser.uid)

@@ -13,25 +13,25 @@ class AccountViewModel {
     
     var trainerName: String {
         get {
-            return firebaseConnector.user?.trainerName ?? ""
+            return firebaseConnector.user?.publicData?.trainerName ?? ""
         }
     }
     
     var currentTeam: Team? {
         get {
-            return firebaseConnector.user?.team
+            return firebaseConnector.user?.publicData?.team
         }
     }
     
     var currentLevel: Int {
         get {
-            return (firebaseConnector.user?.level ?? 0)
+            return (firebaseConnector.user?.publicData?.level ?? 0)
         }
     }
     
     var trainerCode: String {
         get {
-            return firebaseConnector.user?.trainerCode ?? ""
+            return firebaseConnector.user?.publicData?.trainerCode ?? ""
         }
     }
     

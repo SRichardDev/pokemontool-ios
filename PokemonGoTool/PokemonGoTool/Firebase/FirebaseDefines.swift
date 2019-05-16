@@ -21,6 +21,7 @@ struct DatabaseKeys {
     static let submittedRaids = "submittedRaids"
     static let submittedArenas = "submittedArenas"
     static let submittedPokestops = "submittedPokestops"
+    static let publicUserData = "publicData"
     static let team = "team"
     static let level = "level"
     static let trainerCode = "trainerCode"

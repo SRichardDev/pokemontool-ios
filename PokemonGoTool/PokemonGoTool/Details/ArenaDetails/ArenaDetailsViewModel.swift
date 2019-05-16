@@ -77,7 +77,7 @@ class ArenaDetailsViewModel {
         }
     }
     
-    var participants = [String: User]()
+    var participants = [String: PublicUserData]()
     
     var raidBossImage: UIImage? {
         get {
@@ -227,8 +227,8 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
         }
         
         userIds.values.forEach { userId in
-            firebaseConnector.loadUser(for: userId) { user in
-                self.participants[user.id] = user
+            firebaseConnector.loadUser(for: userId) { publicUserData in
+                self.participants[userId] = publicUserData
                 DispatchQueue.main.async {
                     self.delegate?.update(of: .meetupChanged)
                 }

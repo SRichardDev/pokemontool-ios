@@ -315,11 +315,12 @@ class FirebaseConnector {
         }
     }
     
-    func user(for id: String, completion: @escaping (User) -> ()) {
+    func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
         usersRef
             .child(id)
+            .child(DatabaseKeys.publicUserData)
             .observeSingleEvent(of: .value) { snapshot in
-            guard let user: User = decode(from: snapshot) else { return }
+            guard let user: PublicUserData = decode(from: snapshot) else { return }
             completion(user)
         }
     }
@@ -367,7 +368,7 @@ class FirebaseConnector {
         })
     }
 
-    func loadUser(for id: String, completion: @escaping (User) -> Void) {
+    func loadUser(for id: String, completion: @escaping (PublicUserData) -> Void) {
         user(for: id) { user in
             completion(user)
         }

@@ -19,10 +19,10 @@ class ArenaDetailsParticipantsTableViewController: UIViewController, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! ParticipantsTableViewCell
-        let user = Array(viewModel.participants.values)[indexPath.row]
-        cell.trainerNameLabel.text = user.trainerName
-        cell.levelLabel.text = "\(user.level ?? 0)"
-        cell.teamBackgroundView.backgroundColor = user.team?.color
+        let publicUserData = Array(viewModel.participants.values)[indexPath.row]
+        cell.trainerNameLabel.text = publicUserData.trainerName
+        cell.levelLabel.text = "\(publicUserData.level ?? 0)"
+        cell.teamBackgroundView.backgroundColor = publicUserData.team?.color
         return cell
     }
     
