@@ -21,7 +21,7 @@ class OuterVerticalStackView: UIStackView {
     
     func setup() {
         axis = .vertical
-        spacing = 20
+        spacing = 30
         distribution = .equalSpacing
         translatesAutoresizingMaskIntoConstraints = false
     }

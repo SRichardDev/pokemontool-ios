@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anzahl der Teilnehmer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGE-gg-whM" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDi-DO-H4o" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="53" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="375" height="51"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -39,36 +39,19 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVn-7P-ayR" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="106" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="132.5" width="375" height="51.5"/>
                                         <state key="normal" title="Teilnehmerliste"/>
                                         <connections>
                                             <action selector="showParticipantsList:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="u67-9A-RUz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dL9-6C-rCa" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="159" width="375" height="38"/>
+                                        <rect key="frame" x="0.0" y="199" width="375" height="51"/>
                                         <state key="normal" title="Chat"/>
                                         <connections>
                                             <action selector="showChat:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="JLp-xR-ZQK"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eh6-T1-BBg">
-                                        <rect key="frame" x="0.0" y="212" width="375" height="38"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teilnehmen:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9a-3Z-5CZ" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="9" width="326" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4a3-ku-4RZ">
-                                                <rect key="frame" x="326" y="3.5" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="participateSwitchChanged:" destination="JwJ-sF-PSt" eventType="valueChanged" id="AuH-iB-asP"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -85,8 +68,6 @@
                     <connections>
                         <outlet property="participantsCountLabel" destination="uDi-DO-H4o" id="E9q-xL-9s9"/>
                         <outlet property="participantsListButton" destination="tVn-7P-ayR" id="n9c-xW-J7V"/>
-                        <outlet property="participateSwitch" destination="4a3-ku-4RZ" id="f9P-Fv-Snh"/>
-                        <outlet property="participateTitleLabel" destination="N9a-3Z-5CZ" id="0Lh-oR-aHr"/>
                         <outlet property="titleLabel" destination="VGE-gg-whM" id="nUg-rZ-yCC"/>
                     </connections>
                 </viewController>

@@ -13,6 +13,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let restTimeViewController = ArenaDetailsRestTimeViewController.fromStoryboard()
     private let infoViewController = ArenaDetailsInfoViewController.fromStoryboard()
     private let meetupTimeViewController = ArenaDetailsMeetupTimeViewController.fromStoryboard()
+    private let userParticipatesSwitchViewController = ArenaDetailsUserParticipatesViewController.fromStoryboard()
+    private let goldSwitchViewController = ArenaDetailsGoldArenaSwitchViewController.fromStoryboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         let titleLabel = Label()
         titleLabel.style = 2
         titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
         titleLabel.text = viewModel.title
         
         headerViewController.viewModel = viewModel
@@ -35,7 +38,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         participantsOverviewViewController.coordinator = coordinator
         infoViewController.viewModel = viewModel
         meetupTimeViewController.viewModel = viewModel
-
+        userParticipatesSwitchViewController.viewModel = viewModel
+        goldSwitchViewController.viewModel = viewModel
+        
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
@@ -45,9 +50,14 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             stackView.addSepartor()
             stackView.addArrangedViewController(viewController: meetupTimeViewController, to: self)
             stackView.addSepartor()
+            stackView.addArrangedViewController(viewController: userParticipatesSwitchViewController, to: self)
+            stackView.addSepartor()
             stackView.addArrangedViewController(viewController: participantsOverviewViewController, to: self)
             stackView.addSepartor()
         }
+        
+        stackView.addArrangedViewController(viewController: goldSwitchViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: infoViewController, to: self)
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
@@ -70,6 +80,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         switch type {
         case .meetupChanged:
             participantsOverviewViewController.updateUI()
+            userParticipatesSwitchViewController.updateUI()
             meetupTimeViewController.updateUI()
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTimeLeft(timeLeft)

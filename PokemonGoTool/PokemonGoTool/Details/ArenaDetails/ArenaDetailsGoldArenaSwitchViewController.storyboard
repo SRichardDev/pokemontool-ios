@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mwf-wv-dy1">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Arena Details Gold Arena Switch View Controller-->
+        <scene sceneID="veb-2c-hea">
+            <objects>
+                <viewController id="Mwf-wv-dy1" customClass="ArenaDetailsGoldArenaSwitchViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OJM-qg-GXH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wxa-WZ-jfx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gold Arena:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-XV-kFh" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="15" width="357" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-lQ-Edp">
+                                        <rect key="frame" x="365" y="9.5" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="goldArenaSwitchChanged:" destination="Mwf-wv-dy1" eventType="valueChanged" id="jci-k8-gdT"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="zsq-ID-fUE"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="trailing" secondItem="wxa-WZ-jfx" secondAttribute="trailing" id="BSR-cK-OqG"/>
+                            <constraint firstItem="wxa-WZ-jfx" firstAttribute="top" secondItem="3Sb-JR-m2a" secondAttribute="top" id="EJu-QV-rM4"/>
+                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="bottom" secondItem="wxa-WZ-jfx" secondAttribute="bottom" id="IX2-JC-T5H"/>
+                            <constraint firstItem="wxa-WZ-jfx" firstAttribute="leading" secondItem="3Sb-JR-m2a" secondAttribute="leading" id="Lnf-0g-Lvg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3Sb-JR-m2a"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="50"/>
+                    <connections>
+                        <outlet property="goldArenaSwitch" destination="YbP-lQ-Edp" id="Q99-4R-dXD"/>
+                        <outlet property="titleLabel" destination="lYE-XV-kFh" id="uUR-bE-Uk3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Os1-wF-PUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
