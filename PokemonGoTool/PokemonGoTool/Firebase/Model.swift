@@ -219,7 +219,8 @@ struct Raid: Codable, Equatable {
             if hatchTime == nil {
                 let minutes = 45 - Int(timeLeft?.double ?? 0)
                 let calendar = Calendar.current
-                let date = calendar.date(byAdding: .minute, value: -minutes, to: submitDate!)
+                guard let submitDate = submitDate else { return nil }
+                let date = calendar.date(byAdding: .minute, value: -minutes, to: submitDate)
                 return date
             }
             
