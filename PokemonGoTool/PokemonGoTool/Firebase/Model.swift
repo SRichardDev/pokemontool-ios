@@ -250,16 +250,10 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    var image: UIImage {
-        get {
-            return ImageManager.image(named: "\(raidBoss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(level)")!
-        }
-    }
-    
     var timestamp: Double?
     let level: Int
     var hatchTime: String?
-    var raidBoss: RaidbossDefinition?
+    var raidBossId: String?
     var timeLeft: String?
     var raidMeetupId: String?
     var submitDate: Date? {
@@ -268,31 +262,31 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil, raidMeetupId: String?) {
+    init(level: Int, hatchTime: String, raidBoss: String? = nil, raidMeetupId: String?) {
         self.level = level
         self.hatchTime = hatchTime
-        self.raidBoss = raidBoss
+        self.raidBossId = raidBoss
         self.raidMeetupId = raidMeetupId
         self.timeLeft = "45"
     }
     
-    init(level: Int, hatchTime: String, raidBoss: RaidbossDefinition? = nil) {
+    init(level: Int, hatchTime: String, raidBoss: String? = nil) {
         self.level = level
         self.hatchTime = hatchTime
-        self.raidBoss = raidBoss
+        self.raidBossId = raidBoss
         self.timeLeft = "45"
     }
     
-    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String, raidMeetupId: String?) {
+    init(level: Int, raidBoss: String? = nil, timeLeft: String, raidMeetupId: String?) {
         self.level = level
-        self.raidBoss = raidBoss
+        self.raidBossId = raidBoss
         self.timeLeft = timeLeft
         self.raidMeetupId = raidMeetupId
     }
     
-    init(level: Int, raidBoss: RaidbossDefinition? = nil, timeLeft: String) {
+    init(level: Int, raidBoss: String? = nil, timeLeft: String) {
         self.level = level
-        self.raidBoss = raidBoss
+        self.raidBossId = raidBoss
         self.timeLeft = timeLeft
     }
 }

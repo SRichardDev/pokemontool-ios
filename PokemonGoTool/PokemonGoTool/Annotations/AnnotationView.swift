@@ -79,13 +79,20 @@ class AnnotationView: CustomAnnotationView {
         }
     }
     
-    class func prepareFor(mapView: MKMapView, annotation: MKAnnotation, showLabel: Bool = false) -> AnnotationView? {
+    class func prepareFor(mapView: MKMapView,
+                          annotation: MKAnnotation,
+                          showLabel: Bool = false) -> AnnotationView? {
+        
         var annotationView: MKAnnotationView?
         if let pokestopAnnoation = annotation as? PokestopPointAnnotation {
-            annotationView = AnnotationView.preparePokestopAnnotation(in: mapView, for: pokestopAnnoation, showLabel: showLabel)
+            annotationView = AnnotationView.preparePokestopAnnotation(in: mapView,
+                                                                      for: pokestopAnnoation,
+                                                                      showLabel: showLabel)
         }
         if let arenaAnnotation = annotation as? ArenaPointAnnotation {
-            annotationView = AnnotationView.prepareArenaAnnotation(in: mapView, for: arenaAnnotation, showLabel: showLabel)
+            annotationView = AnnotationView.prepareArenaAnnotation(in: mapView,
+                                                                   for: arenaAnnotation,
+                                                                   showLabel: showLabel)
         }
         return annotationView as? AnnotationView
     }
@@ -93,26 +100,37 @@ class AnnotationView: CustomAnnotationView {
     private class func prepareArenaAnnotation(in mapView: MKMapView,
                                         for annotation: ArenaPointAnnotation,
                                         showLabel: Bool = false) -> MKAnnotationView? {
+        
         let reuseId = "arenaReuseIdentifier"
         if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? AnnotationView {
             annotationView.annotation = annotation
-            return AnnotationView.setupArenaAnnotationView(annotationView: annotationView, for: annotation, showLabel: showLabel)
+            return AnnotationView.setupArenaAnnotationView(annotationView: annotationView,
+                                                           for: annotation,
+                                                           showLabel: showLabel)
         } else {
-            let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            return AnnotationView.setupArenaAnnotationView(annotationView: annotationView, for: annotation, showLabel: showLabel)
+            let annotationView = AnnotationView(annotation: annotation,
+                                                reuseIdentifier: reuseId)
+            
+            return AnnotationView.setupArenaAnnotationView(annotationView: annotationView,
+                                                           for: annotation,
+                                                           showLabel: showLabel)
         }
     }
     
     private class func setupArenaAnnotationView(annotationView: AnnotationView,
-                                        for annotation: ArenaPointAnnotation,
-                                        showLabel: Bool) -> AnnotationView {
+                                                for annotation: ArenaPointAnnotation,
+                                                showLabel: Bool) -> AnnotationView {
+        
         annotationView.label.alpha = showLabel ? 1 : 0
         annotationView.customAnnotation = annotation.arena
         
         let baseImage = annotation.arena?.image ?? UIImage(named: "arena")!
         
         if let raid = annotation.arena?.raid, !raid.isExpired {
-            let topImage = raid.image
+            
+            let raidboss = RaidbossManager.shared.raidboss(for: raid.raidBossId)
+            guard let topImage = ImageManager.image(named: "\(raidboss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(raid.level)") else { return annotationView }
+            
             let scaleFactor: CGFloat = raid.hasHatched ? 4 : 2
             
             let size = CGSize(width: topImage.size.width/scaleFactor, height: topImage.size.height/scaleFactor)

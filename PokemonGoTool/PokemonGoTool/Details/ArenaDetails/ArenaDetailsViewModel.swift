@@ -33,7 +33,8 @@ class ArenaDetailsViewModel {
     
     var title: String {
         get {
-            return isRaidExpired ? arena.name : arena.raid?.raidBoss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
+            let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
+            return isRaidExpired ? arena.name : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
         }
     }
     
@@ -71,7 +72,8 @@ class ArenaDetailsViewModel {
     
     var raidBossImage: UIImage? {
         get {
-            return arena.raid?.image
+            let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
+            return ImageManager.image(named: "\(raidboss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(arena.raid?.level ?? 1)")
         }
     }
     

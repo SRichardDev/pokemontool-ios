@@ -6,8 +6,8 @@ import CodableFirebase
 
 class FirebaseConnector {
     
-    private var pokestopsRef = Database.database().reference(withPath: DatabaseKeys.pokestops)
-    private var arenasRef = Database.database().reference(withPath: DatabaseKeys.arenas)
+    private let pokestopsRef = Database.database().reference(withPath: DatabaseKeys.pokestops)
+    private let arenasRef = Database.database().reference(withPath: DatabaseKeys.arenas)
     private let raidMeetupsRef = Database.database().reference(withPath: DatabaseKeys.raidMeetups)
     private let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
     private let questsRef = Database.database().reference(withPath: DatabaseKeys.quests)
@@ -23,7 +23,6 @@ class FirebaseConnector {
     var pokestops: [String: Pokestop] = [:]
     var arenas: [String: Arena] = [:]
     var quests = [QuestDefinition]()
-    var raidbosses = [RaidbossDefinition]()
 
     weak var delegate: FirebaseDelegate?
     weak var userDelegate: FirebaseUserDelegate?
@@ -51,7 +50,7 @@ class FirebaseConnector {
         }
         group.enter()
         loadRaidBosses {
-            self.raidbosses = $0
+            RaidbossManager.shared.raidbosses = $0
             group.leave()
         }
 

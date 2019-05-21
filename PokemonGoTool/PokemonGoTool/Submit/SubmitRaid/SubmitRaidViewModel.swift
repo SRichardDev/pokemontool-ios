@@ -26,7 +26,7 @@ class SubmitRaidViewModel {
     var selectedTimeLeft = "45"
     var currentRaidBosses: [RaidbossDefinition] {
         get {
-            return firebaseConnector.raidbosses.filter { Int($0.level) == selectedRaidLevel }
+            return RaidbossManager.shared.raidbosses?.filter { Int($0.level) == selectedRaidLevel } ?? []
         }
     }
     var imageName: String {
@@ -74,14 +74,14 @@ class SubmitRaidViewModel {
                 let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
 
                 let raid = Raid(level: selectedRaidLevel,
-                                raidBoss: selectedRaidBoss,
+                                raidBoss: selectedRaidBoss?.id,
                                 timeLeft: selectedTimeLeft,
                                 raidMeetupId: id)
                 arena.raid = raid
                 firebaseConnector.userParticipates(in: raid, for: &arena)
             } else {
                 let raid = Raid(level: selectedRaidLevel,
-                                raidBoss: selectedRaidBoss,
+                                raidBoss: selectedRaidBoss?.id,
                                 timeLeft: selectedTimeLeft)
                 arena.raid = raid
             }

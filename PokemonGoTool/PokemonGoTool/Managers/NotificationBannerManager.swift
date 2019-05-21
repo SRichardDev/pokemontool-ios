@@ -62,8 +62,8 @@ class NotificationBannerManager {
                                                subtitle: message,
                                                style: .info)
         case .addFriend:
-            currentBanner = NotificationBanner(title: "Freundes Code kopiert",
-                                               subtitle: "Kopiere den Code nun in Pokémon GO",
+            currentBanner = NotificationBanner(title: "Freundes-Code kopiert",
+                                               subtitle: "Füge den Code nun in Pokémon GO ein",
                                                leftView: UIImageView(image: UIImage(named: "addFriend")),
                                                style: .info)
         }
