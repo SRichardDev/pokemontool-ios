@@ -7,16 +7,10 @@ admin.initializeApp(functions.config().firebase);
 exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
 
     const geohash = context.params.geohash;
-    const snapshotKey = snapshot.after.key;
-
-    if (snapshotKey === 'registeredUsers') {
-        return console.log('New user registered for geohash: ' + geohash)
-    }
-
     const arena = snapshot.after.val();
     const raid = arena.raid;
 
-    return admin.database().ref('/arenas/' + geohash + '/registeredUsers').once('value', (snapshot, context) => {
+    return admin.database().ref('/registeredUsersArenas/' + geohash).once('value', (snapshot, context) => {
         snapshot.forEach((child) => {
             const userId = child.key
             console.log('Pushing to userID: ' + userId)
@@ -60,11 +54,6 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
     
     const geohash = context.params.geohash
     const uid = context.params.uid
-    const snapshotKey = snapshot.after.key;
-
-    if (snapshotKey === 'registeredUsers') {
-        return console.log('New user registered for geohash: ' + geohash)
-    }
 
     const pokestop = snapshot.after.val()
     const name = pokestop.name;
@@ -74,7 +63,7 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
         
     console.log('Pokestop name: ' + pokestop.name + ', with ID: ' + uid + ', in geohash: ' + geohash + ', has new quest: ' + quest.name + ', with reward: ' + quest.reward)
 
-    return admin.database().ref('/pokestops/' + geohash + '/registeredUsers').once('value', (snapshot, context) => {
+    return admin.database().ref('/registeredUsersPokestops/' + geohash).once('value', (snapshot, context) => {
         snapshot.forEach((child) => {
             const userId = child.key
             console.log('Pushing to userID: ' + userId)
