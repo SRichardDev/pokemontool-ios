@@ -12,6 +12,8 @@ class FirebaseConnector {
     private let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
     private let questsRef = Database.database().reference(withPath: DatabaseKeys.quests)
     private let raidBossesRef = Database.database().reference(withPath: DatabaseKeys.raidBosses)
+    private let registeredUsersPokestopsRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersPokestops)
+    private let registeredUsersArenasRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersArenas)
 
     private(set) var user: User? {
         didSet {
@@ -181,35 +183,33 @@ class FirebaseConnector {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let data = [userID : ""]
         
-        pokestopsRef
+        registeredUsersPokestopsRef
             .child(geohash)
-            .child(DatabaseKeys.registeredUser)
             .updateChildValues(data)
         
-        arenasRef
+        registeredUsersArenasRef
             .child(geohash)
-            .child(DatabaseKeys.registeredUser)
             .updateChildValues(data)
         
         user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
+        user?.addGeohashForPushSubscription(for: .arena, geohash: geohash)
     }
     
     func unsubscribeForPush(for geohash: String) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
 
-        pokestopsRef
+        registeredUsersPokestopsRef
             .child(geohash)
-            .child(DatabaseKeys.registeredUser)
             .child(userID)
             .removeValue()
         
-        arenasRef
+        registeredUsersArenasRef
             .child(geohash)
-            .child(DatabaseKeys.registeredUser)
             .child(userID)
             .removeValue()
         
         user?.removeGeohashForPushSubsription(for: .pokestop, geohash: geohash)
+        user?.removeGeohashForPushSubsription(for: .arena, geohash: geohash)
     }
     
     func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {

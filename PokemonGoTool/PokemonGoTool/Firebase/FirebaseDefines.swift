@@ -4,6 +4,8 @@ import Foundation
 struct DatabaseKeys {
     static let pokestops = "pokestops"
     static let arenas = "arenas"
+    static let registeredUsersPokestops = "registeredUsersPokestops"
+    static let registeredUsersArenas = "registeredUsersArenas"
     static let raidMeetups = "raidMeetups"
     static let users = "users"
     static let quest = "quest"
@@ -78,7 +80,7 @@ enum PoiType {
             case .pokestop:
                 return DatabaseKeys.subscribedGeohashPokestops
             case .arena:
-                return DatabaseKeys.subscribedGeohashPokestops
+                return DatabaseKeys.subscribedGeohashArenas
             }
         }
     }
