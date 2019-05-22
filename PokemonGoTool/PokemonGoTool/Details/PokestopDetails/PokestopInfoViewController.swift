@@ -13,6 +13,6 @@ class PokestopInfoViewController: UIViewController, StoryboardInitialViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         coordianteLabel.text = "\(viewModel.coordinate.latitude), \(viewModel.coordinate.longitude)"
-        submitterLabel.text = viewModel.submitter
+        viewModel.pokestopSubmitterName(completion: { self.submitterLabel.text = $0 })
     }
 }

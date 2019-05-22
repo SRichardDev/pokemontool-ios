@@ -15,6 +15,7 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
         titleLabel.style = 2
         titleLabel.numberOfLines = 0
         titleLabel.text = viewModel.pokestop.name
+        titleLabel.textAlignment = .center
         
         let questViewController = PokestopQuestViewController.fromStoryboard()
         questViewController.viewModel = viewModel

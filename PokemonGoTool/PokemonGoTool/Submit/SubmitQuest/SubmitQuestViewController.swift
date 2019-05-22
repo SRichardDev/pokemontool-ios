@@ -25,9 +25,6 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
         tableView.delegate = self
         tableView.dataSource = self
         quests = firebaseConnector.quests
-//        firebaseConnector.loadQuests { quests in
-//            self.quests = quests
-//        }
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -102,27 +99,17 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchController.dismiss(animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! SubmitQuestCell
-        guard let questName = cell.titleLabel.text else { fatalError() }
-        guard let reward = cell.subtitleLabel.text else { fatalError() }
-        guard let trainerName = firebaseConnector.user?.publicData?.trainerName else {
-            let alert = UIAlertController(title: "Fehler",
-                                          message: "Bitte registriere dich um Feldforschungen einzureichen",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            present(alert, animated: true)
-            return
-        }
+        guard let userId = firebaseConnector.user?.id else { NotificationBannerManager.shared.show(.unregisteredUser); return}
         guard let questDefinition = cell.quest else { fatalError() }
         
         let quest = Quest(definitionId: questDefinition.id ?? "??",
-                          name: questName,
-                          reward: reward,
-                          submitter: trainerName)
+                          submitter: userId)
         
-        firebaseConnector.saveQuest(quest: quest,
-                                    for: pokestop)
-        dismiss(animated: true, completion: nil)
+        firebaseConnector.saveQuest(quest: quest, for: pokestop)
+        NotificationBannerManager.shared.show(.questSubmitted)
+        dismiss(animated: true)
     }
 }
 
@@ -133,10 +120,6 @@ class SubmitQuestCell: UITableViewCell {
     @IBOutlet var subtitleLabel: Label!
     
     var quest: QuestDefinition!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }
 
 extension SubmitQuestViewController: UISearchResultsUpdating {

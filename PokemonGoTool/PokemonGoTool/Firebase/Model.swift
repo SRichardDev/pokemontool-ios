@@ -29,6 +29,7 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
     var longitude: Double
     var submitter: String
     var id: String!
+    var questId: String?
     var quest: Quest?
     var upVotes: Int?
     var downVotes: Int?
@@ -73,8 +74,6 @@ func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
 
 struct Quest: Codable, Equatable {
     let definitionId: String
-    let name: String
-    let reward: String
     let submitter: String
     var timestamp: Double?
     
@@ -92,10 +91,8 @@ struct Quest: Codable, Equatable {
         }
     }
     
-    init(definitionId: String, name: String, reward: String, submitter: String) {
+    init(definitionId: String, submitter: String) {
         self.definitionId = definitionId
-        self.name = name
-        self.reward = reward
         self.submitter = submitter
     }
 }

@@ -10,6 +10,8 @@ enum NotificationBannerType {
     case pushRegistration
     case pushNotification
     case addFriend
+    case unregisteredUser
+    case questSubmitted
 }
 
 class NotificationBannerManager {
@@ -66,6 +68,16 @@ class NotificationBannerManager {
                                                subtitle: "Füge den Code nun in Pokémon GO ein",
                                                leftView: UIImageView(image: UIImage(named: "addFriend")),
                                                style: .info)
+        case .unregisteredUser:
+            currentBanner = NotificationBanner(title: "Fehler",
+                                               subtitle: "Bitte registriere dich um diese Funktion zu nutzen",
+                                               leftView: UIImageView(image: UIImage(named: "cross")),
+                                               style: .danger)
+        case .questSubmitted:
+            currentBanner = NotificationBanner(title: "Vielen Dank!",
+                                               subtitle: "Die Feldforschung wurde eingereicht",
+                                               leftView: UIImageView(image: UIImage(named: "checkmark")),
+                                               style: .success)
         }
         
         currentBanner?.show()

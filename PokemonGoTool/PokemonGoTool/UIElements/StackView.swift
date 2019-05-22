@@ -38,7 +38,7 @@ class InnerVerticalStackView: OuterVerticalStackView {
     
     override func setup() {
         axis = .vertical
-        spacing = 10
+        spacing = 15
         distribution = .equalSpacing
         translatesAutoresizingMaskIntoConstraints = false
     }
