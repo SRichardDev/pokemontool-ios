@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ERV-en-bJu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ERV-en-bJu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="ERV-en-bJu" customClass="RaidHatchTimePickerViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nr2-2K-3la">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nhH-ka-Ee5">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-nP-ddG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -33,26 +33,30 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwU-2L-0cT">
-                                        <rect key="frame" x="0.0" y="20.5" width="375" height="169.5"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="375" height="171.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZK-F5-JNz">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="169.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="171.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="75" id="ZF2-82-DjV"/>
                                                 </constraints>
                                             </view>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-0J-wmE">
-                                                <rect key="frame" x="75" y="0.0" width="225" height="169.5"/>
+                                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b1p-54-RDg">
+                                                <rect key="frame" x="75" y="0.0" width="0.0" height="171.5"/>
+                                            </pickerView>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-0J-wmE">
+                                                <rect key="frame" x="75" y="0.0" width="225" height="171.5"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="570669448.518489">
                                                     <!--2019-01-31 23:17:28 +0000-->
                                                 </date>
+                                                <locale key="locale" localeIdentifier="de_DE"/>
                                                 <connections>
                                                     <action selector="timePickerDidChange:" destination="ERV-en-bJu" eventType="valueChanged" id="bmG-2s-bee"/>
                                                 </connections>
                                             </datePicker>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APm-fc-krj">
-                                                <rect key="frame" x="300" y="0.0" width="75" height="169.5"/>
+                                                <rect key="frame" x="300" y="0.0" width="75" height="171.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -60,6 +64,19 @@
                                             <constraint firstItem="sZK-F5-JNz" firstAttribute="width" secondItem="APm-fc-krj" secondAttribute="width" id="bgs-SC-y6B"/>
                                         </constraints>
                                     </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IMl-Xc-hgT">
+                                        <rect key="frame" x="0.0" y="192" width="375" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" placeholder="YES" id="SgV-zU-oI0"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="timeFormatSegmentedControlDidChange:" destination="ERV-en-bJu" eventType="valueChanged" id="mQZ-e3-1UG"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -72,9 +89,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gy1-ow-giz"/>
                     </view>
-                    <size key="freeformSize" width="375" height="190"/>
+                    <size key="freeformSize" width="375" height="225"/>
                     <connections>
-                        <outlet property="pickerView" destination="dgm-0J-wmE" id="ZXP-UD-ff3"/>
+                        <outlet property="hatchTimePointPicker" destination="dgm-0J-wmE" id="ZXP-UD-ff3"/>
+                        <outlet property="timeFormatSegmentedControl" destination="IMl-Xc-hgT" id="aWk-O8-QdY"/>
+                        <outlet property="timeLeftEggHatchesPicker" destination="b1p-54-RDg" id="syo-by-Lhy"/>
                         <outlet property="titleLabel" destination="zq7-to-c1o" id="Cg4-OY-EMK"/>
                     </connections>
                 </viewController>
