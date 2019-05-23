@@ -9,36 +9,44 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
     const geohash = context.params.geohash;
     const arena = snapshot.after.val();
     const raid = arena.raid;
+    const raidBossId = raid.raidBossId || '---'
 
-    return admin.database().ref('/registeredUsersArenas/' + geohash).once('value', (snapshot, context) => {
-        snapshot.forEach((child) => {
-            const userId = child.key
-            console.log('Pushing to userID: ' + userId)
+    //Get registred users
+    return admin.database().ref('/registeredUsersArenas/' + geohash).once('value', (registeredUsersSnapshot, context) => {
 
-            admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value', (snapshot, context) => {
+        //Get Raidboss
+        admin.database().ref('/raidBosses/' + raidBossId).once('value', (raidBossSnapshot, context) => { 
+            const raidBossName = (raidBossSnapshot.val() && raidBossSnapshot.val().name) || '---'
 
-                const raidMeetupTime = (snapshot.val() && snapshot.val().meetupTime) || '---'
-                const raidBoss = raid.raidBoss || '---'
+            //Get Meetup
+            admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value', (meetupSnapshot, context) => {
+                const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '---'
 
-                admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+                //Loop through users
+                registeredUsersSnapshot.forEach((child) => {
+                    const userId = child.key
+                    console.log('Pushing to userID: ' + userId)
+        
+                    admin.database().ref('/users/' + userId).once('value', (usersSnapshot, context) => { 
 
-                    const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token'
-                    const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBoss + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
+                        const notificationToken = (usersSnapshot.val() && usersSnapshot.val().notificationToken) || 'No token'
+                        const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
 
-                    const payload = {
-                        notification: {
-                            title: 'Neuer Raid bei: ' + arena.name,
-                            body: message,
-                            sound: 'default'
-                        },
-                        data: {
-                            latitude: String(arena.latitude),
-                            longitude: String(arena.longitude)
-                        }
-                    };
-                
-                    admin.messaging().sendToDevice(notificationToken, payload)
-                    return true
+                        const payload = {
+                            notification: {
+                                title: 'Neuer Raid bei: ' + arena.name,
+                                body: message,
+                                sound: 'default'
+                            },
+                            data: {
+                                latitude: String(arena.latitude),
+                                longitude: String(arena.longitude)
+                            }
+                        };
+                    
+                        admin.messaging().sendToDevice(notificationToken, payload)
+                        return true
+                    });
                 });
             });
         });
