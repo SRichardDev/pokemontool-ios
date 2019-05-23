@@ -275,20 +275,12 @@ class FirebaseConnector {
     }
     
     func userCanceled(in meetup: RaidMeetup) {
-        if let userKeys = meetup.participants?.keys {
-            if let participants = meetup.participants {
-                userKeys.forEach { userKey in
-                    guard let userId = user?.id else { fatalError() }
-                    if participants[userId] != nil {
-                        raidMeetupsRef
-                            .child(meetup.id)
-                            .child(DatabaseKeys.participants)
-                            .child(userKey)
-                            .removeValue()
-                    }
-                }
-            }
-        }
+        guard let userId = user?.id else { fatalError() }
+        raidMeetupsRef
+            .child(meetup.id)
+            .child(DatabaseKeys.participants)
+            .child(userId)
+            .removeValue()
     }
 
     func sendMessage(_ message: ChatMessage, in arena: inout Arena) {
