@@ -42,7 +42,7 @@ class NotificationBannerManager {
         case .firebaseAuthSuccess:
             currentBanner = NotificationBanner(title: title,
                                                subtitle: message,
-                                               style: .danger)
+                                               style: .success)
         case .firebaseAuthFailure:
             currentBanner = NotificationBanner(title: title,
                                                subtitle: message,

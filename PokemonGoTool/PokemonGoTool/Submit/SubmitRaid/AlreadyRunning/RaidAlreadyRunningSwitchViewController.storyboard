@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dee-tD-OcB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dee-tD-OcB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,35 +18,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-pE-5MF">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gL-A0-aTA" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raid läuft bereits?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-4R-adI" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                <integer key="value" value="0"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0OW-fQ-dDH">
-                                        <rect key="frame" x="326" y="0.0" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="switchToggled:" destination="dee-tD-OcB" eventType="valueChanged" id="s2e-pW-c7x"/>
-                                        </connections>
-                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-pE-5MF">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raid läuft bereits?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-4R-adI" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="326" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0OW-fQ-dDH">
+                                                <rect key="frame" x="326" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="switchToggled:" destination="dee-tD-OcB" eventType="valueChanged" id="s2e-pW-c7x"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="dGL-pE-5MF" firstAttribute="bottom" secondItem="6sK-P5-SsL" secondAttribute="bottom" id="42p-UZ-4Fz"/>
-                            <constraint firstItem="6sK-P5-SsL" firstAttribute="trailing" secondItem="dGL-pE-5MF" secondAttribute="trailing" id="S8m-HY-HLX"/>
-                            <constraint firstItem="dGL-pE-5MF" firstAttribute="top" secondItem="6sK-P5-SsL" secondAttribute="top" id="acF-ig-xQU"/>
-                            <constraint firstItem="dGL-pE-5MF" firstAttribute="leading" secondItem="6sK-P5-SsL" secondAttribute="leading" id="eZZ-Xa-5Lu"/>
+                            <constraint firstItem="1gL-A0-aTA" firstAttribute="top" secondItem="6sK-P5-SsL" secondAttribute="top" id="0Jh-WG-XAB"/>
+                            <constraint firstItem="1gL-A0-aTA" firstAttribute="bottom" secondItem="6sK-P5-SsL" secondAttribute="bottom" id="9vk-Nf-brg"/>
+                            <constraint firstItem="6sK-P5-SsL" firstAttribute="trailing" secondItem="1gL-A0-aTA" secondAttribute="trailing" id="dCh-Yv-rHE"/>
+                            <constraint firstItem="1gL-A0-aTA" firstAttribute="leading" secondItem="6sK-P5-SsL" secondAttribute="leading" id="xOH-Ba-t68"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6sK-P5-SsL"/>
                     </view>

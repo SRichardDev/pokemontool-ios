@@ -18,31 +18,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wxa-WZ-jfx">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N3f-gH-hKB" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gold Arena:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-XV-kFh" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="15" width="357" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-lQ-Edp">
-                                        <rect key="frame" x="365" y="9.5" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="goldArenaSwitchChanged:" destination="Mwf-wv-dy1" eventType="valueChanged" id="jci-k8-gdT"/>
-                                        </connections>
-                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wxa-WZ-jfx">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gold Arena:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-XV-kFh" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="15" width="357" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-lQ-Edp">
+                                                <rect key="frame" x="365" y="9.5" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="goldArenaSwitchChanged:" destination="Mwf-wv-dy1" eventType="valueChanged" id="jci-k8-gdT"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <viewLayoutGuide key="safeArea" id="zsq-ID-fUE"/>
+                                    </stackView>
                                 </subviews>
-                                <viewLayoutGuide key="safeArea" id="zsq-ID-fUE"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="trailing" secondItem="wxa-WZ-jfx" secondAttribute="trailing" id="BSR-cK-OqG"/>
-                            <constraint firstItem="wxa-WZ-jfx" firstAttribute="top" secondItem="3Sb-JR-m2a" secondAttribute="top" id="EJu-QV-rM4"/>
-                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="bottom" secondItem="wxa-WZ-jfx" secondAttribute="bottom" id="IX2-JC-T5H"/>
-                            <constraint firstItem="wxa-WZ-jfx" firstAttribute="leading" secondItem="3Sb-JR-m2a" secondAttribute="leading" id="Lnf-0g-Lvg"/>
+                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="bottom" secondItem="N3f-gH-hKB" secondAttribute="bottom" id="53d-en-JTc"/>
+                            <constraint firstItem="N3f-gH-hKB" firstAttribute="leading" secondItem="3Sb-JR-m2a" secondAttribute="leading" id="M23-O6-hZr"/>
+                            <constraint firstItem="N3f-gH-hKB" firstAttribute="top" secondItem="3Sb-JR-m2a" secondAttribute="top" id="avS-tP-a62"/>
+                            <constraint firstItem="3Sb-JR-m2a" firstAttribute="trailing" secondItem="N3f-gH-hKB" secondAttribute="trailing" id="gns-w2-X9h"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Sb-JR-m2a"/>
                     </view>

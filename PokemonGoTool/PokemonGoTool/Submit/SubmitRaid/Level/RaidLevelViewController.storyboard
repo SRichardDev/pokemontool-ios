@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GFO-f1-pFw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GFO-f1-pFw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YOe-Zj-now">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YOe-Zj-now" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feW-iw-iwb" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
@@ -35,35 +35,35 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynJ-YL-oED" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ynJ-YL-oED" secondAttribute="height" multiplier="1:1" id="xcr-bA-tqA"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru5-Dl-oic" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
                                                         <rect key="frame" x="80" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ru5-Dl-oic" secondAttribute="height" multiplier="1:1" id="pAg-Yg-g0p"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pkt-uv-3pq" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
                                                         <rect key="frame" x="160" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Pkt-uv-3pq" secondAttribute="height" multiplier="1:1" id="i0b-Ve-4k9"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpa-5D-2CE" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
                                                         <rect key="frame" x="240" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="tpa-5D-2CE" secondAttribute="height" multiplier="1:1" id="eZa-JH-inK"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2C-Kd-Ma2" customClass="LevelSelectionButtonView" customModule="PokemonGoTool" customModuleProvider="target">
                                                         <rect key="frame" x="320" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="I2C-Kd-Ma2" secondAttribute="height" multiplier="1:1" id="hps-Fh-4Cv"/>
                                                         </constraints>
@@ -126,7 +126,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="5V4-3W-UIy" firstAttribute="leading" secondItem="wRg-ke-Pjx" secondAttribute="leading" id="2iV-l8-wnm"/>
                                             <constraint firstAttribute="trailing" secondItem="9XW-Jd-2A2" secondAttribute="trailing" id="AOl-hz-v2w"/>
@@ -174,10 +174,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="level_1" width="30" height="30"/>
-        <image name="level_2" width="30" height="30"/>
-        <image name="level_3" width="30" height="30"/>
-        <image name="level_4" width="30" height="30"/>
-        <image name="level_5" width="30" height="30"/>
+        <image name="level_1" width="32" height="32"/>
+        <image name="level_2" width="32" height="32"/>
+        <image name="level_3" width="32" height="32"/>
+        <image name="level_4" width="32" height="32"/>
+        <image name="level_5" width="32" height="32"/>
     </resources>
 </document>
