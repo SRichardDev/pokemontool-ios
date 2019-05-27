@@ -318,6 +318,7 @@ class FirebaseConnector {
     func userName(for id: String, completion: @escaping (String) -> ()) {
         usersRef
             .child(id)
+            .child(DatabaseKeys.publicUserData)
             .child(DatabaseKeys.trainerName)
             .observeSingleEvent(of: .value) { snapshot in
             if let trainerName = snapshot.value as? String {
