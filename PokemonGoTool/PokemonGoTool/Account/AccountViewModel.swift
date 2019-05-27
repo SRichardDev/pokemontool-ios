@@ -41,6 +41,12 @@ class AccountViewModel {
         }
     }
     
+    var isPushActivated: Bool {
+        get {
+            return firebaseConnector.user?.isPushActive ?? false
+        }
+    }
+    
     init(firebaseConnector: FirebaseConnector) {
         self.firebaseConnector = firebaseConnector
     }
@@ -61,5 +67,9 @@ class AccountViewModel {
     func updateTrainerCode(_ code: String) {
         guard code != "" else { return }
         firebaseConnector.user?.updateTrainerCode(code)
+    }
+    
+    func pushActivatedChanged(_ activated: Bool) {
+        firebaseConnector.user?.activatePush(activated)
     }
 }

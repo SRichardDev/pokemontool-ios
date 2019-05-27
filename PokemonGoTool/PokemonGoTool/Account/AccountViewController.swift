@@ -11,6 +11,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     private let accountWelcomeViewController = AccountWelcomeViewController.fromStoryboard()
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
     private let accountMedalViewController = AccountMedalViewController.fromStoryboard()
+    private let pushActiveSwitchViewController = AccountPushActiveSwitchViewController.fromStoryboard()
     private let changeDetailsButton = Button()
     private let createAccountButton = Button()
     private let signInButton = Button()
@@ -21,6 +22,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         
         accountOverviewViewController.viewModel = viewModel
         accountMedalViewController.viewModel = viewModel.accountMedalViewModel
+        pushActiveSwitchViewController.viewModel = viewModel
         
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction(for: .touchUpInside) { [weak self] in
@@ -42,6 +44,8 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
         stackView.addArrangedSubview(changeDetailsButton)
         stackView.addSepartor()
+        stackView.addArrangedViewController(viewController: pushActiveSwitchViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: accountMedalViewController, to: self)
         stackView.addArrangedSubview(signInButton)
         stackView.addArrangedSubview(createAccountButton)
@@ -51,6 +55,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         super.viewWillAppear(animated)
         updateUI()
 
+        #warning("FIX ME")
 //        Auth.auth().currentUser?.getIDTokenForcingRefresh(true, completion: { _, _ in
 //            Auth.auth().currentUser?.reload(completion: { error in
 //                DispatchQueue.main.async {

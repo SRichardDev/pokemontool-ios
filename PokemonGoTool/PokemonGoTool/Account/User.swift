@@ -81,6 +81,7 @@ class User: FirebaseCodable, Equatable {
     var submittedQuests: Int?
     var subscribedGeohashPokestops: [String: String]?
     var subscribedGeohashArenas: [String: String]?
+    var isPushActive: Bool? = true
 
     var teamName: String? {
         get {
@@ -108,7 +109,8 @@ class User: FirebaseCodable, Equatable {
          submittedQuests: Int? = nil,
          subscribedGeohashPokestops: [String: String]? = nil,
          subscribedGeohashArenas: [String: String]? = nil,
-         notificationToken: String? = nil) {
+         notificationToken: String? = nil,
+         isPushActive: Bool = true) {
         
         self.id = id
         self.email = email
@@ -121,6 +123,7 @@ class User: FirebaseCodable, Equatable {
         self.subscribedGeohashPokestops = subscribedGeohashPokestops
         self.subscribedGeohashArenas = subscribedGeohashArenas
         self.notificationToken = notificationToken
+        self.isPushActive = isPushActive
     }
     
     func updateTrainerName(_ name: String) {
@@ -237,6 +240,14 @@ class User: FirebaseCodable, Equatable {
             .removeValue()
     }
     
+    func activatePush(_ activated: Bool) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [DatabaseKeys.pushActive : activated]
+        usersRef
+            .child(userId)
+            .updateChildValues(data)
+    }
+    
     class func load(completion: @escaping (User?) -> ()) {
         let usersRef = Database.database().reference(withPath: "users")
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -289,7 +300,8 @@ class User: FirebaseCodable, Equatable {
             
             let user = User(id: firebaseUser.uid,
                             email: firebaseUser.email!,
-                            publicData: publicUserData)
+                            publicData: publicUserData,
+                            isPushActive: true)
             
             let data = try! FirebaseEncoder().encode(user)
             let ref = Database.database().reference(withPath: "users").child(firebaseUser.uid)
