@@ -29,6 +29,7 @@ class AnnotationView: CustomAnnotationView {
     
     private func loadDetailAnnotationView() -> DetailAnnotationView? {
         guard let annotation = customAnnotation else { return nil }
+        guard isUserInteractionEnabled else { return nil }
         if let views = Bundle.main.loadNibNamed("DetailAnnotationView",
                                                 owner: self,
                                                 options: nil) as? [DetailAnnotationView], views.count > 0 {

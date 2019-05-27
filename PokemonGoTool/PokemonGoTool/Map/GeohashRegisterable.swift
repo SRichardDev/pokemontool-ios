@@ -16,8 +16,7 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         mapView.isZoomEnabled = false
         tabBarController?.tabBar.isHidden = true
         
-        setMapRegion(distance: 3500, animated: false)
-        currentGeohashes?.forEach { addPolyLine(for: Geohash.geohashbox($0)) }
+        setMapRegion(distance: 3500, animated: true)
         
         let submitButton = CircleButton(type: .custom)
         submitButton.type = .accept
@@ -36,6 +35,12 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         
         let menuView = showBottomMenu([cancelButton, submitButton])
         menuView.tag = ViewTags.geohashRegistrationStackView
+        
+        mapView.annotations.forEach({ self.mapView.view(for: $0)?.isUserInteractionEnabled = false })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            currentGeohashes?.forEach { self.addPolyLine(for: Geohash.geohashbox($0)) }
+        }
     }
     
     func endGeohashRegistration() {
@@ -44,6 +49,7 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         guard let stackView = view.viewWithTag(ViewTags.geohashRegistrationStackView) else { return }
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in stackView.removeFromSuperview() }
         mapView.removeOverlays(mapView.overlays)
+        mapView.annotations.forEach({ self.mapView.view(for: $0)?.isUserInteractionEnabled = true })
     }
     
     func addPolyLine(for geohashBox: GeohashBox?) {
