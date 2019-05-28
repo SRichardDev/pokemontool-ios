@@ -99,7 +99,6 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchController.dismiss(animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! SubmitQuestCell
         guard let userId = firebaseConnector.user?.id else { NotificationBannerManager.shared.show(.unregisteredUser); return}
         guard let questDefinition = cell.quest else { fatalError() }
@@ -109,6 +108,7 @@ extension SubmitQuestViewController: UITableViewDelegate, UITableViewDataSource 
         
         firebaseConnector.saveQuest(quest: quest, for: pokestop)
         NotificationBannerManager.shared.show(.questSubmitted)
+        searchController.dismiss(animated: true)
         dismiss(animated: true)
     }
 }
