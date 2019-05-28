@@ -12,7 +12,11 @@ protocol SubmitRaidDelegate: class {
     func update(of type: SubmitRaidUpdateType)
 }
 
-class SubmitRaidViewModel {
+protocol MeetupTimeSelectable {
+    var selectedMeetupTime: String { get set }
+}
+
+class SubmitRaidViewModel: MeetupTimeSelectable {
     
     weak var delegate: SubmitRaidDelegate?
     var arena: Arena

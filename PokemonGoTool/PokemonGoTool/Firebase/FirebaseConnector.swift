@@ -37,6 +37,7 @@ class FirebaseConnector {
     }
     
     init() {
+        questsRef.keepSynced(true)
         checkConnectivity()
         loadInitialData()
     }
@@ -248,11 +249,14 @@ class FirebaseConnector {
                 .child(meetupId)
                 .child(DatabaseKeys.participants)
                 .updateChildValues(data)
-        } else {
-            let meetupId = saveRaidMeetup(raidMeetup: RaidMeetup())
-            associateMeetupIdToRaid(id: meetupId, arena: &arena)
-            saveUserInRaidMeetup(for: meetupId)
         }
+        return arena
+    }
+    
+    func createRaidMeetup(for arena: inout Arena, meetupTime: String) -> Arena {
+        let meetupId = saveRaidMeetup(raidMeetup: RaidMeetup(meetupTime: meetupTime))
+        associateMeetupIdToRaid(id: meetupId, arena: &arena)
+        saveUserInRaidMeetup(for: meetupId)
         return arena
     }
     

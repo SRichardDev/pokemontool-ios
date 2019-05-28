@@ -8,13 +8,14 @@ enum ArenaDetailsUpdateType {
     case timeLeftChanged(_ timeLeft: String)
     case hatchTimeLeftChanged(_ timeLeft: String)
     case goldArenaChanged(isGold: Bool)
+    case createRaidMeetup
 }
 
 protocol ArenaDetailsDelegate: class {
     func update(of type: ArenaDetailsUpdateType)
 }
 
-class ArenaDetailsViewModel {
+class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     var firebaseConnector: FirebaseConnector
     weak var delegate: ArenaDetailsDelegate?
@@ -30,7 +31,8 @@ class ArenaDetailsViewModel {
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
-    
+    var selectedMeetupTime: String = ""
+
     var title: String {
         get {
             let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
@@ -64,7 +66,7 @@ class ArenaDetailsViewModel {
     
     var hasActiveMeetup: Bool {
         get {
-            return arena.raid?.raidMeetupId != nil && participants.count > 0 && !(arena.raid?.isExpired ?? true)
+            return arena.raid?.raidMeetupId != nil && !(arena.raid?.isExpired ?? true)
         }
     }
     
@@ -114,14 +116,26 @@ class ArenaDetailsViewModel {
     }
         
     func userParticipates(_ isParticipating: Bool) {
+        
+        guard let meetup = meetup else {
+            delegate?.update(of: .createRaidMeetup)
+            return
+        }
+        
         if isParticipating {
             guard let raid = arena.raid else { fatalError() }
             self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
             print("🏟 User participates in meetup")
         } else {
-            firebaseConnector.userCanceled(in: meetup!)
+            firebaseConnector.userCanceled(in: meetup)
             print("🏟 User canceled meetup")
         }
+    }
+    
+    func createRaidMeetup() {
+        self.arena = firebaseConnector.createRaidMeetup(for: &arena, meetupTime: selectedMeetupTime)
+        guard let meetupId = arena.raid?.raidMeetupId else { return }
+        firebaseConnector.observeRaidMeetup(for: meetupId)
     }
     
     func changeGoldArena(isGold: Bool) {

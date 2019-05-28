@@ -3,7 +3,7 @@ import UIKit
 
 class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialViewController {
     
-    var viewModel: SubmitRaidViewModel!
+    var viewModel: MeetupTimeSelectable!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var pickerView: UIDatePicker!
     
