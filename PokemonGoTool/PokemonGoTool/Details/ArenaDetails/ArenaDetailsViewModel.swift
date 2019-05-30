@@ -91,6 +91,18 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         }
     }
     
+    var hatchTime: String {
+        get {
+            return arena.raid?.hatchTime ?? "00:00"
+        }
+    }
+    
+    var endTime: String {
+        get {
+            return arena.raid?.endTime ?? "00:00"
+        }
+    }
+    
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector

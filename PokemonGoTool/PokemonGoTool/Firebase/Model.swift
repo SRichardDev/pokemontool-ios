@@ -180,7 +180,7 @@ struct Raid: Codable, Equatable {
     
     var isSubmittedBeforeHatchTime: Bool {
         get {
-            return hatchTime != nil && timeLeft != nil
+            return hatchTime != nil
         }
     }
     
@@ -212,38 +212,25 @@ struct Raid: Codable, Equatable {
     
     var hatchDate: Date? {
         get {
-            
             if hatchTime == nil {
-                let minutes = 45 - Int(timeLeft?.double ?? 0)
-                let calendar = Calendar.current
-                guard let submitDate = submitDate else { return nil }
-                let date = calendar.date(byAdding: .minute, value: -minutes, to: submitDate)
-                return date
+                guard let endDate = endDate else { return nil }
+                let end = Calendar.current.date(byAdding: .minute, value: -45, to: endDate)
+                return end
             }
             
             guard let hatchTime = hatchTime, let submitDate = submitDate else { return nil }
             guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return nil }
+            let hatchDate = DateUtility.date(for: hatchTime)
             
-            let hoursAndMinutesUntilHatch = hatchTime.components(separatedBy: ":")
-            guard let hours = Int(hoursAndMinutesUntilHatch[0]) else { fatalError() }
-            guard let minutes = Int(hoursAndMinutesUntilHatch[1]) else { fatalError() }
-            let hatchDate = Calendar.current.date(bySettingHour: hours,
-                                                  minute: minutes,
-                                                  second: 0,
-                                                  of: Date())
             return hatchDate
         }
     }
     
     var endDate: Date? {
         get {
-            guard let timeLeft = timeLeft?.double else { return nil }
-            
-            if let hatchDate = hatchDate {
-                return hatchDate.addingTimeInterval(45 * 60)
-            } else {
-                return submitDate?.addingTimeInterval(timeLeft * 60)
-            }
+            guard let endTime = endTime else { return nil }
+            let endDate = DateUtility.date(for: endTime)
+            return endDate
         }
     }
     
@@ -251,7 +238,7 @@ struct Raid: Codable, Equatable {
     let level: Int
     var hatchTime: String?
     var raidBossId: String?
-    var timeLeft: String?
+    var endTime: String?
     var raidMeetupId: String?
     var submitDate: Date? {
         get {
@@ -259,32 +246,32 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    init(level: Int, hatchTime: String, raidBoss: String? = nil, raidMeetupId: String?) {
+    init(level: Int, hatchTime: String, endTime: String, raidBoss: String? = nil, raidMeetupId: String?) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBossId = raidBoss
         self.raidMeetupId = raidMeetupId
-        self.timeLeft = "45"
+        self.endTime = endTime
     }
     
-    init(level: Int, hatchTime: String, raidBoss: String? = nil) {
+    init(level: Int, hatchTime: String, endTime: String, raidBoss: String? = nil) {
         self.level = level
         self.hatchTime = hatchTime
         self.raidBossId = raidBoss
-        self.timeLeft = "45"
+        self.endTime = endTime
     }
     
-    init(level: Int, raidBoss: String? = nil, timeLeft: String, raidMeetupId: String?) {
+    init(level: Int, raidBoss: String? = nil, endTime: String, raidMeetupId: String?) {
         self.level = level
         self.raidBossId = raidBoss
-        self.timeLeft = timeLeft
+        self.endTime = endTime
         self.raidMeetupId = raidMeetupId
     }
     
-    init(level: Int, raidBoss: String? = nil, timeLeft: String) {
+    init(level: Int, raidBoss: String? = nil, endTime: String) {
         self.level = level
         self.raidBossId = raidBoss
-        self.timeLeft = timeLeft
+        self.endTime = endTime
     }
 }
 

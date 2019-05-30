@@ -139,6 +139,7 @@
 		2CC2EDEE222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */; };
 		2CC8D7F2229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F1229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard */; };
 		2CC8D7F4229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F3229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift */; };
+		2CC8D7F6229FEBC200AF77D7 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */; };
 		2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */; };
 		2CDFDDDF21ED2BC100170A46 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */; };
 		2CDFDDE121ED306F00170A46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFDDE021ED306F00170A46 /* LocationManager.swift */; };
@@ -289,6 +290,7 @@
 		2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		2CC8D7F1229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountPushActiveSwitchViewController.storyboard; sourceTree = "<group>"; };
 		2CC8D7F3229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPushActiveSwitchViewController.swift; sourceTree = "<group>"; };
+		2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CDFDDDE21ED2BC100170A46 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2CDFDDE021ED306F00170A46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				2C34F1AB220B990600B3B99C /* UIButton+Extension.swift */,
 				2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */,
 				2C84B9FA2214C83E00BE433B /* MKAnnotationView+Extension.swift */,
+				2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				2C5E5705227778B9002E00B0 /* PoiSubmissable.swift in Sources */,
 				2C395A512205FCA3005330B8 /* RaidAlreadyRunningSwitchViewController.swift in Sources */,
 				2CBC0A00227F7BEF00135473 /* Constants.swift in Sources */,
+				2CC8D7F6229FEBC200AF77D7 /* DateUtility.swift in Sources */,
 				2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */,
 				2C870DD922135C60000F2268 /* MapViewController+Extension.swift in Sources */,
 				2C84B9F92214C22A00BE433B /* Pulsator.swift in Sources */,
