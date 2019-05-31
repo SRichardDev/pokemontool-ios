@@ -10,6 +10,7 @@ class ArenaDetailsMeetupTimeViewController: UIViewController, StoryboardInitialV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Treffpunkt:"
     }
     
     func updateUI() {

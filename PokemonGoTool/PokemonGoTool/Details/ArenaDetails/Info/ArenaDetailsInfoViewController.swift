@@ -11,6 +11,8 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        coordinateTitleLabel.text = "Koordinaten:"
+        submitterTitleLabel.text = "Hinzugefügt von:"
         coordinateLabel.text = "\(viewModel.arena.latitude), \(viewModel.arena.longitude)"
         viewModel.submitterName { self.submitterLabel.text = $0 }
     }

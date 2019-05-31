@@ -81,11 +81,20 @@
 //
 "pokestop_details_title" = "Pokéstop";
 "pokestop_details_active_quest_title" = "Aktive Quest:";
-"pokestop_details_reward_title" = "Belohnung:";
-"pokestop_details_submitter_title" = "Eingereicht von:";
+"pokestop_details_quest_reward_title" = "Belohnung:";
+"pokestop_details_quest_submitter_title" = "Eingereicht von:";
+"pokestop_details_coordinates_title" = "Koordinaten:";
+"pokestop_details_submitter_title" = "Hinzugefügt von:";
 
-
-
+//
+//Arena Details
+//
+"arena_details_title" = "Arena";
+"arena_details_active_raid_title" = "Level %@ Raid";
+"arena_details_raid_expired_title" = "Raid bereits abgelaufen";
+"arena_details_coordinates_title" = "Koordinaten:";
+"arena_details_submitter_title" = "Hinzugefügt von:";
+"arena_details_gold_arena_title" = "Gold Arena:";
 
 
 
