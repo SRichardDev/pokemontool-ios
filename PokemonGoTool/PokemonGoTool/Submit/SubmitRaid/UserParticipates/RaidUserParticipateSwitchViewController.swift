@@ -9,6 +9,7 @@ class RaidUserParticipateSwitchViewController: UIViewController, StoryboardIniti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Nimmst du teil am Raid?"
         switchControl.isOn = viewModel.isUserParticipating
     }
     

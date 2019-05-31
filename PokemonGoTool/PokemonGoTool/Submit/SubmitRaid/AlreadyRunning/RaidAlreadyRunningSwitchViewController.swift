@@ -9,6 +9,7 @@ class RaidAlreadyRunningSwitchViewController: UIViewController, StoryboardInitia
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Raid läuft bereits?"
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {

@@ -15,6 +15,11 @@ class PokestopQuestViewController: UIViewController, StoryboardInitialViewContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activeQuestLabel.text = "Aktive Quest:"
+        rewardTitleLabel.text = "Belohnung:"
+        submitterTitleLabel.text = "Eingereicht von:"
+        
         activeQuestLabel.text = viewModel.questDefinition?.quest
         rewardLabel.text = viewModel.questDefinition?.reward
         rewardImageView.image = viewModel.questDefinition?.image

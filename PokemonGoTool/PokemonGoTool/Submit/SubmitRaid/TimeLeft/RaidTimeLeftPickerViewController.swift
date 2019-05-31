@@ -17,10 +17,10 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
             return array.reversed()
         }
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Wieviele Minuten läuft der Raid noch?"
         pickerView.delegate = self
         pickerView.dataSource = self
     }

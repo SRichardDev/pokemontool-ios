@@ -23,6 +23,8 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        titleLabel.text = "Schlüpft:"
+        
         timeLeftEggHatchesPicker.delegate = self
         timeLeftEggHatchesPicker.dataSource = self
         

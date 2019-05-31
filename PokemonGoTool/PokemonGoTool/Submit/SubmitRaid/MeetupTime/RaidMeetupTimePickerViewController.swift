@@ -9,6 +9,7 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Treffpunkt:"
         pickerView.datePickerMode = .time
         pickerView.timeZone = TimeZone.current
         let originalDate = Date()

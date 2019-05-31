@@ -1,0 +1,105 @@
+//
+//Banner
+//
+
+"banner_connected_to_server_title" = "Vebunden zum Server";
+"banner_connected_to_server_description" = "Viel Spaß Trainer!";
+
+"banner_disconnected_from_server_title" = "Keine Verbindung zum Server";
+"banner_disconnected_from_server_description" = "Prüfe bitte deine Internetverbindung";
+
+"banner_add_poi_title" = "Pokéstop / Arena hinzufügen";
+"banner_add_poi_description" = "Schiebe die Karte um die Position anzupassen";
+
+"banner_push_registration_title" = "Push Registrierung";
+"banner_push_registration_description" = "Wähle den Bereich aus für den du Benachrichtigt werden möchtest";
+
+"banner_friend_code_copied_title" = "Freundes-Code kopiert";
+"banner_friend_code_copied_description" = "Füge den Code nun in Pokémon GO ein";
+
+"banner_unregistered_user_title" = "Fehler";
+"banner_unregistered_user_description" = "Bitte registriere dich um diese Funktion zu nutzen";
+
+"banner_submitted_quest_title" = "Vielen Dank!";
+"banner_submitted_quest_description" = "Die Feldforschung wurde eingereicht";
+
+"banner_maptype_changed_title" = "Kartentyp geändert";
+
+
+//
+//Tabbar
+//
+"tabbar_item_map_title" = "Karte";
+"tabbar_item_account_title" = "Account";
+
+
+//
+//Filter
+//
+"filter_title" = "Filter";
+"filter_arenas_title" = "Arenas";
+"filter_only_ex_arenas_title" = "Nur EX";
+"filter_only_with_raid_arenas_title" = "Nur mit Raid";
+"filter_pokestops_title" = "Pokestops";
+"filter_only_with_quest_pokestops_title" = "Nur mit Quest";
+
+
+//
+//Submit Quest
+//
+"quests_title" = "Neue Quest";
+"quests_searchbar_placeholder" = "Quests durchsuchen";
+"quests_search_scope_all" = "Alle";
+"quests_search_scope_catch" = "Fange";
+"quests_search_scope_land" = "Lande";
+"quests_search_scope_win" = "Gewinne";
+
+//
+//Submit POI
+//
+
+"submit_poi_arena_title" = "Neue Arena";
+"submit_poi_pokestop_title" = "Neuer Pokéstop";
+"submit_poi_check_pokestop_name" = "Pokéstop: %@";
+"submit_poi_check_arena_name" = "Arena: %@";
+
+//
+//Submit Raid
+//
+"submit_raid_title" = "Neuer Level %@ Raid";
+"submit_raid_submit_button_title" = "Raid melden";
+"submit_raid_select_raidboss_title" = "Wähle den Raidboss aus:";
+"submit_raid_possible_raidbosses_title" = "Mögliche Raidbosse:";
+"submit_raid_hatch_time_picker_title" = "Schlüpft:";
+"submit_raid_time_left_picker_title" = "Wieviele Minuten läuft der Raid noch?";
+"submit_raid_meetup_time_picker_title" = "Treffpunkt:";
+"submit_raid_already_running_title" = "Raid läuft bereits?";
+"submit_raid_user_participates_title" = "Nimmst du teil am Raid?";
+
+//
+//Pokestop Details
+//
+"pokestop_details_title" = "Pokéstop";
+"pokestop_details_active_quest_title" = "Aktive Quest:";
+"pokestop_details_reward_title" = "Belohnung:";
+"pokestop_details_submitter_title" = "Eingereicht von:";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
