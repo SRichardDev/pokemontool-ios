@@ -1,4 +1,23 @@
 //
+//General
+//
+
+"general_poketop_title" = "Pokéstop";
+"general_arena_title" = "Arena";
+"general_arena_ex_title" = "EX Arena";
+"general_new_quest_button_title" = "Neue Quest";
+"general_details_button_title" = "Details"
+"general_new_raid_title" = "Neuer Raid"
+
+//
+//Map
+//
+
+"map_type_standard" = "Standard Karte";
+"map_type_satellite" = "Satelliten Karte"
+"map_type_hybrid" = "Hybrid Karte"
+"map_type_satellite_flyover" = "Satelliten 3D Karte"
+//
 //Banner
 //
 
@@ -24,6 +43,20 @@
 "banner_submitted_quest_description" = "Die Feldforschung wurde eingereicht";
 
 "banner_maptype_changed_title" = "Kartentyp geändert";
+
+"banner_success_title" = "Erfolgreich";
+"banner_error_title" = "Fehler";
+"banner_weak_password_description" = "Schwaches Passwort! Bitte verwende ein sicheres Passwort!";
+"banner_invalid_credential_description" = "Ungültige Eingabe";
+"banner_email_already_in_use_description" = "Diese E-Mail Adresse ist schon registriert. Falls du dein Passwort vergessen hast, musst du dein Passwort zurücksetzen";
+"banner_invalid_email_description" = "Ungültige E-Mail Adresse";
+"banner_no_internet_description" = "Es besteht keine Verbindung zum Internet";
+"banner_missing_email_description" = "Fehlende E-Mail Adresse";
+"banner_verify_email_description" = "Bitte bestätige die Verifizierungs E-Mail die dir zugesendet wurde";
+"banner_signed_in_title" = "Erfolgreich angemeldet";
+"banner_signed_in_description" = "Willkommen zurück Trainer!";
+"banner_signed_out_title" = "Erfolgreich abgemeldet";
+"banner_signed_out_description" = "Bis bald Trainer!";
 
 
 //
@@ -136,6 +169,31 @@
 
 "account_signin_password_title" = "Passwort";
 "account_signin_password_description" = "Jetzt noch dein Passwort und dann kann es los gehen.";
-
 "account_signin_password_textfield_placeholder" = "Trage hier dein Passwort ein";
+
+"account_details_title" = "Account Details";
+"account_details_trainer_name_title" = "Trainer Name:";
+"account_details_team_title" = "Team:";
+"account_details_level_title" = "Level:";
+"account_details_friend_code_title" = "Freundes-Code:";
+
+"account_details_trainer_name_text_field_placeholder" = "Trage hier deine Namen ein";
+"account_details_friend_code_text_field_placeholder" = "Trage hier deinen Freundes-Code ein";
+
+"account_signup_verify_title" = "Prüfen";
+"account_signup_button_title" = "Account erstellen";
+
+"account_team_mystic_title" = "Mystic";
+"account_team_valor_title" = "Valor";
+"account_team_instinct_title" = "Instinct";
+
+
+
+
+
+
+
+
+
+
 

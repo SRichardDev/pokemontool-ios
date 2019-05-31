@@ -66,7 +66,7 @@ class User: FirebaseCodable, Equatable {
 
     var usersRef: DatabaseReference {
         get {
-            return Database.database().reference(withPath: "users")
+            return Database.database().reference(withPath: DatabaseKeys.users)
         }
     }
     
@@ -85,17 +85,7 @@ class User: FirebaseCodable, Equatable {
 
     var teamName: String? {
         get {
-            if let team = publicData?.team {
-                switch team {
-                case .mystic:
-                    return "Mystic"
-                case .valor:
-                    return "Valor"
-                case .instinct:
-                    return "Instinct"
-                }
-            }
-            return nil
+            return publicData?.team?.description
         }
     }
     
@@ -249,7 +239,7 @@ class User: FirebaseCodable, Equatable {
     }
     
     class func load(completion: @escaping (User?) -> ()) {
-        let usersRef = Database.database().reference(withPath: "users")
+        let usersRef = Database.database().reference(withPath:   DatabaseKeys.users)
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         usersRef.child(userId).observe(.value) { snapshot in
@@ -304,7 +294,7 @@ class User: FirebaseCodable, Equatable {
                             isPushActive: true)
             
             let data = try! FirebaseEncoder().encode(user)
-            let ref = Database.database().reference(withPath: "users").child(firebaseUser.uid)
+            let ref = Database.database().reference(withPath: DatabaseKeys.users).child(firebaseUser.uid)
             ref.setValue(data)
         }
     }

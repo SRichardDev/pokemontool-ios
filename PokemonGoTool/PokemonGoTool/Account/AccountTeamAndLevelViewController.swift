@@ -31,7 +31,12 @@ class AccountTeamAndLevelViewController: UIViewController, StoryboardInitialView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Team & Level"
+        title = "Account Details"
+        trainerNameTitleLabel.text = "Trainer Name:"
+        teamTitleLabel.text = "Team:"
+        levelTitleLabel.text = "Level:"
+        trainerCodeTitleLabel.text = "Freundes-Code:"
+        
         levelPickerView.delegate = self
         levelPickerView.dataSource = self
         trainerNameTitleLabel.isVisible = accountViewModel != nil

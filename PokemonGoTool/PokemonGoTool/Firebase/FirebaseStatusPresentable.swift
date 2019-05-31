@@ -5,9 +5,10 @@ extension FirebaseStatusPresentable where Self: UIViewController {
     
     func showAlert(for status: AuthStatus) {
         
-        var title = "Error"
-        var message = ""
-        var bannerType: NotificationBannerType = .firebaseAuthSuccess
+        var title: String
+        var message: String
+        var bannerType: NotificationBannerType
+        
         switch status {
         case .weakPassword:
             title = "Fehler"

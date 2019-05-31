@@ -4,7 +4,6 @@ import MapKit
 class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
     
     var arena: Arena?
-    var raidEggImageName = "level_5"
     
     var geohash: String {
         get {
@@ -26,10 +25,5 @@ class ArenaPointAnnotation: MKPointAnnotation, GeohashStringRepresentable {
         self.init()
         self.arena = arena
         coordinate = CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
-
-        guard let raid = arena.raid else { return }
-        if !raid.isExpired {
-            raidEggImageName = "level_\(raid.level)"
-        }
     }
 }
