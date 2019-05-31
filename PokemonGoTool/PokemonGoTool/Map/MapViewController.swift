@@ -10,7 +10,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var firebaseConnector: FirebaseConnector!
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var settingsButtonsView: UIView!
-    @IBOutlet var backgroundLabel: UILabel!
     var polygon: MKPolygon?
     var allAnnotations = [PokestopPointAnnotation]()
     var geohashWindow: GeohashWindow?

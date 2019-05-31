@@ -58,7 +58,7 @@ extension MapViewController {
         let changeMapTypeButton = UIButton()
         changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
         changeMapTypeButton.addAction { [weak self] in
-            self?.changeMapTypeAnimated()
+            self?.changeMapType()
             changeMapTypeButton.scaleIn()
         }
         

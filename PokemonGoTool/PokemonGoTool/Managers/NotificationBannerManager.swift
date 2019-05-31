@@ -1,5 +1,6 @@
 
 import NotificationBannerSwift
+import MapKit
 
 enum NotificationBannerType {
     case connected
@@ -12,6 +13,7 @@ enum NotificationBannerType {
     case addFriend
     case unregisteredUser
     case questSubmitted
+    case mapTypeChanged(mapType: MKMapType)
 }
 
 class NotificationBannerManager {
@@ -78,6 +80,15 @@ class NotificationBannerManager {
                                                subtitle: "Die Feldforschung wurde eingereicht",
                                                leftView: UIImageView(image: UIImage(named: "checkmark")),
                                                style: .success)
+        case .mapTypeChanged(mapType: let mapType):
+            
+            let imageView = UIImageView(image: UIImage(named: "mapMenuMap"))
+            imageView.tintColor = .white
+                
+            currentBanner = NotificationBanner(title: "Kartentyp geändert",
+                                               subtitle: mapType.description,
+                                               leftView: imageView,
+                                               style: .info)
         }
         
         currentBanner?.show()

@@ -54,6 +54,7 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
         
         let buttonsStackViewController = ButtonsStackViewController.fromStoryboard()
         buttonsStackViewController.loadView()
+        buttons.forEach({$0.tintColor = .black})
         buttonsStackViewController.buttons = buttons
         
         buttons.forEach {
