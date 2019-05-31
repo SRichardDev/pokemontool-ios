@@ -113,6 +113,7 @@
                     <connections>
                         <outlet property="collectionView" destination="HZ9-dL-nNu" id="V7d-Xr-wwc"/>
                         <outlet property="heightConstraint" destination="wzn-hn-jDh" id="mA5-6G-yhL"/>
+                        <outlet property="titleLabel" destination="bfe-cG-mfZ" id="bv0-GB-ljZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiF-zh-tWg" userLabel="First Responder" sceneMemberID="firstResponder"/>

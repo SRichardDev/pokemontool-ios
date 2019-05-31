@@ -95,20 +95,47 @@
 "arena_details_coordinates_title" = "Koordinaten:";
 "arena_details_submitter_title" = "Hinzugefügt von:";
 "arena_details_gold_arena_title" = "Gold Arena:";
+"arena_details_raid_rest_time_until_hatch_title" = "Zeit bis Ei schlüpft:";
+"arena_details_raid_rest_time_until_end_title" = "Zeit bis Raid endet:";
+"arena_details_raid_time_in_title" = "in: %@";
+"arena_details_raid_time_at_title" = "um: %@";
+"arena_details_raid_title_participants_overview_title" = "Anzahl der Teilnehmer:";
+"arena_details_raid_participate_title" = "Teilnehmen:";
+"arena_details_raid_participants_list_title" = "Teilnehmer";
+"arena_details_chat_title" = "Chat";
 
+//
+//Account
+//
+"account_change_details_button_title" = "Infos bearbeiten";
+"account_create_account_button_title" = "Account anlegen";
+"account_login_button_title" = "Anmelden";
+"account_logout_button_title" = "Abmelden";
+"account_welcome_title" = "Lege einen Account an oder melde dich an, um den vollen Umfang der App zu benutzen";
+"account_medals_title" = "Medallien:";
+"account_medals_submitted_pokestops_title" = "Eingereichte Pokéstops";
+"account_medals_submitted_arenas_title" = "Eingereichte Arenen";
+"account_medals_submitted_raids_title" = "Eingereichte Raids";
+"account_medals_submitted_quests_title" = "Eingereichte Feldforschungen";
 
+"account_create_email_title" = "E-Mail";
+"account_create_email_description" = "Um einen Account zu erstellen benötigen wir eine gültige E-Mail Adresse von dir. Bitte achte darauf, dass die E-Mail Adresse korrekt ist, da du von uns eine Bestätigungs-E-Mail bekommst.";
+"account_create_email_textfield_placeholder" = "Trage hier deine E-Mail Adresse ein";
 
+"account_create_password_title" = "Passwort";
+"account_create_password_description" = "Bitte wähle ein Passwort aus. Dieses muss mindestens 6 Zeichen lang sein und muss aus mindestens 3 Buchstaben und mindestens 3 Zahlen bestehen.";
+"account_create_password_textfield_placeholder" = "Trage hier dein Passwort ein";
 
+"account_create_trainer_name_title" = "Trainer Name";
+"account_create_trainer_name_description" = "Bitte gebe deinen Trainer Namen ein, den du auch im Spiel verwendest.";
+"account_create_trainer_name_textfield_placeholder" = "Trage hier deinen Trainer Namen ein";
 
+"account_signin_email_title" = "E-Mail";
+"account_signin_email_description" = "Bitte gebe deine E-Mail Adresse ein, mit der du dich für diese App registriert hast.";
+"account_signin_email_textfield_placeholder" = "Trage hier deine E-Mail Adresse ein";
 
+"account_signin_password_title" = "Passwort";
+"account_signin_password_description" = "Jetzt noch dein Passwort und dann kann es los gehen.";
 
-
-
-
-
-
-
-
-
-
+"account_signin_password_textfield_placeholder" = "Trage hier dein Passwort ein";
 

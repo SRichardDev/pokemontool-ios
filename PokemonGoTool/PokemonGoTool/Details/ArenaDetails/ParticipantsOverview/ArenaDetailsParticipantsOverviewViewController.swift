@@ -11,6 +11,7 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Anzahl der Teilnehmer:"
         updateUI()
     }
 

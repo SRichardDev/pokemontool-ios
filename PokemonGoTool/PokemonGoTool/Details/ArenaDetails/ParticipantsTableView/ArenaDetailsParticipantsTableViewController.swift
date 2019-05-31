@@ -34,6 +34,7 @@ class ParticipantsTableViewCell: UITableViewCell {
     @IBOutlet var levelLabel: Label!
     @IBOutlet var teamBackgroundView: UIView!
     @IBOutlet var trainerNameLabel: Label!
+    @IBOutlet var copyFriendCodeButton: UIButton!
     
     var userData: PublicUserData? {
         didSet {
@@ -45,6 +46,7 @@ class ParticipantsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        copyFriendCodeButton.isVisible = userData?.trainerCode != "" && userData?.trainerCode != nil
         levelLabel.textColor = .white
         teamBackgroundView.layer.cornerRadius = teamBackgroundView.bounds.width / 2
     }

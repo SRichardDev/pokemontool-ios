@@ -5,11 +5,13 @@ class AccountMedalViewController: UIViewController, StoryboardInitialViewControl
 
     var viewModel: AccountMedalViewModel!
     
+    @IBOutlet var titleLabel: Label!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Medallien:"
         collectionView.delegate = self
         collectionView.dataSource = self
     }
