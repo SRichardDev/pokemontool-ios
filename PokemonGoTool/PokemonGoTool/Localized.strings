@@ -17,6 +17,7 @@
 "map_type_satellite" = "Satelliten Karte"
 "map_type_hybrid" = "Hybrid Karte"
 "map_type_satellite_flyover" = "Satelliten 3D Karte"
+
 //
 //Banner
 //
@@ -186,14 +187,3 @@
 "account_team_mystic_title" = "Mystic";
 "account_team_valor_title" = "Valor";
 "account_team_instinct_title" = "Instinct";
-
-
-
-
-
-
-
-
-
-
-
