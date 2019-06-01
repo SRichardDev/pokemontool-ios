@@ -6,7 +6,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
     private let stackView = OuterVerticalStackView()
-    private let imageView = UIImageView()
     private let headerViewController = ArenaDetailsHeaderViewController.fromStoryboard()
     private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
     private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.fromStoryboard()
@@ -22,17 +21,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         viewModel.delegate = self
         stackView.addToView(view)
         
-        imageView.image = viewModel.isRaidExpired ? UIImage(named: "arena") : viewModel.raidBossImage
-        imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-        let titleLabel = Label()
-        titleLabel.style = 2
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        titleLabel.text = viewModel.title
-        
         headerViewController.viewModel = viewModel
+        headerViewController.coordinator = coordinator
         restTimeViewController.viewModel = viewModel
         participantsTableViewController.viewModel = viewModel
         participantsOverviewViewController.viewModel = viewModel
@@ -43,7 +33,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         goldSwitchViewController.viewModel = viewModel
         meetupTimeSelectionViewController.viewModel = viewModel
         
-        stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
         

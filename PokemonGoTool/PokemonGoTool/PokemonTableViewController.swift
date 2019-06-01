@@ -15,6 +15,7 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Raidboss auswählen"
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -24,7 +25,7 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-//        searchController.searchBar.scopeButtonTitles = ["Alle", "Fange", "Lande", "Gewinne"]
+        searchController.searchBar.scopeButtonTitles = ["Gen 1", "Gen 2", "Gen 3", "Gen 4"]
         searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
         

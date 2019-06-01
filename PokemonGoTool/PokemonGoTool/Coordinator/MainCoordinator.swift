@@ -161,6 +161,12 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
+    func showPokemonSelection() {
+        let pokemonTableViewController = PokemonTableViewController.fromStoryboard()
+        navigationController.pushViewController(pokemonTableViewController, animated: true)
+        impact()
+    }
+    
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)
         navigationController.viewControllers = [scrollableViewController]

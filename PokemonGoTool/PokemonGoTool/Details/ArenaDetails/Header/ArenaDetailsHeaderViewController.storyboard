@@ -15,28 +15,53 @@
             <objects>
                 <viewController id="deP-gV-Vox" customClass="ArenaDetailsHeaderViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N42-A0-SiG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="52S-UY-Da9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="175" id="UxJ-wR-Mdo"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9uy-g1-lXX" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="level_3" translatesAutoresizingMaskIntoConstraints="NO" id="52S-UY-Da9">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="145" id="w38-sa-JVW"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuH-Qr-G7Q" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="145" width="375" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU9-9Q-GlK" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="175" width="375" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="didTapSelectRaidboss:" destination="deP-gV-Vox" eventType="touchUpInside" id="ncJ-G2-0jG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="m6h-Fq-3jY" firstAttribute="bottom" secondItem="52S-UY-Da9" secondAttribute="bottom" id="G2F-hT-ASg"/>
-                            <constraint firstItem="52S-UY-Da9" firstAttribute="top" secondItem="m6h-Fq-3jY" secondAttribute="top" id="GgT-2Q-9WU"/>
-                            <constraint firstItem="52S-UY-Da9" firstAttribute="leading" secondItem="m6h-Fq-3jY" secondAttribute="leading" id="U9Q-Li-aCI"/>
-                            <constraint firstItem="m6h-Fq-3jY" firstAttribute="trailing" secondItem="52S-UY-Da9" secondAttribute="trailing" id="lf2-Rg-uEP"/>
+                            <constraint firstItem="9uy-g1-lXX" firstAttribute="top" secondItem="m6h-Fq-3jY" secondAttribute="top" id="GnS-Ee-0xS"/>
+                            <constraint firstItem="9uy-g1-lXX" firstAttribute="leading" secondItem="m6h-Fq-3jY" secondAttribute="leading" id="QCE-cc-hFc"/>
+                            <constraint firstItem="9uy-g1-lXX" firstAttribute="trailing" secondItem="m6h-Fq-3jY" secondAttribute="trailing" id="cfB-ST-vxq"/>
+                            <constraint firstItem="9uy-g1-lXX" firstAttribute="bottom" secondItem="m6h-Fq-3jY" secondAttribute="bottom" id="hst-Xy-tA2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m6h-Fq-3jY"/>
                     </view>
-                    <size key="freeformSize" width="375" height="175"/>
+                    <size key="freeformSize" width="375" height="225"/>
                     <connections>
                         <outlet property="imageView" destination="52S-UY-Da9" id="x6r-0j-KAj"/>
+                        <outlet property="selectRaidbossButton" destination="MU9-9Q-GlK" id="DsQ-zo-jmn"/>
+                        <outlet property="titleLabel" destination="GuH-Qr-G7Q" id="AVF-Nk-71a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pA-7s-ywH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -44,4 +69,7 @@
             <point key="canvasLocation" x="-108" y="145"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="level_3" width="30" height="30"/>
+    </resources>
 </document>
