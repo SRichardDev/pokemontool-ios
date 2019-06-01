@@ -6,17 +6,17 @@
 "general_arena_title" = "Arena";
 "general_arena_ex_title" = "EX Arena";
 "general_new_quest_button_title" = "Neue Quest";
-"general_details_button_title" = "Details"
-"general_new_raid_title" = "Neuer Raid"
+"general_details_button_title" = "Details";
+"general_new_raid_title" = "Neuer Raid";
 
 //
 //Map
 //
 
 "map_type_standard" = "Standard Karte";
-"map_type_satellite" = "Satelliten Karte"
-"map_type_hybrid" = "Hybrid Karte"
-"map_type_satellite_flyover" = "Satelliten 3D Karte"
+"map_type_satellite" = "Satelliten Karte";
+"map_type_hybrid" = "Hybrid Karte";
+"map_type_satellite_flyover" = "Satelliten 3D Karte";
 
 //
 //Banner
