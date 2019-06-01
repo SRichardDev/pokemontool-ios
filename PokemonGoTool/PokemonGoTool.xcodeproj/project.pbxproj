@@ -11,6 +11,10 @@
 		035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */; };
 		0364D57F2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364D57E2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift */; };
 		0364D581224508AD00DA0508 /* ArenaDetailsMeetupTimeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0364D580224508AD00DA0508 /* ArenaDetailsMeetupTimeViewController.storyboard */; };
+		0366E09822A1612300310339 /* pokemon-names-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09622A1612200310339 /* pokemon-names-de.json */; };
+		0366E09922A1612300310339 /* pokemon-names-en.json in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09722A1612200310339 /* pokemon-names-en.json */; };
+		0366E09B22A161A800310339 /* PokemonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366E09A22A161A800310339 /* PokemonTableViewController.swift */; };
+		0366E09D22A163E300310339 /* PokemonTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */; };
 		0366E09F22A1A09100310339 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09E22A1A09100310339 /* Localized.strings */; };
 		0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */; };
 		0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */; };
@@ -160,6 +164,10 @@
 		035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsOverviewViewController.storyboard; sourceTree = "<group>"; };
 		0364D57E2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsMeetupTimeViewController.swift; sourceTree = "<group>"; };
 		0364D580224508AD00DA0508 /* ArenaDetailsMeetupTimeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsMeetupTimeViewController.storyboard; sourceTree = "<group>"; };
+		0366E09622A1612200310339 /* pokemon-names-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pokemon-names-de.json"; sourceTree = "<group>"; };
+		0366E09722A1612200310339 /* pokemon-names-en.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "pokemon-names-en.json"; sourceTree = "<group>"; };
+		0366E09A22A161A800310339 /* PokemonTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonTableViewController.swift; sourceTree = "<group>"; };
+		0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokemonTableViewController.storyboard; sourceTree = "<group>"; };
 		0366E09E22A1A09100310339 /* Localized.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localized.strings; sourceTree = "<group>"; };
 		0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +445,10 @@
 			isa = PBXGroup;
 			children = (
 				2CF6F9A621F25C9800610BC9 /* PokemonGoTool.entitlements */,
+				0366E09622A1612200310339 /* pokemon-names-de.json */,
+				0366E09722A1612200310339 /* pokemon-names-en.json */,
+				0366E09A22A161A800310339 /* PokemonTableViewController.swift */,
+				0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */,
 				2C19769E21ED266900091F8C /* AppDelegate.swift */,
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
 				2C1AE5852263CC6F00AE9C4A /* Settings.swift */,
@@ -882,6 +894,7 @@
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
+				0366E09822A1612300310339 /* pokemon-names-de.json in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
 				2C1AE58122637BD100AE9C4A /* MapFilterViewController.storyboard in Resources */,
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
@@ -905,6 +918,7 @@
 				2C395A2322025329005330B8 /* SubmitCheckViewController.storyboard in Resources */,
 				2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */,
 				2CDFDDDD21ED283000170A46 /* GoogleService-Info.plist in Resources */,
+				0366E09D22A163E300310339 /* PokemonTableViewController.storyboard in Resources */,
 				0366E09F22A1A09100310339 /* Localized.strings in Resources */,
 				2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */,
 				2C395A4F2205FB0F005330B8 /* RaidMeetupTimePickerViewController.storyboard in Resources */,
@@ -916,6 +930,7 @@
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
 				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
 				2C0B5B6F2255387500620F4A /* AccountTeamAndLevelViewController.storyboard in Resources */,
+				0366E09922A1612300310339 /* pokemon-names-en.json in Resources */,
 				2C97F77D21F6742D00630BA2 /* DetailAnnotationView.xib in Resources */,
 				2C395A552205FF79005330B8 /* RaidUserParticipateSwitchViewController.storyboard in Resources */,
 				2C34F1E72210933700B3B99C /* PokestopDetailsViewController.storyboard in Resources */,
@@ -1077,6 +1092,7 @@
 				2C2FB5752219A4C2009CCEF8 /* CountClusterAnnotationView.swift in Sources */,
 				2C395A422203D393005330B8 /* SubmitRaidViewModel.swift in Sources */,
 				2CDFDDE821ED4FFB00170A46 /* Geohash.swift in Sources */,
+				0366E09B22A161A800310339 /* PokemonTableViewController.swift in Sources */,
 				2C1AE58322638CD500AE9C4A /* MapFilterViewModel.swift in Sources */,
 				2C1AE57D225FF6DF00AE9C4A /* StackView.swift in Sources */,
 				2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */,
