@@ -186,6 +186,9 @@ struct Raid: Codable, Equatable {
     
     var isExpired: Bool {
         get {
+            guard let submitDate = submitDate else { return true }
+            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return true }
+            
             if let raidEndDate = endDate {
                 return raidEndDate < Date()
             }
