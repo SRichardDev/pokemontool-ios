@@ -330,6 +330,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		035A99F322A84FCB00673DFE /* SelectRaidboss */ = {
+			isa = PBXGroup;
+			children = (
+				0366E09A22A161A800310339 /* PokemonTableViewController.swift */,
+				0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */,
+			);
+			path = SelectRaidboss;
+			sourceTree = "<group>";
+		};
 		0366E0A022A1AD8C00310339 /* MeetupTime */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,8 +456,6 @@
 				2CF6F9A621F25C9800610BC9 /* PokemonGoTool.entitlements */,
 				0366E09622A1612200310339 /* pokemon-names-de.json */,
 				0366E09722A1612200310339 /* pokemon-names-en.json */,
-				0366E09A22A161A800310339 /* PokemonTableViewController.swift */,
-				0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */,
 				2C19769E21ED266900091F8C /* AppDelegate.swift */,
 				2CF6F9A721F2846D00610BC9 /* AppModule.swift */,
 				2C1AE5852263CC6F00AE9C4A /* Settings.swift */,
@@ -564,6 +571,7 @@
 				0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */,
 				2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */,
 				0366E0A122A1ADA100310339 /* Header */,
+				035A99F322A84FCB00673DFE /* SelectRaidboss */,
 				0366E0A322A1ADC100310339 /* Info */,
 				0366E0A222A1ADAE00310339 /* GoldArenaSwitch */,
 				0366E0A022A1AD8C00310339 /* MeetupTime */,

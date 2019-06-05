@@ -161,8 +161,9 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showPokemonSelection() {
+    func showPokemonSelection(viewModel: ArenaDetailsViewModel) {
         let pokemonTableViewController = PokemonTableViewController.fromStoryboard()
+        pokemonTableViewController.viewModel = viewModel
         navigationController.pushViewController(pokemonTableViewController, animated: true)
         impact()
     }

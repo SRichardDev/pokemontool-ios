@@ -21,12 +21,10 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
     func updateArenaImage(isGold: Bool) {
         UIView.transition(with: imageView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
             self.imageView.image = self.viewModel.isRaidExpired ? self.viewModel.arenaImage : self.viewModel.raidBossImage
-        }) { _ in
-            
-        }
+        })
     }
     
     @IBAction func didTapSelectRaidboss(_ sender: Any) {
-        coordinator?.showPokemonSelection()
+        coordinator?.showPokemonSelection(viewModel: viewModel)
     }
 }

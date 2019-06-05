@@ -7,6 +7,7 @@ struct PokemonDexEntry: Codable {
 
 class PokemonTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
 
+    var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     var pokemon = [PokemonDexEntry]()
@@ -59,6 +60,18 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }
     }
 }
 
