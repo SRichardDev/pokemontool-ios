@@ -41,12 +41,12 @@ class ParticipantsTableViewCell: UITableViewCell {
             trainerNameLabel.text = userData?.trainerName
             levelLabel.text = "\(userData?.level ?? 0)"
             teamBackgroundView.backgroundColor = userData?.team?.color
+            copyFriendCodeButton.isVisible = userData?.trainerCode != "" && userData?.trainerCode != nil
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        copyFriendCodeButton.isVisible = userData?.trainerCode != "" && userData?.trainerCode != nil
         levelLabel.textColor = .white
         teamBackgroundView.layer.cornerRadius = teamBackgroundView.bounds.width / 2
     }
