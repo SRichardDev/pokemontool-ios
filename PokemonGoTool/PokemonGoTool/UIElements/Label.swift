@@ -32,7 +32,7 @@ class Label: UILabel {
                 font = UIFont.systemFont(ofSize: 12, weight: .regular)
             } else if style == 6 {
                 textColor = .black
-                font = UIFont.systemFont(ofSize: 35, weight: .bold)
+                font = UIFont.systemFont(ofSize: 35, weight: .semibold)
             }
         }
     }

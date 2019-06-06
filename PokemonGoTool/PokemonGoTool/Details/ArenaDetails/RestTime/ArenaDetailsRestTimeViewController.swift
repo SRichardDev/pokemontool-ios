@@ -16,13 +16,13 @@ class ArenaDetailsRestTimeViewController: UIViewController, StoryboardInitialVie
 
     func updateTimeLeft(_ string: String) {
         titleLabel.text = "Zeit bis Raid endet:"
-        restTimeLabel.text = "in: " + string
-        pointOfTimeLabel.text = "um: " + viewModel.endTime
+        restTimeLabel.text = string
+        pointOfTimeLabel.text = viewModel.endTime
     }
     
     func updateHatchTimeLeft(_ string: String) {
         titleLabel.text = "Zeit bis Ei schlüpft:"
-        restTimeLabel.text = "in: " + string
-        pointOfTimeLabel.text = "um: " + viewModel.hatchTime
+        restTimeLabel.text = string
+        pointOfTimeLabel.text = viewModel.hatchTime
     }
 }

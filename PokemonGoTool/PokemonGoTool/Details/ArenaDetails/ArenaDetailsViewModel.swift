@@ -36,7 +36,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     var title: String {
         get {
             let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
-            return isRaidExpired ? arena.name : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
+            return isRaidExpired ? "Arena" : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
         }
     }
     

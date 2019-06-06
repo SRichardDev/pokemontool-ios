@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="deP-gV-Vox" customClass="ArenaDetailsHeaderViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N42-A0-SiG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9uy-g1-lXX" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="level_3" translatesAutoresizingMaskIntoConstraints="NO" id="52S-UY-Da9">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
@@ -28,18 +28,18 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuH-Qr-G7Q" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="145" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="145" width="375" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                <integer key="value" value="2"/>
+                                                <integer key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MU9-9Q-GlK" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="175" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="187" width="375" height="63"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="didTapSelectRaidboss:" destination="deP-gV-Vox" eventType="touchUpInside" id="ncJ-G2-0jG"/>
@@ -57,7 +57,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m6h-Fq-3jY"/>
                     </view>
-                    <size key="freeformSize" width="375" height="225"/>
+                    <size key="freeformSize" width="375" height="250"/>
                     <connections>
                         <outlet property="imageView" destination="52S-UY-Da9" id="x6r-0j-KAj"/>
                         <outlet property="selectRaidbossButton" destination="MU9-9Q-GlK" id="DsQ-zo-jmn"/>

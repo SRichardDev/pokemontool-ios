@@ -60,7 +60,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setTitle("Arena")
+        setTitle(viewModel.title)
     }
     
     func updateUI() {

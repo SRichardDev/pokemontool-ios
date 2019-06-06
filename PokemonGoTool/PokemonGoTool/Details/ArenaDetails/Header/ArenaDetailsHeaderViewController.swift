@@ -12,7 +12,7 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = viewModel.title
+        titleLabel.text = viewModel.arena.name
         imageView.image = viewModel.isRaidExpired ? viewModel.arenaImage : viewModel.raidBossImage
         selectRaidbossButton.isHidden = viewModel.isRaidExpired
         selectRaidbossButton.setTitle("Raidboss auswählen", for: .normal)
