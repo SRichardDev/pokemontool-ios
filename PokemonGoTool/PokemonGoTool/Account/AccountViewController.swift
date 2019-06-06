@@ -25,19 +25,18 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         pushActiveSwitchViewController.viewModel = viewModel
         
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
-        changeDetailsButton.addAction(for: .touchUpInside) { [weak self] in
-            guard let self = self else { return }
+        changeDetailsButton.addAction(for: .touchUpInside) { [unowned self] in
             self.coordinator?.showTeamAndLevel(accountViewModel: self.viewModel)
         }
         
         createAccountButton.setTitle("Account anlegen", for: .normal)
-        createAccountButton.addAction(for: .touchUpInside) { [weak self] in
-            self?.coordinator?.showAccountInput(type: .email)
+        createAccountButton.addAction(for: .touchUpInside) { [unowned self] in
+            self.coordinator?.showAccountInput(type: .email)
         }
         
         signInButton.setTitle("Anmelden", for: .normal)
-        signInButton.addAction(for: .touchUpInside) { [weak self] in
-            self?.coordinator?.showAccountInput(type: .emailSignIn)
+        signInButton.addAction(for: .touchUpInside) { [unowned self] in
+            self.coordinator?.showAccountInput(type: .emailSignIn)
         }
         
         stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)
@@ -89,6 +88,7 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         createAccountButton.isHidden = viewModel.isLoggedIn
         signInButton.isHidden = viewModel.isLoggedIn
         changeDetailsButton.isVisible = viewModel.isLoggedIn
+        pushActiveSwitchViewController.view.isVisible = viewModel.isLoggedIn
         
         let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = viewModel.isLoggedIn ? logoutItem : nil
