@@ -92,10 +92,10 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
                 self.viewModel.createRaidMeetup()
                 self.updateUI()
             }))
-            alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: { action in
+                self.userParticipatesSwitchViewController.updateUI()
+            }))
             present(alert, animated: true, completion: nil)
-
-            break
         }
     }
 }
