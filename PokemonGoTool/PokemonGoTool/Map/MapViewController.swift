@@ -19,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var mapRegionFromPush: MKCoordinateRegion?
 
     var isPoiSubmissionMode = false
-    var poiSubmissionAnnotation: MKPointAnnotation! = MKPointAnnotation()
+    var poiSubmissionAnnotation = MKPointAnnotation()
 
     lazy var manager: ClusterManager = {
         let manager = ClusterManager()
@@ -57,6 +57,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         zoomToLocationFromPushIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        endPoiSubmission()
+        endGeohashRegistration()
+        moveMapMenu(ConstraintConstants.mapMenuOrigin)
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
