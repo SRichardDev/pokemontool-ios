@@ -8,7 +8,7 @@ protocol PoiSubmissable {
     var poiSubmissionAnnotation: MKPointAnnotation! { get set }
 }
 
-extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & MapRegionSetable {
+extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & MapRegionSetable & MapTypeSwitchable {
     
     func startPoiSubmission(submitClosure: @escaping () -> Void, endClosure: @escaping () -> Void) {
         setMapRegion(distance: 100)
@@ -23,6 +23,13 @@ extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & Map
             submitClosure()
         }
         
+        let changeMapTypeButton = CircleButton(type: .custom)
+        changeMapTypeButton.type = .map
+        changeMapTypeButton.addAction {
+            changeMapTypeButton.scaleIn()
+            self.changeMapType(showBanner: false)
+        }
+        
         let cancelButton = CircleButton(type: .custom)
         cancelButton.type = .cancel
         cancelButton.addAction {
@@ -31,7 +38,7 @@ extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & Map
             endClosure()
         }
         
-        let menuView = showBottomMenu([cancelButton, submitButton])
+        let menuView = showBottomMenu([cancelButton, changeMapTypeButton, submitButton])
         menuView.tag = ViewTags.poiSubmissionStackView
     }
     

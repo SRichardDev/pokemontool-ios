@@ -3,7 +3,7 @@ import MapKit
 
 
 protocol MapTypeSwitchable {
-    func changeMapType()
+    func changeMapType(showBanner: Bool)
     var mapView: MKMapView! {get set}
 }
 
@@ -32,7 +32,7 @@ extension MKMapType {
 
 extension MapTypeSwitchable where Self: UIViewController {
     
-    func changeMapType() {
+    func changeMapType(showBanner: Bool = true) {
         let mapType = self.mapView.mapType
         
         if mapType == .mutedStandard {
@@ -45,7 +45,9 @@ extension MapTypeSwitchable where Self: UIViewController {
             self.mapView.mapType = .mutedStandard
         }
         
-        NotificationBannerManager.shared.show(.mapTypeChanged(mapType: self.mapView.mapType))
+        if showBanner {
+            NotificationBannerManager.shared.show(.mapTypeChanged(mapType: self.mapView.mapType))
+        }
     }
 }
 
