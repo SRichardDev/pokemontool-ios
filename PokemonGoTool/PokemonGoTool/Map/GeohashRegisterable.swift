@@ -14,8 +14,6 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
                                   endClosure: @escaping () -> Void) {
     
         mapView.isZoomEnabled = false
-        tabBarController?.tabBar.isHidden = true
-        
         setMapRegion(distance: 3500, animated: true)
         
         let submitButton = CircleButton(type: .custom)
@@ -45,7 +43,6 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
     
     func endGeohashRegistration() {
         mapView.isZoomEnabled = true
-        tabBarController?.tabBar.isHidden = false
         guard let stackView = view.viewWithTag(ViewTags.geohashRegistrationStackView) else { return }
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in stackView.removeFromSuperview() }
         mapView.removeOverlays(mapView.overlays)

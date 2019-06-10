@@ -35,21 +35,18 @@ extension MapViewController {
         
         let newPoiButton = UIButton()
         newPoiButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
-        newPoiButton.addAction { [weak self] in
+        newPoiButton.addAction { [unowned self] in
             newPoiButton.scaleIn()
-            guard let self = self else { fatalError() }
             self.isPoiSubmissionMode = true
             NotificationBannerManager.shared.show(.addPoi)
             self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
-            self.startPoiSubmission(submitClosure: { [weak self] in
-                guard let self = self else { fatalError() }
+            self.startPoiSubmission(submitClosure: { [unowned self] in
                 NotificationBannerManager.shared.dismiss()
                 self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
                 let viewModel = SubmitViewModel(firebaseConnector: self.firebaseConnector,
                                                 coordinate: self.poiSubmissionAnnotation.coordinate)
                 self.coordinator?.showSubmitPokestopAndArena(for: viewModel)
-            }, endClosure: { [weak self] in
-                guard let self = self else { fatalError() }
+            }, endClosure: { [unowned self] in
                 NotificationBannerManager.shared.dismiss()
                 self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
             })
@@ -57,22 +54,22 @@ extension MapViewController {
         
         let changeMapTypeButton = UIButton()
         changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
-        changeMapTypeButton.addAction { [weak self] in
-            self?.changeMapType()
+        changeMapTypeButton.addAction { [unowned self] in
+            self.changeMapType()
             changeMapTypeButton.scaleIn()
         }
         
         let locateButton = UIButton()
         locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
-        locateButton.addAction { [weak self] in
-            self?.zoomToUserLocation(animated: true)
+        locateButton.addAction { [unowned self] in
+            self.zoomToUserLocation(animated: true)
             locateButton.scaleIn()
         }
         
         let filterButton = UIButton()
         filterButton.setImage(UIImage(named: "filter"), for: .normal)
-        filterButton.addAction { [weak self] in
-            self?.coordinator?.showMapFilter()
+        filterButton.addAction { [unowned self] in
+            self.coordinator?.showMapFilter()
             filterButton.scaleIn()
         }
         
