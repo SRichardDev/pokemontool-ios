@@ -6,7 +6,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
     private let stackView = OuterVerticalStackView()
-    private let imageView = UIImageView()
+
+    private let headerViewController = SubmitRaidHeaderViewController.fromStoryboard()
     private let raidLevelViewController = RaidLevelViewController.fromStoryboard()
     private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.fromStoryboard()
@@ -28,11 +29,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         doneButton.setTitle("Raid melden", for: .normal)
         doneButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
 
-        let image = UIImage(named: viewModel.imageName)
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-
+        headerViewController.viewModel = viewModel
         raidLevelViewController.viewModel = viewModel
         raidBossCollectionViewController.viewModel = viewModel
         raidAlreadyRunningSwitchViewController.viewModel = viewModel
@@ -44,12 +41,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
         
-        let arenaNameLabel = Label()
-        arenaNameLabel.style = 3
-        arenaNameLabel.text = viewModel.arena.name
-        
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(arenaNameLabel)
+        stackView.addArrangedViewController(viewController: headerViewController, to: self)
+        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
         stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
@@ -81,11 +74,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     func update(of type: SubmitRaidUpdateType) {
         switch type {
         case .raidLevelChanged:
-            UIView.transition(with: imageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-                self.imageView.image = UIImage(named: self.viewModel.imageName)!
-                self.setTitle("Neuer Level \(self.viewModel.selectedRaidLevel) Raid")
-            })
-
+            setTitle("Neuer Level \(self.viewModel.selectedRaidLevel) Raid")
+            headerViewController.updateUI()
         case .raidAlreadyRunning:
             changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
                                                 timeLeftPickerViewController])

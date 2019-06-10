@@ -39,9 +39,9 @@ class Button: UIButton {
         let systemBlue = UIButton(type: .system).tintColor!
         layer.cornerRadius = 10
         layer.borderColor = systemBlue.cgColor
-        titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        titleLabel?.font = UIFont.systemFont(ofSize: 15)
         setTitleColor(.white, for: .normal)
-        setTitleColor(.gray, for: .highlighted)
+        setTitleColor(.white, for: .highlighted)
         setBackgroundColor(color: systemBlue, forState: .normal)
         setBackgroundColor(color: systemBlue.withAlphaComponent(0.8), forState: .highlighted)
         setBackgroundColor(color: .lightGray, forState: .disabled)

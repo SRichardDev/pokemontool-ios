@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */; };
+		033BC72D22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */; };
 		035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */; };
 		035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */; };
 		0364D57F2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0364D57E2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift */; };
@@ -160,6 +162,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidHeaderViewController.swift; sourceTree = "<group>"; };
+		033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidHeaderViewController.storyboard; sourceTree = "<group>"; };
 		035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsOverviewViewController.swift; sourceTree = "<group>"; };
 		035A836C2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsOverviewViewController.storyboard; sourceTree = "<group>"; };
 		0364D57E2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsMeetupTimeViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +334,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		033BC72E22AAEFFA0036C0F6 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */,
+				033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		035A99F322A84FCB00673DFE /* SelectRaidboss */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,6 +678,7 @@
 				2C395A412203D393005330B8 /* SubmitRaidViewModel.swift */,
 				2C395A1522012CC4005330B8 /* SubmitRaidDetailsViewController.swift */,
 				2C395A1322012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard */,
+				033BC72E22AAEFFA0036C0F6 /* Header */,
 				2C348BA222061A4000F6A1F7 /* Level */,
 				2C348BB1220657A400F6A1F7 /* RaidBossTableView */,
 				2C348BA322061A4B00F6A1F7 /* HatchTime */,
@@ -903,6 +917,7 @@
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
 				0366E09822A1612300310339 /* pokemon-names-de.json in Resources */,
+				033BC72D22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
 				2C1AE58122637BD100AE9C4A /* MapFilterViewController.storyboard in Resources */,
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
@@ -1045,6 +1060,7 @@
 				2C44EAAD21FA73E40029527C /* UIViewController+Extensions.swift in Sources */,
 				2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */,
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
+				033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */,
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
 				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,

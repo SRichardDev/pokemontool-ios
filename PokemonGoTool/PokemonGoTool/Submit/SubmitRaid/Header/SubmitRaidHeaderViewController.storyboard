@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wrC-0Q-H5s">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Submit Raid Header View Controller-->
+        <scene sceneID="Zqx-Aj-XVB">
+            <objects>
+                <viewController id="wrC-0Q-H5s" customClass="SubmitRaidHeaderViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5gl-KT-reO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pDy-rR-Jgc" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="level_3" translatesAutoresizingMaskIntoConstraints="NO" id="vcx-tf-6mU">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="145" id="b9p-uS-yi0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fT-uT-cg9" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="145" width="414" height="55"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pDy-rR-Jgc" firstAttribute="top" secondItem="XAr-5r-bNB" secondAttribute="top" id="Ra5-i1-wby"/>
+                            <constraint firstItem="pDy-rR-Jgc" firstAttribute="leading" secondItem="XAr-5r-bNB" secondAttribute="leading" id="dKA-dn-nal"/>
+                            <constraint firstAttribute="bottom" secondItem="pDy-rR-Jgc" secondAttribute="bottom" id="mSE-zZ-xpJ"/>
+                            <constraint firstItem="XAr-5r-bNB" firstAttribute="trailing" secondItem="pDy-rR-Jgc" secondAttribute="trailing" id="zOs-BJ-QHO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XAr-5r-bNB"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="200"/>
+                    <connections>
+                        <outlet property="imageView" destination="vcx-tf-6mU" id="uec-h5-a14"/>
+                        <outlet property="titleLabel" destination="3fT-uT-cg9" id="N0P-Bj-3Yv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rp2-2L-p9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-83" y="104"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="level_3" width="30" height="30"/>
+    </resources>
+</document>
