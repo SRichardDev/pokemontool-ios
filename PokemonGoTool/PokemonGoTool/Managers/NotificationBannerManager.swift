@@ -14,6 +14,7 @@ enum NotificationBannerType {
     case unregisteredUser
     case questSubmitted
     case mapTypeChanged(mapType: MKMapType)
+    case filterActive
 }
 
 class NotificationBannerManager {
@@ -89,6 +90,18 @@ class NotificationBannerManager {
                                                subtitle: mapType.description,
                                                leftView: imageView,
                                                style: .info)
+        case .filterActive:
+            
+            let imageView = UIImageView(image: UIImage(named: "filter"))
+            imageView.tintColor = .white
+            
+            currentBanner = NotificationBanner(title: "Filter aktiv",
+                                               subtitle: "Du siehst gerade nicht alle Arenen/Pokéstops",
+                                               leftView: imageView,
+                                               style: .info)
+            currentBanner?.autoDismiss = false
+            currentBanner?.haptic = .none
+
         }
         
         currentBanner?.show()

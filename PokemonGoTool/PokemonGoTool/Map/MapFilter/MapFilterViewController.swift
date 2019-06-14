@@ -60,6 +60,23 @@ class MapFilterViewController: UIViewController, StoryboardInitialViewController
         setTitle("Filter")
         AppSettings.filterSettingsChanged = true
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        showBannerIfNeeded()
+    }
+    
+    private func showBannerIfNeeded() {
+        if AppSettings.showOnlyEXArenas ||
+            AppSettings.showOnlyArenasWithRaid ||
+            AppSettings.showOnlyPokestopsWithQuest ||
+            !AppSettings.showArenas ||
+            !AppSettings.showPokestops {
+            NotificationBannerManager.shared.show(.filterActive)
+        } else {
+            NotificationBannerManager.shared.dismiss()
+        }
+    }
 }
 
 class FilterStackView: InnerVerticalStackView {
