@@ -29,6 +29,10 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
         
                     admin.database().ref('/users/' + userId).once('value', (usersSnapshot, context) => { 
 
+                        if (!usersSnapshot.val().isPushActive) {
+                            return false
+                        }
+
                         const notificationToken = (usersSnapshot.val() && usersSnapshot.val().notificationToken) || 'No token'
                         const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
 
@@ -77,6 +81,10 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
             console.log('Pushing to userID: ' + userId)
             admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
 
+                if (!snapshot.val().isPushActive) {
+                    return false
+                }
+                
                 const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token'
 
                 const payload = {
