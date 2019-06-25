@@ -1,10 +1,13 @@
 
 import Foundation
 
-@objc protocol SettingsConfigurable {
+protocol SettingsAppliable {
+    func appSettingsDidChange()
 }
 
-@objc protocol MapFilterSettingsConfigurable {
+
+@objc
+protocol MapFilterSettingsConfigurable {
     static var filterSettingsChanged: Bool { get set }
     static var showPokestops: Bool { get set }
     static var showOnlyPokestopsWithQuest: Bool { get set }
@@ -17,18 +20,12 @@ import Foundation
 class AppSettings: NSObject {
     
     fileprivate static func updateDefaults(for key: String, value: Any) {
-        // Save value into UserDefaults
         UserDefaults.standard.set(value, forKey: key)
     }
     
     fileprivate static func value<T>(for key: String) -> T? {
-        // Get value from UserDefaults
         return UserDefaults.standard.value(forKey: key) as? T
     }
-}
-
-extension AppSettings: SettingsConfigurable {
-
 }
 
 extension AppSettings: MapFilterSettingsConfigurable {
@@ -60,5 +57,23 @@ extension AppSettings: MapFilterSettingsConfigurable {
     static var showOnlyEXArenas: Bool {
         get { return AppSettings.value(for: #keyPath(showOnlyEXArenas)) ?? false }
         set { AppSettings.updateDefaults(for: #keyPath(showOnlyEXArenas), value: newValue) }
+    }
+    
+    static var isFilterActive: Bool {
+        get {
+            return AppSettings.showOnlyEXArenas ||
+                AppSettings.showOnlyArenasWithRaid ||
+                AppSettings.showOnlyPokestopsWithQuest ||
+                !AppSettings.showArenas ||
+                !AppSettings.showPokestops
+        }
+    }
+    
+    static func disableAllFilters() {
+        showPokestops = true
+        showArenas = true
+        showOnlyPokestopsWithQuest = false
+        showOnlyArenasWithRaid = false
+        showOnlyEXArenas = false
     }
 }

@@ -67,11 +67,7 @@ class MapFilterViewController: UIViewController, StoryboardInitialViewController
     }
     
     private func showBannerIfNeeded() {
-        if AppSettings.showOnlyEXArenas ||
-            AppSettings.showOnlyArenasWithRaid ||
-            AppSettings.showOnlyPokestopsWithQuest ||
-            !AppSettings.showArenas ||
-            !AppSettings.showPokestops {
+        if AppSettings.isFilterActive {
             NotificationBannerManager.shared.show(.filterActive)
         } else {
             NotificationBannerManager.shared.dismiss()

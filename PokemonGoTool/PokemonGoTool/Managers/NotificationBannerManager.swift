@@ -29,7 +29,7 @@ class NotificationBannerManager {
     private init() {}
     
     func show(_ type: NotificationBannerType, title: String? = nil, message: String? = nil) {
-        
+            
         switch type {
 
         case .connected:

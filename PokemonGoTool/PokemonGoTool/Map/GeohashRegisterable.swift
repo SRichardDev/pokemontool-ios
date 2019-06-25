@@ -20,15 +20,15 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         submitButton.type = .accept
         submitButton.addAction {
             submitButton.scaleIn()
+            self.endGeohashRegistration()
             submitClosure()
         }
         
         let cancelButton = CircleButton(type: .custom)
-        cancelButton.type = .cancel
+        cancelButton.type = .trash
         cancelButton.addAction {
             cancelButton.scaleIn()
-            self.endGeohashRegistration()
-            endClosure()
+            self.deleteAllRegisteredGeohashes()
         }
         
         let menuView = showBottomMenu([cancelButton, submitButton])
@@ -47,6 +47,10 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in stackView.removeFromSuperview() }
         mapView.removeOverlays(mapView.overlays)
         mapView.annotations.forEach({ self.mapView.view(for: $0)?.isUserInteractionEnabled = true })
+    }
+    
+    func deleteAllRegisteredGeohashes() {
+        #warning("TODO: Delete all registered Geohashes from the server")
     }
     
     func addPolyLine(for geohashBox: GeohashBox?) {

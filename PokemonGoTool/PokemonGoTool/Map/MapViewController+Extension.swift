@@ -14,8 +14,7 @@ extension MapViewController {
     func setupMapButtonsMenu() {
         let registerPushGeohashButton = UIButton()
         registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
-        registerPushGeohashButton.addAction { [weak self] in
-            guard let self = self else { fatalError() }
+        registerPushGeohashButton.addAction { [unowned self] in
             registerPushGeohashButton.scaleIn()
             
             guard let user = self.firebaseConnector.user else { return }
@@ -23,11 +22,10 @@ extension MapViewController {
             let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted()
             self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
             self.startGeohashRegistration(with: subscribedGeohashPokestops, submitClosure: {
-                
-            }, endClosure: { [weak self] in
-                guard let self = self else { fatalError() }
                 self.isGeohashSelectionMode = false
                 self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
+            }, endClosure: { [unowned self] in
+                #warning("TODO: Delete all registered Geohashes from the server")
             })
         }
         

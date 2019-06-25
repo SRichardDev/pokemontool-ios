@@ -8,11 +8,14 @@ protocol PoiSubmissable {
     var poiSubmissionAnnotation: MKPointAnnotation { get set }
 }
 
-extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & MapRegionSetable & MapTypeSwitchable {
+extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & MapRegionSetable & MapTypeSwitchable & SettingsAppliable {
     
     func startPoiSubmission(submitClosure: @escaping () -> Void, endClosure: @escaping () -> Void) {
         NotificationBannerManager.shared.show(.addPoi)
-        setMapRegion(distance: 100)
+        setMapRegion(distance: 50)
+        mapView.mapType = .standard
+        mapView.showsPointsOfInterest = true
+
         poiSubmissionAnnotation.coordinate = mapView.centerCoordinate
         mapView.addAnnotation(poiSubmissionAnnotation)
         
@@ -44,6 +47,9 @@ extension PoiSubmissable where Self: UIViewController & BottomMenuShowable & Map
     }
     
     func endPoiSubmission() {
+        mapView.mapType = .mutedStandard
+        mapView.showsPointsOfInterest = false
+
         NotificationBannerManager.shared.dismiss()
         mapView.removeAnnotation(poiSubmissionAnnotation)
         guard let stackView = view.viewWithTag(ViewTags.poiSubmissionStackView) else { return }

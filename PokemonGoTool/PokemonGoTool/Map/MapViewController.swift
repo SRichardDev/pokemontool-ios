@@ -3,7 +3,7 @@ import UIKit
 import MapKit
 import Cluster
 
-class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable, BottomMenuShowable, GeohashRegisterable, MapRegionSetable {
+class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialViewController, MapTypeSwitchable, PoiSubmissable, BottomMenuShowable, GeohashRegisterable, MapRegionSetable, SettingsAppliable {
     
     weak var coordinator: MainCoordinator?
     var locationManager: LocationManager!
@@ -46,12 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if AppSettings.filterSettingsChanged {
-            manager.removeAll()
-            manager.reload(mapView: mapView)
-            loadData()
-        }
+        if AppSettings.filterSettingsChanged { appSettingsDidChange() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +59,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         endPoiSubmission()
         endGeohashRegistration()
         moveMapMenu(ConstraintConstants.mapMenuOrigin)
+    }
+    
+    func appSettingsDidChange() {
+        manager.removeAll()
+        manager.reload(mapView: mapView)
+        loadData()
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {

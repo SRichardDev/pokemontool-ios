@@ -58,7 +58,8 @@
 "banner_signed_in_description" = "Willkommen zurück Trainer!";
 "banner_signed_out_title" = "Erfolgreich abgemeldet";
 "banner_signed_out_description" = "Bis bald Trainer!";
-
+"banner_filter_active_title" = "Filter aktiv";
+"banner_filter_active_description" = "Du siehst gerade nicht alle Arenen/Pokéstops";
 
 //
 //Tabbar
