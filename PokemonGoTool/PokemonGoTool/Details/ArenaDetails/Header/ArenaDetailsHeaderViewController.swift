@@ -14,7 +14,7 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
         super.viewDidLoad()
         titleLabel.text = viewModel.arena.name
         imageView.image = viewModel.headerImage
-        selectRaidbossButton.isHidden = viewModel.isRaidExpired
+        selectRaidbossButton.isHidden = viewModel.isRaidExpired && !viewModel.isRaidbossActive
         selectRaidbossButton.setTitle("Raidboss auswählen", for: .normal)
     }
     

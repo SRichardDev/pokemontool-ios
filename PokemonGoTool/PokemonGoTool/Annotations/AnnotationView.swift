@@ -125,15 +125,11 @@ class AnnotationView: CustomAnnotationView {
         annotationView.label.alpha = showLabel ? 1 : 0
         annotationView.customAnnotation = annotation.arena
         
-        let baseImage = annotation.arena?.image ?? UIImage(named: "arena")!
-        
-        if let raid = annotation.arena?.raid, !raid.isExpired {
+        if let raid = annotation.arena?.raid,
+            let arena = annotation.arena,
+            !raid.isExpired {
             
-            guard let topImage = raid.image else { return annotationView }
-            let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidBossId != nil) ? 4 : 1.5) : 1.5            
-            let size = CGSize(width: topImage.size.width / scaleFactor, height: topImage.size.height / scaleFactor)
-            let resizedTopImage = topImage.resize(targetSize: size)
-            annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+            annotationView.image = ImageManager.combinedArenaImage(for: arena)
             
             if raid.level == 5 {
                 annotationView.addPulsator(numPulses: 1, color: .purple)
@@ -147,6 +143,7 @@ class AnnotationView: CustomAnnotationView {
                 annotationView.addPulsator(numPulses: 1, color: .magenta)
             }
         } else {
+            let baseImage = annotation.arena?.image ?? UIImage(named: "areana")!
             let size = CGSize(width: baseImage.size.width/2, height: baseImage.size.height/2)
             let resizedBaseImage = baseImage.resize(targetSize: size)
             

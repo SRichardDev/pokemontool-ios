@@ -31,9 +31,9 @@ class DetailAnnotationView: UIView {
                                     for: .touchUpInside)
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
-        } else if let annotation = annotation as? Arena {
-            annotationTypeLabel.text = annotation.isEX ? "EX Arena" : "Arena"
-            annotationImageView.image = annotation.image
+        } else if let arena = annotation as? Arena {
+            annotationTypeLabel.text = arena.isEX ? "EX Arena" : "Arena"
+            annotationImageView.image = ImageManager.combinedArenaImage(for: arena)
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)

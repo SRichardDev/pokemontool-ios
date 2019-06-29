@@ -52,4 +52,16 @@ class ImageManager {
         }
         return image
     }
+    
+    class func combinedArenaImage(for arena: Arena) -> UIImage? {
+        let baseImage = arena.image
+        guard let topImage = arena.raid?.image else { return arena.image }
+        guard let raid = arena.raid else { return arena.image }
+        guard raid.isActive else { return arena.image }
+        let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidBossId != nil) ? 4 : 1.5) : 1.5
+        let size = CGSize(width: topImage.size.width / scaleFactor, height: topImage.size.height / scaleFactor)
+        let resizedTopImage = topImage.resize(targetSize: size)
+        
+        return UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
+    }
 }
