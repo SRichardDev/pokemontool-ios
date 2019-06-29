@@ -129,18 +129,8 @@ class AnnotationView: CustomAnnotationView {
         
         if let raid = annotation.arena?.raid, !raid.isExpired {
             
-            let raidboss = RaidbossManager.shared.raidboss(for: raid.raidBossId)
-            
-            let topImage: UIImage
-            let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidBossId != nil) ? 4 : 1.5) : 1.5
-
-            let raidBossImage = ImageManager.image(named: "\(raidboss?.imageName ?? "")")
-            let eggImage = ImageManager.image(named: "level_\(raid.level)")
-            let eggHatchedImage = ImageManager.image(named: "level_\(raid.level)_hatched")
-            let hatchedTopImage = raidBossImage ?? eggHatchedImage ?? UIImage()
-            let notHatchedTopImage = eggImage ?? UIImage()
-            topImage = raid.hasHatched ? hatchedTopImage : notHatchedTopImage
-            
+            guard let topImage = raid.image else { return annotationView }
+            let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidBossId != nil) ? 4 : 1.5) : 1.5            
             let size = CGSize(width: topImage.size.width / scaleFactor, height: topImage.size.height / scaleFactor)
             let resizedTopImage = topImage.resize(targetSize: size)
             annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)

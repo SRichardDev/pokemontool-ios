@@ -82,13 +82,18 @@ class RaidBossCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: Label!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        layer.cornerRadius = 10
+    }
+    
     override var isSelected: Bool {
         didSet {
             UIView.animate(withDuration: 0.25) {
                 if self.isSelected {
                     self.layer.borderColor = UIColor.lightGray.cgColor
                     self.layer.borderWidth = 1
-                    self.layer.cornerRadius = 5
+
                 } else {
                     self.layer.borderColor = UIColor.clear.cgColor
                 }

@@ -35,7 +35,7 @@ class LevelSelectionButtonView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.borderColor = UIColor.orange.cgColor
+        layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 1
         translatesAutoresizingMaskIntoConstraints = false
         transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -43,7 +43,7 @@ class LevelSelectionButtonView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = bounds.width / 3
+        layer.cornerRadius = 10
     }
     
     func show(_ isShowing: Bool) {

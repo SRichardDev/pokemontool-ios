@@ -13,14 +13,14 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = viewModel.arena.name
-        imageView.image = viewModel.isRaidExpired ? viewModel.arenaImage : viewModel.raidBossImage
+        imageView.image = viewModel.headerImage
         selectRaidbossButton.isHidden = viewModel.isRaidExpired
         selectRaidbossButton.setTitle("Raidboss auswählen", for: .normal)
     }
     
     func updateArenaImage(isGold: Bool) {
         UIView.transition(with: imageView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-            self.imageView.image = self.viewModel.isRaidExpired ? self.viewModel.arenaImage : self.viewModel.raidBossImage
+            self.imageView.image = self.viewModel.headerImage
         })
     }
     

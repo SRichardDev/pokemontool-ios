@@ -72,16 +72,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     var participants = [String: PublicUserData]()
     
-    var raidBossImage: UIImage? {
+    var headerImage: UIImage? {
         get {
-            let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
-            return ImageManager.image(named: "\(raidboss?.imageName ?? "")") ?? ImageManager.image(named: "level_\(arena.raid?.level ?? 1)")
-        }
-    }
-    
-    var arenaImage: UIImage {
-        get {
-            return arena.image
+            return isRaidExpired ? arena.image : arena.raid?.image
         }
     }
     
