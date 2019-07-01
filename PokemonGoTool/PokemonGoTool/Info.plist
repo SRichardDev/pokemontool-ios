@@ -19,17 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Bla</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bar</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Test</string>
+	<string>PoGO Radar benötigt deinen Standort</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Foo</string>
+	<string>PoGO Radar benötigt deinen Standort damit du POIs in deiner Nähe sehen kannst</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
