@@ -143,7 +143,7 @@ class AnnotationView: CustomAnnotationView {
                 annotationView.addPulsator(numPulses: 1, color: .magenta)
             }
         } else {
-            let baseImage = annotation.arena?.image ?? UIImage(named: "areana")!
+            let baseImage = annotation.arena?.image ?? UIImage(named: "arena")!
             let size = CGSize(width: baseImage.size.width/2, height: baseImage.size.height/2)
             let resizedBaseImage = baseImage.resize(targetSize: size)
             
