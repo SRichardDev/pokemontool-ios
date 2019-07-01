@@ -34,11 +34,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             return DateUtility.timeStringWithAddedMinutesToDate(minutes: Int(selectedTimeLeft.double), date: hatchDate)
         }
     }
-    var currentRaidBosses: [RaidbossDefinition] {
-        get {
-            return RaidbossManager.shared.raidbosses?.filter { Int($0.level) == selectedRaidLevel } ?? []
-        }
-    }
+
     var imageName: String {
         get {
             return "level_\(selectedRaidLevel)"
@@ -65,10 +61,6 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
         selectedRaidLevel = value
         updateCurrentRaidBosses()
         delegate?.update(of: .raidLevelChanged)
-    }
-    
-    func raidBosses() -> [RaidbossDefinition]  {
-        return currentRaidBosses
     }
     
     func updateCurrentRaidBosses() {

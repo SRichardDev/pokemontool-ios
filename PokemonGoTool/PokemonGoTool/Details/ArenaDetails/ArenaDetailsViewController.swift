@@ -15,7 +15,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let userParticipatesSwitchViewController = ArenaDetailsUserParticipatesViewController.fromStoryboard()
     private let goldSwitchViewController = ArenaDetailsGoldArenaSwitchViewController.fromStoryboard()
     private let meetupTimeSelectionViewController = RaidMeetupTimePickerViewController.fromStoryboard()
-    
+    private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -35,6 +36,14 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
         stackView.addSepartor()
+        
+        if !viewModel.isRaidBossSelected && viewModel.isRaidbossActive {
+            stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
+            stackView.addSepartor()
+            raidBossCollectionViewController.level = viewModel.level
+            raidBossCollectionViewController.isRaidRunning = true
+            raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
+        }
         
         if !viewModel.isRaidExpired {
             stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
@@ -81,8 +90,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             restTimeViewController.view.isHidden = viewModel.isRaidExpired
         case .hatchTimeLeftChanged(let timeLeft):
             restTimeViewController.updateHatchTimeLeft(timeLeft)
-        case .goldArenaChanged(let isGold):
-            headerViewController.updateArenaImage(isGold: isGold)
+        case .goldArenaChanged:
+            headerViewController.updateUI()
         case .createRaidMeetup:
             let alert = UIAlertController(title: "Stimmt der Treffpunkt?",
                                           message: viewModel.selectedMeetupTime,
@@ -96,6 +105,11 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
                 self.userParticipatesSwitchViewController.updateUI()
             }))
             present(alert, animated: true, completion: nil)
+        case .eggHatched:
+            headerViewController.updateUI()
+        case .raidbossChanged:
+            headerViewController.updateUI()
+            setTitle(viewModel.title)
         }
     }
 }

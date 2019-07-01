@@ -260,6 +260,15 @@ class FirebaseConnector {
         return arena
     }
     
+    func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
+        arena.raid?.raidBossId = raidboss.id
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .updateChildValues([DatabaseKeys.raidBossId : raidboss.id])
+    }
+    
     private func associateMeetupIdToRaid(id: String, arena: inout Arena) {
         arena.raid?.raidMeetupId = id
         arenasRef

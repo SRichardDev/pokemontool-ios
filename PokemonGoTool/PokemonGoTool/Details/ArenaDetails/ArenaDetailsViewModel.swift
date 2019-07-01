@@ -9,6 +9,8 @@ enum ArenaDetailsUpdateType {
     case hatchTimeLeftChanged(_ timeLeft: String)
     case goldArenaChanged(isGold: Bool)
     case createRaidMeetup
+    case eggHatched
+    case raidbossChanged
 }
 
 protocol ArenaDetailsDelegate: class {
@@ -61,6 +63,18 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     var isRaidExpired: Bool {
         get {
             return arena.raid?.isExpired ?? true
+        }
+    }
+    
+    var isRaidBossSelected: Bool {
+        get {
+            return arena.raid?.raidBossId != nil
+        }
+    }
+    
+    var level: Int {
+        get {
+            return arena.raid?.level ?? 0
         }
     }
     
@@ -173,7 +187,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     func startTimeLeftTimer() {
         guard let raid = arena.raid else { return }
-        guard let date = raid.endDate else { fatalError() }
+        guard let date = raid.endDate else { return }
         timeLeftTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             if self.isTimeUp(for: date) {
                 self.showTimeUp()
@@ -186,11 +200,17 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
             }
         })
         timeLeftTimer?.fire()
+        
+        #warning("Hacky")
+        guard !isRaidbossActive else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.delegate?.update(of: .eggHatched)
+        }
     }
     
     func showTimeUp() {
         DispatchQueue.main.async {
-            self.delegate?.update(of: .timeLeftChanged("Raid bereits abgelaufen"))
+            self.delegate?.update(of: .timeLeftChanged("--:--"))
         }
     }
     
@@ -198,6 +218,11 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         firebaseConnector.userName(for: arena.submitter) { trainerName in
             completion(trainerName)
         }
+    }
+    
+    func updateRaidboss(_ raidboss: RaidbossDefinition) {
+        firebaseConnector.setRaidbossForRaid(in: &arena, raidboss: raidboss)
+        delegate?.update(of: .raidbossChanged)
     }
     
     private func isTimeUp(for date: Date) -> Bool {

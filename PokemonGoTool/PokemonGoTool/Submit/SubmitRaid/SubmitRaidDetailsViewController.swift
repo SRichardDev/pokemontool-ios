@@ -31,12 +31,12 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
 
         headerViewController.viewModel = viewModel
         raidLevelViewController.viewModel = viewModel
-        raidBossCollectionViewController.viewModel = viewModel
         raidAlreadyRunningSwitchViewController.viewModel = viewModel
         hatchTimePickerViewController.viewModel = viewModel
         timeLeftPickerViewController.viewModel = viewModel
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
+        raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.selectedRaidBoss = $0 }
 
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
@@ -76,10 +76,11 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         case .raidLevelChanged:
             setTitle("Neuer Level \(self.viewModel.selectedRaidLevel) Raid")
             headerViewController.updateUI()
+            raidBossCollectionViewController.level = viewModel.selectedRaidLevel
         case .raidAlreadyRunning:
             changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
                                                 timeLeftPickerViewController])
-            raidBossCollectionViewController.toggleScrolling()
+            raidBossCollectionViewController.isRaidRunning = viewModel.isRaidAlreadyRunning
         case .userParticipates:
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:

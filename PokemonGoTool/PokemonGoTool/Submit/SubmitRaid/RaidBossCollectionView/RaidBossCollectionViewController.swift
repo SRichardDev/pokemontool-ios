@@ -3,13 +3,33 @@ import UIKit
 
 class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    var viewModel: SubmitRaidViewModel!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var collectionView: UICollectionView!
     private var scrollTimer: Timer?
     private var newOffsetX: CGFloat = 0.0
     private var reverseScrolling = false
+    
+    var selectedRaidbossCallback: ((RaidbossDefinition) -> ())?
+    
+    var level = 3 {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    var isRaidRunning = false {
+        didSet {
+            collectionView.reloadData()
+            toggleScrolling()
+        }
+    }
+    
+    private var currentRaidBosses: [RaidbossDefinition] {
+        get {
+            return RaidbossManager.shared.raidbosses?.filter { Int($0.level) == level } ?? []
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +44,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     
     func toggleScrolling() {
         collectionView.reloadData()
-        if viewModel.isRaidAlreadyRunning {
+        if isRaidRunning {
             scrollTimer?.invalidate()
             titleLabel.text = "Wähle den Raidboss aus:"
         } else {
@@ -34,18 +54,19 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectedRaidBoss = viewModel.currentRaidBosses[indexPath.row]
+        guard let selectedRaidbossCallback = selectedRaidbossCallback else { return }
+        selectedRaidbossCallback(currentRaidBosses[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.currentRaidBosses.count
+        return currentRaidBosses.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RaidBossCell
-        cell.titleLabel.text = viewModel.currentRaidBosses[indexPath.row].name
-        cell.imageView.image = viewModel.currentRaidBosses[indexPath.row].image
-        cell.isUserInteractionEnabled = viewModel.isRaidAlreadyRunning
+        cell.titleLabel.text = currentRaidBosses[indexPath.row].name
+        cell.imageView.image = currentRaidBosses[indexPath.row].image
+        cell.isUserInteractionEnabled = isRaidRunning
         return cell
     }
     
