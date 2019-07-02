@@ -5,6 +5,8 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
 
     var viewModel: ArenaDetailsViewModel!
     weak var coordinator: MainCoordinator?
+    
+    @IBOutlet var stackView: InnerVerticalStackView!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var participantsCountLabel: Label!
     @IBOutlet var participantsListButton: Button!

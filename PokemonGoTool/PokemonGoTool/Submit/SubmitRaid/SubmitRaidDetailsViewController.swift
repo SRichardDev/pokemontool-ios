@@ -21,11 +21,9 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        view.addSubviewAndEdgeConstraints(stackView,
-                                          edges: .all,
-                                          margins: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
-                                          constrainToSafeAreaGuide: false)
         
+        stackView.addToView(view)
+                
         doneButton.setTitle("Raid melden", for: .normal)
         doneButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
 
@@ -42,18 +40,12 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
         
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)
         stackView.addArrangedViewController(viewController: timeLeftPickerViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: userParticipatesViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: meetupTimePickerViewController, to: self)
         stackView.addArrangedSubview(doneButton)
     }

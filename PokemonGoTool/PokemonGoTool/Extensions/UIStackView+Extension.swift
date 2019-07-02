@@ -9,9 +9,4 @@ extension UIStackView {
         addArrangedSubview(viewController.view)
         viewController.didMove(toParent: parent)
     }
-    
-    func addSepartor() {
-        let separatorView = SeparatorView.fromNib()
-        addArrangedSubview(separatorView)
-    }
 }

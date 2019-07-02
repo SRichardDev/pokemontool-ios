@@ -37,14 +37,18 @@ class Button: UIButton {
     
     private func setup() {
         let systemBlue = UIButton(type: .system).tintColor!
-        layer.cornerRadius = 10
         layer.borderColor = systemBlue.cgColor
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .highlighted)
-        setBackgroundColor(color: systemBlue, forState: .normal)
-        setBackgroundColor(color: systemBlue.withAlphaComponent(0.8), forState: .highlighted)
-        setBackgroundColor(color: .lightGray, forState: .disabled)
+        backgroundColor = systemBlue
+        
+        layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 0.2
+        layer.masksToBounds = false
+        layer.cornerRadius = 10
     }
 
     override var intrinsicContentSize: CGSize {

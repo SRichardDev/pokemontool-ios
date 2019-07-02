@@ -31,11 +31,9 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedViewController(viewController: mapViewController, to: self)
-        stackView.addSepartor()
         
         if viewModel.hasActiveQuest {
             stackView.addArrangedViewController(viewController: questViewController, to: self)
-            stackView.addSepartor()
         }
         
         stackView.addArrangedViewController(viewController: infoViewController, to: self)

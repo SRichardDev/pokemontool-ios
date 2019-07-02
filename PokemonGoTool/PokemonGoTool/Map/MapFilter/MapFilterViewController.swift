@@ -51,7 +51,6 @@ class MapFilterViewController: UIViewController, StoryboardInitialViewController
 
         
         stackView.addArrangedSubview(arenasFilterStackView)
-        stackView.addSepartor()
         stackView.addArrangedSubview(pokstopsFilterStackView)
     }
     

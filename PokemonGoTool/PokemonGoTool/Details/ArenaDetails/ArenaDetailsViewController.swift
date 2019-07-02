@@ -35,11 +35,10 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         meetupTimeSelectionViewController.viewModel = viewModel
         
         stackView.addArrangedViewController(viewController: headerViewController, to: self)
-        stackView.addSepartor()
+
         
         if !viewModel.isRaidBossSelected && viewModel.isRaidbossActive {
             stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
-            stackView.addSepartor()
             raidBossCollectionViewController.level = viewModel.level
             raidBossCollectionViewController.isRaidRunning = true
             raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
@@ -47,18 +46,13 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         
         if !viewModel.isRaidExpired {
             stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
-            stackView.addSepartor()
             stackView.addArrangedViewController(viewController: meetupTimeViewController, to: self)
             stackView.addArrangedViewController(viewController: meetupTimeSelectionViewController, to: self)
-            stackView.addSepartor()
             stackView.addArrangedViewController(viewController: userParticipatesSwitchViewController, to: self)
-            stackView.addSepartor()
             stackView.addArrangedViewController(viewController: participantsOverviewViewController, to: self)
-            stackView.addSepartor()
         }
         
         stackView.addArrangedViewController(viewController: goldSwitchViewController, to: self)
-        stackView.addSepartor()
         stackView.addArrangedViewController(viewController: infoViewController, to: self)
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired

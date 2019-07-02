@@ -9,6 +9,12 @@ class NavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.prefersLargeTitles = true
+        
+        navigationBar.layer.masksToBounds = false
+        navigationBar.layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
+        navigationBar.layer.shadowOpacity = 0.5
+        navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2)
+        navigationBar.layer.shadowRadius = 0.2
     }
     
     override func viewWillAppear(_ animated: Bool) {
