@@ -31,6 +31,9 @@ struct DatabaseKeys {
     static let subscribedGeohashPokestops = "subscribedGeohashPokestops"
     static let subscribedGeohashArenas = "subscribedGeohashArenas"
     static let pushActive = "isPushActive"
+    
+    static let testpokestops = "test_pokestops"
+    static let testarenas = "test_arenas"
 }
 
 protocol FirebaseDelegate: class {

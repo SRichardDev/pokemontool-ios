@@ -15,6 +15,9 @@ class FirebaseConnector {
     private let registeredUsersPokestopsRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersPokestops)
     private let registeredUsersArenasRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersArenas)
 
+    private let testPokestopsRef = Database.database().reference(withPath: DatabaseKeys.testpokestops)
+    private let testArenasRef = Database.database().reference(withPath: DatabaseKeys.testarenas)
+    
     private(set) var user: User? {
         didSet {
             userDelegate?.didUpdateUser()
