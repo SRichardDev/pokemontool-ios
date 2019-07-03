@@ -41,6 +41,7 @@ class FirebaseConnector {
     
     init() {
         questsRef.keepSynced(true)
+        raidBossesRef.keepSynced(true)
         checkConnectivity()
         loadInitialData()
     }
@@ -118,8 +119,7 @@ class FirebaseConnector {
     
     func saveRaidMeetup(raidMeetup: RaidMeetup) -> String {
         let data = try! FirebaseEncoder().encode(raidMeetup)
-        let ref = Database.database().reference(withPath: DatabaseKeys.raidMeetups)
-        let createId = ref.childByAutoId()
+        let createId = raidMeetupsRef.childByAutoId()
         createId.setValue(data)
         return createId.key!
     }
@@ -261,6 +261,12 @@ class FirebaseConnector {
         associateMeetupIdToRaid(id: meetupId, arena: &arena)
         saveUserInRaidMeetup(for: meetupId)
         return arena
+    }
+    
+    func deleteOldRaidMeetup(for id: String) {
+        raidMeetupsRef
+            .child(id)
+            .removeValue()
     }
     
     func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {

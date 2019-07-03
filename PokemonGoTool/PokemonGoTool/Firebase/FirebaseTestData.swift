@@ -22,6 +22,11 @@ class FirebaseTestData {
         ref1.removeValue()
     }
     
+    class func removeAllMeetups() {
+        let ref = Database.database().reference(withPath: "raidMeetups")
+        ref.removeValue()
+    }
+    
     class func addRaidBosses() {
         let palkia = ["name": "Palkia",
                       "level": "5",

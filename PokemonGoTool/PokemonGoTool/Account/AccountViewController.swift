@@ -12,40 +12,21 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
     private let accountOverviewViewController = AccountOverviewViewController.fromStoryboard()
     private let accountMedalViewController = AccountMedalViewController.fromStoryboard()
     private let pushActiveSwitchViewController = AccountPushActiveSwitchViewController.fromStoryboard()
-    private let changeDetailsButton = Button()
-    private let createAccountButton = Button()
-    private let signInButton = Button()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.addToView(view)
         
+        accountWelcomeViewController.coordinator = coordinator
+        accountOverviewViewController.coordinator = coordinator
         accountOverviewViewController.viewModel = viewModel
         accountMedalViewController.viewModel = viewModel.accountMedalViewModel
         pushActiveSwitchViewController.viewModel = viewModel
         
-        changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
-        changeDetailsButton.addAction(for: .touchUpInside) { [unowned self] in
-            self.coordinator?.showTeamAndLevel(accountViewModel: self.viewModel)
-        }
-        
-        createAccountButton.setTitle("Account anlegen", for: .normal)
-        createAccountButton.addAction(for: .touchUpInside) { [unowned self] in
-            self.coordinator?.showAccountInput(type: .email)
-        }
-        
-        signInButton.setTitle("Anmelden", for: .normal)
-        signInButton.addAction(for: .touchUpInside) { [unowned self] in
-            self.coordinator?.showAccountInput(type: .emailSignIn)
-        }
-        
         stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)
         stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
-        stackView.addArrangedSubview(changeDetailsButton)
         stackView.addArrangedViewController(viewController: pushActiveSwitchViewController, to: self)
         stackView.addArrangedViewController(viewController: accountMedalViewController, to: self)
-        stackView.addArrangedSubview(signInButton)
-        stackView.addArrangedSubview(createAccountButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,9 +64,6 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         accountWelcomeViewController.view.isHidden = viewModel.isLoggedIn
         accountOverviewViewController.view.isVisible = viewModel.isLoggedIn
         accountMedalViewController.view.isVisible = viewModel.isLoggedIn
-        createAccountButton.isHidden = viewModel.isLoggedIn
-        signInButton.isHidden = viewModel.isLoggedIn
-        changeDetailsButton.isVisible = viewModel.isLoggedIn
         pushActiveSwitchViewController.view.isVisible = viewModel.isLoggedIn
         
         let logoutItem = UIBarButtonItem(title: "Abmelden", style: .plain, target: self, action: #selector(logout))

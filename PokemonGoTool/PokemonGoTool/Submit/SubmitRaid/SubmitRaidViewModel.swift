@@ -68,6 +68,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     }
     
     func submitRaid() {
+        deleteOldRaidMeetupIfNeeded()
         let raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime)
     
         if isRaidAlreadyRunning {
@@ -105,5 +106,11 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             }
         }
         firebaseConnector.saveRaid(arena: arena)
+    }
+    
+    private func deleteOldRaidMeetupIfNeeded() {
+        if let oldRaidMeetupId = arena.raid?.raidMeetupId {
+            firebaseConnector.deleteOldRaidMeetup(for: oldRaidMeetupId)
+        }
     }
 }

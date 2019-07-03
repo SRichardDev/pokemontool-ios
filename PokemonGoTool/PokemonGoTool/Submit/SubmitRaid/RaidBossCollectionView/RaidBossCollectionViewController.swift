@@ -6,10 +6,11 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     @IBOutlet var titleLabel: Label!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var selectButton: Button!
     private var scrollTimer: Timer?
     private var newOffsetX: CGFloat = 0.0
     private var reverseScrolling = false
-    
+    var selectedRaidboss: RaidbossDefinition?
     var selectedRaidbossCallback: ((RaidbossDefinition) -> ())?
     
     var level = 3 {
@@ -50,12 +51,12 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         } else {
             startScrolling()
             titleLabel.text = "Mögliche Raidbosse:"
+            selectButton.isHidden = true
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedRaidbossCallback = selectedRaidbossCallback else { return }
-        selectedRaidbossCallback(currentRaidBosses[indexPath.row])
+        selectedRaidboss = currentRaidBosses[indexPath.row]
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -91,6 +92,12 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         }
         guard let scrollTimer = scrollTimer else { return }
         RunLoop.current.add(scrollTimer, forMode: .common)
+    }
+    
+    @IBAction func didTapSelectRaidboss(_ sender: Any) {
+        guard let selectedRaidbossCallback = selectedRaidbossCallback else { return }
+        guard let raidboss = selectedRaidboss else { return }
+        selectedRaidbossCallback(raidboss)
     }
 }
 
