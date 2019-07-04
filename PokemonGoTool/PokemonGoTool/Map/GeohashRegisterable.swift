@@ -20,6 +20,8 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         submitButton.type = .accept
         submitButton.addAction {
             submitButton.scaleIn()
+            NotificationBannerManager.shared.show(.pushRegistrationSuccess)
+            self.endGeohashRegistration()
             submitClosure()
         }
         
@@ -27,6 +29,7 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
         cancelButton.type = .cancel
         cancelButton.addAction {
             cancelButton.scaleIn()
+            NotificationBannerManager.shared.dismiss()
             self.endGeohashRegistration()
             endClosure()
         }
@@ -42,7 +45,6 @@ extension GeohashRegisterable where Self: UIViewController & BottomMenuShowable 
     }
     
     func endGeohashRegistration() {
-        NotificationBannerManager.shared.dismiss()
         guard let stackView = view.viewWithTag(ViewTags.geohashRegistrationStackView) else { return }
         UIView.animate(withDuration: 0.25, animations: {stackView.alpha = 0}) { _ in stackView.removeFromSuperview() }
         mapView.removeOverlays(mapView.overlays)

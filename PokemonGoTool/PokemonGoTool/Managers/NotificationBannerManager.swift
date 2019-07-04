@@ -15,6 +15,7 @@ enum NotificationBannerType {
     case questSubmitted
     case mapTypeChanged(mapType: MKMapType)
     case filterActive
+    case pushRegistrationSuccess
 }
 
 class NotificationBannerManager {
@@ -101,7 +102,12 @@ class NotificationBannerManager {
                                                style: .info)
             currentBanner?.autoDismiss = false
             currentBanner?.haptic = .none
-
+            
+        case .pushRegistrationSuccess:
+            currentBanner = NotificationBanner(title: "Push Nachrichten",
+                                               subtitle: "Du wurdest erfolgreich registriert",
+                                               leftView: UIImageView(image: UIImage(named: "checkmark")),
+                                               style: .success)
         }
         
         currentBanner?.show()

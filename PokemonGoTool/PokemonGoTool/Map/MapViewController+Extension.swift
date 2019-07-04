@@ -22,8 +22,10 @@ extension MapViewController {
             self.isGeohashSelectionMode = true
             let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted()
             self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
+            
             self.startGeohashRegistration(with: subscribedGeohashPokestops, submitClosure: {
-                
+                self.isGeohashSelectionMode = false
+                self.moveMapMenu(ConstraintConstants.mapMenuOrigin)
             }, endClosure: { [weak self] in
                 guard let self = self else { fatalError() }
                 self.isGeohashSelectionMode = false
