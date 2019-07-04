@@ -24,6 +24,10 @@ class PokestopDetailsViewModel {
     }
     
     func pokestopSubmitterName(completion: @escaping (String) -> ()) {
+        if pokestop.submitter == "System" {
+            completion(pokestop.submitter)
+        }
+        
         firebaseConnector.user(for: pokestop.submitter, completion: { userData in
             guard let trainerName = userData.trainerName else { return }
             completion(trainerName)
@@ -32,6 +36,7 @@ class PokestopDetailsViewModel {
     
     func questSubmitterName(completion: @escaping (String) -> ()) {
         guard let submitter = pokestop.quest?.submitter else { return }
+        
         firebaseConnector.user(for: submitter, completion: { userData in
             guard let trainerName = userData.trainerName else { return }
             completion(trainerName)

@@ -215,6 +215,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     }
     
     func submitterName(_ completion: @escaping (String) -> ()) {
+        if arena.submitter == "System" {
+            completion(arena.submitter)
+        }
         firebaseConnector.userName(for: arena.submitter) { trainerName in
             completion(trainerName)
         }
