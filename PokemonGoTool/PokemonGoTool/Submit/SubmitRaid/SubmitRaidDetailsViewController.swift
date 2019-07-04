@@ -72,7 +72,11 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         case .raidAlreadyRunning:
             changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
                                                 timeLeftPickerViewController])
-            raidBossCollectionViewController.isRaidRunning = viewModel.isRaidAlreadyRunning
+            if viewModel.isRaidAlreadyRunning {
+                raidBossCollectionViewController.activateSelectionMode()
+            } else {
+                raidBossCollectionViewController.activateOverViewMode()
+            }
         case .userParticipates:
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:

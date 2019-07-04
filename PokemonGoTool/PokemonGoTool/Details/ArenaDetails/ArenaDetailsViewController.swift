@@ -40,7 +40,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         if !viewModel.isRaidBossSelected && viewModel.isRaidbossActive {
             stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
             raidBossCollectionViewController.level = viewModel.level
-            raidBossCollectionViewController.isRaidRunning = true
+            raidBossCollectionViewController.activateSelectionMode()
             raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
         }
         

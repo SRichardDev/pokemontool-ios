@@ -19,10 +19,9 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         }
     }
     
-    var isRaidRunning = false {
+    private var isRaidRunning = false {
         didSet {
             collectionView.reloadData()
-            toggleScrolling()
         }
     }
     
@@ -36,23 +35,27 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        startScrolling()
+        activateOverViewMode()
+        selectButton.isHidden = true
     }
 
     func updateRaidBosses() {
-        collectionView.reloadSections(IndexSet(integer: 0))
+        collectionView.reloadData()
+//        collectionView.reloadSections(IndexSet(integer: 0))
     }
     
-    func toggleScrolling() {
-        collectionView.reloadData()
-        if isRaidRunning {
-            scrollTimer?.invalidate()
-            titleLabel.text = "Wähle den Raidboss aus:"
-        } else {
-            startScrolling()
-            titleLabel.text = "Mögliche Raidbosse:"
-            selectButton.isHidden = true
-        }
+    func activateOverViewMode() {
+        isRaidRunning = false
+        UIView.animate(withDuration: 0.25) { self.selectButton.isHidden = true }
+        startScrolling()
+        titleLabel.text = "Mögliche Raidbosse:"
+    }
+    
+    func activateSelectionMode() {
+        isRaidRunning = true
+        UIView.animate(withDuration: 0.25) { self.selectButton.isHidden = false }
+        scrollTimer?.invalidate()
+        titleLabel.text = "Wähle den Raidboss aus:"
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
