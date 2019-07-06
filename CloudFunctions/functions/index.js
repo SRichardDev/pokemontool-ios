@@ -35,19 +35,52 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
 
                         const notificationToken = (usersSnapshot.val() && usersSnapshot.val().notificationToken) || 'No token'
                         const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
+                        const platform = usersSnapshot.val().platform || "fallback"
 
-                        const payload = {
-                            notification: {
-                                title: 'Neuer Raid bei: ' + arena.name,
-                                body: message,
-                                sound: 'default'
-                            },
-                            data: {
-                                latitude: String(arena.latitude),
-                                longitude: String(arena.longitude)
-                            }
-                        };
-                    
+                        var payload
+
+                        if (platform === "iOS") {
+                            //iOS
+                            payload = {
+                                notification: {
+                                    title: 'Neuer Raid bei: ' + arena.name,
+                                    body: message,
+                                    sound: 'default'
+                                },
+                                data: {
+                                    latitude: String(arena.latitude),
+                                    longitude: String(arena.longitude)
+                                }
+                            };
+                        }
+
+                        if (platform === "android") {
+                            //Android
+                            payload = {
+                                data: {
+                                    title: 'Neuer Raid bei: ' + arena.name,
+                                    body: message,
+                                    latitude: String(arena.latitude),
+                                    longitude: String(arena.longitude)
+                                }
+                            };
+                        }
+
+                        if (platform === "fallback") {
+                            //Fallback
+                            payload = {
+                                notification: {
+                                    title: 'Neuer Raid bei: ' + arena.name,
+                                    body: message,
+                                    sound: 'default'
+                                },
+                                data: {
+                                    latitude: String(arena.latitude),
+                                    longitude: String(arena.longitude)
+                                }
+                            };
+                        }
+
                         admin.messaging().sendToDevice(notificationToken, payload)
                         return true
                     });
@@ -68,48 +101,83 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
     const uid = context.params.uid
 
     const pokestop = snapshot.after.val()
-    const name = pokestop.name;
+    const name = pokestop.name
     const quest = pokestop.quest
-    const questName = quest.name
-    const questReward = quest.reward
-        
-    console.log('Pokestop name: ' + pokestop.name + ', with ID: ' + uid + ', in geohash: ' + geohash + ', has new quest: ' + quest.name + ', with reward: ' + quest.reward)
+    const questId = quest.definitionId
 
-    return admin.database().ref('/registeredUsersPokestops/' + geohash).once('value', (snapshot, context) => {
-        snapshot.forEach((child) => {
-            const userId = child.key
-            console.log('Pushing to userID: ' + userId)
-            admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+    admin.database().ref('/quests/' + questId).once('value', (questDefinitionSnapshot) => { 
+        const questName = questDefinitionSnapshot.val().quest
+        const questReward = questDefinitionSnapshot.val().reward
+    
+        console.log('Pokestop name: ' + pokestop.name + ', with ID: ' + uid + ', in geohash: ' + geohash + ', has new quest: ' + quest.name + ', with reward: ' + quest.reward)
 
-                if (!snapshot.val().isPushActive) {
-                    return false
-                }
-                
-                const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token'
-
-                const payload = {
-                    notification: {
-                        title: 'Neue Feldforschung',
-                        body: 'Pokéstop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
-                        badge: '1',
-                        sound: 'default',
-                        mutable_content: '1',
-                        category : 'Push'
-                    },
-                    data: {
-                        latitude: String(pokestop.latitude),
-                        longitude: String(pokestop.longitude),
-                        imageUrl: 'foo.jpg'
+        return admin.database().ref('/registeredUsersPokestops/' + geohash).once('value', (snapshot, context) => {
+            snapshot.forEach((child) => {
+                const userId = child.key
+                console.log('Pushing to userID: ' + userId)
+                admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
+    
+                    if (!snapshot.val().isPushActive) {
+                        return false
                     }
-                };
-            
-                admin.messaging().sendToDevice(notificationToken, payload)
-                return true
+                    
+                    const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token'
+                    const platform = snapshot.val().platform || "fallback"
+                    var payload
+    
+                    if (platform === "iOS") {
+                        payload = {
+                            notification: {
+                                title: 'Neue Feldforschung',
+                                body: 'Pokéstop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
+                                badge: '1',
+                                sound: 'default',
+                                mutable_content: '1',
+                                category : 'Push'
+                            },
+                            data: {
+                                latitude: String(pokestop.latitude),
+                                longitude: String(pokestop.longitude),
+                            }
+                        };
+                    }
+    
+                    if (platform === "android") {
+                        payload = {
+                            data: {
+                                title: 'Neue Feldforschung',
+                                body: 'Pokéstop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
+                                latitude: String(pokestop.latitude),
+                                longitude: String(pokestop.longitude),
+                            }
+                        };    
+                    }
+    
+                    if (platform === "fallback") {
+                        payload = {
+                            notification: {
+                                title: 'Neue Feldforschung',
+                                body: 'Pokéstop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
+                                badge: '1',
+                                sound: 'default',
+                                mutable_content: '1',
+                                category : 'Push'
+                            },
+                            data: {
+                                latitude: String(pokestop.latitude),
+                                longitude: String(pokestop.longitude),
+                            }
+                        };
+                    }
+    
+                    admin.messaging().sendToDevice(notificationToken, payload)
+                    return true
+                });
             });
-        });
-    })
-    .catch(err => {
-        console.error('ERROR:', err)
-        return false
+        })
+        .catch(err => {
+            console.error('ERROR:', err)
+            return false
+        })
     })
 });

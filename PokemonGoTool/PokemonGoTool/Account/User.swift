@@ -71,7 +71,8 @@ class User: FirebaseCodable, Equatable {
     }
     
     var id: String!
-    var email: String?
+    var email: String
+    var platform: String?
     var publicData: PublicUserData?
     var notificationToken: String?
     var submittedPokestops: [PokestopId: String]?
