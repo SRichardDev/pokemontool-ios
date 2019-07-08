@@ -21,20 +21,6 @@ class Button: UIButton {
         setup()
     }
     
-    var isDestructive: Bool = false {
-        didSet {
-            if isDestructive {
-                let color = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-                setBackgroundColor(color: color, forState: .normal)
-                layer.borderColor = color.cgColor
-            } else {
-                let systemBlue = UIButton(type: .system).tintColor!
-                setBackgroundColor(color: systemBlue, forState: .normal)
-                layer.borderColor = systemBlue.cgColor
-            }
-        }
-    }
-    
     private func setup() {
         let systemBlue = UIButton(type: .system).tintColor!
         layer.borderColor = systemBlue.cgColor
@@ -56,18 +42,24 @@ class Button: UIButton {
             return CGSize(width: bounds.width, height: 44)
         }
     }
-}
-
-extension UIButton {
-    func setBackgroundColor(color: UIColor, forState: UIControl.State) {
-        clipsToBounds = true
-        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setFillColor(color.cgColor)
-            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
-            let colorImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            setBackgroundImage(colorImage, for: forState)
+    
+    override open var isHighlighted: Bool {
+        didSet {
+            updateBackgroundColor()
+        }
+    }
+    override open var isEnabled: Bool {
+        didSet {
+            updateBackgroundColor()
+        }
+    }
+    
+    private func updateBackgroundColor() {
+        if isEnabled {
+            let systemBlue = UIButton(type: .system).tintColor!
+            backgroundColor = isHighlighted ? systemBlue.withAlphaComponent(0.8) : systemBlue
+        } else {
+            backgroundColor = .lightGray
         }
     }
 }

@@ -41,6 +41,18 @@ enum Team: Int, Codable {
             }
         }
     }
+    
+    static var pickerRows: [String] {
+        get {
+            var array = [String]()
+            array.reserveCapacity(40)
+            
+            for index in 1...40 {
+                array.append("\(index)")
+            }
+            return array.reversed()
+        }
+    }
 }
 
 struct PublicUserData: FirebaseCodable {

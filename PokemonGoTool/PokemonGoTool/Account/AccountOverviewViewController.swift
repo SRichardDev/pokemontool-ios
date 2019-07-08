@@ -16,10 +16,9 @@ class AccountOverviewViewController: UIViewController, StoryboardInitialViewCont
         
         changeDetailsButton.setTitle("Infos bearbeiten", for: .normal)
         changeDetailsButton.addAction(for: .touchUpInside) { [unowned self] in
-            self.coordinator?.showTeamAndLevel(accountViewModel: self.viewModel)
+            self.coordinator?.showAccountDetails(viewModel: self.viewModel)
         }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        

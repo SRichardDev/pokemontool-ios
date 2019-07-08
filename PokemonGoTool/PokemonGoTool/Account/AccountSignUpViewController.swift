@@ -12,10 +12,9 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
     @IBOutlet var passwordLabel: Label!
     @IBOutlet var trainerNameTitleLabel: Label!
     @IBOutlet var trainerNameLabel: Label!
-    @IBOutlet var teamTitleLabel: Label!
     @IBOutlet var teamLabel: Label!
-    @IBOutlet var levelTitleLabel: Label!
     @IBOutlet var levelLabel: Label!
+    
     @IBOutlet var signUpButton: Button!
     
     override func viewDidLoad() {
@@ -25,9 +24,9 @@ class AccountSignUpViewController: UIViewController, StoryboardInitialViewContro
         signUpButton.setTitle("Account erstellen", for: .normal)
         emailLabel.text = viewModel.email
         passwordLabel.text = String(viewModel.password.map { _ in return "•" })
-        trainerNameLabel.text = viewModel.trainerName
-        teamLabel.text = viewModel.team.description
-        levelLabel.text = "\(viewModel.level)"
+        trainerNameLabel.text = "Trainer Name: \(viewModel.trainerName)"
+        teamLabel.text = "Team: \(viewModel.team.description)"
+        levelLabel.text = "Level: \(viewModel.level)"
     }
     
     @IBAction func signUpTapped(_ sender: Any) {

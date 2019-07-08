@@ -127,12 +127,12 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showTeamAndLevel(signUpViewModel: SignUpViewModel? = nil, accountViewModel: AccountViewModel? = nil) {
-        let accountDetailsViewController = AccountTeamAndLevelViewController.fromStoryboard()
-        accountDetailsViewController.signUpViewModel = signUpViewModel
-        accountDetailsViewController.accountViewModel = accountViewModel
-        accountDetailsViewController.coordinator = self
-        mainNavigationController.pushViewController(accountDetailsViewController, animated: true)
+    func showAccountDetails(viewModel: AccountViewModel) {
+        let accountDetailsViewController = AccountDetailsViewController.fromStoryboard()
+        accountDetailsViewController.viewModel = viewModel
+        let scrollableViewController = ScrollableViewController(childViewController: accountDetailsViewController)
+        scrollableViewController.title = "Account Details"
+        mainNavigationController.pushViewController(scrollableViewController, animated: true)
         impact()
     }
     

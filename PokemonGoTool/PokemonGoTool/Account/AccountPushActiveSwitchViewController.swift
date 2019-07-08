@@ -8,8 +8,8 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
     @IBOutlet var titleLabel: Label!
     @IBOutlet var pushActiveSwitch: UISwitch!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         pushActiveSwitch.isOn = viewModel.isPushActivated
     }
     
