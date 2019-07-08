@@ -335,6 +335,16 @@ class User: FirebaseCodable, Equatable {
         }
     }
     
+    class func resetPassword(for email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                NotificationBannerManager.shared.show(.resetPasswordFailed, message: error.localizedDescription)
+            } else {
+                NotificationBannerManager.shared.show(.resetPasswordSuccess)
+            }
+        }
+    }
+    
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id
     }

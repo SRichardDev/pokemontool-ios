@@ -19,6 +19,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
     
     @IBOutlet var subtitleLabel: Label!
     @IBOutlet var textField: UITextField!
+    @IBOutlet var forgotPasswordButton: UIButton!
     @IBOutlet var nextButton: Button!
     @IBOutlet var textInputStackView: InnerVerticalStackView!
     @IBOutlet var teamStackView: InnerVerticalStackView!
@@ -30,10 +31,15 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
         viewModel.accountSignInDelegate = self
         nextButton.isEnabled = false
         textInputStackView.isHidden = true
+        forgotPasswordButton.isHidden = true
         teamStackView.isHidden = true
         levelStackView.isHidden = true
         levelPickerView.delegate = self
         levelPickerView.dataSource = self
+        
+        forgotPasswordButton.addAction { [unowned self] in
+            self.viewModel.resetPassword()
+        }
 
         switch type {
         case .email:
@@ -68,6 +74,7 @@ class AccountInputViewController: UIViewController, StoryboardInitialViewControl
             textField.textContentType = .password
             textField.isSecureTextEntry = true
             textInputStackView.isHidden = false
+            forgotPasswordButton.isHidden = false
         case .team:
             title = "Team"
             teamStackView.isHidden = false

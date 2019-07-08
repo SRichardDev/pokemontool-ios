@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="V8r-na-zUa" customClass="OuterVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="25" y="60" width="325" height="371.5"/>
+                                <rect key="frame" x="25" y="60" width="325" height="426.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="fsL-hS-S1K" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="112.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="167.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVG-SL-hXj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="57.5"/>
@@ -45,10 +45,14 @@
                                                     <action selector="doneTapped:" destination="eaa-fN-iMv" eventType="primaryActionTriggered" id="ocC-YM-2B8"/>
                                                 </connections>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rla-d1-mS6">
+                                                <rect key="frame" x="0.0" y="137.5" width="325" height="30"/>
+                                                <state key="normal" title="Passwort vergessen?"/>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F4A-0i-xn6" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="137.5" width="325" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="192.5" width="325" height="68.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpP-fa-l7X" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="20.5"/>
@@ -70,7 +74,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-3J-Kao" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="231" width="325" height="140.5"/>
+                                        <rect key="frame" x="0.0" y="286" width="325" height="140.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ON0-uI-BWi" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="20.5"/>
@@ -131,6 +135,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="forgotPasswordButton" destination="rla-d1-mS6" id="Jto-5P-W3P"/>
                         <outlet property="levelPickerView" destination="r7u-4H-Kj1" id="sLn-5Q-gVB"/>
                         <outlet property="levelStackView" destination="hk3-3J-Kao" id="gRJ-Oe-gQD"/>
                         <outlet property="nextButton" destination="lrR-Od-wX1" id="UQG-x9-dfp"/>
