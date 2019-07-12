@@ -42,7 +42,7 @@ class SignUpViewModel {
                         case .signedUp:
                             self.firebaseConnector.loadUser {
                                 self.accountCreationDelegate?.didCreateAccount(status)
-                                self.registerForPushIfNeeded()
+                                PushManager.shared.registerForPush()
                             }
                         default:
                             self.accountCreationDelegate?.failedToCreateAccount(status)
@@ -56,7 +56,7 @@ class SignUpViewModel {
             case .signedIn:
                 self.firebaseConnector.loadUser {
                     self.accountSignInDelegate?.didSignInUser(status)
-                    self.registerForPushIfNeeded()
+                    PushManager.shared.registerForPush()
                 }
             default:
                 self.accountSignInDelegate?.failedToSignIn(status)
@@ -66,21 +66,6 @@ class SignUpViewModel {
     
     func resetPassword() {
         User.resetPassword(for: email)
-    }
-    
-    private func registerForPushIfNeeded() {
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
-                                                                completionHandler: {_, _ in })
-        UIApplication.shared.registerForRemoteNotifications()
-        
-        if let token = Messaging.messaging().fcmToken {
-            guard let userID = Auth.auth().currentUser?.uid else {return}
-            let database = Database.database().reference(withPath: "users/\(userID)")
-            let data = ["notificationToken" : token,
-                        "platform" : "iOS"]
-            database.updateChildValues(data)
-        }
     }
     
     func isValidEmail(_ testString: String) -> Bool {
