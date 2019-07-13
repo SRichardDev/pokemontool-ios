@@ -29,10 +29,10 @@ extension MapEmbeddable where Self: UIViewController {
 class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     
     var locationOnMap: CLLocationCoordinate2D!
-    var camera: MKMapCamera?
+    var camera: MKMapCamera!
     var isFlyover = false
-
     let mapView = MKMapView()
+    
     private var pokestopAnnotation: PokestopPointAnnotation {
         get {
             return PokestopPointAnnotation(coordinate: locationOnMap)
@@ -45,17 +45,26 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    let stackView = InnerVerticalStackView()
+    let slider = Degree360Slider()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviewAndEdgeConstraints(mapView)
+        
+        stackView.axis = .vertical
+        view.addSubviewAndEdgeConstraints(stackView)
+        stackView.addArrangedSubview(mapView)
+        stackView.addArrangedSubview(slider)
+        
+        slider.setup()
+        slider.addTarget(self, action: #selector(sliderValueDidChange(sender:)), for: .valueChanged)
+        
+        
         mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 1/1).isActive = true
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
         mapView.addAnnotation(pokestopAnnotation)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         let distance: CLLocationDistance = 200
         let pitch: CGFloat = 65
         let heading = 180.0
@@ -64,7 +73,11 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
                              fromDistance: distance,
                              pitch: pitch,
                              heading: heading)
-        mapView.camera = camera!
+        mapView.camera = camera
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +85,14 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         startFlyover()
     }
     
+    @objc
+    func sliderValueDidChange(sender: UISlider) {
+        camera.heading = CLLocationDirection(exactly: sender.value)!
+        mapView.camera = camera
+    }
+    
     func startFlyover() {
+    
         UIView.animate(withDuration: 5.0, animations: {
             self.camera!.heading += 180
             self.camera!.pitch = 45

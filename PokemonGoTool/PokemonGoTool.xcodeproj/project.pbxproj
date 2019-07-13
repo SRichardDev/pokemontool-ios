@@ -121,6 +121,7 @@
 		2C91ACA222CBDBBB00152D7E /* BulkUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AC8F22CBDBBB00152D7E /* BulkUploader.swift */; };
 		2C91ACA422CBDBBB00152D7E /* Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AC9122CBDBBB00152D7E /* Loc.swift */; };
 		2C91ACAA22CBDBBB00152D7E /* Json4Swift_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AC9722CBDBBB00152D7E /* Json4Swift_Base.swift */; };
+		2C970EFC22D9711000295DBD /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C970EFB22D9711000295DBD /* Slider.swift */; };
 		2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */; };
 		2C97154C221DE7EB00B4E49A /* ArenaDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */; };
 		2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */; };
@@ -281,6 +282,7 @@
 		2C91AC8F22CBDBBB00152D7E /* BulkUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulkUploader.swift; sourceTree = "<group>"; };
 		2C91AC9122CBDBBB00152D7E /* Loc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loc.swift; sourceTree = "<group>"; };
 		2C91AC9722CBDBBB00152D7E /* Json4Swift_Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json4Swift_Base.swift; sourceTree = "<group>"; };
+		2C970EFB22D9711000295DBD /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewModel.swift; sourceTree = "<group>"; };
 		2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsRestTimeViewController.storyboard; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 				2C34F1DB220F10C300B3B99C /* MapTypeSwitchable.swift */,
 				2C84B9FA2214C83E00BE433B /* MKAnnotationView+Extension.swift */,
 				2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */,
+				2C970EFB22D9711000295DBD /* Slider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 				2C395A492204C110005330B8 /* UIStackView+Extension.swift in Sources */,
 				2C395A4B2205FA38005330B8 /* RaidHatchTimePickerViewController.swift in Sources */,
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
+				2C970EFC22D9711000295DBD /* Slider.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
 				2C2E98472291F43D001ED8C6 /* ArenaDetailsGoldArenaSwitchViewController.swift in Sources */,

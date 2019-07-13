@@ -135,7 +135,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     }
     
     func changeAnnotationLabelVisibility() {
-        let showLabels = mapView.camera.altitude < 1000.0
+        let showLabels = mapView.camera.altitude < 1500.0
         
         if showLabels != currentlyShowingLabels {
             currentlyShowingLabels = showLabels
