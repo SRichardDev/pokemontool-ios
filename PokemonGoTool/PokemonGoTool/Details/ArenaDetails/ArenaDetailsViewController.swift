@@ -57,8 +57,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
-        meetupTimeViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
-        meetupTimeSelectionViewController.view.isHidden = !viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
    }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +67,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     var animating = false
     func update(of type: ArenaDetailsUpdateType) {
         switch type {
+        case .meetupInit:
+            meetupTimeViewController.view.isVisible = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
+            meetupTimeSelectionViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
         case .meetupChanged:
             participantsOverviewViewController.updateUI()
             userParticipatesSwitchViewController.updateUI()

@@ -4,6 +4,7 @@ import Firebase
 import CodableFirebase
 
 enum ArenaDetailsUpdateType {
+    case meetupInit
     case meetupChanged
     case timeLeftChanged(_ timeLeft: String)
     case hatchTimeLeftChanged(_ timeLeft: String)
@@ -248,6 +249,11 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
 extension ArenaDetailsViewModel: RaidMeetupDelegate {
 
     func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
+        
+        if meetup == nil {
+            delegate?.update(of: .meetupInit)
+        }
+        
         self.participants.removeAll()
         self.meetup = raidMeetup
         
