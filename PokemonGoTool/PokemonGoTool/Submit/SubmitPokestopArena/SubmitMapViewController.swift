@@ -65,7 +65,7 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         mapView.layer.cornerRadius = 10
         mapView.addAnnotation(pokestopAnnotation)
         
-        let distance: CLLocationDistance = 200
+        let distance: CLLocationDistance = 400
         let pitch: CGFloat = 65
         let heading = 180.0
         

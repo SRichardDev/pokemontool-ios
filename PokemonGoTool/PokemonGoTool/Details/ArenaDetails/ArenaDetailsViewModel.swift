@@ -251,6 +251,7 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
     func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
         
         if meetup == nil {
+            self.meetup = raidMeetup
             delegate?.update(of: .meetupInit)
         }
         
