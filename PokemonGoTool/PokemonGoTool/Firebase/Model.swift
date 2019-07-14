@@ -297,11 +297,9 @@ struct RaidMeetup: FirebaseCodable, Equatable {
     var meetupTime: String?
     var participants: [UserId: String]?
     
-    init(meetupTime: String) {
+    init(meetupTime: String? = nil) {
         self.meetupTime = meetupTime
     }
-    
-    init() {}
 }
 
 struct ChatMessage: FirebaseCodable {

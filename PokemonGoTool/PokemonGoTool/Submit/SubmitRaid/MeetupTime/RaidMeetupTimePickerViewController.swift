@@ -6,12 +6,16 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
     var viewModel: MeetupTimeSelectable!
     @IBOutlet var titleLabel: Label!
     @IBOutlet var pickerView: UIDatePicker!
+    @IBOutlet var submitMeetupTimeButton: Button!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = "Treffpunkt:"
         pickerView.datePickerMode = .time
         pickerView.timeZone = TimeZone.current
+        submitMeetupTimeButton.setTitle("Bestätigen", for: .normal)
+        submitMeetupTimeButton.isHidden = viewModel.meetupTimeSelectionType == .initial
+        
         let originalDate = Date()
         viewModel.selectedMeetupTime = selectedTime(date: originalDate)
         let calendar = Calendar.current
@@ -37,5 +41,9 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
         dateFormatter.locale = Locale.current
         let selectedTime: String = dateFormatter.string(from: date)
         return selectedTime
+    }
+    
+    @IBAction func didTapSubmitMeetupTime(_ sender: Any) {
+        viewModel.meetupTimeDidChange()
     }
 }

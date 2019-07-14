@@ -57,18 +57,13 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
-        meetupTimeViewController.view.isHidden = !viewModel.hasActiveMeetup || viewModel.isRaidExpired
-        meetupTimeSelectionViewController.view.isHidden = viewModel.hasActiveMeetup || viewModel.isRaidExpired
+        meetupTimeViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
+        meetupTimeSelectionViewController.view.isHidden = !viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle(viewModel.title)
-    }
-    
-    func updateUI() {
-        meetupTimeViewController.view.isHidden = !viewModel.hasActiveMeetup || viewModel.isRaidExpired
-        meetupTimeSelectionViewController.view.isHidden = viewModel.hasActiveMeetup || viewModel.isRaidExpired
     }
     
     var animating = false
@@ -78,7 +73,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             participantsOverviewViewController.updateUI()
             userParticipatesSwitchViewController.updateUI()
             meetupTimeViewController.updateUI()
-            updateUI()
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTimeLeft(timeLeft)
             restTimeViewController.view.isHidden = viewModel.isRaidExpired
@@ -86,24 +80,13 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             restTimeViewController.updateHatchTimeLeft(timeLeft)
         case .goldArenaChanged:
             headerViewController.updateUI()
-        case .createRaidMeetup:
-            let alert = UIAlertController(title: "Stimmt der Treffpunkt?",
-                                          message: viewModel.selectedMeetupTime,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Ja", style: .default, handler: { action in
-                self.viewModel.createRaidMeetup()
-                self.updateUI()
-            }))
-            alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: { action in
-                self.userParticipatesSwitchViewController.updateUI()
-            }))
-            present(alert, animated: true, completion: nil)
         case .eggHatched:
             headerViewController.updateUI()
         case .raidbossChanged:
             headerViewController.updateUI()
             setTitle(viewModel.title)
+        case .changeMeetupTime:
+            changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
         }
     }
 }
