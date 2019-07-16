@@ -22,12 +22,12 @@ class Button: UIButton {
     }
     
     private func setup() {
-        let systemBlue = UIButton(type: .system).tintColor!
-        layer.borderColor = systemBlue.cgColor
+        layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor
+        layer.borderWidth = 1
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .highlighted)
-        backgroundColor = systemBlue
+        backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         
         layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
         layer.shadowOpacity = 0.5
@@ -56,8 +56,7 @@ class Button: UIButton {
     
     private func updateBackgroundColor() {
         if isEnabled {
-            let systemBlue = UIButton(type: .system).tintColor!
-            backgroundColor = isHighlighted ? systemBlue.withAlphaComponent(0.8) : systemBlue
+            backgroundColor = isHighlighted ? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.8) : #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         } else {
             backgroundColor = .lightGray
         }
