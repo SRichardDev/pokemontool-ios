@@ -4,13 +4,14 @@ import Firebase
 import CodableFirebase
 
 enum ArenaDetailsUpdateType {
+    case meetupInit
     case meetupChanged
     case timeLeftChanged(_ timeLeft: String)
     case hatchTimeLeftChanged(_ timeLeft: String)
     case goldArenaChanged(isGold: Bool)
-    case createRaidMeetup
     case eggHatched
     case raidbossChanged
+    case changeMeetupTime
 }
 
 protocol ArenaDetailsDelegate: class {
@@ -21,19 +22,14 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     var firebaseConnector: FirebaseConnector
     weak var delegate: ArenaDetailsDelegate?
-    var arena: Arena {
-        didSet {
-            guard let meetupId = arena.raid?.raidMeetupId else { return }
-            firebaseConnector.observeRaidMeetup(for: meetupId)
-        }
-    }
+    var arena: Arena
     var meetup: RaidMeetup?
-    var coordinate: CLLocationCoordinate2D!
     var timeLeft: String?
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
-    var selectedMeetupTime: String = ""
+    var selectedMeetupTime: String?
+    var meetupTimeSelectionType: MeetupTimeSelectionType = .change
 
     var title: String {
         get {
@@ -78,9 +74,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         }
     }
     
-    var hasActiveMeetup: Bool {
+    var isTimeSetForMeetup: Bool {
         get {
-            return arena.raid?.raidMeetupId != nil && !(arena.raid?.isExpired ?? true)
+            return meetup?.meetupTime != "--:--"
         }
     }
     
@@ -113,7 +109,6 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
-        self.coordinate = CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
 
         firebaseConnector.raidMeetupDelegate = self
 
@@ -135,11 +130,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     }
         
     func userParticipates(_ isParticipating: Bool) {
-        
-        guard let meetup = meetup else {
-            delegate?.update(of: .createRaidMeetup)
-            return
-        }
+        guard let meetup = meetup else { return }
         
         if isParticipating {
             guard let raid = arena.raid else { fatalError() }
@@ -151,10 +142,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         }
     }
     
-    func createRaidMeetup() {
-        self.arena = firebaseConnector.createRaidMeetup(for: &arena, meetupTime: selectedMeetupTime)
-        guard let meetupId = arena.raid?.raidMeetupId else { return }
-        firebaseConnector.observeRaidMeetup(for: meetupId)
+    private func submitMeetupTime() {
+        guard let selectedMeetupTime = selectedMeetupTime, let meetup = meetup else { return }
+        firebaseConnector.setMeetupTime(meetupTime: selectedMeetupTime, raidMeetup: meetup)
     }
     
     func changeGoldArena(isGold: Bool) {
@@ -228,6 +218,15 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         delegate?.update(of: .raidbossChanged)
     }
     
+    func changeMeetupTimeRequested() {
+        delegate?.update(of: .changeMeetupTime)
+    }
+    
+    func meetupTimeDidChange() {
+        submitMeetupTime()
+        delegate?.update(of: .changeMeetupTime)
+    }
+
     private func isTimeUp(for date: Date) -> Bool {
         let timerInterval = date.timeIntervalSince(Date())
         let time = NSInteger(timerInterval)
@@ -250,6 +249,12 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
 extension ArenaDetailsViewModel: RaidMeetupDelegate {
 
     func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
+        
+        if meetup == nil {
+            self.meetup = raidMeetup
+            delegate?.update(of: .meetupInit)
+        }
+        
         self.participants.removeAll()
         self.meetup = raidMeetup
         

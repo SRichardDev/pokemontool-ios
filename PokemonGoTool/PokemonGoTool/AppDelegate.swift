@@ -16,25 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
-                                                                    completionHandler: {_, _ in })
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
-                                                                                  categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
-        
-        application.registerForRemoteNotifications()
         FirebaseApp.configure()
+        UIApplication.shared.registerForRemoteNotifications()
         Database.database().isPersistenceEnabled = true
+        PushManager.shared.registerForPush()
         Messaging.messaging().delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
         coordinator = MainCoordinator(appModule: appModule, window: window!)
-        
         return true
     }
     
@@ -74,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let error = error {
                 print("🔥❌ Error fetching remote instance ID: \(error)")
             } else {
-                print("🔥✅ Firebase registration token: \(fcmToken)")
                 guard let userID = Auth.auth().currentUser?.uid else {return}
+                print("🔥✅ Firebase registration token: \(fcmToken)")
                 let database = Database.database().reference(withPath: "users/\(userID)")
                 let data = ["notificationToken" : fcmToken,
                             "platform" : "iOS"]

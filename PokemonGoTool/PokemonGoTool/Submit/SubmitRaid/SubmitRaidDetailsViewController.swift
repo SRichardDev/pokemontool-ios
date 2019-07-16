@@ -105,7 +105,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
             textField.placeholder = "Level"
         }
         alert.addTextField { (textField) in
-            textField.placeholder = "Image Name"
+            textField.placeholder = "Pokédex Nummer"
         }
         
         let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)

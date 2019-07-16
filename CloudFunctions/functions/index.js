@@ -11,7 +11,7 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
     const raid = arena.raid;
     const raidBossId = raid.raidBossId || '---'
 
-    //Get registred users
+    //Get registered users
     return admin.database().ref('/registeredUsersArenas/' + geohash).once('value', (registeredUsersSnapshot, context) => {
 
         //Get Raidboss
@@ -92,7 +92,7 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
         console.error('ERROR:', err)
         return false
     })
-});
+})
 
 
 exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
@@ -180,4 +180,47 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
             return false
         })
     })
-});
+})
+
+
+exports.sendRaidMeetupChatPush = functions.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite((snapshot, context) => {
+    const meetupId = context.params.meetupId
+    const messageContainer = snapshot.after.val()
+    const message = messageContainer.message
+    const senderId = messageContainer.senderId
+
+    //Get participants
+    return admin.database().ref('/raidMeetups/' + meetupId + '/participants').once('value', (participantSnapshot, context) => { 
+
+        //Get sender
+        admin.database().ref('/users/' + senderId).once('value', (senderSnapshot, context) => {
+
+            const publicData = senderSnapshot.val().publicData
+            const senderName = publicData.trainerName
+
+            //Loop through userIds
+            participantSnapshot.forEach((participant) => {
+                const userId = participant.key
+                console.log('Sending push to UserId: ' + userId)            
+
+                //Get user to push to
+                admin.database().ref('/users/' + userId).once('value', (userSnapshot, context) => { 
+
+                    const notificationToken = (userSnapshot.val() && userSnapshot.val().notificationToken) || 'No token'
+
+                    const payload = {
+                        notification: {
+                            title: 'Neue Nachricht von: ' + senderName,
+                            body: message,
+                            badge: '1',
+                            sound: 'default',
+                        }
+                    }
+
+                    admin.messaging().sendToDevice(notificationToken, payload)
+                    return true
+                })
+            })
+        })
+    })
+})

@@ -1,5 +1,8 @@
 
 import UIKit
+import UserNotifications
+import FirebaseMessaging
+import Firebase
 
 protocol AccountCreationDelegate: class {
     func didCreateAccount(_ status: AuthStatus)
@@ -39,6 +42,7 @@ class SignUpViewModel {
                         case .signedUp:
                             self.firebaseConnector.loadUser {
                                 self.accountCreationDelegate?.didCreateAccount(status)
+                                PushManager.shared.registerForPush()
                             }
                         default:
                             self.accountCreationDelegate?.failedToCreateAccount(status)
@@ -52,6 +56,7 @@ class SignUpViewModel {
             case .signedIn:
                 self.firebaseConnector.loadUser {
                     self.accountSignInDelegate?.didSignInUser(status)
+                    PushManager.shared.registerForPush()
                 }
             default:
                 self.accountSignInDelegate?.failedToSignIn(status)

@@ -2,6 +2,8 @@
 import Foundation
 import UserNotifications
 import MapKit
+import Firebase
+import FirebaseMessaging
 
 struct PushNotification {
     let title: String
@@ -20,6 +22,25 @@ class PushManager {
     var latestPushNotification: PushNotification?
     
     private init() {}
+    
+    func registerForPush() {
+        guard let userID = Auth.auth().currentUser?.uid else { print("🔥❌ No current user. Skipping push registration"); return }
+        
+        UNUserNotificationCenter.current().delegate = UIApplication.shared.delegate as? UNUserNotificationCenterDelegate
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+                                                                completionHandler: {_, _ in })
+        UIApplication.shared.registerForRemoteNotifications()
+        
+        if let token = Messaging.messaging().fcmToken {
+            let database = Database.database().reference(withPath: "users/\(userID)")
+            let data = ["notificationToken" : token,
+                        "platform" : "iOS"]
+            database.updateChildValues(data)
+            print("🔥📲 Push token saved to user")
+        }
+        print("🔥📲 Push registration completed")
+    }
     
     func parsePushNotification(response: UNNotificationResponse) {
         let title = response.notification.request.content.title

@@ -256,11 +256,11 @@ class FirebaseConnector {
         return arena
     }
     
-    func createRaidMeetup(for arena: inout Arena, meetupTime: String) -> Arena {
-        let meetupId = saveRaidMeetup(raidMeetup: RaidMeetup(meetupTime: meetupTime))
-        associateMeetupIdToRaid(id: meetupId, arena: &arena)
-        saveUserInRaidMeetup(for: meetupId)
-        return arena
+    func setMeetupTime(meetupTime: String, raidMeetup: RaidMeetup) {
+        let data = ["meetupTime": meetupTime]
+        raidMeetupsRef
+            .child(raidMeetup.id)
+            .updateChildValues(data)
     }
     
     func deleteOldRaidMeetup(for id: String) {
@@ -270,12 +270,13 @@ class FirebaseConnector {
     }
     
     func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
-        arena.raid?.raidBossId = raidboss.id
+        guard let raidbossId = raidboss.id else { return }
+        arena.raid?.raidBossId = raidbossId
         arenasRef
             .child(arena.geohash)
             .child(arena.id)
             .child(DatabaseKeys.raid)
-            .updateChildValues([DatabaseKeys.raidBossId : raidboss.id])
+            .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
     }
     
     private func associateMeetupIdToRaid(id: String, arena: inout Arena) {
