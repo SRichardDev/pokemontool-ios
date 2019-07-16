@@ -122,6 +122,8 @@
 		2C91ACA422CBDBBB00152D7E /* Loc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AC9122CBDBBB00152D7E /* Loc.swift */; };
 		2C91ACAA22CBDBBB00152D7E /* Json4Swift_Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AC9722CBDBBB00152D7E /* Json4Swift_Base.swift */; };
 		2C970EFC22D9711000295DBD /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C970EFB22D9711000295DBD /* Slider.swift */; };
+		2C970EFE22DE7B1F00295DBD /* SubmitRaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C970EFD22DE7B1F00295DBD /* SubmitRaidViewController.swift */; };
+		2C970F0022DE7B6400295DBD /* SubmitRaidViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C970EFF22DE7B6400295DBD /* SubmitRaidViewController.storyboard */; };
 		2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */; };
 		2C97154C221DE7EB00B4E49A /* ArenaDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */; };
 		2C971550221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */; };
@@ -283,6 +285,8 @@
 		2C91AC9122CBDBBB00152D7E /* Loc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loc.swift; sourceTree = "<group>"; };
 		2C91AC9722CBDBBB00152D7E /* Json4Swift_Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json4Swift_Base.swift; sourceTree = "<group>"; };
 		2C970EFB22D9711000295DBD /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		2C970EFD22DE7B1F00295DBD /* SubmitRaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubmitRaidViewController.swift; path = ../SubmitRaidViewController.swift; sourceTree = "<group>"; };
+		2C970EFF22DE7B6400295DBD /* SubmitRaidViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SubmitRaidViewController.storyboard; path = ../SubmitRaidViewController.storyboard; sourceTree = "<group>"; };
 		2C971549221DE62700B4E49A /* ArenaDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsViewController.storyboard; sourceTree = "<group>"; };
 		2C97154B221DE7EB00B4E49A /* ArenaDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewModel.swift; sourceTree = "<group>"; };
 		2C97154F221DF09A00B4E49A /* ArenaDetailsRestTimeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsRestTimeViewController.storyboard; sourceTree = "<group>"; };
@@ -686,6 +690,7 @@
 				2C348BA522061A6E00F6A1F7 /* MeetupTime */,
 				2C348BA622061A7800F6A1F7 /* AlreadyRunning */,
 				2C348BA722061A8400F6A1F7 /* UserParticipates */,
+				2C970F0122DE7E5300295DBD /* SubmitButton */,
 				2C395A5C22060EF7005330B8 /* SeparatorView.swift */,
 				2C395A5A22060E9D005330B8 /* SeparatorView.xib */,
 			);
@@ -735,6 +740,15 @@
 				2C91AC9122CBDBBB00152D7E /* Loc.swift */,
 			);
 			path = "POI Data";
+			sourceTree = "<group>";
+		};
+		2C970F0122DE7E5300295DBD /* SubmitButton */ = {
+			isa = PBXGroup;
+			children = (
+				2C970EFD22DE7B1F00295DBD /* SubmitRaidViewController.swift */,
+				2C970EFF22DE7B6400295DBD /* SubmitRaidViewController.storyboard */,
+			);
+			path = SubmitButton;
 			sourceTree = "<group>";
 		};
 		2C97F77421F66CD900630BA2 /* Extensions */ = {
@@ -952,6 +966,7 @@
 				2C97F78621F67B5C00630BA2 /* SubmitQuestViewController.storyboard in Resources */,
 				2CC8D7F2229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard in Resources */,
 				2C395A3E2203A2A2005330B8 /* RaidAlreadyRunningSwitchViewController.storyboard in Resources */,
+				2C970F0022DE7B6400295DBD /* SubmitRaidViewController.storyboard in Resources */,
 				2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */,
 				2C1AE573225E885900AE9C4A /* AccountWelcomeViewController.storyboard in Resources */,
 				2C1AE58C226B97EC00AE9C4A /* AccountMedalViewController.storyboard in Resources */,
@@ -1146,6 +1161,7 @@
 				2C395A58220603E4005330B8 /* RaidTimeLeftPickerViewController.swift in Sources */,
 				2C97F77E21F6742D00630BA2 /* DetailAnnotationView.swift in Sources */,
 				2CDFDDE321ED4A3D00170A46 /* FirebaseConnector.swift in Sources */,
+				2C970EFE22DE7B1F00295DBD /* SubmitRaidViewController.swift in Sources */,
 				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
 				2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */,
 				2C1AE571225E884200AE9C4A /* AccountWelcomeViewController.swift in Sources */,

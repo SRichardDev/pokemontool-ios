@@ -23,10 +23,10 @@ class AccountViewController: UIViewController, StoryboardInitialViewController, 
         accountMedalViewController.viewModel = viewModel.accountMedalViewModel
         pushActiveSwitchViewController.viewModel = viewModel
         
-        stackView.addArrangedViewController(viewController: accountWelcomeViewController, to: self)
-        stackView.addArrangedViewController(viewController: accountOverviewViewController, to: self)
-        stackView.addArrangedViewController(viewController: pushActiveSwitchViewController, to: self)
-        stackView.addArrangedViewController(viewController: accountMedalViewController, to: self)
+        stackView.addArrangedViewController(accountWelcomeViewController, to: self)
+        stackView.addArrangedViewController(accountOverviewViewController, to: self)
+        stackView.addArrangedViewController(pushActiveSwitchViewController, to: self)
+        stackView.addArrangedViewController(accountMedalViewController, to: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

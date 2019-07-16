@@ -20,8 +20,5 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
             self.imageView.image = self.viewModel.headerImage
         })
     }
-    
-    @IBAction func didTapSelectRaidboss(_ sender: Any) {
-        coordinator?.showPokemonSelection(viewModel: viewModel)
-    }
+
 }

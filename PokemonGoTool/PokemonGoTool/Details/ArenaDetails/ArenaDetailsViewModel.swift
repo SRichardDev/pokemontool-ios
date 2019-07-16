@@ -12,6 +12,7 @@ enum ArenaDetailsUpdateType {
     case eggHatched
     case raidbossChanged
     case changeMeetupTime
+    case raidExpired
 }
 
 protocol ArenaDetailsDelegate: class {
@@ -118,6 +119,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         dateFormatter.locale = Locale.current
 
         guard let raid = arena.raid else { return }
+        guard !raid.isExpired else { return }
 
         if raid.isSubmittedBeforeHatchTime {
             startHatchTimer()
@@ -200,7 +202,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     func showTimeUp() {
         DispatchQueue.main.async {
-            self.delegate?.update(of: .timeLeftChanged("--:--"))
+            self.delegate?.update(of: .raidExpired)
         }
     }
     

@@ -6,7 +6,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
     private let stackView = OuterVerticalStackView()
-
+    
     private let headerViewController = SubmitRaidHeaderViewController.fromStoryboard()
     private let raidLevelViewController = RaidLevelViewController.fromStoryboard()
     private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
@@ -15,18 +15,15 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.fromStoryboard()
     private let meetupTimePickerViewController = RaidMeetupTimePickerViewController.fromStoryboard()
     private let raidAlreadyRunningSwitchViewController = RaidAlreadyRunningSwitchViewController.fromStoryboard()
+    private let submitRaidViewController = SubmitRaidViewController.fromStoryboard()
     private let doneButton = Button()
     var viewModel: SubmitRaidViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        
         stackView.addToView(view)
-                
-        doneButton.setTitle("Raid melden", for: .normal)
-        doneButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
-
+        
         headerViewController.viewModel = viewModel
         raidLevelViewController.viewModel = viewModel
         raidAlreadyRunningSwitchViewController.viewModel = viewModel
@@ -34,33 +31,28 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         timeLeftPickerViewController.viewModel = viewModel
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
+        submitRaidViewController.viewModel = viewModel
         raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.selectedRaidBoss = $0 }
-
+        
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
         
-        stackView.addArrangedViewController(viewController: headerViewController, to: self)
-        stackView.addArrangedViewController(viewController: raidLevelViewController, to: self)
-        stackView.addArrangedViewController(viewController: raidAlreadyRunningSwitchViewController, to: self)
-        stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
-        stackView.addArrangedViewController(viewController: hatchTimePickerViewController, to: self)
-        stackView.addArrangedViewController(viewController: timeLeftPickerViewController, to: self)
-        stackView.addArrangedViewController(viewController: userParticipatesViewController, to: self)
-        stackView.addArrangedViewController(viewController: meetupTimePickerViewController, to: self)
-        stackView.addArrangedSubview(doneButton)
+        stackView.addArrangedViewController(headerViewController, to: self)
+        stackView.addArrangedViewController(raidLevelViewController, to: self)
+        stackView.addArrangedViewController(raidAlreadyRunningSwitchViewController, to: self)
+        stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
+        stackView.addArrangedViewController(hatchTimePickerViewController, to: self)
+        stackView.addArrangedViewController(timeLeftPickerViewController, to: self)
+        stackView.addArrangedViewController(userParticipatesViewController, to: self)
+        stackView.addArrangedViewController(meetupTimePickerViewController, to: self)
+        stackView.addArrangedViewController(submitRaidViewController, to: self)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle("Neuer Level \(viewModel.selectedRaidLevel) Raid")
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = addItem
-    }
-    
-    @objc
-    func submitTapped() {
-        viewModel.submitRaid()
-        dismiss(animated: true)
     }
     
     func update(of type: SubmitRaidUpdateType) {
@@ -81,6 +73,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:
             raidBossCollectionViewController.updateRaidBosses()
+        case .raidSubmitted:
+            dismiss(animated: true)
         }
     }
     
@@ -93,8 +87,8 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
             let textField2 = alert.textFields![2] as UITextField
             
             let raidboss = ["name" : textField.text!,
-                         "level" : textField1.text!,
-                         "imageName" : textField2.text!]
+                            "level" : textField1.text!,
+                            "imageName" : textField2.text!]
             self.firebaseConnector.addRaidBoss(raidboss)
         }
         

@@ -58,6 +58,18 @@ extension UIViewController {
         }
     }
     
+    func hideViewControllers(_ viewControllers: [UIViewController] ) {
+        viewControllers.forEach { vc in
+            UIView.animate(withDuration: 0.25, animations: {
+                vc.view.alpha = 0
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.25, animations: {
+                    vc.view.isHidden = true
+                })
+            })
+        }
+    }
+    
     func changeVisibility(of viewController: UIViewController, visible: Bool, hideAnimated: Bool = true) {
         
         UIView.animate(withDuration: 0.25, animations: {

@@ -3,7 +3,7 @@ import UIKit
 
 extension UIStackView {
     
-    func addArrangedViewController(viewController: UIViewController, to parent: UIViewController) {
+    func addArrangedViewController(_ viewController: UIViewController, to parent: UIViewController) {
         viewController.view.backgroundColor = .clear
         parent.addChild(viewController)
         addArrangedSubview(viewController.view)

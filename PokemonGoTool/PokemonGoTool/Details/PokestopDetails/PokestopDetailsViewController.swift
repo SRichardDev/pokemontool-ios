@@ -29,13 +29,13 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
         infoViewController.viewModel = viewModel
         
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedViewController(viewController: mapViewController, to: self)
+        stackView.addArrangedViewController(mapViewController, to: self)
         
         if viewModel.hasActiveQuest {
-            stackView.addArrangedViewController(viewController: questViewController, to: self)
+            stackView.addArrangedViewController(questViewController, to: self)
         }
         
-        stackView.addArrangedViewController(viewController: infoViewController, to: self)
+        stackView.addArrangedViewController(infoViewController, to: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

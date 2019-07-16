@@ -6,6 +6,7 @@ enum SubmitRaidUpdateType {
     case raidAlreadyRunning
     case userParticipates
     case currentRaidbossesChanged
+    case raidSubmitted
 }
 
 protocol SubmitRaidDelegate: class {
@@ -110,6 +111,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             }
         }
         firebaseConnector.saveRaid(arena: arena)
+        delegate?.update(of: .raidSubmitted)
     }
     
     private func deleteOldRaidMeetupIfNeeded() {

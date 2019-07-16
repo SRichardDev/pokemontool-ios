@@ -41,18 +41,18 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Uvk-NF-QWF">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Uvk-NF-QWF">
                                         <rect key="frame" x="0.0" y="226.5" width="375" height="98.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVn-7P-ayR" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="98.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="184" height="98.5"/>
                                                 <state key="normal" title="Teilnehmerliste"/>
                                                 <connections>
                                                     <action selector="showParticipantsList:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="u67-9A-RUz"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dL9-6C-rCa" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="195" y="0.0" width="180" height="98.5"/>
+                                                <rect key="frame" x="191" y="0.0" width="184" height="98.5"/>
                                                 <state key="normal" title="Chat"/>
                                                 <connections>
                                                     <action selector="showChat:" destination="JwJ-sF-PSt" eventType="touchUpInside" id="JLp-xR-ZQK"/>

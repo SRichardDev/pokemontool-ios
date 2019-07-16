@@ -5,6 +5,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
+    
     private let stackView = OuterVerticalStackView()
     private let headerViewController = ArenaDetailsHeaderViewController.fromStoryboard()
     private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
@@ -34,30 +35,27 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         goldSwitchViewController.viewModel = viewModel
         meetupTimeSelectionViewController.viewModel = viewModel
         
-        stackView.addArrangedViewController(viewController: headerViewController, to: self)
+        stackView.addArrangedViewController(headerViewController, to: self)
+        stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
+        stackView.addArrangedViewController(restTimeViewController, to: self)
+        stackView.addArrangedViewController(meetupTimeViewController, to: self)
+        stackView.addArrangedViewController(meetupTimeSelectionViewController, to: self)
+        stackView.addArrangedViewController(userParticipatesSwitchViewController, to: self)
+        stackView.addArrangedViewController(participantsOverviewViewController, to: self)
+        stackView.addArrangedViewController(goldSwitchViewController, to: self)
+        stackView.addArrangedViewController(infoViewController, to: self)
 
-        
-        if !viewModel.isRaidBossSelected && viewModel.isRaidbossActive {
-            stackView.addArrangedViewController(viewController: raidBossCollectionViewController, to: self)
-            raidBossCollectionViewController.level = viewModel.level
-            raidBossCollectionViewController.activateSelectionMode()
-            raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
-        }
-        
-        if !viewModel.isRaidExpired {
-            stackView.addArrangedViewController(viewController: restTimeViewController, to: self)
-            stackView.addArrangedViewController(viewController: meetupTimeViewController, to: self)
-            stackView.addArrangedViewController(viewController: meetupTimeSelectionViewController, to: self)
-            stackView.addArrangedViewController(viewController: userParticipatesSwitchViewController, to: self)
-            stackView.addArrangedViewController(viewController: participantsOverviewViewController, to: self)
-        }
-        
-        stackView.addArrangedViewController(viewController: goldSwitchViewController, to: self)
-        stackView.addArrangedViewController(viewController: infoViewController, to: self)
-        
+        raidBossCollectionViewController.view.isHidden = viewModel.isRaidExpired || viewModel.isRaidBossSelected || !viewModel.isRaidbossActive
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
+        meetupTimeViewController.view.isHidden = viewModel.isRaidExpired
+        meetupTimeSelectionViewController.view.isHidden = viewModel.isRaidExpired
+        userParticipatesSwitchViewController.view.isHidden = viewModel.isRaidExpired
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
-   }
+        
+        raidBossCollectionViewController.level = viewModel.level
+        raidBossCollectionViewController.activateSelectionMode()
+        raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -88,6 +86,14 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             setTitle(viewModel.title)
         case .changeMeetupTime:
             changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
+        case .raidExpired:
+            headerViewController.updateUI()
+            hideViewControllers([raidBossCollectionViewController,
+                                 restTimeViewController,
+                                 meetupTimeViewController,
+                                 meetupTimeSelectionViewController,
+                                 userParticipatesSwitchViewController,
+                                 participantsOverviewViewController])
         }
     }
 }
