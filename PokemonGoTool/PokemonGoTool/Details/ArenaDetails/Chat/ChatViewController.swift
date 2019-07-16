@@ -118,12 +118,7 @@ extension ChatViewController: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        avatarView.isHidden = true
-        
-        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-            layout.setMessageIncomingAvatarSize(.zero)
-            layout.setMessageOutgoingAvatarSize(.zero)
-        }
+        avatarView.set(avatar: Avatar(image: nil, initials: String(message.sender.displayName.prefix(2))))
     }
 }
 
