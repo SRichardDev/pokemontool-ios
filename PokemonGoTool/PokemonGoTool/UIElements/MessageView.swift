@@ -28,7 +28,7 @@ class MessageView: UIView {
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 2
         addSubviewAndEdgeConstraints(label, margins: UIEdgeInsets(top: 2, left: 15, bottom: 2, right: 15))
-        label.text = "Filter Aktiv"
+        label.text = "Filter aktiv"
         label.textColor = .white
         addShadow()
     }

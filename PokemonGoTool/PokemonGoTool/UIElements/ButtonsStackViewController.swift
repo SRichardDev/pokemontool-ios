@@ -83,6 +83,8 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
 
         viewController.add(buttonsStackViewController, toView: containerView)
         containerView.addSubviewAndEdgeConstraints(buttonsStackViewController.view)
+        containerView.addShadow()
+        containerView.clipsToBounds = false
         return buttonsStackViewController
     }
 }
