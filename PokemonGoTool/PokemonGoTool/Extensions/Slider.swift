@@ -6,6 +6,7 @@ class Degree360Slider: UISlider {
     func setup() {
         minimumValue = 0
         maximumValue = 360
+        value = maximumValue / 2
         minimumTrackTintColor = .clear
         maximumTrackTintColor = .clear
     }
