@@ -80,7 +80,7 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     @objc
     func addRaidboss() {
-        let alert = UIAlertController(title: "Neuer Raidboss", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Raidboss eintragen", message: "Info: Danach bitte App neu starten damit der Raidboss auftaucht.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Senden", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             let textField1 = alert.textFields![1] as UITextField

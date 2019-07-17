@@ -42,7 +42,7 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
     
     @objc
     func addQuest() {
-        let alert = UIAlertController(title: "Neue Quest", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Neue Feldforschung", message: "Info: Wenn die Belohnung Sternenstaub / Sonderbonbons beinhaltet bitte stardust / candy als Pokédex Nummer eintragen. Danach bitte App neu starten damit die Feldforschung auftaucht.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Senden", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             let textField1 = alert.textFields![1] as UITextField
@@ -55,13 +55,13 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
         }
         
         alert.addTextField { (textField) in
-            textField.placeholder = "Quest"
+            textField.placeholder = "Feldforschung"
         }
         alert.addTextField { (textField) in
-            textField.placeholder = "Reward"
+            textField.placeholder = "Belohnung"
         }
         alert.addTextField { (textField) in
-            textField.placeholder = "Image Name"
+            textField.placeholder = "Pokédex Nummer"
         }
         
         let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
