@@ -20,6 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
 
     var isPoiSubmissionMode = false
     var poiSubmissionAnnotation = MKPointAnnotation()
+    let messageView = MessageView()
 
     lazy var manager: ClusterManager = {
         let manager = ClusterManager()
@@ -42,6 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         zoomToUserLocation()
         setupMapButtonsMenu()
         displayLocationFromPushIfNeeded()
+        messageView.addToTopMiddle(in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +59,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         zoomToLocationFromPushIfNeeded()
+        
+        if AppSettings.isFilterActive {
+            messageView.show()
+        } else {
+            messageView.hide()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

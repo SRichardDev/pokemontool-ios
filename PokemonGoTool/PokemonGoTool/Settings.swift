@@ -61,4 +61,14 @@ extension AppSettings: MapFilterSettingsConfigurable {
         get { return AppSettings.value(for: #keyPath(showOnlyEXArenas)) ?? false }
         set { AppSettings.updateDefaults(for: #keyPath(showOnlyEXArenas), value: newValue) }
     }
+    
+    static var isFilterActive: Bool {
+        get {
+            return showPokestops == false ||
+                showOnlyPokestopsWithQuest == true ||
+                showArenas == false ||
+                showOnlyArenasWithRaid == true ||
+                showOnlyEXArenas == true
+        }
+    }
 }
