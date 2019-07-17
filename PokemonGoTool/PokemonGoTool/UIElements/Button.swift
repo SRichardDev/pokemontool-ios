@@ -28,12 +28,7 @@ class Button: UIButton {
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .highlighted)
         backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        
-        layer.shadowColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 0.2
-        layer.masksToBounds = false
+        addShadow()
         layer.cornerRadius = 10
     }
 

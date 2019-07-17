@@ -14,7 +14,6 @@ enum NotificationBannerType {
     case unregisteredUser
     case questSubmitted
     case mapTypeChanged(mapType: MKMapType)
-    case filterActive
     case pushRegistrationSuccess
     case resetPasswordSuccess
     case resetPasswordFailed
@@ -98,18 +97,6 @@ class NotificationBannerManager {
                                                subtitle: mapType.description,
                                                leftView: imageView,
                                                style: .info)
-        case .filterActive:
-            
-            let imageView = UIImageView(image: UIImage(named: "filter"))
-            imageView.tintColor = .white
-            
-            currentBanner = NotificationBanner(title: "Filter aktiv",
-                                               subtitle: "Du siehst gerade nicht alle Arenen/Pokéstops",
-                                               leftView: imageView,
-                                               style: .info)
-            currentBanner?.autoDismiss = false
-            currentBanner?.haptic = .none
-            
         case .pushRegistrationSuccess:
             currentBanner = NotificationBanner(title: "Push Nachrichten",
                                                subtitle: "Du wurdest erfolgreich registriert",
