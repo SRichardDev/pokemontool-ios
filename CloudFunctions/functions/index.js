@@ -148,7 +148,7 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
                                 title: 'Neue Feldforschung',
                                 body: 'Pokéstop: ' + name + '\nQuest: ' + questName + '\nBelohnung: ' + questReward,
                                 latitude: String(pokestop.latitude),
-                                longitude: String(pokestop.longitude),
+                                longitude: String(pokestop.longitude)
                             }
                         };    
                     }
@@ -207,14 +207,36 @@ exports.sendRaidMeetupChatPush = functions.database.ref('/raidMeetups/{meetupId}
                 admin.database().ref('/users/' + userId).once('value', (userSnapshot, context) => { 
 
                     const notificationToken = (userSnapshot.val() && userSnapshot.val().notificationToken) || 'No token'
+                    const platform = userSnapshot.val().platform || "fallback"
 
-                    const payload = {
+                    // fallback
+                    var payload = {
                         notification: {
                             title: 'Neue Nachricht von: ' + senderName,
                             body: message,
                             badge: '1',
-                            sound: 'default',
+                            sound: 'default'
                         }
+                    }
+
+                    if (platform === "iOS") {
+                        payload = {
+                            notification: {
+                                title: 'Neue Nachricht von: ' + senderName,
+                                body: message,
+                                badge: '1',
+                                sound: 'default'
+                            }
+                        };
+                    }
+    
+                    if (platform === "android") {
+                        payload = {
+                            data: {
+                                title: 'Neue Nachricht von: ' + senderName,
+                                body: message
+                            }
+                        };    
                     }
 
                     admin.messaging().sendToDevice(notificationToken, payload)
