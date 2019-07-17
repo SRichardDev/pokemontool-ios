@@ -271,7 +271,8 @@ extension MKMapView {
         let annotationView = self.annotationView(of: CountClusterAnnotationView.self,
                                                  annotation: annotation,
                                                  reuseIdentifier: reuseIdentifier)
-        annotationView.countLabel.backgroundColor = .orange
+        annotationView.countLabel.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        annotationView.countLabel.textColor = .lightGray
         return annotationView
     }
 }
