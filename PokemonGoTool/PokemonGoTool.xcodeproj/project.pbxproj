@@ -36,6 +36,7 @@
 		2C0B5B77225540A100620F4A /* AccountInputViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */; };
 		2C0B5B7F2258D87A00620F4A /* AccountOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */; };
 		2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */; };
+		2C13BD2022E1102F00312061 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13BD1F22E1102F00312061 /* UIApplication+Extension.swift */; };
 		2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19769E21ED266900091F8C /* AppDelegate.swift */; };
 		2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A521ED266B00091F8C /* Assets.xcassets */; };
 		2C1976A921ED266B00091F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */; };
@@ -198,6 +199,7 @@
 		2C0B5B76225540A100620F4A /* AccountInputViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInputViewController.storyboard; sourceTree = "<group>"; };
 		2C0B5B7E2258D87A00620F4A /* AccountOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOverviewViewController.swift; sourceTree = "<group>"; };
 		2C0B5B802258D88D00620F4A /* AccountOverviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountOverviewViewController.storyboard; sourceTree = "<group>"; };
+		2C13BD1F22E1102F00312061 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		2C19769B21ED266900091F8C /* PokemonGoTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGoTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C19769E21ED266900091F8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C1976A521ED266B00091F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 				2C84B9FA2214C83E00BE433B /* MKAnnotationView+Extension.swift */,
 				2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */,
 				2C970EFB22D9711000295DBD /* Slider.swift */,
+				2C13BD1F22E1102F00312061 /* UIApplication+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1119,6 +1122,7 @@
 				2CC2EDEE222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift in Sources */,
 				2C395A5D22060EF7005330B8 /* SeparatorView.swift in Sources */,
 				2C34F1E5221092D100B3B99C /* PokestopDetailsViewController.swift in Sources */,
+				2C13BD2022E1102F00312061 /* UIApplication+Extension.swift in Sources */,
 				2C79CA4021F92E1600FA82EE /* User.swift in Sources */,
 				2C34F1A8220B720C00B3B99C /* ButtonsStackViewController.swift in Sources */,
 				2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */,

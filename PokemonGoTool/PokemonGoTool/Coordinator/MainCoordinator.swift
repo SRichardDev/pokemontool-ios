@@ -43,6 +43,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         mainNavigationController.navigationBar.prefersLargeTitles = true
         mainNavigationController.viewControllers = [scrollableViewController]
         tabBarController.viewControllers = [mapViewController, mainNavigationController]
+        if !appModule.firebaseConnector.isSignedIn { tabBarController.selectedIndex = 1 }
         window.rootViewController = tabBarController
         
         var options = UIWindow.TransitionOptions()

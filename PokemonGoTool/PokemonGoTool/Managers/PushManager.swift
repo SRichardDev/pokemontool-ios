@@ -33,8 +33,8 @@ class PushManager {
         if !AppSettings.isPushActive {
             let center = UNUserNotificationCenter.current()
             let content = UNMutableNotificationContent()
-            content.title = "Push Nachrichten sind ausgeschaltet"
-            content.body = "Du bekommst ab jetzt keine Nachrichten mehr. Um Nachrichten zu erhalten bitte Push Nachrichten wieder aktivieren."
+            content.title = "Push Nachrichten deaktiviert"
+            content.body = "Du bekommst ab jetzt keine Nachrichten mehr"
             content.sound = UNNotificationSound.default
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)

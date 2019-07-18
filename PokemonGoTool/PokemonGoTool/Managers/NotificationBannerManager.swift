@@ -17,6 +17,7 @@ enum NotificationBannerType {
     case pushRegistrationSuccess
     case resetPasswordSuccess
     case resetPasswordFailed
+    case notLoggedIn
 }
 
 class NotificationBannerManager {
@@ -113,6 +114,12 @@ class NotificationBannerManager {
                                                subtitle: message,
                                                leftView: cross,
                                                style: .danger)
+        case .notLoggedIn:
+            currentBanner = NotificationBanner(title: "Du bist nicht registriert / angemeldet",
+                                               subtitle: "Bitte registrieren / anmelden",
+                                               leftView: cross,
+                                               style: .danger)
+            currentBanner?.autoDismiss = false
         }
         
         currentBanner?.show()

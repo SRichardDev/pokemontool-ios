@@ -54,6 +54,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             manager.reload(mapView: mapView)
             loadData()
         }
+        
+        if !firebaseConnector.isSignedIn {
+            NotificationBannerManager.shared.show(.notLoggedIn)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

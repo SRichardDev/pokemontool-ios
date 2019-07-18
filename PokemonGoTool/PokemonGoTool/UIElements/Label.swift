@@ -36,6 +36,9 @@ class Label: UILabel {
             } else if style == 7 {
                 textColor = .black
                 font = UIFont.boldSystemFont(ofSize: 34)
+            } else if style == 8 {
+                textColor = .red
+                font = UIFont.systemFont(ofSize: 12, weight: .regular)
             }
         }
     }

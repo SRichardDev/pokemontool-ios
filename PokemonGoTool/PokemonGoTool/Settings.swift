@@ -64,7 +64,7 @@ extension AppSettings: MapFilterSettingsConfigurable {
     }
     
     static var isPushActive: Bool {
-        get { return AppSettings.value(for: #keyPath(isPushActive)) ?? false }
+        get { return AppSettings.value(for: #keyPath(isPushActive)) ?? true }
         set { AppSettings.updateDefaults(for: #keyPath(isPushActive), value: newValue) }
     }
     
