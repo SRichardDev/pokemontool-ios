@@ -12,6 +12,7 @@ import Foundation
     static var showArenas: Bool { get set }
     static var showOnlyArenasWithRaid: Bool { get set }
     static var showOnlyEXArenas: Bool { get set }
+    static var isPushActive: Bool { get set }
 }
 
 class AppSettings: NSObject {
@@ -60,6 +61,11 @@ extension AppSettings: MapFilterSettingsConfigurable {
     static var showOnlyEXArenas: Bool {
         get { return AppSettings.value(for: #keyPath(showOnlyEXArenas)) ?? false }
         set { AppSettings.updateDefaults(for: #keyPath(showOnlyEXArenas), value: newValue) }
+    }
+    
+    static var isPushActive: Bool {
+        get { return AppSettings.value(for: #keyPath(isPushActive)) ?? false }
+        set { AppSettings.updateDefaults(for: #keyPath(isPushActive), value: newValue) }
     }
     
     static var isFilterActive: Bool {

@@ -21,7 +21,26 @@ class PushManager {
     weak var delegate: PushManagerDelegate?
     var latestPushNotification: PushNotification?
     
-    private init() {}
+    private init() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willResignActive),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
+    }
+    
+    @objc
+    func willResignActive() {
+        if !AppSettings.isPushActive {
+            let center = UNUserNotificationCenter.current()
+            let content = UNMutableNotificationContent()
+            content.title = "Push Nachrichten sind ausgeschaltet"
+            content.body = "Du bekommst ab jetzt keine Nachrichten mehr. Um Nachrichten zu erhalten bitte Push Nachrichten wieder aktivieren."
+            content.sound = UNNotificationSound.default
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+            center.add(request)
+        }
+    }
     
     func registerForPush() {
         guard let userID = Auth.auth().currentUser?.uid else { print("🔥❌ No current user. Skipping push registration"); return }

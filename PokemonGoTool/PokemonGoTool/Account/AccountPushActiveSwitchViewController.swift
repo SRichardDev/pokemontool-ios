@@ -15,5 +15,6 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
     
     @IBAction func pushActiveSwitchDidChange(_ sender: UISwitch) {
         viewModel.pushActivatedChanged(sender.isOn)
+        AppSettings.isPushActive = sender.isOn
     }
 }

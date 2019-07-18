@@ -94,7 +94,11 @@ class User: FirebaseCodable, Equatable {
     var submittedQuests: Int?
     var subscribedGeohashPokestops: [String: String]?
     var subscribedGeohashArenas: [String: String]?
-    var isPushActive: Bool? = true
+    var isPushActive: Bool? = true {
+        didSet {
+            AppSettings.isPushActive = isPushActive ?? false
+        }
+    }
 
     var teamName: String? {
         get {
