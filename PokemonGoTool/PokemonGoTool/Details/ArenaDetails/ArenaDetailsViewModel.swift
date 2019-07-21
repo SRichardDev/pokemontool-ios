@@ -228,6 +228,26 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
         submitMeetupTime()
         delegate?.update(of: .changeMeetupTime)
     }
+    
+    func formattedRaidTextForSharing() -> String {
+        
+        var participantsString = ""
+        participants.values.forEach { participantsString += ("• " + $0.trainerName! + "\n") }
+        
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        let shareText = """
+        🐲: \(RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)?.name ?? "---"), ⭐️: \(arena.raid?.level ?? 0)
+        🏟: \(arena.name)
+        ⌚️: \(dateFormatter.string(from: arena.raid?.hatchDate ?? Date())) - \(dateFormatter.string(from: arena.raid?.endDate ?? Date()))
+        👫: \(meetup?.meetupTime ?? "")
+        📍: https://maps.google.com/?q=\(arena.latitude),\(arena.longitude)\n
+        \(participantsString)
+        """
+        
+        return shareText
+    }
 
     private func isTimeUp(for date: Date) -> Bool {
         let timerInterval = date.timeIntervalSince(Date())

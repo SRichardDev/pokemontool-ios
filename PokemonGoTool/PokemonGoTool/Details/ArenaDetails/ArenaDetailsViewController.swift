@@ -59,7 +59,18 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !viewModel.isRaidExpired {
+            let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+            navigationController?.topViewController?.navigationItem.rightBarButtonItem = shareBarButtonItem
+        }
         setTitle(viewModel.title)
+    }
+    
+    @objc
+    func didTapShare() {
+        let items = [viewModel.formattedRaidTextForSharing()]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     var animating = false
