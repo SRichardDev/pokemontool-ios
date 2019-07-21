@@ -163,10 +163,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
 extension MapViewController: FirebaseDelegate {
     
     func didUpdateArena(arena: Arena) {
-        for annotationOnMap in mapView.annotations {
-            if let arenaAnnotationOnMap = annotationOnMap as? ArenaPointAnnotation {
-                if arenaAnnotationOnMap.arena?.id == arena.id {
-                    manager.remove(annotationOnMap)
+        for storedAnnotation in manager.annotations {
+            if let storedArenaAnnotation = storedAnnotation as? ArenaPointAnnotation {
+                if storedArenaAnnotation.arena?.id == arena.id {
+                    manager.remove(storedAnnotation)
                     didAddArena(arena: arena)
                 }
             }
@@ -174,7 +174,7 @@ extension MapViewController: FirebaseDelegate {
     }
 
     func didUpdatePokestop(pokestop: Pokestop) {
-        for annotationOnMap in mapView.annotations {
+        for annotationOnMap in manager.annotations {
             if let pokestopAnnotationOnMap = annotationOnMap as? PokestopPointAnnotation {
                 if pokestopAnnotationOnMap.pokestop?.id == pokestop.id {
                     manager.remove(annotationOnMap)
