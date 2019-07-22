@@ -29,7 +29,7 @@ extension MapEmbeddable where Self: UIViewController {
 class SubmitMapViewController: UIViewController, MKMapViewDelegate {
     
     var locationOnMap: CLLocationCoordinate2D!
-    var camera: MKMapCamera!
+    private var camera: MKMapCamera!
     var isFlyover = false
     let mapView = MKMapView()
     
@@ -45,8 +45,19 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    let stackView = InnerVerticalStackView()
-    let slider = Degree360Slider()
+    private let stackView = InnerVerticalStackView()
+    private let slider = Degree360Slider()
+    
+    
+    class func setup(with coordinate: CLLocationCoordinate2D, isPokestop: Bool = true) -> SubmitMapViewController {
+        let submitMapViewController = SubmitMapViewController()
+        submitMapViewController.locationOnMap = coordinate
+        let annotation = isPokestop ? submitMapViewController.pokestopAnnotation : submitMapViewController.arenaAnnotation
+        submitMapViewController.mapView.addAnnotation(annotation)
+        submitMapViewController.mapView.mapType = .satelliteFlyover
+        submitMapViewController.isFlyover = true
+        return submitMapViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +74,6 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 1/1).isActive = true
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
-        mapView.addAnnotation(pokestopAnnotation)
         
         let distance: CLLocationDistance = 400
         let pitch: CGFloat = 65

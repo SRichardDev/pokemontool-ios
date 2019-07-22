@@ -1,9 +1,14 @@
 
 import UIKit
 
-class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewController {
+protocol HeaderProvidable {
+    var headerTitle: String { get }
+    var headerImage: UIImage { get }
+}
 
-    var viewModel: ArenaDetailsViewModel!
+class HeaderViewController: UIViewController, StoryboardInitialViewController {
+
+    var viewModel: HeaderProvidable!
     weak var coordinator: MainCoordinator?
     
     @IBOutlet var titleLabel: Label!
@@ -11,7 +16,7 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = viewModel.arena.name
+        titleLabel.text = viewModel.headerTitle
         imageView.image = viewModel.headerImage
     }
     
@@ -20,5 +25,4 @@ class ArenaDetailsHeaderViewController: UIViewController, StoryboardInitialViewC
             self.imageView.image = self.viewModel.headerImage
         })
     }
-
 }

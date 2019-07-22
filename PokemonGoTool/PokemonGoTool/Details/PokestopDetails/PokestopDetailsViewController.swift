@@ -6,35 +6,27 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
     var viewModel: PokestopDetailsViewModel!
     weak var coordinator: MainCoordinator?
     private let stackView = OuterVerticalStackView()
-    
+    private let headerViewController = HeaderViewController.fromStoryboard()
+    private let questViewController = PokestopQuestViewController.fromStoryboard()
+    private let infoViewController = PokestopInfoViewController.fromStoryboard()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.addToView(view)
         
-        let titleLabel = Label()
-        titleLabel.style = 2
-        titleLabel.numberOfLines = 0
-        titleLabel.text = viewModel.pokestop.name
-        titleLabel.textAlignment = .center
-        
-        let questViewController = PokestopQuestViewController.fromStoryboard()
+        headerViewController.viewModel = viewModel
         questViewController.viewModel = viewModel
-        
-        let mapViewController = SubmitMapViewController()
-        mapViewController.locationOnMap = viewModel.coordinate
-        mapViewController.mapView.mapType = .satelliteFlyover
-        mapViewController.isFlyover = true
-        
-        let infoViewController = PokestopInfoViewController.fromStoryboard()
         infoViewController.viewModel = viewModel
+
+        let mapViewController = SubmitMapViewController.setup(with: viewModel.coordinate)
         
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedViewController(mapViewController, to: self)
+        stackView.addArrangedViewController(headerViewController, to: self)
         
         if viewModel.hasActiveQuest {
             stackView.addArrangedViewController(questViewController, to: self)
         }
         
+        stackView.addArrangedViewController(mapViewController, to: self)
         stackView.addArrangedViewController(infoViewController, to: self)
     }
     

@@ -19,8 +19,8 @@ protocol ArenaDetailsDelegate: class {
     func update(of type: ArenaDetailsUpdateType)
 }
 
-class ArenaDetailsViewModel: MeetupTimeSelectable {
-    
+class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
+
     var firebaseConnector: FirebaseConnector
     weak var delegate: ArenaDetailsDelegate?
     var arena: Arena
@@ -38,6 +38,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
             return isRaidExpired ? (arena.isEX ? "EX Arena" : "Arena") : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
         }
     }
+    
+    var headerTitle: String { get { return arena.name }}
+    var headerImage: UIImage { get  { return arena.image }}
     
     var isUserParticipating: Bool {
         get {
@@ -83,9 +86,9 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     
     var participants = [String: PublicUserData]()
     
-    var headerImage: UIImage? {
+    var image: UIImage {
         get {
-            return isRaidExpired ? arena.image : arena.raid?.image
+            return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage()
         }
     }
     
@@ -104,6 +107,12 @@ class ArenaDetailsViewModel: MeetupTimeSelectable {
     var endTime: String {
         get {
             return arena.raid?.endTime ?? "00:00"
+        }
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
         }
     }
     

@@ -7,7 +7,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     var viewModel: ArenaDetailsViewModel!
     
     private let stackView = OuterVerticalStackView()
-    private let headerViewController = ArenaDetailsHeaderViewController.fromStoryboard()
+    private let headerViewController = HeaderViewController.fromStoryboard()
     private let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
     private let participantsOverviewViewController = ArenaDetailsParticipantsOverviewViewController.fromStoryboard()
     private let restTimeViewController = ArenaDetailsRestTimeViewController.fromStoryboard()
@@ -42,6 +42,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         stackView.addArrangedViewController(meetupTimeSelectionViewController, to: self)
         stackView.addArrangedViewController(userParticipatesSwitchViewController, to: self)
         stackView.addArrangedViewController(participantsOverviewViewController, to: self)
+        let mapViewController = SubmitMapViewController.setup(with: viewModel.coordinate, isPokestop: false)
+        stackView.addArrangedViewController(mapViewController, to: self)
         stackView.addArrangedViewController(goldSwitchViewController, to: self)
         stackView.addArrangedViewController(infoViewController, to: self)
 

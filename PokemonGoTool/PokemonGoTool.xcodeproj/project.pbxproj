@@ -22,8 +22,8 @@
 		0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */; };
 		0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */; };
 		2C03085B222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085A222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift */; };
-		2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */; };
-		2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */; };
+		2C03085D222B4098007A1EA0 /* HeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C03085C222B4098007A1EA0 /* HeaderViewController.storyboard */; };
+		2C03085F222B40AF007A1EA0 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03085E222B40AF007A1EA0 /* HeaderViewController.swift */; };
 		2C030863222B5A38007A1EA0 /* FirebaseTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */; };
 		2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */; };
 		2C030869222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */; };
@@ -185,8 +185,8 @@
 		0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewController.swift; sourceTree = "<group>"; };
 		0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
 		2C03085A222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsRestTimeViewController.swift; sourceTree = "<group>"; };
-		2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsHeaderViewController.storyboard; sourceTree = "<group>"; };
-		2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsHeaderViewController.swift; sourceTree = "<group>"; };
+		2C03085C222B4098007A1EA0 /* HeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HeaderViewController.storyboard; sourceTree = "<group>"; };
+		2C03085E222B40AF007A1EA0 /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestData.swift; sourceTree = "<group>"; };
 		2C030866222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsInfoViewController.swift; sourceTree = "<group>"; };
 		2C030868222C85EB007A1EA0 /* ArenaDetailsInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsInfoViewController.storyboard; sourceTree = "<group>"; };
@@ -380,8 +380,8 @@
 		0366E0A122A1ADA100310339 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				2C03085E222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift */,
-				2C03085C222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard */,
+				2C03085E222B40AF007A1EA0 /* HeaderViewController.swift */,
+				2C03085C222B4098007A1EA0 /* HeaderViewController.storyboard */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -967,7 +967,7 @@
 				0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */,
-				2C03085D222B4098007A1EA0 /* ArenaDetailsHeaderViewController.storyboard in Resources */,
+				2C03085D222B4098007A1EA0 /* HeaderViewController.storyboard in Resources */,
 				2C1AE56D225BFF0600AE9C4A /* AccountSignUpViewController.storyboard in Resources */,
 				2C97F78621F67B5C00630BA2 /* SubmitQuestViewController.storyboard in Resources */,
 				2CC8D7F2229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard in Resources */,
@@ -1105,7 +1105,7 @@
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
 				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
-				2C03085F222B40AF007A1EA0 /* ArenaDetailsHeaderViewController.swift in Sources */,
+				2C03085F222B40AF007A1EA0 /* HeaderViewController.swift in Sources */,
 				2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */,
 				2C03085B222B3DF9007A1EA0 /* ArenaDetailsRestTimeViewController.swift in Sources */,
 				2C97F77321F6585900630BA2 /* Double+String+Extension.swift in Sources */,

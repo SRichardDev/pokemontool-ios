@@ -39,6 +39,12 @@ struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
         }
     }
     
+    var image: UIImage {
+        get {
+            return UIImage(named: "PokestopLarge")!
+        }
+    }
+    
     var hasActiveQuest: Bool {
         get {
             return quest?.isActive ?? false

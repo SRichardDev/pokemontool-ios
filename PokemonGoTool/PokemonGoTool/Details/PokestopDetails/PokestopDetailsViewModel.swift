@@ -1,17 +1,15 @@
 
 import MapKit
 
-class PokestopDetailsViewModel {
+class PokestopDetailsViewModel: HeaderProvidable {
     
     var coordinate: CLLocationCoordinate2D!
     var firebaseConnector: FirebaseConnector
     var pokestop: Pokestop
 
-    var hasActiveQuest: Bool {
-        get {
-            return pokestop.quest?.isActive ?? false
-        }
-    }
+    var headerTitle: String { get { return pokestop.name } }
+    var headerImage: UIImage { get { return pokestop.image } }
+    var hasActiveQuest: Bool { get { return pokestop.quest?.isActive ?? false } }
     
     var questDefinition: QuestDefinition? {
         return firebaseConnector.quests.first(where: {$0.id == pokestop.quest?.definitionId})

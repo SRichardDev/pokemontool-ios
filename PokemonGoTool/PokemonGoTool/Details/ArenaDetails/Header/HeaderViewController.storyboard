@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Arena Details Header View Controller-->
+        <!--Header View Controller-->
         <scene sceneID="IfL-K4-vFO">
             <objects>
-                <viewController id="deP-gV-Vox" customClass="ArenaDetailsHeaderViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="deP-gV-Vox" customClass="HeaderViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N42-A0-SiG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
