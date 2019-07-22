@@ -21,13 +21,11 @@ class PokestopDetailsViewController: UIViewController, StoryboardInitialViewCont
         let mapViewController = SubmitMapViewController.setup(with: viewModel.coordinate)
         
         stackView.addArrangedViewController(headerViewController, to: self)
-        
-        if viewModel.hasActiveQuest {
-            stackView.addArrangedViewController(questViewController, to: self)
-        }
-        
+        stackView.addArrangedViewController(questViewController, to: self)
         stackView.addArrangedViewController(mapViewController, to: self)
         stackView.addArrangedViewController(infoViewController, to: self)
+        
+        questViewController.view.isHidden = !viewModel.hasActiveQuest
     }
     
     override func viewWillAppear(_ animated: Bool) {
