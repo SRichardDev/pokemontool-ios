@@ -21,21 +21,19 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
             //Get Meetup
             admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value', (meetupSnapshot, context) => {
                 const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '---'
+                const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
+                console.log('Message: ' + message)
 
                 //Loop through users
                 registeredUsersSnapshot.forEach((child) => {
                     const userId = child.key
-                    console.log('Pushing to userID: ' + userId)
         
                     admin.database().ref('/users/' + userId).once('value', (usersSnapshot, context) => { 
 
-                        if (!usersSnapshot.val().isPushActive) {
-                            return false
-                        }
-
                         const notificationToken = (usersSnapshot.val() && usersSnapshot.val().notificationToken) || 'No token'
-                        const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
                         const platform = usersSnapshot.val().platform || "fallback"
+                        console.log('Pushing to userID: ' + userId)
+                        console.log('Platform: ' + platform)
 
                         var payload
 
@@ -81,7 +79,12 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
                             };
                         }
 
-                        admin.messaging().sendToDevice(notificationToken, payload)
+                        if (usersSnapshot.val().isPushActive) {
+                            admin.messaging().sendToDevice(notificationToken, payload)
+                            console.log('Push sent')
+                        } else {
+                            console.log('Push not active... continuing')
+                        }
                         return true
                     });
                 });
