@@ -2,6 +2,7 @@
 import MapKit
 import Firebase
 import CodableFirebase
+import UserNotifications
 
 enum ArenaDetailsUpdateType {
     case meetupInit
@@ -147,8 +148,16 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
             guard let raid = arena.raid else { fatalError() }
             self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
             print("🏟 User participates in meetup")
+
+            guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
+            DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                   destinationCoordinate: arena.coordinate,
+                                                                   arenaName: arena.name,
+                                                                   meetupDate: meetup.meetupDate,
+                                                                   meetupId: meetup.id)
         } else {
             firebaseConnector.userCanceled(in: meetup)
+            DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
             print("🏟 User canceled meetup")
         }
     }
@@ -239,10 +248,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     func formattedRaidTextForSharing() -> String {
-        
         var participantsString = ""
         participants.values.forEach { participantsString += ("• " + $0.trainerName! + "\n") }
-        
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         
@@ -254,7 +261,6 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         📍: https://maps.google.com/?q=\(arena.latitude),\(arena.longitude)\n
         \(participantsString)
         """
-        
         return shareText
     }
 
@@ -279,17 +285,31 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
 
 extension ArenaDetailsViewModel: RaidMeetupDelegate {
 
-    func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup) {
+    func didUpdateRaidMeetup(_ changedRaidMeetup: RaidMeetup) {
         
         if meetup == nil {
-            self.meetup = raidMeetup
+            self.meetup = changedRaidMeetup
             delegate?.update(of: .meetupInit)
         }
         
-        self.participants.removeAll()
-        self.meetup = raidMeetup
+        if changedRaidMeetup.meetupDate != meetup?.meetupDate {
+            guard let meetup = meetup else { return }
+            DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
+            guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
+            DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                   destinationCoordinate: arena.coordinate,
+                                                                   arenaName: arena.name,
+                                                                   meetupDate: changedRaidMeetup.meetupDate,
+                                                                   meetupId: meetup.id,
+                                                                   timeChanged: true)
+        }
         
-        guard let userIds = raidMeetup.participants else {
+        
+        self.participants.removeAll()
+        self.meetup = changedRaidMeetup
+        
+        
+        guard let userIds = changedRaidMeetup.participants else {
             DispatchQueue.main.async {
                 self.delegate?.update(of: .meetupChanged)
             }

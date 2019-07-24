@@ -39,4 +39,12 @@ class DateUtility {
         
         return "\(hourString):\(minuteString)"
     }
+    
+    class func timeString(for date: Date) -> String {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.locale = Locale.current
+        let selectedTime: String = dateFormatter.string(from: date)
+        return selectedTime
+    }
 }

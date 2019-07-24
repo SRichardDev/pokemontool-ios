@@ -78,36 +78,48 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     func submitRaid() {
         deleteOldRaidMeetupIfNeeded()
         
-        let raidMeetup: RaidMeetup
+        let meetup: RaidMeetup
 
         if isUserParticipating {
-            raidMeetup = RaidMeetup(meetupTime: selectedMeetupTime)
+            meetup = RaidMeetup(meetupTime: selectedMeetupTime)
         } else {
-            raidMeetup = RaidMeetup(meetupTime: "--:--")
+            meetup = RaidMeetup(meetupTime: "--:--")
         }
         
         if isRaidAlreadyRunning {
-            let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
+            let meetupId = firebaseConnector.saveRaidMeetup(raidMeetup: meetup)
             let raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss?.id,
                             endTime: endTime,
-                            raidMeetupId: id)
+                            raidMeetupId: meetupId)
             arena.raid = raid
             
             if isUserParticipating {
                 firebaseConnector.userParticipates(in: raid, for: &arena)
+                guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
+                DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                       destinationCoordinate: arena.coordinate,
+                                                                       arenaName: arena.name,
+                                                                       meetupDate: meetup.meetupDate,
+                                                                       meetupId: meetupId)
             }
             
         } else {
-            let id = firebaseConnector.saveRaidMeetup(raidMeetup: raidMeetup)
+            let meetupId = firebaseConnector.saveRaidMeetup(raidMeetup: meetup)
             let raid = Raid(level: selectedRaidLevel,
                             hatchTime: selectedHatchTime,
                             endTime: endTime,
-                            raidMeetupId: id)
+                            raidMeetupId: meetupId)
             arena.raid = raid
 
             if isUserParticipating {
                 firebaseConnector.userParticipates(in: raid, for: &arena)
+                guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
+                DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                       destinationCoordinate: arena.coordinate,
+                                                                       arenaName: arena.name,
+                                                                       meetupDate: meetup.meetupDate,
+                                                                       meetupId: meetupId)
             }
         }
         firebaseConnector.saveRaid(arena: arena)

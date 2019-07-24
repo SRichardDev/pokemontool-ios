@@ -70,10 +70,6 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
     }
     
     private func selectedTime(date: Date) -> String {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = Locale.current
-        let selectedTime: String = dateFormatter.string(from: date)
-        return selectedTime
+        return DateUtility.timeString(for: date)
     }
 }

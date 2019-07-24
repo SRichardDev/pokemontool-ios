@@ -55,7 +55,7 @@ protocol FirebaseStatusPresentable: class {
 }
 
 protocol RaidMeetupDelegate: class {
-    func didUpdateRaidMeetup(_ raidMeetup: RaidMeetup)
+    func didUpdateRaidMeetup(_ changedRaidMeetup: RaidMeetup)
 }
 
 protocol RaidChatDelegate: class {

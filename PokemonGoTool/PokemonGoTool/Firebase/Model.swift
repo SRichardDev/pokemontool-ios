@@ -2,6 +2,7 @@
 import Foundation
 import Firebase
 import CodableFirebase
+import MapKit
 
 protocol FirebaseCodable: Codable {
     var id: String! {get set}
@@ -149,6 +150,12 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
     var geohash: String {
         get {
             return Geohash.encode(latitude: latitude, longitude: longitude)
+        }
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
     }
     
@@ -302,6 +309,13 @@ struct RaidMeetup: FirebaseCodable, Equatable {
     var id: String!
     var meetupTime: String?
     var participants: [UserId: String]?
+    
+    var meetupDate: Date {
+        get {
+            guard let meetupTime = meetupTime else { return Date() }
+            return DateUtility.date(for: meetupTime) ?? Date()
+        }
+    }
     
     init(meetupTime: String? = nil) {
         self.meetupTime = meetupTime

@@ -3,6 +3,7 @@ import NotificationBannerSwift
 import MapKit
 
 enum NotificationBannerType {
+    case custom
     case connected
     case disconnected
     case firebaseAuthSuccess
@@ -37,7 +38,12 @@ class NotificationBannerManager {
         let cross = UIImageView(image: UIImage(named: "cross"))
         
         switch type {
-
+            
+        case .custom:
+            currentBanner = NotificationBanner(title: title,
+                                               subtitle: message,
+                                               leftView: checkMark,
+                                               style: .success)
         case .connected:
             currentBanner = NotificationBanner(title: "Vebunden zum Server",
                                                subtitle: "Viel Spaß Trainer!",

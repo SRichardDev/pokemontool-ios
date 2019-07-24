@@ -113,6 +113,7 @@
 		2C6E7F7A2201103500427FBE /* ScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F792201103500427FBE /* ScrollableViewController.swift */; };
 		2C6E7F7C220110C200427FBE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7B220110C200427FBE /* UIView+Extension.swift */; };
 		2C6E7F8122011ED900427FBE /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F8022011ED900427FBE /* Label.swift */; };
+		2C79C3CC22E8EB860093B8CA /* DepartureNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */; };
 		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
@@ -278,6 +279,7 @@
 		2C6E7F792201103500427FBE /* ScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableViewController.swift; sourceTree = "<group>"; };
 		2C6E7F7B220110C200427FBE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		2C6E7F8022011ED900427FBE /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureNotificationManager.swift; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				2C073359227B670300C45028 /* NotificationBannerManager.swift */,
 				2C2E984A22948F8A001ED8C6 /* RaidBossManager.swift */,
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
+				2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1169,6 +1172,7 @@
 				2C97F77E21F6742D00630BA2 /* DetailAnnotationView.swift in Sources */,
 				2CDFDDE321ED4A3D00170A46 /* FirebaseConnector.swift in Sources */,
 				2C970EFE22DE7B1F00295DBD /* SubmitRaidViewController.swift in Sources */,
+				2C79C3CC22E8EB860093B8CA /* DepartureNotificationManager.swift in Sources */,
 				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
 				2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */,
 				2C1AE571225E884200AE9C4A /* AccountWelcomeViewController.swift in Sources */,

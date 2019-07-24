@@ -8,6 +8,7 @@ protocol LocationManagerDelegate: class {
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
+    static let shared = LocationManager()
     public weak var delegate: LocationManagerDelegate?
     private var locationManager: CLLocationManager!
     private var initialUserLocationWasSet = false
