@@ -310,10 +310,10 @@ struct RaidMeetup: FirebaseCodable, Equatable {
     var meetupTime: String?
     var participants: [UserId: String]?
     
-    var meetupDate: Date {
+    var meetupDate: Date? {
         get {
-            guard let meetupTime = meetupTime else { return Date() }
-            return DateUtility.date(for: meetupTime) ?? Date()
+            guard let meetupTime = meetupTime else { return nil }
+            return DateUtility.date(for: meetupTime)
         }
     }
     

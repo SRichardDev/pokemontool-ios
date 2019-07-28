@@ -150,11 +150,13 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
             print("🏟 User participates in meetup")
 
             guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
-            DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-                                                                   destinationCoordinate: arena.coordinate,
-                                                                   arenaName: arena.name,
-                                                                   meetupDate: meetup.meetupDate,
-                                                                   meetupId: meetup.id)
+            if let meetupDate = meetup.meetupDate {
+                DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                       destinationCoordinate: arena.coordinate,
+                                                                       arenaName: arena.name,
+                                                                       meetupDate: meetupDate,
+                                                                       meetupId: meetup.id)
+            }
         } else {
             firebaseConnector.userCanceled(in: meetup)
             DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
@@ -292,16 +294,21 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
             delegate?.update(of: .meetupInit)
         }
         
-        if changedRaidMeetup.meetupDate != meetup?.meetupDate {
-            guard let meetup = meetup else { return }
-            DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
-            guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else { return }
-            DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-                                                                   destinationCoordinate: arena.coordinate,
-                                                                   arenaName: arena.name,
-                                                                   meetupDate: changedRaidMeetup.meetupDate,
-                                                                   meetupId: meetup.id,
-                                                                   timeChanged: true)
+        
+        if changedRaidMeetup.meetupDate != meetup?.meetupDate  {
+            if isUserParticipating {
+                if let meetup = meetup,
+                    let meetupDate = changedRaidMeetup.meetupDate,
+                    let userLocation = LocationManager.shared.currentUserLocation?.coordinate {
+                    DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
+                    DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                                           destinationCoordinate: arena.coordinate,
+                                                                           arenaName: arena.name,
+                                                                           meetupDate: meetupDate,
+                                                                           meetupId: meetup.id,
+                                                                           timeChanged: true)
+                }
+            }
         }
         
         
