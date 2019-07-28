@@ -36,6 +36,12 @@ struct DatabaseKeys {
     static let testarenas = "test_arenas"
 }
 
+struct Topics {
+    static let quests = "quests"
+    static let raids = "raids"
+    static let level = "level-"
+}
+
 protocol FirebaseDelegate: class {
     func didAddPokestop(pokestop: Pokestop)
     func didUpdatePokestop(pokestop: Pokestop)

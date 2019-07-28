@@ -184,36 +184,23 @@ class FirebaseConnector {
     }
     
     func subscribeForPush(for geohash: String) {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let data = [userID : ""]
-        
-        registeredUsersPokestopsRef
-            .child(geohash)
-            .updateChildValues(data)
-        
-        registeredUsersArenasRef
-            .child(geohash)
-            .updateChildValues(data)
-        
+        Messaging.messaging().subscribe(toTopic: geohash) { error in print("Subscribed to \(geohash) topic") }
         user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
         user?.addGeohashForPushSubscription(for: .arena, geohash: geohash)
     }
     
     func unsubscribeForPush(for geohash: String) {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-
-        registeredUsersPokestopsRef
-            .child(geohash)
-            .child(userID)
-            .removeValue()
-        
-        registeredUsersArenasRef
-            .child(geohash)
-            .child(userID)
-            .removeValue()
-        
+        Messaging.messaging().unsubscribe(fromTopic: geohash) { error in print("Unsubscribed from \(geohash) topic") }
         user?.removeGeohashForPushSubsription(for: .pokestop, geohash: geohash)
         user?.removeGeohashForPushSubsription(for: .arena, geohash: geohash)
+    }
+    
+    func subscribeToTopic(_ topic: String) {
+        Messaging.messaging().subscribe(toTopic: topic) { error in print("Subscribed to \(topic) topic") }
+    }
+    
+    func unsubscribeFormTopic(_ topic: String) {
+        Messaging.messaging().unsubscribe(fromTopic: topic) { error in print("Unsubscribed from \(topic) topic") }
     }
     
     func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {

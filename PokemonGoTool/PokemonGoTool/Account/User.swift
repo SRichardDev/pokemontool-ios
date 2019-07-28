@@ -248,11 +248,24 @@ class User: FirebaseCodable, Equatable {
     }
     
     func activatePush(_ activated: Bool) {
+        
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.pushActive : activated]
         usersRef
             .child(userId)
             .updateChildValues(data)
+        
+        if activated {
+            Messaging.messaging().subscribe(toTopic: "arena")
+            Messaging.messaging().subscribe(toTopic: "pokestop")
+            Messaging.messaging().subscribe(toTopic: "incidents")
+            print("Push activated")
+        } else {
+            Messaging.messaging().unsubscribe(fromTopic: "arena")
+            Messaging.messaging().unsubscribe(fromTopic: "pokestop")
+            Messaging.messaging().unsubscribe(fromTopic: "incidents")
+            print("Push deactivated")
+        }
     }
     
     class func load(completion: @escaping (User?) -> ()) {

@@ -10,6 +10,7 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
     @IBOutlet var pushActiveSwitch: UISwitch!
     @IBOutlet var pushStatusLabel: Label!
     @IBOutlet var goToSettingsButton: UIButton!
+    @IBOutlet var switchesStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,7 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
         pushStatusLabel.isHidden = true
         pushActiveSwitch.isEnabled = true
         goToSettingsButton.isHidden = true
+        switchesStackView.isVisible = viewModel.isPushActivated
     }
     
     func showSystemPushDeactivated() {
@@ -61,11 +63,24 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
         pushActiveSwitch.isEnabled = false
         pushActiveSwitch.isOn = false
         goToSettingsButton.isHidden = false
+        switchesStackView.isHidden = true
     }
     
     @IBAction func pushActiveSwitchDidChange(_ sender: UISwitch) {
         viewModel.pushActivatedChanged(sender.isOn)
         AppSettings.isPushActive = sender.isOn
-        showSystemPushActivated()
+        switchesStackView.changeVisibilityAnimated(visible: sender.isOn)
+    }
+    
+    @IBAction func questTopicSwitchDidChange(_ sender: UISwitch) {
+        viewModel.subscribeForQuestsPush(sender.isOn)
+    }
+    
+    @IBAction func raidsTopicSwitchDidChange(_ sender: UISwitch) {
+        viewModel.subscribeForRaidsPush(sender.isOn)
+    }
+    
+    @IBAction func levelTopicSwitchDidChange(_ sender: UISwitch) {
+        viewModel.subscribeForRaidLevelPush(sender.isOn, level: sender.tag)
     }
 }

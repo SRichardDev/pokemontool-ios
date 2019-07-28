@@ -87,3 +87,22 @@ extension UIView {
         layer.shadowRadius = 0.2
     }
 }
+
+extension UIView {
+    
+    func changeVisibilityAnimated(visible: Bool) {
+        guard self.isVisible != visible else { return }
+        
+        let isVisible = self.isVisible
+        let alphaChange = { self.alpha = visible ? 1 : 0 }
+        let visibilityChange = { self.isVisible = visible }
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            isVisible ? alphaChange() : visibilityChange()
+        }) { _ in
+            UIView.animate(withDuration: 0.25) {
+                isVisible ? visibilityChange() : alphaChange()
+            }
+        }
+    }
+}

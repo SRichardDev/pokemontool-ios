@@ -72,4 +72,28 @@ class AccountViewModel {
     func pushActivatedChanged(_ activated: Bool) {
         firebaseConnector.user?.activatePush(activated)
     }
+    
+    func subscribeForQuestsPush(_ subscribed: Bool) {
+        if subscribed {
+            firebaseConnector.subscribeToTopic(Topics.quests)
+        } else {
+            firebaseConnector.unsubscribeFormTopic(Topics.quests)
+        }
+    }
+    
+    func subscribeForRaidsPush(_ subscribed: Bool) {
+        if subscribed {
+            firebaseConnector.subscribeToTopic(Topics.raids)
+        } else {
+            firebaseConnector.unsubscribeFormTopic(Topics.raids)
+        }
+    }
+    
+    func subscribeForRaidLevelPush(_ subscribed: Bool, level: Int) {
+        if subscribed {
+            firebaseConnector.subscribeToTopic(Topics.level + "\(level)")
+        } else {
+            firebaseConnector.unsubscribeFormTopic(Topics.level + "\(level)")
+        }
+    }
 }
