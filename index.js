@@ -4,31 +4,34 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 
-exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
+exports.sendRaidPush = functions.region('europe-west1').database.ref('/arenas/{geohash}/{uid}').onWrite((snapshot, context) => {
 
-    const geohash = context.params.geohash;
-    const arena = snapshot.after.val();
-    const raid = arena.raid;
+    const geohash = context.params.geohash
+    const arena = snapshot.after.val()
+    const raid = arena.raid
     const raidBossId = raid.raidBossId || '---'
 
     //Get registered users
     return admin.database().ref('/registeredUsersArenas/' + geohash).once('value', (registeredUsersSnapshot, context) => {
 
         //Get Raidboss
-        admin.database().ref('/raidBosses/' + raidBossId).once('value', (raidBossSnapshot, context) => { 
+        return admin.database().ref('/raidBosses/' + raidBossId).once('value', (raidBossSnapshot, context) => { 
             const raidBossName = (raidBossSnapshot.val() && raidBossSnapshot.val().name) || '---'
 
             //Get Meetup
-            admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value', (meetupSnapshot, context) => {
+            return admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value', (meetupSnapshot, context) => {
                 const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '---'
-                const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + raid.hatchTime + '\nTreffpunkt: ' + raidMeetupTime
+                const hatchTime = raid.hatchTime || "---"
+                const message = 'Level: ' + raid.level + '\nRaidboss: ' + raidBossName + '\nSchlüpft: ' + hatchTime + '\nTreffpunkt: ' + raidMeetupTime
                 console.log('Message: ' + message)
+
+                var promises = []
 
                 //Loop through users
                 registeredUsersSnapshot.forEach((child) => {
                     const userId = child.key
         
-                    admin.database().ref('/users/' + userId).once('value', (usersSnapshot, context) => { 
+                    const p = admin.database().ref('/users/' + userId).once('value', (usersSnapshot, context) => { 
 
                         const notificationToken = (usersSnapshot.val() && usersSnapshot.val().notificationToken) || 'No token'
                         const platform = usersSnapshot.val().platform || "fallback"
@@ -49,7 +52,7 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
                                     latitude: String(arena.latitude),
                                     longitude: String(arena.longitude)
                                 }
-                            };
+                            }
                         }
 
                         if (platform === "android") {
@@ -61,7 +64,7 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
                                     latitude: String(arena.latitude),
                                     longitude: String(arena.longitude)
                                 }
-                            };
+                            }
                         }
 
                         if (platform === "fallback") {
@@ -76,29 +79,30 @@ exports.sendRaidPush = functions.database.ref('/arenas/{geohash}/{uid}').onWrite
                                     latitude: String(arena.latitude),
                                     longitude: String(arena.longitude)
                                 }
-                            };
+                            }
                         }
 
                         if (usersSnapshot.val().isPushActive) {
                             admin.messaging().sendToDevice(notificationToken, payload)
-                            console.log('Push sent')
+                            .then((response) => {
+                                console.log("Successfully sent message: ", response)
+                                return true
+                            })
                         } else {
                             console.log('Push not active... continuing')
+                            return true
                         }
-                        return true
-                    });
-                });
-            });
-        });
-    })
-    .catch(err => {
-        console.error('ERROR:', err)
-        return false
+                    })
+                    promises.push(p)
+                })
+                return Promise.all(promises)
+            })
+        })
     })
 })
 
 
-exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
+exports.sendNewQuestPushNotification = functions.region('europe-west1').database.ref('/pokestops/{geohash}/{uid}').onWrite((snapshot, context) => {
     
     const geohash = context.params.geohash
     const uid = context.params.uid
@@ -108,7 +112,7 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
     const quest = pokestop.quest
     const questId = quest.definitionId
 
-    admin.database().ref('/quests/' + questId).once('value', (questDefinitionSnapshot) => { 
+    return admin.database().ref('/quests/' + questId).once('value', (questDefinitionSnapshot) => { 
         const questName = questDefinitionSnapshot.val().quest
         const questReward = questDefinitionSnapshot.val().reward
     
@@ -119,10 +123,6 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
                 const userId = child.key
                 console.log('Pushing to userID: ' + userId)
                 admin.database().ref('/users/' + userId).once('value', (snapshot, context) => { 
-    
-                    if (!snapshot.val().isPushActive) {
-                        return false
-                    }
                     
                     const notificationToken = (snapshot.val() && snapshot.val().notificationToken) || 'No token'
                     const platform = snapshot.val().platform || "fallback"
@@ -173,20 +173,15 @@ exports.sendNewQuestPushNotification = functions.database.ref('/pokestops/{geoha
                         };
                     }
     
-                    admin.messaging().sendToDevice(notificationToken, payload)
-                    return true
+                    return admin.messaging().sendToDevice(notificationToken, payload)
                 });
             });
-        })
-        .catch(err => {
-            console.error('ERROR:', err)
-            return false
         })
     })
 })
 
 
-exports.sendRaidMeetupChatPush = functions.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite((snapshot, context) => {
+exports.sendRaidMeetupChatPush = functions.region('europe-west1').database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite((snapshot, context) => {
     const meetupId = context.params.meetupId
     const messageContainer = snapshot.after.val()
     const message = messageContainer.message
@@ -196,7 +191,7 @@ exports.sendRaidMeetupChatPush = functions.database.ref('/raidMeetups/{meetupId}
     return admin.database().ref('/raidMeetups/' + meetupId + '/participants').once('value', (participantSnapshot, context) => { 
 
         //Get sender
-        admin.database().ref('/users/' + senderId).once('value', (senderSnapshot, context) => {
+        return admin.database().ref('/users/' + senderId).once('value', (senderSnapshot, context) => {
 
             const publicData = senderSnapshot.val().publicData
             const senderName = publicData.trainerName
@@ -242,8 +237,7 @@ exports.sendRaidMeetupChatPush = functions.database.ref('/raidMeetups/{meetupId}
                         };    
                     }
 
-                    admin.messaging().sendToDevice(notificationToken, payload)
-                    return true
+                    return admin.messaging().sendToDevice(notificationToken, payload)
                 })
             })
         })
