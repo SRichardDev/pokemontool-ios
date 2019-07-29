@@ -20,7 +20,7 @@ export const onWriteArenas = functions.region('europe-west1').database.ref('/are
         const hatchTime = raid.hatchTime || "---"
         const endTime = raid.endTime || "---"
         const level = raid.level
-        const message = '⭐️: ' + level + ', 🐲: ' + raidBossName + '\n⌚️: ' + hatchTime + " - " + endTime + ', 👫: ' + raidMeetupTime
+        const message = '⭐️: ' + level + '\n🐲: ' + raidBossName + '\n⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
 
         const condition = "'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
         console.log(condition)
