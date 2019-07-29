@@ -5,48 +5,21 @@ class AccountViewModel {
     
     private let firebaseConnector: FirebaseConnector
     
-    var accountMedalViewModel: AccountMedalViewModel {
-        get {
-            return AccountMedalViewModel(firebaseConnector: firebaseConnector)
-        }
-    }
-    
-    var trainerName: String {
-        get {
-            return firebaseConnector.user?.publicData?.trainerName ?? ""
-        }
-    }
-    
-    var currentTeam: Team? {
-        get {
-            return firebaseConnector.user?.publicData?.team
-        }
-    }
-    
-    var currentLevel: Int {
-        get {
-            return (firebaseConnector.user?.publicData?.level ?? 0)
-        }
-    }
-    
-    var trainerCode: String {
-        get {
-            return firebaseConnector.user?.publicData?.trainerCode ?? ""
-        }
-    }
-    
-    var isLoggedIn: Bool {
-        get {
-            return firebaseConnector.isSignedIn
-        }
-    }
-    
-    var isPushActivated: Bool {
-        get {
-            return firebaseConnector.user?.isPushActive ?? false
-        }
-    }
-    
+    var accountMedalViewModel: AccountMedalViewModel {get{return AccountMedalViewModel(firebaseConnector: firebaseConnector)}}
+    var trainerName: String {get{return firebaseConnector.user?.publicData?.trainerName ?? ""}}
+    var currentTeam: Team? {get{return firebaseConnector.user?.publicData?.team}}
+    var currentLevel: Int {get{return (firebaseConnector.user?.publicData?.level ?? 0)}}
+    var trainerCode: String {get{return firebaseConnector.user?.publicData?.trainerCode ?? ""}}
+    var isLoggedIn: Bool {get{return firebaseConnector.isSignedIn}}
+    var isPushActivated: Bool {get{return firebaseConnector.user?.isPushActive ?? false}}
+    var isQuestTopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "quests"} ?? false}}
+    var isRaidTopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "raids"} ?? false}}
+    var isLevel5TopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "level-5"} ?? false}}
+    var isLevel4TopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "level-4"} ?? false}}
+    var isLevel3TopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "level-3"} ?? false}}
+    var isLevel2TopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "level-2"} ?? false}}
+    var isLevel1TopicSubscribed: Bool {get{return firebaseConnector.user?.topics?.contains { $0.key == "level-1"} ?? false}}
+
     init(firebaseConnector: FirebaseConnector) {
         self.firebaseConnector = firebaseConnector
     }

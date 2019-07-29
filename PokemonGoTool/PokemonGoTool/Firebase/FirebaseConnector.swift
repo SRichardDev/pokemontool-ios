@@ -197,10 +197,12 @@ class FirebaseConnector {
     
     func subscribeToTopic(_ topic: String) {
         Messaging.messaging().subscribe(toTopic: topic) { error in print("Subscribed to \(topic) topic") }
+        user?.addTopicSubcription(topic)
     }
     
     func unsubscribeFormTopic(_ topic: String) {
         Messaging.messaging().unsubscribe(fromTopic: topic) { error in print("Unsubscribed from \(topic) topic") }
+        user?.removeTopicSubscription(topic)
     }
     
     func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {

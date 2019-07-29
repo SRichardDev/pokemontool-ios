@@ -105,114 +105,119 @@
                                                     </switch>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHn-EG-aVG">
-                                                <rect key="frame" x="0.0" y="92" width="414" height="31"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jnf-HT-d8c">
+                                                <rect key="frame" x="0.0" y="92" width="414" height="215"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-dk-at8" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                                <integer key="value" value="0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gcq-tu-OGX">
-                                                        <rect key="frame" x="365" y="0.0" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="pF9-jB-zML"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-Ko-87I">
-                                                <rect key="frame" x="0.0" y="138" width="414" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpx-fY-QAS" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                                <integer key="value" value="0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NIl-8z-4XU">
-                                                        <rect key="frame" x="365" y="0.0" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QdP-kN-Se5"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="152-C0-sZs">
-                                                <rect key="frame" x="0.0" y="184" width="414" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-aW-gAA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                                <integer key="value" value="0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HNt-Mk-D6W">
-                                                        <rect key="frame" x="365" y="0.0" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="euo-VT-6MT"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slj-PO-dXw">
-                                                <rect key="frame" x="0.0" y="230" width="414" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggw-UY-Rmf" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                                <integer key="value" value="0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9vV-hG-4Ic">
-                                                        <rect key="frame" x="365" y="0.0" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QFK-9P-uhX"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-zI-jbu">
-                                                <rect key="frame" x="0.0" y="276" width="414" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K7-nl-2qc" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
-                                                                <integer key="value" value="0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vi2-iU-b1x">
-                                                        <rect key="frame" x="365" y="0.0" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QOc-TD-3sc"/>
-                                                        </connections>
-                                                    </switch>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHn-EG-aVG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-dk-at8" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gcq-tu-OGX">
+                                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="pF9-jB-zML"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-Ko-87I">
+                                                        <rect key="frame" x="0.0" y="46" width="414" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpx-fY-QAS" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NIl-8z-4XU">
+                                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QdP-kN-Se5"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="152-C0-sZs">
+                                                        <rect key="frame" x="0.0" y="92" width="414" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-aW-gAA" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HNt-Mk-D6W">
+                                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="euo-VT-6MT"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slj-PO-dXw">
+                                                        <rect key="frame" x="0.0" y="138" width="414" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggw-UY-Rmf" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9vV-hG-4Ic">
+                                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QFK-9P-uhX"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-zI-jbu">
+                                                        <rect key="frame" x="0.0" y="184" width="414" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭐️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K7-nl-2qc" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vi2-iU-b1x">
+                                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="levelTopicSwitchDidChange:" destination="ygk-4L-9Ja" eventType="valueChanged" id="QOc-TD-3sc"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -232,8 +237,16 @@
                     <size key="freeformSize" width="414" height="400"/>
                     <connections>
                         <outlet property="goToSettingsButton" destination="u29-la-P6E" id="koc-nR-z2I"/>
+                        <outlet property="level1RaidSwitch" destination="vi2-iU-b1x" id="tPd-3j-n7Q"/>
+                        <outlet property="level2RaidSwitch" destination="9vV-hG-4Ic" id="lG8-YH-TRU"/>
+                        <outlet property="level3RaidSwitch" destination="HNt-Mk-D6W" id="vJF-5h-9dq"/>
+                        <outlet property="level4RaidSwitch" destination="NIl-8z-4XU" id="DvD-L3-IS4"/>
+                        <outlet property="level5RaidSwitch" destination="Gcq-tu-OGX" id="vex-7r-qr1"/>
+                        <outlet property="levelSwitchesStackView" destination="Jnf-HT-d8c" id="Jo3-pL-tAf"/>
                         <outlet property="pushActiveSwitch" destination="VqA-I3-n6O" id="HfA-HY-eva"/>
                         <outlet property="pushStatusLabel" destination="njr-6P-81d" id="frN-bT-f9x"/>
+                        <outlet property="questSwitch" destination="dYR-cC-sYn" id="3YP-QR-J2W"/>
+                        <outlet property="raidSwitch" destination="kFs-hc-eOg" id="jIT-qP-q2E"/>
                         <outlet property="switchesStackView" destination="7oP-R9-jEf" id="bRD-Y8-gWp"/>
                         <outlet property="titleLabel" destination="wRJ-fw-ioh" id="4P6-r2-k2b"/>
                     </connections>

@@ -94,6 +94,8 @@ class User: FirebaseCodable, Equatable {
     var submittedQuests: Int?
     var subscribedGeohashPokestops: [String: String]?
     var subscribedGeohashArenas: [String: String]?
+    var topics: [String: String]?
+
     var isPushActive: Bool? = true {
         didSet {
             AppSettings.isPushActive = isPushActive ?? false
@@ -116,6 +118,7 @@ class User: FirebaseCodable, Equatable {
          submittedQuests: Int? = nil,
          subscribedGeohashPokestops: [String: String]? = nil,
          subscribedGeohashArenas: [String: String]? = nil,
+         topics: [String: String]? = nil,
          notificationToken: String? = nil,
          isPushActive: Bool = true) {
         
@@ -129,6 +132,7 @@ class User: FirebaseCodable, Equatable {
         self.submittedQuests = submittedQuests
         self.subscribedGeohashPokestops = subscribedGeohashPokestops
         self.subscribedGeohashArenas = subscribedGeohashArenas
+        self.topics = topics
         self.notificationToken = notificationToken
         self.isPushActive = isPushActive
     }
@@ -244,6 +248,24 @@ class User: FirebaseCodable, Equatable {
             .child(userId)
             .child(poiType.databaseKey)
             .child(geohash)
+            .removeValue()
+    }
+    
+    func addTopicSubcription(_ topic: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let data = [topic : ""]
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.topics)
+            .updateChildValues(data)
+    }
+    
+    func removeTopicSubscription(_ topic: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        usersRef
+            .child(userId)
+            .child(DatabaseKeys.topics)
+            .child(topic)
             .removeValue()
     }
     
