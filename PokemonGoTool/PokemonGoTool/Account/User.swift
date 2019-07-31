@@ -108,6 +108,12 @@ class User: FirebaseCodable, Equatable {
         }
     }
     
+    var isRegisteredForGeohashes: Bool {
+        get {
+            return subscribedGeohashArenas != nil
+        }
+    }
+    
     init(id: String,
          email: String,
          publicData: PublicUserData,
