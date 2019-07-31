@@ -69,6 +69,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         } else {
             messageView.hide()
         }
+        
+        guard let user = firebaseConnector.user else { return }
+        if firebaseConnector.isSignedIn && !user.isRegisteredForGeohashes {
+            let alert = UIAlertController(title: "Du bist noch nicht für Push Nachrichten registriert!",
+                                          message: "Um den vollen Funktionsumfang der App zu erleben musst du dir einen Bereich auswählen, für den du Benachrichtigt werden möchtest.\n\nUm dich zu registrieren tippe bitte auf das Zahnrad unten rechts und dann auf den Pin mit dem Haken drin.",
+                                          preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(ok)
+            present(alert, animated:true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
