@@ -77,3 +77,48 @@ export const onWriteRaidMeetupChat = functions.region('europe-west1')
         return false
     }
 })
+
+export const onWriteRaidMeetup = functions.region('europe-west1')
+.database.ref('/raidMeetups/{meetupId}').onWrite( async (snapshot, context) => {
+
+    if (snapshot.before.hasChild("participants") && snapshot.after.hasChild("participants")) {
+        
+        const meetupId = context.params.meetupId
+        const meetupBefore = snapshot.before.val()
+        const meetupAfter = snapshot.after.val()
+    
+        const participantsBefore = meetupBefore.participants
+        const participantsAfter = meetupAfter.participants
+        const participantsBeforeCount = Object.keys(participantsBefore).length;
+        const participantsAfterCount = Object.keys(participantsAfter).length;
+    
+        const condition = "'" + meetupId + "' in topics" 
+    
+        if (participantsAfterCount > participantsBeforeCount) {
+            
+            const payload = {
+                notification: {
+                    title: 'Ein Spieler nimmt beim Raid teil',
+                    body: 'Neue Anzahl: ' + participantsAfterCount,
+                    badge: '1',
+                    sound: 'default'
+                }
+            }
+            return admin.messaging().sendToCondition(condition, payload)
+    
+        } else if (participantsAfterCount < participantsBeforeCount) {
+    
+            const payload = {
+                notification: {
+                    title: 'Ein Spieler hat beim Raid abgesagt',
+                    body: 'Neue Anzahl: ' + participantsAfterCount,
+                    badge: '1',
+                    sound: 'default'
+                }
+            }
+            return admin.messaging().sendToCondition(condition, payload)
+        }    
+    }
+
+    return false
+})
