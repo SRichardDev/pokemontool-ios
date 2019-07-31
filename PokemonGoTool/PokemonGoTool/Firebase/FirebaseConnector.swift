@@ -241,6 +241,7 @@ class FirebaseConnector {
                 .child(meetupId)
                 .child(DatabaseKeys.participants)
                 .updateChildValues(data)
+            subscribeToTopic(meetupId)
         }
         return arena
     }
@@ -293,6 +294,7 @@ class FirebaseConnector {
             .child(DatabaseKeys.participants)
             .child(userId)
             .removeValue()
+        unsubscribeFormTopic(meetup.id)
     }
 
     func sendMessage(_ message: ChatMessage, in arena: inout Arena) {
