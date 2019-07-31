@@ -100,6 +100,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         case .changeMeetupTime:
             changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
         case .raidExpired:
+            setTitle(viewModel.title)
             headerViewController.updateUI()
             hideViewControllers([raidBossCollectionViewController,
                                  restTimeViewController,

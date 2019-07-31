@@ -32,6 +32,19 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var timerIsOn = false
     var selectedMeetupTime: String?
     var meetupTimeSelectionType: MeetupTimeSelectionType = .change
+    var participants = [String: PublicUserData]()
+    var hasActiveRaid: Bool { get { return !(arena.raid?.isExpired ?? true) }}
+    var isRaidbossActive: Bool {get { return arena.raid?.hasHatched ?? false }}
+    var isRaidExpired: Bool { get { return arena.raid?.isExpired ?? true }}
+    var isRaidBossSelected: Bool { get { return arena.raid?.raidBossId != nil }}
+    var level: Int { get { return arena.raid?.level ?? 0 }}
+    var isTimeSetForMeetup: Bool {get{return meetup?.meetupTime != "--:--" }}
+    var isGoldArena: Bool { get { return arena.isGoldArena ?? false }}
+    var hatchTime: String { get { return arena.raid?.hatchTime ?? "00:00" }}
+    var endTime: String { get { return arena.raid?.endTime ?? "00:00" }}
+    var coordinate: CLLocationCoordinate2D { get { return arena.coordinate }}
+    var headerImage: UIImage { get { return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage() }}
+    var headerTitle: String { get { return arena.name }}
 
     var title: String {
         get {
@@ -39,83 +52,15 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
             return isRaidExpired ? (arena.isEX ? "EX Arena" : "Arena") : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
         }
     }
-    
-    var headerTitle: String { get { return arena.name }}
-    var headerImage: UIImage { get  { return arena.image }}
-    
+
+
     var isUserParticipating: Bool {
         get {
             guard let userId = firebaseConnector.user?.id else {return false}
             return participants[userId] != nil
         }
     }
-    var hasActiveRaid: Bool {
-        get {
-            return !(arena.raid?.isExpired ?? true)
-        }
-    }
     
-    var isRaidbossActive: Bool {
-        get {
-            return arena.raid?.hasHatched ?? false
-        }
-    }
-    
-    var isRaidExpired: Bool {
-        get {
-            return arena.raid?.isExpired ?? true
-        }
-    }
-    
-    var isRaidBossSelected: Bool {
-        get {
-            return arena.raid?.raidBossId != nil
-        }
-    }
-    
-    var level: Int {
-        get {
-            return arena.raid?.level ?? 0
-        }
-    }
-    
-    var isTimeSetForMeetup: Bool {
-        get {
-            return meetup?.meetupTime != "--:--"
-        }
-    }
-    
-    var participants = [String: PublicUserData]()
-    
-    var image: UIImage {
-        get {
-            return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage()
-        }
-    }
-    
-    var isGoldArena: Bool {
-        get {
-            return arena.isGoldArena ?? false
-        }
-    }
-    
-    var hatchTime: String {
-        get {
-            return arena.raid?.hatchTime ?? "00:00"
-        }
-    }
-    
-    var endTime: String {
-        get {
-            return arena.raid?.endTime ?? "00:00"
-        }
-    }
-    
-    var coordinate: CLLocationCoordinate2D {
-        get {
-            return CLLocationCoordinate2D(latitude: arena.latitude, longitude: arena.longitude)
-        }
-    }
     
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
@@ -294,7 +239,6 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
             delegate?.update(of: .meetupInit)
         }
         
-        
         if changedRaidMeetup.meetupDate != meetup?.meetupDate  {
             if isUserParticipating {
                 if let meetup = meetup,
@@ -311,10 +255,8 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
             }
         }
         
-        
         self.participants.removeAll()
         self.meetup = changedRaidMeetup
-        
         
         guard let userIds = changedRaidMeetup.participants else {
             DispatchQueue.main.async {
