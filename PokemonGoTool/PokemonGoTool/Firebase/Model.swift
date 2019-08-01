@@ -267,38 +267,43 @@ struct Raid: Codable, Equatable {
     var raidBossId: String?
     var endTime: String?
     var raidMeetupId: String?
+    var submitter: String?
     var submitDate: Date? {
         get {
             return timestamp?.dateFromUnixTime()
         }
     }
     
-    init(level: Int, hatchTime: String, endTime: String, raidBoss: String? = nil, raidMeetupId: String?) {
+    init(level: Int, hatchTime: String, endTime: String, submitter: String, raidBoss: String? = nil, raidMeetupId: String?) {
         self.level = level
         self.hatchTime = hatchTime
-        self.raidBossId = raidBoss
-        self.raidMeetupId = raidMeetupId
         self.endTime = endTime
-    }
-    
-    init(level: Int, hatchTime: String, endTime: String, raidBoss: String? = nil) {
-        self.level = level
-        self.hatchTime = hatchTime
+        self.submitter = submitter
         self.raidBossId = raidBoss
-        self.endTime = endTime
-    }
-    
-    init(level: Int, raidBoss: String? = nil, endTime: String, raidMeetupId: String?) {
-        self.level = level
-        self.raidBossId = raidBoss
-        self.endTime = endTime
         self.raidMeetupId = raidMeetupId
     }
     
-    init(level: Int, raidBoss: String? = nil, endTime: String) {
+    init(level: Int, hatchTime: String, endTime: String, submitter: String, raidBoss: String? = nil) {
+        self.level = level
+        self.hatchTime = hatchTime
+        self.submitter = submitter
+        self.raidBossId = raidBoss
+        self.endTime = endTime
+    }
+    
+    init(level: Int, raidBoss: String? = nil, endTime: String, submitter: String, raidMeetupId: String?) {
         self.level = level
         self.raidBossId = raidBoss
         self.endTime = endTime
+        self.submitter = submitter
+        self.raidMeetupId = raidMeetupId
+    }
+    
+    init(level: Int, raidBoss: String? = nil, endTime: String, submitter: String) {
+        self.level = level
+        self.raidBossId = raidBoss
+        self.endTime = endTime
+        self.submitter = submitter
     }
 }
 

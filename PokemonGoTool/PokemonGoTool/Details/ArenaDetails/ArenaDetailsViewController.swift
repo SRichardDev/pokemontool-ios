@@ -57,6 +57,15 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         raidBossCollectionViewController.level = viewModel.level
         raidBossCollectionViewController.activateSelectionMode()
         raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
+        
+        #if DEBUG
+        let DEBUGdeleteArenaButton = Button()
+        DEBUGdeleteArenaButton.setTitle("DELETE", for: .normal)
+        DEBUGdeleteArenaButton.addAction {
+            self.viewModel.DEBUGdeleteArena()
+        }
+        stackView.addArrangedSubview(DEBUGdeleteArenaButton)
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +84,6 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         present(ac, animated: true)
     }
     
-    var animating = false
     func update(of type: ArenaDetailsUpdateType) {
         switch type {
         case .meetupInit:
@@ -95,8 +103,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         case .eggHatched:
             headerViewController.updateUI()
         case .raidbossChanged:
-            headerViewController.updateUI()
             setTitle(viewModel.title)
+            headerViewController.updateUI()
         case .changeMeetupTime:
             changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
         case .raidExpired:

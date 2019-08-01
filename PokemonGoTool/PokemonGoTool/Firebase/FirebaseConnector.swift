@@ -408,5 +408,12 @@ class FirebaseConnector {
         let quests = Database.database().reference(withPath: DatabaseKeys.raidBosses)
         quests.childByAutoId().setValue(data)
     }
+    
+    func DEBUGdeleteArena(_ arena: Arena) {
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .removeValue()
+    }
     /// End DEBUG
 }

@@ -22,13 +22,30 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koordinaten:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmG-2j-a1g" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="12.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45.345356, 11.455654" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84X-aY-5Iq" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41.5" width="375" height="26"/>
+                                        <rect key="frame" x="0.0" y="27.5" width="375" height="12.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raid gemeldet von:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-XO-dPc" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55" width="375" height="12.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptq-bY-VM3" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="82.5" width="375" height="12.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -39,13 +56,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hinzugefügt von:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jn-BI-UKG" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="82.5" width="375" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="110" width="375" height="12.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPK-XS-Kt6" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="124" width="375" height="26"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="375" height="12.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -71,6 +88,8 @@
                     <connections>
                         <outlet property="coordinateLabel" destination="84X-aY-5Iq" id="lQn-bv-vrn"/>
                         <outlet property="coordinateTitleLabel" destination="xmG-2j-a1g" id="ovD-xT-dmi"/>
+                        <outlet property="raidSubmitterLabel" destination="Ptq-bY-VM3" id="CDC-lK-IC4"/>
+                        <outlet property="raidSubmitterTitleLabel" destination="Oac-XO-dPc" id="S9q-8J-kM3"/>
                         <outlet property="submitterLabel" destination="tPK-XS-Kt6" id="IxZ-ks-WWf"/>
                         <outlet property="submitterTitleLabel" destination="0Jn-BI-UKG" id="9YZ-Bh-uH4"/>
                     </connections>

@@ -76,6 +76,8 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     }
     
     func submitRaid() {
+        guard let userId = firebaseConnector.user?.id else { NotificationBannerManager.shared.show(.unregisteredUser); return}
+        
         deleteOldRaidMeetupIfNeeded()
         
         let meetup: RaidMeetup
@@ -91,6 +93,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             let raid = Raid(level: selectedRaidLevel,
                             raidBoss: selectedRaidBoss?.id,
                             endTime: endTime,
+                            submitter: userId,
                             raidMeetupId: meetupId)
             arena.raid = raid
             
@@ -111,6 +114,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             let raid = Raid(level: selectedRaidLevel,
                             hatchTime: selectedHatchTime,
                             endTime: endTime,
+                            submitter: userId,
                             raidMeetupId: meetupId)
             arena.raid = raid
 
