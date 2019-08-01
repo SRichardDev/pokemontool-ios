@@ -185,7 +185,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         guard let raidSubmitter = arena.raid?.submitter else { completion("Fehler"); return }
 
         if raidSubmitter == "Bot" {
-            completion(arena.submitter)
+            completion(raidSubmitter)
         } else {
             firebaseConnector.userName(for: raidSubmitter) { trainerName in
                 completion(trainerName)
