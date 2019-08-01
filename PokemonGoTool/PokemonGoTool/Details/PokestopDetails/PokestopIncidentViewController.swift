@@ -19,4 +19,3 @@ class PokestopIncidentViewController: UIViewController, StoryboardInitialViewCon
         submitterLabel.text = viewModel.incidentSubmitter
     }
 }
-
