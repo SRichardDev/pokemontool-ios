@@ -160,19 +160,23 @@ class AnnotationView: CustomAnnotationView {
         
         if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? AnnotationView {
             annotationView.annotation = annotation
-            return AnnotationView.setupPokestopAnnotationView(annotationView: annotationView, for: annotation, showLabel: showLabel)
+            return AnnotationView.setupPokestopAnnotationView(annotationView: annotationView,
+                                                              for: annotation,
+                                                              showLabel: showLabel)
         } else {
             let annotationView = AnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            return AnnotationView.setupPokestopAnnotationView(annotationView: annotationView, for: annotation, showLabel: showLabel)
+            return AnnotationView.setupPokestopAnnotationView(annotationView: annotationView,
+                                                              for: annotation,
+                                                              showLabel: showLabel)
         }
     }
     
     private class func setupPokestopAnnotationView(annotationView: AnnotationView,
-                                           for annotation: PokestopPointAnnotation,
-                                           showLabel: Bool) -> AnnotationView {
+                                                   for annotation: PokestopPointAnnotation,
+                                                   showLabel: Bool) -> AnnotationView {
         annotationView.customAnnotation = annotation.pokestop
         annotationView.label.alpha = showLabel ? 1 : 0
-    
+        
         if let quest = annotation.pokestop?.quest, quest.isActive, let image = ImageManager.image(named: annotation.imageName) {
             let baseImage = UIImage(named: "Pokestop")!
             let size = CGSize(width: image.size.width/3, height: image.size.height/3)
@@ -180,6 +184,8 @@ class AnnotationView: CustomAnnotationView {
             let background = UIImage(named: "iconBackground")!
             let combined = UIImage.imageByCombiningImage(firstImage: background, withImage: topImage)
             annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: combined)
+        } else if let incident = annotation.pokestop?.incident, incident.isActive {
+            annotationView.image = UIImage(named: "PokestopIncident")!
         } else {
             annotationView.image = UIImage(named: "Pokestop")!
         }

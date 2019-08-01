@@ -114,6 +114,9 @@
 		2C6E7F7C220110C200427FBE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7B220110C200427FBE /* UIView+Extension.swift */; };
 		2C6E7F8122011ED900427FBE /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F8022011ED900427FBE /* Label.swift */; };
 		2C79C3CC22E8EB860093B8CA /* DepartureNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */; };
+		2C79C3CE22F36DAF0093B8CA /* Pokestop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79C3CD22F36DAF0093B8CA /* Pokestop.swift */; };
+		2C79C3D022F38AE30093B8CA /* PokestopIncidentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79C3CF22F38AE30093B8CA /* PokestopIncidentViewController.swift */; };
+		2C79C3D222F38AF00093B8CA /* PokestopIncidentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C79C3D122F38AF00093B8CA /* PokestopIncidentViewController.storyboard */; };
 		2C79CA4021F92E1600FA82EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79CA3F21F92E1600FA82EE /* User.swift */; };
 		2C7DC24B21FE805900BC3F24 /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */; };
 		2C7DC24D21FE8D2800BC3F24 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DC24C21FE8D2800BC3F24 /* Button.swift */; };
@@ -280,6 +283,9 @@
 		2C6E7F7B220110C200427FBE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		2C6E7F8022011ED900427FBE /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureNotificationManager.swift; sourceTree = "<group>"; };
+		2C79C3CD22F36DAF0093B8CA /* Pokestop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokestop.swift; sourceTree = "<group>"; };
+		2C79C3CF22F38AE30093B8CA /* PokestopIncidentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopIncidentViewController.swift; sourceTree = "<group>"; };
+		2C79C3D122F38AF00093B8CA /* PokestopIncidentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokestopIncidentViewController.storyboard; sourceTree = "<group>"; };
 		2C79CA3F21F92E1600FA82EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C7DC24A21FE805900BC3F24 /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		2C7DC24C21FE8D2800BC3F24 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -611,13 +617,15 @@
 		2C34F1DF220F135700B3B99C /* PokestopDetails */ = {
 			isa = PBXGroup;
 			children = (
+				2C34F1E8221206A000B3B99C /* PokestopDetailsViewModel.swift */,
 				2C34F1E4221092D100B3B99C /* PokestopDetailsViewController.swift */,
 				2C34F1E62210933700B3B99C /* PokestopDetailsViewController.storyboard */,
 				2C1AE574225FBB0000AE9C4A /* PokestopQuestViewController.swift */,
 				2C1AE576225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard */,
-				2C34F1E8221206A000B3B99C /* PokestopDetailsViewModel.swift */,
 				2C1AE578225FD05700AE9C4A /* PokestopInfoViewController.swift */,
 				2C1AE57A225FD06100AE9C4A /* PokestopInfoViewController.storyboard */,
+				2C79C3CF22F38AE30093B8CA /* PokestopIncidentViewController.swift */,
+				2C79C3D122F38AF00093B8CA /* PokestopIncidentViewController.storyboard */,
 			);
 			path = PokestopDetails;
 			sourceTree = "<group>";
@@ -843,6 +851,7 @@
 				2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */,
 				2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */,
 				2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */,
+				2C79C3CD22F36DAF0093B8CA /* Pokestop.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -960,6 +969,7 @@
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
+				2C79C3D222F38AF00093B8CA /* PokestopIncidentViewController.storyboard in Resources */,
 				0366E09822A1612300310339 /* pokemon-names-de.json in Resources */,
 				033BC72D22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard in Resources */,
 				2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */,
@@ -1179,6 +1189,7 @@
 				2C395A542205FCCB005330B8 /* RaidUserParticipateSwitchViewController.swift in Sources */,
 				2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */,
 				2C395A342203934C005330B8 /* RaidLevelViewController.swift in Sources */,
+				2C79C3CE22F36DAF0093B8CA /* Pokestop.swift in Sources */,
 				2CBC09FE227F7B8D00135473 /* BottomMenuShowable.swift in Sources */,
 				2C2E984B22948F8A001ED8C6 /* RaidBossManager.swift in Sources */,
 				2C9D6D8322DFC1E90030D0EA /* MessageView.swift in Sources */,
@@ -1197,6 +1208,7 @@
 				2C1AE575225FBB0000AE9C4A /* PokestopQuestViewController.swift in Sources */,
 				2CC8D7F4229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift in Sources */,
 				2C0733582279BA6000C45028 /* CircleButton.swift in Sources */,
+				2C79C3D022F38AE30093B8CA /* PokestopIncidentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,22 @@ extension FirebaseCodable {
     }
 }
 
+func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
+    if let data = snapshot.value {
+        do {
+            let decoder = FirebaseDecoder()
+            decoder.dateDecodingStrategy = .millisecondsSince1970
+            var object = try decoder.decode(T.self, from: data)
+            object.setId(snapshot.key)
+            return object
+        } catch _ {
+            //Error for registred push users
+            //            print("Error decoding: \(error.localizedDescription) : \(T.self)")
+        }
+    }
+    return nil
+}
+
 protocol Annotation  {
     var name: String { get set }
     var latitude: Double { get set }
@@ -22,99 +38,6 @@ protocol Annotation  {
     var upVotes: Int? { get set }
     var downVotes: Int? { get set }
     var id: String! { get set }
-}
-
-struct Pokestop: FirebaseCodable, Equatable, Annotation, Hashable {
-    var name: String
-    var latitude: Double
-    var longitude: Double
-    var submitter: String
-    var id: String!
-    var questId: String?
-    var quest: Quest?
-    var upVotes: Int?
-    var downVotes: Int?
-    var geohash: String {
-        get {
-            return Geohash.encode(latitude: latitude, longitude: longitude)
-        }
-    }
-    
-    var image: UIImage {
-        get {
-            return UIImage(named: "PokestopLarge")!
-        }
-    }
-    
-    var hasActiveQuest: Bool {
-        get {
-            return quest?.isActive ?? false
-        }
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(id)
-    }
-    
-    init(name: String, latitude: Double, longitude: Double, submitter: String) {
-        self.name = name
-        self.latitude = latitude
-        self.longitude = longitude
-        self.submitter = submitter
-    }
-}
-
-func decode<T: FirebaseCodable>(from snapshot: DataSnapshot) -> T? {
-    if let data = snapshot.value {
-        do {
-            var object = try FirebaseDecoder().decode(T.self, from: data)
-            object.setId(snapshot.key)
-            return object
-        } catch _ {
-            //Error for registred push users
-//            print("Error decoding: \(error.localizedDescription) : \(T.self)")
-        }
-    }
-    return nil
-}
-
-struct Quest: Codable, Equatable {
-    let definitionId: String
-    let submitter: String
-    var timestamp: Double?
-    
-    var submitDate: Date? {
-        get {
-            return timestamp?.dateFromUnixTime()
-        }
-    }
-    
-    var isActive: Bool {
-        get {
-            guard let submitDate = submitDate else { return false }
-            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return false }
-            return true
-        }
-    }
-    
-    init(definitionId: String, submitter: String) {
-        self.definitionId = definitionId
-        self.submitter = submitter
-    }
-}
-
-struct QuestDefinition: FirebaseCodable {
-    var id: String!
-    let quest: String
-    let reward: String
-    let imageName: String
-    
-    var image: UIImage? {
-        get {
-            return ImageManager.image(named: imageName)
-        }
-    }
 }
 
 struct RaidbossDefinition: FirebaseCodable, Equatable {
@@ -261,7 +184,7 @@ struct Raid: Codable, Equatable {
         }
     }
     
-    var timestamp: Double?
+    var timestamp: TimeInterval?
     let level: Int
     var hatchTime: String?
     var raidBossId: String?
@@ -331,7 +254,7 @@ struct ChatMessage: FirebaseCodable {
     var id: String!
     let message: String
     let senderId: String
-    var timestamp: Double?
+    var timestamp: TimeInterval?
 
     init(message: String, senderId: String) {
         self.message = message

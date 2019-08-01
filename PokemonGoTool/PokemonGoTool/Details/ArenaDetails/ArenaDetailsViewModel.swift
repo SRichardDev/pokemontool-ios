@@ -68,11 +68,6 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
 
         firebaseConnector.raidMeetupDelegate = self
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-        dateFormatter.locale = Locale.current
-
         guard let raid = arena.raid else { return }
         guard !raid.isExpired else { return }
 
