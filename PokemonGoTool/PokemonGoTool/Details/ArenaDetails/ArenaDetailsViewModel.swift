@@ -181,14 +181,15 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     func submitterNameForRaid(_ completion: @escaping (String) -> ()) {
-        if arena.submitter == "Bot" {
+        
+        guard let raidSubmitter = arena.raid?.submitter else { completion("Fehler"); return }
+
+        if raidSubmitter == "Bot" {
             completion(arena.submitter)
-        }
-        
-        guard let raidSubmitter = arena.raid?.submitter else { return }
-        
-        firebaseConnector.userName(for: raidSubmitter) { trainerName in
-            completion(trainerName)
+        } else {
+            firebaseConnector.userName(for: raidSubmitter) { trainerName in
+                completion(trainerName)
+            }
         }
     }
     
