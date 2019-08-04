@@ -58,9 +58,9 @@ class AnnotationView: CustomAnnotationView {
                 
                 // animate presentation
                 if animated {
-                    self.customCalloutView!.alpha = 0.0
+                    self.customCalloutView?.alpha = 0.0
                     UIView.animate(withDuration: animationTime, animations: {
-                        self.customCalloutView!.alpha = 1.0
+                        self.customCalloutView?.alpha = 1.0
                     })
                 }
             }
@@ -68,13 +68,12 @@ class AnnotationView: CustomAnnotationView {
             if customCalloutView != nil {
                 if animated { // fade out animation, then remove it.
                     UIView.animate(withDuration: animationTime, animations: {
-                        self.customCalloutView!.alpha = 0.0
+                        self.customCalloutView?.alpha = 0.0
                     }, completion: { (success) in
-                        self.customCalloutView!.removeFromSuperview()
+                        self.customCalloutView?.removeFromSuperview()
                     })
                 } else {
-                    self.customCalloutView!.removeFromSuperview()
-                    
+                    self.customCalloutView?.removeFromSuperview()
                 }
             }
         }
