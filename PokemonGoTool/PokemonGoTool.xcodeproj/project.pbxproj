@@ -170,6 +170,7 @@
 		2CF6F9A321F130C400610BC9 /* GeohashWIndow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6F9A221F130C400610BC9 /* GeohashWIndow.swift */; };
 		2CF6F9A521F259E700610BC9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6F9A421F259E700610BC9 /* AccountViewController.swift */; };
 		2CF6F9A821F2846D00610BC9 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6F9A721F2846D00610BC9 /* AppModule.swift */; };
+		2CF7B4CC22F780560088C0F6 /* ArenaConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */; };
 		49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */; };
 /* End PBXBuildFile section */
 
@@ -341,6 +342,7 @@
 		2CF6F9A421F259E700610BC9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		2CF6F9A621F25C9800610BC9 /* PokemonGoTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PokemonGoTool.entitlements; sourceTree = "<group>"; };
 		2CF6F9A721F2846D00610BC9 /* AppModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
+		2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaConnector.swift; sourceTree = "<group>"; };
 		85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonGoTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8D17068DFD218CB12B0034 /* Pods-PokemonGoTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.release.xcconfig"; sourceTree = "<group>"; };
 		FFADD158951324AC77E484BA /* Pods-PokemonGoTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.debug.xcconfig"; sourceTree = "<group>"; };
@@ -848,6 +850,7 @@
 			children = (
 				2C97F77021F6576500630BA2 /* Model.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
+				2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */,
 				2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */,
 				2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */,
 				2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */,
@@ -1116,6 +1119,7 @@
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */,
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
+				2CF7B4CC22F780560088C0F6 /* ArenaConnector.swift in Sources */,
 				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C03085F222B40AF007A1EA0 /* HeaderViewController.swift in Sources */,

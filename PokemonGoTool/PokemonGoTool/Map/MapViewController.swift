@@ -21,6 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var isPoiSubmissionMode = false
     var poiSubmissionAnnotation = MKPointAnnotation()
     let messageView = MessageView()
+    let arenaConnector = ArenaConnector()
 
     lazy var manager: ClusterManager = {
         let manager = ClusterManager()
@@ -44,6 +45,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         setupMapButtonsMenu()
         displayLocationFromPushIfNeeded()
         messageView.addToTopMiddle(in: self.view)
+        
+        arenaConnector.didAddArenaCallback = { arena in
+            let annotation = ArenaPointAnnotation(arena: arena)
+            self.manager.add(annotation)
+            self.manager.reload(mapView: self.mapView)
+        }
+
+        arenaConnector.didUpdateArenaCallback = { arena in
+            let annotation = self.manager.annotations.first { annotation in
+                if let arenaAnnotation = annotation as? ArenaPointAnnotation {
+                    return arenaAnnotation.arena?.id == arena.id
+                }
+                return false
+            }
+            guard let unwrappedAnnotation = annotation else { return }
+            self.manager.remove(unwrappedAnnotation)
+            let updatedAnnotation = ArenaPointAnnotation(arena: arena)
+            self.manager.add(updatedAnnotation)
+            self.manager.reload(mapView: self.mapView)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +129,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
                 firebaseConnector.loadPokestops(for: geohashBox.hash)
-                firebaseConnector.loadArenas(for: geohashBox.hash)
+                arenaConnector.loadArenas(for: geohashBox.hash)
             }
         }
         

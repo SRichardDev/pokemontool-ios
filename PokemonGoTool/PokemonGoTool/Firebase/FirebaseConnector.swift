@@ -156,33 +156,6 @@ class FirebaseConnector {
         })
     }
     
-    func loadArenas(for geohash: String) {
-        guard geohash != "" else { return }
-        arenasRef
-            .child(geohash)
-            .removeAllObservers()
-        arenasRef
-            .child(geohash)
-            .observe(.value, with: { snapshot in
-            if let result = snapshot.children.allObjects as? [DataSnapshot] {
-                for child in result {
-                    guard var arena: Arena = decode(from: child) else { continue }
-                    
-                    arena.isGoldArena = self.user?.goldArenas?.keys.contains(arena.id) ?? false
-                    
-                    if let localArena = self.arenas[arena.id] {
-                        if localArena == arena { continue }
-                        self.arenas[arena.id] = arena
-                        self.delegate?.didUpdateArena(arena: arena)
-                    } else {
-                        self.arenas[arena.id] = arena
-                        self.delegate?.didAddArena(arena: arena)
-                    }
-                }
-            }
-        })
-    }
-    
     func subscribeForPush(for geohash: String) {
         Messaging.messaging().subscribe(toTopic: geohash) { error in print("Subscribed to \(geohash) topic") }
         user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
