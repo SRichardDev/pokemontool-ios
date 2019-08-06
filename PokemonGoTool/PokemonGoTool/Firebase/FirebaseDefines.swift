@@ -28,10 +28,19 @@ struct DatabaseKeys {
     static let team = "team"
     static let level = "level"
     static let trainerCode = "trainerCode"
+    
+    @available(*, deprecated, message: "Old - remove soon")
     static let subscribedGeohashPokestops = "subscribedGeohashPokestops"
+    @available(*, deprecated, message: "Old - remove soon")
     static let subscribedGeohashArenas = "subscribedGeohashArenas"
+    
     static let pushActive = "isPushActive"
     static let topics = "topics"
+    static let subscribedGeohashes = "subscribedGeohashes"
+    static let notificationToken = "notificationToken"
+    static let platform = "platform"
+    static let appLastOpened = "appLastOpened"
+    static let subscribedRaidMeetups = "subscribedRaidMeetups"
     
     static let testpokestops = "test_pokestops"
     static let testarenas = "test_arenas"
@@ -40,7 +49,9 @@ struct DatabaseKeys {
 struct Topics {
     static let quests = "quests"
     static let raids = "raids"
+    static let incidents = "incidents"
     static let level = "level-"
+    static let iOS = "iOS"
 }
 
 protocol FirebaseDelegate: class {
@@ -82,6 +93,7 @@ enum AuthStatus {
     case unknown(error: String)
 }
 
+@available(*, deprecated, message: "Old method - delete soon")
 enum PoiType {
     case pokestop
     case arena

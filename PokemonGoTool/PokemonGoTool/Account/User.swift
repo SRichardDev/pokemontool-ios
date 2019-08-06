@@ -92,9 +92,16 @@ class User: FirebaseCodable, Equatable {
     var goldArenas: [ArenaId: String]?
     var submittedRaids: Int?
     var submittedQuests: Int?
-    var subscribedGeohashPokestops: [String: String]?
-    var subscribedGeohashArenas: [String: String]?
+    var subscribedGeohashes: [String: String]?
+    var subscribedRaidMeetups: [String: String]?
     var topics: [String: String]?
+    var appLastOpened: Date?
+
+    @available(*, deprecated, message: "Old - remove soon")
+    var subscribedGeohashPokestops: [String: String]?
+    @available(*, deprecated, message: "Old - remove soon")
+    var subscribedGeohashArenas: [String: String]?
+    
 
     var isPushActive: Bool? = true {
         didSet {
@@ -110,7 +117,7 @@ class User: FirebaseCodable, Equatable {
     
     var isRegisteredForGeohashes: Bool {
         get {
-            return subscribedGeohashArenas != nil
+            return subscribedGeohashes != nil
         }
     }
     
@@ -126,7 +133,8 @@ class User: FirebaseCodable, Equatable {
          subscribedGeohashArenas: [String: String]? = nil,
          topics: [String: String]? = nil,
          notificationToken: String? = nil,
-         isPushActive: Bool = true) {
+         isPushActive: Bool = true,
+         appLastOpened: Date? = nil) {
         
         self.id = id
         self.email = email
@@ -141,6 +149,7 @@ class User: FirebaseCodable, Equatable {
         self.topics = topics
         self.notificationToken = notificationToken
         self.isPushActive = isPushActive
+        self.appLastOpened = appLastOpened
     }
     
     func updateTrainerName(_ name: String) {
@@ -238,7 +247,8 @@ class User: FirebaseCodable, Equatable {
             .child(id)
             .removeValue()
     }
-    
+
+    @available(*, deprecated, message: "Old method - delete soon")
     func addGeohashForPushSubscription(for poiType: PoiType, geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [geohash : ""]
@@ -248,6 +258,8 @@ class User: FirebaseCodable, Equatable {
             .updateChildValues(data)
     }
     
+    
+    @available(*, deprecated, message: "Old method - delete soon")
     func removeGeohashForPushSubsription(for poiType: PoiType, geohash: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         usersRef
@@ -257,51 +269,56 @@ class User: FirebaseCodable, Equatable {
             .removeValue()
     }
     
-    func addTopicSubcription(_ topic: String) {
+    func cleanupMeetupSubscriptionsIfNeeded() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let data = [topic : ""]
-        usersRef
-            .child(userId)
-            .child(DatabaseKeys.topics)
-            .updateChildValues(data)
+        
+        if let appLastOpened = appLastOpened {
+            if !Calendar.current.isDate(appLastOpened, inSameDayAs: Date()) {
+
+                guard let subscribedRaidMeetups = subscribedRaidMeetups?.keys else { return }
+                subscribedRaidMeetups.forEach { Messaging.messaging().unsubscribe(fromTopic: $0) }
+
+                usersRef
+                    .child(userId)
+                    .child(DatabaseKeys.subscribedRaidMeetups)
+                    .removeValue()
+            }
+        }
     }
     
-    func removeTopicSubscription(_ topic: String) {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+    func saveAppLastOpened() {
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        let appLastOpenedData = [DatabaseKeys.appLastOpened: ServerValue.timestamp()]
         usersRef
             .child(userId)
-            .child(DatabaseKeys.topics)
-            .child(topic)
-            .removeValue()
+            .updateChildValues(appLastOpenedData)
     }
+    
     
     func activatePush(_ activated: Bool) {
-        
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let data = [DatabaseKeys.pushActive : activated]
         usersRef
             .child(userId)
             .updateChildValues(data)
-        
-        if activated {
-            Messaging.messaging().subscribe(toTopic: "arena")
-            Messaging.messaging().subscribe(toTopic: "pokestop")
-            Messaging.messaging().subscribe(toTopic: "incidents")
-            print("Push activated")
-        } else {
-            Messaging.messaging().unsubscribe(fromTopic: "arena")
-            Messaging.messaging().unsubscribe(fromTopic: "pokestop")
-            Messaging.messaging().unsubscribe(fromTopic: "incidents")
-            print("Push deactivated")
-        }
     }
     
     class func load(completion: @escaping (User?) -> ()) {
-        let usersRef = Database.database().reference(withPath:   DatabaseKeys.users)
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
+        guard let userId = Auth.auth().currentUser?.uid else { completion(nil); return }
+        
+        usersRef.child(userId).observeSingleEvent(of: .value) { snapshot in
+            guard let user: User = decode(from: snapshot) else { completion(nil); return }
+            completion(user)
+        }
+    }
+    
+    class func observe(completion: @escaping (User?) -> ()) {
+        let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
+        guard let userId = Auth.auth().currentUser?.uid else { completion(nil); return }
         
         usersRef.child(userId).observe(.value) { snapshot in
-            guard let user: User = decode(from: snapshot) else { return }
+            guard let user: User = decode(from: snapshot) else { completion(nil); return }
             completion(user)
         }
     }

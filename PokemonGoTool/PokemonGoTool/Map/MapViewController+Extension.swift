@@ -20,7 +20,7 @@ extension MapViewController {
             
             guard let user = self.firebaseConnector.user else { return }
             self.isGeohashSelectionMode = true
-            let subscribedGeohashPokestops = user.subscribedGeohashPokestops?.keys.sorted()
+            let subscribedGeohashPokestops = user.subscribedGeohashes?.keys.sorted()
             self.moveMapMenu(ConstraintConstants.mapMenuOffScreen)
             
             self.startGeohashRegistration(with: subscribedGeohashPokestops, submitClosure: {
@@ -95,10 +95,10 @@ extension MapViewController {
             
             if foundOverlays.count > 0 {
                 mapView.removeOverlays(foundOverlays)
-                firebaseConnector.unsubscribeForPush(for: tappedGeohash)
+                firebaseConnector.unsubscribeFormTopic(tappedGeohash, topicType: .geohash)
             } else {
                 addPolyLine(for: Geohash.geohashbox(tappedGeohash))
-                firebaseConnector.subscribeForPush(for: tappedGeohash)
+                firebaseConnector.subscribeToTopic(tappedGeohash, topicType: .geohash)
             }
         }
     }

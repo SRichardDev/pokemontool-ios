@@ -65,12 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 guard let userID = Auth.auth().currentUser?.uid else {return}
                 print("🔥✅ Firebase registration token: \(fcmToken)")
                 let database = Database.database().reference(withPath: "users/\(userID)")
-                let data = ["notificationToken" : fcmToken,
-                            "platform" : "iOS"]
+                let data = [DatabaseKeys.notificationToken : fcmToken,
+                            DatabaseKeys.platform : "iOS"]
                 database.updateChildValues(data)
             }
         }
-        let dataDict:[String: String] = ["token": fcmToken]
+        let dataDict: [String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
     

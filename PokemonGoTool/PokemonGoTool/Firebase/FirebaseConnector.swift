@@ -17,6 +17,7 @@ class FirebaseConnector {
 
     private let testPokestopsRef = Database.database().reference(withPath: DatabaseKeys.testpokestops)
     private let testArenasRef = Database.database().reference(withPath: DatabaseKeys.testarenas)
+    private var topicSubscriptionManager = TopicSubscriptionManager()
     
     private(set) var user: User? {
         didSet {
@@ -47,9 +48,13 @@ class FirebaseConnector {
     }
     
     private func loadInitialData() {
-        loadUser(){}
     
         let group = DispatchGroup()
+        group.enter()
+        User.load { user in
+            self.user = user
+            group.leave()
+        }
         group.enter()
         loadQuests {
             self.quests = $0
@@ -62,14 +67,25 @@ class FirebaseConnector {
         }
 
         group.notify(queue: .main) {
+            self.observerUser()
             self.startUpDelegate?.didLoadInitialData()
+            self.user?.cleanupMeetupSubscriptionsIfNeeded()
+            self.user?.saveAppLastOpened()
+            Migrator(firebaseConnector: self)
         }
     }
     
     func loadUser(completion: @escaping () -> Void) {
         User.load { user in
             self.user = user
+            self.observerUser()
             completion()
+        }
+    }
+    
+    func observerUser() {
+        User.observe { user in
+            self.user = user
         }
     }
     
@@ -156,26 +172,14 @@ class FirebaseConnector {
         })
     }
     
-    func subscribeForPush(for geohash: String) {
-        Messaging.messaging().subscribe(toTopic: geohash) { error in print("Subscribed to \(geohash) topic") }
-        user?.addGeohashForPushSubscription(for: .pokestop, geohash: geohash)
-        user?.addGeohashForPushSubscription(for: .arena, geohash: geohash)
+    func subscribeToTopic(_ topic: String, topicType: TopicType) {
+        guard let user = user else { return }
+        topicSubscriptionManager.subscribeToTopic(for: user, in: topic, for: topicType)
     }
     
-    func unsubscribeForPush(for geohash: String) {
-        Messaging.messaging().unsubscribe(fromTopic: geohash) { error in print("Unsubscribed from \(geohash) topic") }
-        user?.removeGeohashForPushSubsription(for: .pokestop, geohash: geohash)
-        user?.removeGeohashForPushSubsription(for: .arena, geohash: geohash)
-    }
-    
-    func subscribeToTopic(_ topic: String) {
-        Messaging.messaging().subscribe(toTopic: topic) { error in print("Subscribed to \(topic) topic") }
-        user?.addTopicSubcription(topic)
-    }
-    
-    func unsubscribeFormTopic(_ topic: String) {
-        Messaging.messaging().unsubscribe(fromTopic: topic) { error in print("Unsubscribed from \(topic) topic") }
-        user?.removeTopicSubscription(topic)
+    func unsubscribeFormTopic(_ topic: String, topicType: TopicType) {
+        guard let user = user else { return }
+        topicSubscriptionManager.unsubscribeFromTopic(for: user, in: topic, for: topicType)
     }
     
     func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {
@@ -214,9 +218,19 @@ class FirebaseConnector {
                 .child(meetupId)
                 .child(DatabaseKeys.participants)
                 .updateChildValues(data)
-            subscribeToTopic(meetupId)
+            subscribeToTopic(meetupId, topicType: .raidMeetups)
         }
         return arena
+    }
+    
+    func userCanceled(in meetup: RaidMeetup) {
+        guard let userId = user?.id else { fatalError() }
+        raidMeetupsRef
+            .child(meetup.id)
+            .child(DatabaseKeys.participants)
+            .child(userId)
+            .removeValue()
+        unsubscribeFormTopic(meetup.id, topicType: .raidMeetups)
     }
     
     func setMeetupTime(meetupTime: String, raidMeetup: RaidMeetup) {
@@ -258,16 +272,6 @@ class FirebaseConnector {
             .child(id)
             .child(DatabaseKeys.participants)
             .updateChildValues(data)
-    }
-    
-    func userCanceled(in meetup: RaidMeetup) {
-        guard let userId = user?.id else { fatalError() }
-        raidMeetupsRef
-            .child(meetup.id)
-            .child(DatabaseKeys.participants)
-            .child(userId)
-            .removeValue()
-        unsubscribeFormTopic(meetup.id)
     }
 
     func sendMessage(_ message: ChatMessage, in arena: inout Arena) {
