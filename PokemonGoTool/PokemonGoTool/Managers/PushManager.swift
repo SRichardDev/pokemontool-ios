@@ -53,8 +53,8 @@ class PushManager {
         
         if let token = Messaging.messaging().fcmToken {
             let database = Database.database().reference(withPath: "users/\(userID)")
-            let data = ["notificationToken" : token,
-                        "platform" : "iOS"]
+            let data = [DatabaseKeys.notificationToken : token,
+                        DatabaseKeys.platform : "iOS"]
             database.updateChildValues(data)
             print("🔥📲 Push token saved to user")
         }

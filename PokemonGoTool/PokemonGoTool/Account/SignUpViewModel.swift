@@ -41,6 +41,7 @@ class SignUpViewModel {
                         switch status {
                         case .signedUp:
                             self.firebaseConnector.loadUser {
+                                self.subscribeToAllTopics()
                                 self.accountCreationDelegate?.didCreateAccount(status)
                                 PushManager.shared.registerForPush()
                             }
@@ -77,5 +78,13 @@ class SignUpViewModel {
     func isValidPassword(_ testString: String) -> Bool {
         let passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9])(?=.*[A-Za-z].*[A-Za-z].*[A-Za-z]).{6,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: testString)
+    }
+    
+    private func subscribeToAllTopics() {
+        firebaseConnector.subscribeToTopic(Topics.iOS, topicType: .topics)
+        firebaseConnector.subscribeToTopic(Topics.quests, topicType: .topics)
+        firebaseConnector.subscribeToTopic(Topics.raids, topicType: .topics)
+        firebaseConnector.subscribeToTopic(Topics.incidents, topicType: .topics)
+        (1...5).forEach { firebaseConnector.subscribeToTopic(Topics.level + "\($0)", topicType: .topics) }
     }
 }

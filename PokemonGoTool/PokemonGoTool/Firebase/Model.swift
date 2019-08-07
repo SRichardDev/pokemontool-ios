@@ -192,9 +192,7 @@ struct Raid: Codable, Equatable {
     var raidMeetupId: String?
     var submitter: String?
     var submitDate: Date? {
-        get {
-            return timestamp?.dateFromUnixTime()
-        }
+        return timestamp?.dateFromUnixTime()
     }
     
     init(level: Int, hatchTime: String, endTime: String, submitter: String, raidBoss: String? = nil, raidMeetupId: String?) {

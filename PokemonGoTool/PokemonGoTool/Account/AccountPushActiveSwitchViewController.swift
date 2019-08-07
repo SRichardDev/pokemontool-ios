@@ -31,14 +31,6 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
         goToSettingsButton.addAction {
             UIApplication.openAppSettings()
         }
-        
-        questSwitch.isOn = viewModel.isQuestTopicSubscribed
-        raidSwitch.isOn = viewModel.isRaidTopicSubscribed
-        level5RaidSwitch.isOn = viewModel.isLevel5TopicSubscribed
-        level4RaidSwitch.isOn = viewModel.isLevel4TopicSubscribed
-        level3RaidSwitch.isOn = viewModel.isLevel3TopicSubscribed
-        level2RaidSwitch.isOn = viewModel.isLevel2TopicSubscribed
-        level1RaidSwitch.isOn = viewModel.isLevel1TopicSubscribed
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +45,13 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
     
     func updatePushStatus() {
         pushActiveSwitch.isOn = viewModel.isPushActivated
+        questSwitch.isOn = viewModel.isQuestTopicSubscribed
+        raidSwitch.isOn = viewModel.isRaidTopicSubscribed
+        level5RaidSwitch.isOn = viewModel.isLevel5TopicSubscribed
+        level4RaidSwitch.isOn = viewModel.isLevel4TopicSubscribed
+        level3RaidSwitch.isOn = viewModel.isLevel3TopicSubscribed
+        level2RaidSwitch.isOn = viewModel.isLevel2TopicSubscribed
+        level1RaidSwitch.isOn = viewModel.isLevel1TopicSubscribed
         
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
@@ -85,7 +84,6 @@ class AccountPushActiveSwitchViewController: UIViewController, StoryboardInitial
     
     @IBAction func pushActiveSwitchDidChange(_ sender: UISwitch) {
         viewModel.pushActivatedChanged(sender.isOn)
-        AppSettings.isPushActive = sender.isOn
         switchesStackView.changeVisibilityAnimated(visible: sender.isOn)
         levelSwitchesStackView.changeVisibilityAnimated(visible: sender.isOn && viewModel.isRaidTopicSubscribed)
     }

@@ -12,8 +12,8 @@ class AccountViewModel {
     var trainerCode: String { return firebaseConnector.user?.publicData?.trainerCode ?? ""}
     var isLoggedIn: Bool { return firebaseConnector.isSignedIn}
     var isPushActivated: Bool { return firebaseConnector.user?.isPushActive ?? false}
-    var isQuestTopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == "quests"} ?? false}
-    var isRaidTopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == "raids"} ?? false}
+    var isQuestTopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == Topics.quests} ?? false}
+    var isRaidTopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == Topics.raids} ?? false}
     var isLevel5TopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == "level-5"} ?? false}
     var isLevel4TopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == "level-4"} ?? false}
     var isLevel3TopicSubscribed: Bool { return firebaseConnector.user?.topics?.contains { $0.key == "level-3"} ?? false}
@@ -43,8 +43,7 @@ class AccountViewModel {
     }
     
     func pushActivatedChanged(_ activated: Bool) {
-        firebaseConnector.user?.activatePush(activated)
-        
+        AppSettings.isPushActive = activated
         if activated {
             firebaseConnector.subscribeToTopic(Topics.iOS, topicType: .topics)
         } else {

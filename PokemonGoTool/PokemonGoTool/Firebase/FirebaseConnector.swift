@@ -21,6 +21,7 @@ class FirebaseConnector {
     
     private(set) var user: User? {
         didSet {
+            Migrator(firebaseConnector: self)
             userDelegate?.didUpdateUser()
         }
     }
@@ -71,7 +72,6 @@ class FirebaseConnector {
             self.startUpDelegate?.didLoadInitialData()
             self.user?.cleanupMeetupSubscriptionsIfNeeded()
             self.user?.saveAppLastOpened()
-            Migrator(firebaseConnector: self)
         }
     }
     

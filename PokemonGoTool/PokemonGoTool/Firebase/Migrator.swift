@@ -27,18 +27,12 @@ class Migrator {
             
             firebaseConnector.unsubscribeFormTopic("arena", topicType: .topics)
             firebaseConnector.unsubscribeFormTopic("pokestop", topicType: .topics)
-            firebaseConnector.unsubscribeFormTopic(Topics.incidents, topicType: .topics)
 
-            firebaseConnector.subscribeToTopic(Topics.raids, topicType: .topics)
+            firebaseConnector.subscribeToTopic(Topics.iOS, topicType: .topics)
             firebaseConnector.subscribeToTopic(Topics.quests, topicType: .topics)
+            firebaseConnector.subscribeToTopic(Topics.raids, topicType: .topics)
             firebaseConnector.subscribeToTopic(Topics.incidents, topicType: .topics)
-
-            firebaseConnector.subscribeToTopic("level-1", topicType: .topics)
-            firebaseConnector.subscribeToTopic("level-2", topicType: .topics)
-            firebaseConnector.subscribeToTopic("level-3", topicType: .topics)
-            firebaseConnector.subscribeToTopic("level-4", topicType: .topics)
-            firebaseConnector.subscribeToTopic("level-5", topicType: .topics)
-            firebaseConnector.subscribeToTopic("iOS", topicType: .topics)
+            (1...5).forEach { firebaseConnector.subscribeToTopic(Topics.level + "\($0)", topicType: .topics) }
 
             let topicSubscriptionManager = TopicSubscriptionManager()
             
@@ -50,6 +44,13 @@ class Migrator {
                     topicSubscriptionManager.subscribeToTopic(for: user, in: geohash, for: .geohash)
                 }
             }
+            
+            let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
+            
+            usersRef
+                .child(user.id)
+                .child("isPushActive")
+                .removeValue()
         }
     }
 }
