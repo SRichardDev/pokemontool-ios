@@ -253,6 +253,10 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
         
         let isMeetupTimeChange = changedRaidMeetup.meetupDate != meetup?.meetupDate
         
+        if isMeetupTimeChange && meetup?.meetupDate == nil {
+            self.delegate?.update(of: .changeMeetupTime)
+        }
+        
         if isMeetupTimeChange && isUserParticipating && !isRaidExpired {
             if let meetup = meetup,
                 let meetupDate = changedRaidMeetup.meetupDate,
