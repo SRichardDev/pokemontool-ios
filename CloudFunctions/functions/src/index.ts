@@ -10,15 +10,15 @@ export const onWriteRaid = functions.region('europe-west1')
     const arenaId = context.params.arenaId
     
     const raid = snapshot.after.val()
-    const raidBossId = raid.raidBossId
+    // const raidBossId = raid.raidBossId || ""
 
     try {
-        const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
-        const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
+        // const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
+        const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
 
         const arena = arenaSnapshot.val()
-        const raidBossName = (raidBossSnapshot.val() && raidBossSnapshot.val().name) || 'Unbekannt'
+        const raidBossName = /*(raidBossSnapshot.val() && raidBossSnapshot.val().name) ||*/ 'Unbekannt'
         const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '--:--'
         const hatchTime = raid.hatchTime || "--:--"
         const endTime = raid.endTime || "--:--"
@@ -26,7 +26,10 @@ export const onWriteRaid = functions.region('europe-west1')
         const message = '⌚️: ' + hatchTime + "-" + endTime + '\n🐲: ' + raidBossName + '\n👫: ' + raidMeetupTime
 
         const condition = "'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
-        console.log(condition)
+
+        console.log('Sending Condition: ' + condition)
+        console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
+
 
         const payload = {
             notification: {
@@ -63,7 +66,7 @@ export const onWriteRaidMeetupChat = functions.region('europe-west1')
 
         const condition = "'" + meetupId + "' in topics" 
 
-        var payload = {
+        const payload = {
             notification: {
                 title: 'Neue Nachricht von: ' + senderName,
                 body: message,
@@ -93,7 +96,9 @@ export const onWriteRaidMeetup = functions.region('europe-west1')
         const participantsAfter = meetupAfter.participants
         const participantsBeforeCount = Object.keys(participantsBefore).length;
         const participantsAfterCount = Object.keys(participantsAfter).length;
-    
+        const meetupTimeBefore = meetupBefore.meetupTime
+        const meetupTimeAfter = meetupAfter.meetupTime
+
         const condition = "'" + meetupId + "' in topics" 
     
         if (participantsAfterCount > participantsBeforeCount) {
@@ -119,7 +124,18 @@ export const onWriteRaidMeetup = functions.region('europe-west1')
                 }
             }
             return admin.messaging().sendToCondition(condition, payload)
-        }    
+
+        } else if (meetupTimeBefore !== meetupTimeAfter) {
+            const payload = {
+                notification: {
+                    title: 'Der Treffpunkt wurde geändert',
+                    body: 'Treffpunkt: ' + meetupTimeAfter,
+                    badge: '1',
+                    sound: 'default'
+                }
+            }
+            return admin.messaging().sendToCondition(condition, payload)
+        }  
     }
 
     return false
