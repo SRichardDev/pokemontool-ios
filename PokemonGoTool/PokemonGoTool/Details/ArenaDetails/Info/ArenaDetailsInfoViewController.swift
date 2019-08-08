@@ -19,5 +19,7 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
         coordinateLabel.text = "\(viewModel.arena.latitude), \(viewModel.arena.longitude)"
         viewModel.submitterName { self.submitterLabel.text = $0 }
         viewModel.submitterNameForRaid { self.raidSubmitterLabel.text = $0 }
+        raidSubmitterTitleLabel.isHidden = viewModel.isRaidExpired
+        raidSubmitterLabel.isHidden = viewModel.isRaidExpired
     }
 }
