@@ -27,11 +27,8 @@ class FirebaseConnector {
     }
     
     private var connectivityTimer: Timer?
-    var pokestops: [String: Pokestop] = [:]
-    var arenas: [String: Arena] = [:]
     var quests = [QuestDefinition]()
 
-    weak var delegate: FirebaseDelegate?
     weak var userDelegate: FirebaseUserDelegate?
     weak var startUpDelegate: FirebaseStartupDelegate?
     weak var raidMeetupDelegate: RaidMeetupDelegate?
@@ -138,38 +135,6 @@ class FirebaseConnector {
         let createId = raidMeetupsRef.childByAutoId()
         createId.setValue(data)
         return createId.key!
-    }
-    
-    func loadPokestops(for geohash: String) {
-        if AppSettings.filterSettingsChanged {
-            pokestops.removeAll()
-            arenas.removeAll()
-            AppSettings.filterSettingsChanged = false
-        }
-        
-        guard geohash != "" else { return }
-        pokestopsRef
-            .child(geohash)
-            .removeAllObservers()
-        
-        pokestopsRef
-            .child(geohash)
-            .observe(.value, with: { snapshot in
-            if let result = snapshot.children.allObjects as? [DataSnapshot] {
-                for child in result {
-                    guard let pokestop: Pokestop = decode(from: child) else { continue }
-                    
-                    if let localPokestop = self.pokestops[pokestop.id] {
-                        if localPokestop == pokestop { continue }
-                        self.pokestops[pokestop.id] = pokestop
-                        self.delegate?.didUpdatePokestop(pokestop: pokestop)
-                    } else {
-                        self.pokestops[pokestop.id] = pokestop
-                        self.delegate?.didAddPokestop(pokestop: pokestop)
-                    }
-                }
-            }
-        })
     }
     
     func subscribeToTopic(_ topic: String, topicType: TopicType) {
@@ -370,9 +335,10 @@ class FirebaseConnector {
         })
     }
     
+    #warning("FIX: GOLD ARENA")
     func updateArena(_ arena: Arena) {
-        self.arenas[arena.id] = arena
-        self.delegate?.didUpdateArena(arena: arena)
+//        self.arenas[arena.id] = arena
+//        self.delegate?.didUpdateArena(arena: arena)
     }
     
     /// DEBUG

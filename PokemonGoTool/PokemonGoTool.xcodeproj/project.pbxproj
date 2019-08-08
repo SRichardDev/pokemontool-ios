@@ -173,6 +173,7 @@
 		2CF7B4CC22F780560088C0F6 /* ArenaConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */; };
 		2CF7B4D022F8BBB60088C0F6 /* Migrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4CF22F8BBB60088C0F6 /* Migrator.swift */; };
 		2CF7B4D222F8E7540088C0F6 /* TopicSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D122F8E7540088C0F6 /* TopicSubscriptionManager.swift */; };
+		2CF7B4D422FB5BA10088C0F6 /* PokestopConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */; };
 		49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */; };
 /* End PBXBuildFile section */
 
@@ -347,6 +348,7 @@
 		2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaConnector.swift; sourceTree = "<group>"; };
 		2CF7B4CF22F8BBB60088C0F6 /* Migrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrator.swift; sourceTree = "<group>"; };
 		2CF7B4D122F8E7540088C0F6 /* TopicSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionManager.swift; sourceTree = "<group>"; };
+		2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopConnector.swift; sourceTree = "<group>"; };
 		85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonGoTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8D17068DFD218CB12B0034 /* Pods-PokemonGoTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.release.xcconfig"; sourceTree = "<group>"; };
 		FFADD158951324AC77E484BA /* Pods-PokemonGoTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.debug.xcconfig"; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 				2C97F77021F6576500630BA2 /* Model.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
 				2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */,
+				2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */,
 				2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */,
 				2C030862222B5A38007A1EA0 /* FirebaseTestData.swift */,
 				2C97F76E21F297E900630BA2 /* FirebaseStatusPresentable.swift */,
@@ -1160,6 +1163,7 @@
 				2CC6C0C822C694E500A4AB00 /* RaidBossCollectionViewController.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
 				2C395A4E2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift in Sources */,
+				2CF7B4D422FB5BA10088C0F6 /* PokestopConnector.swift in Sources */,
 				2C2E98432291EEB3001ED8C6 /* ArenaDetailsUserParticipatesViewController.swift in Sources */,
 				2C395A492204C110005330B8 /* UIStackView+Extension.swift in Sources */,
 				2C395A4B2205FA38005330B8 /* RaidHatchTimePickerViewController.swift in Sources */,

@@ -17,12 +17,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     var isGeohashSelectionMode = false
     var currentlyShowingLabels = true
     var mapRegionFromPush: MKCoordinateRegion?
-
     var isPoiSubmissionMode = false
     var poiSubmissionAnnotation = MKPointAnnotation()
     let messageView = MessageView()
-    let arenaConnector = ArenaConnector()
-
+    private let arenaConnector = ArenaConnector()
+    private let pokestopConnector = PokestopConnector()
+    
     lazy var manager: ClusterManager = {
         let manager = ClusterManager()
         manager.delegate = self
@@ -35,7 +35,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
-        firebaseConnector.delegate = self
         PushManager.shared.delegate = self
         mapView.delegate = self
         mapView.showsUserLocation = true
@@ -65,16 +64,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             self.manager.add(updatedAnnotation)
             self.manager.reload(mapView: self.mapView)
         }
+        
+        pokestopConnector.didAddPokestopCallback = { pokestop in
+            let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: self.firebaseConnector?.quests)
+            self.manager.add(annotation)
+            self.manager.reload(mapView: self.mapView)
+        }
+        
+        pokestopConnector.didUpdatePokestopCallback = { pokestop in
+            let annotation = self.manager.annotations.first { annotation in
+                if let arenaAnnotation = annotation as? PokestopPointAnnotation {
+                    return arenaAnnotation.pokestop?.id == pokestop.id
+                }
+                return false
+            }
+            guard let unwrappedAnnotation = annotation else { return }
+            self.manager.remove(unwrappedAnnotation)
+            let updatedAnnotation = PokestopPointAnnotation(pokestop: pokestop, quests: self.firebaseConnector?.quests)
+            self.manager.add(updatedAnnotation)
+            self.manager.reload(mapView: self.mapView)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if AppSettings.filterSettingsChanged {
-            manager.removeAll()
-            manager.reload(mapView: mapView)
-            loadData()
-        }
         
         if !firebaseConnector.isSignedIn {
             NotificationBannerManager.shared.show(.notLoggedIn)
@@ -128,7 +141,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         
         geohashWindow?.geohashMatrix.forEach { lineArray in
             lineArray.forEach { geohashBox in
-                firebaseConnector.loadPokestops(for: geohashBox.hash)
+                pokestopConnector.loadPokestops(for: geohashBox.hash)
                 arenaConnector.loadArenas(for: geohashBox.hash)
             }
         }
@@ -187,68 +200,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
                 if let annotationView = self.mapView.view(for: annotation) as? AnnotationView {
                     annotationView.changeLabelVisibilityAnimated(showLabels)
                 }
-            }
-        }
-    }
-}
-
-extension MapViewController: FirebaseDelegate {
-    
-    func didUpdateArena(arena: Arena) {
-        for storedAnnotation in manager.annotations {
-            if let storedArenaAnnotation = storedAnnotation as? ArenaPointAnnotation {
-                if storedArenaAnnotation.arena?.id == arena.id {
-                    manager.remove(storedAnnotation)
-                    didAddArena(arena: arena)
-                }
-            }
-        }
-    }
-
-    func didUpdatePokestop(pokestop: Pokestop) {
-        for annotationOnMap in manager.annotations {
-            if let pokestopAnnotationOnMap = annotationOnMap as? PokestopPointAnnotation {
-                if pokestopAnnotationOnMap.pokestop?.id == pokestop.id {
-                    manager.remove(annotationOnMap)
-                    didAddPokestop(pokestop: pokestop)
-                }
-            }
-        }
-    }
-    
-    func didAddArena(arena: Arena) {
-        let annotation = ArenaPointAnnotation(arena: arena)
-        
-        if AppSettings.showArenas {
-            if AppSettings.showOnlyEXArenas {
-                if arena.isEX {
-                    manager.add(annotation)
-                    manager.reload(mapView: mapView)
-                }
-            } else if AppSettings.showOnlyArenasWithRaid {
-                if arena.hasActiveRaid {
-                    manager.add(annotation)
-                    manager.reload(mapView: mapView)
-                }
-            } else {
-                manager.add(annotation)
-                manager.reload(mapView: mapView)
-            }
-        }
-    }
-    
-    func didAddPokestop(pokestop: Pokestop) {
-        let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: firebaseConnector?.quests)
-        
-        if AppSettings.showPokestops {
-            if AppSettings.showOnlyPokestopsWithQuest {
-                if pokestop.hasActiveQuest {
-                    manager.add(annotation)
-                    manager.reload(mapView: mapView)
-                }
-            } else {
-                manager.add(annotation)
-                manager.reload(mapView: mapView)
             }
         }
     }

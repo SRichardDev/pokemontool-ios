@@ -54,13 +54,6 @@ struct Topics {
     static let iOS = "iOS"
 }
 
-protocol FirebaseDelegate: class {
-    func didAddPokestop(pokestop: Pokestop)
-    func didUpdatePokestop(pokestop: Pokestop)
-    func didAddArena(arena: Arena)
-    func didUpdateArena(arena: Arena)
-}
-
 protocol FirebaseUserDelegate: class {
     func didUpdateUser()
 }
