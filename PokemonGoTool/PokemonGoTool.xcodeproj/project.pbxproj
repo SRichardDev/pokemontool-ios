@@ -174,6 +174,8 @@
 		2CF7B4D022F8BBB60088C0F6 /* Migrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4CF22F8BBB60088C0F6 /* Migrator.swift */; };
 		2CF7B4D222F8E7540088C0F6 /* TopicSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D122F8E7540088C0F6 /* TopicSubscriptionManager.swift */; };
 		2CF7B4D422FB5BA10088C0F6 /* PokestopConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */; };
+		2CF7B4D622FCDEA60088C0F6 /* DepartureNotificationSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D522FCDEA60088C0F6 /* DepartureNotificationSwitchViewController.swift */; };
+		2CF7B4D822FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D722FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard */; };
 		49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */; };
 /* End PBXBuildFile section */
 
@@ -349,6 +351,8 @@
 		2CF7B4CF22F8BBB60088C0F6 /* Migrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrator.swift; sourceTree = "<group>"; };
 		2CF7B4D122F8E7540088C0F6 /* TopicSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSubscriptionManager.swift; sourceTree = "<group>"; };
 		2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokestopConnector.swift; sourceTree = "<group>"; };
+		2CF7B4D522FCDEA60088C0F6 /* DepartureNotificationSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureNotificationSwitchViewController.swift; sourceTree = "<group>"; };
+		2CF7B4D722FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DepartureNotificationSwitchViewController.storyboard; sourceTree = "<group>"; };
 		85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonGoTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8D17068DFD218CB12B0034 /* Pods-PokemonGoTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.release.xcconfig"; sourceTree = "<group>"; };
 		FFADD158951324AC77E484BA /* Pods-PokemonGoTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonGoTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokemonGoTool/Pods-PokemonGoTool.debug.xcconfig"; sourceTree = "<group>"; };
@@ -617,6 +621,7 @@
 				0366E0A422A1ADCE00310339 /* RestTime */,
 				0366E0A522A1ADD900310339 /* ParticipantsOverview */,
 				0366E0A622A1ADED00310339 /* UserParticipates */,
+				2CF7B4D922FCE19E0088C0F6 /* DepartureNotification */,
 				0366E0A722A1AE0000310339 /* ParticipantsTableView */,
 				0366E0A822A1AE1600310339 /* Chat */,
 			);
@@ -888,6 +893,15 @@
 			path = GeoHash;
 			sourceTree = "<group>";
 		};
+		2CF7B4D922FCE19E0088C0F6 /* DepartureNotification */ = {
+			isa = PBXGroup;
+			children = (
+				2CF7B4D522FCDEA60088C0F6 /* DepartureNotificationSwitchViewController.swift */,
+				2CF7B4D722FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard */,
+			);
+			path = DepartureNotification;
+			sourceTree = "<group>";
+		};
 		343F3E850971499C3D289673 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,6 +1030,7 @@
 				2C1976A621ED266B00091F8C /* Assets.xcassets in Resources */,
 				2C395A3622039358005330B8 /* RaidLevelViewController.storyboard in Resources */,
 				2C2E98452291EEE4001ED8C6 /* ArenaDetailsUserParticipatesViewController.storyboard in Resources */,
+				2CF7B4D822FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard in Resources */,
 				2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */,
 				2C395A1F22025100005330B8 /* AccountViewController.storyboard in Resources */,
 				2C0B5B6F2255387500620F4A /* AccountDetailsViewController.storyboard in Resources */,
@@ -1208,6 +1223,7 @@
 				2CF7B4D222F8E7540088C0F6 /* TopicSubscriptionManager.swift in Sources */,
 				2CBC09FE227F7B8D00135473 /* BottomMenuShowable.swift in Sources */,
 				2C2E984B22948F8A001ED8C6 /* RaidBossManager.swift in Sources */,
+				2CF7B4D622FCDEA60088C0F6 /* DepartureNotificationSwitchViewController.swift in Sources */,
 				2C9D6D8322DFC1E90030D0EA /* MessageView.swift in Sources */,
 				0364D57F2245089F00DA0508 /* ArenaDetailsMeetupTimeViewController.swift in Sources */,
 				2CBC09FA227F795400135473 /* MapRegionSetable.swift in Sources */,

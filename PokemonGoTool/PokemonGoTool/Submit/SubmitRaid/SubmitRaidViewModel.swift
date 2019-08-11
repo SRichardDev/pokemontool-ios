@@ -99,14 +99,6 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             
             if isUserParticipating {
                 firebaseConnector.userParticipates(in: raid, for: &arena)
-                if let meetupDate = meetup.meetupDate,
-                    let userLocation = LocationManager.shared.currentUserLocation?.coordinate {
-                    DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-                                                                           destinationCoordinate: arena.coordinate,
-                                                                           arenaName: arena.name,
-                                                                           meetupDate: meetupDate,
-                                                                           meetupId: meetupId)
-                }
             }
             
         } else {
@@ -120,14 +112,6 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
 
             if isUserParticipating {
                 firebaseConnector.userParticipates(in: raid, for: &arena)
-                if let meetupDate = meetup.meetupDate,
-                    let userLocation = LocationManager.shared.currentUserLocation?.coordinate {
-                    DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-                                                                           destinationCoordinate: arena.coordinate,
-                                                                           arenaName: arena.name,
-                                                                           meetupDate: meetupDate,
-                                                                           meetupId: meetupId)
-                }
             }
         }
         firebaseConnector.saveRaid(arena: arena)

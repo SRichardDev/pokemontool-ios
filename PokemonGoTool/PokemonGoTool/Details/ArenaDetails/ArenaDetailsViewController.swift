@@ -17,7 +17,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let goldSwitchViewController = ArenaDetailsGoldArenaSwitchViewController.fromStoryboard()
     private let meetupTimeSelectionViewController = RaidMeetupTimePickerViewController.fromStoryboard()
     private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
-
+    private let departureNotificationViewController = DepartureNotificationSwitchViewController.fromStoryboard()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -34,14 +35,16 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         userParticipatesSwitchViewController.viewModel = viewModel
         goldSwitchViewController.viewModel = viewModel
         meetupTimeSelectionViewController.viewModel = viewModel
+        departureNotificationViewController.viewModel = viewModel
         
         stackView.addArrangedViewController(headerViewController, to: self)
         stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
         stackView.addArrangedViewController(restTimeViewController, to: self)
         stackView.addArrangedViewController(meetupTimeViewController, to: self)
         stackView.addArrangedViewController(meetupTimeSelectionViewController, to: self)
-        stackView.addArrangedViewController(userParticipatesSwitchViewController, to: self)
         stackView.addArrangedViewController(participantsOverviewViewController, to: self)
+        stackView.addArrangedViewController(userParticipatesSwitchViewController, to: self)
+        stackView.addArrangedViewController(departureNotificationViewController, to: self)
         let mapViewController = SubmitMapViewController.setup(with: viewModel.coordinate, isPokestop: false)
         stackView.addArrangedViewController(mapViewController, to: self)
         stackView.addArrangedViewController(goldSwitchViewController, to: self)
@@ -52,6 +55,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         meetupTimeViewController.view.isHidden = viewModel.isRaidExpired
         meetupTimeSelectionViewController.view.isHidden = viewModel.isRaidExpired
         userParticipatesSwitchViewController.view.isHidden = viewModel.isRaidExpired
+        departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
         
         raidBossCollectionViewController.level = viewModel.level
@@ -93,6 +97,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             participantsOverviewViewController.updateUI()
             userParticipatesSwitchViewController.updateUI()
             meetupTimeViewController.updateUI()
+            departureNotificationViewController.updateUI()
         case .timeLeftChanged(let timeLeft):
             restTimeViewController.updateTimeLeft(timeLeft)
             restTimeViewController.view.isHidden = viewModel.isRaidExpired
@@ -107,6 +112,11 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             headerViewController.updateUI()
         case .changeMeetupTime:
             changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
+        case .updateMeetupTime:
+            departureNotificationViewController.updateUI()
+        case .userParticipatesChanged(let isParticipating):
+            departureNotificationViewController.updateUI()
+            changeVisibility(of: departureNotificationViewController, visible: isParticipating)
         case .raidExpired:
             setTitle(viewModel.title)
             headerViewController.updateUI()
@@ -115,7 +125,8 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
                                  meetupTimeViewController,
                                  meetupTimeSelectionViewController,
                                  userParticipatesSwitchViewController,
-                                 participantsOverviewViewController])
+                                 participantsOverviewViewController,
+                                 departureNotificationViewController])
         }
     }
 }

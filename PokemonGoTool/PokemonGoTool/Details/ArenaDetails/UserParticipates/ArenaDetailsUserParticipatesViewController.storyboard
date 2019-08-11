@@ -15,17 +15,17 @@
             <objects>
                 <viewController id="g7P-GQ-0Dz" customClass="ArenaDetailsUserParticipatesViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7mk-hv-ZQB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tnu-Cj-HXs" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yN1-5B-fEX" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylP-xC-LIW">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-R3-drZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nimmst du teil am Raid?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uaj-sQ-HAz" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="10"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nimmst du teil am Raid?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94g-kI-oHL" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="326" height="66"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -35,10 +35,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bNV-Sy-pBF">
-                                                <rect key="frame" x="326" y="0.0" width="51" height="10"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6be-dq-NV1">
+                                                <rect key="frame" x="326" y="0.0" width="51" height="66"/>
                                                 <connections>
-                                                    <action selector="switchToggled:" destination="g7P-GQ-0Dz" eventType="valueChanged" id="B2E-9L-p3w"/>
+                                                    <action selector="switchToggled:" destination="g7P-GQ-0Dz" eventType="valueChanged" id="76p-ZG-huc"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -48,17 +48,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Wcc-Dy-bDM" firstAttribute="trailing" secondItem="tnu-Cj-HXs" secondAttribute="trailing" id="Uad-Et-TxB"/>
-                            <constraint firstItem="tnu-Cj-HXs" firstAttribute="top" secondItem="7mk-hv-ZQB" secondAttribute="top" id="cRc-bj-aLA"/>
-                            <constraint firstItem="Wcc-Dy-bDM" firstAttribute="bottom" secondItem="tnu-Cj-HXs" secondAttribute="bottom" id="khJ-Ud-yP2"/>
-                            <constraint firstItem="tnu-Cj-HXs" firstAttribute="leading" secondItem="Wcc-Dy-bDM" secondAttribute="leading" id="o1n-2H-HXR"/>
+                            <constraint firstAttribute="bottom" secondItem="yN1-5B-fEX" secondAttribute="bottom" id="8Rn-Xe-V9E"/>
+                            <constraint firstItem="yN1-5B-fEX" firstAttribute="top" secondItem="7mk-hv-ZQB" secondAttribute="top" id="I2e-qE-F9f"/>
+                            <constraint firstItem="Wcc-Dy-bDM" firstAttribute="trailing" secondItem="yN1-5B-fEX" secondAttribute="trailing" id="SKg-rJ-IGp"/>
+                            <constraint firstItem="yN1-5B-fEX" firstAttribute="leading" secondItem="Wcc-Dy-bDM" secondAttribute="leading" id="o7e-Xj-2cx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wcc-Dy-bDM"/>
                     </view>
-                    <size key="freeformSize" width="375" height="44"/>
+                    <size key="freeformSize" width="375" height="66"/>
                     <connections>
-                        <outlet property="switchControl" destination="bNV-Sy-pBF" id="Aaf-4Q-aRi"/>
-                        <outlet property="titleLabel" destination="Uaj-sQ-HAz" id="5Wi-iY-G6Z"/>
+                        <outlet property="switchControl" destination="6be-dq-NV1" id="GU8-gF-eqa"/>
+                        <outlet property="titleLabel" destination="94g-kI-oHL" id="mAb-hF-DMS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDx-eN-N37" userLabel="First Responder" sceneMemberID="firstResponder"/>

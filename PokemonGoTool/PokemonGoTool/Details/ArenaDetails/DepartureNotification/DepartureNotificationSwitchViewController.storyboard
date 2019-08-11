@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hVi-wv-Rry">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Departure Notification Switch View Controller-->
+        <scene sceneID="Zhy-Vs-Uk5">
+            <objects>
+                <viewController id="hVi-wv-Rry" customClass="DepartureNotificationSwitchViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k4E-Cr-N0h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ie-Z7-BWp" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-QK-Y0Z">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aufbruch Benachrichtigung:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-eV-hlk" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W52-9i-n7q">
+                                                <rect key="frame" x="365" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="switchChanged:" destination="hVi-wv-Rry" eventType="valueChanged" id="4ah-TK-Elk"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhY-NN-ptT" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="31" width="414" height="79"/>
+                                        <string key="text">PoGO Radar wird dich benachrichtigen, wenn es Zeit zum losgehen um pünktlich zum Raid zu erscheinen. Achtung: Die Berechnung der Wegzeit wird von deinem aktuellen Standort abhängig gemacht. Aktiviere diese Funktion nur falls du dich bis zum Aufbruch immer noch am selben Ort befindest.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jlh-Zr-Dfn" firstAttribute="trailing" secondItem="4ie-Z7-BWp" secondAttribute="trailing" id="0JB-ZM-UOb"/>
+                            <constraint firstItem="4ie-Z7-BWp" firstAttribute="top" secondItem="k4E-Cr-N0h" secondAttribute="top" id="RPg-vx-JCf"/>
+                            <constraint firstAttribute="bottom" secondItem="4ie-Z7-BWp" secondAttribute="bottom" id="gBO-Eq-eSu"/>
+                            <constraint firstItem="4ie-Z7-BWp" firstAttribute="leading" secondItem="jlh-Zr-Dfn" secondAttribute="leading" id="hHW-gq-RhC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jlh-Zr-Dfn"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="110"/>
+                    <connections>
+                        <outlet property="detailsLabel" destination="NhY-NN-ptT" id="lGK-g5-Eb2"/>
+                        <outlet property="switchControl" destination="W52-9i-n7q" id="dIC-jp-jeC"/>
+                        <outlet property="titleLabel" destination="6LO-eV-hlk" id="tGK-tp-DQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y92-P1-fEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10" y="115"/>
+        </scene>
+    </scenes>
+</document>
