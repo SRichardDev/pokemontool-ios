@@ -52,14 +52,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
 
         arenaConnector.didUpdateArenaCallback = { arena in
-            let annotation = self.manager.annotations.first { annotation in
+            let foundAnnotation = self.manager.annotations.first { annotation in
                 if let arenaAnnotation = annotation as? ArenaPointAnnotation {
                     return arenaAnnotation.arena?.id == arena.id
                 }
                 return false
             }
-            guard let unwrappedAnnotation = annotation else { return }
-            self.manager.remove(unwrappedAnnotation)
+            if let foundUnwrappedAnnotation = foundAnnotation {
+                self.manager.remove(foundUnwrappedAnnotation)
+            }
             let updatedAnnotation = ArenaPointAnnotation(arena: arena)
             self.manager.add(updatedAnnotation)
             self.manager.reload(mapView: self.mapView)
@@ -91,6 +92,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         
         if !firebaseConnector.isSignedIn {
             NotificationBannerManager.shared.show(.notLoggedIn)
+        }
+        
+        if AppSettings.filterSettingsChanged {
+            arenaConnector.clear()
+            pokestopConnector.clear()
+            manager.remove(manager.annotations)
+            manager.reload(mapView: self.mapView)
+            AppSettings.filterSettingsChanged = false
+            loadData()
         }
     }
     
@@ -249,6 +259,11 @@ extension MapViewController: PushManagerDelegate {
 extension MapViewController: ClusterManagerDelegate {
     
     func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
+        
+        if let arenaAnnotation = annotation as? ArenaPointAnnotation {
+            return arenaAnnotation.arena?.raid?.isExpired ?? true
+        }
+        
         return true
     }
 }

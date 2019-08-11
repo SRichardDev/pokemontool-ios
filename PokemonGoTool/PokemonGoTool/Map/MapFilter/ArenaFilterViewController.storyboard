@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wht-uK-t1B">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Arena Filter View Controller-->
+        <scene sceneID="PXT-xo-d2K">
+            <objects>
+                <viewController id="Wht-uK-t1B" customClass="ArenaFilterViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qLG-q8-z1w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R38-l3-xJz" customClass="HideableSubRowStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="R38-l3-xJz" firstAttribute="leading" secondItem="D8o-Gy-aEy" secondAttribute="leading" id="0Zl-XT-kDx"/>
+                            <constraint firstItem="D8o-Gy-aEy" firstAttribute="bottom" secondItem="R38-l3-xJz" secondAttribute="bottom" id="Pbf-Jb-azt"/>
+                            <constraint firstItem="D8o-Gy-aEy" firstAttribute="trailing" secondItem="R38-l3-xJz" secondAttribute="trailing" id="oZk-Ot-q9c"/>
+                            <constraint firstItem="R38-l3-xJz" firstAttribute="top" secondItem="D8o-Gy-aEy" secondAttribute="top" id="q4l-5Y-U0A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="D8o-Gy-aEy"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="300"/>
+                    <connections>
+                        <outlet property="stackView" destination="R38-l3-xJz" id="dLi-5P-Saj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qn6-s9-HFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="31"/>
+        </scene>
+    </scenes>
+</document>

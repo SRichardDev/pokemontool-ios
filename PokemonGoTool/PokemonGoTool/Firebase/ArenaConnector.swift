@@ -11,10 +11,15 @@ class ArenaConnector {
 
     var didAddArenaCallback: ((Arena) -> Void)?
     var didUpdateArenaCallback: ((Arena) -> Void)?
+    var activeLevelFilter: [Int: Bool]? {
+        if let levelFilter = UserDefaults.standard.object(forKey: "levelFilter") as? Data {
+            return try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(levelFilter) as! [Int: Bool]
+        }
+        return nil
+    }
     
     func loadArenas(for geohash: Geohash) {
         
-        guard geohash != "" else { return }
         let geohashNotLoaded = arenasInGeohash[geohash] == nil
         guard geohashNotLoaded else { return }
         arenasInGeohash[geohash] = [:]
@@ -29,7 +34,20 @@ class ArenaConnector {
                     for child in result {
                         guard let arena: Arena = decode(from: child) else { continue }
                         arenas[arena.id] = arena
-                        self.didAddArenaCallback?(arena)
+                        
+                        let anyLevelFilterActive = (self.activeLevelFilter?.values.reduce(false) { $0 || $1 }) ?? false
+                        
+                        if anyLevelFilterActive {
+                            if let raid = arena.raid {
+                                if raid.isActive {
+                                    if self.activeLevelFilter?[raid.level] ?? false {
+                                        self.didAddArenaCallback?(arena)
+                                    }
+                                }
+                            }
+                        } else {
+                            self.didAddArenaCallback?(arena)
+                        }
                     }
                     self.arenasInGeohash[geohash] = arenas
                 }
@@ -40,7 +58,24 @@ class ArenaConnector {
             .observe(.childChanged, with: { snapshot in
                 guard let arena: Arena = decode(from: snapshot) else { return }
                 self.arenasInGeohash[geohash]?[arena.id] = arena
-                self.didUpdateArenaCallback?(arena)
+                
+                let anyLevelFilterActive = (self.activeLevelFilter?.values.reduce(false) { $0 || $1 }) ?? false
+                
+                if anyLevelFilterActive {
+                    if let raid = arena.raid {
+                        if raid.isActive {
+                            if self.activeLevelFilter?[raid.level] ?? false {
+                                self.didUpdateArenaCallback?(arena)
+                            }
+                        }
+                    }
+                } else {
+                    self.didUpdateArenaCallback?(arena)
+                }
             })
+    }
+    
+    func clear() {
+        arenasInGeohash.removeAll()
     }
 }

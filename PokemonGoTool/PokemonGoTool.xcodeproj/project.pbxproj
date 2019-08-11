@@ -103,6 +103,8 @@
 		2C44EAAF21FA7CDB0029527C /* ArenaPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */; };
 		2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB021FCA0B10029527C /* Array+Extension.swift */; };
 		2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44EAB221FCC45C0029527C /* MapRectUtility.swift */; };
+		2C45A84E2300488200BF8415 /* ArenaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45A84D2300488200BF8415 /* ArenaFilterViewController.swift */; };
+		2C45A850230048EE00BF8415 /* ArenaFilterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C45A84F230048EE00BF8415 /* ArenaFilterViewController.storyboard */; };
 		2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */; };
 		2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */; };
 		2C5E5705227778B9002E00B0 /* PoiSubmissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */; };
@@ -278,6 +280,8 @@
 		2C44EAAE21FA7CDB0029527C /* ArenaPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaPointAnnotation.swift; sourceTree = "<group>"; };
 		2C44EAB021FCA0B10029527C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		2C44EAB221FCC45C0029527C /* MapRectUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRectUtility.swift; sourceTree = "<group>"; };
+		2C45A84D2300488200BF8415 /* ArenaFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaFilterViewController.swift; sourceTree = "<group>"; };
+		2C45A84F230048EE00BF8415 /* ArenaFilterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaFilterViewController.storyboard; sourceTree = "<group>"; };
 		2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMedalViewModel.swift; sourceTree = "<group>"; };
 		2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDefines.swift; sourceTree = "<group>"; };
 		2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoiSubmissable.swift; sourceTree = "<group>"; };
@@ -540,6 +544,8 @@
 				2C1AE58222638CD500AE9C4A /* MapFilterViewModel.swift */,
 				2C1AE57E22637B5F00AE9C4A /* MapFilterViewController.swift */,
 				2C1AE58022637BD100AE9C4A /* MapFilterViewController.storyboard */,
+				2C45A84D2300488200BF8415 /* ArenaFilterViewController.swift */,
+				2C45A84F230048EE00BF8415 /* ArenaFilterViewController.storyboard */,
 			);
 			path = MapFilter;
 			sourceTree = "<group>";
@@ -1003,6 +1009,7 @@
 				035A836D2232D3D000658841 /* ArenaDetailsParticipantsOverviewViewController.storyboard in Resources */,
 				2C1AE577225FBB0C00AE9C4A /* PokestopQuestViewController.storyboard in Resources */,
 				2C395A5B22060E9D005330B8 /* SeparatorView.xib in Resources */,
+				2C45A850230048EE00BF8415 /* ArenaFilterViewController.storyboard in Resources */,
 				0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */,
 				2C395A1422012C8E005330B8 /* SubmitRaidDetailsViewController.storyboard in Resources */,
 				2C97154A221DE62700B4E49A /* ArenaDetailsViewController.storyboard in Resources */,
@@ -1143,6 +1150,7 @@
 				2C19769F21ED266A00091F8C /* AppDelegate.swift in Sources */,
 				033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */,
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
+				2C45A84E2300488200BF8415 /* ArenaFilterViewController.swift in Sources */,
 				2CF7B4CC22F780560088C0F6 /* ArenaConnector.swift in Sources */,
 				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,

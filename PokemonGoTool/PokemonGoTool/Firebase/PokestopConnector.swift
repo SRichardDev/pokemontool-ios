@@ -43,4 +43,8 @@ class PokestopConnector {
                 self.didUpdatePokestopCallback?(pokestop)
             })
     }
+    
+    func clear() {
+        pokestopsInGeohash.removeAll()
+    }
 }

@@ -68,3 +68,71 @@ class InnerVerticalStackView: OuterVerticalStackView {
                                      bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -7)])
     }
 }
+
+class HideableSubRowStackView: InnerVerticalStackView {
+    
+    var mainRow: LabelSwitchRow!
+    var subRows: [LabelSwitchRow]?
+    
+    func setup(mainRow: LabelSwitchRow, subRows: [LabelSwitchRow]) {
+        self.mainRow = mainRow
+        self.subRows = subRows
+        addArrangedSubview(mainRow)
+        subRows.forEach {
+            $0.isVisible = mainRow.isOn
+            addArrangedSubview($0)
+        }
+    }
+}
+
+class LabelSwitchRow: UIStackView {
+    private let label = Label()
+    private let settingsSwitch = UISwitch()
+    private var isSubRow = false
+    var isOn: Bool {
+        get {
+            return settingsSwitch.isOn
+        }
+        set {
+            if isSubRow {
+                isVisible = newValue
+            }
+            settingsSwitch.isOn = newValue
+        }
+    }
+    
+    func setup(_ title: String, isOn: Bool, isSubRow: Bool = false, settingsClosure: @escaping (Bool) -> Void) {
+        self.isSubRow = isSubRow
+        self.isOn = isOn
+        axis = .horizontal
+        label.translatesAutoresizingMaskIntoConstraints = false
+        settingsSwitch.translatesAutoresizingMaskIntoConstraints = false
+        label.text = title
+        addArrangedSubview(label)
+        addArrangedSubview(settingsSwitch)
+        
+        settingsSwitch.addAction(for: .valueChanged) { [weak self] in
+            settingsClosure(self?.settingsSwitch.isOn ?? false)
+        }
+    }
+    
+    func changeVisibility(_ visible: Bool) {
+        
+        let changeAlpha = {
+            self.alpha = visible ? 1 : 0
+        }
+        
+        let changeVisibility = {
+            self.isVisible = visible
+        }
+        
+        UIView.animate(withDuration: 0.125, animations: {
+            visible ? changeVisibility() : changeAlpha()
+        }) { _ in
+            UIView.animate(withDuration: 0.125, animations: {
+                visible ? changeAlpha() : changeVisibility()
+            })
+        }
+    }
+}
+
