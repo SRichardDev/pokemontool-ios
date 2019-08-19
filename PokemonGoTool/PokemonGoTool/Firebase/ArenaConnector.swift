@@ -11,7 +11,10 @@ class ArenaConnector {
 
     var didAddArenaCallback: ((Arena) -> Void)?
     var didUpdateArenaCallback: ((Arena) -> Void)?
-    var activeLevelFilter: [Int: Bool]? {
+    private var isArenaFilterActive: Bool {
+        return UserDefaults.standard.bool(forKey: "arenaFilter")
+    }
+    private var activeLevelFilter: [Int: Bool]? {
         if let levelFilter = UserDefaults.standard.object(forKey: "levelFilter") as? Data {
             return try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(levelFilter) as! [Int: Bool]
         }
@@ -22,6 +25,7 @@ class ArenaConnector {
         
         let geohashNotLoaded = arenasInGeohash[geohash] == nil
         guard geohashNotLoaded else { return }
+        
         arenasInGeohash[geohash] = [:]
 
         arenasRef
@@ -37,16 +41,18 @@ class ArenaConnector {
                         
                         let anyLevelFilterActive = (self.activeLevelFilter?.values.reduce(false) { $0 || $1 }) ?? false
                         
-                        if anyLevelFilterActive {
-                            if let raid = arena.raid {
-                                if raid.isActive {
-                                    if self.activeLevelFilter?[raid.level] ?? false {
-                                        self.didAddArenaCallback?(arena)
+                        if self.isArenaFilterActive {
+                            if anyLevelFilterActive {
+                                if let raid = arena.raid {
+                                    if raid.isActive {
+                                        if self.activeLevelFilter?[raid.level] ?? false {
+                                            self.didAddArenaCallback?(arena)
+                                        }
                                     }
                                 }
+                            } else {
+                                self.didAddArenaCallback?(arena)
                             }
-                        } else {
-                            self.didAddArenaCallback?(arena)
                         }
                     }
                     self.arenasInGeohash[geohash] = arenas

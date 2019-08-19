@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R38-l3-xJz" customClass="HideableSubRowStackView" customModule="PokemonGoTool" customModuleProvider="target">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R38-l3-xJz" customClass="OuterVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                             </stackView>
                         </subviews>

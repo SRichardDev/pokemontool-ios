@@ -72,13 +72,13 @@ class InnerVerticalStackView: OuterVerticalStackView {
 class HideableSubRowStackView: InnerVerticalStackView {
     
     var mainRow: LabelSwitchRow!
-    var subRows: [LabelSwitchRow]?
+    var subRows: [UIView]?
     
-    func setup(mainRow: LabelSwitchRow, subRows: [LabelSwitchRow]) {
+    func setup(mainRow: LabelSwitchRow, subRows: [UIView]? = nil) {
         self.mainRow = mainRow
         self.subRows = subRows
         addArrangedSubview(mainRow)
-        subRows.forEach {
+        subRows?.forEach {
             $0.isVisible = mainRow.isOn
             addArrangedSubview($0)
         }
@@ -94,9 +94,6 @@ class LabelSwitchRow: UIStackView {
             return settingsSwitch.isOn
         }
         set {
-            if isSubRow {
-                isVisible = newValue
-            }
             settingsSwitch.isOn = newValue
         }
     }
