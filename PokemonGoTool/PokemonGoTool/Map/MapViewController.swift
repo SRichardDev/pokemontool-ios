@@ -85,6 +85,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             self.manager.add(updatedAnnotation)
             self.manager.reload(mapView: self.mapView)
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadAnnotations),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +136,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         endPoiSubmission()
         endGeohashRegistration()
         moveMapMenu(ConstraintConstants.mapMenuOrigin)
+    }
+    
+    @objc
+    func reloadAnnotations() {
+        let annotations = manager.annotations
+        manager.remove(manager.annotations)
+        manager.reload(mapView: self.mapView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.manager.add(annotations)
+            self.manager.reload(mapView: self.mapView)
+        }
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
