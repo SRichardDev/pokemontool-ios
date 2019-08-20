@@ -106,6 +106,7 @@
 		2C45A84E2300488200BF8415 /* ArenaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45A84D2300488200BF8415 /* ArenaFilterViewController.swift */; };
 		2C45A850230048EE00BF8415 /* ArenaFilterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C45A84F230048EE00BF8415 /* ArenaFilterViewController.storyboard */; };
 		2C496D41226E05E700E668F1 /* AccountMedalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */; };
+		2C57CC8F230C8131009F25DC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57CC8E230C8131009F25DC /* Reachability.swift */; };
 		2C5DAA3E226FB6AF00252AC8 /* FirebaseDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */; };
 		2C5E5705227778B9002E00B0 /* PoiSubmissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */; };
 		2C6E7F7221FF893F00427FBE /* SubmitNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */; };
@@ -283,6 +284,7 @@
 		2C45A84D2300488200BF8415 /* ArenaFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaFilterViewController.swift; sourceTree = "<group>"; };
 		2C45A84F230048EE00BF8415 /* ArenaFilterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaFilterViewController.storyboard; sourceTree = "<group>"; };
 		2C496D40226E05E700E668F1 /* AccountMedalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMedalViewModel.swift; sourceTree = "<group>"; };
+		2C57CC8E230C8131009F25DC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDefines.swift; sourceTree = "<group>"; };
 		2C5E5704227778B9002E00B0 /* PoiSubmissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoiSubmissable.swift; sourceTree = "<group>"; };
 		2C6E7F7121FF893F00427FBE /* SubmitNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitNameViewController.swift; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */,
 				2C970EFB22D9711000295DBD /* Slider.swift */,
 				2C13BD1F22E1102F00312061 /* UIApplication+Extension.swift */,
+				2C57CC8E230C8131009F25DC /* Reachability.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1193,6 +1196,7 @@
 				2C97F76F21F297E900630BA2 /* FirebaseStatusPresentable.swift in Sources */,
 				2C970EFC22D9711000295DBD /* Slider.swift in Sources */,
 				2C44EAB321FCC45C0029527C /* MapRectUtility.swift in Sources */,
+				2C57CC8F230C8131009F25DC /* Reachability.swift in Sources */,
 				2C97F78421F67B3700630BA2 /* SubmitQuestViewController.swift in Sources */,
 				2C2E98472291F43D001ED8C6 /* ArenaDetailsGoldArenaSwitchViewController.swift in Sources */,
 				2CBCD8E7221C8E910058D782 /* LoadingViewController.swift in Sources */,

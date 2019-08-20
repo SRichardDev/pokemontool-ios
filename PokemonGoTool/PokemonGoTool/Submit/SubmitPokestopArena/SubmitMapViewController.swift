@@ -54,7 +54,16 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         submitMapViewController.locationOnMap = coordinate
         let annotation = isPokestop ? submitMapViewController.pokestopAnnotation : submitMapViewController.arenaAnnotation
         submitMapViewController.mapView.addAnnotation(annotation)
-        submitMapViewController.mapView.mapType = .satelliteFlyover
+        
+        switch Network.reachability.status {
+        case .unreachable:
+            submitMapViewController.mapView.mapType = .mutedStandard
+        case .wwan:
+            submitMapViewController.mapView.mapType = .mutedStandard
+        case .wifi:
+            submitMapViewController.mapView.mapType = .satelliteFlyover
+        }
+        
         submitMapViewController.isFlyover = true
         return submitMapViewController
     }
