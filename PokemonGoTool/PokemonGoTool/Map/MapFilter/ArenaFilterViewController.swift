@@ -4,16 +4,13 @@ import UIKit
 class ArenaFilterViewController: UIViewController, StoryboardInitialViewController {
     
     @IBOutlet var stackView: OuterVerticalStackView!
-    private let userDefaults = UserDefaults.standard
-    private lazy var isArenaFilterOn = userDefaults.bool(forKey: arenaFilterKey)
     private var levelFilters: [Int: Bool] = [:]
-    private let arenaFilterKey = "arenaFilter"
     private let levelFilterKey = "levelFilter"
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        if let levelFilter = userDefaults.object(forKey: levelFilterKey) as? Data {
+        if let levelFilter = UserDefaults.standard.object(forKey: levelFilterKey) as? Data {
             let decodedLevelFilter = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(levelFilter) as! [Int: Bool]
             self.levelFilters = decodedLevelFilter
         }
@@ -71,17 +68,17 @@ class ArenaFilterViewController: UIViewController, StoryboardInitialViewControll
                                                                   level2Row,
                                                                   level1Row])
         
-        let arenaFilterStackView = HideableSubRowStackView()
+        let arenaFilterStackView = InnerVerticalStackView()
         let arenaFilter = LabelSwitchRow()
-        arenaFilter.setup("Arenen", isOn: isArenaFilterOn) { isOn in
-            self.userDefaults.set(isOn, forKey: self.arenaFilterKey)
+        arenaFilter.setup("Arenen", isOn: AppSettings.showArenas) { isOn in
+            AppSettings.showArenas = isOn
             levelFilterStackView.changeVisibilityAnimated(visible: isOn)
         }
-        arenaFilterStackView.setup(mainRow: arenaFilter)
-        
+        arenaFilterStackView.addArrangedSubview(arenaFilter)
+        arenaFilterStackView.addArrangedSubview(levelFilterStackView)
+
         stackView.addArrangedSubview(arenaFilterStackView)
-        stackView.addArrangedSubview(levelFilterStackView)
-        levelFilterStackView.isVisible = isArenaFilterOn
+        levelFilterStackView.isVisible = AppSettings.showArenas
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,10 +86,9 @@ class ArenaFilterViewController: UIViewController, StoryboardInitialViewControll
         
         AppSettings.filterSettingsChanged = true
         
-        
         do {
             let encodedData = try NSKeyedArchiver.archivedData(withRootObject: levelFilters, requiringSecureCoding: false)
-            userDefaults.set(encodedData, forKey: levelFilterKey)
+            UserDefaults.standard.set(encodedData, forKey: levelFilterKey)
         } catch let error {
             print(error)
         }

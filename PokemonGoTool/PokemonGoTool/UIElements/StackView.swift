@@ -1,7 +1,30 @@
 
 import UIKit
 
-@IBDesignable
+class StackView: UIStackView {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    func setup() {
+        axis = .vertical
+        spacing = 15
+        distribution = .equalSpacing
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
 class OuterVerticalStackView: UIStackView {
 
     override func awakeFromNib() {
@@ -24,17 +47,6 @@ class OuterVerticalStackView: UIStackView {
         spacing = 50
         distribution = .equalSpacing
         translatesAutoresizingMaskIntoConstraints = false
-        
-//        let backgroundView = UIView()
-//        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-//        backgroundView.backgroundColor = .orange
-//        backgroundView.layer.cornerRadius = 10
-//        addSubview(backgroundView)
-//        sendSubviewToBack(backgroundView)
-//        NSLayoutConstraint.activate([leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 10),
-//                                     rightAnchor.constraint(equalTo: backgroundView.rightAnchor, constant: -10),
-//                                     topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 10),
-//                                     bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10)])
     }
     
     func addToView(_ view: UIView) {
@@ -69,7 +81,7 @@ class InnerVerticalStackView: OuterVerticalStackView {
     }
 }
 
-class HideableSubRowStackView: InnerVerticalStackView {
+class HideableSubRowStackView: StackView {
     
     var mainRow: LabelSwitchRow!
     var subRows: [UIView]?

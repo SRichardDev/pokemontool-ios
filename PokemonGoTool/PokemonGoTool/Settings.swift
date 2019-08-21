@@ -7,7 +7,8 @@ import Foundation
 @objc protocol MapFilterSettingsConfigurable {
     static var filterSettingsChanged: Bool { get set }
     static var showPokestops: Bool { get set }
-    static var showOnlyPokestopsWithQuest: Bool { get set }
+    static var isQuestFilterActive: Bool { get set }
+    static var isIncidentFilterActive: Bool { get set }
 
     static var showArenas: Bool { get set }
     static var showOnlyArenasWithRaid: Bool { get set }
@@ -43,9 +44,14 @@ extension AppSettings: MapFilterSettingsConfigurable {
         set { AppSettings.updateDefaults(for: #keyPath(showPokestops), value: newValue) }
     }
     
-    static var showOnlyPokestopsWithQuest: Bool {
-        get { return AppSettings.value(for: #keyPath(showOnlyPokestopsWithQuest)) ?? false }
-        set { AppSettings.updateDefaults(for: #keyPath(showOnlyPokestopsWithQuest), value: newValue) }
+    static var isQuestFilterActive: Bool {
+        get { return AppSettings.value(for: #keyPath(isQuestFilterActive)) ?? false }
+        set { AppSettings.updateDefaults(for: #keyPath(isQuestFilterActive), value: newValue) }
+    }
+    
+    static var isIncidentFilterActive: Bool {
+        get { return AppSettings.value(for: #keyPath(isIncidentFilterActive)) ?? false }
+        set { AppSettings.updateDefaults(for: #keyPath(isIncidentFilterActive), value: newValue) }
     }
     
     static var showArenas: Bool {
@@ -71,10 +77,11 @@ extension AppSettings: MapFilterSettingsConfigurable {
     static var isFilterActive: Bool {
         get {
             return showPokestops == false ||
-                showOnlyPokestopsWithQuest == true ||
+                isQuestFilterActive == true ||
                 showArenas == false ||
                 showOnlyArenasWithRaid == true ||
-                showOnlyEXArenas == true
+                showOnlyEXArenas == true ||
+                isIncidentFilterActive == true
         }
     }
 }

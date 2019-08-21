@@ -88,7 +88,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadAnnotations),
-                                               name: UIApplication.didBecomeActiveNotification,
+                                               name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
     }
     

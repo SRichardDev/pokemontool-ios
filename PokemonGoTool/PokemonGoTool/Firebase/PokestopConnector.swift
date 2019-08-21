@@ -14,6 +14,7 @@ class PokestopConnector {
     
     func loadPokestops(for geohash: Geohash) {
         
+        guard AppSettings.showPokestops else { return }
         guard geohash != "" else { return }
         let geohashNotLoaded = pokestopsInGeohash[geohash] == nil
         guard geohashNotLoaded else { return }
@@ -29,7 +30,22 @@ class PokestopConnector {
                     for child in result {
                         guard let pokestop: Pokestop = decode(from: child) else { continue }
                         pokestops[pokestop.id] = pokestop
-                        self.didAddPokestopCallback?(pokestop)
+                        
+                        if AppSettings.isIncidentFilterActive && AppSettings.isQuestFilterActive {
+                            if pokestop.incident?.isActive ?? false || pokestop.quest?.isActive ?? false {
+                                self.didAddPokestopCallback?(pokestop)
+                            }
+                        } else if AppSettings.isIncidentFilterActive {
+                            if pokestop.incident?.isActive ?? false {
+                                self.didAddPokestopCallback?(pokestop)
+                            }
+                        } else if AppSettings.isQuestFilterActive {
+                            if pokestop.quest?.isActive ?? false {
+                                self.didAddPokestopCallback?(pokestop)
+                            }
+                        } else {
+                            self.didAddPokestopCallback?(pokestop)
+                        }
                     }
                     self.pokestopsInGeohash[geohash] = pokestops
                 }
@@ -40,7 +56,24 @@ class PokestopConnector {
             .observe(.childChanged, with: { snapshot in
                 guard let pokestop: Pokestop = decode(from: snapshot) else { return }
                 self.pokestopsInGeohash[geohash]?[pokestop.id] = pokestop
-                self.didUpdatePokestopCallback?(pokestop)
+                if AppSettings.showPokestops {
+                    
+                    if AppSettings.isIncidentFilterActive && AppSettings.isQuestFilterActive {
+                        if pokestop.incident?.isActive ?? false || pokestop.quest?.isActive ?? false {
+                            self.didUpdatePokestopCallback?(pokestop)
+                        }
+                    } else if AppSettings.isIncidentFilterActive {
+                        if pokestop.incident?.isActive ?? false {
+                            self.didUpdatePokestopCallback?(pokestop)
+                        }
+                    } else if AppSettings.isQuestFilterActive {
+                        if pokestop.quest?.isActive ?? false {
+                            self.didUpdatePokestopCallback?(pokestop)
+                        }
+                    } else {
+                        self.didUpdatePokestopCallback?(pokestop)
+                    }
+                }
             })
     }
     

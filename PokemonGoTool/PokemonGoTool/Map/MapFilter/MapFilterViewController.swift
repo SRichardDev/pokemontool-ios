@@ -5,15 +5,14 @@ class MapFilterViewController: UIViewController, StoryboardInitialViewController
 
     private let stackView = OuterVerticalStackView()
     private let arenaFilterViewController = ArenaFilterViewController.fromStoryboard()
-    
+    private let pokestopFilterViewController = PokestopFilterViewController.fromStoryboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stackView.addToView(view)
-        
         stackView.addArrangedViewController(arenaFilterViewController, to: self)
-        
+        stackView.addArrangedViewController(pokestopFilterViewController, to: self)
         
 //        let arenaFilter = LabelSwitchRow()
 //        let arenaOnlyEXFilter = LabelSwitchRow()
