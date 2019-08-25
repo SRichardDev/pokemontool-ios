@@ -100,12 +100,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
         
         if AppSettings.filterSettingsChanged {
-            arenaConnector.clear()
-            pokestopConnector.clear()
-            manager.remove(manager.annotations)
-            manager.reload(mapView: self.mapView)
             AppSettings.filterSettingsChanged = false
-            loadData()
+            reloadAnnotations()
         }
     }
     
@@ -140,14 +136,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     @objc
     func reloadAnnotations() {
-        let annotations = manager.annotations
+        arenaConnector.clear()
+        pokestopConnector.clear()
         manager.remove(manager.annotations)
         manager.reload(mapView: self.mapView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            self.manager.add(annotations)
-            self.manager.reload(mapView: self.mapView)
-        }
+        loadData()
     }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {

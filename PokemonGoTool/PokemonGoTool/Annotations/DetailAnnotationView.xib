@@ -34,7 +34,7 @@
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Sc-gq-Gfi">
-                                    <rect key="frame" x="33" y="67.5" width="134.5" height="49"/>
+                                    <rect key="frame" x="33" y="70.5" width="134.5" height="43"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AnnotationName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="6cS-cu-EPc" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="134.5" height="20.5"/>
@@ -43,7 +43,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AnnotationType" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNe-cZ-7dB" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                            <rect key="frame" x="4" y="28.5" width="126.5" height="20.5"/>
+                                            <rect key="frame" x="23" y="28.5" width="88.5" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -87,9 +87,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="annotationDetailLabel" destination="gNe-cZ-7dB" id="NKe-AO-Eod"/>
                 <outlet property="annotationImageView" destination="XXr-mF-scy" id="ISK-YD-qUl"/>
                 <outlet property="annotationNameLabel" destination="6cS-cu-EPc" id="idN-dA-vPR"/>
-                <outlet property="annotationTypeLabel" destination="gNe-cZ-7dB" id="NKe-AO-Eod"/>
                 <outlet property="buttonsStackView" destination="1Cr-3f-J3f" id="YoR-K0-Fle"/>
                 <outlet property="stackView" destination="wyv-X1-FgS" id="Eh3-vY-no1"/>
             </connections>

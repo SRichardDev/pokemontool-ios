@@ -124,6 +124,49 @@ struct Incident: Codable, Equatable {
             return "Unbekannt"
         }
     }
+    
+    var image: UIImage {
+        switch gruntType {
+        case .random4, .random5:
+            return UIImage(named: "Random")!
+        case .bug6, .bug7:
+            return UIImage(named: "Bug")!
+        case .ghost8, .ghost9:
+            return UIImage(named: "Ghost")!
+        case .dark10, .dark11:
+            return UIImage(named: "Dark")!
+        case .dragon12, .dragon13:
+            return UIImage(named: "Dragon")!
+        case .fairy14, .fairy15:
+            return UIImage(named: "Fariy")!
+        case .fighting16, .fighting17:
+            return UIImage(named: "Fighting")!
+        case .fire18, .fire19:
+            return UIImage(named: "Fire")!
+        case .flying20, .flying21:
+            return UIImage(named: "Flying")!
+        case .grass22, .grass23:
+            return UIImage(named: "Grass")!
+        case .ground24, .ground25:
+            return UIImage(named: "Ground")!
+        case .ice26, .ice27:
+            return UIImage(named: "Ice")!
+        case .metal28, .metal29:
+            return UIImage(named: "Metal")!
+        case .normal30, .normal31:
+            return UIImage(named: "Normal")!
+        case .poison32, .poison33:
+            return UIImage(named: "Poison")!
+        case .psychic34, .psychic35:
+            return UIImage(named: "Psychic")!
+        case .rock36, .rock37:
+            return UIImage(named: "Rock")!
+        case .water38, .water39:
+            return UIImage(named: "Water")!
+        default:
+            return UIImage(named: "Random")!
+        }
+    }
 }
 
 struct GruntType: Codable, Equatable, RawRepresentable {

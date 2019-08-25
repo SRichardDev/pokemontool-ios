@@ -5,7 +5,7 @@ class DetailAnnotationView: UIView {
     
     @IBOutlet private var annotationImageView: UIImageView!
     @IBOutlet private var annotationNameLabel: Label!
-    @IBOutlet private var annotationTypeLabel: Label!
+    @IBOutlet private var annotationDetailLabel: Label!
     @IBOutlet private var stackView: UIStackView!
     @IBOutlet private var buttonsStackView: UIStackView!
     
@@ -16,9 +16,11 @@ class DetailAnnotationView: UIView {
         self.annotation = annotation
         annotationNameLabel.text = annotation.name
         
-        if annotation is Pokestop {
-            annotationTypeLabel.text = "Pokéstop"
-            annotationImageView.image = UIImage(named: "PokestopLarge")
+        if let pokestop = annotation as? Pokestop {
+            let pokestopUtility = PokestopUtility(pokestop: pokestop)
+            
+            annotationDetailLabel.text = pokestopUtility.detailAnnotionString()
+            annotationImageView.image = pokestopUtility.detailAnnotationImage()
             let questButton = Button()
             let detailsButton = Button()
             questButton.setTitle("Neue Quest", for: .normal)
@@ -32,8 +34,10 @@ class DetailAnnotationView: UIView {
             buttonsStackView.addArrangedSubview(questButton)
             buttonsStackView.addArrangedSubview(detailsButton)
         } else if let arena = annotation as? Arena {
-            annotationTypeLabel.text = arena.isEX ? "EX Arena" : "Arena"
+            
+            annotationDetailLabel.text = ArenaUtility.detailAnnotationString(for: arena)
             annotationImageView.image = ImageManager.combinedArenaImage(for: arena)
+            
             let raidButton = Button()
             let detailsButton = Button()
             raidButton.setTitle("Neuer Raid", for: .normal)

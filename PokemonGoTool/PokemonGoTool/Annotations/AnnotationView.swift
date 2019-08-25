@@ -184,7 +184,11 @@ class AnnotationView: CustomAnnotationView {
             let combined = UIImage.imageByCombiningImage(firstImage: background, withImage: topImage)
             annotationView.image = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: combined)
         } else if let incident = annotation.pokestop?.incident, incident.isActive {
-            annotationView.image = UIImage(named: "PokestopIncident")!
+            let baseImage = UIImage(named: "PokestopIncident")!
+            let typeImage = incident.image
+            let typeImageSize = CGSize(width: typeImage.size.width/2, height: typeImage.size.height/2)
+            let combined = UIImage.imageByCombiningImage(firstImage: baseImage, withImage: typeImage.resize(targetSize: typeImageSize))
+            annotationView.image = combined
         } else {
             annotationView.image = UIImage(named: "Pokestop")!
         }
