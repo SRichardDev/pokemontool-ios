@@ -3,8 +3,7 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 
-export const onWriteRaid = functions.region('europe-west1')
-.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
 
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
@@ -23,17 +22,21 @@ export const onWriteRaid = functions.region('europe-west1')
         const hatchTime = raid.hatchTime || "--:--"
         const endTime = raid.endTime || "--:--"
         const level = raid.level
-        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n🐲: ' + raidBossName + '\n👫: ' + raidMeetupTime
+        
+        const title = '⭐️'.repeat(level) + " @ " + arena.name
+        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
 
-        const condition = "'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+        const iOSCondition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+        const androidCondition = "'android' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
 
-        console.log('Sending Condition: ' + condition)
+        console.log('Sending Condition: ' + iOSCondition)
+        console.log('Android Condition: ' + androidCondition)
         console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
 
 
-        const payload = {
+        const iOSPayload = {
             notification: {
-                title: '⭐️'.repeat(level) + " @ " + arena.name,
+                title: title,
                 body: message,
                 sound: 'default'
             },
@@ -43,7 +46,18 @@ export const onWriteRaid = functions.region('europe-west1')
             }
         }
 
-        return admin.messaging().sendToCondition(condition, payload)
+        const androidPayload = {
+            data: {
+                title: title,
+                body: message,
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude)
+            }
+        }
+
+        void admin.messaging().sendToCondition(iOSCondition, iOSPayload)
+        void admin.messaging().sendToCondition(androidCondition, androidPayload)
+        return true
             
     } catch (error) {
         console.log(error)
@@ -51,8 +65,7 @@ export const onWriteRaid = functions.region('europe-west1')
     }
 })
 
-export const onWriteRaidMeetupChat = functions.region('europe-west1')
-.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite( async (snapshot, context) => {
+export const onWriteRaidMeetupChat = functions.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite( async (snapshot, context) => {
 
     const meetupId = context.params.meetupId
     const messageContainer = snapshot.after.val()
@@ -72,6 +85,10 @@ export const onWriteRaidMeetupChat = functions.region('europe-west1')
                 body: message,
                 badge: '1',
                 sound: 'default'
+            },
+            data: {
+                title: 'Neue Nachricht von: ' + senderName,
+                body: message
             }
         }
 
@@ -83,8 +100,7 @@ export const onWriteRaidMeetupChat = functions.region('europe-west1')
     }
 })
 
-export const onWriteRaidMeetup = functions.region('europe-west1')
-.database.ref('/raidMeetups/{meetupId}').onWrite( async (snapshot, context) => {
+export const onWriteRaidMeetup = functions.database.ref('/raidMeetups/{meetupId}').onWrite( async (snapshot, context) => {
 
     if (snapshot.before.hasChild("participants") && snapshot.after.hasChild("participants")) {
         
@@ -109,6 +125,10 @@ export const onWriteRaidMeetup = functions.region('europe-west1')
                     body: 'Neue Anzahl: ' + participantsAfterCount,
                     badge: '1',
                     sound: 'default'
+                },
+                data: {
+                    title: 'Ein Spieler nimmt beim Raid teil',
+                    body: 'Neue Anzahl: ' + participantsAfterCount,
                 }
             }
             return admin.messaging().sendToCondition(condition, payload)
@@ -121,6 +141,10 @@ export const onWriteRaidMeetup = functions.region('europe-west1')
                     body: 'Neue Anzahl: ' + participantsAfterCount,
                     badge: '1',
                     sound: 'default'
+                },
+                data: {
+                    title: 'Ein Spieler hat beim Raid abgesagt',
+                    body: 'Neue Anzahl: ' + participantsAfterCount,
                 }
             }
             return admin.messaging().sendToCondition(condition, payload)
@@ -132,6 +156,10 @@ export const onWriteRaidMeetup = functions.region('europe-west1')
                     body: 'Treffpunkt: ' + meetupTimeAfter,
                     badge: '1',
                     sound: 'default'
+                },
+                data: {
+                    title: 'Der Treffpunkt wurde geändert',
+                    body: 'Treffpunkt: ' + meetupTimeAfter,
                 }
             }
             return admin.messaging().sendToCondition(condition, payload)
