@@ -15,9 +15,10 @@ class PokestopConnector {
     func loadPokestops(for geohash: Geohash) {
         
         guard AppSettings.showPokestops else { return }
-        guard geohash != "" else { return }
+
         let geohashNotLoaded = pokestopsInGeohash[geohash] == nil
         guard geohashNotLoaded else { return }
+        
         pokestopsInGeohash[geohash] = [:]
         
         pokestopsRef
@@ -56,8 +57,8 @@ class PokestopConnector {
             .observe(.childChanged, with: { snapshot in
                 guard let pokestop: Pokestop = decode(from: snapshot) else { return }
                 self.pokestopsInGeohash[geohash]?[pokestop.id] = pokestop
+                
                 if AppSettings.showPokestops {
-                    
                     if AppSettings.isIncidentFilterActive && AppSettings.isQuestFilterActive {
                         if pokestop.incident?.isActive ?? false || pokestop.quest?.isActive ?? false {
                             self.didUpdatePokestopCallback?(pokestop)

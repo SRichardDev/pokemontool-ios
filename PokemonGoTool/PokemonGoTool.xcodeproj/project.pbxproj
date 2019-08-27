@@ -335,6 +335,7 @@
 		2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitViewController.storyboard; sourceTree = "<group>"; };
 		2C9D6D8222DFC1E90030D0EA /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		2CB1A0F823133126008FB90E /* Sources.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sources.txt; sourceTree = "<group>"; };
 		2CBC09F9227F795400135473 /* MapRegionSetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRegionSetable.swift; sourceTree = "<group>"; };
 		2CBC09FB227F7B6100135473 /* GeohashRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeohashRegisterable.swift; sourceTree = "<group>"; };
 		2CBC09FD227F7B8D00135473 /* BottomMenuShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuShowable.swift; sourceTree = "<group>"; };
@@ -544,6 +545,7 @@
 				2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */,
 				2C1976AA21ED266B00091F8C /* Info.plist */,
 				2CDFDDDC21ED283000170A46 /* GoogleService-Info.plist */,
+				2CB1A0F823133126008FB90E /* Sources.txt */,
 			);
 			path = PokemonGoTool;
 			sourceTree = "<group>";

@@ -100,7 +100,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
         
         if AppSettings.filterSettingsChanged {
-            AppSettings.filterSettingsChanged = false
             reloadAnnotations()
         }
     }
@@ -136,6 +135,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
     
     @objc
     func reloadAnnotations() {
+        AppSettings.filterSettingsChanged = false
         arenaConnector.clear()
         pokestopConnector.clear()
         manager.remove(manager.annotations)
