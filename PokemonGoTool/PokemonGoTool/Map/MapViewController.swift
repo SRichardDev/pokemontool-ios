@@ -73,14 +73,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
         
         pokestopConnector.didUpdatePokestopCallback = { pokestop in
-            let annotation = self.manager.annotations.first { annotation in
+            let foundAnnotation = self.manager.annotations.first { annotation in
                 if let arenaAnnotation = annotation as? PokestopPointAnnotation {
                     return arenaAnnotation.pokestop?.id == pokestop.id
                 }
                 return false
             }
-            guard let unwrappedAnnotation = annotation else { return }
-            self.manager.remove(unwrappedAnnotation)
+            if let foundUnwrappedAnnotation = foundAnnotation {
+                self.manager.remove(foundUnwrappedAnnotation)
+            }
             let updatedAnnotation = PokestopPointAnnotation(pokestop: pokestop, quests: self.firebaseConnector?.quests)
             self.manager.add(updatedAnnotation)
             self.manager.reload(mapView: self.mapView)

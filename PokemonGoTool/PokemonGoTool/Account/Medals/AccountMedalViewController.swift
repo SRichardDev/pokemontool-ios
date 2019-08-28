@@ -11,7 +11,7 @@ class AccountMedalViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "Medallien:"
+        titleLabel.text = "Medaillen:"
         collectionView.delegate = self
         collectionView.dataSource = self
     }

@@ -22,7 +22,7 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
         const hatchTime = raid.hatchTime || "--:--"
         const endTime = raid.endTime || "--:--"
         const level = raid.level
-        
+
         const title = '⭐️'.repeat(level) + " @ " + arena.name
         const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
 
