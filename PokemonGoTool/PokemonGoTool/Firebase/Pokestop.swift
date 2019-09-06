@@ -140,7 +140,7 @@ struct Incident: Codable, Equatable {
         case .fairy14, .fairy15:
             return UIImage(named: "Fariy")!
         case .fighting16, .fighting17:
-            return UIImage(named: "Fighting")!
+            return UIImage(named: "Fight")!
         case .fire18, .fire19:
             return UIImage(named: "Fire")!
         case .flying20, .flying21:

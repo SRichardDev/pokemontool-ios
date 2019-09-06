@@ -9,7 +9,7 @@ class ArenaUtility {
             let levelStars = String(repeating: "⭐️", count: raid.level)
             let hatchTime = raid.hatchTime ?? "--:--"
             let endTime = raid.endTime ?? "--:--"
-            let particpantsCount = raid.meetup?.participants?.count ?? 0
+//            let particpantsCount = raid.meetup?.participants?.count ?? 0
             
             let formattedString = """
             \(levelStars)
