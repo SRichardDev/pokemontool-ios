@@ -4,14 +4,14 @@ import MapKit
 import UserNotifications
 
 class DepartureNotificationManager {
-   
+    
     class func notifyUserToDepartForRaid(pickupCoordinate: CLLocationCoordinate2D,
                                          destinationCoordinate: CLLocationCoordinate2D,
                                          destinationName: String,
                                          meetupDate: Date,
                                          identifier: String,
                                          timeStringCompletion: @escaping (String) -> ()) {
-            
+        
         let sourcePlacemark = MKPlacemark(coordinate: pickupCoordinate, addressDictionary: nil)
         let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate, addressDictionary: nil)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
@@ -50,6 +50,8 @@ class DepartureNotificationManager {
             print("👫🔔 Notification scheduled at: \(alarmTime)")
             timeStringCompletion(time)
         }
+        
+        NotificationBannerManager.shared.show(.custom, title: "DEBUG", message: "Added Departure Notification")
     }
     
     class func removeUserFromDepartForRaidNotification(for meetupId: String) {
