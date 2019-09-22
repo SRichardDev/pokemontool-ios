@@ -46,9 +46,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         messageView.addToTopMiddle(in: self.view)
         
         arenaConnector.didAddArenaCallback = { arena in
-            let annotation = ArenaPointAnnotation(arena: arena)
-            self.manager.add(annotation)
-            self.manager.reload(mapView: self.mapView)
+            DispatchQueue.global().async {
+                let annotation = ArenaPointAnnotation(arena: arena)
+                self.manager.add(annotation)
+                DispatchQueue.main.async {
+                    self.manager.reload(mapView: self.mapView)
+                }
+            }
         }
 
         arenaConnector.didUpdateArenaCallback = { arena in
@@ -67,9 +71,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         }
         
         pokestopConnector.didAddPokestopCallback = { pokestop in
-            let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: self.firebaseConnector?.quests)
-            self.manager.add(annotation)
-            self.manager.reload(mapView: self.mapView)
+            DispatchQueue.global().async {
+                let annotation = PokestopPointAnnotation(pokestop: pokestop, quests: self.firebaseConnector?.quests)
+                self.manager.add(annotation)
+                DispatchQueue.main.async {
+                    self.manager.reload(mapView: self.mapView)
+                }
+            }
         }
         
         pokestopConnector.didUpdatePokestopCallback = { pokestop in
