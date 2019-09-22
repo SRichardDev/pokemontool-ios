@@ -81,6 +81,11 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         setTitle(viewModel.title)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.viewDisappeared()
+    }
+    
     @objc
     func didTapShare() {
         let items = [viewModel.formattedRaidTextForSharing()]

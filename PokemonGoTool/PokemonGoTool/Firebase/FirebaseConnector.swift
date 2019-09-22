@@ -284,9 +284,7 @@ class FirebaseConnector {
     }
 
     func observeRaidMeetup(for meetupId: String) {
-        raidMeetupsRef
-            .child(meetupId)
-            .removeAllObservers()
+        raidMeetupsRef.child(meetupId).removeAllObservers()
         
         raidMeetupsRef
             .child(meetupId)
@@ -294,6 +292,10 @@ class FirebaseConnector {
             guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
             self.raidMeetupDelegate?.didUpdateRaidMeetup(meetup)
         })
+    }
+    
+    func stopObservingRaidMeetup(for meetupId: String) {
+        raidMeetupsRef.child(meetupId).removeAllObservers()
     }
 
     func observeRaidChat(for meetupId: String) {
