@@ -1,0 +1,3 @@
+[submodule "NSTAppKit-Old"]
+	path = NSTAppKit-Old
+	url = git@github.com:NickAtGit/NSTAppKit-Old.git

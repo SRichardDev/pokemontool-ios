@@ -152,6 +152,8 @@
 		2C97F78C21F6881A00630BA2 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */; };
 		2C97F78E21F6883000630BA2 /* SubmitViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */; };
 		2C9D6D8322DFC1E90030D0EA /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D6D8222DFC1E90030D0EA /* MessageView.swift */; };
+		2CA89D4E2340EA7F0053AA1B /* NSTAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA89D4D2340EA260053AA1B /* NSTAppKit.framework */; };
+		2CA89D4F2340EA7F0053AA1B /* NSTAppKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA89D4D2340EA260053AA1B /* NSTAppKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2CBC09FA227F795400135473 /* MapRegionSetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC09F9227F795400135473 /* MapRegionSetable.swift */; };
 		2CBC09FC227F7B6100135473 /* GeohashRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC09FB227F7B6100135473 /* GeohashRegisterable.swift */; };
 		2CBC09FE227F7B8D00135473 /* BottomMenuShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBC09FD227F7B8D00135473 /* BottomMenuShowable.swift */; };
@@ -185,6 +187,30 @@
 		2CF7B4D822FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CF7B4D722FCDF120088C0F6 /* DepartureNotificationSwitchViewController.storyboard */; };
 		49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FDB96095CB21653BF580B8 /* Pods_PokemonGoTool.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2CA89D4C2340EA260053AA1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03373EB01F8D769800EEB943;
+			remoteInfo = NSTAppKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2CA89D502340EA7F0053AA1B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2CA89D4F2340EA7F0053AA1B /* NSTAppKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidHeaderViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +361,7 @@
 		2C97F78B21F6881A00630BA2 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		2C97F78D21F6883000630BA2 /* SubmitViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitViewController.storyboard; sourceTree = "<group>"; };
 		2C9D6D8222DFC1E90030D0EA /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NSTAppKit.xcodeproj; path = "../NSTAppKit-Old/NSTAppKit.xcodeproj"; sourceTree = "<group>"; };
 		2CB1A0F823133126008FB90E /* Sources.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sources.txt; sourceTree = "<group>"; };
 		2CBC09F9227F795400135473 /* MapRegionSetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRegionSetable.swift; sourceTree = "<group>"; };
 		2CBC09FB227F7B6100135473 /* GeohashRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeohashRegisterable.swift; sourceTree = "<group>"; };
@@ -379,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49089D2055385400A8F1C712 /* Pods_PokemonGoTool.framework in Frameworks */,
+				2CA89D4E2340EA7F0053AA1B /* NSTAppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +529,7 @@
 		2C19769221ED266900091F8C = {
 			isa = PBXGroup;
 			children = (
+				2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */,
 				2C19769D21ED266900091F8C /* PokemonGoTool */,
 				2C19769C21ED266900091F8C /* Products */,
 				343F3E850971499C3D289673 /* Pods */,
@@ -896,6 +925,14 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		2CA89D492340EA260053AA1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CA89D4D2340EA260053AA1B /* NSTAppKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2CC6C0C522C6949F00A4AB00 /* RaidBossCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,6 +991,7 @@
 				2C19769821ED266900091F8C /* Frameworks */,
 				2C19769921ED266900091F8C /* Resources */,
 				40B398E778E5892C4D4DF4AD /* [CP] Embed Pods Frameworks */,
+				2CA89D502340EA7F0053AA1B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1000,12 +1038,28 @@
 			mainGroup = 2C19769221ED266900091F8C;
 			productRefGroup = 2C19769C21ED266900091F8C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2CA89D492340EA260053AA1B /* Products */;
+					ProjectRef = 2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2C19769A21ED266900091F8C /* PokemonGoTool */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2CA89D4D2340EA260053AA1B /* NSTAppKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NSTAppKit.framework;
+			remoteRef = 2CA89D4C2340EA260053AA1B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2C19769921ED266900091F8C /* Resources */ = {
