@@ -68,7 +68,7 @@ class InnerVerticalStackView: OuterVerticalStackView {
         let backgroundView = UIView()
         backgroundView.addShadow()
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.backgroundColor = .white
+        backgroundView.backgroundColor = .tertiarySystemBackground
         backgroundView.layer.cornerRadius = 10
         backgroundView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).cgColor
         backgroundView.layer.borderWidth = 1

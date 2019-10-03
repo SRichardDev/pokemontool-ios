@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Messaging.messaging().delegate = self
         window = UIWindow(frame: UIScreen.main.bounds)
         coordinator = MainCoordinator(appModule: appModule, window: window!)
+        Theming.applySelectedPersistedTheme()
         
         return true
     }

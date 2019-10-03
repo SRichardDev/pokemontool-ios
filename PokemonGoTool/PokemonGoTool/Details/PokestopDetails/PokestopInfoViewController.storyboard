@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="msa-Dy-l28">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="msa-Dy-l28">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,11 +13,11 @@
             <objects>
                 <viewController id="msa-Dy-l28" customClass="PokestopInfoViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S94-yh-BQg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BVA-Mf-6VS" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gIY-r5-tRe">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="42.666666666666664"/>
@@ -50,7 +47,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2k6-W9-eKo">
-                                        <rect key="frame" x="0.0" y="57.333333333333343" width="375" height="42.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="77.333333333333329" width="375" height="42.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hinzugefügt von:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEd-vi-qZ7" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20.333333333333332"/>
@@ -64,7 +61,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NicoVR42" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aex-41-fQR" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.333333333333332" width="375" height="14.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="28.333333333333339" width="375" height="14.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -79,7 +76,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BVA-Mf-6VS" firstAttribute="top" secondItem="ce3-xu-NvW" secondAttribute="top" id="81h-pW-8Qu"/>
                             <constraint firstItem="ce3-xu-NvW" firstAttribute="trailing" secondItem="BVA-Mf-6VS" secondAttribute="trailing" id="GB5-x2-Ank"/>
@@ -88,7 +85,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ce3-xu-NvW"/>
                     </view>
-                    <size key="freeformSize" width="375" height="100"/>
+                    <size key="freeformSize" width="375" height="120"/>
                     <connections>
                         <outlet property="coordianteLabel" destination="Yzc-h2-Jgq" id="k3y-KB-HJb"/>
                         <outlet property="coordinateTitleLabel" destination="Igl-sb-VOp" id="gSH-1F-7Bs"/>

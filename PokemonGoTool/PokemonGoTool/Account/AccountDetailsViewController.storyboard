@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X90-2a-4Wj">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X90-2a-4Wj">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="amP-gc-reY" customClass="OuterVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="25" y="60" width="325" height="582"/>
+                                <rect key="frame" x="25" y="40" width="325" height="602"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eDJ-A5-StV" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="106.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpS-ze-0LP" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="20.5"/>
@@ -31,8 +28,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Job-aC-C1B">
-                                                <rect key="frame" x="0.0" y="40.5" width="325" height="59.5"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="0.0" y="40.5" width="325" height="66"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <connections>
@@ -42,7 +38,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JE3-gd-wzm" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="325" height="100"/>
+                                        <rect key="frame" x="0.0" y="126.5" width="325" height="106.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g38-hy-fJi" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="20.5"/>
@@ -51,8 +47,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEL-eR-eZM">
-                                                <rect key="frame" x="0.0" y="40.5" width="325" height="59.5"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="0.0" y="40.5" width="325" height="66"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
                                                 <connections>
@@ -62,7 +57,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8xq-re-6FX" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="240" width="325" height="97.5"/>
+                                        <rect key="frame" x="0.0" y="253" width="325" height="102.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQT-UT-6Qd" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="20.5"/>
@@ -71,7 +66,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jFy-gs-err">
-                                                <rect key="frame" x="0.0" y="40.5" width="325" height="58"/>
+                                                <rect key="frame" x="0.0" y="40.5" width="325" height="63"/>
                                                 <segments>
                                                     <segment title="Mystic"/>
                                                     <segment title="Valor"/>
@@ -84,20 +79,20 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Q3O-RO-9j0" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="357.5" width="325" height="224.5"/>
+                                        <rect key="frame" x="0.0" y="375.5" width="325" height="226.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd0-DE-obE" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="325" height="104.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="325" height="106.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srp-98-ZMN">
-                                                <rect key="frame" x="0.0" y="124.5" width="325" height="100"/>
+                                                <rect key="frame" x="0.0" y="126.5" width="325" height="100"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-Jh-vVE">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="100"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="75" id="rh0-vG-RaE"/>
                                                         </constraints>
@@ -110,7 +105,7 @@
                                                     </pickerView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOY-RC-I4J">
                                                         <rect key="frame" x="250" y="0.0" width="75" height="100"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
@@ -122,7 +117,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="amP-gc-reY" firstAttribute="top" secondItem="J2T-mp-853" secondAttribute="top" constant="40" id="4Es-P8-LAp"/>

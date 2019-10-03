@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iwm-uN-HHB">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Iwm-uN-HHB">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,10 +27,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bV-dA-aMc">
-                                                    <rect key="frame" x="15" y="8" width="40" height="40"/>
+                                                    <rect key="frame" x="15" y="8" width="40" height="43"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ4-vr-2w7" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                            <rect key="frame" x="9.5" y="9.5" width="21" height="21"/>
+                                                            <rect key="frame" x="9.5" y="11" width="21" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -48,13 +45,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seA-hK-x2W" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                    <rect key="frame" x="63" y="17.5" width="96" height="21"/>
+                                                    <rect key="frame" x="63" y="19" width="96" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G64-Tc-KCy">
-                                                    <rect key="frame" x="295" y="8" width="40" height="40"/>
+                                                    <rect key="frame" x="288" y="9.5" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="G64-Tc-KCy" secondAttribute="height" multiplier="1:1" id="6DJ-6c-qFe"/>
                                                         <constraint firstAttribute="width" constant="40" id="ytn-yH-M1p"/>
@@ -86,7 +83,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Vp0-L6-AKj" firstAttribute="bottom" secondItem="u5S-HI-q6o" secondAttribute="bottom" constant="16" id="10J-n3-xK0"/>
                             <constraint firstItem="Vp0-L6-AKj" firstAttribute="trailing" secondItem="u5S-HI-q6o" secondAttribute="trailing" constant="16" id="20c-iy-aUB"/>

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KrQ-Kv-4pp">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KrQ-Kv-4pp">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gb7-3u-wUU">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crypto-Pokémon Typ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8T-xb-p3s" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -37,7 +34,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Normal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zij-jF-8br" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.5" width="375" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="375" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -50,7 +47,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wn4-kv-yrV">
-                                        <rect key="frame" x="0.0" y="75.5" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="77" width="375" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zeitraum:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVC-bQ-eNH" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -64,7 +61,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:20 - 12:50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pw-DA-2Te" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.5" width="375" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="375" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -77,7 +74,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-Ia-qrs">
-                                        <rect key="frame" x="0.0" y="151" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="153.5" width="375" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hinzugefügt von:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTQ-ST-hcj" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -91,7 +88,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NicoVR42" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK1-K1-F00" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.5" width="375" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="375" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -106,7 +103,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="B1q-fJ-lHZ" secondAttribute="bottom" id="a8z-I1-VgP"/>
                             <constraint firstItem="B1q-fJ-lHZ" firstAttribute="top" secondItem="C4X-ix-2hI" secondAttribute="top" id="cRL-gO-S8b"/>

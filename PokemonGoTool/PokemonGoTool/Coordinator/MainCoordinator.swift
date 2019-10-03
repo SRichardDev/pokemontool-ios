@@ -2,6 +2,7 @@
 import UIKit
 import NVActivityIndicatorView
 import UIWindowTransitions
+import NSTAppKit
 
 class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     
