@@ -36,6 +36,11 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         firebaseConnector.raidChatDelegate = self
         guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
         firebaseConnector.observeRaidChat(for: raidMeetupId)
+        
+        messagesCollectionView.backgroundColor = .systemBackground
+        messageInputBar.backgroundColor = .systemBackground
+        messageInputBar.backgroundView.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
     }
 
     private func insertNewMessage(_ message: Message) {
