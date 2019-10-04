@@ -21,9 +21,25 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
         stackView.addToView(view)
-        
+
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                self.setupUI()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !viewModel.isRaidExpired {
+            let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+            navigationController?.topViewController?.navigationItem.rightBarButtonItem = shareBarButtonItem
+        }
+        setTitle(viewModel.title)
+    }
+    
+    private func setupUI() {
         headerViewController.viewModel = viewModel
         headerViewController.coordinator = coordinator
         restTimeViewController.viewModel = viewModel
@@ -36,7 +52,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         goldSwitchViewController.viewModel = viewModel
         meetupTimeSelectionViewController.viewModel = viewModel
         departureNotificationViewController.viewModel = viewModel
-        
+
         stackView.addArrangedViewController(headerViewController, to: self)
         stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
         stackView.addArrangedViewController(restTimeViewController, to: self)
@@ -57,42 +73,31 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         userParticipatesSwitchViewController.view.isHidden = viewModel.isRaidExpired
         departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
-        
+
         raidBossCollectionViewController.level = viewModel.level
         raidBossCollectionViewController.activateSelectionMode()
-        raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.updateRaidboss($0) }
-        
+        raidBossCollectionViewController.selectedRaidbossCallback = { [weak self] in self?.viewModel.updateRaidboss($0) }
+
         #if DEBUG
         let DEBUGdeleteArenaButton = Button()
         DEBUGdeleteArenaButton.setTitle("DELETE", for: .normal)
-        DEBUGdeleteArenaButton.addAction {
-            self.viewModel.DEBUGdeleteArena()
+        DEBUGdeleteArenaButton.addAction { [weak self] in
+            self?.viewModel.DEBUGdeleteArena()
         }
         stackView.addArrangedSubview(DEBUGdeleteArenaButton)
         #endif
+        
+        viewModel.delegate = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !viewModel.isRaidExpired {
-            let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
-            navigationController?.topViewController?.navigationItem.rightBarButtonItem = shareBarButtonItem
-        }
-        setTitle(viewModel.title)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        viewModel.viewDisappeared()
-    }
-    
+
+
     @objc
     func didTapShare() {
         let items = [viewModel.formattedRaidTextForSharing()]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
     }
-    
+
     func update(of type: ArenaDetailsUpdateType) {
         switch type {
         case .meetupInit:

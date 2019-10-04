@@ -87,7 +87,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         firebaseConnector.observeRaidMeetup(for: meetupId)
     }
     
-    func viewDisappeared() {
+    deinit {
+        print("Deinit ArenaDetailsViewModel")
         guard let meetupId = arena.raid?.raidMeetupId else { return }
         firebaseConnector.stopObservingRaidMeetup(for: meetupId)
     }
@@ -126,7 +127,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     func startHatchTimer() { 
         guard let raid = arena.raid else { return }
         guard let date = raid.hatchDate else { return }
-        hatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+        hatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            guard let self = self else { return }
             if self.isTimeUp(for: date) {
                 self.startTimeLeftTimer()
                 self.hatchTimer?.invalidate()
@@ -143,7 +145,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     func startTimeLeftTimer() {
         guard let raid = arena.raid else { return }
         guard let date = raid.endDate else { return }
-        timeLeftTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+        timeLeftTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            guard let self = self else { return }
             if self.isTimeUp(for: date) {
                 self.showTimeUp()
                 self.timeLeftTimer?.invalidate()
@@ -304,13 +307,13 @@ extension ArenaDetailsViewModel: RaidMeetupDelegate {
         }
         
         userIds.keys.forEach { userId in
-            firebaseConnector.loadPublicUserData(for: userId) { publicUserData in
-                self.participants[userId] = publicUserData
+            firebaseConnector.loadPublicUserData(for: userId) { [weak self] publicUserData in
+                self?.participants[userId] = publicUserData
                 DispatchQueue.main.async {
-                    self.delegate?.update(of: .meetupChanged)
+                    self?.delegate?.update(of: .meetupChanged)
                 }
-                if self.isUserParticipating {
-                    self.delegate?.update(of: .userParticipatesChanged(true))
+                if self?.isUserParticipating ?? false {
+                    self?.delegate?.update(of: .userParticipatesChanged(true))
                 }
             }
         }
