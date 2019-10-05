@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WQC-4h-Rds">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WQC-4h-Rds">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +12,7 @@
             <objects>
                 <viewController id="qIv-hQ-9u0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B0d-e1-xSU">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="355.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="375.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tjM-p5-2Mh"/>
@@ -41,7 +38,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sind deine Eingaben korrekt?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95Q-hj-o0K" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="16" y="40" width="343" height="20.5"/>
+                                <rect key="frame" x="16" y="20" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -75,13 +72,13 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRU-ew-WCk">
-                                <rect key="frame" x="16" y="75.5" width="343" height="355.5"/>
+                                <rect key="frame" x="16" y="55.5" width="343" height="375.5"/>
                                 <connections>
                                     <segue destination="qIv-hQ-9u0" kind="embed" id="ggK-0d-7Wt"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="95Q-hj-o0K" firstAttribute="top" secondItem="Cqe-nr-2ox" secondAttribute="top" constant="20" id="AMu-RL-NYW"/>
                             <constraint firstItem="MHR-dm-gft" firstAttribute="trailing" secondItem="95Q-hj-o0K" secondAttribute="trailing" id="Du9-Xr-wPU"/>
