@@ -15,6 +15,9 @@ class DetailAnnotationView: UIView {
     func configure(with annotation: Annotation) {
         self.annotation = annotation
         annotationNameLabel.text = annotation.name
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 10
         
         if let pokestop = annotation as? Pokestop {
             let pokestopUtility = PokestopUtility(pokestop: pokestop)

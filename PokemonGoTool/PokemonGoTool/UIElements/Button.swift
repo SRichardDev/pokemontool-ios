@@ -22,13 +22,10 @@ class Button: UIButton {
     }
     
     private func setup() {
-        layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor
         layer.borderWidth = 1
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .highlighted)
-        backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        addShadow()
         layer.cornerRadius = 10
     }
 
@@ -51,9 +48,7 @@ class Button: UIButton {
     
     private func updateBackgroundColor() {
         if isEnabled {
-            backgroundColor = isHighlighted ? #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.8) : #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         } else {
-            backgroundColor = .lightGray
         }
     }
 }
