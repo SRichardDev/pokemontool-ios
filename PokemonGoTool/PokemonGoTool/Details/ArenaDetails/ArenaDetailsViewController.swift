@@ -16,18 +16,12 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     private let userParticipatesSwitchViewController = ArenaDetailsUserParticipatesViewController.fromStoryboard()
     private let goldSwitchViewController = ArenaDetailsGoldArenaSwitchViewController.fromStoryboard()
     private let meetupTimeSelectionViewController = RaidMeetupTimePickerViewController.fromStoryboard()
-    private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
+//    private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
     private let departureNotificationViewController = DepartureNotificationSwitchViewController.fromStoryboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stackView.addToView(view)
-
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                self.setupUI()
-            }
-        }
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +34,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     }
     
     private func setupUI() {
+        stackView.addToView(view)
         headerViewController.viewModel = viewModel
         headerViewController.coordinator = coordinator
         restTimeViewController.viewModel = viewModel
@@ -54,7 +49,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         departureNotificationViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(headerViewController, to: self)
-        stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
+//        stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
         stackView.addArrangedViewController(restTimeViewController, to: self)
         stackView.addArrangedViewController(meetupTimeViewController, to: self)
         stackView.addArrangedViewController(meetupTimeSelectionViewController, to: self)
@@ -66,7 +61,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         stackView.addArrangedViewController(goldSwitchViewController, to: self)
         stackView.addArrangedViewController(infoViewController, to: self)
 
-        raidBossCollectionViewController.view.isHidden = viewModel.isRaidExpired || viewModel.isRaidBossSelected || !viewModel.isRaidbossActive
+//        raidBossCollectionViewController.view.isHidden = viewModel.isRaidExpired || viewModel.isRaidBossSelected || !viewModel.isRaidbossActive
         restTimeViewController.view.isHidden = viewModel.isRaidExpired
         meetupTimeViewController.view.isHidden = viewModel.isRaidExpired
         meetupTimeSelectionViewController.view.isHidden = viewModel.isRaidExpired
@@ -74,9 +69,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
 
-        raidBossCollectionViewController.level = viewModel.level
-        raidBossCollectionViewController.activateSelectionMode()
-        raidBossCollectionViewController.selectedRaidbossCallback = { [weak self] in self?.viewModel.updateRaidboss($0) }
+//        raidBossCollectionViewController.level = viewModel.level
+//        raidBossCollectionViewController.activateSelectionMode()
+//        raidBossCollectionViewController.selectedRaidbossCallback = { [weak self] in self?.viewModel.updateRaidboss($0) }
 
         #if DEBUG
         let DEBUGdeleteArenaButton = Button()
@@ -130,8 +125,7 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
         case .raidExpired:
             setTitle(viewModel.title)
             headerViewController.updateUI()
-            hideViewControllers([raidBossCollectionViewController,
-                                 restTimeViewController,
+            hideViewControllers([restTimeViewController,
                                  meetupTimeViewController,
                                  meetupTimeSelectionViewController,
                                  userParticipatesSwitchViewController,
