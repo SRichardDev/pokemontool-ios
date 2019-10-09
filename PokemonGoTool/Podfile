@@ -12,8 +12,9 @@ target 'PokemonGoTool' do
   pod 'Firebase/Messaging'
   pod 'CodableFirebase'
   pod 'NotificationBannerSwift'
-  pod 'Cluster'
+  pod 'Cluster', '3.0.0'
   pod 'NVActivityIndicatorView'
   pod 'UIWindowTransitions'
-  pod 'MessageKit'
+  pod 'MessageKit', '3.0.0'
+  pod 'ScrollingContentViewController'
 end

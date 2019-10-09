@@ -1,10 +1,9 @@
 
 import UIKit
 import MessageKit
-import MessageInputBar
 
 struct Message: MessageType {
-    var sender: Sender
+    var sender: SenderType
     var messageId: String
     var sentDate: Date
     var kind: MessageKind
@@ -78,7 +77,7 @@ extension ChatViewController: RaidChatDelegate {
 
 extension ChatViewController: MessagesDataSource {
 
-    func currentSender() -> Sender {
+    func currentSender() -> SenderType {
         return sender
     }
 

@@ -1,5 +1,5 @@
 PODS:
-  - Cluster (2.5.0)
+  - Cluster (3.0.0)
   - CodableFirebase (0.2.1)
   - Firebase/Auth (5.20.2):
     - Firebase/CoreOnly
@@ -75,11 +75,11 @@ PODS:
   - GoogleUtilities/UserDefaults (5.7.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
+  - InputBarAccessoryView (4.2.2)
   - leveldb-library (1.20)
   - MarqueeLabel/Swift (3.2.1)
-  - MessageInputBar/Core (0.4.1)
-  - MessageKit (2.0.0):
-    - MessageInputBar/Core
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -92,24 +92,25 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
   - Protobuf (3.7.0)
+  - ScrollingContentViewController (1.4.0)
   - SnapKit (4.2.0)
   - UIWindowTransitions (0.2.0)
 
 DEPENDENCIES:
-  - Cluster
+  - Cluster (= 3.0.0)
   - CodableFirebase
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
-  - MessageKit
+  - MessageKit (= 3.0.0)
   - NotificationBannerSwift
   - NVActivityIndicatorView
+  - ScrollingContentViewController
   - UIWindowTransitions
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Cluster
+  https://github.com/CocoaPods/Specs.git:
     - CodableFirebase
     - Firebase
     - FirebaseAnalytics
@@ -125,17 +126,20 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - MarqueeLabel
-    - MessageInputBar
-    - MessageKit
     - nanopb
     - NotificationBannerSwift
     - NVActivityIndicatorView
     - Protobuf
     - SnapKit
     - UIWindowTransitions
+  trunk:
+    - Cluster
+    - InputBarAccessoryView
+    - MessageKit
+    - ScrollingContentViewController
 
 SPEC CHECKSUMS:
-  Cluster: fb4bd978d49da048e3f1242aafe57a9720dbabee
+  Cluster: 47f0e962d94ea961cc336d2bf936fe4dc1f61cdb
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
@@ -149,17 +153,18 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
-  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
-  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NotificationBannerSwift: 4483919639202bec56d6bfe8f106ebc352d38bc7
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  ScrollingContentViewController: 1bff026d6f32c15489dcd22821911eda5fda3801
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   UIWindowTransitions: cb662e2ae9e2d1060fcdbe3eb3de9232bedb7612
 
-PODFILE CHECKSUM: 3e92d8dc7909fe5224b8ac6ffbb814f95972f1bd
+PODFILE CHECKSUM: 7ead6b25641c731ceeb5ca02fa1e2ae166725f19
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3

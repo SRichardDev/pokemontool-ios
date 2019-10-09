@@ -1,7 +1,8 @@
 
 import UIKit
+import ScrollingContentViewController
 
-class ArenaDetailsViewController: UIViewController, StoryboardInitialViewController, ArenaDetailsDelegate {
+class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInitialViewController, ArenaDetailsDelegate {
     
     weak var coordinator: MainCoordinator?
     var viewModel: ArenaDetailsViewModel!
@@ -21,7 +22,11 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView = UIView()
+        contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        stackView.addToView(contentView)
         setupUI()
+        title = viewModel.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,11 +35,9 @@ class ArenaDetailsViewController: UIViewController, StoryboardInitialViewControl
             let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
             navigationController?.topViewController?.navigationItem.rightBarButtonItem = shareBarButtonItem
         }
-        setTitle(viewModel.title)
     }
     
     private func setupUI() {
-        stackView.addToView(view)
         headerViewController.viewModel = viewModel
         headerViewController.coordinator = coordinator
         restTimeViewController.viewModel = viewModel

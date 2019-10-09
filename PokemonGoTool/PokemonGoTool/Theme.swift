@@ -101,31 +101,31 @@ extension Theme {
     func apply(for application: UIApplication) {
         application.keyWindow?.tintColor = tint
         
-        let titilliumWebRegular = "Helvetica"
-        let font15 = UIFont(name: titilliumWebRegular, size: 15)!
-        let font12 =  UIFont(name: titilliumWebRegular, size: 12)!
-        let font24 =  UIFont(name: titilliumWebRegular, size: 24)!
-
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
-                                                            for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
-                                                            for: .disabled)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
-                                                            for: .highlighted)
+//        let titilliumWebRegular = "Helvetica"
+//        let font15 = UIFont(name: titilliumWebRegular, size: 15)!
+//        let font12 =  UIFont(name: titilliumWebRegular, size: 12)!
+//        let font24 =  UIFont(name: titilliumWebRegular, size: 24)!
+//
+//        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
+//                                                            for: .normal)
+//        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
+//                                                            for: .disabled)
+//        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font15],
+//                                                            for: .highlighted)
         
-        UITabBarItem.appearance().setTitleTextAttributes([.font: font12],
-                                                         for: .normal)
+//        UITabBarItem.appearance().setTitleTextAttributes([.font: font12],
+//                                                         for: .normal)
         
-        UISegmentedControl.appearance().setTitleTextAttributes([.font: font12], for: .normal)
+//        UISegmentedControl.appearance().setTitleTextAttributes([.font: font12], for: .normal)
         
         
-        UITextView.appearance().with {
-            $0.font = font15
-        }
-        
-        UITextField.appearance().with {
-            $0.font = font15
-        }
+//        UITextView.appearance().with {
+//            $0.font = font15
+//        }
+//
+//        UITextField.appearance().with {
+//            $0.font = font15
+//        }
         
         UITabBar.appearance().with {
             $0.tintColor = tint
@@ -134,8 +134,8 @@ extension Theme {
         UINavigationBar.appearance().with {
             $0.tintColor = tint
 //            $0.shadowImage = tint.as1ptImage()
-            $0.titleTextAttributes = [.foregroundColor: labelColor,
-                                      .font: font24]
+//            $0.titleTextAttributes = [.foregroundColor: labelColor,
+//                                      .font: font24]
         }
         
 //        UICollectionView.appearance().backgroundColor = backgroundColor

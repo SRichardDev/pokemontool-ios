@@ -110,8 +110,9 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         let arenaDetailsViewController = ArenaDetailsViewController.fromStoryboard()
         arenaDetailsViewController.coordinator = self
         arenaDetailsViewController.viewModel = ArenaDetailsViewModel(arena: arena,
-                                                                     firebaseConnector: appModule.firebaseConnector)
-        embedInScrollViewControllerAndPresent(viewController: arenaDetailsViewController)
+                                                                     firebaseConnector: appModule.firebaseConnector)        
+        navigationController.viewControllers = [arenaDetailsViewController]
+        tabBarController.present(navigationController, animated: true)
     }
 
     func showRaidParticipants(_ viewModel: ArenaDetailsViewModel) {
