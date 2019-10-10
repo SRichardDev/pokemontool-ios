@@ -27,13 +27,10 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         stackView.addToView(contentView)
         setupUI()
         title = viewModel.title
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         if !viewModel.isRaidExpired {
             let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
-            navigationController?.topViewController?.navigationItem.rightBarButtonItem = shareBarButtonItem
+            navigationItem.leftBarButtonItem = shareBarButtonItem
         }
     }
     

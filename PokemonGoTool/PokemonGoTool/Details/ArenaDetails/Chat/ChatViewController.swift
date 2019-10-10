@@ -1,6 +1,7 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 struct Message: MessageType {
     var sender: SenderType
@@ -126,9 +127,9 @@ extension ChatViewController: MessagesDisplayDelegate {
     }
 }
 
-extension ChatViewController: MessageInputBarDelegate {
+extension ChatViewController: InputBarAccessoryViewDelegate {
 
-    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let chatMessage = ChatMessage(message: text, senderId: sender.id)
         firebaseConnector.sendMessage(chatMessage, in: &viewModel.arena)
         inputBar.inputTextView.text = ""
