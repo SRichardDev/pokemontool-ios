@@ -54,23 +54,33 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
         submitMapViewController.locationOnMap = coordinate
         let annotation = isPokestop ? submitMapViewController.pokestopAnnotation : submitMapViewController.arenaAnnotation
         submitMapViewController.mapView.addAnnotation(annotation)
-        
-        switch Network.reachability.status {
-        case .unreachable:
-            submitMapViewController.mapView.mapType = .mutedStandard
-        case .wwan:
-            submitMapViewController.mapView.mapType = .mutedStandard
-        case .wifi:
-            submitMapViewController.mapView.mapType = .satelliteFlyover
-        }
-        
+        submitMapViewController.mapView.mapType = .mutedStandard
+
+//        DispatchQueue.global().async {
+//            switch Network.reachability.status {
+//            case .unreachable:
+//                submitMapViewController.mapView.mapType = .mutedStandard
+//            case .wwan:
+//                submitMapViewController.mapView.mapType = .mutedStandard
+//            case .wifi:
+//                submitMapViewController.mapView.mapType = .satelliteFlyover
+//            }
+//        }
         submitMapViewController.isFlyover = true
         return submitMapViewController
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startFlyover()
+    }
+    
+    private func setup() {
         stackView.axis = .vertical
         view.addSubviewAndEdgeConstraints(stackView)
         stackView.addArrangedSubview(mapView)
@@ -93,15 +103,6 @@ class SubmitMapViewController: UIViewController, MKMapViewDelegate {
                              pitch: pitch,
                              heading: heading)
         mapView.camera = camera
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        startFlyover()
     }
     
     @objc
