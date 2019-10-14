@@ -8,7 +8,6 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     
     var children = [Coordinator]()
     var tabBarController = UITabBarController()
-    var navigationController = NavigationController()
     let mainNavigationController = UINavigationController()
     var appModule: AppModule
     var window: UIWindow!
@@ -58,12 +57,13 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         let submitViewController = SubmitViewController.fromStoryboard()
         submitViewController.coordinator = self
         submitViewController.viewModel = viewModel
+        let navigationController = NavigationController()
         navigationController.viewControllers = [submitViewController]
         tabBarController.present(navigationController, animated: true)
         impact()
     }
     
-    func showSubmitName(for viewModel: SubmitViewModel) {
+    func showSubmitName(for viewModel: SubmitViewModel, in navigationController: UINavigationController) {
         let submitNameViewController = SubmitNameViewController.fromStoryboard()
         submitNameViewController.coordinator = self
         submitNameViewController.viewModel = viewModel
@@ -71,7 +71,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         impact()
     }
     
-    func showSubmitCheck(for viewModel: SubmitViewModel) {
+    func showSubmitCheck(for viewModel: SubmitViewModel, in navigationController: UINavigationController) {
         let submitCheckViewController = SubmitCheckViewController.fromStoryboard()
         submitCheckViewController.coordinator = self
         submitCheckViewController.viewModel = viewModel
@@ -84,6 +84,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         submitQuestViewController.coordinator = self
         submitQuestViewController.pokestop = pokestop
         submitQuestViewController.firebaseConnector = appModule.firebaseConnector
+        let navigationController = NavigationController()
         navigationController.viewControllers = [submitQuestViewController]
         tabBarController.present(navigationController, animated: true)
         impact()
@@ -110,19 +111,20 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         let arenaDetailsViewController = ArenaDetailsViewController.fromStoryboard()
         arenaDetailsViewController.coordinator = self
         arenaDetailsViewController.viewModel = ArenaDetailsViewModel(arena: arena,
-                                                                     firebaseConnector: appModule.firebaseConnector)        
+                                                                     firebaseConnector: appModule.firebaseConnector)
+        let navigationController = NavigationController()
         navigationController.viewControllers = [arenaDetailsViewController]
         tabBarController.present(navigationController, animated: true)
     }
 
-    func showRaidParticipants(_ viewModel: ArenaDetailsViewModel) {
+    func showRaidParticipants(_ viewModel: ArenaDetailsViewModel, in navigationController: UINavigationController) {
         let participantsTableViewController = ArenaDetailsParticipantsTableViewController.fromStoryboard()
         participantsTableViewController.viewModel = viewModel
         navigationController.pushViewController(participantsTableViewController, animated: true)
         impact()
     }
 
-    func showRaidChat(_ viewModel: ArenaDetailsViewModel) {
+    func showRaidChat(_ viewModel: ArenaDetailsViewModel, in navigationController: UINavigationController) {
         let chatViewController = ChatViewController.fromStoryboard()
         chatViewController.viewModel = viewModel
         chatViewController.firebaseConnector = appModule.firebaseConnector
@@ -159,20 +161,22 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     func showMapFilter() {
         let mapFilterViewController = MapFilterViewController.fromStoryboard()
         let scrollableViewController = ScrollableViewController(childViewController: mapFilterViewController)
+        let navigationController = NavigationController()
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
         impact()
     }
     
     func showPokemonSelection(viewModel: ArenaDetailsViewModel) {
-        let pokemonTableViewController = PokemonTableViewController.fromStoryboard()
-        pokemonTableViewController.viewModel = viewModel
-        navigationController.pushViewController(pokemonTableViewController, animated: true)
-        impact()
+//        let pokemonTableViewController = PokemonTableViewController.fromStoryboard()
+//        pokemonTableViewController.viewModel = viewModel
+//        navigationController.pushViewController(pokemonTableViewController, animated: true)
+//        impact()
     }
     
     private func embedInScrollViewControllerAndPresent(viewController: UIViewController) {
         let scrollableViewController = ScrollableViewController(childViewController: viewController)
+        let navigationController = NavigationController()
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
         impact()

@@ -75,7 +75,8 @@ class SubmitNameViewController: UIViewController, UITextFieldDelegate, Storyboar
         if !viewModel.isPokestop {
             viewModel.submitType = .arena(isEX: isExSwitch?.isOn)
         }
-        coordinator?.showSubmitCheck(for: viewModel)
+        guard let navigationController = navigationController else { return }
+        coordinator?.showSubmitCheck(for: viewModel, in: navigationController)
     }
     
     private func animateBottomButtonConstraint(to constant: CGFloat) {

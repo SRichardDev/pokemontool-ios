@@ -22,10 +22,12 @@ class ArenaDetailsParticipantsOverviewViewController: UIViewController, Storyboa
     }
 
     @IBAction func showParticipantsList(_ sender: Any) {
-        coordinator?.showRaidParticipants(viewModel)
+        guard let navigationController = navigationController else { return }
+        coordinator?.showRaidParticipants(viewModel, in: navigationController)
     }
 
     @IBAction func showChat(_ sender: Any) {
-        coordinator?.showRaidChat(viewModel)
+        guard let navigationController = navigationController else { return }
+        coordinator?.showRaidChat(viewModel, in: navigationController)
     }
 }

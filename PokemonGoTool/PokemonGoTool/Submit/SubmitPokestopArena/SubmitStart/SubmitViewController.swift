@@ -42,6 +42,7 @@ class SubmitViewController: UIViewController, StoryboardInitialViewController, M
     }
     
     @IBAction func bottomButtonTapped(_ sender: Any) {
-        coordinator?.showSubmitName(for: viewModel)
+        guard let navigationController = navigationController else { return }
+        coordinator?.showSubmitName(for: viewModel, in: navigationController)
     }
 }

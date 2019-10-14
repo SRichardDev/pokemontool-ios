@@ -88,7 +88,6 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     deinit {
-        print("Deinit ArenaDetailsViewModel")
         guard let meetupId = arena.raid?.raidMeetupId else { return }
         firebaseConnector.stopObservingRaidMeetup(for: meetupId)
     }
