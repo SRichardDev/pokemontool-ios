@@ -162,6 +162,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         let mapFilterViewController = MapFilterViewController.fromStoryboard()
         let scrollableViewController = ScrollableViewController(childViewController: mapFilterViewController)
         let navigationController = NavigationController()
+        navigationController.modalPresentationStyle = .fullScreen
         navigationController.viewControllers = [scrollableViewController]
         tabBarController.present(navigationController, animated: true)
         impact()
