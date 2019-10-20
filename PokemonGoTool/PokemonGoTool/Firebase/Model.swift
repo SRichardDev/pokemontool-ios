@@ -112,7 +112,9 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
     }
 }
 
-struct Raid: Codable, Equatable {
+struct Raid: FirebaseCodable, Equatable {
+    
+    var id: String!
     
     var isSubmittedBeforeHatchTime: Bool {
         get {
@@ -150,27 +152,13 @@ struct Raid: Codable, Equatable {
     }
     
     var hatchDate: Date? {
-        get {
-            if hatchTime == nil {
-                guard let endDate = endDate else { return nil }
-                let end = Calendar.current.date(byAdding: .minute, value: -45, to: endDate)
-                return end
-            }
-            
-            guard let hatchTime = hatchTime, let submitDate = submitDate else { return nil }
-            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return nil }
-            let hatchDate = DateUtility.date(for: hatchTime)
-            
-            return hatchDate
-        }
+        guard let hatchTime = hatchTime else { return nil }
+        return Date(timeIntervalSince1970: hatchTime/1000)
     }
     
     var endDate: Date? {
-        get {
-            guard let endTime = endTime else { return nil }
-            let endDate = DateUtility.date(for: endTime)
-            return endDate
-        }
+        guard let endTime = endTime else { return nil }
+        return Date(timeIntervalSince1970: endTime/1000)
     }
     
     var image: UIImage? {
@@ -186,64 +174,43 @@ struct Raid: Codable, Equatable {
     
     var timestamp: TimeInterval?
     let level: Int
-    var hatchTime: String?
+    var hatchTime: TimeInterval?
+    var endTime: TimeInterval?
     var raidBossId: String?
-    var endTime: String?
-    var raidMeetupId: String?
+    var meetup: RaidMeetup?
     var submitter: String?
     var submitDate: Date? {
         return timestamp?.dateFromUnixTime()
     }
     
-    init(level: Int, hatchTime: String, endTime: String, submitter: String, raidBoss: String? = nil, raidMeetupId: String?) {
+    init(level: Int, hatchTime: TimeInterval, endTime: TimeInterval, submitter: String, raidBoss: String? = nil, meetup: RaidMeetup) {
         self.level = level
         self.hatchTime = hatchTime
         self.endTime = endTime
         self.submitter = submitter
         self.raidBossId = raidBoss
-        self.raidMeetupId = raidMeetupId
-    }
-    
-    init(level: Int, hatchTime: String, endTime: String, submitter: String, raidBoss: String? = nil) {
-        self.level = level
-        self.hatchTime = hatchTime
-        self.submitter = submitter
-        self.raidBossId = raidBoss
-        self.endTime = endTime
-    }
-    
-    init(level: Int, raidBoss: String? = nil, endTime: String, submitter: String, raidMeetupId: String?) {
-        self.level = level
-        self.raidBossId = raidBoss
-        self.endTime = endTime
-        self.submitter = submitter
-        self.raidMeetupId = raidMeetupId
-    }
-    
-    init(level: Int, raidBoss: String? = nil, endTime: String, submitter: String) {
-        self.level = level
-        self.raidBossId = raidBoss
-        self.endTime = endTime
-        self.submitter = submitter
+        self.meetup = meetup
     }
 }
 
-struct RaidMeetup: FirebaseCodable, Equatable {
+struct RaidMeetup: Codable, Equatable {
     
     typealias UserId = String
     
-    var id: String!
-    var meetupTime: String?
+    var meetupTime: TimeInterval
     var participants: [UserId: String]?
     
     var meetupDate: Date? {
         get {
-            guard let meetupTime = meetupTime else { return nil }
-            return DateUtility.date(for: meetupTime)
+            return meetupTime == 0 ? nil : Date(timeIntervalSince1970: meetupTime/1000)
         }
     }
     
-    init(meetupTime: String? = nil) {
+    var isTimeSet: Bool {
+        return meetupTime != 0
+    }
+    
+    init(meetupTime: TimeInterval) {
         self.meetupTime = meetupTime
     }
 }

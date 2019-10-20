@@ -17,7 +17,7 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
         submitMeetupTimeButton.isHidden = viewModel.meetupTimeSelectionType == .initial
         
         let originalDate = Date()
-        viewModel.selectedMeetupTime = selectedTime(date: originalDate)
+        viewModel.selectedMeetupTime = originalDate.timestamp
         let calendar = Calendar.current
         let minDate = calendar.date(byAdding: .minute,
                                     value: 0,
@@ -32,7 +32,8 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
     }
     
     @IBAction func timePickerDidChange(_ sender: UIDatePicker) {
-        viewModel.selectedMeetupTime = selectedTime(date: sender.date)
+        let timeinterval = sender.date.timestamp
+        viewModel.selectedMeetupTime = timeinterval
     }
     
     private func selectedTime(date: Date) -> String {
@@ -42,7 +43,7 @@ class RaidMeetupTimePickerViewController: UIViewController, StoryboardInitialVie
         let selectedTime: String = dateFormatter.string(from: date)
         return selectedTime
     }
-    
+        
     @IBAction func didTapSubmitMeetupTime(_ sender: Any) {
         viewModel.meetupTimeDidChange()
     }

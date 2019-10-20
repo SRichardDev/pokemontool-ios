@@ -35,7 +35,10 @@ class ArenaConnector {
                     var arenas: Arenas = [:]
                     
                     for child in result {
-                        guard let arena: Arena = decode(from: child) else { continue }
+                        guard let arena: Arena = decode(from: child) else {
+                            self.arenasRef.child(<#T##pathString: String##String#>)
+                            continue
+                        }
                         arenas[arena.id] = arena
                         
                         let anyLevelFilterActive = (self.activeLevelFilter?.values.reduce(false) { $0 || $1 }) ?? false

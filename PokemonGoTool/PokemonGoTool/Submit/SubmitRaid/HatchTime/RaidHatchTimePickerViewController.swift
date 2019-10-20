@@ -35,7 +35,7 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
         hatchTimePointPicker.datePickerMode = .time
         hatchTimePointPicker.timeZone = TimeZone.current
         let currentDate = Date()
-        viewModel.selectedHatchTime = selectedTime(date: currentDate)
+//        viewModel.selectedHatchTime = selectedTime(date: currentDate)
         let calendar = Calendar.current
         let minDate = calendar.date(byAdding: .minute, value: -60, to: currentDate, wrappingComponents: false)
         let maxDate = calendar.date(byAdding: .minute, value: 60, to: currentDate, wrappingComponents: false)
@@ -45,7 +45,7 @@ class RaidHatchTimePickerViewController: UIViewController, StoryboardInitialView
     
     @IBAction func timePickerDidChange(_ sender: UIDatePicker) {
 //        let timeDifference = Calendar.current.dateComponents([.minute], from: Date(), to: sender.date)
-        viewModel.selectedHatchTime = selectedTime(date: sender.date)
+//        viewModel.selectedHatchTime = selectedTime(date: sender.date)
     }
     
     @IBAction func timeFormatSegmentedControlDidChange(_ sender: UISegmentedControl) {

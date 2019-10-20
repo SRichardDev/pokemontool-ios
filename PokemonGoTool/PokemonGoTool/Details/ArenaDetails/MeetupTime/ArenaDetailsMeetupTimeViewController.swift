@@ -13,10 +13,12 @@ class ArenaDetailsMeetupTimeViewController: UIViewController, StoryboardInitialV
         super.viewDidLoad()
         titleLabel.text = "Treffpunkt:"
         changeMeetupTimeButton.setTitle("Treffpunkt ändern", for: .normal)
+        updateUI()
     }
     
     func updateUI() {
-        meetupTimeLabel.text = viewModel.meetup?.meetupTime
+        guard let date = viewModel.meetup?.meetupDate else { return }
+        meetupTimeLabel.text = DateUtility.timeString(for: date)
     }
     
     @IBAction func didTapChangeMeetupTime(_ sender: Any) {

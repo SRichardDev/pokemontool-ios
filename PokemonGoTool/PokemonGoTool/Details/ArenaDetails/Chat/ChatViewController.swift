@@ -34,8 +34,8 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         maintainPositionOnKeyboardFrameChanged = true
 
         firebaseConnector.raidChatDelegate = self
-        guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
-        firebaseConnector.observeRaidChat(for: raidMeetupId)
+//        guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
+//        firebaseConnector.observeRaidChat(for: raidMeetupId)
         
         messagesCollectionView.backgroundColor = .systemBackground
         messageInputBar.backgroundColor = .systemBackground

@@ -49,6 +49,12 @@ class DepartureNotificationManager {
             center.add(request)
             print("👫🔔 Notification scheduled at: \(alarmTime)")
             timeStringCompletion(time)
+            
+            center.getPendingNotificationRequests { requests in
+                requests.forEach {
+                    print($0.identifier)
+                }
+            }
         }
         
         NotificationBannerManager.shared.show(.custom, title: "DEBUG", message: "Added Departure Notification")

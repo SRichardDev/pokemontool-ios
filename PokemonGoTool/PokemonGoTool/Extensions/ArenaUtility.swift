@@ -7,8 +7,8 @@ class ArenaUtility {
         
         if let raid = arena.raid, raid.isActive {
             let levelStars = String(repeating: "⭐️", count: raid.level)
-            let hatchTime = raid.hatchTime ?? "--:--"
-            let endTime = raid.endTime ?? "--:--"
+            let hatchTime = "TODO"//raid.hatchTime ?? "--:--"
+            let endTime = "TODO" //raid.endTime ?? "--:--"
 //            let particpantsCount = raid.meetup?.participants?.count ?? 0
             
             let formattedString = """

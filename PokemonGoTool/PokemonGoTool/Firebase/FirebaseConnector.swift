@@ -31,7 +31,7 @@ class FirebaseConnector {
 
     weak var userDelegate: FirebaseUserDelegate?
     weak var startUpDelegate: FirebaseStartupDelegate?
-    weak var raidMeetupDelegate: RaidMeetupDelegate?
+    weak var raidDelegate: RaidDelegate?
     weak var raidChatDelegate: RaidChatDelegate?
 
     var isSignedIn: Bool {
@@ -175,33 +175,42 @@ class FirebaseConnector {
     }
     
     @discardableResult
-    func userParticipates(in raid: Raid, for arena: inout Arena) -> Arena {
-        if let meetupId = raid.raidMeetupId {
-            guard let userId = user?.id else { fatalError() }
-            let data = [userId: ""]
-            raidMeetupsRef
-                .child(meetupId)
-                .child(DatabaseKeys.participants)
-                .updateChildValues(data)
-            subscribeToTopic(meetupId, topicType: .raidMeetups)
-        }
+    func userParticipatesInRaid(in arena: inout Arena) -> Arena {
+        guard let userId = user?.id else { fatalError() }
+        let data = [userId: ""]
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .child(DatabaseKeys.meetup)
+            .child(DatabaseKeys.participants)
+            .updateChildValues(data)
+        
+        #warning("TODO: subscribe to topic")
         return arena
     }
     
-    func userCanceled(in meetup: RaidMeetup) {
+    func userCanceledInRaid(in arena: inout Arena) {
         guard let userId = user?.id else { fatalError() }
-        raidMeetupsRef
-            .child(meetup.id)
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .child(DatabaseKeys.meetup)
             .child(DatabaseKeys.participants)
             .child(userId)
             .removeValue()
-        unsubscribeFormTopic(meetup.id, topicType: .raidMeetups)
+        #warning("TODO: unsubscribe from topic")
+
     }
     
-    func setMeetupTime(meetupTime: String, raidMeetup: RaidMeetup) {
-        let data = ["meetupTime": meetupTime]
-        raidMeetupsRef
-            .child(raidMeetup.id)
+    func setMeetupTime(_ meetupTime: TimeInterval, in arena: Arena) {
+        let data = [DatabaseKeys.meetupTime: meetupTime]
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .child(DatabaseKeys.meetup)
             .updateChildValues(data)
     }
     
@@ -222,12 +231,12 @@ class FirebaseConnector {
     }
     
     private func associateMeetupIdToRaid(id: String, arena: inout Arena) {
-        arena.raid?.raidMeetupId = id
-        arenasRef
-            .child(arena.geohash)
-            .child(arena.id)
-            .child(DatabaseKeys.raid)
-            .updateChildValues([DatabaseKeys.raidMeetupId : id])
+//        arena.raid?.raidMeetupId = id
+//        arenasRef
+//            .child(arena.geohash)
+//            .child(arena.id)
+//            .child(DatabaseKeys.raid)
+//            .updateChildValues([DatabaseKeys.raidMeetupId : id])
     }
     
     private func saveUserInRaidMeetup(for id: String) {
@@ -252,13 +261,13 @@ class FirebaseConnector {
                 .setValue(dataWithTimestamp)
         }
         
-        if let meetupId = arena.raid?.raidMeetupId {
-            sendMessage(meetupId)
-        } else {
-            let meetupId = saveRaidMeetup(raidMeetup: RaidMeetup())
-            associateMeetupIdToRaid(id: meetupId, arena: &arena)
-            sendMessage(meetupId)
-        }
+//        if let meetupId = arena.raid?.raidMeetupId {
+//            sendMessage(meetupId)
+//        } else {
+//            let meetupId = saveRaidMeetup(raidMeetup: RaidMeetup())
+//            associateMeetupIdToRaid(id: meetupId, arena: &arena)
+//            sendMessage(meetupId)
+//        }
     }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
@@ -283,15 +292,24 @@ class FirebaseConnector {
         }
     }
 
-    func observeRaidMeetup(for meetupId: String) {
-        raidMeetupsRef.child(meetupId).removeAllObservers()
+    func observeRaid(in arena: Arena) {
         
-        raidMeetupsRef
-            .child(meetupId)
-            .observe(.value, with: { snapshot in
-            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
-            self.raidMeetupDelegate?.didUpdateRaidMeetup(meetup)
-        })
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .observe(.value) { snapshot in
+                guard let raid: Raid = decode(from: snapshot) else { return }
+                self.raidDelegate?.didUpdateRaid(raid)
+        }
+//        raidMeetupsRef.child(meetupId).removeAllObservers()
+//
+//        raidMeetupsRef
+//            .child(meetupId)
+//            .observe(.value, with: { snapshot in
+//            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
+//            self.raidMeetupDelegate?.didUpdateRaidMeetup(meetup)
+//        })
     }
     
     func stopObservingRaidMeetup(for meetupId: String) {

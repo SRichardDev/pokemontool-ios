@@ -7,6 +7,7 @@ struct DatabaseKeys {
     static let registeredUsersPokestops = "registeredUsersPokestops"
     static let registeredUsersArenas = "registeredUsersArenas"
     static let raidMeetups = "raidMeetups"
+    static let meetup = "meetup"
     static let users = "users"
     static let quest = "quest"
     static let raid = "raid"
@@ -28,6 +29,7 @@ struct DatabaseKeys {
     static let team = "team"
     static let level = "level"
     static let trainerCode = "trainerCode"
+    static let meetupTime = "meetupTime"
     
     @available(*, deprecated, message: "Old - remove soon")
     static let subscribedGeohashPokestops = "subscribedGeohashPokestops"
@@ -65,8 +67,8 @@ protocol FirebaseStartupDelegate: class {
 protocol FirebaseStatusPresentable: class {
 }
 
-protocol RaidMeetupDelegate: class {
-    func didUpdateRaidMeetup(_ changedRaidMeetup: RaidMeetup)
+protocol RaidDelegate: class {
+    func didUpdateRaid(_ changedRaid: Raid)
 }
 
 protocol RaidChatDelegate: class {

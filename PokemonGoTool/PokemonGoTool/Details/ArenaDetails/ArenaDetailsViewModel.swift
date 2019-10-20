@@ -5,7 +5,6 @@ import CodableFirebase
 import UserNotifications
 
 enum ArenaDetailsUpdateType {
-    case meetupInit
     case meetupChanged
     case timeLeftChanged(_ timeLeft: String)
     case hatchTimeLeftChanged(_ timeLeft: String)
@@ -27,12 +26,14 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var firebaseConnector: FirebaseConnector
     weak var delegate: ArenaDetailsDelegate?
     var arena: Arena
-    var meetup: RaidMeetup?
+    var meetup: RaidMeetup? {
+        return arena.raid?.meetup
+    }
     var timeLeft: String?
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
-    var selectedMeetupTime: String?
+    var selectedMeetupTime: TimeInterval?
     var meetupTimeSelectionType: MeetupTimeSelectionType = .change
     var participants = [String: PublicUserData]()
     var hasActiveRaid: Bool { return !(arena.raid?.isExpired ?? true) }
@@ -40,10 +41,10 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var isRaidExpired: Bool { return arena.raid?.isExpired ?? true }
     var isRaidBossSelected: Bool { return arena.raid?.raidBossId != nil }
     var level: Int { return arena.raid?.level ?? 0 }
-    var isTimeSetForMeetup: Bool {return meetup?.meetupTime != "--:--" }
+    var isTimeSetForMeetup: Bool {meetup?.isTimeSet ?? false }
     var isGoldArena: Bool { return arena.isGoldArena ?? false }
-    var hatchTime: String { return arena.raid?.hatchTime ?? "00:00" }
-    var endTime: String { return arena.raid?.endTime ?? "00:00" }
+    var hatchTime: TimeInterval { return arena.raid?.hatchTime ?? 0 }
+    var endTime: TimeInterval { return arena.raid?.endTime ?? 0 }
     var coordinate: CLLocationCoordinate2D { return arena.coordinate }
     var headerImage: UIImage { return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage() }
     var headerTitle: String { return arena.name }
@@ -60,19 +61,18 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     
     var isDepartureNotificationSet: Bool {
         guard let meetup = meetup else { return false }
-        return UserDefaults.standard.bool(forKey: meetup.id + "-departureNotification")
+        return false //UserDefaults.standard.bool(forKey: meetup.id + "-departureNotification")
     }
     
     var departureNotificationTime: String? {
         guard let meetup = meetup else { return nil }
-        return UserDefaults.standard.string(forKey: meetup.id + "-meetupTime")
+        return "" //UserDefaults.standard.string(forKey: meetup.id + "-meetupTime")
     }
     
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
 
-        firebaseConnector.raidMeetupDelegate = self
 
         guard let raid = arena.raid else { return }
         guard !raid.isExpired else { return }
@@ -82,25 +82,25 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         } else {
             startTimeLeftTimer()
         }
-
-        guard let meetupId = arena.raid?.raidMeetupId else { return }
-        firebaseConnector.observeRaidMeetup(for: meetupId)
+        
+        firebaseConnector.raidDelegate = self
+        firebaseConnector.observeRaid(in: arena)
+        
+//        guard let meetupId = arena.raid?.raidMeetupId else { return }
+//        firebaseConnector.observeRaidMeetup(for: meetupId)
     }
     
     deinit {
-        guard let meetupId = arena.raid?.raidMeetupId else { return }
-        firebaseConnector.stopObservingRaidMeetup(for: meetupId)
+//        guard let meetupId = arena.raid?.raidMeetupId else { return }
+//        firebaseConnector.stopObservingRaidMeetup(for: meetupId)
     }
         
     func userParticipates(_ isParticipating: Bool) {
-        guard let meetup = meetup else { return }
-        
         if isParticipating {
-            guard let raid = arena.raid else { fatalError() }
-            self.arena = firebaseConnector.userParticipates(in: raid, for: &arena)
+            self.arena = firebaseConnector.userParticipatesInRaid(in: &arena)
             print("🏟 User participates in meetup")
         } else {
-            firebaseConnector.userCanceled(in: meetup)
+            firebaseConnector.userCanceledInRaid(in: &arena)
             removeDepartureNotification()
             print("🏟 User canceled meetup")
         }
@@ -108,8 +108,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     private func submitMeetupTime() {
-        guard let selectedMeetupTime = selectedMeetupTime, let meetup = meetup else { return }
-        firebaseConnector.setMeetupTime(meetupTime: selectedMeetupTime, raidMeetup: meetup)
+        guard let selectedMeetupTime = selectedMeetupTime else { return }
+        firebaseConnector.setMeetupTime(selectedMeetupTime, in: arena)
     }
     
     func changeGoldArena(isGold: Bool) {
@@ -208,30 +208,30 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     func addDepartureNotification(departureTimeStringCompletion: @escaping (_ time: String, _ error: CustomError?) -> ()) {
-        guard let meetup = meetup, let meetupDate = meetup.meetupDate else { return }
-        guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else {
-            let error = CustomError(type: .userLocationNotFound)
-            departureTimeStringCompletion("", error)
-            return
-        }
-
-
-        DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-                                                               destinationCoordinate: arena.coordinate,
-                                                               destinationName: arena.name,
-                                                               meetupDate: meetupDate,
-                                                               identifier: meetup.id) { time in
-                                                                UserDefaults.standard.set(true, forKey: meetup.id + "-departureNotification")
-                                                                UserDefaults.standard.set(time, forKey: meetup.id + "-meetupTime")
-                                                                departureTimeStringCompletion(time, nil)
-        }
+//        guard let meetup = meetup, let meetupDate = meetup.meetupDate else { return }
+//        guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else {
+//            let error = CustomError(type: .userLocationNotFound)
+//            departureTimeStringCompletion("", error)
+//            return
+//        }
+//
+//
+//        DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+//                                                               destinationCoordinate: arena.coordinate,
+//                                                               destinationName: arena.name,
+//                                                               meetupDate: meetupDate,
+//                                                               identifier: meetup.id) { time in
+//                                                                UserDefaults.standard.set(true, forKey: meetup.id + "-departureNotification")
+//                                                                UserDefaults.standard.set(time, forKey: meetup.id + "-meetupTime")
+//                                                                departureTimeStringCompletion(time, nil)
+//        }
     }
     
     func removeDepartureNotification() {
-        guard let meetup = meetup else { return }
-        DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
-        UserDefaults.standard.removeObject(forKey: meetup.id + "-departureNotification")
-        UserDefaults.standard.removeObject(forKey: meetup.id + "-meetupTime")
+//        guard let meetup = meetup else { return }
+//        DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
+//        UserDefaults.standard.removeObject(forKey: meetup.id + "-departureNotification")
+//        UserDefaults.standard.removeObject(forKey: meetup.id + "-meetupTime")
     }
     
     func formattedRaidTextForSharing() -> String {
@@ -244,7 +244,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         🐲: \(RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)?.name ?? "---"), ⭐️: \(arena.raid?.level ?? 0)
         🏟: \(arena.name)
         ⌚️: \(dateFormatter.string(from: arena.raid?.hatchDate ?? Date())) - \(dateFormatter.string(from: arena.raid?.endDate ?? Date()))
-        👫: \(meetup?.meetupTime ?? "")
+        👫: \(meetup?.meetupTime /*?? ""*/)
         📍: https://maps.google.com/?q=\(arena.latitude),\(arena.longitude)\n
         \(participantsString)
         """
@@ -274,45 +274,48 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
 }
 
-extension ArenaDetailsViewModel: RaidMeetupDelegate {
+extension ArenaDetailsViewModel: RaidDelegate {
+    
+    func didUpdateRaid(_ changedRaid: Raid) {
+        guard let meetup = changedRaid.meetup else { return }
+        updateParticipants(in: meetup)
+        updateMeetupTime(in: meetup)
+        
+        arena.raid = changedRaid
+    }
+    
+    private func updateMeetupTime(in meetup: RaidMeetup) {
+        let meetupTimeWasSet = meetup.meetupDate != self.meetup?.meetupDate
+        let meetupTimeWasNotSetBefore = self.meetup?.meetupDate == nil
 
-    func didUpdateRaidMeetup(_ changedRaidMeetup: RaidMeetup) {
-        
-        if meetup == nil {
-            self.meetup = changedRaidMeetup
-            delegate?.update(of: .meetupInit)
-        }
-        
-        let meetupTimeWasSet = changedRaidMeetup.meetupDate != meetup?.meetupDate
-        let meetupTimeWasNotSetBefore = meetup?.meetupDate == nil
-        
         if meetupTimeWasSet && meetupTimeWasNotSetBefore {
             self.delegate?.update(of: .changeMeetupTime)
         }
-        
+
         if meetupTimeWasSet && !meetupTimeWasNotSetBefore {
             removeDepartureNotification()
             self.delegate?.update(of: .updateMeetupTime)
         }
-        
-        self.participants.removeAll()
-        self.meetup = changedRaidMeetup
-        
-        guard let userIds = changedRaidMeetup.participants else {
+    }
+    
+    private func updateParticipants(in meetup: RaidMeetup) {
+        participants.removeAll()
+        guard let userIds = meetup.participants else {
             DispatchQueue.main.async {
                 self.delegate?.update(of: .meetupChanged)
             }
             return
         }
-        
+
         userIds.keys.forEach { userId in
             firebaseConnector.loadPublicUserData(for: userId) { [weak self] publicUserData in
                 self?.participants[userId] = publicUserData
                 DispatchQueue.main.async {
                     self?.delegate?.update(of: .meetupChanged)
-                }
-                if self?.isUserParticipating ?? false {
-                    self?.delegate?.update(of: .userParticipatesChanged(true))
+                    
+                    if self?.isUserParticipating ?? false {
+                        self?.delegate?.update(of: .userParticipatesChanged(true))
+                    }
                 }
             }
         }

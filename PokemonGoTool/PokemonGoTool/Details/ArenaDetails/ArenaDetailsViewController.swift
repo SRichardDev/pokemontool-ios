@@ -69,6 +69,9 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
 
+        meetupTimeViewController.view.isVisible = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
+        meetupTimeSelectionViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
+
 //        raidBossCollectionViewController.level = viewModel.level
 //        raidBossCollectionViewController.activateSelectionMode()
 //        raidBossCollectionViewController.selectedRaidbossCallback = { [weak self] in self?.viewModel.updateRaidboss($0) }
@@ -95,9 +98,6 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
 
     func update(of type: ArenaDetailsUpdateType) {
         switch type {
-        case .meetupInit:
-            meetupTimeViewController.view.isVisible = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
-            meetupTimeSelectionViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
         case .meetupChanged:
             participantsOverviewViewController.updateUI()
             userParticipatesSwitchViewController.updateUI()

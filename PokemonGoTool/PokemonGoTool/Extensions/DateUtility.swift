@@ -48,3 +48,9 @@ class DateUtility {
         return selectedTime
     }
 }
+
+extension Date {
+    var timestamp: TimeInterval {
+        return self.timeIntervalSince1970.rounded() * 1000
+    }
+}
