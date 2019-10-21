@@ -7,12 +7,12 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
     @IBOutlet var titleLabel: Label!
     @IBOutlet var pickerView: UIPickerView!
     
-    var pickerViewRows: [String] {
+    var pickerViewRows: [Int] {
         get {
-            var array = [String]()
+            var array = [Int]()
             array.reserveCapacity(45)
             for index in 1...45 {
-                array.append("\(index)")
+                array.append(index)
             }
             return array.reversed()
         }
@@ -26,11 +26,11 @@ class RaidTimeLeftPickerViewController: UIViewController, StoryboardInitialViewC
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.pickerViewRows[row]
+        return "\(self.pickerViewRows[row])"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        viewModel.selectedTimeLeft = pickerViewRows[row]
+        viewModel.timeLeft = pickerViewRows[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

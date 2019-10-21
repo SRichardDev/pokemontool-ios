@@ -32,7 +32,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     var isUserParticipating = false
     var selectedRaidLevel = 3
     var selectedRaidBoss: RaidbossDefinition?
-    var selectedTimeLeft = "45"
+    var timeLeft = 45
     var meetupTimeSelectionType: MeetupTimeSelectionType = .initial
     var hatchDate: Date?
     var meetupDate: Date?
@@ -74,21 +74,16 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     
     func submitRaid() {
         guard let userId = firebaseConnector.user?.id else { NotificationBannerManager.shared.show(.unregisteredUser); return}
-        
-//        deleteOldRaidMeetupIfNeeded()
-        
-        var meetup: RaidMeetup
-
-        if isUserParticipating {
-            guard let meetupDate = meetupDate else { fatalError() }
-            meetup = RaidMeetup(meetupDate: meetupDate)
-        } else {
-            meetup = RaidMeetup(meetupDate: nil)
-        }
-        
+                
+        var meetup = RaidMeetup(meetupDate: meetupDate)
 
         if isUserParticipating {
             meetup.participants = [userId: ""]
+        }
+        
+        if isRaidAlreadyRunning {
+            let time = TimeInterval(-((45 - timeLeft) * 60))
+            hatchDate = Date().addingTimeInterval(time)
         }
         
         let raid = Raid(level: selectedRaidLevel,
@@ -97,39 +92,8 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
                         submitter: userId,
                         meetup: meetup)
         arena.raid = raid
-    
-//        if isRaidAlreadyRunning {
-//            let meetupId = firebaseConnector.saveRaidMeetup(raidMeetup: meetup)
-//            let raid = Raid(level: selectedRaidLevel,
-//                            raidBoss: selectedRaidBoss?.id,
-//                            endTime: endTime,
-//                            submitter: userId)
-//            arena.raid = raid
-//
-//            if isUserParticipating {
-//                firebaseConnector.userParticipates(in: raid, for: &arena)
-//            }
-//
-//        } else {
-//            let meetupId = firebaseConnector.saveRaidMeetup(raidMeetup: meetup)
-//            let raid = Raid(level: selectedRaidLevel,
-//                            hatchTime: selectedHatchTime,
-//                            endTime: endTime,
-//                            submitter: userId)
-//            arena.raid = raid
-//
-//            if isUserParticipating {
-//                firebaseConnector.userParticipates(in: raid, for: &arena)
-//            }
-//        }
         firebaseConnector.saveRaid(arena: arena)
         delegate?.update(of: .raidSubmitted)
-    }
-    
-    private func deleteOldRaidMeetupIfNeeded() {
-//        if let oldRaidMeetupId = arena.raid?.raidMeetupId {
-//            firebaseConnector.deleteOldRaidMeetup(for: oldRaidMeetupId)
-//        }
     }
     
     func meetupTimeDidChange() {
