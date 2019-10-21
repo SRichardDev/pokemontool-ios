@@ -20,7 +20,7 @@ enum MeetupTimeSelectionType {
 
 protocol MeetupTimeSelectable {
     var meetupTimeSelectionType: MeetupTimeSelectionType { get set }
-    var selectedMeetupTime: TimeInterval? { get set }
+    var meetupDate: Date? { get set }
     func meetupTimeDidChange()
 }
 
@@ -32,14 +32,12 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     var isUserParticipating = false
     var selectedRaidLevel = 3
     var selectedRaidBoss: RaidbossDefinition?
-    var selectedHatchTime: TimeInterval = 0
-    var selectedMeetupTime: TimeInterval?
     var selectedTimeLeft = "45"
     var meetupTimeSelectionType: MeetupTimeSelectionType = .initial
-    var endTime: TimeInterval {
-            return 0
-//            guard let hatchDate = DateUtility.date(for: selectedHatchTime) else { return 0 }
-//            return DateUtility.timeStringWithAddedMinutesToDate(minutes: Int(selectedTimeLeft.double), date: hatchDate)
+    var hatchDate: Date?
+    var meetupDate: Date?
+    var endDate: Date? {
+        return hatchDate?.addingTimeInterval(45 * 60)
     }
 
     var imageName: String {
@@ -82,10 +80,10 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
         var meetup: RaidMeetup
 
         if isUserParticipating {
-            guard let meetupTime = selectedMeetupTime else { fatalError() }
-            meetup = RaidMeetup(meetupTime: meetupTime)
+            guard let meetupDate = meetupDate else { fatalError() }
+            meetup = RaidMeetup(meetupDate: meetupDate)
         } else {
-            meetup = RaidMeetup(meetupTime: 0)
+            meetup = RaidMeetup(meetupDate: nil)
         }
         
 
@@ -94,8 +92,8 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
         }
         
         let raid = Raid(level: selectedRaidLevel,
-                        hatchTime: selectedHatchTime,
-                        endTime: endTime,
+                        hatchDate: hatchDate,
+                        endDate: endDate,
                         submitter: userId,
                         meetup: meetup)
         arena.raid = raid

@@ -69,7 +69,7 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
 
-        meetupTimeViewController.view.isVisible = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
+        meetupTimeViewController.view.isHidden = !viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
         meetupTimeSelectionViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
 
 //        raidBossCollectionViewController.level = viewModel.level

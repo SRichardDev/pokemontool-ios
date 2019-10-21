@@ -33,7 +33,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var hatchTimer: Timer?
     var timeLeftTimer: Timer?
     var timerIsOn = false
-    var selectedMeetupTime: TimeInterval?
+    var meetupDate: Date?
     var meetupTimeSelectionType: MeetupTimeSelectionType = .change
     var participants = [String: PublicUserData]()
     var hasActiveRaid: Bool { return !(arena.raid?.isExpired ?? true) }
@@ -43,8 +43,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var level: Int { return arena.raid?.level ?? 0 }
     var isTimeSetForMeetup: Bool {meetup?.isTimeSet ?? false }
     var isGoldArena: Bool { return arena.isGoldArena ?? false }
-    var hatchTime: TimeInterval { return arena.raid?.hatchTime ?? 0 }
-    var endTime: TimeInterval { return arena.raid?.endTime ?? 0 }
+    var hatchDate: Date? { return arena.raid?.hatchDate }
+    var endDate: Date? { return arena.raid?.endDate }
     var coordinate: CLLocationCoordinate2D { return arena.coordinate }
     var headerImage: UIImage { return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage() }
     var headerTitle: String { return arena.name }
@@ -108,8 +108,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     private func submitMeetupTime() {
-        guard let selectedMeetupTime = selectedMeetupTime else { return }
-        firebaseConnector.setMeetupTime(selectedMeetupTime, in: arena)
+        guard let selectedMeetupTime = meetupDate else { return }
+        firebaseConnector.setMeetupTime(selectedMeetupTime.timestamp, in: arena)
     }
     
     func changeGoldArena(isGold: Bool) {

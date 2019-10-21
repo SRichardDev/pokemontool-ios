@@ -183,10 +183,16 @@ struct Raid: FirebaseCodable, Equatable {
         return timestamp?.dateFromUnixTime()
     }
     
-    init(level: Int, hatchTime: TimeInterval, endTime: TimeInterval, submitter: String, raidBoss: String? = nil, meetup: RaidMeetup) {
+    init(level: Int,
+         hatchDate: Date? = nil,
+         endDate: Date? = nil,
+         submitter: String,
+         raidBoss: String? = nil,
+         meetup: RaidMeetup) {
+        
         self.level = level
-        self.hatchTime = hatchTime
-        self.endTime = endTime
+        self.hatchTime = hatchDate?.timestamp ?? 0
+        self.endTime = endDate?.timestamp ?? 0
         self.submitter = submitter
         self.raidBossId = raidBoss
         self.meetup = meetup
@@ -210,8 +216,8 @@ struct RaidMeetup: Codable, Equatable {
         return meetupTime != 0
     }
     
-    init(meetupTime: TimeInterval) {
-        self.meetupTime = meetupTime
+    init(meetupDate: Date? = nil) {
+        self.meetupTime = meetupDate?.timestamp ?? 0
     }
 }
 
