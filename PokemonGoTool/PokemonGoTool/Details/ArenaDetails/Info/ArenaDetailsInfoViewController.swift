@@ -10,6 +10,8 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
     @IBOutlet var raidSubmitterLabel: Label!
     @IBOutlet var submitterTitleLabel: Label!
     @IBOutlet var submitterLabel: Label!
+    @IBOutlet var developerDetailsTitleLabel: Label!
+    @IBOutlet var developerDetailsLabel: Label!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +23,7 @@ class ArenaDetailsInfoViewController: UIViewController, StoryboardInitialViewCon
         viewModel.submitterNameForRaid { self.raidSubmitterLabel.text = $0 }
         raidSubmitterTitleLabel.isHidden = viewModel.isRaidExpired
         raidSubmitterLabel.isHidden = viewModel.isRaidExpired
+        developerDetailsLabel.text = viewModel.arena.geohash
+        
     }
 }

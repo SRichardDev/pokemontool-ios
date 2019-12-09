@@ -55,8 +55,7 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         stackView.addArrangedViewController(submitRaidViewController, to: self)
         
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
-        navigationController?.topViewController?.navigationItem.rightBarButtonItem = addItem
-
+        navigationItem.rightBarButtonItem = addItem
     }
     
     func update(of type: SubmitRaidUpdateType) {
