@@ -36,14 +36,17 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     var meetupTimeSelectionType: MeetupTimeSelectionType = .initial
     var hatchDate: Date?
     var meetupDate: Date?
+    
+    var title: String {
+        return "Neuer Level \(selectedRaidLevel) Raid"
+    }
+    
     var endDate: Date? {
         return hatchDate?.addingTimeInterval(45 * 60)
     }
 
     var imageName: String {
-        get {
-            return "level_\(selectedRaidLevel)"
-        }
+        return "level_\(selectedRaidLevel)"
     }
     
     init(arena: Arena, firebaseConnector: FirebaseConnector) {

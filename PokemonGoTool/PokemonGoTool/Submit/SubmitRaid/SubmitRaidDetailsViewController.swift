@@ -1,7 +1,8 @@
 
 import UIKit
+import ScrollingContentViewController
 
-class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewController, SubmitRaidDelegate {
+class SubmitRaidDetailsViewController: ScrollingContentViewController, StoryboardInitialViewController, SubmitRaidDelegate {
     
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
@@ -21,9 +22,15 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView = UIView()
+        contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        stackView.addToView(contentView)
         viewModel.delegate = self
-        stackView.addToView(view)
-        
+        setupUI()
+    }
+    
+    private func setupUI() {
+        title = viewModel.title
         headerViewController.viewModel = viewModel
         raidLevelViewController.viewModel = viewModel
         raidAlreadyRunningSwitchViewController.viewModel = viewModel
@@ -46,19 +53,16 @@ class SubmitRaidDetailsViewController: UIViewController, StoryboardInitialViewCo
         stackView.addArrangedViewController(userParticipatesViewController, to: self)
         stackView.addArrangedViewController(meetupTimePickerViewController, to: self)
         stackView.addArrangedViewController(submitRaidViewController, to: self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setTitle("Neuer Level \(viewModel.selectedRaidLevel) Raid")
+        
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = addItem
+
     }
     
     func update(of type: SubmitRaidUpdateType) {
         switch type {
         case .raidLevelChanged:
-            setTitle("Neuer Level \(self.viewModel.selectedRaidLevel) Raid")
+            title = viewModel.title
             headerViewController.updateUI()
             raidBossCollectionViewController.level = viewModel.selectedRaidLevel
         case .raidAlreadyRunning:

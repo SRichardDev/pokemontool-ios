@@ -96,7 +96,10 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
                                                                         firebaseConnector: appModule.firebaseConnector)
         submitRaidDetailsViewController.coordinator = self
         submitRaidDetailsViewController.firebaseConnector = appModule.firebaseConnector
-        embedInScrollViewControllerAndPresent(viewController: submitRaidDetailsViewController)
+        
+        let navigationController = NavigationController()
+        navigationController.viewControllers = [submitRaidDetailsViewController]
+        tabBarController.present(navigationController, animated: true)
     }
     
     func showPokestopDetails(for pokestop: Pokestop) {
