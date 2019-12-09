@@ -110,7 +110,8 @@ DEPENDENCIES:
   - UIWindowTransitions
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
+    - Cluster
     - CodableFirebase
     - Firebase
     - FirebaseAnalytics
@@ -124,19 +125,17 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - GTMSessionFetcher
+    - InputBarAccessoryView
     - leveldb-library
     - MarqueeLabel
+    - MessageKit
     - nanopb
     - NotificationBannerSwift
     - NVActivityIndicatorView
     - Protobuf
+    - ScrollingContentViewController
     - SnapKit
     - UIWindowTransitions
-  trunk:
-    - Cluster
-    - InputBarAccessoryView
-    - MessageKit
-    - ScrollingContentViewController
 
 SPEC CHECKSUMS:
   Cluster: 47f0e962d94ea961cc336d2bf936fe4dc1f61cdb
@@ -167,4 +166,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7ead6b25641c731ceeb5ca02fa1e2ae166725f19
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4
