@@ -5,15 +5,18 @@ class ArenaUtility {
     
     class func detailAnnotationString(for arena: Arena) -> String {
         
-        if let raid = arena.raid, raid.isActive {
+        if let raid = arena.raid, raid.isActive,
+            let hatchDate = raid.hatchDate,
+            let endDate = raid.endDate {
             let levelStars = String(repeating: "⭐️", count: raid.level)
-            let hatchTime = "TODO"//raid.hatchTime ?? "--:--"
-            let endTime = "TODO" //raid.endTime ?? "--:--"
-//            let particpantsCount = raid.meetup?.participants?.count ?? 0
+            let hatchTime = DateUtility.timeString(for: hatchDate)
+            let endTime = DateUtility.timeString(for: endDate)
+            let particpantsCount = raid.meetup?.participants?.count ?? 0
             
             let formattedString = """
             \(levelStars)
             \(hatchTime) - \(endTime)
+            Teilnehmer: \(particpantsCount)
             """
             return formattedString
         }

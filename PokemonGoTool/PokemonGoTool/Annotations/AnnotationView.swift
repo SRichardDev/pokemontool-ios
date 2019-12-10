@@ -141,6 +141,7 @@ class AnnotationView: CustomAnnotationView {
             } else if raid.level == 1 {
                 annotationView.addPulsator(numPulses: 1, color: .magenta)
             }
+            annotationView.addParticipantsCountBadge(raid.meetup?.participants?.count ?? 0)
         } else {
             let baseImage = annotation.arena?.image ?? UIImage(named: "arena")!
             let size = CGSize(width: baseImage.size.width/2, height: baseImage.size.height/2)

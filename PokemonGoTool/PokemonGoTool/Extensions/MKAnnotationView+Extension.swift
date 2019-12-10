@@ -13,4 +13,33 @@ extension MKAnnotationView {
         layer.addSublayer(pulsator)
         pulsator.start()
     }
+    
+    func addParticipantsCountBadge(_ count: Int) {
+        let badgeLabel = UILabel(badgeText: "\(count)")
+        addSubview(badgeLabel)
+    }
+}
+
+
+fileprivate extension UILabel {
+    convenience init(badgeText: String, color: UIColor = .red, fontSize: CGFloat = UIFont.smallSystemFontSize) {
+        self.init()
+        text = badgeText.count > 1 ? " \(badgeText) " : badgeText
+        textAlignment = .center
+        textColor = .white
+        backgroundColor = color
+        
+        font = UIFont.systemFont(ofSize: fontSize)
+        layer.cornerRadius = fontSize * CGFloat(0.6)
+        clipsToBounds = true
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        addConstraint(NSLayoutConstraint(item: self,
+                                         attribute: .width,
+                                         relatedBy: .greaterThanOrEqual,
+                                         toItem: self,
+                                         attribute: .height,
+                                         multiplier: 1,
+                                         constant: 0))
+    }
 }
