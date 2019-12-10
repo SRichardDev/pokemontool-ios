@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030AB18B239F050800CA930F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030AB18A239F050800CA930F /* NotificationService.swift */; };
+		030AB18F239F050800CA930F /* NotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 030AB188239F050800CA930F /* NotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		030AB195239F073300CA930F /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */; };
 		033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */; };
 		033BC72D22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */; };
 		035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */; };
@@ -192,6 +195,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		030AB18D239F050800CA930F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C19769321ED266900091F8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 030AB187239F050800CA930F;
+			remoteInfo = NotificationExtension;
+		};
 		2CA89D4C2340EA260053AA1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */;
@@ -202,6 +212,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		030AB190239F050800CA930F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				030AB18F239F050800CA930F /* NotificationExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CA89D502340EA7F0053AA1B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,6 +237,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030AB188239F050800CA930F /* NotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		030AB18A239F050800CA930F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		030AB18C239F050800CA930F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidHeaderViewController.swift; sourceTree = "<group>"; };
 		033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidHeaderViewController.storyboard; sourceTree = "<group>"; };
 		035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsOverviewViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +431,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		030AB185239F050800CA930F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C19769821ED266900091F8C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,6 +450,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030AB189239F050800CA930F /* NotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				030AB18A239F050800CA930F /* NotificationService.swift */,
+				030AB18C239F050800CA930F /* Info.plist */,
+			);
+			path = NotificationExtension;
+			sourceTree = "<group>";
+		};
 		033BC72E22AAEFFA0036C0F6 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +577,7 @@
 			children = (
 				2CA89D482340EA260053AA1B /* NSTAppKit.xcodeproj */,
 				2C19769D21ED266900091F8C /* PokemonGoTool */,
+				030AB189239F050800CA930F /* NotificationExtension */,
 				2C19769C21ED266900091F8C /* Products */,
 				343F3E850971499C3D289673 /* Pods */,
 				9F247A602ECC6BF79D26CD78 /* Frameworks */,
@@ -547,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				2C19769B21ED266900091F8C /* PokemonGoTool.app */,
+				030AB188239F050800CA930F /* NotificationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -991,6 +1033,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		030AB187239F050800CA930F /* NotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 030AB194239F050800CA930F /* Build configuration list for PBXNativeTarget "NotificationExtension" */;
+			buildPhases = (
+				030AB184239F050800CA930F /* Sources */,
+				030AB185239F050800CA930F /* Frameworks */,
+				030AB186239F050800CA930F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationExtension;
+			productName = NotificationExtension;
+			productReference = 030AB188239F050800CA930F /* NotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		2C19769A21ED266900091F8C /* PokemonGoTool */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C1976AD21ED266B00091F8C /* Build configuration list for PBXNativeTarget "PokemonGoTool" */;
@@ -1001,10 +1060,12 @@
 				2C19769921ED266900091F8C /* Resources */,
 				40B398E778E5892C4D4DF4AD /* [CP] Embed Pods Frameworks */,
 				2CA89D502340EA7F0053AA1B /* Embed Frameworks */,
+				030AB190239F050800CA930F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				030AB18E239F050800CA930F /* PBXTargetDependency */,
 			);
 			name = PokemonGoTool;
 			productName = PokemonGoTool;
@@ -1017,10 +1078,13 @@
 		2C19769321ED266900091F8C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Nicolo Stanciu";
 				TargetAttributes = {
+					030AB187239F050800CA930F = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					2C19769A21ED266900091F8C = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
@@ -1056,6 +1120,7 @@
 			projectRoot = "";
 			targets = (
 				2C19769A21ED266900091F8C /* PokemonGoTool */,
+				030AB187239F050800CA930F /* NotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1071,6 +1136,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		030AB186239F050800CA930F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C19769921ED266900091F8C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1175,6 +1247,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		030AB184239F050800CA930F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				030AB195239F073300CA930F /* DateUtility.swift in Sources */,
+				030AB18B239F050800CA930F /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C19769721ED266900091F8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1311,6 +1392,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		030AB18E239F050800CA930F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 030AB187239F050800CA930F /* NotificationExtension */;
+			targetProxy = 030AB18D239F050800CA930F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		2C1976A721ED266B00091F8C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1324,6 +1413,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		030AB191239F050800CA930F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FMXL9R3NPC;
+				INFOPLIST_FILE = NotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.stanc.PokemonGoTool.NotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		030AB192239F050800CA930F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FMXL9R3NPC;
+				INFOPLIST_FILE = NotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.stanc.PokemonGoTool.NotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		2C1976AB21ED266B00091F8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1446,6 +1575,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FFADD158951324AC77E484BA /* Pods-PokemonGoTool.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PokemonGoTool/PokemonGoTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1467,6 +1597,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD8D17068DFD218CB12B0034 /* Pods-PokemonGoTool.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PokemonGoTool/PokemonGoTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1487,6 +1618,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		030AB194239F050800CA930F /* Build configuration list for PBXNativeTarget "NotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				030AB191239F050800CA930F /* Debug */,
+				030AB192239F050800CA930F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2C19769621ED266900091F8C /* Build configuration list for PBXProject "PokemonGoTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
