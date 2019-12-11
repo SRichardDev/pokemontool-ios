@@ -65,6 +65,78 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
     }
 })
 
+export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+
+    const geohash = context.params.geohash
+    const arenaId = context.params.arenaId
+    
+    const raid = snapshot.after.val()
+    // const raidBossId = raid.raidBossId || ""
+
+    try {
+        const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
+        // const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
+        const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
+
+        const arena = arenaSnapshot.val()
+        const raidBossName = /*(raidBossSnapshot.val() && raidBossSnapshot.val().name) ||*/ 'Unbekannt'
+        const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '--:--'
+        const hatchTime = raid.hatchTime || "--:--"
+        const endTime = raid.endTime || "--:--"
+        const level = raid.level
+
+        const title = '⭐️'.repeat(level) + " @ " + arena.name
+        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
+
+        const iOSCondition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+        const androidCondition = "'android' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+
+        console.log('Sending Condition: ' + iOSCondition)
+        console.log('Android Condition: ' + androidCondition)
+        console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
+
+
+        const iOSPayload = {
+            notification: {
+                title: title,
+                body: message,
+                sound: 'default'
+            },
+            data: {
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude),
+                hatch: String(hatchTime), 
+                end: String(endTime),
+                meetup: String(raidMeetupTime)
+            }
+        }
+
+        const androidPayload = {
+            data: {
+                title: title,
+                body: message,
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude),
+                hatch: String(hatchTime), 
+                end: String(endTime),
+                meetup: String(raidMeetupTime)
+            }
+        }
+
+        const options = {
+            mutableContent: true
+        }
+
+        void admin.messaging().sendToCondition(iOSCondition, iOSPayload, options)
+        void admin.messaging().sendToCondition(androidCondition, androidPayload)
+        return true
+            
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+})
+
 export const onWriteRaidMeetupChat = functions.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite( async (snapshot, context) => {
 
     const meetupId = context.params.meetupId
