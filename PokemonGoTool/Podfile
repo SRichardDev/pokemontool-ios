@@ -6,7 +6,7 @@ target 'PokemonGoTool' do
   use_frameworks!
 
   # Pods for PokemonGoTool
-  pod 'Firebase/Core'
+  pod 'FirebaseCore'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Messaging'
