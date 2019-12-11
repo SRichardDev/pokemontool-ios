@@ -10,29 +10,31 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        let hatchTimestamp = request.content.userInfo["hatch"] as! Double
-        let hatchDate = Date(timeIntervalSince1970: hatchTimestamp/1000)
-        let hatchDateString = DateUtility.timeString(for: hatchDate)
-        
-        let endTimestamp = request.content.userInfo["end"] as! Double
-        let endDate = Date(timeIntervalSince1970: endTimestamp/1000)
-        let endDateString = DateUtility.timeString(for: endDate)
+        guard let hatch = request.content.userInfo["hatch"] as? String,
+              let end = request.content.userInfo["end"] as? String,
+              let meetup = request.content.userInfo["meetup"] as? String else { return }
 
-        
         if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            bestAttemptContent.body = "\(hatchDateString) - \(endDateString)"
+            bestAttemptContent.title = "\(bestAttemptContent.title)"
+            bestAttemptContent.body =
+            """
+            ⌚️ \(timeString(from: hatch)) - \(timeString(from: end))
+            👫 \(timeString(from: meetup))
+            """
             contentHandler(bestAttemptContent)
         }
     }
     
     override func serviceExtensionTimeWillExpire() {
-        // Called just before the extension will be terminated by the system.
-        // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
         if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
     }
-
+    
+    private func timeString(from input: String) -> String {
+        guard let timestamp = Double(input) else { return "--:--" }
+        let date = Date(timeIntervalSince1970: timestamp/1000)
+        let dateString = DateUtility.timeString(for: date)
+        return dateString
+    }
 }
