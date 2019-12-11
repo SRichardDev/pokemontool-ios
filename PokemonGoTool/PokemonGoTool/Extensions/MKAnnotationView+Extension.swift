@@ -17,6 +17,8 @@ extension MKAnnotationView {
     func addParticipantsCountBadge(_ count: Int) {
         let badgeLabel = UILabel(badgeText: "\(count)")
         addSubview(badgeLabel)
+        badgeLabel.leftAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        badgeLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
     }
 }
 
@@ -31,6 +33,8 @@ fileprivate extension UILabel {
         
         font = UIFont.systemFont(ofSize: fontSize)
         layer.cornerRadius = fontSize * CGFloat(0.6)
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1
         clipsToBounds = true
         
         translatesAutoresizingMaskIntoConstraints = false

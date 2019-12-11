@@ -41,6 +41,9 @@ class CustomAnnotationView: MKAnnotationView {
         label.alpha = 0
         label.removeFromSuperview()
         customCalloutView?.removeFromSuperview()
+        subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
     
     func changeLabelVisibilityAnimated(_ visible: Bool) {

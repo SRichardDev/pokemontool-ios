@@ -2,27 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "arena-new.pdf"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "arena-dark.pdf",
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "light"
-        }
-      ]
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "arena-light.pdf",
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ]
+      "filename" : "arena.pdf"
     }
   ],
   "info" : {
