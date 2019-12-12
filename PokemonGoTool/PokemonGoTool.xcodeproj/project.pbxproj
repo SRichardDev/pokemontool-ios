@@ -21,6 +21,7 @@
 		0366E09B22A161A800310339 /* PokemonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366E09A22A161A800310339 /* PokemonTableViewController.swift */; };
 		0366E09D22A163E300310339 /* PokemonTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */; };
 		0366E09F22A1A09100310339 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09E22A1A09100310339 /* Localized.strings */; };
+		0370082523A2C87E00D5B34D /* ChatConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0370082423A2C87E00D5B34D /* ChatConnector.swift */; };
 		0379FC21223A5F4700A2D1C0 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */; };
 		0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */; };
 		0379FC25223A660200A2D1C0 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */; };
@@ -252,6 +253,7 @@
 		0366E09A22A161A800310339 /* PokemonTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonTableViewController.swift; sourceTree = "<group>"; };
 		0366E09C22A163E300310339 /* PokemonTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PokemonTableViewController.storyboard; sourceTree = "<group>"; };
 		0366E09E22A1A09100310339 /* Localized.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localized.strings; sourceTree = "<group>"; };
+		0370082423A2C87E00D5B34D /* ChatConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConnector.swift; sourceTree = "<group>"; };
 		0379FC20223A5F4700A2D1C0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0379FC22223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArenaDetailsViewController.swift; sourceTree = "<group>"; };
 		0379FC24223A660200A2D1C0 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
@@ -967,6 +969,7 @@
 			children = (
 				2C97F77021F6576500630BA2 /* Model.swift */,
 				2CDFDDE221ED4A3D00170A46 /* FirebaseConnector.swift */,
+				0370082423A2C87E00D5B34D /* ChatConnector.swift */,
 				2CF7B4CB22F780560088C0F6 /* ArenaConnector.swift */,
 				2CF7B4D322FB5BA10088C0F6 /* PokestopConnector.swift */,
 				2C5DAA3D226FB6AF00252AC8 /* FirebaseDefines.swift */,
@@ -1287,6 +1290,7 @@
 				0379FC23223A5F5F00A2D1C0 /* ArenaDetailsViewController.swift in Sources */,
 				2C45A84E2300488200BF8415 /* ArenaFilterViewController.swift in Sources */,
 				2CF7B4CC22F780560088C0F6 /* ArenaConnector.swift in Sources */,
+				0370082523A2C87E00D5B34D /* ChatConnector.swift in Sources */,
 				2C1AE579225FD05700AE9C4A /* PokestopInfoViewController.swift in Sources */,
 				2C44EAB121FCA0B10029527C /* Array+Extension.swift in Sources */,
 				2C03085F222B40AF007A1EA0 /* HeaderViewController.swift in Sources */,

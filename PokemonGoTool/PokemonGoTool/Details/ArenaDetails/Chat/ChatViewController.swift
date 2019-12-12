@@ -38,9 +38,9 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         messageInputBar.backgroundView.backgroundColor = .systemBackground
         view.backgroundColor = .systemBackground
         
-        firebaseConnector.raidChatDelegate = self
+        firebaseConnector.chatConnector.raidChatDelegate = self
         guard let chatId = viewModel.arena.raid?.meetup?.chatId else { return }
-        firebaseConnector.observeRaidChat(for: chatId)
+        firebaseConnector.chatConnector.observeRaidChat(for: chatId)
     }
 
     private func insertNewMessage(_ message: Message) {
@@ -131,7 +131,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let chatMessage = ChatMessage(message: text, senderId: sender.id)
-        firebaseConnector.sendMessage(chatMessage, in: &viewModel.arena)
+        firebaseConnector.chatConnector.sendMessage(chatMessage, in: &viewModel.arena)
         inputBar.inputTextView.text = ""
     }
 }

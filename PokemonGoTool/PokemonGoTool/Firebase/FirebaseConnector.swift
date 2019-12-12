@@ -6,9 +6,10 @@ import CodableFirebase
 
 class FirebaseConnector {
     
+    let chatConnector = ChatConnector()
+    
     private let pokestopsRef = Database.database().reference(withPath: DatabaseKeys.pokestops)
     private let arenasRef = Database.database().reference(withPath: DatabaseKeys.arenas)
-    private let chatsRef = Database.database().reference(withPath: DatabaseKeys.chats)
     private let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
     private let questsRef = Database.database().reference(withPath: DatabaseKeys.quests)
     private let raidBossesRef = Database.database().reference(withPath: DatabaseKeys.raidBosses)
@@ -32,7 +33,6 @@ class FirebaseConnector {
     weak var userDelegate: FirebaseUserDelegate?
     weak var startUpDelegate: FirebaseStartupDelegate?
     weak var raidDelegate: RaidDelegate?
-    weak var raidChatDelegate: RaidChatDelegate?
 
     var isSignedIn: Bool {
         return Auth.auth().currentUser?.uid != nil ? true : false
@@ -231,16 +231,6 @@ class FirebaseConnector {
             .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
     }
     
-    private func associateChatIdToMeetup(id: String, arena: inout Arena) {
-        arena.raid?.meetup?.chatId = id
-        arenasRef
-            .child(arena.geohash)
-            .child(arena.id)
-            .child(DatabaseKeys.raid)
-            .child(DatabaseKeys.meetup)
-            .updateChildValues([DatabaseKeys.chatId : id])
-    }
-    
     private func saveUserInRaidMeetup(for id: String) {
 //        guard let userId = user?.id else { fatalError() }
 //        let data = [userId: ""]
@@ -248,29 +238,6 @@ class FirebaseConnector {
 //            .child(id)
 //            .child(DatabaseKeys.participants)
 //            .updateChildValues(data)
-    }
-
-    func sendMessage(_ message: ChatMessage, in arena: inout Arena) {
-        
-        let sendMessage: (_ chatId: String) -> Void = { chatId in
-            let data = try! FirebaseEncoder().encode(message)
-            var dataWithTimestamp = data as! [String: Any]
-            dataWithTimestamp[DatabaseKeys.timestamp] = ServerValue.timestamp()
-            self.chatsRef
-                .child(chatId)
-                .childByAutoId()
-                .setValue(dataWithTimestamp)
-        }
-        
-        if let chatId = arena.raid?.meetup?.chatId {
-            sendMessage(chatId)
-        } else {
-            guard let chatId = chatsRef.childByAutoId().key else { return }
-            associateChatIdToMeetup(id: chatId, arena: &arena)
-            observeRaidChat(for: chatId)
-            arena.raid?.meetup?.chatId = chatId
-            sendMessage(chatId)
-        }
     }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
@@ -317,23 +284,6 @@ class FirebaseConnector {
     
     func stopObservingRaidMeetup(for meetupId: String) {
 //        raidMeetupsRef.child(meetupId).removeAllObservers()
-    }
-
-    func observeRaidChat(for chatId: String) {
-        chatsRef
-            .child(chatId)
-            .removeAllObservers()
-        
-        chatsRef
-            .child(chatId)
-            .observe(.value, with: { snapshot in
-            if let result = snapshot.children.allObjects as? [DataSnapshot] {
-                for child in result {
-                    guard let chatMessage: ChatMessage = decode(from: child) else { continue }
-                    self.raidChatDelegate?.didReceiveNewChatMessage(chatMessage)
-                }
-            }
-        })
     }
 
     func loadPublicUserData(for id: String, completion: @escaping (PublicUserData) -> Void) {
