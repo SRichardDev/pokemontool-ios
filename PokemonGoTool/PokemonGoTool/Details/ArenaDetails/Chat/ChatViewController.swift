@@ -33,14 +33,14 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         scrollsToBottomOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
 
-        firebaseConnector.raidChatDelegate = self
-//        guard let raidMeetupId = viewModel.arena.raid?.raidMeetupId else { return }
-//        firebaseConnector.observeRaidChat(for: raidMeetupId)
-        
         messagesCollectionView.backgroundColor = .systemBackground
         messageInputBar.backgroundColor = .systemBackground
         messageInputBar.backgroundView.backgroundColor = .systemBackground
         view.backgroundColor = .systemBackground
+        
+        firebaseConnector.raidChatDelegate = self
+        guard let chatId = viewModel.arena.raid?.meetup?.chatId else { return }
+        firebaseConnector.observeRaidChat(for: chatId)
     }
 
     private func insertNewMessage(_ message: Message) {

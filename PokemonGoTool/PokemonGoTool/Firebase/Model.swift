@@ -205,6 +205,7 @@ struct RaidMeetup: Codable, Equatable {
     
     var meetupTime: TimeInterval
     var participants: [UserId: String]?
+    var chatId: String?
     
     var meetupDate: Date? {
         get {
