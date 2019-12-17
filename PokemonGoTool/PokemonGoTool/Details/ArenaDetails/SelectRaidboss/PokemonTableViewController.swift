@@ -1,17 +1,18 @@
 
 import UIKit
 
-struct PokemonDexEntry: Codable {
+struct PokemonDexEntry: Codable, Equatable {
+    let dexNumber: Int
     let name: String
 }
 
 class PokemonTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
 
-    var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!
-    let searchController = UISearchController(searchResultsController: nil)
-    var pokemon = [PokemonDexEntry]()
-    var filteredPokemon = [PokemonDexEntry]()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var pokemon = [PokemonDexEntry]()
+    private var filteredPokemon = [PokemonDexEntry]()
+    private var selectedPokemon: PokemonDexEntry?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,27 +24,35 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Pokémon durchsuchen"
+        searchController.delegate = self
+
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        
-        searchController.searchBar.scopeButtonTitles = ["Gen 1", "Gen 2", "Gen 3", "Gen 4"]
-        searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         
         guard let filepath = Bundle.main.path(forResource: "pokemon-names-de", ofType: "json") else { return }
         
         let data = try! Data(contentsOf: URL(fileURLWithPath: filepath))
         let pokemonNames = try! JSONSerialization.jsonObject(with: data, options: []) as! [String]
-        
+        var counter = 1
         for pokemonName in pokemonNames {
-            let entry = PokemonDexEntry(name: pokemonName)
+            let entry = PokemonDexEntry(dexNumber: counter, name: pokemonName)
             self.pokemon.append(entry)
+            counter += 1
         }
         tableView.reloadData()
+        searchController.searchBar.becomeFirstResponder()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.isActive = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredPokemon.count
+        }
         return pokemon.count
     }
     
@@ -53,10 +62,16 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "dexCell") {
-            let pokemonEntry = pokemon[indexPath.row]
-            cell.textLabel?.text = pokemonEntry.name
-            cell.imageView?.image = UIImage(named: "\(indexPath.row + 1)")
+            let pokemonEntry = isFiltering() ? filteredPokemon[indexPath.row] : pokemon[indexPath.row]
             
+            cell.textLabel?.text = pokemonEntry.name
+            cell.imageView?.image = UIImage(named: "\(pokemonEntry.dexNumber)")
+            if let selectedPokemon = selectedPokemon {
+                cell.accessoryType = pokemonEntry == selectedPokemon ? .checkmark : .none
+            } else {
+                cell.accessoryType = .none
+            }
+
             return cell
         }
         return UITableViewCell()
@@ -65,12 +80,15 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
+            selectedPokemon = isFiltering() ? filteredPokemon[indexPath.row] : pokemon[indexPath.row]
+//            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .none
+            selectedPokemon = nil
         }
     }
 }
@@ -78,20 +96,12 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
 extension PokemonTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        filterContentForSearchText(searchController.searchBar.text!)
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "Alle") {
+    func filterContentForSearchText(_ searchText: String) {
         filteredPokemon = pokemon.filter({ pokemon -> Bool in
-            let doesCategoryMatch = (scope == "Alle") || (pokemon.name.components(separatedBy: " ").first == scope)
-            
-            if searchBarIsEmpty() {
-                return doesCategoryMatch
-            } else {
-                return doesCategoryMatch && pokemon.name.lowercased().contains(searchText.lowercased())
-            }
+            return pokemon.name.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
@@ -101,15 +111,21 @@ extension PokemonTableViewController: UISearchResultsUpdating {
     }
     
     func isFiltering() -> Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+        return searchController.isActive && !searchBarIsEmpty()
     }
 }
 
-extension PokemonTableViewController: UISearchBarDelegate {
-    // MARK: - UISearchBar Delegate
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+extension PokemonTableViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        DispatchQueue.main.async {[weak self] in
+            self?.searchController.searchBar.becomeFirstResponder()
+        }
+    }
+}
+
+class PokemonCell: UITableViewCell {
+    override func prepareForReuse() {
+        accessoryType = .none
     }
 }
 

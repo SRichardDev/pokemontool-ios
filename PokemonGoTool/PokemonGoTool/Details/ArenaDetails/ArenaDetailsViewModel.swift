@@ -50,8 +50,8 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var headerTitle: String { return arena.name }
 
     var title: String {
-        let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
-        return isRaidExpired ? (arena.isEX ? "EX Arena" : "Arena") : raidboss?.name ?? "Level \(arena.raid?.level ?? 0) Raid"
+        //let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
+        return isRaidExpired ? (arena.isEX ? "EX Arena" : "Arena") : "raidboss?.name" ?? "Level \(arena.raid?.level ?? 0) Raid"
     }
 
     var isUserParticipating: Bool {
@@ -241,7 +241,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         dateFormatter.dateFormat = "HH:mm"
         
         let shareText = """
-        🐲: \(RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)?.name ?? "---"), ⭐️: \(arena.raid?.level ?? 0)
+        🐲: "---", ⭐️: \(arena.raid?.level ?? 0)
         🏟: \(arena.name)
         ⌚️: \(dateFormatter.string(from: arena.raid?.hatchDate ?? Date())) - \(dateFormatter.string(from: arena.raid?.endDate ?? Date()))
         👫: \(meetup?.meetupTime /*?? ""*/)

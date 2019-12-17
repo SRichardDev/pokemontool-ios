@@ -162,14 +162,14 @@ struct Raid: FirebaseCodable, Equatable {
     }
     
     var image: UIImage? {
-        get {
-            let raidboss = RaidbossManager.shared.raidboss(for: raidBossId)
-            let raidbossImage = ImageManager.image(named: "\(raidboss?.imageName ?? "")")
-            let eggImage = ImageManager.image(named: "level_\(level)")
-            let eggHatchedImage = ImageManager.image(named: "level_\(level)_hatched")
-            
-            return hasHatched ? (raidbossImage ?? eggHatchedImage) : eggImage
-        }
+            return nil
+        #warning("TODO")
+//            let raidboss = RaidbossManager.shared.raidboss(for: raidBossId)
+//            let raidbossImage = ImageManager.image(named: "\(raidboss?.imageName ?? "")")
+//            let eggImage = ImageManager.image(named: "level_\(level)")
+//            let eggHatchedImage = ImageManager.image(named: "level_\(level)_hatched")
+//
+//            return hasHatched ? (raidbossImage ?? eggHatchedImage) : eggImage
     }
     
     var timestamp: TimeInterval?

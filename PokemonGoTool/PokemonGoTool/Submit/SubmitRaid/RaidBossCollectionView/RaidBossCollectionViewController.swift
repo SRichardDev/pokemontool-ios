@@ -27,7 +27,7 @@ class RaidBossCollectionViewController: UIViewController, StoryboardInitialViewC
     
     private var currentRaidBosses: [RaidbossDefinition] {
         get {
-            return RaidbossManager.shared.raidbosses?.filter { Int($0.level) == level } ?? []
+            return []//RaidbossManager.shared.raidbosses?.filter { Int($0.level) == level } ?? []
         }
     }
     

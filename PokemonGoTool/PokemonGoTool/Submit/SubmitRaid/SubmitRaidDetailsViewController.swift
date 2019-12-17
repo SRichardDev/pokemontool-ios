@@ -6,11 +6,11 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
     
     weak var coordinator: MainCoordinator?
     var firebaseConnector: FirebaseConnector!
+    var viewModel: SubmitRaidViewModel!
     private let stackView = OuterVerticalStackView()
-    
     private let headerViewController = SubmitRaidHeaderViewController.fromStoryboard()
     private let raidLevelViewController = RaidLevelViewController.fromStoryboard()
-    private let raidBossCollectionViewController = RaidBossCollectionViewController.fromStoryboard()
+    private let raidBossViewController = RaidBossViewController.fromStoryboard()
     private let hatchTimePickerViewController = RaidHatchTimePickerViewController.fromStoryboard()
     private let timeLeftPickerViewController = RaidTimeLeftPickerViewController.fromStoryboard()
     private let userParticipatesViewController = RaidUserParticipateSwitchViewController.fromStoryboard()
@@ -18,7 +18,6 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
     private let raidAlreadyRunningSwitchViewController = RaidAlreadyRunningSwitchViewController.fromStoryboard()
     private let submitRaidViewController = SubmitRaidViewController.fromStoryboard()
     private let doneButton = Button()
-    var viewModel: SubmitRaidViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +38,6 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
         submitRaidViewController.viewModel = viewModel
-        raidBossCollectionViewController.selectedRaidbossCallback = { self.viewModel.selectedRaidBoss = $0 }
         
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
@@ -47,7 +45,7 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         stackView.addArrangedViewController(headerViewController, to: self)
         stackView.addArrangedViewController(raidLevelViewController, to: self)
         stackView.addArrangedViewController(raidAlreadyRunningSwitchViewController, to: self)
-        stackView.addArrangedViewController(raidBossCollectionViewController, to: self)
+        stackView.addArrangedViewController(raidBossViewController, to: self)
         stackView.addArrangedViewController(hatchTimePickerViewController, to: self)
         stackView.addArrangedViewController(timeLeftPickerViewController, to: self)
         stackView.addArrangedViewController(userParticipatesViewController, to: self)
@@ -63,19 +61,13 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         case .raidLevelChanged:
             title = viewModel.title
             headerViewController.updateUI()
-            raidBossCollectionViewController.level = viewModel.selectedRaidLevel
         case .raidAlreadyRunning:
             changeVisibiltyOf(viewControllers: [hatchTimePickerViewController,
                                                 timeLeftPickerViewController])
-            if viewModel.isRaidAlreadyRunning {
-                raidBossCollectionViewController.activateSelectionMode()
-            } else {
-                raidBossCollectionViewController.activateOverViewMode()
-            }
         case .userParticipates:
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
         case .currentRaidbossesChanged:
-            raidBossCollectionViewController.updateRaidBosses()
+            break
         case .raidSubmitted:
             dismiss(animated: true)
         }

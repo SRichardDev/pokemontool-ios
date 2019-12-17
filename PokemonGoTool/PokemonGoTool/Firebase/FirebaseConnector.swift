@@ -12,7 +12,6 @@ class FirebaseConnector {
     private let arenasRef = Database.database().reference(withPath: DatabaseKeys.arenas)
     private let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
     private let questsRef = Database.database().reference(withPath: DatabaseKeys.quests)
-    private let raidBossesRef = Database.database().reference(withPath: DatabaseKeys.raidBosses)
     private let registeredUsersPokestopsRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersPokestops)
     private let registeredUsersArenasRef = Database.database().reference(withPath: DatabaseKeys.registeredUsersArenas)
 
@@ -40,7 +39,6 @@ class FirebaseConnector {
     
     init() {
         questsRef.keepSynced(true)
-        raidBossesRef.keepSynced(true)
         checkConnectivity()
         loadInitialData()
     }
@@ -56,11 +54,6 @@ class FirebaseConnector {
         group.enter()
         loadQuests {
             self.quests = $0
-            group.leave()
-        }
-        group.enter()
-        loadRaidBosses {
-            RaidbossManager.shared.raidbosses = $0
             group.leave()
         }
 
@@ -130,14 +123,6 @@ class FirebaseConnector {
         user?.updateSubmittedRaidCount()
     }
     
-    func saveRaidMeetup(raidMeetup: RaidMeetup) -> String {
-//        let data = try! FirebaseEncoder().encode(raidMeetup)
-//        let createId = raidMeetupsRef.childByAutoId()
-//        createId.setValue(data)
-//        return createId.key!
-        return ""
-    }
-    
     func subscribeToTopic(_ topic: String, topicType: TopicType) {
         guard let user = user else { return }
         topicSubscriptionManager.subscribeToTopic(for: user, in: topic, for: topicType)
@@ -146,20 +131,6 @@ class FirebaseConnector {
     func unsubscribeFormTopic(_ topic: String, topicType: TopicType) {
         guard let user = user else { return }
         topicSubscriptionManager.unsubscribeFromTopic(for: user, in: topic, for: topicType)
-    }
-    
-    func loadRaidBosses(completion: @escaping ([RaidbossDefinition]) -> ()) {
-        raidBossesRef.observeSingleEvent(of: .value) { snapshot in
-            if let result = snapshot.children.allObjects as? [DataSnapshot] {
-                var raidbosses = [RaidbossDefinition]()
-                
-                for child in result {
-                    guard let raidboss: RaidbossDefinition = decode(from: child) else { continue }
-                    raidbosses.append(raidboss)
-                }
-                completion(raidbosses)
-            }
-        }
     }
     
     func loadQuests(completion: @escaping ([QuestDefinition]) -> ()) {
@@ -215,10 +186,8 @@ class FirebaseConnector {
             .updateChildValues(data)
     }
     
-    func deleteOldRaidMeetup(for id: String) {
-//        raidMeetupsRef
-//            .child(id)
-//            .removeValue()
+    func deleteOldChat(for id: String) {
+        #warning("TODO: Delete old chat")
     }
     
     func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
@@ -229,15 +198,6 @@ class FirebaseConnector {
             .child(arena.id)
             .child(DatabaseKeys.raid)
             .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
-    }
-    
-    private func saveUserInRaidMeetup(for id: String) {
-//        guard let userId = user?.id else { fatalError() }
-//        let data = [userId: ""]
-//        raidMeetupsRef
-//            .child(id)
-//            .child(DatabaseKeys.participants)
-//            .updateChildValues(data)
     }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
@@ -263,7 +223,6 @@ class FirebaseConnector {
     }
 
     func observeRaid(in arena: Arena) {
-        
         arenasRef
             .child(arena.geohash)
             .child(arena.id)
@@ -272,20 +231,8 @@ class FirebaseConnector {
                 guard let raid: Raid = decode(from: snapshot) else { return }
                 self.raidDelegate?.didUpdateRaid(raid)
         }
-//        raidMeetupsRef.child(meetupId).removeAllObservers()
-//
-//        raidMeetupsRef
-//            .child(meetupId)
-//            .observe(.value, with: { snapshot in
-//            guard let meetup: RaidMeetup = decode(from: snapshot) else { return }
-//            self.raidMeetupDelegate?.didUpdateRaidMeetup(meetup)
-//        })
     }
     
-    func stopObservingRaidMeetup(for meetupId: String) {
-//        raidMeetupsRef.child(meetupId).removeAllObservers()
-    }
-
     func loadPublicUserData(for id: String, completion: @escaping (PublicUserData) -> Void) {
         user(for: id) { user in
             completion(user)
