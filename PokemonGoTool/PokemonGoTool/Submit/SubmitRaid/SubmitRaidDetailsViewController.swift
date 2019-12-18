@@ -52,9 +52,6 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         stackView.addArrangedViewController(userParticipatesViewController, to: self)
         stackView.addArrangedViewController(meetupTimePickerViewController, to: self)
         stackView.addArrangedViewController(submitRaidViewController, to: self)
-        
-        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRaidboss))
-        navigationItem.rightBarButtonItem = addItem
     }
     
     func update(of type: SubmitRaidUpdateType) {
@@ -73,36 +70,4 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
             dismiss(animated: true)
         }
     }
-    
-    @objc
-    func addRaidboss() {
-        let alert = UIAlertController(title: "Raidboss eintragen", message: "Info: Danach bitte App neu starten damit der Raidboss auftaucht.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Senden", style: .default) { (alertAction) in
-            let textField = alert.textFields![0] as UITextField
-            let textField1 = alert.textFields![1] as UITextField
-            let textField2 = alert.textFields![2] as UITextField
-            
-            let raidboss = ["name" : textField.text!,
-                            "level" : textField1.text!,
-                            "imageName" : textField2.text!]
-            self.firebaseConnector.addRaidBoss(raidboss)
-        }
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Name"
-        }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Level"
-        }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Pokédex Nummer"
-        }
-        
-        let cancel = UIAlertAction(title: "Abbrechen", style: .cancel)
-        alert.addAction(action)
-        alert.addAction(cancel)
-        present(alert, animated:true)
-    }
 }
-
-
