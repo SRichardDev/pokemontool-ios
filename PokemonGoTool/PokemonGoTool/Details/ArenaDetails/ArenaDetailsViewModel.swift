@@ -39,7 +39,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var hasActiveRaid: Bool { return !(arena.raid?.isExpired ?? true) }
     var isRaidbossActive: Bool { return arena.raid?.hasHatched ?? false }
     var isRaidExpired: Bool { return arena.raid?.isExpired ?? true }
-    var isRaidBossSelected: Bool { return arena.raid?.raidBossId != nil }
+    var isRaidBossSelected: Bool { return arena.raid?.raidboss != nil }
     var level: Int { return arena.raid?.level ?? 0 }
     var isTimeSetForMeetup: Bool {meetup?.isTimeSet ?? false }
     var isGoldArena: Bool { return arena.isGoldArena ?? false }

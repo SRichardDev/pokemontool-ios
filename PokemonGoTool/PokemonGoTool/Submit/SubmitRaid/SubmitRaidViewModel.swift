@@ -5,7 +5,7 @@ enum SubmitRaidUpdateType {
     case raidLevelChanged
     case raidAlreadyRunning
     case userParticipates
-    case currentRaidbossesChanged
+    case raidbossChanged
     case raidSubmitted
 }
 
@@ -31,7 +31,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     var isRaidAlreadyRunning = false
     var isUserParticipating = false
     var selectedRaidLevel = 3
-    var selectedRaidBoss: RaidbossDefinition?
+    private(set) var selectedRaidBoss: Int?
     var timeLeft = 45
     var meetupTimeSelectionType: MeetupTimeSelectionType = .initial
     var hatchDate: Date?
@@ -52,7 +52,6 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
-        updateCurrentRaidBosses()
     }
     
     func raidAlreadyRunning(_ isRunning: Bool) {
@@ -67,12 +66,12 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     
     func raidLevelChanged(to value: Int) {
         selectedRaidLevel = value
-        updateCurrentRaidBosses()
         delegate?.update(of: .raidLevelChanged)
     }
     
-    func updateCurrentRaidBosses() {
-        self.delegate?.update(of: .currentRaidbossesChanged)
+    func updateRaidboss(dexNumber: Int) {
+        selectedRaidBoss = dexNumber
+        delegate?.update(of: .raidbossChanged)
     }
     
     func submitRaid() {
@@ -93,6 +92,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
                         hatchDate: hatchDate,
                         endDate: endDate,
                         submitter: userId,
+                        raidboss: selectedRaidBoss,
                         meetup: meetup)
         arena.raid = raid
         firebaseConnector.saveRaid(arena: arena)

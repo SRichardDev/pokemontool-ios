@@ -191,13 +191,13 @@ class FirebaseConnector {
     }
     
     func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
-        guard let raidbossId = raidboss.id else { return }
-        arena.raid?.raidBossId = raidbossId
-        arenasRef
-            .child(arena.geohash)
-            .child(arena.id)
-            .child(DatabaseKeys.raid)
-            .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
+//        guard let raidbossId = raidboss.id else { return }
+//        arena.raid?.raidBossId = raidbossId
+//        arenasRef
+//            .child(arena.geohash)
+//            .child(arena.id)
+//            .child(DatabaseKeys.raid)
+//            .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
     }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {

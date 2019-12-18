@@ -14,6 +14,8 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
     private var filteredPokemon = [PokemonDexEntry]()
     private var selectedPokemon: PokemonDexEntry?
 
+    var selectedRaidbossCallback: ((Int) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,7 +83,9 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
             selectedPokemon = isFiltering() ? filteredPokemon[indexPath.row] : pokemon[indexPath.row]
-//            tableView.deselectRow(at: indexPath, animated: true)
+            selectedRaidbossCallback?(selectedPokemon?.dexNumber ?? 0)
+            searchController.dismiss(animated: true)
+            dismiss(animated: true)
         }
     }
     

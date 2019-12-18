@@ -54,11 +54,19 @@ class ImageManager {
     }
     
     class func combinedArenaImage(for arena: Arena) -> UIImage? {
-        let baseImage = arena.image
+        
         guard let topImage = arena.raid?.image else { return arena.image }
         guard let raid = arena.raid else { return arena.image }
         guard raid.isActive else { return arena.image }
-        let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidBossId != nil) ? 4 : 1.5) : 1.5
+        
+        #if targetEnvironment(macCatalyst)
+        let baseImage = arena.image.resize(scaleFactor: 1.5)
+        let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidboss != nil) ? 4 : 1) : 1
+        #else
+        let baseImage = arena.image
+        let scaleFactor: CGFloat = raid.hasHatched ? ((raid.raidboss != nil) ? 4 : 1.5) : 1.5
+        #endif
+        
         let size = CGSize(width: topImage.size.width / scaleFactor, height: topImage.size.height / scaleFactor)
         let resizedTopImage = topImage.resize(targetSize: size)
         

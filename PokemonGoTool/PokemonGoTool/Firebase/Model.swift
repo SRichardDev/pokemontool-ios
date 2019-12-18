@@ -176,7 +176,7 @@ struct Raid: FirebaseCodable, Equatable {
     let level: Int
     var hatchTime: TimeInterval?
     var endTime: TimeInterval?
-    var raidBossId: String?
+    var raidboss: Int?
     var meetup: RaidMeetup?
     var submitter: String?
     var submitDate: Date? {
@@ -187,14 +187,14 @@ struct Raid: FirebaseCodable, Equatable {
          hatchDate: Date? = nil,
          endDate: Date? = nil,
          submitter: String,
-         raidBoss: String? = nil,
+         raidboss: Int? = nil,
          meetup: RaidMeetup) {
         
         self.level = level
         self.hatchTime = hatchDate?.timestamp ?? 0
         self.endTime = endDate?.timestamp ?? 0
         self.submitter = submitter
-        self.raidBossId = raidBoss
+        self.raidboss = raidboss
         self.meetup = meetup
     }
 }

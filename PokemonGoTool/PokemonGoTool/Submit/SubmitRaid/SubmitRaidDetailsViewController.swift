@@ -38,6 +38,7 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
         userParticipatesViewController.viewModel = viewModel
         meetupTimePickerViewController.viewModel = viewModel
         submitRaidViewController.viewModel = viewModel
+        raidBossViewController.viewModel = viewModel
         
         timeLeftPickerViewController.view.isVisible = viewModel.isRaidAlreadyRunning
         meetupTimePickerViewController.view.isVisible = viewModel.isUserParticipating
@@ -66,8 +67,8 @@ class SubmitRaidDetailsViewController: ScrollingContentViewController, Storyboar
                                                 timeLeftPickerViewController])
         case .userParticipates:
             changeVisibility(of: meetupTimePickerViewController, visible: viewModel.isUserParticipating, hideAnimated: true)
-        case .currentRaidbossesChanged:
-            break
+        case .raidbossChanged:
+            raidBossViewController.updateUI()
         case .raidSubmitted:
             dismiss(animated: true)
         }
