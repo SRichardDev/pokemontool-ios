@@ -93,10 +93,7 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
     func showSubmitRaid(for arena: Arena) {
         let submitRaidDetailsViewController = SubmitRaidDetailsViewController.fromStoryboard()
         submitRaidDetailsViewController.viewModel = SubmitRaidViewModel(arena: arena,
-                                                                        firebaseConnector: appModule.firebaseConnector)
-        submitRaidDetailsViewController.coordinator = self
-        submitRaidDetailsViewController.firebaseConnector = appModule.firebaseConnector
-        
+                                                                        firebaseConnector: appModule.firebaseConnector)        
         let navigationController = NavigationController()
         navigationController.viewControllers = [submitRaidDetailsViewController]
         tabBarController.present(navigationController, animated: true)

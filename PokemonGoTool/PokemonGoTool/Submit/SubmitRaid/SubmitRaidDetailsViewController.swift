@@ -4,8 +4,6 @@ import ScrollingContentViewController
 
 class SubmitRaidDetailsViewController: ScrollingContentViewController, StoryboardInitialViewController, SubmitRaidDelegate {
     
-    weak var coordinator: MainCoordinator?
-    var firebaseConnector: FirebaseConnector!
     var viewModel: SubmitRaidViewModel!
     private let stackView = OuterVerticalStackView()
     private let headerViewController = SubmitRaidHeaderViewController.fromStoryboard()
