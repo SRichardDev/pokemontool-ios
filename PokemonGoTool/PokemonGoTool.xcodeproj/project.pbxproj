@@ -12,6 +12,10 @@
 		030AB195239F073300CA930F /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */; };
 		033BC72B22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */; };
 		033BC72D22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */; };
+		034CC31B23AAC2C200EDFA01 /* RaidbossManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CC31A23AAC2C200EDFA01 /* RaidbossManager.swift */; };
+		034CC31C23AAD25F00EDFA01 /* RaidbossManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CC31A23AAC2C200EDFA01 /* RaidbossManager.swift */; };
+		034CC31D23AAD46000EDFA01 /* pokemon-names-en.json in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09722A1612200310339 /* pokemon-names-en.json */; };
+		034CC31E23AAD46400EDFA01 /* pokemon-names-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 0366E09622A1612200310339 /* pokemon-names-de.json */; };
 		0357E20923A2D50600C23ED1 /* RaidBossViewContorller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0357E20823A2D50600C23ED1 /* RaidBossViewContorller.swift */; };
 		0357E20B23A2D51200C23ED1 /* RaidBossViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0357E20A23A2D51200C23ED1 /* RaidBossViewController.storyboard */; };
 		035A836B2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */; };
@@ -170,8 +174,6 @@
 		2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */; };
 		2CC2EDEC222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC2EDEB222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard */; };
 		2CC2EDEE222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */; };
-		2CC6C0C822C694E500A4AB00 /* RaidBossCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6C0C622C694E500A4AB00 /* RaidBossCollectionViewController.swift */; };
-		2CC6C0C922C694E500A4AB00 /* RaidBossCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC6C0C722C694E500A4AB00 /* RaidBossCollectionViewController.storyboard */; };
 		2CC8D7F2229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F1229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard */; };
 		2CC8D7F4229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F3229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift */; };
 		2CC8D7F6229FEBC200AF77D7 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */; };
@@ -245,6 +247,7 @@
 		0311546323A05B5900B7763E /* NotificationExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationExtension.entitlements; sourceTree = "<group>"; };
 		033BC72A22AAEFC20036C0F6 /* SubmitRaidHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRaidHeaderViewController.swift; sourceTree = "<group>"; };
 		033BC72C22AAEFEF0036C0F6 /* SubmitRaidHeaderViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubmitRaidHeaderViewController.storyboard; sourceTree = "<group>"; };
+		034CC31A23AAC2C200EDFA01 /* RaidbossManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidbossManager.swift; sourceTree = "<group>"; };
 		0357E20823A2D50600C23ED1 /* RaidBossViewContorller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidBossViewContorller.swift; sourceTree = "<group>"; };
 		0357E20A23A2D51200C23ED1 /* RaidBossViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RaidBossViewController.storyboard; sourceTree = "<group>"; };
 		035A836A2232D3B200658841 /* ArenaDetailsParticipantsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsOverviewViewController.swift; sourceTree = "<group>"; };
@@ -406,8 +409,6 @@
 		2CBCD8E8221C8EA30058D782 /* LoadingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingViewController.storyboard; sourceTree = "<group>"; };
 		2CC2EDEB222ADD510087DF6F /* ArenaDetailsParticipantsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArenaDetailsParticipantsTableViewController.storyboard; sourceTree = "<group>"; };
 		2CC2EDED222ADD740087DF6F /* ArenaDetailsParticipantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaDetailsParticipantsTableViewController.swift; sourceTree = "<group>"; };
-		2CC6C0C622C694E500A4AB00 /* RaidBossCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaidBossCollectionViewController.swift; sourceTree = "<group>"; };
-		2CC6C0C722C694E500A4AB00 /* RaidBossCollectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RaidBossCollectionViewController.storyboard; sourceTree = "<group>"; };
 		2CC8D7F1229C6FF900AF77D7 /* AccountPushActiveSwitchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountPushActiveSwitchViewController.storyboard; sourceTree = "<group>"; };
 		2CC8D7F3229C701500AF77D7 /* AccountPushActiveSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPushActiveSwitchViewController.swift; sourceTree = "<group>"; };
 		2CC8D7F5229FEBC200AF77D7 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
@@ -573,6 +574,7 @@
 				2CDFDDE021ED306F00170A46 /* LocationManager.swift */,
 				2C79C3CB22E8EB860093B8CA /* DepartureNotificationManager.swift */,
 				2CF7B4D122F8E7540088C0F6 /* TopicSubscriptionManager.swift */,
+				034CC31A23AAC2C200EDFA01 /* RaidbossManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -995,8 +997,6 @@
 			children = (
 				0357E20823A2D50600C23ED1 /* RaidBossViewContorller.swift */,
 				0357E20A23A2D51200C23ED1 /* RaidBossViewController.storyboard */,
-				2CC6C0C722C694E500A4AB00 /* RaidBossCollectionViewController.storyboard */,
-				2CC6C0C622C694E500A4AB00 /* RaidBossCollectionViewController.swift */,
 			);
 			path = RaidBossCollectionView;
 			sourceTree = "<group>";
@@ -1148,6 +1148,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034CC31D23AAD46000EDFA01 /* pokemon-names-en.json in Resources */,
+				034CC31E23AAD46400EDFA01 /* pokemon-names-de.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,7 +1159,6 @@
 			files = (
 				2C0B5B812258D88D00620F4A /* AccountOverviewViewController.storyboard in Resources */,
 				2C34F1AA220B737E00B3B99C /* ButtonsStackViewController.storyboard in Resources */,
-				2CC6C0C922C694E500A4AB00 /* RaidBossCollectionViewController.storyboard in Resources */,
 				2C395A25220253DD005330B8 /* SubmitNameViewController.storyboard in Resources */,
 				2CBCD8E9221C8EA30058D782 /* LoadingViewController.storyboard in Resources */,
 				2C395A1D22024F40005330B8 /* MapViewController.storyboard in Resources */,
@@ -1260,6 +1261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034CC31C23AAD25F00EDFA01 /* RaidbossManager.swift in Sources */,
 				030AB195239F073300CA930F /* DateUtility.swift in Sources */,
 				030AB18B239F050800CA930F /* NotificationService.swift in Sources */,
 			);
@@ -1326,7 +1328,6 @@
 				2C97154C221DE7EB00B4E49A /* ArenaDetailsViewModel.swift in Sources */,
 				2C1AE5862263CC6F00AE9C4A /* Settings.swift in Sources */,
 				2C395A2C22025708005330B8 /* ViewModel.swift in Sources */,
-				2CC6C0C822C694E500A4AB00 /* RaidBossCollectionViewController.swift in Sources */,
 				2CF6F99F21EFF71600610BC9 /* PokestopPointAnnotation.swift in Sources */,
 				2C395A4E2205FA4B005330B8 /* RaidMeetupTimePickerViewController.swift in Sources */,
 				2CF7B4D422FB5BA10088C0F6 /* PokestopConnector.swift in Sources */,
@@ -1368,6 +1369,7 @@
 				2CDFDDE321ED4A3D00170A46 /* FirebaseConnector.swift in Sources */,
 				2C970EFE22DE7B1F00295DBD /* SubmitRaidViewController.swift in Sources */,
 				2C79C3CC22E8EB860093B8CA /* DepartureNotificationManager.swift in Sources */,
+				034CC31B23AAC2C200EDFA01 /* RaidbossManager.swift in Sources */,
 				2C395A1A22024A7F005330B8 /* MainCoordinator.swift in Sources */,
 				2C030867222C85B2007A1EA0 /* ArenaDetailsInfoViewController.swift in Sources */,
 				2C1AE571225E884200AE9C4A /* AccountWelcomeViewController.swift in Sources */,

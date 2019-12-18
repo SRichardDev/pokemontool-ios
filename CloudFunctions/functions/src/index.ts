@@ -65,35 +65,30 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
     }
 })
 
-export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onUpdate( async (snapshot, context) => {
 
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
-    
     const raid = snapshot.after.val()
-    // const raidBossId = raid.raidBossId || ""
 
     try {
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
-        // const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
-        const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
-
         const arena = arenaSnapshot.val()
-        const raidBossName = /*(raidBossSnapshot.val() && raidBossSnapshot.val().name) ||*/ 'Unbekannt'
-        const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '--:--'
-        const hatchTime = raid.hatchTime || "--:--"
-        const endTime = raid.endTime || "--:--"
+        const raidboss = raid.raidboss
+        const meetupTime = raid.meetup.meetupTime || "0"
+        const hatchTime = raid.hatchTime || "0"
+        const endTime = raid.endTime || "0"
         const level = raid.level
 
         const title = '⭐️'.repeat(level) + " @ " + arena.name
-        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
+        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + meetupTime
 
         const iOSCondition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
         const androidCondition = "'android' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
 
         console.log('Sending Condition: ' + iOSCondition)
         console.log('Android Condition: ' + androidCondition)
-        console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
+        console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidboss + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + meetupTime)
 
 
         const iOSPayload = {
@@ -107,7 +102,8 @@ export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash
                 longitude: String(arena.longitude),
                 hatch: String(hatchTime), 
                 end: String(endTime),
-                meetup: String(raidMeetupTime)
+                meetup: String(meetupTime),
+                raidboss: String(raidboss)
             }
         }
 
@@ -119,7 +115,8 @@ export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash
                 longitude: String(arena.longitude),
                 hatch: String(hatchTime), 
                 end: String(endTime),
-                meetup: String(raidMeetupTime)
+                meetup: String(meetupTime),
+                raidboss: String(raidboss)
             }
         }
 

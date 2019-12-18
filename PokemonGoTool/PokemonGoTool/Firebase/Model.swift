@@ -40,19 +40,6 @@ protocol Annotation  {
     var id: String! { get set }
 }
 
-struct RaidbossDefinition: FirebaseCodable, Equatable {
-    var id: String!
-    let name: String
-    let level: String
-    let imageName: String
-    
-    var image: UIImage? {
-        get {
-            return ImageManager.image(named: imageName)
-        }
-    }
-}
-
 struct Arena: FirebaseCodable, Annotation, Hashable {
     
     func hash(into hasher: inout Hasher) {
@@ -162,14 +149,10 @@ struct Raid: FirebaseCodable, Equatable {
     }
     
     var image: UIImage? {
-            return nil
-        #warning("TODO")
-//            let raidboss = RaidbossManager.shared.raidboss(for: raidBossId)
-//            let raidbossImage = ImageManager.image(named: "\(raidboss?.imageName ?? "")")
-//            let eggImage = ImageManager.image(named: "level_\(level)")
-//            let eggHatchedImage = ImageManager.image(named: "level_\(level)_hatched")
-//
-//            return hasHatched ? (raidbossImage ?? eggHatchedImage) : eggImage
+        let raidbossImage = ImageManager.image(named: "\(raidboss ?? 0)")
+        let eggImage = ImageManager.image(named: "level_\(level)")
+        let eggHatchedImage = ImageManager.image(named: "level_\(level)_hatched")
+        return hasHatched ? (raidbossImage ?? eggHatchedImage) : eggImage
     }
     
     var timestamp: TimeInterval?

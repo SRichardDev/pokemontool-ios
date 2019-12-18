@@ -190,7 +190,7 @@ class FirebaseConnector {
         #warning("TODO: Delete old chat")
     }
     
-    func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
+//    func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
 //        guard let raidbossId = raidboss.id else { return }
 //        arena.raid?.raidBossId = raidbossId
 //        arenasRef
@@ -198,7 +198,7 @@ class FirebaseConnector {
 //            .child(arena.id)
 //            .child(DatabaseKeys.raid)
 //            .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
-    }
+//    }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
         usersRef

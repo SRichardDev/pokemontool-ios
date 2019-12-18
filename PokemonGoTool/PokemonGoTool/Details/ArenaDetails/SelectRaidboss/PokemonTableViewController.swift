@@ -1,16 +1,11 @@
 
 import UIKit
 
-struct PokemonDexEntry: Codable, Equatable {
-    let dexNumber: Int
-    let name: String
-}
-
 class PokemonTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoryboardInitialViewController {
 
     @IBOutlet var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
-    private var pokemon = [PokemonDexEntry]()
+    private let pokemon = RaidbossManager.shared.pokemon
     private var filteredPokemon = [PokemonDexEntry]()
     private var selectedPokemon: PokemonDexEntry?
 
@@ -32,16 +27,6 @@ class PokemonTableViewController: UIViewController, UITableViewDelegate, UITable
         definesPresentationContext = true
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        guard let filepath = Bundle.main.path(forResource: "pokemon-names-de", ofType: "json") else { return }
-        
-        let data = try! Data(contentsOf: URL(fileURLWithPath: filepath))
-        let pokemonNames = try! JSONSerialization.jsonObject(with: data, options: []) as! [String]
-        var counter = 1
-        for pokemonName in pokemonNames {
-            let entry = PokemonDexEntry(dexNumber: counter, name: pokemonName)
-            self.pokemon.append(entry)
-            counter += 1
-        }
         tableView.reloadData()
         searchController.searchBar.becomeFirstResponder()
     }

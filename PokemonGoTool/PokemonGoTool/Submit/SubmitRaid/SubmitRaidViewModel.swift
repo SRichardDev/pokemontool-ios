@@ -77,7 +77,7 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
     func submitRaid() {
         guard let userId = firebaseConnector.user?.id else { NotificationBannerManager.shared.show(.unregisteredUser); return}
                 
-        var meetup = RaidMeetup(meetupDate: meetupDate)
+        var meetup = RaidMeetup(meetupDate: isUserParticipating ? meetupDate : nil )
 
         if isUserParticipating {
             meetup.participants = [userId: ""]

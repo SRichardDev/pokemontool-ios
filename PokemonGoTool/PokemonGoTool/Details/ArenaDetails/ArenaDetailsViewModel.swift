@@ -50,8 +50,12 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var headerTitle: String { return arena.name }
 
     var title: String {
-        //let raidboss = RaidbossManager.shared.raidboss(for: arena.raid?.raidBossId)
-        return isRaidExpired ? (arena.isEX ? "EX Arena" : "Arena") : "raidboss?.name" ?? "Level \(arena.raid?.level ?? 0) Raid"
+        let standardName = arena.isEX ? "EX Arena" : "Arena"
+        guard let raid = arena.raid else { return standardName }
+        guard raid.isActive else { return standardName }
+        guard let raidboss = raid.raidboss else { return "Level \(raid.level) Raid" }
+        let raidbossName = RaidbossManager.shared.pokemon[raidboss - 1].name
+        return raidbossName
     }
 
     var isUserParticipating: Bool {
@@ -60,12 +64,12 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     var isDepartureNotificationSet: Bool {
-        guard let meetup = meetup else { return false }
+//        guard let meetup = meetup else { return false }
         return false //UserDefaults.standard.bool(forKey: meetup.id + "-departureNotification")
     }
     
     var departureNotificationTime: String? {
-        guard let meetup = meetup else { return nil }
+//        guard let meetup = meetup else { return nil }
         return "" //UserDefaults.standard.string(forKey: meetup.id + "-meetupTime")
     }
     
@@ -193,10 +197,10 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         }
     }
     
-    func updateRaidboss(_ raidboss: RaidbossDefinition) {
-        firebaseConnector.setRaidbossForRaid(in: &arena, raidboss: raidboss)
-        delegate?.update(of: .raidbossChanged)
-    }
+//    func updateRaidboss(_ raidboss: RaidbossDefinition) {
+//        firebaseConnector.setRaidbossForRaid(in: &arena, raidboss: raidboss)
+//        delegate?.update(of: .raidbossChanged)
+//    }
     
     func changeMeetupTimeRequested() {
         delegate?.update(of: .changeMeetupTime)
