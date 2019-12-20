@@ -65,20 +65,87 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
     }
 })
 
-export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onUpdate( async (snapshot, context) => {
-
+export const onWriteRaidmeetupNew = functions.database.ref('/arenas/{geohash}/{arenaId}/raid/meetup').onUpdate( async (snapshot, context) => {
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
-    const raid = snapshot.after.val()
 
     try {
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
         const arena = arenaSnapshot.val()
+
+        const beforeMeetupSnapshot = snapshot.before.val()
+        const afterMeetupSnapshot = snapshot.after.val()
+
+        const participantsBefore = Object.keys(beforeMeetupSnapshot.participants);
+        const participantsAfter = Object.keys(afterMeetupSnapshot.participants);
+
+        const signedUpParticipant = participantsAfter.filter(item => participantsBefore.indexOf(item) < 0);
+        const signedOffParticipant = participantsBefore.filter(item => participantsAfter.indexOf(item) < 0);
+
+        console.log("Signed Up: " + signedUpParticipant)
+        console.log("Signed Off: " + signedOffParticipant)
+        let participant = ""
+        let foo = ""
+
+        if (signedUpParticipant.length === 1) {
+            participant = signedUpParticipant[0]
+            foo = " nimmt beim Raid teil"
+        } else if (signedOffParticipant.length === 1) {
+            participant = signedOffParticipant[0]
+            foo = " hat abgesagt"
+        }
+        console.log(participant + foo)
+
+
+        const userSnapshot = await admin.database().ref('/users/' + participant).once('value')
+        const publicData = userSnapshot.val().publicData
+        const trainerName = publicData.trainerName
+
+        const payload = {
+            notification: {
+                title: trainerName + foo,
+                body:  "Neue Teilnehmerzahl: " + String(participantsAfter.length),
+                sound: 'default'
+            },
+            data: {
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude),
+                // hatch: String(hatchTime), 
+                // end: String(endTime),
+                // meetup: String(meetupTime),
+                // raidboss: String(raidboss)
+            }
+        }
+        const condition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics"
+        void admin.messaging().sendToCondition(condition, payload,)
+        return true
+
+    }
+    catch (error) {
+        console.log(error)
+        return false
+    }
+})
+
+export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+
+    const geohash = context.params.geohash
+    const arenaId = context.params.arenaId
+    // const raid = snapshot.after.val()
+
+    try {
+        const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
+        const arena = arenaSnapshot.val()
+
+        const raid = arena.raid
+
         const raidboss = raid.raidboss
         const meetupTime = raid.meetup.meetupTime || "0"
         const hatchTime = raid.hatchTime || "0"
         const endTime = raid.endTime || "0"
         const level = raid.level
+
+
 
         const title = '⭐️'.repeat(level) + " @ " + arena.name
         const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + meetupTime
