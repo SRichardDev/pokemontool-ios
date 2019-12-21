@@ -110,6 +110,7 @@ class FirebaseConnector {
     }
     
     func saveRaid(arena: Arena) {
+        clearRaidIfExpired(for: arena)
         guard let arenaID = arena.id else { return }
         let data = try! FirebaseEncoder().encode(arena.raid)
         var dataWithTimestamp = data as! [String: Any]

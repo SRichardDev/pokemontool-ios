@@ -65,7 +65,8 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
     }
 })
 
-export const onWriteRaidmeetupNew = functions.database.ref('/arenas/{geohash}/{arenaId}/raid/meetup').onUpdate( async (snapshot, context) => {
+
+export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{arenaId}/raid/meetup').onUpdate( async (snapshot, context) => {
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
 
@@ -85,17 +86,18 @@ export const onWriteRaidmeetupNew = functions.database.ref('/arenas/{geohash}/{a
         console.log("Signed Up: " + signedUpParticipant)
         console.log("Signed Off: " + signedOffParticipant)
         let participant = ""
-        let foo = ""
+        let title = ""
+        let isSignUp = false
 
         if (signedUpParticipant.length === 1) {
             participant = signedUpParticipant[0]
-            foo = " nimmt beim Raid teil"
+            title = "🙋‍♂️ @ " + arena.name
+            isSignUp = true
         } else if (signedOffParticipant.length === 1) {
             participant = signedOffParticipant[0]
-            foo = " hat abgesagt"
+            title = "🙅‍♂️ @ " + arena.name
+            isSignUp = false
         }
-        console.log(participant + foo)
-
 
         const userSnapshot = await admin.database().ref('/users/' + participant).once('value')
         const publicData = userSnapshot.val().publicData
@@ -103,21 +105,22 @@ export const onWriteRaidmeetupNew = functions.database.ref('/arenas/{geohash}/{a
 
         const payload = {
             notification: {
-                title: trainerName + foo,
-                body:  "Neue Teilnehmerzahl: " + String(participantsAfter.length),
+                title: title,
+                body:  "",
                 sound: 'default'
             },
             data: {
                 latitude: String(arena.latitude),
                 longitude: String(arena.longitude),
-                // hatch: String(hatchTime), 
-                // end: String(endTime),
-                // meetup: String(meetupTime),
-                // raidboss: String(raidboss)
+                trainer: trainerName,
+                signup: String(isSignUp),
+                count: String(participantsAfter.length)
             }
         }
+
+        const options = { mutableContent: true }
         const condition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics"
-        void admin.messaging().sendToCondition(condition, payload,)
+        void admin.messaging().sendToCondition(condition, payload,options)
         return true
 
     }
@@ -127,25 +130,20 @@ export const onWriteRaidmeetupNew = functions.database.ref('/arenas/{geohash}/{a
     }
 })
 
-export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+export const onCreateRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onCreate( async (snapshot, context) => {
 
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
-    // const raid = snapshot.after.val()
 
     try {
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
         const arena = arenaSnapshot.val()
-
         const raid = arena.raid
-
         const raidboss = raid.raidboss
         const meetupTime = raid.meetup.meetupTime || "0"
         const hatchTime = raid.hatchTime || "0"
         const endTime = raid.endTime || "0"
         const level = raid.level
-
-
 
         const title = '⭐️'.repeat(level) + " @ " + arena.name
         const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + meetupTime
@@ -187,10 +185,7 @@ export const onWriteRaidWithTimestamp = functions.database.ref('/arenas/{geohash
             }
         }
 
-        const options = {
-            mutableContent: true
-        }
-
+        const options = { mutableContent: true }
         void admin.messaging().sendToCondition(iOSCondition, iOSPayload, options)
         void admin.messaging().sendToCondition(androidCondition, androidPayload)
         return true
