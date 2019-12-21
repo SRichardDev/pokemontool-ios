@@ -238,6 +238,17 @@ class FirebaseConnector {
             completion(user)
         }
     }
+    
+    func clearRaidIfExpired(for arena: Arena) {
+        guard let raid = arena.raid else { return }
+        if raid.isExpired {
+            arenasRef
+                .child(arena.geohash)
+                .child(arena.id)
+                .child(DatabaseKeys.raid)
+                .removeValue()
+        }
+    }
 
     private func checkConnectivity() {
         let connectedRef = Database.database().reference(withPath: ".info/connected")

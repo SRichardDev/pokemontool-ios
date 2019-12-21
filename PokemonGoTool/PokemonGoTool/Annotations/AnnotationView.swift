@@ -98,8 +98,8 @@ class AnnotationView: CustomAnnotationView {
     }
     
     private class func prepareArenaAnnotation(in mapView: MKMapView,
-                                        for annotation: ArenaPointAnnotation,
-                                        showLabel: Bool = false) -> MKAnnotationView? {
+                                              for annotation: ArenaPointAnnotation,
+                                              showLabel: Bool = false) -> MKAnnotationView? {
         
         let reuseId = "arenaReuseIdentifier"
         if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? AnnotationView {

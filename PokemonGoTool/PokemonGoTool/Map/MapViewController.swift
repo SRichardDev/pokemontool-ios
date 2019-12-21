@@ -192,6 +192,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
             return mapView.annotationView(annotation: annotation, reuseIdentifier: "identifier")
         }
         
+        if let annotation = annotation as? ArenaPointAnnotation,
+            let arena = annotation.arena {
+            firebaseConnector.clearRaidIfExpired(for: arena)
+        }
+        
         let annotationView = AnnotationView.prepareFor(mapView: mapView,
                                                        annotation: annotation,
                                                        showLabel: currentlyShowingLabels)
