@@ -69,14 +69,18 @@ export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/r
 export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{arenaId}/raid/meetup').onUpdate( async (snapshot, context) => {
     const geohash = context.params.geohash
     const arenaId = context.params.arenaId
+    const beforeMeetupSnapshot = snapshot.before.val()
+    const afterMeetupSnapshot = snapshot.after.val()
+
+    if (beforeMeetupSnapshot === undefined) {
+        console.log("No before snapshot... Skipping")
+        return false
+    }
 
     try {
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
         const arena = arenaSnapshot.val()
         const raidId = arena.raid.raidId
-
-        const beforeMeetupSnapshot = snapshot.before.val()
-        const afterMeetupSnapshot = snapshot.after.val()
 
         const participantsBefore = Object.keys(beforeMeetupSnapshot.participants);
         const participantsAfter = Object.keys(afterMeetupSnapshot.participants);
@@ -84,20 +88,23 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
         const signedUpParticipant = participantsAfter.filter(item => participantsBefore.indexOf(item) < 0);
         const signedOffParticipant = participantsBefore.filter(item => participantsAfter.indexOf(item) < 0);
 
-        console.log("Signed Up: " + signedUpParticipant)
-        console.log("Signed Off: " + signedOffParticipant)
         let participant = ""
         let title = ""
         let isSignUp = false
 
         if (signedUpParticipant.length === 1) {
+            console.log("Signed Up: " + signedUpParticipant)
             participant = signedUpParticipant[0]
             title = "🙋‍♂️ @ " + arena.name
             isSignUp = true
         } else if (signedOffParticipant.length === 1) {
+            console.log("Signed Off: " + signedOffParticipant)
             participant = signedOffParticipant[0]
             title = "🙅‍♂️ @ " + arena.name
             isSignUp = false
+        } else {
+            console.log("No sign up/off... Skipping")
+            return false
         }
 
         const userSnapshot = await admin.database().ref('/users/' + participant).once('value')
@@ -133,6 +140,9 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
 
         const options = { mutableContent: true }
         const condition = "'" + raidId + "' in topics" 
+        console.log("Sending to condition: " + condition)
+        console.log("iOS Payload: " + iOSPayload.data)
+        console.log("Android Payload: " + androidPayload.data)
         void admin.messaging().sendToCondition(condition, iOSPayload, options)
         void admin.messaging().sendToCondition(condition, androidPayload, options)
         return true
