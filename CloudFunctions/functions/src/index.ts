@@ -104,7 +104,7 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
         const publicData = userSnapshot.val().publicData
         const trainerName = publicData.trainerName
 
-        const payload = {
+        const iOSPayload = {
             notification: {
                 title: title,
                 body:  "",
@@ -119,9 +119,22 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
             }
         }
 
+        const androidPayload = {
+            data: {
+                title: title,
+                body:  "",
+                latitude: String(arena.latitude),
+                longitude: String(arena.longitude),
+                trainer: trainerName,
+                signup: String(isSignUp),
+                count: String(participantsAfter.length)
+            }
+        }
+
         const options = { mutableContent: true }
         const condition = "'" + raidId + "' in topics" 
-        void admin.messaging().sendToCondition(condition, payload,options)
+        void admin.messaging().sendToCondition(condition, iOSPayload, options)
+        void admin.messaging().sendToCondition(condition, androidPayload, options)
         return true
 
     }
