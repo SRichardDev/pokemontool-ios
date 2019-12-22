@@ -31,6 +31,7 @@ struct DatabaseKeys {
     static let level = "level"
     static let trainerCode = "trainerCode"
     static let meetupTime = "meetupTime"
+    static let raidId = "raidId"
     
     @available(*, deprecated, message: "Old - remove soon")
     static let subscribedGeohashPokestops = "subscribedGeohashPokestops"

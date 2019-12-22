@@ -28,4 +28,9 @@ class RaidbossManager {
             counter += 1
         }
     }
+    
+    func pokemonNameFor(dexNumber: Int?) -> String {
+        guard let dexNumber = dexNumber else { return "---" }
+        return pokemon[dexNumber - 1].name
+    }
 }

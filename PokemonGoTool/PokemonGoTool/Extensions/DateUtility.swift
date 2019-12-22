@@ -40,12 +40,21 @@ class DateUtility {
         return "\(hourString):\(minuteString)"
     }
     
-    class func timeString(for date: Date) -> String {
+    class func timeString(for date: Date?) -> String {
+        guard let date = date else { return "--:--" }
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         dateFormatter.locale = Locale.current
         let selectedTime: String = dateFormatter.string(from: date)
         return selectedTime
+    }
+    
+    class func timeString(from string: String) -> String {
+        guard let timestamp = Double(string) else { return "--:--" }
+        guard timestamp != 0 else { return "--:--" }
+        let date = Date(timeIntervalSince1970: timestamp/1000)
+        let dateString = DateUtility.timeString(for: date)
+        return dateString
     }
 }
 

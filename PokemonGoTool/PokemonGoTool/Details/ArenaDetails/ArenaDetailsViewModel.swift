@@ -238,17 +238,19 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
 //        UserDefaults.standard.removeObject(forKey: meetup.id + "-meetupTime")
     }
     
-    func formattedRaidTextForSharing() -> String {
+    func formattedRaidTextForSharing() -> String? {
+        guard let raid = arena.raid,
+            let hatchDate = raid.hatchDate,
+            let endDate = raid.endDate else { return nil }
+        
         var participantsString = ""
-        participants.values.forEach { participantsString += ("• " + $0.trainerName! + "\n") }
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
+        participants.values.forEach { participantsString += ("- " + $0.trainerName! + "\n") }
         
         let shareText = """
-        🐲: "---", ⭐️: \(arena.raid?.level ?? 0)
+        🐲: \(RaidbossManager.shared.pokemonNameFor(dexNumber: raid.raidboss)), ⭐️: \(raid.level)
         🏟: \(arena.name)
-        ⌚️: \(dateFormatter.string(from: arena.raid?.hatchDate ?? Date())) - \(dateFormatter.string(from: arena.raid?.endDate ?? Date()))
-        👫: \(meetup?.meetupTime /*?? ""*/)
+        ⌚️: \(DateUtility.timeString(for: hatchDate)) - \(DateUtility.timeString(for: endDate))
+        👫: \(DateUtility.timeString(for: meetup?.meetupDate))
         📍: https://maps.google.com/?q=\(arena.latitude),\(arena.longitude)\n
         \(participantsString)
         """

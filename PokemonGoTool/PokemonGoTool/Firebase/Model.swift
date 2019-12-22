@@ -102,6 +102,7 @@ struct Arena: FirebaseCodable, Annotation, Hashable {
 struct Raid: FirebaseCodable, Equatable {
     
     var id: String!
+    var raidId: String?
     
     var isSubmittedBeforeHatchTime: Bool {
         get {
@@ -110,25 +111,21 @@ struct Raid: FirebaseCodable, Equatable {
     }
     
     var isExpired: Bool {
-        get {
-            guard let submitDate = submitDate else { return true }
-            guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return true }
-            
-            if let raidEndDate = endDate {
-                return raidEndDate < Date()
-            }
-
-            if let hatchDate = hatchDate {
-                return hatchDate < Date()
-            }
-            return true
+        guard let submitDate = submitDate else { return true }
+        guard Calendar.current.isDate(submitDate, inSameDayAs: Date()) else { return true }
+        
+        if let raidEndDate = endDate {
+            return raidEndDate < Date()
         }
+
+        if let hatchDate = hatchDate {
+            return hatchDate < Date()
+        }
+        return true
     }
     
     var isActive: Bool {
-        get {
-            return !isExpired
-        }
+        return !isExpired
     }
     
     var hasHatched: Bool {

@@ -115,6 +115,8 @@ class FirebaseConnector {
         let data = try! FirebaseEncoder().encode(arena.raid)
         var dataWithTimestamp = data as! [String: Any]
         dataWithTimestamp[DatabaseKeys.timestamp] = ServerValue.timestamp()
+        let raidId = arenasRef.childByAutoId().key
+        dataWithTimestamp[DatabaseKeys.raidId] = raidId
         arenasRef
             .child(arena.geohash)
             .child(arenaID)
@@ -122,6 +124,12 @@ class FirebaseConnector {
             .setValue(dataWithTimestamp)
         
         user?.updateSubmittedRaidCount()
+        
+        guard let userId = user?.id,
+              let unwrappedRaidId = raidId else { return }
+        if arena.raid?.meetup?.participants?[userId] != nil {
+            subscribeToTopic(unwrappedRaidId, topicType: .raidMeetups)
+        }
     }
     
     func subscribeToTopic(_ topic: String, topicType: TopicType) {
@@ -159,7 +167,9 @@ class FirebaseConnector {
             .child(DatabaseKeys.participants)
             .updateChildValues(data)
         
-        #warning("TODO: subscribe to topic")
+        if let raidId = arena.raid?.raidId {
+            subscribeToTopic(raidId, topicType: .raidMeetups)
+        }
         return arena
     }
     
@@ -173,8 +183,9 @@ class FirebaseConnector {
             .child(DatabaseKeys.participants)
             .child(userId)
             .removeValue()
-        #warning("TODO: unsubscribe from topic")
-
+        if let raidId = arena.raid?.raidId {
+            unsubscribeFormTopic(raidId, topicType: .raidMeetups)
+        }
     }
     
     func setMeetupTime(_ meetupTime: TimeInterval, in arena: Arena) {
@@ -276,12 +287,7 @@ class FirebaseConnector {
         let quests = Database.database().reference(withPath: DatabaseKeys.quests)
         quests.childByAutoId().setValue(data)
     }
-    
-    func addRaidBoss(_ data: [String : String]) {
-        let quests = Database.database().reference(withPath: DatabaseKeys.raidBosses)
-        quests.childByAutoId().setValue(data)
-    }
-    
+        
     func DEBUGdeleteArena(_ arena: Arena) {
         arenasRef
             .child(arena.geohash)

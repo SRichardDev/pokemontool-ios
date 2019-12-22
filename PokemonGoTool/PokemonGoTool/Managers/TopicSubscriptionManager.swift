@@ -20,9 +20,9 @@ enum TopicType: CustomStringConvertible {
 class TopicSubscriptionManager {
     
     private let usersRef = Database.database().reference(withPath: DatabaseKeys.users)
-        
+    
     func subscribeToTopic(for user: User, in topic: String, for type: TopicType) {
-
+        
         Messaging.messaging().subscribe(toTopic: topic) { error in
             if let error = error {
                 print(error)
@@ -38,7 +38,7 @@ class TopicSubscriptionManager {
     }
     
     func unsubscribeFromTopic(for user: User, in topic: String, for type: TopicType) {
-
+        
         Messaging.messaging().unsubscribe(fromTopic: topic) { error in
             if let error = error {
                 print(error)

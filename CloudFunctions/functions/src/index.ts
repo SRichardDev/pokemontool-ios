@@ -73,6 +73,7 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
     try {
         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
         const arena = arenaSnapshot.val()
+        const raidId = arena.raid.raidId
 
         const beforeMeetupSnapshot = snapshot.before.val()
         const afterMeetupSnapshot = snapshot.after.val()
@@ -119,7 +120,7 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
         }
 
         const options = { mutableContent: true }
-        const condition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics"
+        const condition = "'" + raidId + "' in topics" 
         void admin.messaging().sendToCondition(condition, payload,options)
         return true
 

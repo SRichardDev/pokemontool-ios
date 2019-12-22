@@ -6,13 +6,23 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
 
-    override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    override func didReceive(_ request: UNNotificationRequest,
+                             withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
         if let _ = request.content.userInfo["signup"] {
             createSignupPush(request, withContentHandler: contentHandler)
         }
+        
+        if let _ = request.content.userInfo["hatch"] {
+            createRaidPush(request, withContentHandler: contentHandler)
+        }
+    }
+    
+    private func createRaidPush(_ request: UNNotificationRequest,
+                                withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         
         guard let hatch = request.content.userInfo["hatch"] as? String,
               let end = request.content.userInfo["end"] as? String,
@@ -27,14 +37,14 @@ class NotificationService: UNNotificationServiceExtension {
                 let raidbossString = RaidbossManager.shared.pokemon[raidbossNumber - 1].name
                 bestAttemptContent.body =
                 """
-                ⌚️ \(timeString(from: hatch)) - \(timeString(from: end))
-                👫 \(timeString(from: meetup)) 🐲 \(raidbossString)
+                ⌚️ \(DateUtility.timeString(from: hatch)) - \(DateUtility.timeString(from: end))
+                👫 \(DateUtility.timeString(from: meetup)) 🐲 \(raidbossString)
                 """
             } else {
                 bestAttemptContent.body =
                 """
-                ⌚️ \(timeString(from: hatch)) - \(timeString(from: end))
-                👫 \(timeString(from: meetup))
+                ⌚️ \(DateUtility.timeString(from: hatch)) - \(DateUtility.timeString(from: end))
+                👫 \(DateUtility.timeString(from: meetup))
                 """
             }
             contentHandler(bestAttemptContent)
@@ -70,14 +80,6 @@ class NotificationService: UNNotificationServiceExtension {
         if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
-    }
-    
-    private func timeString(from input: String) -> String {
-        guard let timestamp = Double(input) else { return "--:--" }
-        guard timestamp != 0 else { return "--:--" }
-        let date = Date(timeIntervalSince1970: timestamp/1000)
-        let dateString = DateUtility.timeString(for: date)
-        return dateString
     }
 }
 
