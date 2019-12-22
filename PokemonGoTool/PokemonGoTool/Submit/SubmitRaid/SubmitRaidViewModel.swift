@@ -88,6 +88,9 @@ class SubmitRaidViewModel: MeetupTimeSelectable {
             hatchDate = Date().addingTimeInterval(time)
         }
         
+        firebaseConnector.chatConnector.deleteOldChat(for: arena)
+        firebaseConnector.clearRaid(for: arena)
+
         let raid = Raid(level: selectedRaidLevel,
                         hatchDate: hatchDate,
                         endDate: endDate,

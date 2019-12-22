@@ -89,14 +89,10 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         
         firebaseConnector.raidDelegate = self
         firebaseConnector.observeRaid(in: arena)
-        
-//        guard let meetupId = arena.raid?.raidMeetupId else { return }
-//        firebaseConnector.observeRaidMeetup(for: meetupId)
     }
     
     deinit {
-//        guard let meetupId = arena.raid?.raidMeetupId else { return }
-//        firebaseConnector.stopObservingRaidMeetup(for: meetupId)
+        firebaseConnector.stopObservingRaid(in: arena)
     }
         
     func userParticipates(_ isParticipating: Bool) {

@@ -110,7 +110,6 @@ class FirebaseConnector {
     }
     
     func saveRaid(arena: Arena) {
-        clearRaidIfExpired(for: arena)
         guard let arenaID = arena.id else { return }
         let data = try! FirebaseEncoder().encode(arena.raid)
         var dataWithTimestamp = data as! [String: Any]
@@ -198,10 +197,7 @@ class FirebaseConnector {
             .updateChildValues(data)
     }
     
-    func deleteOldChat(for id: String) {
-        #warning("TODO: Delete old chat")
-    }
-    
+    #warning("TODO: set raidboss in raid")
 //    func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
 //        guard let raidbossId = raidboss.id else { return }
 //        arena.raid?.raidBossId = raidbossId
@@ -235,6 +231,9 @@ class FirebaseConnector {
     }
 
     func observeRaid(in arena: Arena) {
+        guard let raid = arena.raid,
+                  raid.isActive else { return }
+        print("🏟 Started observing raid in arena \(arena.id ?? "??")")
         arenasRef
             .child(arena.geohash)
             .child(arena.id)
@@ -244,8 +243,17 @@ class FirebaseConnector {
                 self.raidDelegate?.didUpdateRaid(raid)
         }
     }
+    func stopObservingRaid(in arena: Arena) {
+        print("🏟 Stopped observing raid in arena \(arena.id ?? "??")")
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .removeAllObservers()
+    }
     
     func loadPublicUserData(for id: String, completion: @escaping (PublicUserData) -> Void) {
+        print("👨🏻 Loading user data for \(id)")
         user(for: id) { user in
             completion(user)
         }
@@ -254,12 +262,22 @@ class FirebaseConnector {
     func clearRaidIfExpired(for arena: Arena) {
         guard let raid = arena.raid else { return }
         if raid.isExpired {
+            chatConnector.deleteOldChat(for: arena)
+            print("🏟 Clearing raid in arena \(arena.id ?? "??")")
             arenasRef
                 .child(arena.geohash)
                 .child(arena.id)
                 .child(DatabaseKeys.raid)
                 .removeValue()
         }
+    }
+    
+    func clearRaid(for arena: Arena) {
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .removeValue()
     }
 
     private func checkConnectivity() {

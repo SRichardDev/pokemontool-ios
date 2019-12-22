@@ -41,6 +41,7 @@ class ChatViewController: MessagesViewController, StoryboardInitialViewControlle
         firebaseConnector.chatConnector.raidChatDelegate = self
         guard let chatId = viewModel.arena.raid?.meetup?.chatId else { return }
         firebaseConnector.chatConnector.observeRaidChat(for: chatId)
+        isModalInPresentation = true
     }
 
     private func insertNewMessage(_ message: Message) {

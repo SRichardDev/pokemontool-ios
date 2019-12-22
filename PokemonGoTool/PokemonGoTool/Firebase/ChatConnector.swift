@@ -41,13 +41,13 @@ class ChatConnector {
         }
     }
     
-    func observeRaidChat(for chatId: String) {
+    func observeRaidChat(for id: String) {
         chatsRef
-            .child(chatId)
+            .child(id)
             .removeAllObservers()
         
         chatsRef
-            .child(chatId)
+            .child(id)
             .observe(.value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 for child in result {
@@ -56,5 +56,13 @@ class ChatConnector {
                 }
             }
         })
+    }
+    
+    func deleteOldChat(for arena: Arena) {
+        guard let id = arena.raid?.meetup?.chatId else { return }
+        print("🏟💬 Clearing chat in arena \(arena.id ?? "??")")
+        chatsRef
+            .child(id)
+            .removeValue()
     }
 }
