@@ -12,20 +12,31 @@
             <objects>
                 <viewController id="bHD-at-kgR" customClass="RaidBossViewController" customModule="PokemonGoTool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ItH-L6-oJP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wIQ-yT-2mi" customClass="InnerVerticalStackView" customModule="PokemonGoTool" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eVn-eZ-lWt">
-                                        <rect key="frame" x="0.0" y="0.5" width="375" height="199"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eVn-eZ-lWt">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="IIT-OD-0xV"/>
+                                            <constraint firstAttribute="height" constant="150" id="IIT-OD-0xV"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAu-5E-3Q2" customClass="Label" customModule="PokemonGoTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="150" width="375" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="style">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvO-Rw-DgO" customClass="Button" customModule="PokemonGoTool" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="200" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="186" width="375" height="44"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="showPokemonSelectionTapped:" destination="bHD-at-kgR" eventType="touchUpInside" id="5uR-wQ-Oh2"/>
@@ -43,8 +54,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0KN-g0-dCM"/>
                     </view>
-                    <size key="freeformSize" width="375" height="250"/>
+                    <size key="freeformSize" width="375" height="230"/>
                     <connections>
+                        <outlet property="nameLabel" destination="mAu-5E-3Q2" id="h2V-nv-Qwu"/>
                         <outlet property="selectRaidbossButton" destination="AvO-Rw-DgO" id="Wx7-Y1-aZq"/>
                         <outlet property="selectedPokemonImageView" destination="eVn-eZ-lWt" id="bvx-O1-zYj"/>
                     </connections>
@@ -54,7 +66,4 @@
             <point key="canvasLocation" x="-112" y="110"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="questionmark.circle" catalog="system" width="64" height="60"/>
-    </resources>
 </document>

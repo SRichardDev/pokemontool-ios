@@ -822,7 +822,7 @@
 				033BC72E22AAEFFA0036C0F6 /* Header */,
 				2C348BA222061A4000F6A1F7 /* Level */,
 				2C348BA322061A4B00F6A1F7 /* HatchTime */,
-				2CC6C0C522C6949F00A4AB00 /* RaidBossCollectionView */,
+				2CC6C0C522C6949F00A4AB00 /* Raidboss */,
 				2C348BA422061A5B00F6A1F7 /* TimeLeft */,
 				2C348BA522061A6E00F6A1F7 /* MeetupTime */,
 				2C348BA622061A7800F6A1F7 /* AlreadyRunning */,
@@ -992,13 +992,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2CC6C0C522C6949F00A4AB00 /* RaidBossCollectionView */ = {
+		2CC6C0C522C6949F00A4AB00 /* Raidboss */ = {
 			isa = PBXGroup;
 			children = (
 				0357E20823A2D50600C23ED1 /* RaidBossViewContorller.swift */,
 				0357E20A23A2D51200C23ED1 /* RaidBossViewController.storyboard */,
 			);
-			path = RaidBossCollectionView;
+			path = Raidboss;
 			sourceTree = "<group>";
 		};
 		2CDFDDEA21ED501A00170A46 /* GeoHash */ = {

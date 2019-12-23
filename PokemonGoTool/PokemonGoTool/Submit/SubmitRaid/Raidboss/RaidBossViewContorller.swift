@@ -6,11 +6,12 @@ class RaidBossViewController: UIViewController, StoryboardInitialViewController 
     
     var viewModel: SubmitRaidViewModel!
     @IBOutlet var selectedPokemonImageView: UIImageView!
+    @IBOutlet var nameLabel: Label!
     @IBOutlet var selectRaidbossButton: Button!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectRaidbossButton.setTitle("Raidboss auswählen", for: .normal)
+        updateUI()
     }
     
     @IBAction func showPokemonSelectionTapped(_ sender: Any) {
@@ -25,6 +26,10 @@ class RaidBossViewController: UIViewController, StoryboardInitialViewController 
     }
     
     func updateUI() {
+        selectRaidbossButton.setTitle("Raidboss auswählen", for: .normal)
         selectedPokemonImageView.image = ImageManager.image(named: "\(viewModel.selectedRaidBoss ?? 0)")
+        selectedPokemonImageView.isHidden = selectedPokemonImageView.image == nil
+        nameLabel.text = RaidbossManager.shared.pokemonNameFor(dexNumber: viewModel.selectedRaidBoss)
+        nameLabel.isHidden = selectedPokemonImageView.image == nil
     }
 }
