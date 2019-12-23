@@ -37,7 +37,7 @@ class SubmitQuestViewController: UIViewController, StoryboardInitialViewControll
         navigationItem.hidesSearchBarWhenScrolling = false
         
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuest))
-        navigationItem.rightBarButtonItem = addItem
+        navigationItem.leftBarButtonItem = addItem
     }
     
     @objc
