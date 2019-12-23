@@ -5,7 +5,11 @@ class ArenaDetailsParticipantsTableViewController: UIViewController, UITableView
 
     var viewModel: ArenaDetailsViewModel!
     @IBOutlet var tableView: UITableView!
-
+    private var participants: [PublicUserData] {
+        return viewModel.participants.values.sorted { $0.trainerName!.lowercased() < $1.trainerName!.lowercased() }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -14,12 +18,12 @@ class ArenaDetailsParticipantsTableViewController: UIViewController, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.participants.count
+        return participants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! ParticipantsTableViewCell
-        let publicUserData = Array(viewModel.participants.values)[indexPath.row]
+        let publicUserData = participants[indexPath.row]
         cell.userData = publicUserData
         return cell
     }
