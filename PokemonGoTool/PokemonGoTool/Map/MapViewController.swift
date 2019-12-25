@@ -277,15 +277,18 @@ extension MapViewController: PushManagerDelegate {
         setMapRegion(distance: 200, coordinate: push.coordinate)
         arenaConnector.arena(in: push.geohash, for: push.arenaId) { [weak self] arena in
             guard let arena = arena else { return }
+            guard arena.raid?.isActive ?? false else { self?.openArenaForPush(push); return }
             self?.coordinator?.showArenaDetails(for: arena)
         }
     }
     
     func processLatestPushIfNeeded() {
-        guard let push = PushManager.shared.latestPushNotification else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            guard let push = PushManager.shared.latestPushNotification else { return }
 
-        if let push = push as? ArenaPushNotification {
-            openArenaForPush(push)
+            if let push = push as? ArenaPushNotification {
+                self.openArenaForPush(push)
+            }
         }
     }
 }

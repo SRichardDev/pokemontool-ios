@@ -3,67 +3,67 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 
-export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
+// export const onWriteRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/raid').onWrite( async (snapshot, context) => {
 
-    const geohash = context.params.geohash
-    const arenaId = context.params.arenaId
+//     const geohash = context.params.geohash
+//     const arenaId = context.params.arenaId
     
-    const raid = snapshot.after.val()
-    // const raidBossId = raid.raidBossId || ""
+//     const raid = snapshot.after.val()
+//     // const raidBossId = raid.raidBossId || ""
 
-    try {
-        const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
-        // const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
-        const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
+//     try {
+//         const arenaSnapshot = await admin.database().ref('/arenas/' + geohash + '/' + arenaId).once('value')
+//         // const raidBossSnapshot = await admin.database().ref('/raidBosses/' + raidBossId).once('value') 
+//         const meetupSnapshot = await admin.database().ref('/raidMeetups/' + raid.raidMeetupId).once('value')
 
-        const arena = arenaSnapshot.val()
-        const raidBossName = /*(raidBossSnapshot.val() && raidBossSnapshot.val().name) ||*/ 'Unbekannt'
-        const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '--:--'
-        const hatchTime = raid.hatchTime || "--:--"
-        const endTime = raid.endTime || "--:--"
-        const level = raid.level
+//         const arena = arenaSnapshot.val()
+//         const raidBossName = /*(raidBossSnapshot.val() && raidBossSnapshot.val().name) ||*/ 'Unbekannt'
+//         const raidMeetupTime = (meetupSnapshot.val() && meetupSnapshot.val().meetupTime) || '--:--'
+//         const hatchTime = raid.hatchTime || "--:--"
+//         const endTime = raid.endTime || "--:--"
+//         const level = raid.level
 
-        const title = '⭐️'.repeat(level) + " @ " + arena.name
-        const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
+//         const title = '⭐️'.repeat(level) + " @ " + arena.name
+//         const message = '⌚️: ' + hatchTime + "-" + endTime + '\n👫: ' + raidMeetupTime
 
-        const iOSCondition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
-        const androidCondition = "'android' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+//         const iOSCondition = "'iOS' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
+//         const androidCondition = "'android' in topics && 'raids' in topics && '" + geohash + "' in topics && 'level-" + level + "' in topics"
 
-        console.log('Sending Condition: ' + iOSCondition)
-        console.log('Android Condition: ' + androidCondition)
-        console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
+//         console.log('Sending Condition: ' + iOSCondition)
+//         console.log('Android Condition: ' + androidCondition)
+//         console.log('Geohash: ' + geohash +  ' Arena: ' + arena.name + ' Raidboss: ' + raidBossName + ' HatchTime: ' + hatchTime + ' EndTime: ' + endTime + ' Level: ' + level + ' MeetupTime: ' + raidMeetupTime)
 
 
-        const iOSPayload = {
-            notification: {
-                title: title,
-                body: message,
-                sound: 'default'
-            },
-            data: {
-                latitude: String(arena.latitude),
-                longitude: String(arena.longitude)
-            }
-        }
+//         const iOSPayload = {
+//             notification: {
+//                 title: title,
+//                 body: message,
+//                 sound: 'default'
+//             },
+//             data: {
+//                 latitude: String(arena.latitude),
+//                 longitude: String(arena.longitude)
+//             }
+//         }
 
-        const androidPayload = {
-            data: {
-                title: title,
-                body: message,
-                latitude: String(arena.latitude),
-                longitude: String(arena.longitude)
-            }
-        }
+//         const androidPayload = {
+//             data: {
+//                 title: title,
+//                 body: message,
+//                 latitude: String(arena.latitude),
+//                 longitude: String(arena.longitude)
+//             }
+//         }
 
-        void admin.messaging().sendToCondition(iOSCondition, iOSPayload)
-        void admin.messaging().sendToCondition(androidCondition, androidPayload)
-        return true
+//         void admin.messaging().sendToCondition(iOSCondition, iOSPayload)
+//         void admin.messaging().sendToCondition(androidCondition, androidPayload)
+//         return true
             
-    } catch (error) {
-        console.log(error)
-        return false
-    }
-})
+//     } catch (error) {
+//         console.log(error)
+//         return false
+//     }
+// })
 
 
 export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{arenaId}/raid/meetup').onUpdate( async (snapshot, context) => {
