@@ -118,11 +118,14 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
                 sound: 'default'
             },
             data: {
+                identifier: "onUpdateRaidMeetup",
+                arena: String(arenaId),
+                geohash: String(geohash),
                 latitude: String(arena.latitude),
                 longitude: String(arena.longitude),
-                trainer: trainerName,
                 signup: String(isSignUp),
-                count: String(participantsAfter.length)
+                count: String(participantsAfter.length),
+                trainer: trainerName
             }
         }
 
@@ -130,11 +133,14 @@ export const onUpdateRaidMeetup = functions.database.ref('/arenas/{geohash}/{are
             data: {
                 title: title,
                 body:  "",
+                identifier: "onUpdateRaidMeetup",
+                arena: String(arenaId),
+                geohash: String(geohash),
                 latitude: String(arena.latitude),
                 longitude: String(arena.longitude),
-                trainer: trainerName,
                 signup: String(isSignUp),
-                count: String(participantsAfter.length)
+                count: String(participantsAfter.length),
+                trainer: trainerName
             }
         }
 
@@ -187,6 +193,9 @@ export const onCreateRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/
                 sound: 'default'
             },
             data: {
+                identifier: "onCreateRaid",
+                arena: String(arenaId),
+                geohash: String(geohash),
                 latitude: String(arena.latitude),
                 longitude: String(arena.longitude),
                 hatch: String(hatchTime), 
@@ -200,6 +209,9 @@ export const onCreateRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/
             data: {
                 title: title,
                 body: message,
+                identifier: "onCreateRaid",
+                arena: String(arenaId),
+                geohash: String(geohash),
                 latitude: String(arena.latitude),
                 longitude: String(arena.longitude),
                 hatch: String(hatchTime), 

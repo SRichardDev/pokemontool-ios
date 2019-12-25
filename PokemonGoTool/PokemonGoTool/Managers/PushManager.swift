@@ -5,14 +5,23 @@ import MapKit
 import Firebase
 import FirebaseMessaging
 
-struct PushNotification {
-    let title: String
-    let message: String
-    let coordinate: CLLocationCoordinate2D
+protocol PushNotification {
 }
 
+struct PushNotificationIdentifiers {
+    static let onCreateRaid = "onCreateRaid"
+    static let onUpdateRaidMeetup = "onUpdateRaidMeetup"
+}
+
+struct ArenaPushNotification: PushNotification {
+    var coordinate: CLLocationCoordinate2D
+    var arenaId: String
+    var geohash: String
+}
+
+
 protocol PushManagerDelegate: class {
-    func didReceivePush()
+    func didReceivePush(_ push: PushNotification)
 }
 
 class PushManager {
@@ -62,16 +71,59 @@ class PushManager {
     }
     
     func parsePushNotification(response: UNNotificationResponse) {
-        let title = response.notification.request.content.title
-        let message = response.notification.request.content.body
-        let userInfo = response.notification.request.content.userInfo
-        guard let latitude = userInfo["latitude"] as? String else {return}
-        guard let longitude = userInfo["longitude"] as? String else {return}
         
-        let coordiante = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let identifier = userInfo["identifier"] as? String {
+            if identifier == PushNotificationIdentifiers.onUpdateRaidMeetup {
+                parseOnUpdateRaidMeetup(with: userInfo)
+            }
+            
+            if identifier == PushNotificationIdentifiers.onCreateRaid {
+                parseOnUpdateRaidMeetup(with: userInfo)
+            }
+        }
+        
+//        guard let latitude = userInfo["latitude"] as? String else { return }
+//        guard let longitude = userInfo["longitude"] as? String else { return }
+//
+//        let coordiante = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
+//                                                longitude:CLLocationDegrees(longitude.double))
+
+//        latestPushNotification = PushNotification(title: title, message: message, coordinate: coordiante)
+//        delegate?.didReceivePush()
+    }
+    
+    private func parseOnUpdateRaidMeetup(with userInfo: [AnyHashable : Any]) {
+        guard let arenaId = userInfo["arena"] as? String else { return }
+        guard let geohash = userInfo["geohash"] as? String else { return }
+        guard let latitude = userInfo["latitude"] as? String else { return }
+        guard let longitude = userInfo["longitude"] as? String else { return }
+
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
                                                 longitude:CLLocationDegrees(longitude.double))
 
-        latestPushNotification = PushNotification(title: title, message: message, coordinate: coordiante)
-        delegate?.didReceivePush()
+        let push = ArenaPushNotification(coordinate: coordinate,
+                                         arenaId: arenaId,
+                                         geohash: geohash)
+        latestPushNotification = push
+        delegate?.didReceivePush(push)
+    }
+    
+    private func parseOnCreateRaid(with userInfo: [AnyHashable : Any]) {
+        guard let arenaId = userInfo["arena"] as? String else { return }
+        guard let geohash = userInfo["geohash"] as? String else { return }
+        guard let latitude = userInfo["latitude"] as? String else { return }
+        guard let longitude = userInfo["longitude"] as? String else { return }
+
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude.double),
+                                                longitude:CLLocationDegrees(longitude.double))
+
+        let push = ArenaPushNotification(coordinate: coordinate,
+                                         arenaId: arenaId,
+                                         geohash: geohash)
+        
+        latestPushNotification = push
+        delegate?.didReceivePush(push)
     }
 }

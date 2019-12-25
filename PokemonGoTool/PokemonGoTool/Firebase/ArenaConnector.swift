@@ -84,4 +84,14 @@ class ArenaConnector {
     func clear() {
         arenasInGeohash.removeAll()
     }
+    
+    func arena(in geohash: Geohash, for id: String, callback: @escaping (Arena?) -> Void) {
+        arenasRef
+            .child(geohash)
+            .child(id)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard let arena: Arena = decode(from: snapshot) else { callback(nil); return }
+                callback(arena)
+            })
+    }
 }

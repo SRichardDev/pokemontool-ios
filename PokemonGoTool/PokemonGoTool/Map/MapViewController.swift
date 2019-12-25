@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StoryboardInitialV
         mapView.pointOfInterestFilter = MKPointOfInterestFilter(including: [.park])
         zoomToUserLocation()
         setupMapButtonsMenu()
-        displayLocationFromPushIfNeeded()
+        processLatestPushIfNeeded()
         messageView.addToTopMiddle(in: self.view)
         
         arenaConnector.didAddArenaCallback = { arena in
@@ -266,17 +266,27 @@ extension MapViewController: DetailAnnotationViewDelegate {
 
 extension MapViewController: PushManagerDelegate {
     
-    func didReceivePush() {
-        displayLocationFromPushIfNeeded()
+    func didReceivePush(_ push: PushNotification) {
+        
+        if let push = push as? ArenaPushNotification {
+            openArenaForPush(push)
+        }
     }
     
-    func displayLocationFromPushIfNeeded() {
-        guard let push = PushManager.shared.latestPushNotification else { return }
-        
-        NotificationBannerManager.shared.show(.pushNotification,
-                                              title: push.title,
-                                              message: push.message.replacingOccurrences(of: "\n", with: ", "))
+    func openArenaForPush(_ push: ArenaPushNotification) {
         setMapRegion(distance: 200, coordinate: push.coordinate)
+        arenaConnector.arena(in: push.geohash, for: push.arenaId) { [weak self] arena in
+            guard let arena = arena else { return }
+            self?.coordinator?.showArenaDetails(for: arena)
+        }
+    }
+    
+    func processLatestPushIfNeeded() {
+        guard let push = PushManager.shared.latestPushNotification else { return }
+
+        if let push = push as? ArenaPushNotification {
+            openArenaForPush(push)
+        }
     }
 }
 
