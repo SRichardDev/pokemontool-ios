@@ -275,10 +275,11 @@ extension MapViewController: PushManagerDelegate {
     
     func openArenaForPush(_ push: ArenaPushNotification) {
         setMapRegion(distance: 200, coordinate: push.coordinate)
-        arenaConnector.arena(in: push.geohash, for: push.arenaId) { [weak self] arena in
-            guard let arena = arena else { return }
-            guard arena.raid?.isActive ?? false else { self?.openArenaForPush(push); return }
-            self?.coordinator?.showArenaDetails(for: arena)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.arenaConnector.arena(in: push.geohash, for: push.arenaId) { [weak self] arena in
+                guard let arena = arena else { return }
+                self?.coordinator?.showArenaDetails(for: arena)
+            }
         }
     }
     

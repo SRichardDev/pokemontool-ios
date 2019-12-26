@@ -11,6 +11,7 @@ class ArenaConnector {
 
     var didAddArenaCallback: ((Arena) -> Void)?
     var didUpdateArenaCallback: ((Arena) -> Void)?
+    
     private var activeLevelFilter: [Int: Bool]? {
         if let levelFilter = UserDefaults.standard.object(forKey: "levelFilter") as? Data {
             return try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(levelFilter) as! [Int: Bool]
