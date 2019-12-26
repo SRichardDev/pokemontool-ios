@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         coordinator = MainCoordinator(appModule: appModule, window: window!)
         Theming.applySelectedPersistedTheme()
+        DepartureNotificationManager.debugPrintAllPendingNotificationRequests()
         
         return true
     }

@@ -44,25 +44,32 @@ class DepartureNotificationManager {
             
             let time = DateUtility.timeString(for: alarmTime)
             let components = Calendar.current.dateComponents([.weekday, .hour, .minute], from: alarmTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             center.add(request)
             print("👫🔔 Notification scheduled at: \(alarmTime)")
             timeStringCompletion(time)
-            
-            center.getPendingNotificationRequests { requests in
-                requests.forEach {
-                    print($0.identifier)
-                }
-            }
+            debugPrintAllPendingNotificationRequests()
         }
         
         NotificationBannerManager.shared.show(.custom, title: "DEBUG", message: "Added Departure Notification")
     }
     
-    class func removeUserFromDepartForRaidNotification(for meetupId: String) {
+    class func removeUserFromDepartForRaidNotification(for raidId: String) {
         let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [meetupId])
-        print("👫🔔 Removed notification schedule for \(meetupId)")
+        center.removePendingNotificationRequests(withIdentifiers: [raidId])
+        print("👫🔔 Removed notification schedule for \(raidId)")
+    }
+    
+    class func debugPrintAllPendingNotificationRequests() {
+        print("====ScheduledSTART====")
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { requests in
+            requests.forEach {
+                print($0.identifier)
+                print($0.trigger)
+            }
+        }
+        print("====ScheduledEND====")
     }
 }

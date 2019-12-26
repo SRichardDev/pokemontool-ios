@@ -64,19 +64,18 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     var isDepartureNotificationSet: Bool {
-//        guard let meetup = meetup else { return false }
-        return false //UserDefaults.standard.bool(forKey: meetup.id + "-departureNotification")
+        guard let raidId = arena.raid?.raidId else { return false }
+        return UserDefaults.standard.bool(forKey: raidId + "-departureNotification")
     }
     
     var departureNotificationTime: String? {
-//        guard let meetup = meetup else { return nil }
-        return "" //UserDefaults.standard.string(forKey: meetup.id + "-meetupTime")
+        guard let raidId = arena.raid?.raidId else { return "" }
+        return UserDefaults.standard.string(forKey: raidId + "-meetupTime")
     }
     
     init(arena: Arena, firebaseConnector: FirebaseConnector) {
         self.arena = arena
         self.firebaseConnector = firebaseConnector
-
 
         guard let raid = arena.raid else { return }
         guard !raid.isExpired else { return }
@@ -208,30 +207,31 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     }
     
     func addDepartureNotification(departureTimeStringCompletion: @escaping (_ time: String, _ error: CustomError?) -> ()) {
-//        guard let meetup = meetup, let meetupDate = meetup.meetupDate else { return }
-//        guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else {
-//            let error = CustomError(type: .userLocationNotFound)
-//            departureTimeStringCompletion("", error)
-//            return
-//        }
-//
-//
-//        DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
-//                                                               destinationCoordinate: arena.coordinate,
-//                                                               destinationName: arena.name,
-//                                                               meetupDate: meetupDate,
-//                                                               identifier: meetup.id) { time in
-//                                                                UserDefaults.standard.set(true, forKey: meetup.id + "-departureNotification")
-//                                                                UserDefaults.standard.set(time, forKey: meetup.id + "-meetupTime")
-//                                                                departureTimeStringCompletion(time, nil)
-//        }
+        guard let raidId = arena.raid?.raidId,
+            let meetupDate = meetup?.meetupDate else { return }
+        guard let userLocation = LocationManager.shared.currentUserLocation?.coordinate else {
+            let error = CustomError(type: .userLocationNotFound)
+            departureTimeStringCompletion("", error)
+            return
+        }
+
+
+        DepartureNotificationManager.notifyUserToDepartForRaid(pickupCoordinate: userLocation,
+                                                               destinationCoordinate: arena.coordinate,
+                                                               destinationName: arena.name,
+                                                               meetupDate: meetupDate,
+                                                               identifier: raidId) { time in
+                                                                UserDefaults.standard.set(true, forKey: raidId + "-departureNotification")
+                                                                UserDefaults.standard.set(time, forKey: raidId + "-meetupTime")
+                                                                departureTimeStringCompletion(time, nil)
+        }
     }
     
     func removeDepartureNotification() {
-//        guard let meetup = meetup else { return }
-//        DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: meetup.id)
-//        UserDefaults.standard.removeObject(forKey: meetup.id + "-departureNotification")
-//        UserDefaults.standard.removeObject(forKey: meetup.id + "-meetupTime")
+        guard let raidId = arena.raid?.raidId else { return }
+        DepartureNotificationManager.removeUserFromDepartForRaidNotification(for: raidId)
+        UserDefaults.standard.removeObject(forKey: raidId + "-departureNotification")
+        UserDefaults.standard.removeObject(forKey: raidId + "-meetupTime")
     }
     
     func formattedRaidTextForSharing() -> String? {
