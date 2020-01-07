@@ -4,7 +4,7 @@ import NSTAppKit
 
 class RaidBossViewController: UIViewController, StoryboardInitialViewController {
     
-    var viewModel: SubmitRaidViewModel!
+    var viewModel: RaidbossSelectable!
     @IBOutlet var selectedPokemonImageView: UIImageView!
     @IBOutlet var nameLabel: Label!
     @IBOutlet var selectRaidbossButton: Button!

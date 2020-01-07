@@ -24,14 +24,19 @@ protocol MeetupTimeSelectable {
     func meetupTimeDidChange()
 }
 
-class SubmitRaidViewModel: MeetupTimeSelectable {
+protocol RaidbossSelectable {
+    var selectedRaidBoss: Int? { get set }
+    func updateRaidboss(dexNumber: Int)
+}
+
+class SubmitRaidViewModel: MeetupTimeSelectable, RaidbossSelectable {
     weak var delegate: SubmitRaidDelegate?
     var arena: Arena
     var firebaseConnector: FirebaseConnector
     var isRaidAlreadyRunning = false
     var isUserParticipating = false
     var selectedRaidLevel = 3
-    private(set) var selectedRaidBoss: Int?
+    var selectedRaidBoss: Int?
     var timeLeft = 45
     var meetupTimeSelectionType: MeetupTimeSelectionType = .initial
     var hatchDate: Date?

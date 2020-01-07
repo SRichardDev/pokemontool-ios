@@ -197,16 +197,14 @@ class FirebaseConnector {
             .updateChildValues(data)
     }
     
-    #warning("TODO: set raidboss in raid")
-//    func setRaidbossForRaid(in arena: inout Arena, raidboss: RaidbossDefinition) {
-//        guard let raidbossId = raidboss.id else { return }
-//        arena.raid?.raidBossId = raidbossId
-//        arenasRef
-//            .child(arena.geohash)
-//            .child(arena.id)
-//            .child(DatabaseKeys.raid)
-//            .updateChildValues([DatabaseKeys.raidBossId : raidbossId])
-//    }
+    func updateRaidboss(in arena: inout Arena, dexNumber: Int) {
+        arena.raid?.raidboss = dexNumber
+        arenasRef
+            .child(arena.geohash)
+            .child(arena.id)
+            .child(DatabaseKeys.raid)
+            .updateChildValues([DatabaseKeys.raidboss : dexNumber])
+    }
     
     func user(for id: String, completion: @escaping (PublicUserData) -> ()) {
         usersRef

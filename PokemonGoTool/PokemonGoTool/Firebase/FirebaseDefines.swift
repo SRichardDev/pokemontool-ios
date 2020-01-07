@@ -13,7 +13,7 @@ struct DatabaseKeys {
     static let raid = "raid"
     static let raidMeetupId = "raidMeetupId"
     static let chatId = "chatId"
-    static let raidBossId = "raidBossId"
+    static let raidboss = "raidboss"
     static let quests = "quests"
     static let raidBosses = "raidBosses"
     static let timestamp = "timestamp"

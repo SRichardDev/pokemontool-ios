@@ -21,7 +21,7 @@ protocol ArenaDetailsDelegate: class {
     func update(of type: ArenaDetailsUpdateType)
 }
 
-class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
+class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable, RaidbossSelectable {
 
     var firebaseConnector: FirebaseConnector
     weak var delegate: ArenaDetailsDelegate?
@@ -48,6 +48,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
     var coordinate: CLLocationCoordinate2D { return arena.coordinate }
     var headerImage: UIImage { return isRaidExpired ? arena.image : arena.raid?.image ?? UIImage() }
     var headerTitle: String { return arena.name }
+    var selectedRaidBoss: Int?
 
     var title: String {
         let standardName = arena.isEX ? "EX Arena" : "Arena"
@@ -86,6 +87,7 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
             startTimeLeftTimer()
         }
         
+        selectedRaidBoss = arena.raid?.raidboss
         firebaseConnector.raidDelegate = self
         firebaseConnector.observeRaid(in: arena)
     }
@@ -192,11 +194,6 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         }
     }
     
-//    func updateRaidboss(_ raidboss: RaidbossDefinition) {
-//        firebaseConnector.setRaidbossForRaid(in: &arena, raidboss: raidboss)
-//        delegate?.update(of: .raidbossChanged)
-//    }
-    
     func changeMeetupTimeRequested() {
         delegate?.update(of: .changeMeetupTime)
     }
@@ -251,6 +248,12 @@ class ArenaDetailsViewModel: MeetupTimeSelectable, HeaderProvidable {
         \(participantsString)
         """
         return shareText
+    }
+    
+    func updateRaidboss(dexNumber: Int) {
+        selectedRaidBoss = dexNumber
+        firebaseConnector.updateRaidboss(in: &arena, dexNumber: dexNumber)
+        delegate?.update(of: .raidbossChanged)
     }
 
     private func isTimeUp(for date: Date) -> Bool {

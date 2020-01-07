@@ -18,6 +18,7 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
     private let goldSwitchViewController = ArenaDetailsGoldArenaSwitchViewController.fromStoryboard()
     private let meetupTimeSelectionViewController = RaidMeetupTimePickerViewController.fromStoryboard()
     private let departureNotificationViewController = DepartureNotificationSwitchViewController.fromStoryboard()
+    private let raidBossViewController = RaidBossViewController.fromStoryboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,7 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         goldSwitchViewController.viewModel = viewModel
         meetupTimeSelectionViewController.viewModel = viewModel
         departureNotificationViewController.viewModel = viewModel
+        raidBossViewController.viewModel = viewModel
 
         stackView.addArrangedViewController(headerViewController, to: self)
         stackView.addArrangedViewController(restTimeViewController, to: self)
@@ -54,6 +56,7 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         stackView.addArrangedViewController(participantsOverviewViewController, to: self)
         stackView.addArrangedViewController(userParticipatesSwitchViewController, to: self)
         stackView.addArrangedViewController(departureNotificationViewController, to: self)
+        stackView.addArrangedViewController(raidBossViewController, to: self)
         let mapViewController = SubmitMapViewController.setup(with: viewModel.coordinate, isPokestop: false)
         stackView.addArrangedViewController(mapViewController, to: self)
         stackView.addArrangedViewController(goldSwitchViewController, to: self)
@@ -65,7 +68,8 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         userParticipatesSwitchViewController.view.isHidden = viewModel.isRaidExpired
         departureNotificationViewController.view.isHidden = viewModel.isRaidExpired || !viewModel.isUserParticipating
         participantsOverviewViewController.view.isHidden = viewModel.isRaidExpired
-
+        raidBossViewController.view.isHidden = viewModel.isRaidExpired
+        
         meetupTimeViewController.view.isHidden = !viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
         meetupTimeSelectionViewController.view.isHidden = viewModel.isTimeSetForMeetup || viewModel.isRaidExpired
 
@@ -84,7 +88,7 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
     @objc
     func didTapShare() {
         let items = [viewModel.formattedRaidTextForSharing()]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
         present(ac, animated: true)
     }
 
@@ -105,8 +109,9 @@ class ArenaDetailsViewController: ScrollingContentViewController, StoryboardInit
         case .eggHatched:
             headerViewController.updateUI()
         case .raidbossChanged:
-            setTitle(viewModel.title)
+            title = viewModel.title
             headerViewController.updateUI()
+            raidBossViewController.updateUI()
         case .changeMeetupTime:
             changeVisibiltyOf(viewControllers: [meetupTimeViewController, meetupTimeSelectionViewController])
         case .updateMeetupTime:
