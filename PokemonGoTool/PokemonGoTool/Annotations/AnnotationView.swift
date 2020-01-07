@@ -130,16 +130,19 @@ class AnnotationView: CustomAnnotationView {
             
             annotationView.image = ImageManager.combinedArenaImage(for: arena)
             
-            if raid.level == 5 {
+            switch raid.level {
+            case 5:
                 annotationView.addPulsator(numPulses: 1, color: .purple)
-            } else if raid.level == 4 {
+            case 4:
                 annotationView.addPulsator(numPulses: 1, color: .yellow)
-            } else if raid.level == 3 {
+            case 3:
                 annotationView.addPulsator(numPulses: 1, color: .orange)
-            } else if raid.level == 2 {
+            case 2:
                 annotationView.addPulsator(numPulses: 1, color: .red)
-            } else if raid.level == 1 {
+            case 1:
                 annotationView.addPulsator(numPulses: 1, color: .magenta)
+            default:
+                break
             }
             
             if let participantsCount = raid.meetup?.participants?.count {
