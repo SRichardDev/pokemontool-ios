@@ -17,8 +17,8 @@ extension MKAnnotationView {
     func addParticipantsCountBadge(_ count: Int) {
         let badgeLabel = UILabel(badgeText: "\(count)")
         addSubview(badgeLabel)
-        badgeLabel.leftAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        badgeLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        badgeLabel.leftAnchor.constraint(equalTo: rightAnchor, constant: -7).isActive = true
+        badgeLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
     }
 }
 

@@ -11,12 +11,12 @@ class ArenaUtility {
             let levelStars = String(repeating: "⭐️", count: raid.level)
             let hatchTime = DateUtility.timeString(for: hatchDate)
             let endTime = DateUtility.timeString(for: endDate)
-            let particpantsCount = raid.meetup?.participants?.count ?? 0
+            let raidboss = RaidbossManager.shared.pokemonNameFor(dexNumber: raid.raidboss)
             
             let formattedString = """
             \(levelStars)
             \(hatchTime) - \(endTime)
-            Teilnehmer: \(particpantsCount)
+            Raidboss: \(raidboss)
             """
             return formattedString
         }
