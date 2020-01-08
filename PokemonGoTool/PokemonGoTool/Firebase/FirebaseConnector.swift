@@ -63,6 +63,12 @@ class FirebaseConnector {
             self.user?.cleanupMeetupSubscriptionsIfNeeded()
             self.user?.saveAppLastOpened()
         }
+        
+        Messaging.messaging().loadTopics { (topics, error) in
+           topics?.forEach({ (topic) in
+               print("Subscribed to topic: \(topic.name ?? "") added: \(topic.addDate ?? "")")
+           })
+        }
     }
     
     func loadUser(completion: @escaping () -> Void) {
