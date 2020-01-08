@@ -13,7 +13,7 @@ extension MapViewController {
         
     func setupMapButtonsMenu() {
         let registerPushGeohashButton = UIButton()
-        registerPushGeohashButton.setImage(UIImage(named: "mapMenuPush"), for: .normal)
+        registerPushGeohashButton.setImage(UIImage(systemName: "rectangle.grid.2x2"), for: .normal)
         registerPushGeohashButton.addAction { [weak self] in
             guard let self = self else { fatalError() }
             registerPushGeohashButton.scaleIn()
@@ -34,7 +34,7 @@ extension MapViewController {
         }
         
         let newPoiButton = UIButton()
-        newPoiButton.setImage(UIImage(named: "mapMenuCrosshair"), for: .normal)
+        newPoiButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         newPoiButton.addAction { [unowned self] in
             newPoiButton.scaleIn()
             self.isPoiSubmissionMode = true
@@ -50,21 +50,21 @@ extension MapViewController {
         }
         
         let changeMapTypeButton = UIButton()
-        changeMapTypeButton.setImage(UIImage(named: "mapMenuMap"), for: .normal)
+        changeMapTypeButton.setImage(UIImage(systemName: "map"), for: .normal)
         changeMapTypeButton.addAction { [unowned self] in
             self.changeMapType()
             changeMapTypeButton.scaleIn()
         }
         
         let locateButton = UIButton()
-        locateButton.setImage(UIImage(named: "mapMenuLocate"), for: .normal)
+        locateButton.setImage(UIImage(systemName: "location"), for: .normal)
         locateButton.addAction { [unowned self] in
             self.zoomToUserLocation(animated: true)
             locateButton.scaleIn()
         }
         
         let filterButton = UIButton()
-        filterButton.setImage(UIImage(named: "filter"), for: .normal)
+        filterButton.setImage(UIImage(systemName: "line.horizontal.3.decrease.circle"), for: .normal)
         filterButton.addAction { [unowned self] in
             self.coordinator?.showMapFilter()
             filterButton.scaleIn()

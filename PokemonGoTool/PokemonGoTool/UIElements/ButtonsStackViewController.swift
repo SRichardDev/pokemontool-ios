@@ -66,7 +66,7 @@ class ButtonsStackViewController: UIViewController, StoryboardInitialViewControl
         }
         
         let settingsButton = UIButton()
-        settingsButton.setImage(UIImage(named: "mapMenuGear"), for: .normal)
+        settingsButton.setImage(UIImage(systemName: "gear"), for: .normal)
         settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.addAction {

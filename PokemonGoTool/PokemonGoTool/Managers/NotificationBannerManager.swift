@@ -34,8 +34,8 @@ class NotificationBannerManager {
     
     func show(_ type: NotificationBannerType, title: String? = nil, message: String? = nil) {
         
-        let checkMark = UIImageView(image: UIImage(named: "checkmark"))
-        let cross = UIImageView(image: UIImage(named: "cross"))
+        let checkMark = ImageManager.imageViewWithSystemImage(type: .checkMark)
+        let cross = ImageManager.imageViewWithSystemImage(type: .xMark)
         
         switch type {
             
@@ -54,6 +54,7 @@ class NotificationBannerManager {
                                                subtitle: "Prüfe bitte deine Internetverbindung",
                                                leftView: cross,
                                                style: .danger)
+            currentBanner?.autoDismiss = false
         case .firebaseAuthSuccess:
             currentBanner = NotificationBanner(title: title,
                                                subtitle: message,
@@ -72,7 +73,8 @@ class NotificationBannerManager {
             currentBanner?.haptic = .none
         case .pushRegistration:
             currentBanner = NotificationBanner(title: "Push Registrierung",
-                                               subtitle: "Wähle den Bereich aus für den du Benachrichtigt werden möchtest",
+                                               subtitle: "Tippe auf die Karte",
+                                               leftView: ImageManager.imageViewWithSystemImage(type: .radioWaves),
                                                style: .info)
             currentBanner?.autoDismiss = false
             currentBanner?.haptic = .none

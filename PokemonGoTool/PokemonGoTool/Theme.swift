@@ -156,6 +156,9 @@ extension Theme {
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
             .textColor = secondaryLabelColor
         
+        UIImageView.appearance(whenContainedInInstancesOf: [CircleButton.self])
+            .tintColor = .white
+        
         Button.appearance().with {
             $0.backgroundColor = tint
             $0.setTitleColor(tint, for: .normal)

@@ -31,12 +31,16 @@ class MainCoordinator: Coordinator, FirebaseStartupDelegate {
         mapViewController.coordinator = self
         mapViewController.firebaseConnector = appModule.firebaseConnector
         mapViewController.locationManager = appModule.locationManager
-        mapViewController.tabBarItem = UITabBarItem(title: "Karte", image: UIImage(named: "Map"), selectedImage: nil)
+        mapViewController.tabBarItem = UITabBarItem(title: "Karte",
+                                                    image: UIImage(systemName: "map"),
+                                                    selectedImage: nil)
         
         let accountViewController = AccountViewController.fromStoryboard()
         let scrollableViewController = ScrollableViewController(childViewController: accountViewController)
         scrollableViewController.title = "Account"
-        scrollableViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "Account"), selectedImage: nil)
+        scrollableViewController.tabBarItem = UITabBarItem(title: "Account",
+                                                           image: UIImage(systemName: "person.circle"),
+                                                           selectedImage: nil)
         accountViewController.coordinator = self
         let viewModel = AccountViewModel(firebaseConnector: appModule.firebaseConnector)
         accountViewController.viewModel = viewModel

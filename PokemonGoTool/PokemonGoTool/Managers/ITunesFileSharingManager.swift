@@ -72,4 +72,37 @@ class ImageManager {
         
         return UIImage.imageByCombiningImage(firstImage: baseImage, withImage: resizedTopImage)
     }
+    
+    class func imageViewWithSystemImage(type: SystemImageType) -> UIImageView {
+                
+        let imageView = UIImageView(image: systemImage(type: type))
+        imageView.tintColor = .white
+        
+        return imageView
+    }
+    
+    class func systemImage(type: SystemImageType, pointSize: CGFloat = 40) -> UIImage? {
+        var image: UIImage?
+        let config = UIImage.SymbolConfiguration(pointSize: pointSize)
+
+        switch type {
+        case .radioWaves:
+            image = UIImage(systemName: "antenna.radiowaves.left.and.right", withConfiguration: config)
+        case .checkMark:
+            image = UIImage(systemName: "checkmark.circle", withConfiguration: config)
+        case .xMark:
+            image = UIImage(systemName: "xmark.circle", withConfiguration: config)
+        case .map:
+            image = UIImage(systemName: "map", withConfiguration: config)
+        }
+
+        return image
+    }
+}
+
+enum SystemImageType {
+    case radioWaves
+    case checkMark
+    case xMark
+    case map
 }
