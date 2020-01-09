@@ -5,8 +5,7 @@ import MapKit
 import Firebase
 import FirebaseMessaging
 
-protocol PushNotification {
-}
+protocol PushNotification {}
 
 struct PushNotificationIdentifiers {
     static let onCreateRaid = "onCreateRaid"
