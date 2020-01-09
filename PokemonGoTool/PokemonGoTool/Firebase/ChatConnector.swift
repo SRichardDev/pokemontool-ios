@@ -34,6 +34,11 @@ class ChatConnector {
             sendMessage(chatId)
         } else {
             guard let chatId = chatsRef.childByAutoId().key else { return }
+            let raidIdData = ["raidId" : arena.raid?.raidId]
+            self.chatsRef
+                .child(chatId)
+                .setValue(raidIdData)
+
             associateChatIdToMeetup(id: chatId, arena: &arena)
             observeRaidChat(for: chatId)
             arena.raid?.meetup?.chatId = chatId

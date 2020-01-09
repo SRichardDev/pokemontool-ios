@@ -232,6 +232,51 @@ export const onCreateRaid = functions.database.ref('/arenas/{geohash}/{arenaId}/
     }
 })
 
+export const onWriteChats = functions.database.ref('/chats/{chatId}/{messageId}').onWrite( async (snapshot, context) => {
+
+    const chatId = context.params.chatId
+    const messageContainer = snapshot.after.val()
+    const message = messageContainer.message
+    const senderId = messageContainer.senderId
+
+    try {
+        const chatSnapshot = await admin.database().ref('/chats/' + chatId).once('value')
+        const senderSnapshot = await admin.database().ref('/users/' + senderId).once('value')
+        const raidId = chatSnapshot.val().raidId
+        const publicData = senderSnapshot.val().publicData
+        const senderName = publicData.trainerName
+
+        const condition = "'" + raidId + "' in topics" 
+
+        const payload = {
+            notification: {
+                title: 'Neue Nachricht von: ' + senderName,
+                body: message,
+                badge: '1',
+                sound: 'default'
+            },
+            data: {
+                title: 'Neue Nachricht von: ' + senderName,
+                body: message
+            }
+        }
+
+        return admin.messaging().sendToCondition(condition, payload)
+
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+})
+
+
+
+
+
+
+
+
+
 export const onWriteRaidMeetupChat = functions.database.ref('/raidMeetups/{meetupId}/chat/{messageId}').onWrite( async (snapshot, context) => {
 
     const meetupId = context.params.meetupId
